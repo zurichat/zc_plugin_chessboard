@@ -4,7 +4,7 @@
 Zuri chesss plugin is a web based recreational and competitive board game played between two players with an option for AI, that can easily be installed and used as part of the Zuri chat main application.
 
 ## Design
-Figma link to the design implemented - 
+Figma link to the design implemented:
 coming soon!
 
 ## Hosted URL:
