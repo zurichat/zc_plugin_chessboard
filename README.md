@@ -26,9 +26,19 @@ coming soon!
 
 4 - Navigate to it in the terminal. Run 'git clone(github link)'
 
-5 - Create a branch for your Task 'git checkout -b '
-
+```http
+  git clone https://github.com/zurichat/zc_plugin_chessboard.git
+```
+5 - Create a branch for your Task 'git checkout -b 
+```http
+  git checkout -b {$yourBranchName}
+```
 6 - After changes - git add , - git commit m 'some comments' , - git push origin (name of your branch)
+```http
+  git add .
+  git commit -m 'commit message'
+  git push origin {$yourBranchName}
+```
 
 7 - Create a Pull Request
 
