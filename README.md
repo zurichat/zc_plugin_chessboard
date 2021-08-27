@@ -5,7 +5,8 @@ Zuri chesss plugin is a web based recreational and competitive board game played
 
 ## Design
 Figma link to the design implemented:
-- coming soon!
+<br>
+coming soon!
 
 ## Hosted URL:
 coming soon!
