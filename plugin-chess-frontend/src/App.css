@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+h1 {
+  font-size: 2.6rem;
+}
+
+li,
+button,
+label,
+input,
+p {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 4.5rem;
+}
+
+button {
+  padding: 2rem 6rem;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  border-radius: 5rem;
+  background: #25364b;
+}
+
+button:hover {
+  background: #121a24;
+  cursor: pointer;
+  transition: background 0.5s ease 0.2s;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  background: #131c27;
+  color: white;
+}
+
+nav {
+  min-height: 10vh;
+  display: flex;
+  width: 90%;
+  padding: 1rem;
+  margin: auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#logo {
+  flex: 3 1 40rem;
+  font-family: "Pattaya", sans-serif;
+  font-weight: normal;
+}
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), transparent),
+    url("../src/assets/chesspieces.jpg");
+  min-height: 90vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: rgba(255, 255, 255, 0.945);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hero h2 {
+  padding: 6rem;
+}
+
+@media screen and (max-width: 933px) {
+  nav {
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  #logo {
+    padding: 1rem;
+  }
+  html {
+    font: size 50%;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+}
