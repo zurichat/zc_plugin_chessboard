@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       <header class="main-header">
         <nav>
-          <h1 id="logo">Chess Board Plugin</h1>
+          <h1 id="logo">Chess Board Room Plugin</h1>
         </nav>
       </header>
       <section class="hero">
