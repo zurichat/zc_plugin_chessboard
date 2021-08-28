@@ -13,7 +13,6 @@ function App() {
 
         <button>Start Game</button>
       </section>
-      <section id="locations"></section>
     </div>
   );
 }
