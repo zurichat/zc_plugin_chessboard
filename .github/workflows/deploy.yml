@@ -1,0 +1,19 @@
+name: deployment pipeline
+
+on:
+  push:
+    branches: [main]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+        node_version: '14.x'
+      - name: install deps and build frontend
+        run: cd plugin-chess-frontend && rm -rf build && npm install && npm run build
+      - name: deploy backend
+        run: ls
