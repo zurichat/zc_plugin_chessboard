@@ -19,9 +19,9 @@ jobs:
       - name: Deployment
         uses: appleboy/ssh-action@master
         with:
+          key: ${{ secrets.PRIVATE_KEY }}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/zc_plugin_chessboard/
             git pull
