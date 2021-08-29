@@ -1,0 +1,22 @@
+name: deployment pipeline
+
+on:
+  push:
+    branches: [main]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: install deps and build frontend
+        run: cd plugin-chess-frontend && rm -rf build && npm install && npm run build
+      - name: install ssh key
+        uses: shimatro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIV_KEY }}
+          known_hosts: 'a very bad secret hash'
