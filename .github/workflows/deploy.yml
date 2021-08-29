@@ -15,5 +15,8 @@ jobs:
           node-version: '14.x'
       - name: install deps and build frontend
         run: cd plugin-chess-frontend && rm -rf build && npm install && npm run build
-      - name: deploy backend
-        run: ls
+      - name: install ssh key
+        uses: shimatro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIV_KEY }}
+          known_hosts: 'a very bad secret hash'
