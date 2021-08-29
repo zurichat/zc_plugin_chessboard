@@ -23,4 +23,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            echo "Working"
+            cd /var/www/zc_plugin_chessboard/
+            git pull
+            cd /var/www/zc_plugin_chessboard/plugin-chess-frontend
+            sudo yarn build
+            pm2 restart chess_plugin
