@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import QuickSetting from "./Pages/Quick_Setting/QuickSetting";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <QuickSetting />
   </React.StrictMode>,
   document.getElementById("root")
 );

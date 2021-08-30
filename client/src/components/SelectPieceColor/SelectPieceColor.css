@@ -1,0 +1,44 @@
+.center{
+    display: grid;
+    place-content: center;
+    margin-bottom: 20px;
+}
+.color{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.color-tile{
+    display: flex;
+    gap: 10px;
+    position: fixed;
+}
+.black{
+    background: linear-gradient(184.01deg, rgba(61, 61, 61, 0.92) -104.08%, rgba(35, 35, 35, 0.959834) -0.32%, #040404 114.59%);
+    border: 1px solid #fff;
+}
+.white{
+    background-color: #fff;
+    border: 1px solid #000;
+}
+.color:hover{
+    width: 22px;
+    height: 22px;
+}
+.border{
+    border: 0.65px solid #FFFFFF;
+    border-radius: 12px;
+    padding: 30px 60px;
+}
+.line2 {
+    position: absolute;
+    top: 50%;
+    left: -45%;
+    width: 25px;
+}
+.line3 {
+    position: absolute;
+    top: 50%;
+    left: 110%;
+    width: 25px;
+}

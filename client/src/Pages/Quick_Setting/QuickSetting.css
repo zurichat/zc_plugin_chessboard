@@ -1,0 +1,59 @@
+.container {
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    background: #000000;
+    color: #fff;
+}
+.head-container{
+     display: grid;
+    place-content: center;
+   
+}
+
+#outerellipse,
+.header {
+    position: relative;
+    margin: 0 auto 30px auto;
+}
+
+#innerellipse {
+    position: absolute;
+    top: 14%;
+    left: 15%;
+}
+
+#logo {
+    position: absolute;
+    top: 9%;
+    left: 12%;
+}
+
+.line {
+    position: absolute;
+    top: 50%;
+    left: -65%;
+}
+
+.second {
+    position: absolute;
+    top: 50%;
+    left: 110%;
+}
+
+.components {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.advance-button{
+    padding: 20px 0;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
