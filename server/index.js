@@ -12,8 +12,14 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get("/ping", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
-// Node API Endpoints
 
+app.get('/info', (req, res) => {
+    try{
+        res.status(200).json({ plugin: "plugin for Zuri Chat that enables the users play chess within the application" })
+    }catch(e){
+        res.status(500).send("Could not fetch plugin information")
+    }
+})
 
 
 // All other GET requests not handled before will return our React app
