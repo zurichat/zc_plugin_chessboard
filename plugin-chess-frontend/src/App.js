@@ -9,7 +9,7 @@ function App() {
         </nav>
       </header>
       <section class="hero">
-        <h2>Welcome to Team Teslas Chess Board Room</h2>
+        <h2>Welcome to Team Teslas  Chess Board Room</h2>
 
         <button>Start Game</button>
       </section>
