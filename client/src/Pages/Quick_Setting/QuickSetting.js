@@ -1,6 +1,6 @@
 import React from "react";
 import "./QuickSetting.css";
-import SelectPieceColor from "../../components/SelectPieceColor/SelectPieceColor";
+import SelectPieceColor from "./components/SelectPieceColor/SelectPieceColor";
 import outerellipse from "../../assets/Ellipse_134.png";
 import innerellipse from "../../assets/Ellipse_135.png";
 import logo from "../../assets/Union.png";
