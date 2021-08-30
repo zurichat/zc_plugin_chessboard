@@ -52,9 +52,9 @@ https://chess.zuri.chat/
  git pull upstream dev
  ```
 
- - Switch to dev branch
+ - Switch to a new branch with your {feature-name}
  ```
- git checkout dev
+ git checkout -b <feature-name>
  ```
 
  - Add your work/code
@@ -63,7 +63,7 @@ https://chess.zuri.chat/
 ```
   git add .
   git commit -m 'your commit message'
-  git push origin <name-of-your-feature>
+  git push origin <feature-name>
 ```
 
  - Create a Pull Request to `` dev `` branch
