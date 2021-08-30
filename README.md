@@ -1,6 +1,6 @@
 # Chess Board Room Plugin
 
-<img src="/images/chesspieces.jpg" alt="An image of chess pieces"/>
+<img src="https://raw.githubusercontent.com/eni4sure/zc_plugin_chessboard/2e0f029fb0c05eaea0206f46b17ce4722adca9df/images/chesspieces.jpg" alt="An image of chess pieces"/>
 
 Zuri chesss plugin is a web based recreational and competitive board game played between two players with an option for AI, that can easily be installed and used as part of the Zuri chat main application.
 
