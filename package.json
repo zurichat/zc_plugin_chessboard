@@ -10,14 +10,15 @@
   "author": "Team Tesla",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "socket.io": "^4.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
   },
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js",
+    "dev": "nodemon ./server/index.js",
     "build": "cd client && npm install && npm run build"
   }
 }
