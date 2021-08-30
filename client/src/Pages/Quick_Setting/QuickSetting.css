@@ -1,47 +1,47 @@
-.container {
+.container__piececolor {
     display: grid;
     place-content: center;
     height: 100vh;
     background: #000000;
     color: #fff;
 }
-.head-container{
+.head-container__piececolor{
      display: grid;
     place-content: center;
    
 }
 
-#outerellipse,
-.header {
+#outerellipse__piececolor,
+.header__piececolor {
     position: relative;
     margin: 0 auto 30px auto;
 }
 
-#innerellipse {
+#innerellipse__piececolor {
     position: absolute;
     top: 14%;
     left: 15%;
 }
 
-#logo {
+#logo__piececolor {
     position: absolute;
     top: 9%;
     left: 12%;
 }
 
-.line {
+.line__piececolor {
     position: absolute;
     top: 50%;
     left: -65%;
 }
 
-.second {
+.second__piececolor {
     position: absolute;
     top: 50%;
     left: 110%;
 }
 
-.components {
+.components__piececolor {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -50,7 +50,7 @@
     margin-bottom: 30px;
 }
 
-.advance-button{
+.advance-button__piececolor{
     padding: 20px 0;
     background-color: transparent;
     color: #fff;

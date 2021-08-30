@@ -1,42 +1,42 @@
-.center{
+.center__piececolor{
     display: grid;
     place-content: center;
     margin-bottom: 20px;
 }
-.color{
+.color__piececolor{
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
-.color-tile{
+.color-tile__piececolor{
     display: flex;
     gap: 10px;
     position: fixed;
 }
-.black{
+.black__piececolor{
     background: linear-gradient(184.01deg, rgba(61, 61, 61, 0.92) -104.08%, rgba(35, 35, 35, 0.959834) -0.32%, #040404 114.59%);
     border: 1px solid #fff;
 }
-.white{
-    background-color: #fff;
+.white__piececolor{
+    background: linear-gradient(262.27deg, #FEFDFB -23.58%, #E4D2B4 18.19%);
     border: 1px solid #000;
 }
-.color:hover{
+.color__piececolor:hover{
     width: 22px;
     height: 22px;
 }
-.border{
+.border__piececolor{
     border: 0.65px solid #FFFFFF;
     border-radius: 12px;
     padding: 30px 60px;
 }
-.line2 {
+.line2__piececolor {
     position: absolute;
     top: 50%;
     left: -45%;
     width: 25px;
 }
-.line3 {
+.line3__piececolor {
     position: absolute;
     top: 50%;
     left: 110%;
