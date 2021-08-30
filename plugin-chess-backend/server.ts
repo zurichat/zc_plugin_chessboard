@@ -1,5 +1,5 @@
-const express = require('express') 
-const path = require('path') 
+import express, { Request, Response } from 'express'
+import path from 'path'
 
 const app = express()
 
@@ -7,7 +7,7 @@ const PORT = 5005
 
 app.use(express.static(path.join(__dirname, '../plugin-chess-frontend/build')))
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to the chessboard plugin app!')
 })
 
