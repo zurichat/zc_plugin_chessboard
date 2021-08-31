@@ -27,5 +27,5 @@ jobs:
             git pull origin main
             yarn install
             yarn build
-            lsof -i tcp:5000
+            netstat -nlp | grep :5000
             PM2_HOME=/opt/pm2/.pm2 pm2 start server/index.js
