@@ -27,4 +27,5 @@ jobs:
             git pull
             yarn install
             yarn build
+            whomai
             pm2 list
