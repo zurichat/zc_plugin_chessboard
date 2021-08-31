@@ -24,8 +24,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           script: |
             cd /var/www/zc_plugin_chessboard/
+            sudo lsof -i :5000
             git pull origin main
             yarn install
             yarn build
-            lsof -i tcp:5000
             PM2_HOME=/opt/pm2/.pm2 pm2 start server/index.js
