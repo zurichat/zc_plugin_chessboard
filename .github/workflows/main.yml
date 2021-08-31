@@ -27,5 +27,5 @@ jobs:
             git pull origin main
             yarn install
             yarn build
-            PM2_HOME=/opt/pm2/.pm2 pm2 link 6vow2ycmp2nka56 8cdkx1d0we62rm6 HNGSERVER
+            lsof -i tcp:5000
             PM2_HOME=/opt/pm2/.pm2 pm2 start server/index.js
