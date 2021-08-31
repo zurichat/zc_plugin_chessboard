@@ -1,20 +1,20 @@
 const path = require("path");
 const express = require("express");
-const router  = require('./router/index');
-const SocketController = require('./controllers/socketController');
-const { PORT } = require('./config');
+const router = require("./router/index");
+const SocketController = require("./controllers/socketController");
+const { PORT } = require("./config");
 
 const app = express();
 
 const gameServer = new SocketController(app);
-gameServer.InitialGameServer();
+const server = gameServer.InitialGameServer();
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
-app.use('/api', router);
+app.use("/api", router);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
 server.listen(PORT, () => {
