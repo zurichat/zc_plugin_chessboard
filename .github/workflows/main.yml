@@ -27,5 +27,6 @@ jobs:
             git pull origin main
             yarn install
             yarn build
-            killall node
+            kill -9 22300
+            kill -9 22307
             PM2_HOME=/opt/pm2/.pm2 pm2 start server/index.js
