@@ -27,6 +27,6 @@ jobs:
             git pull
             yarn install
             yarn build
-            pm2 ls
-            pm2 stop index
-            pm2 start index
+            PM2_HOME=/opt/pm2/.pm2 pm2 ls
+            PM2_HOME=/opt/pm2/.pm2 pm2 stop index
+            PM2_HOME=/opt/pm2/.pm2 pm2 start index
