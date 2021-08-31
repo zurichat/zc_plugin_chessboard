@@ -23,11 +23,8 @@ jobs:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           script: |
-            whoami
-            echo $PM2_HOME
-#            cd /var/www/zc_plugin_chessboard/
-#            git pull
-#            yarn install
-#            yarn build
-#            whoami
-#            pm2 
+            cd /var/www/zc_plugin_chessboard/
+            git pull
+            yarn install
+            yarn build
+            PM2_HOME=/opt/pm2/.pm2 pm2 list
