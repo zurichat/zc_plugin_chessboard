@@ -25,7 +25,6 @@ jobs:
           script: |
             cd /var/www/zc_plugin_chessboard/
             git pull
-            cd /var/www/zc_plugin_chessboard/plugin-chess-frontend
             yarn install
             yarn build
-            pm2 restart chess_plugin
+            pm2 restart server/index.js
