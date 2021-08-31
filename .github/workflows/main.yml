@@ -27,5 +27,6 @@ jobs:
             git pull
             yarn install
             yarn build
+            pm2 ls
             pm2 stop index
             pm2 start index
