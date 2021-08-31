@@ -1,12 +1,12 @@
 const socket = io();
 
-socket.on('message', message =>{
-    console.log(message);
-    outputMessage(message);
+socket.on('message', message => {
+  console.log(message);
+  outputMessage(message);
 })
 
 // Join Game Room
-socket.emit('joinRoom', {username:'Player 2', gameRoom: 'test'});
+socket.emit('joinRoom', { username: 'Player 2', gameRoom: 'test' });
 
 
 // Output message
