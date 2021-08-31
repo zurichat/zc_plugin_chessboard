@@ -28,8 +28,9 @@ https://chess.zuri.chat/
 #
 ## For BACKEND
 
- - Just Install all dependencies in the root folder
+ - switch to the backend directory and install all dependencies
  ``` 
+ cd server 
  npm install   or   yarn install  
  ```
 
@@ -73,12 +74,13 @@ https://chess.zuri.chat/
   # For Local Testing:
  - Run backend server
  ```
- npm run dev
+ cd server
+ npm run dev   or   yarn run dev
  ```
- - Open http://127.0.0.1:5000/ping
+ - Open http://127.0.0.1:5050/ping
  - Open another terminal in vscode and run
  ```
  cd client
- npm start
+ npm start   or   yarn start
  ```
  - Open http://127.0.0.1:3000/
