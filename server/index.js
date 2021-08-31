@@ -10,6 +10,7 @@ const gameServer = new SocketController(app);
 const server = gameServer.InitialGameServer();
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(express.static(path.resolve(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));

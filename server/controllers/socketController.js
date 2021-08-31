@@ -2,7 +2,6 @@ const http = require("http");
 const { Server } = require("socket.io");
 const joinRoomHandler = require("../socketHandlers/joinRoomHandler");
 
-
 class SocketController {
   constructor(app) {
     this._app = app;
@@ -14,7 +13,7 @@ class SocketController {
     this._io.on("connection", (socket) => {
       console.log("Websocket connected!!!");
 
-      socket.on("joinRoom", joinRoomHandler);
+      socket.on("joinRoom", joinRoomHandler(socket));
     });
 
     return this._server;
