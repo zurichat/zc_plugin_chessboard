@@ -19,4 +19,8 @@ router.get("/ping", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
 
+router.get("/ping2", (req, res) => {
+    res.json({ message: "Hello from server!" });
+});
+
 module.exports = router;
