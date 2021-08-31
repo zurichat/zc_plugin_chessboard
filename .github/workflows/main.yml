@@ -27,4 +27,4 @@ jobs:
             git pull origin main
             yarn install
             yarn build
-            PM2_HOME=/opt/pm2/.pm2 pm2 start server/index.js
+            PM2_HOME=/opt/pm2/.pm2 pm2 restart server/index.js
