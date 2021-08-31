@@ -1,5 +1,7 @@
-const {uuid} = require('uuidv4');
-class GameController {
+// Import UUID
+const { uuid } = require('uuidv4');
+
+class gameController {
 
   static HandleGameCreation(req, res, next) {
     const gameId = uuid();
@@ -15,4 +17,4 @@ class GameController {
 
 }
 
-module.exports = GameController;
+module.exports = gameController;

@@ -1,0 +1,22 @@
+{
+  "name": "zc_plugin_chessboard",
+  "version": "1.0.0",
+  "description": "A chess plugin for Zuri.chat",
+  "main": "index.js",
+  "repository": "https://github.com/zurichat/zc_plugin_chessboard",
+  "author": "Team Tesla",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.2.0",
+    "uuidv4": "^6.2.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "cd ../client && yarn install && yarn build"
+  }
+}

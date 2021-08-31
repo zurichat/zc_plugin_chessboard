@@ -1,5 +1,5 @@
-const formatMessage = (username, text)=>{
-  return{
+const formatMessage = (username, text) => {
+  return {
     username,
     text
   }
