@@ -24,7 +24,7 @@ function App() {
         <Switch>
           <Route exact path='/advanced-setting' component={AdvancedSetting}/>
           <Route exact path='/main-game' component={MainGame}/>
-          <Route exact path='/home' component={Homepage}/>
+          <Route exact path='/' component={Homepage}/>
           <Route exact path='/invite-notification' component={InviteNotification}/>
           <Route exact path='/leader-board' component={LeaderBoard}/>
           <Route exact path='/main-menu' component={MainMenu}/>
@@ -36,7 +36,7 @@ function App() {
         </Switch>
       </Router>
 
-      <header class="main-header">
+      {/* <header class="main-header">
         <nav>
           <h1 id="logo">Chess Board Room Plugin</h1>
         </nav>
@@ -45,7 +45,7 @@ function App() {
         <h2>Welcome to the Chess Board Room</h2>
 
         <button>Start Game</button>
-      </section>
+      </section> */}
     </div>
   );
 }
