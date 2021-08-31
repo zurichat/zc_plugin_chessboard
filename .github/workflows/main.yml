@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           script: |
             cd /var/www/zc_plugin_chessboard/
-            sudo lsof -i :5000
+            lsof -i :5000
             git pull origin main
             yarn install
             yarn build
