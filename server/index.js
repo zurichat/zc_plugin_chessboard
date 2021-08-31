@@ -17,6 +17,11 @@ io.on('connection', (socket) => {
   console.log('Websocket connected!!!');
 
   socket.emit('Game Room');
+
+  socket.on("resign", (game_id) => {
+    socket.broadcast.emit(`User left game ${game_id}`);
+    console.log(game_id)
+});
 });
 
 
