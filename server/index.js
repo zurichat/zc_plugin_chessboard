@@ -12,12 +12,12 @@ const server = gameServer.InitialGameServer();
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(express.static(path.resolve(__dirname, "public")));
 
+app.use("/api", router);
+
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
-app.use("/api", router);
-
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server started listening on port ${PORT}`);
 });
