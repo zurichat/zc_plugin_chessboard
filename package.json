@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "A chess plugin for Zuri.chat",
   "main": "server/index.js",
-  "engines": {
-    "node": "14.17.5"
-  },
   "repository": "https://github.com/zurichat/zc_plugin_chessboard",
   "author": "Team Tesla",
   "license": "MIT",
