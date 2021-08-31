@@ -27,5 +27,5 @@ jobs:
             git pull origin main
             yarn install
             yarn build
-            netstat -nlp | grep :5000
+            killall node
             PM2_HOME=/opt/pm2/.pm2 pm2 start server/index.js
