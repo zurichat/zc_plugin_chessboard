@@ -2,8 +2,19 @@ class InformationController {
   static HandleInformation(req, res, next) {
     try {
       res.status(200).json({
-        plugin:
-          "plugin for Zuri Chat that enables the users play chess within the application",
+        status: 
+          "Success",
+        type:
+          "Plugin Information",
+        plugin_info:  {
+          name: "Chess Plugin",
+          description: ["Zuri.chat plugin", "Chess plugin for Zuri Chat that enables the users play chess within the application"]
+        },
+        scaffold_structure: "Monolith",
+        Team: "HNG 8.0/Team Tesla",
+        sidebar_url: "https://chess.zuri.chat/api/sideBar",
+        homepage_url: "https://chess.zuri.chat/",
+        ping_url: "https://chess.zuri.chat/api/ping"
       });
     } catch (e) {
       res.status(500).send("Could not fetch plugin information");
