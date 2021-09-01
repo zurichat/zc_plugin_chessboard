@@ -1,0 +1,15 @@
+{
+  "name": "zc_plugin_chessboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:cskwasu2019/zc_plugin_chessboard.git",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd client && yarn build && cd ../server && yarn start",
+    "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn start\"",
+    "postinstall": "cd server && yarn install && cd ../client && yarn install"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
