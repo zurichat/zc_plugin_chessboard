@@ -13,7 +13,7 @@ router.get("/info", informationController.HandleInformation);
 
 router.get("/sideBar", informationController.HandleSideBarInfo);
 
-router.post('/createGame', gameController.HandleGameCreation);
+router.get('/createGame', gameController.HandleGameCreation);
 
 router.get("/ping", (req, res) => {
     res.json({ message: "Hello from server!" });
