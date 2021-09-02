@@ -17,9 +17,6 @@ module.exports = (app) => {
     // Tell express to recognize the incoming Request Object as a JSON Object
     app.use(express.json());
 
-    // temporary - to be removed
-    app.use(express.static(path.join(__dirname, "..", "..", "public")));
-
     // Create express static engine to run React app build
     app.use(express.static(path.join(__dirname, "..", "..", "..", "client", "build")));
 
