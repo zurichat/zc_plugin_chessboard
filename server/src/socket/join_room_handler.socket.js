@@ -1,11 +1,9 @@
 // Custom Modules
 const formatMessage = require("./libs/formatMessage");
 
-const join_room_handler = (socket) => ({ user_id, game_id = 001 }) => {
-
-    // random user
-    user_id = "Bla BLaa",
-
+const join_room_handler =
+  (socket) =>
+  ({ user_id, game_id }) => {
     // Join the room with the game_id specified
     socket.join(game_id);
 
@@ -14,17 +12,22 @@ const join_room_handler = (socket) => ({ user_id, game_id = 001 }) => {
 
     // Check if the user_id is the game owner
     // logic here
-    
+
     // If user_id != game_owner
-        // if users in the game_id == 1
-        // logic here
-        
-        // if users in game_id > 2
-        // logic here
-    socket.broadcast.to(game_id).emit("message", formatMessage(user_id, `Spectator Joined this room`));
+    // if users in the game_id == 1
+    // logic here
+
+    // if users in game_id > 2
+    // logic here
+    socket.broadcast
+      .to(game_id)
+      .emit("message", formatMessage(user_id, `${user_id} Joined this room`));
 
     // Welcome current user to the room
-    socket.emit("message", formatMessage(user_id, `welcome to room [${game_id}]`));
-};
+    socket.emit(
+      "message",
+      formatMessage(user_id, `welcome to room [${game_id}]`)
+    );
+  };
 
 module.exports = join_room_handler;

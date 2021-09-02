@@ -1,32 +1,96 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Socket.IO</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Socket.IO</title>
-</head>
+  <body>
+    <h1>Chess Game Room</h1>
+    <h3 id="game-id"></h3>
+    <div>
+      <button id="create-game">create game</button>
+      <button id="join-game">join game</button>
+      <input type="text" id="join-game-input" style="display: none" />
+      <button id="Ok-btn" style="display: none">Ok</button>
+    </div>
 
-<body>
-  <h1>Chess Game Room</h1>
+    <!-- Update -->
+    <h2 id="update"></h2>
 
-  <!-- Update -->
-  <h2 id="update"></h2>
+    <div>
+      <input type="text" id="move-input" />
+      <button id="send-btn">send</button>
+    </div>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
 
-    socket.on('message', data => {
-      document.querySelector("#update").innerHTML += `${data.message} <br/>`;
-    });
+      socket.on("message", (data) => {
+        document.querySelector("#update").innerHTML += `${data.message} <br/>`;
+      });
 
-    // Socket Events
-    // socket.emit('join_room', {user_id, game_id});
-    socket.emit('join_room', { user_id: "Tester" });
-  </script>
-</body>
+      let gameId = "";
+      let playerId = "";
 
+      // new game
+      document
+        .getElementById("create-game")
+        .addEventListener("click", async () => {
+          //create a new game
+          const response = await fetch("http://chess.zuri.chat/api/createGame");
+          const body = await response.json();
+
+          // update gameId and player Id
+          gameId = body.data.game_id;
+          playerId = "player1";
+
+          document.getElementById("game-id").innerText = `Game Id: ${gameId}`;
+
+          //join the newly created game as player one
+          socket.emit("join_room", {
+            user_id: playerId,
+            game_id: gameId,
+          });
+        });
+
+      // palyer sends moves to a gaming room
+      document.getElementById("send-btn").addEventListener("click", () => {
+        const move = document.getElementById("move-input").value;
+        socket.emit("piece_moved", { move, playerId, gameId });
+      });
+
+      // existing game
+      const joinGameBtn = document.getElementById("join-game");
+      const joinGameInput = document.getElementById("join-game-input");
+      const okButton = document.getElementById("Ok-btn");
+
+      joinGameBtn.addEventListener("click", () => {
+        joinGameInput.style.display = "inline";
+        okButton.style.display = "inline";
+        joinGameBtn.style.display = "none";
+      });
+
+      okButton.addEventListener("click", () => {
+        playerId = "player2";
+        //join exiting game with inputed game id
+        socket.emit("join_room", {
+          user_id: playerId,
+          game_id: joinGameInput.value,
+        });
+
+        // reset view
+        joinGameInput.style.display = "none";
+        okButton.style.display = "none";
+        joinGameBtn.style.display = "inline";
+
+        // update game Id
+        gameId = joinGameInput.value;
+        document.getElementById("game-id").innerText = `Game Id: ${gameId}`;
+      });
+    </script>
+  </body>
 </html>
