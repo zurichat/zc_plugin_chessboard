@@ -1,6 +1,6 @@
 const formatMessage = (user_id, message) => {
   return {
-    user_id, game_id, message
+    user_id, message
   }
 }
 

@@ -26,7 +26,9 @@
     // Socket Events
     // socket.emit('join_room', {user_id, game_id});
     socket.emit('join_room', { user_id: "Tester" });
-    socket.emit('end_game', {game_id: "bla Blaa 001"});
+
+    // socket emit(end of game)
+    socket.emit('end_game', {user_id: "bla Blaa"});
   </script>
 </body>
 
