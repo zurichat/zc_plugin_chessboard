@@ -1,6 +1,7 @@
 // Custom Modules
 const join_room_handler = require('./join_room_handler.socket.js');
 const leave_room_handler = require('./leave_room_handler.socket.js');
+const end_game_handler = require('./end_game_handler.socket.js');
 
 const socket = (socket) => {
     console.log("Connected succesfully to the socket ...");
@@ -9,6 +10,8 @@ const socket = (socket) => {
     socket.on("join_room", join_room_handler(socket));
 
     socket.on("leave_room", leave_room_handler(socket));
+
+    socket.on("end_game", end_game_handler(socket));
 }
 
 module.exports = socket;
