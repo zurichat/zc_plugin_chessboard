@@ -1,35 +1,43 @@
+// Node Core Modules 
 const path = require("path");
+const http = require("http");
+
+// Package Modules
+require('express-async-errors');
 const express = require("express");
-const { PORT } = require("./config");
-const routes = require("./routes/index");
-const SocketController = require("./controllers/socketController");
+const socketIO = require("socket.io");
 
+// Custom Modules
+const routes = require("./src/routes");
+const { PORT } = require("./src/config");
+
+// Variables
 const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
-const gameServer = new SocketController(app);
-const server = gameServer.InitialGameServer();
+// Pre-Route middlewares
+require("./src/middlewares/pre_route.middleware")(app);
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "..", "client", "build")));
-
-// All Endpoints routes are defined here
+// All Endpoints routes for backend are defined here
 app.use("/api", routes);
 
-
-// temporary
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/test", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-// temporary
+// temporary - to be removed
+app.get("/test", (req, res) => { res.sendFile(path.join(__dirname, "public", "index.html")); });
 
 
-// Send all other requests to the React app
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-});
+// Handle Socket Connections
+io.on('connection', (socket) => { require("./src/socket/")(socket) });
 
+// Error middlewares
+require("./src/middlewares/error.middleware")(app);
 
+// The server should start listening
 server.listen(PORT, () => {
-  console.log(`Server started listening on port http://127.0.0.1:${PORT}`);
+    console.log(`Server started listening on port http://127.0.0.1:${PORT}`);
+});
+
+// Listen for server error
+server.on("error", (error) => {
+    console.error(`<::: An error occurred on the server: \n ${error}`);
 });
