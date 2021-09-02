@@ -41,7 +41,7 @@
         .getElementById("create-game")
         .addEventListener("click", async () => {
           //create a new game
-          const response = await fetch("http://localhost:5050/api/createGame");
+          const response = await fetch("http://chess.zuri.chat/api/createGame");
           const body = await response.json();
 
           // update gameId and player Id
@@ -60,7 +60,7 @@
       // palyer sends moves to a gaming room
       document.getElementById("send-btn").addEventListener("click", () => {
         const move = document.getElementById("move-input").value;
-        socket.emit("piece_moved", { message, playerId, gameId });
+        socket.emit("piece_moved", { move, playerId, gameId });
       });
 
       // existing game
@@ -71,7 +71,7 @@
       joinGameBtn.addEventListener("click", () => {
         joinGameInput.style.display = "inline";
         okButton.style.display = "inline";
-        joinGameInput.style.display = "none";
+        joinGameBtn.style.display = "none";
       });
 
       okButton.addEventListener("click", () => {

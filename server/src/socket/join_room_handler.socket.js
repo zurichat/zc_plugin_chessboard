@@ -3,11 +3,9 @@ const formatMessage = require("./libs/formatMessage");
 
 const join_room_handler =
   (socket) =>
-  ({ user_id, game_id = 001 }) => {
-    // random user
-    (user_id = "Bla BLaa"),
-      // Join the room with the game_id specified
-      socket.join(game_id);
+  ({ user_id, game_id }) => {
+    // Join the room with the game_id specified
+    socket.join(game_id);
 
     // Retrieve data about the game_id from db
     // db code here
@@ -23,7 +21,7 @@ const join_room_handler =
     // logic here
     socket.broadcast
       .to(game_id)
-      .emit("message", formatMessage(user_id, `Spectator Joined this room`));
+      .emit("message", formatMessage(user_id, `${user_id} Joined this room`));
 
     // Welcome current user to the room
     socket.emit(
