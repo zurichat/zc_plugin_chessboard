@@ -16,9 +16,5 @@ router.get("/ping", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
 
-router.get("/devping", (req, res) => {
-    res.json({ message: "Hello from server autodeployed from dev branch!" });
-});
-
 // Export Module
 module.exports = router
