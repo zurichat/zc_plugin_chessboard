@@ -41,7 +41,9 @@
         .getElementById("create-game")
         .addEventListener("click", async () => {
           //create a new game
-          const response = await fetch("http://chess.zuri.chat/api/createGame");
+          const response = await fetch(
+            "https://chess.zuri.chat/api/createGame"
+          );
           const body = await response.json();
 
           // update gameId and player Id
