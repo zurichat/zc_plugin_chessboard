@@ -1,30 +1,43 @@
-const path = require('path');
-const express = require('express');
+// Node Core Modules 
+const path = require("path");
+const http = require("http");
 
+// Package Modules
+require('express-async-errors');
+const express = require("express");
+const socketIO = require("socket.io");
+
+// Custom Modules
+const routes = require("./src/routes");
+const { PORT } = require("./src/config");
+
+// Variables
 const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
-// Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+// Pre-Route middlewares
+require("./src/middlewares/pre_route.middleware")(app);
+
+// All Endpoints routes for backend are defined here
+app.use("/api", routes);
+
+// temporary - to be removed
+app.get("/test", (req, res) => { res.sendFile(path.join(__dirname, "public", "index.html")); });
 
 
+// Handle Socket Connections
+io.on('connection', (socket) => { require("./src/socket/")(socket) });
 
-// Node API Endpoints
-app.get("/ping", (req, res) => {
-    res.json({ message: "Hello from server!" });
+// Error middlewares
+require("./src/middlewares/error.middleware")(app);
+
+// The server should start listening
+server.listen(PORT, () => {
+    console.log(`Server started listening on port http://127.0.0.1:${PORT}`);
 });
-// Node API Endpoints
 
-
-
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
-
-// Set Port
-const PORT = process.env.PORT || 5000;
-
-// Listen to port
-app.listen(PORT, () => {
-    console.log(`Server started listening on port ${PORT}`);
+// Listen for server error
+server.on("error", (error) => {
+    console.error(`<::: An error occurred on the server: \n ${error}`);
 });

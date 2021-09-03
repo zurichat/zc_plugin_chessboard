@@ -19,52 +19,68 @@ https://chess.zuri.chat/
  - WebSockets
 
 # Project Setup & Contribution Guide:
-- Fork this REPO
-- Run `` git clone https://github.com/zurichat/zc_plugin_chessboard.git ``
+ - Fork this REPO
+ - Clone the repo from your account
+ ``` 
+ git clone https://github.com/<username>/zc_plugin_chessboard.git
+ ```
 
 #
+## For BACKEND
+
+ - switch to the backend directory and install all dependencies
+ ``` 
+ cd server 
+ npm install   or   yarn install  
+ ```
+
 ## For FRONTEND
 
- - Enter the frontend working directory and install all dependencies
+ - switch to the frontend directory and install all dependencies
  ``` 
  cd client 
  npm install   or   yarn install 
  ```
-
-## For BACKEND
-
- - Just Install all dependencies
- ``` 
- npm install   or   yarn install  
- ```
 #
 
+ - Add the main repo remote to your project upstream
+ ```
+ git remote add upstream https://github.com/zurichat/zc_plugin_chessboard.git
+ ```
 
-  - Create a branch for your Task
-```
-  git checkout -b {$yourBranchName}
-```
+ - Pull from upstream
+ ```
+ git pull upstream dev
+ ```
 
- - After changes, run
+ - Switch to a new branch with your {feature-name}
+ ```
+ git checkout -b <feature-name>
+ ```
+
+ - Add your work/code
+
+ - When done making your changes, run
 ```
   git add .
-  git commit -m 'commit message'
-  git push origin {$yourBranchName}
+  git commit -m 'your commit message'
+  git push origin <feature-name>
 ```
 
- - Create a Pull Request
+ - Create a Pull Request to `` dev `` branch
 
+<br>
 
   # For Local Testing:
  - Run backend server
  ```
- npm run dev
+ cd server
+ npm run dev   or   yarn run dev
  ```
- - Open http://127.0.0.1:5000
- - Open another terminal in vscode
- - change directory to client
+ - Open http://127.0.0.1:5050/ping
+ - Open another terminal in vscode and run
  ```
  cd client
- npm start
+ npm start   or   yarn start
  ```
  - Open http://127.0.0.1:3000/
