@@ -25,6 +25,9 @@ app.use("/api", routes);
 // temporary - to be removed
 app.get("/test", (req, res) => { res.sendFile(path.join(__dirname, "public", "index.html")); });
 
+//temporary also - to be removed
+app.get("/dbtest", (req, res) => { res.sendFile(path.join(__dirname, "public", "userTest.html"))})
+
 
 // Handle Socket Connections
 io.on('connection', (socket) => { require("./src/socket/")(socket) });
