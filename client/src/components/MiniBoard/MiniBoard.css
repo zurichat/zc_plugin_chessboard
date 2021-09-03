@@ -3,22 +3,20 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-.mini-board {
-  height: 348px;
-  width: 264px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 0px;
+.mini-board{
+ position: absolute;
+ top: 0;
+ width: 100%;
+ bottom: 0;
 }
 
 .board-image {
-  height: 265px;
-  width: 264px;
-  border-radius: 0px;
-  background: url("../../assets/mini-board.png");
+  height: 100%;
+  width: 100%;
+}
+img{
+  width: 100%;
+  height: 100%;
 }
 
 .playerProfile {
@@ -58,7 +56,7 @@
 
 .asideBar {
   display: flex;
-  height: 41.5px;
+  height: 4rem;
 }
 
 .topBar {
@@ -74,7 +72,7 @@
   padding-left: 4px;
 }
 
-.mini-board .join-button {
+.join-button {
   padding: 7px 0px !important;
   height: 32px;
   width: 128px;

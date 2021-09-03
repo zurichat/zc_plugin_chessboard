@@ -58,7 +58,8 @@ nav {
 .color{
   flex-basis: 33.33%;
   padding-top: 3rem;
-  height: 50%;
+  padding-bottom: 6rem;
+  height: 70%;
 }
 .one, .two{
   border-right: 1px solid black;
@@ -84,8 +85,8 @@ nav {
 }
 .box{
   width:85%;
+  position: relative;
   height: 90%;
-  background-color: lightblue;
   margin: 0 auto 0 auto;
 }
 
