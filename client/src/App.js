@@ -1,4 +1,5 @@
 import "./App.css";
+import {Link} from 'react-router-dom';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <section class="hero">
         <h2>Welcome to the Chess Board Update</h2>
 
-        <button>Start Game</button>
+        <button><Link to = "/chessboard">Start Game</Link></button>
       </section>
     </div>
   );
