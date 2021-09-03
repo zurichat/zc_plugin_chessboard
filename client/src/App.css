@@ -55,28 +55,46 @@ nav {
   align-items: center;
   flex-wrap: wrap;
 }
+.color{
+  flex-basis: 33.33%;
+  padding-top: 3rem;
+  height: 50%;
+}
+.one, .two{
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-top:none;
+  border-left:none;
+}
+.three{
+  border-right: none;
+  border-bottom: 1px solid black;
+  border-top:none;
+  border-left:none;
+}
+.four, .five{
+  border-right: 1px solid black;
+  border-bottom: none;
+  border-top:none;
+  border-left:none;
+  padding-top: 6rem;
+}
+.six{
+  padding-top: 6rem;
+}
+.box{
+  width:85%;
+  height: 90%;
+  background-color: lightblue;
+  margin: 0 auto 0 auto;
+}
 
-#logo {
-  flex: 3 1 40rem;
-  font-family: "Pattaya", sans-serif;
-  font-weight: normal;
-}
-.hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), transparent),
-    url("../src/assets/chesspieces.jpg");
-  min-height: 90vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  color: rgba(255, 255, 255, 0.945);
+.app__container{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.hero h2 {
-  padding: 6rem;
+  flex-wrap: wrap;
+  height: 100vh;
+  padding: 3rem 6rem;
+
 }
 
 @media screen and (max-width: 933px) {
@@ -93,4 +111,48 @@ nav {
   h2 {
     font-size: 2.5rem;
   }
+}
+
+@media (min-width:768px) and (max-width: 900px){
+  .color{
+    flex-basis: 50%;
+  }
+  .two,.four{
+    border-right: none;
+  }
+  .three{
+    border-right: 1px solid black;
+    padding-top: 6rem;
+  }
+  .six{
+    border-top: 1px solid black;
+  }
+}
+
+@media (max-width: 767px){
+  .app__container{
+    padding: 3rem 3rem;
+  }
+  .color{
+    flex-basis: 100%;
+  }
+  .box{
+    width: 50%;
+  }
+  .one{
+    border-right: none;
+    border-bottom: none;
+  }
+  .two,.three,.four,.five, .six{
+    border-top: 1px solid black;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+  }
+}
+
+@media (max-width: 500px){
+.box{
+  width: 70%;
+}
 }
