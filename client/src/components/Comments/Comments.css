@@ -1,0 +1,85 @@
+.comments_container {
+  position: relative;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.comments_container .title {
+  color: #00B87C;
+  padding: 1.2rem;
+  border-bottom: .4rem solid #00B87C;
+  font-size: 2rem;
+}
+
+.comments_container .comments {
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  position: relative;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.comments_container .comments::-webkit-scrollbar {
+  width: 8px;
+  background-color:#F3F1F1; 
+}
+
+.comments_container .comments::-webkit-scrollbar-thumb {
+  background-color: #CCCCCC;
+  border-radius: 10px;
+}
+
+.comments_container .text-muted {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  width: 100%;
+  text-align: center;
+  color: #747474;
+}
+
+.comment_container {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  margin-bottom: 1.5rem;
+}
+
+.comment_container img {
+  width: 4rem;
+  vertical-align: middle;
+  height: auto;
+  margin-top: -3rem;
+  margin-right: 1rem;
+}
+
+.name {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: #242424;
+  margin-right: .8rem;
+}
+
+.faded {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: #C1C1C1;
+  text-transform: uppercase;
+}
+
+.comment {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 140%;
+  color: #3A3A3A;
+}
