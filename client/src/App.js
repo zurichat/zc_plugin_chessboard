@@ -1,13 +1,13 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Games from './'
 
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage"
-import MainGame from ''
+import MainGame from './Pages/GameScreen/MainGame.jsx'
 
 function App() {
   return (
     <div className="App">
-     <MainGame />
       <Router>
         <Switch>
           <Route exact path='/' render={HomePage} />
@@ -15,7 +15,6 @@ function App() {
 
         </Switch>
       </Router>
-     {/* <HomePage /> */}
     </div>
   );
 }

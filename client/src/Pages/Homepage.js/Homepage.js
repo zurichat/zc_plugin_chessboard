@@ -7,7 +7,7 @@ import './Homepage.css'
   return (
     <div className="App">
       <header class="main-header">
-        <nav>
+        <nav className='nav'>
           <h1>Chess Board Room Plugin</h1>
         </nav>
       </header>
