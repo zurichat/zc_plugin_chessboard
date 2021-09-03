@@ -1,4 +1,5 @@
 import "./App.css";
+import MiniBoard from "./components/MiniBoard/MiniBoard";
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
 
         <button>Start Game</button>
       </section>
+      <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
+      <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
     </div>
   );
 }
