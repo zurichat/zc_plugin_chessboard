@@ -12,6 +12,7 @@ function App() {
         <h2>Welcome to the Chess Board Update</h2>
 
         <button>Start Game</button>
+
       </section>
     </div>
   );
