@@ -1,0 +1,42 @@
+main {
+  border: 1px solid #616161;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#chessboard_container {
+  width: 70%;
+  box-sizing: border-box;
+  font-size: 5rem;
+  min-height: 80vh;
+  text-align: center;
+  padding-top: 15rem;
+}
+
+#side_container {
+  box-sizing: border-box;
+  border-left: 1px solid #616161;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn_container {
+  padding: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    flex-direction: column;
+  }
+  #chessboard_container {
+    width: 100%;
+  }
+  #side_container {
+    width: 100%;
+  }
+}

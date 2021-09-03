@@ -1,9 +1,7 @@
 .comments_container {
-  width: 30rem;
   position: relative;
   background-color: transparent;
   box-sizing: border-box;
-  border: 1px solid #616161;
 }
 
 .comments_container .title {
