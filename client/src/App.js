@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
+=======
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+
+>>>>>>> zurichat-dev
 import "./App.css";
 import MiniBoard from "./components/MiniBoard/MiniBoard";
+import Homepage from "./components/Homepage.js/Homepage"
+import MainGame from "./components/GameScreen/MainGame";
 
 class App extends Component() {
     render(){
   return (
     <div className="App">
+<<<<<<< HEAD
       <header class="main-header">
         <nav>
           <h1>Chess Board Room Plugin</h1>
@@ -39,6 +47,14 @@ class App extends Component() {
      </div>
       
     
+=======
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => Homepage} />
+          <Route exact path="/game" render={() => MainGame} />
+        </Switch>
+      </Router>
+>>>>>>> zurichat-dev
     </div>
   );
     }
