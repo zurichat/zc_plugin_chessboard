@@ -1,5 +1,6 @@
 import React from "react";
 import "./MiniBoard.css";
+import boardImg from "../../assets/mini-board.png"
 
 function MiniBoard({ id, playerOne, playerTwo }) {
   return (
@@ -16,7 +17,9 @@ function MiniBoard({ id, playerOne, playerTwo }) {
         )}
       </div>
 
-      <div className="board-image"></div>
+      <div className="board-image">
+       <a href="#"><img src={boardImg} alt=""/> </a>
+      </div>
       <div className="asideBar bottomBar">
         {playerTwo ? (
           <div className="playerProfile playerTwo">
