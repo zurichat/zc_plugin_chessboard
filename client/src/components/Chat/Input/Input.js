@@ -6,7 +6,7 @@ import Line from './images/line.png';
 
 import Bold from './images/bold.png';
 import Italic from './images/italic.png';
-import Link from './images/link.png';
+// import Link from './images/link.png';
 import List from './images/list.png';
 import Atsign from './images/at-sign.png';
 import Paperclip from './images/paperclip.png';

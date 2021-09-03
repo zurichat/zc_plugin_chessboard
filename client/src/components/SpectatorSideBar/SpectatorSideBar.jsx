@@ -2,7 +2,7 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Games from "../Games/Games";
 import Chat from "../Chat/Chat";
 import "./SpectatorSideBar.css";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 
 const SpectatorSideBar = () => {
   return (
