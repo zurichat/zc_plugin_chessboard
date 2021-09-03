@@ -1,22 +1,46 @@
-import React from 'react'
+import React from 'react';
+import MiniBoard from "../../components/MiniBoard/MiniBoard";
 
 import './Homepage.css'
 
-const Homepage = () => {
-    return (
-      <div>
-        <header class="main-header">
-          <nav>
-            <h1 id="logo">Chess Board Room Plugin</h1>
-          </nav>
-        </header>
-        <section class="hero">
-          <h2>Welcome to the Chess Board Room</h2>
-
-          <button>Start Game</button>
-        </section>
+  function Homepage(){
+  return (
+    <div className="App">
+      <header class="main-header">
+        <nav>
+          <h1>Chess Board Room Plugin</h1>
+        </nav>
+      </header>
+     <div className = "app__container">
+        <div className="color one">
+            <div className="box">
+            <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
+            </div></div>
+        <div className="color two">
+            <div className="box">
+            <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
+                </div></div>
+        <div className="color three">
+            <div className="box">
+            <MiniBoard id="234" playerOne="Vermilion" playerTwo="" />
+                </div></div>
+        <div className="color four">
+        <div className="box">
+            <MiniBoard id="234" playerOne="" playerTwo="" />
+                </div></div>
+        <div className="color five">
+        <div className="box">
+            <MiniBoard id="234" playerOne="SOI" playerTwo="Realice" />
+                </div></div>
+        <div className="color six">
+        <div className="box">
+            <MiniBoard id="234" playerOne="DevPriest" playerTwo="bombos" />
+                </div></div>
+     </div>
       </div>
-    );
-}
+  
+     )
+     }
+      
 
 export default Homepage
