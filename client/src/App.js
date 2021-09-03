@@ -5,7 +5,7 @@ import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage"
 import GameScreen2 from './Pages/GameScreen2';
 import MainGame from "./Pages/GameScreen/MainGame";
-import Input from './components/Chat/Input/Input';
+// import Input from './components/Chat/Input/Input';
 
 function App() {
   return (
