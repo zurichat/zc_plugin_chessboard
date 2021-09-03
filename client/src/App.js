@@ -1,6 +1,7 @@
 import React from 'react';
 import "./App.css";
-import Sidebar from './components/Sidebar/Sidebar';
+
+
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
 
         <button>Start Game</button>
       </section>
-    <Sidebar />
+
+     
+   
       
     </div>
   );
