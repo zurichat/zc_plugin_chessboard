@@ -13,6 +13,7 @@ function App() {
         <h2>Welcome to the Chess Board Update</h2>
 
         <button>Start Game</button>
+
       </section>
       <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
       <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
