@@ -19,9 +19,6 @@ const io = socketIO(server);
 // Pre-Route middlewares
 require("./src/middlewares/pre_route.middleware")(app);
 
-// Express body parser
-app.use(express.urlencoded({ extended: true }));
-
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
 
