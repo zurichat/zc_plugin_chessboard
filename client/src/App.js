@@ -12,7 +12,12 @@ function App() {
       <section class="hero">
         <h2>Welcome to the Chess Board Update</h2>
 
+<<<<<<< HEAD
         <button><Link to = "/chessboard">Start Game</Link></button>
+=======
+        <button>Start Game</button>
+
+>>>>>>> d35e6d55c3bb918480ea4fe7e3b4ee7fcff52168
       </section>
     </div>
   );
