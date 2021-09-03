@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test db_function</title>
+</head>
+<body>
+    <h3>Chess Room user details</h3>
+    <div>
+        <form action="/api/dbWriteTemp" method="POST">
+            <label for="userName" class="label-form">Name</label>
+            <input type="text" name="userName" placeholder="Enter user name here" required>
+            
+        
+            <label for="organization" class="label-form">Organization</label>
+            <input type="text" name="organization" placeholder="Enter company here" required>
+        
+            <label for="wins" class="label-form">Description</label>
+            <input type="number" name="wins" placeholder="Total number of wins" required>
+        
+            <button type="submit">Save</button>
+            <div class="log-in">
+                <p>Already saved> <a href="/api/dbReadTemp">Fetch user details</a></p>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
+  

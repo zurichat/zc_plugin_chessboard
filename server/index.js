@@ -19,11 +19,17 @@ const io = socketIO(server);
 // Pre-Route middlewares
 require("./src/middlewares/pre_route.middleware")(app);
 
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
+
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
 
 // temporary - to be removed
 app.get("/test", (req, res) => { res.sendFile(path.join(__dirname, "public", "index.html")); });
+
+//temporary also - to be removed
+app.get("/dbtest", (req, res) => { res.sendFile(path.join(__dirname, "public", "userTest.html"))})
 
 
 // Handle Socket Connections
