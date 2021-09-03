@@ -20,6 +20,9 @@ module.exports = (app) => {
     // Tell express to recognize the incoming Request Object as a JSON Object
     app.use(express.json());
 
+    // Express body parser
+    app.use(express.urlencoded({ extended: true }));
+
     // Create express static engine to run React app build
     app.use(express.static(path.join(__dirname, "..", "..", "..", "client", "build")));
 
