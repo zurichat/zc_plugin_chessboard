@@ -28,6 +28,8 @@
     <br><br>
     <button id="end-game">End game</button>
 
+    <h4 id="log"></h4>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
@@ -102,6 +104,7 @@
       });
 
       document.getElementById("end-game").addEventListener('click', ()=>{
+        document.querySelector("#log").innerHTML = "Game ended... <br/>"
           stale_mate = false
           if(stale_mate){
             winner = null;
@@ -112,6 +115,13 @@
           }
           socket.emit('game_ended',{game_id:gameId, winner:winner, looser:looser, stale_mate:stale_mate});
       })
+      socket.on("game save", (data) => {
+        document.querySelector("#log").innerHTML += `Game saved... <br/> 
+        game: ${data.message.game_id}<br/>
+        Winner: ${data.message.winner} <br/>
+        Looser: ${data.message.looser} <br/>
+        Stalemate: ${data.message.stale_mate}`;
+      });
     </script>
   </body>
 </html>

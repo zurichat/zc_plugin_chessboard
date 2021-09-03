@@ -6,18 +6,18 @@ const Path = require('path')
 const formatMessage = require("./libs/formatMessage");
 
 const game_end_handler = (socket)=>(msg)=>{
-    game_id = msg.game_id
-    var game_details ={
-        "game_id" : game_id,
+    var game_details =
+    {
+        "game_id" : msg.game_id,
         "winner" : msg.winner,
         "looser" : msg.looser,
         "stale_mate" : msg.stale_mate
     }
-    // game_details = JSON.stringify(game_details, null, 4);
 
     // Temporary
     save_game(game_details);
 
+    socket.emit("game save", {message:msg});
 }
 
 // Temporary
@@ -30,10 +30,8 @@ function save_game(game_data){
             } else {
                 // parse JSON string to JSON object
                 var db_data = JSON.parse(data);
-                console.log(db_data)
-                // db_data = array(db_data)
                 // add a new record
-                db_data.push(game_data);
+                db_data = Object.assign(db_data,{[game_data.game_id]:game_data})
                 // write new data back to the file
                 fs.writeFile(dbpath, JSON.stringify(db_data, null, 4), (err) => {
                     if (err) {
@@ -44,7 +42,8 @@ function save_game(game_data){
         
         });
     }else{
-        fs.writeFile(dbpath, JSON.stringify(game_data, null, 4), (err) => {
+        db_data = {[game_data.game_id]:game_data}
+        fs.writeFile(dbpath, JSON.stringify(db_data, null, 4), (err) => {
             if (err) {
                 console.log(`Error writing database file: ${err}`);
             }
