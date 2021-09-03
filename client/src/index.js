@@ -1,23 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import ChessBoard from './components/ChessBoard/ChessBoard';
 
-const Routing = () => {
-  return (
-    <Router>
-      <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/chessboard" component={ChessBoard} />
-      </Switch>
-    </Router>
-  )
-}
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routing />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
