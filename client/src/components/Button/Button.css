@@ -1,0 +1,24 @@
+.request-challenge-btn{
+    background: #27AE60;
+    border-radius: 3px;
+    width: 197px;
+    height: 41px;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+
+}
+
+.exit-btn{
+    width: 128px;
+    height: 41px;
+    border: 1px solid #B8003C;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin-left: 16px;
+    color: #B8003C;
+    background: #FFFFFF;
+    cursor: pointer;
+}
