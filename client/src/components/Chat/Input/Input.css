@@ -1,0 +1,47 @@
+
+
+.input-container{
+    background: #FDFFFF;
+    border: 0.5px solid #999999;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 0.5px solid #999999;
+    margin: 5px ;
+    padding: 5px 0 0 10px;
+}
+
+.input-message{
+    margin: 10px 0;
+    padding-bottom: 5px;
+}
+
+.input-message input{
+    width: 95%;
+    border:none;
+    outline: none;
+}
+
+.input-iconers{
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+ #layiconers{
+    width: 30px;
+    height: 30px;
+   padding: 5px;
+}
+
+
+img{
+    width:0;
+    height: 0;
+    
+}
+
+
+.input-message > form > button{
+    display: none;
+  }
