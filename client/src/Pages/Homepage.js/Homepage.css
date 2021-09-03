@@ -1,52 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-h1 {
-  font-size: 2.6rem;
-}
-
-li,
-button,
-label,
-input,
-p {
-  font-size: 2rem;
-}
-h2 {
-  font-size: 4.5rem;
-}
-
-button {
-  padding: 2rem 6rem;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  border-radius: 5rem;
-  background: #25364b;
-}
-
-button:hover {
-  background: #121a24;
-  cursor: pointer;
-  transition: background 0.5s ease 0.2s;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-}
-
 header {
   background: #131c27;
   color: white;
 }
 
-nav {
+.nav {
   min-height: 10vh;
   display: flex;
   width: 90%;
@@ -105,12 +62,6 @@ nav {
   }
   #logo {
     padding: 1rem;
-  }
-  html {
-    font: size 50%;
-  }
-  h2 {
-    font-size: 2.5rem;
   }
 }
 
