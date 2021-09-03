@@ -1,7 +1,5 @@
 import "./App.css";
-
 import HomePage from "./Pages/Homepage.js/Homepage"
-
 
 function App() {
   return (
