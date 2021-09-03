@@ -10,7 +10,7 @@
 <body>
     <h3>Chess Room user details</h3>
     <div>
-        <form action="/api/dbWriteTemp" method="POST">
+        <form action="/api/dbWrite" method="POST">
             <label for="userName" class="label-form">Name</label>
             <input type="text" name="userName" placeholder="Enter user name here" required>
             
@@ -23,7 +23,7 @@
         
             <button type="submit">Save</button>
             <div class="log-in">
-                <p>Already saved> <a href="/api/dbReadTemp">Fetch user details</a></p>
+                <p>Already saved> <a href="/api/dbRead">Fetch user details</a></p>
             </div>
         </form>
     </div>
