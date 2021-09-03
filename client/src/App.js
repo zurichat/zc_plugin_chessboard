@@ -3,6 +3,7 @@ import "./App.css";
 
 
 
+
 function App() {
   return (
     <div className="App">
@@ -15,10 +16,7 @@ function App() {
         <h2>Welcome to the Chess Board Room</h2>
 
         <button>Start Game</button>
-      </section>
-
-     
-   
+      </section>   
       
     </div>
   );
