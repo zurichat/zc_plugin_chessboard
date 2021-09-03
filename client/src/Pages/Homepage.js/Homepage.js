@@ -18,7 +18,7 @@ import './Homepage.css'
             </div></div>
         <div className="color two">
             <div className="box">
-            <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
+            <MiniBoard id="234" playerOne="" playerTwo="odiri" />
                 </div></div>
         <div className="color three">
             <div className="box">
