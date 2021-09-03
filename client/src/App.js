@@ -1,4 +1,5 @@
 import "./App.css";
+import Comments from "./components/Comments/Comments";
 
 function App() {
   return (
@@ -12,8 +13,16 @@ function App() {
         <h2>Welcome to the Chess Board Update</h2>
 
         <button>Start Game</button>
+
       </section>
     </div>
+    // <div style={{
+    //   display:"flex",
+    //   justifyContent: 'center',
+    //   alignItems: 'center'
+    // }}>
+    //   <Comments />
+    // </div>
   );
 }
 
