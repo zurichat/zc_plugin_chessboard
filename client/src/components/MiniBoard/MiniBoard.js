@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.png"
 
@@ -13,12 +14,12 @@ function MiniBoard({ id, playerOne, playerTwo }) {
             <p>Player 1: @{playerOne}</p>
           </div>
         ) : (
-          <button className="join-button">Join as Player 1</button>
+          <Link to='/game'><button className="join-button">Join as Player 1</button></Link>
         )}
       </div>
 
       <div className="board-image">
-        <img src={boardImg} alt=""/>
+       <a href="#"><img src={boardImg} alt=""/> </a>
       </div>
       <div className="asideBar bottomBar">
         {playerTwo ? (
@@ -28,7 +29,7 @@ function MiniBoard({ id, playerOne, playerTwo }) {
             <p>Player 2: @{playerTwo}</p>
           </div>
         ) : (
-          <button className="join-button">Join as Player 2</button>
+          <Link to='/game'><button className="join-button">Join as Player 2</button></Link>
         )}
       </div>
     </div>

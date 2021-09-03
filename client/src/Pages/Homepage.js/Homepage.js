@@ -7,7 +7,7 @@ import './Homepage.css'
   return (
     <div className="App">
       <header class="main-header">
-        <nav>
+        <nav className='nav'>
           <h1>Chess Board Room Plugin</h1>
         </nav>
       </header>
@@ -18,7 +18,7 @@ import './Homepage.css'
             </div></div>
         <div className="color two">
             <div className="box">
-            <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
+            <MiniBoard id="234" playerOne="" playerTwo="odiri" />
                 </div></div>
         <div className="color three">
             <div className="box">
