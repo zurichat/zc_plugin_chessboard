@@ -1,4 +1,6 @@
+import React from 'react'
 import "./App.css";
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
 
         <button>Start Game</button>
       </section>
+
     </div>
   );
 }
