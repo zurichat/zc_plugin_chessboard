@@ -1,8 +1,4 @@
 import "./App.css";
-import MiniBoard from "./components/MiniBoard/MiniBoard";
-
-
-
 
 function App() {
   return (
@@ -13,13 +9,10 @@ function App() {
         </nav>
       </header>
       <section class="hero">
-        <h2>Welcome to the Chess Board Room</h2>
+        <h2>Welcome to the Chess Board Update</h2>
 
         <button>Start Game</button>
-
       </section>
-      <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
-      <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
     </div>
   );
 }
