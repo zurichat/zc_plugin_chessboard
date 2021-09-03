@@ -2,8 +2,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import "./App.css";
 import MiniBoard from "./components/MiniBoard/MiniBoard";
-import Homepage from "./components/Homepage.js/Homepage"
-import MainGame from "./components/GameScreen/MainGame";
+import Homepage from "./Pages/Homepage.js/Homepage"
+import MainGame from "./Pages/GameScreen/MainGame";
 
 function App() {
   return (
