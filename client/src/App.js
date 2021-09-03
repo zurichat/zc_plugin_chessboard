@@ -17,7 +17,6 @@ function App() {
           <Route exact path='/game_comments' render={GameScreen2} />
         </Switch>
       </Router>
-     {/* <HomePage /> */}
      
     </div>
   );
