@@ -1,4 +1,5 @@
 import "./App.css";
+import MiniBoard from "./components/MiniBoard/MiniBoard";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <div className="color five"><div className="box"></div></div>
         <div className="color six"><div className="box"></div></div>
      </div>
+      <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
+      <MiniBoard id="234" playerOne="" playerTwo="codeJonin" />
     </div>
   );
 }
