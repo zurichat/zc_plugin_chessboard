@@ -3,9 +3,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 100%;
+    border: solid;
     height: 100vh;
     margin: auto;
+}
+
+.chessboard #startPos{
+    /* width: 1000px; */
+    display: none;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
