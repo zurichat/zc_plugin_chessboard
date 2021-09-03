@@ -48,11 +48,19 @@ class DatabaseConnection {
     this.data.payload = payload;
     this.data.object_id = id;
 
-    const response = await axios.post(
+    const response = await axios.put(
       databaseWriteUrl,
       JSON.stringify(this.data)
     );
 
+    return response.data;
+  }
+
+  async delete(id) {
+    this.data.object_id = id;
+    const response = await axios.delete(
+      databaseWriteUrl
+    );
     return response.data;
   }
 }

@@ -21,10 +21,9 @@ class UserController {
     }
   }
 
-  async getAllUsers(req, res) {
+  async getAllZCUsers(req, res) {
     try {
       const response = await Users.fetchAll();
-
       res
         .status(200)
         .send(appResponse(null, response, true, { count: response.length }));
@@ -32,11 +31,9 @@ class UserController {
       throw new CustomError("Could not fetch users information", "500");
     }
   }
-
   async userDetails(req, res) {
     try {
       const response = await Users.fetchOne(req.params.id);
-
       res.status(200).send(appResponse(null, response, true));
     } catch (error) {
       throw new CustomError("Could not fetch user details", "500");
@@ -45,12 +42,21 @@ class UserController {
 
   async userUpdate(req, res) {
     try {
-    } catch (error) {}
+      const response = await Users.update(req.params.id, req.body);
+      res.status(200).send(appResponse(null, response, true));
+    } catch (error) {
+      throw new CustomError("Could not update user details", "500");
+    }
   }
 
   async userDelete(req, res) {
     try {
-    } catch (error) {}
+      // console.log(req.params.id);
+      const response = await Users.delete(req.params.id);
+      res.status(200).send(appResponse(null, response, true));
+    } catch (error) {
+      throw new CustomError("Could not delete user details", "500");
+    }
   }
 }
 
