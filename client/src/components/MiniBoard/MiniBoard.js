@@ -18,7 +18,7 @@ function MiniBoard({ id, playerOne, playerTwo }) {
       </div>
 
       <div className="board-image">
-        <img src={boardImg} alt=""/>
+       <a href="#"><img src={boardImg} alt=""/> </a>
       </div>
       <div className="asideBar bottomBar">
         {playerTwo ? (
