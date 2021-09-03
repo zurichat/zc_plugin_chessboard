@@ -17,7 +17,7 @@ const SpectatorSideBar = () => {
       </nav>
       <Switch>
         <Route exact path="/" component={Chat} />
-        {/* <Route exact path="/chat" component={Chat} /> */}
+        <Route exact path="/chat" component={Chat} />
         <Route exact path="/games" component={Games} />
       </Switch>
     </aside>
