@@ -7,7 +7,6 @@ function Button() {
             <button className='request-challenge-btn'>
                 Request another Challenge
             </button>
-
             <button className='exit-btn'>
                 Exit
             </button> 
