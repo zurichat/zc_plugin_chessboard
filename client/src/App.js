@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/game/chat" render={MainGame} />
           <Route exact path="/game_comments" render={GameScreen2} />
           <Route exact path="/modalpage" render={Modal} />
-          <Route exact path="/test-accept-modal" component={TestModal} />          
+          <Route exact path="/test-accept-modal" component={TestModal} />
           <Route exact path="/inviteplayer">
             <InviteModal />
           </Route>
