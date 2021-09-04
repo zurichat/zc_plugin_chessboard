@@ -28,7 +28,14 @@ const ChessBoard = () => {
     <>
       <div className="chessboard">
         <PlayerName name="Dejavu" />
-        <Chessboard width={638} id="startPos" position={fen} onDrop={onDrop} />
+        <Chessboard
+          width={538}
+          id="startPos"
+          position={fen}
+          onDrop={onDrop}
+          sparePieces={true}
+          className="cboard"
+        />
         <PlayerName style={{ justifyContent: "flex-end" }} name="Bombos" />
       </div>
     </>
