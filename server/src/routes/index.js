@@ -12,7 +12,9 @@ router.get("/info", InfoCtrl.getPluginInfo);
 
 router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
-router.get("/createGame", GameCtrl.create);
+router.post("/createGame", GameCtrl.create);
+router.post("/joingame", GameCtrl.join);
+router.post("/move", GameCtrl.move);
 
 // temporary to test db function
 router.post("/dbWrite", UserCtrl.userCreate);
