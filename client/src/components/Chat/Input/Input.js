@@ -12,31 +12,31 @@ import Atsign from "./images/at-sign.png";
 import Paperclip from "./images/paperclip.png";
 
 const Input = () => {
-    return (
-        <div className="input-container">
-            <div className="input-message">
-                <form>
-                    <input placeholder="Type a message" type="text" />
-                    <button type="submit">Send message</button>
-                </form>
-            </div>
+  return (
+    <div className="input-container">
+      <div className="input-message">
+        <form>
+          <input placeholder="Type a message" type="text" />
+          <button type="submit">Send message</button>
+        </form>
+      </div>
 
-            <div className="input-iconers">
-                <div className="icon-left">
-                    <img id="layiconers" src={Zap} alt="#" />
-                    <img id="layiconers" src={Line} alt="#" />
-                    <img id="layiconers" src={Bold} alt="#" />
-                    <img id="layiconers" src={Italic} alt="#" />
-                    <img id="layiconers" src={List} alt="#" />
-                </div>
-
-                <div className="icon-right">
-                    <img id="layiconers" src={Atsign} alt="#" />
-                    <img id="layiconers" src={Paperclip} alt="#" />
-                </div>
-            </div>
+      <div className="input-iconers">
+        <div className="icon-left">
+          <img id="layiconers" src={Zap} alt="#" />
+          <img id="layiconers" src={Line} alt="#" />
+          <img id="layiconers" src={Bold} alt="#" />
+          <img id="layiconers" src={Italic} alt="#" />
+          <img id="layiconers" src={List} alt="#" />
         </div>
-    );
+
+        <div className="icon-right">
+          <img id="layiconers" src={Atsign} alt="#" />
+          <img id="layiconers" src={Paperclip} alt="#" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Input;
