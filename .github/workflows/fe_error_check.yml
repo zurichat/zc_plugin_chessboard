@@ -1,8 +1,9 @@
 name: EsLint - Checking For Errors [Frontend]
 
-# This action works with pull requests
+# Triggers the workflow on pull requests
 on:
   pull_request:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
