@@ -3,9 +3,9 @@ import "./AcceptDeclineModal.css";
 import ModalContent from "./ModalContent";
 import PopUp from "./PopUp";
 
-const AcceptDeclineModal = () => {
+const AcceptDeclineModal = ({ showModal, setShowModal }) => {
   return (
-    <PopUp>
+    <PopUp showModal={showModal} hideModal={setShowModal}>
       <ModalContent />
     </PopUp>
   );

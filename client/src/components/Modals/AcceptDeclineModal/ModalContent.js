@@ -3,7 +3,7 @@ import Avatar from "./acceptAvatar.svg";
 
 const ModalContent = () => {
   return (
-    <>
+    <div className="accept_decline_modal_content_wrapper">
       <div className="accept_decline_modal_header">
         <img src={Avatar} alt="user" />
       </div>
@@ -14,7 +14,7 @@ const ModalContent = () => {
         <button>Accept</button>
         <button>Decline</button>
       </div>
-    </>
+    </div>
   );
 };
 
