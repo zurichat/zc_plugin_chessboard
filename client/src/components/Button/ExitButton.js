@@ -4,7 +4,7 @@ import "./Button.css";
 function ExitButton() {
   return (
     <div>
-      <button class="exit-button">Exit</button>
+      <button className="exit-button">Exit</button>
     </div>
   );
 }
