@@ -1,7 +1,11 @@
 import React from "react";
 import Avatar from "./acceptAvatar.svg";
 
-const ModalContent = () => {
+const ModalContent = ({ closeModal }) => {
+  const handleDecline = () => {
+    closeModal();
+  };
+
   return (
     <div className="accept_decline_modal_content_wrapper">
       <div className="accept_decline_modal_header">
@@ -12,7 +16,7 @@ const ModalContent = () => {
       </div>
       <div className="accept_decline_modal_footer">
         <button>Accept</button>
-        <button>Decline</button>
+        <button onClick={handleDecline}>Decline</button>
       </div>
     </div>
   );

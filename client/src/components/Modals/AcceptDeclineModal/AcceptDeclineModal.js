@@ -6,7 +6,7 @@ import PopUp from "./PopUp";
 const AcceptDeclineModal = ({ showModal, setShowModal }) => {
   return (
     <PopUp showModal={showModal} hideModal={setShowModal}>
-      <ModalContent />
+      <ModalContent closeModal={setShowModal} />
     </PopUp>
   );
 };
