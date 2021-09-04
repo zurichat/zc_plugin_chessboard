@@ -5,6 +5,7 @@ const router = require("express").Router();
 const InfoCtrl = require("../controllers/info.controller");
 const GameCtrl = require("../controllers/game.controller");
 const UserCtrl = require("../controllers/user.controller");
+const ResultCtrl = require("../controllers/result.controller");
 
 // Endpoints
 router.get("/info", InfoCtrl.getPluginInfo);
@@ -22,8 +23,15 @@ router.post("/dbWrite", UserCtrl.userCreate);
 // temporary to test db function
 router.put("/dbUpdate/:id", UserCtrl.userUpdate);
 
+
 // temporary to test db function
-// router.delete('/dbDelete/:id', UserCtrl.userDelete);
+router.post("/dbResult", ResultCtrl.resultCreate);
+
+// temporary to test db function
+router.get("/dbResult", ResultCtrl.getAllResults);
+
+// temporary to test db function
+router.get("/dbResult/:id", ResultCtrl.getResultById);
 
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });

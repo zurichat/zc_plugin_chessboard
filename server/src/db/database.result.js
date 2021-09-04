@@ -2,33 +2,32 @@ const axios = require("axios");
 const databaseWriteUrl = "https://zccore.herokuapp.com/data/write";
 const databaseReadUrl = "https://zccore.herokuapp.com/data/read";
 
-class DatabaseConnection {
+class DatabaseConnectionResult {
   constructor(collection_name) {
     this.data = {
       plugin_id: "6132482f569dbbb7ce5b4fe5", //registered chess plug-in
       organization_id: "612a3a914acf115e685df8e3",
-      collection_name: "chess_room",
+      collection_name: "result",
       bulk_write: false,
       object_id: "",
       filter: {},
       payload: {},
     };
   }
- 
-  async create(payload) {
+
+  async createResult(payload) {
     this.data.payload = payload;
     this.data.payload.createdAt = new Date().toISOString();
-
+    console.log(this.payload);
     const response = await axios.post(
       databaseWriteUrl,
       JSON.stringify(this.data)
     );
-
-    console.log(response.data);
+    console.log(response);
     return response.data;
   }
 
-  async fetchAll() {
+  async fetchAllResult() {
     const response = await axios.get(
       `${databaseReadUrl}/${this.data.plugin_id}/${this.data.collection_name}/${this.data.organization_id}`
     );
@@ -36,34 +35,13 @@ class DatabaseConnection {
     return response.data;
   }
 
-  async fetchOne(id) {
+  async fetchUserResult(id) {
     const response = await axios.get(
       `${databaseReadUrl}/${this.data.plugin_id}/${this.data.collection_name}/${this.data.organization_id}?object_id=${id}`
     );
 
     return response.data;
   }
-
-  async update(id, payload) {
-    this.data.payload = payload;
-    this.data.object_id = id;
-
-    const response = await axios.post(
-      databaseWriteUrl,
-      JSON.stringify(this.data)
-    );
-
-    return response.data;
-  }
-
-  async delete(id) {
-    this.data.object_id = id;
-    const response = await axios.delete(databaseWriteUrl);
-    return response.data;
-  }
 }
 
-
-
-
-module.exports = DatabaseConnection;
+module.exports = DatabaseConnectionResult;

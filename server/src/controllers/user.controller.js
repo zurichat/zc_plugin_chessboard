@@ -17,18 +17,21 @@ class UserController {
 
       res.status(200).send(appResponse(null, response, true));
     } catch (error) {
-      throw new CustomError("Could not create user", "500");
+      throw new CustomError(error, "500");
+      console.log(error);
     }
   }
 
   async getAllZCUsers(req, res) {
     try {
+      
       const response = await Users.fetchAll();
       res
         .status(200)
         .send(appResponse(null, response, true, { count: response.length }));
     } catch (error) {
-      throw new CustomError("Could not fetch users information", "500");
+      throw new CustomError(error, "500");
+      // console.log(error);
     }
   }
   async userDetails(req, res) {
