@@ -8,7 +8,7 @@ const TestModal = () => {
   const handleModal = () => setShowModal(!showModal);
   const style = {
     "text-align": "center",
-    "margin-top": "2%",
+    "margin-top": "5%",
     cursor: "pointer",
   };
   return (
