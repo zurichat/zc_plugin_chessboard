@@ -5,82 +5,100 @@
 Zuri chesss plugin is a web based recreational and competitive board game played between two players with an option for AI, that can easily be installed and used as part of the Zuri chat main application.
 
 ## Design:
+
 Figma link to the design implemented:
 <br>
- coming soon!
+coming soon!
 
 ## Hosted URL:
+
 https://chess.zuri.chat/
 
 ## Tech Stack:
- - React js
- - Nodejs
- - Ajax
- - WebSockets
+
+- React js
+- Nodejs
+- Ajax
+- WebSockets
 
 # Project Setup & Contribution Guide:
- - Fork this REPO
- - Clone the repo from your account
- ``` 
- git clone https://github.com/<username>/zc_plugin_chessboard.git
- ```
+
+- Fork this REPO
+- Clone the repo from your account
+
+```
+git clone https://github.com/<username>/zc_plugin_chessboard.git
+```
 
 #
+
 ## For BACKEND
 
- - switch to the backend directory and install all dependencies
- ``` 
- cd server 
- npm install   or   yarn install  
- ```
+- switch to the backend directory and install all dependencies
+
+```
+cd server
+npm install   or   yarn install
+```
 
 ## For FRONTEND
 
- - switch to the frontend directory and install all dependencies
- ``` 
- cd client 
- npm install   or   yarn install 
- ```
+- switch to the frontend directory and install all dependencies
+
+```
+cd client
+npm install   or   yarn install
+```
+
 #
 
- - Add the main repo remote to your project upstream
- ```
- git remote add upstream https://github.com/zurichat/zc_plugin_chessboard.git
- ```
+- Add the main repo remote to your project upstream
 
- - Pull from upstream
- ```
- git pull upstream dev
- ```
+```
+git remote add upstream https://github.com/zurichat/zc_plugin_chessboard.git
+```
 
- - Switch to a new branch with your {feature-name}
- ```
- git checkout -b <feature-name>
- ```
+- Pull from upstream
 
- - Add your work/code
+```
+git pull upstream dev
+```
 
- - When done making your changes, run
+- Switch to a new branch with your {feature-name}
+
+```
+git checkout -b <feature-name>
+```
+
+- Add your work/code
+
+- When done making your changes, run
+
 ```
   git add .
   git commit -m 'your commit message'
   git push origin <feature-name>
 ```
 
- - Create a Pull Request to `` dev `` branch
+- Create a Pull Request to `dev` branch
 
 <br>
 
-  # For Local Testing:
- - Run backend server
- ```
- cd server
- npm run dev   or   yarn run dev
- ```
- - Open http://127.0.0.1:5050/ping
- - Open another terminal in vscode and run
- ```
- cd client
- npm start   or   yarn start
- ```
- - Open http://127.0.0.1:3000/
+# For Local Testing:
+
+- Run backend server
+
+```
+cd server
+npm run dev   or   yarn run dev
+```
+
+- Open http://127.0.0.1:5050/ping
+- Open another terminal in vscode and run
+
+```
+cd client
+npm start   or   yarn start
+```
+
+- Open http://127.0.0.1:3000/
