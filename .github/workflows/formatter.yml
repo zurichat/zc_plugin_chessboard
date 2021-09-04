@@ -1,6 +1,6 @@
 name: Prettier Action
 
-# This action works with pull requests and pushes
+# This action works on pushes
 on:
   push:
     branches:

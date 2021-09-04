@@ -2,15 +2,15 @@ import React from "react";
 import "./Button.css";
 
 function Button() {
-  return (
-    <div className="btn">
-      <button className="request-challenge-btn">
+    return (
+        <div className="btn">
+            <button className="request-challenge-btn">
         Request another Challenge
-      </button>
+            </button>
 
-      <button className="exit-btn">Exit</button>
-    </div>
-  );
+            <button className="exit-btn">Exit</button>
+        </div>
+    );
 }
 
 export default Button;
