@@ -7,12 +7,25 @@
   "author": "Team Tesla",
   "license": "MIT",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "axios": "^0.21.1",
+    "centrifuge": "^2.8.0",
+>>>>>>> be71c77ab8ad17a538d513616fe38a58d96929cb
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^4.6.0",
+<<<<<<< HEAD
+=======
+    "joi": "^17.4.2",
+    "jscent": "^0.2.1",
+    "node-cache": "^5.1.2",
+>>>>>>> be71c77ab8ad17a538d513616fe38a58d96929cb
     "socket.io": "^4.2.0",
-    "uuid": "^8.3.2"
+    "sockjs-client": "^1.5.2",
+    "uuid": "^8.3.2",
+    "ws": "^8.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

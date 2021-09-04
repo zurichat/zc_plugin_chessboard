@@ -20,5 +20,32 @@ function formatMesaage(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+<<<<<<< HEAD
+=======
+const formtMessage = (objectOrMessage) => {
+  return typeof objectOrMessage === "string"
+    ? objectOrMessage
+    : typeof objectOrMessage === "object" &&
+      objectOrMessage &&
+      objectOrMessage.message
+    ? objectOrMessage.message
+    : "";
+};
+
+const createResponse = (
+  objectOrMessage,
+  data,
+  status = false,
+  additionalData
+) => {
+  return {
+    status: status === false ? "failure" : "success",
+    message: objectOrMessage ? formtMessage(objectOrMessage) : undefined,
+    ...additionalData,
+    data,
+  };
+};
+
+>>>>>>> be71c77ab8ad17a538d513616fe38a58d96929cb
 // Export Module
 module.exports = response
