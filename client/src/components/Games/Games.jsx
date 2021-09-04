@@ -1,4 +1,4 @@
-
+import Gamesection from "./gamesection";
 
 const Games = () => {
   return (
@@ -12,6 +12,7 @@ const Games = () => {
       }}
     >
       <h1>Games Component</h1>
+      <Gamesection />
     </div>
   );
 };

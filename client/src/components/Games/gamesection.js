@@ -1,4 +1,4 @@
-
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './game.css';
 
@@ -10,7 +10,7 @@ import Ellipse133 from "../../assets/Ellipse133.png";
 import Ellipse135 from "../../assets/Ellipse135.png";
 import Ellipse136 from "../../assets/Ellipse136.png";
 
-function Game() {
+function Gamesection() {
   return (
    <div>
      <Container>
@@ -45,4 +45,4 @@ function Game() {
   );
 }
 
-export default Game;
+export default Gamesection;
