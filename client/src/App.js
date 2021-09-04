@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage"
 import GameScreen2 from "./Pages/GameScreen2";
+import MainGame from "./Pages/GameScreen/MainGame"
+
 
 
 function App() {
