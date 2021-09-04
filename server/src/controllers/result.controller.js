@@ -28,9 +28,7 @@ class ResultController {
 
   async getResultById(req, res) {
     try {
-     
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   async getAllResults(req, res) {

@@ -14,7 +14,7 @@ class DatabaseConnection {
       payload: {},
     };
   }
- 
+
   async create(payload) {
     this.data.payload = payload;
     this.data.payload.createdAt = new Date().toISOString();
@@ -62,8 +62,5 @@ class DatabaseConnection {
     return response.data;
   }
 }
-
-
-
 
 module.exports = DatabaseConnection;

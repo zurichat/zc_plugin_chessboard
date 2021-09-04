@@ -24,7 +24,6 @@ class UserController {
 
   async getAllZCUsers(req, res) {
     try {
-      
       const response = await Users.fetchAll();
       res
         .status(200)
