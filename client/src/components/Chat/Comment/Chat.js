@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
+import avi from "../../../assets/ChatAvatar.png"
 import moment from "moment";
-import avi from "../../assets/ChatAvatar.png";
+
 
 const data = {
   players: [
@@ -94,7 +95,7 @@ function Comment() {
         <p>Loading</p>
       )}
 
-      {players.includes(mainUser.id) ? null : (
+      {/* {players.includes(mainUser.id) ? null : (
         <>
           <div className="chatInputForm">
             <input
@@ -105,7 +106,7 @@ function Comment() {
             <button onClick={submitForm}>submit</button>
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 }
