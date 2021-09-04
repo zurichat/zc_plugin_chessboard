@@ -39,8 +39,8 @@
   content: "";
   position: absolute;
   top: 92%;
-  left: 0px;
-  right:0px;
+  left: -8px;
+  right:-8px;
   height: 5px;
   background: #00b87c;
   border-radius: 15px 15px 0 0;
