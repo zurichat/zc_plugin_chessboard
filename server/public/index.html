@@ -84,6 +84,11 @@
           game_id: joinGameInput.value,
         });
 
+        socket.emit("end_game", {
+          user_id: playerId,
+          game_id: joinGameInput.value,
+        });
+
         // reset view
         joinGameInput.style.display = "none";
         okButton.style.display = "none";
