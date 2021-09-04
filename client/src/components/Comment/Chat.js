@@ -3,7 +3,6 @@ import "./index.css";
 import moment from "moment";
 import avi from "../../assets/ChatAvatar.png";
 
-
 const data = {
   players: [
     {
@@ -16,7 +15,6 @@ const data = {
     },
   ],
   comments: [
-
     {
       id: 1,
       name: "Abby",
@@ -65,7 +63,7 @@ function Comment() {
   console.log(players);
 
   const submitForm = () => {
-    const time = moment().format('h:mm a');
+    const time = moment().format("h:mm a");
     const submitted = {
       id: 5,
       message,
@@ -80,32 +78,31 @@ function Comment() {
   return (
     <div className="chatContainer">
       {details.length ? (
-        details.map(({ id, name, time, message}) => (
-          <div className="chatWrapper"
-           key={id}>
-           <img className= "specAvi" src={avi} alt="avi" img/>
-           <div className="specNameTime">
-               <div className="specInfo">
-            <h2 className="spectatorName">{name}</h2>
-            {time ? <p className="time-muted">{time}</p> : null}
-            </div>
-            <p className="spectatorMessage">{message}</p>
+        details.map(({ id, name, time, message }) => (
+          <div className="chatWrapper" key={id}>
+            <img className="specAvi" src={avi} alt="avi" img />
+            <div className="specNameTime">
+              <div className="specInfo">
+                <h2 className="spectatorName">{name}</h2>
+                {time ? <p className="time-muted">{time}</p> : null}
+              </div>
+              <p className="spectatorMessage">{message}</p>
             </div>
           </div>
         ))
       ) : (
         <p>Loading</p>
       )}
-      
-{players.includes(mainUser.id) ? null : (
+
+      {players.includes(mainUser.id) ? null : (
         <>
-        <div className="chatInputForm">
-          <input 
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button onClick={submitForm}>submit</button>
+          <div className="chatInputForm">
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button onClick={submitForm}>submit</button>
           </div>
         </>
       )}
