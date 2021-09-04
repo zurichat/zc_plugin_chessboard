@@ -1,4 +1,4 @@
-import './ChessBoard.css';
+import "./ChessBoard.css";
 import Chessboard from "chessboardjsx";
 import React, { useState, useEffect, useRef } from "react"
 import Chess from "chess.js"
