@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import avi from "../../../assets/ChatAvatar.png";
-import moment from "moment";
+// import moment from "moment";
 
 const data = {
   players: [
@@ -43,14 +43,14 @@ const data = {
   ],
 };
 
-const mainUser = {
-  id: 1,
-  name: "Adebola",
-  message: "hello there",
-};
+// const mainUser = {
+//     id: 1,
+//     name: "Adebola",
+//     message: "hello there",
+// };
 
 function Comment() {
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [details, setDetails] = useState([]);
   const [players, setPlayers] = useState([]);
 
@@ -62,18 +62,18 @@ function Comment() {
 
   console.log(players);
 
-  const submitForm = () => {
-    const time = moment().format("h:mm a");
-    const submitted = {
-      id: 5,
-      message,
-      name: "Yemyemm",
-      time,
-    };
+  // const submitForm = () => {
+  //     const time = moment().format("h:mm a");
+  //     const submitted = {
+  //         id: 5,
+  //         message,
+  //         name: "Yemyemm",
+  //         time,
+  //     };
 
-    setDetails([...details, submitted]);
-    setMessage("");
-  };
+  //     setDetails([...details, submitted]);
+  //     setMessage("");
+  // };
 
   return (
     <div className="chatContainer">
