@@ -4,14 +4,10 @@ const express = require("express");
 const routes = require("./src/routes");
 const middlewares = require("./src/middlewares/pre_route.middleware");
 const errorMiddleware = require("./src/middlewares/error.middleware");
-const centrifugoController = require("./src/controllers/centrifugoController");
 const { PORT } = require("./src/config");
 require("express-async-errors");
 
 const app = express();
-
-// connect to real time messaging
-centrifugoController.getInstance().connect();
 
 // Pre-Route middlewares
 middlewares(app);

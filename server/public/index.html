@@ -49,11 +49,7 @@
       };
 
       const centrifuge = new Centrifuge(
-        "ws://localhost:8000/connection/websocket"
-      );
-      // keep this token somewhere safe
-      centrifuge.setToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NSIsImV4cCI6MTYzMTM1ODc1OH0.4c7pAxI0L242-35QYMF28mlujF9dbuZK6WRgxygrE7Q"
+        "wss://realtime.zuri.chat/connection/websocket"
       );
 
       centrifuge.on("connect", function (ctx) {
@@ -74,13 +70,21 @@
       document
         .getElementById("create-game")
         .addEventListener("click", async () => {
-          //create a new game
-          const response = await fetch("http://localhost:5050/api/createGame");
-          const body = await response.json();
-
-          // update gameId and player Id
-          gameId = body.data.game_id;
           playerId = "player1";
+          //create a new game
+          const response = await fetch("http://localhost:5050/api/creategame", {
+            method: "post",
+            body: JSON.stringify({
+              playerId,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          const body = await response.json();
+          // update gameId and player Id
+          gameId = body.data.gameId;
 
           document.getElementById(
             "game-id"
@@ -90,20 +94,24 @@
         });
 
       // // palyer sends moves to a gaming room
-      document.getElementById("send-btn").addEventListener("click", () => {
-        const move = document.getElementById("move-input").value;
-        subscription
-          .publish({
-            event: "piece_move",
-            permission: "READ/WRITE",
-            name: playerId,
-            move,
-          })
-          .then((res) => {})
-          .catch((err) => {
-            console.log("Error:", err);
+      document
+        .getElementById("send-btn")
+        .addEventListener("click", async () => {
+          const move = document.getElementById("move-input").value;
+          const response = await fetch("http://localhost:5050/api/move", {
+            method: "post",
+            body: JSON.stringify({
+              event: "piece_move",
+              permission: "READ/WRITE",
+              name: playerId,
+              move,
+              gameId,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
           });
-      });
+        });
 
       // // existing game
       const joinGameBtn = document.getElementById("join-game");
@@ -116,29 +124,29 @@
         joinGameBtn.style.display = "none";
       });
 
-      okButton.addEventListener("click", () => {
+      okButton.addEventListener("click", async () => {
         gameId = joinGameInput.value;
         playerId = "player2";
 
-        subscription = centrifuge.subscribe(gameId, hookUpListeners);
-
-        subscription
-          .publish({
-            event: "join_game",
-            permission: "READ/WRITE",
-            name: playerId,
-          })
-          .then((res) => {
-            console.log("Sent: ", res);
-          })
-          .catch((err) => {
-            console.log("Error:", err);
-          });
+        const response = await fetch("http://localhost:5050/api/joingame", {
+          method: "post",
+          body: JSON.stringify({
+            playerId,
+            gameId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const body = await response.json();
+        console.log(body);
 
         // reset view
         joinGameInput.style.display = "none";
         okButton.style.display = "none";
         joinGameBtn.style.display = "inline";
+
+        subscription = centrifuge.subscribe(gameId, hookUpListeners);
 
         // update game Id
         gameId = joinGameInput.value;

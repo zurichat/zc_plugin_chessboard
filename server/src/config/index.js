@@ -1,8 +1,6 @@
 module.exports = {
   PORT: process.env.PORT || 5050,
-  SOCKER_TOKEN:
-    process.env.SOCKER_TOKEN ||
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NSIsImV4cCI6MTYzMTM1ODc1OH0.4c7pAxI0L242-35QYMF28mlujF9dbuZK6WRgxygrE7Q",
-  SOCKET_URL:
-    process.env.SOCKET_URL || "ws://localhost:8000/connection/websocket",
+  SOCKER_KEY:
+    process.env.SOCKER_TOKEN || "58c2400b-831d-411d-8fe8-31b6e337738b",
+  SOCKET_URL: process.env.SOCKET_URL || "wss://realtime.zuri.chat/api",
 };
