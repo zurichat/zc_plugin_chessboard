@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+>>>>>>> a052278d8b06e45cbaf81b0ec19470a8f85ebf37
 import "./App.css";
 
 function App() {
