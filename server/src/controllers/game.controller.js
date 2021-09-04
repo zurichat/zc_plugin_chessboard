@@ -40,13 +40,11 @@ class GameController {
       const initialPosition = 23
       const finalPosition = 22
       const gameId = 11
-      const { plugin_id, organization_id, collection_name } = Game.data
 
       const payload = {playerId, pieceId, initialPosition, finalPosition, gameId}
-      const body = {payload, plugin_id, organization_id, collection_name}
 
-      const response = await axios.post('https://zccore.herokuapp.com/data/write', body) 
-      res.json({'message': 'success', data: response.data.data})
+      const response = await Game.create(payload)
+      res.json({'message': 'success', data: response.data})
 
     } catch (error) {
       console.log(error)
