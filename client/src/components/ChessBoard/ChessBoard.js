@@ -2,6 +2,7 @@ import "./ChessBoard.css";
 import Chessboard from "chessboardjsx";
 import React, { useState, useEffect, useRef } from "react";
 import Chess from "chess.js";
+import PlayerName from "../PlayerName/PlayerName";
 
 const ChessBoard = () => {
   const [fen, setFen] = useState("start");
@@ -24,9 +25,13 @@ const ChessBoard = () => {
   };
 
   return (
-    <div className="chessboard">
-      <Chessboard width={400} id="startPos" position={fen} onDrop={onDrop} />
-    </div>
+    <>
+      <div className="chessboard">
+        <PlayerName name="Dejavu" />
+        <Chessboard width={638} id="startPos" position={fen} onDrop={onDrop} />
+        <PlayerName style={{ justifyContent: "flex-end" }} name="Bombos" />
+      </div>
+    </>
   );
 };
 
