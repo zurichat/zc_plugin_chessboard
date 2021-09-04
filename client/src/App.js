@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
@@ -6,6 +7,7 @@ import GameScreen2 from "./Pages/GameScreen2";
 import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
 import AcceptDeclineModal from "./components/Modals/AcceptDeclineModal/AcceptDeclineModal";
+import InviteModal from "./components/Modals/InviteModal/InviteModal";
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
           <Route exact path="/game_comments" render={GameScreen2} />
           <Route exact path="/modalpage" render={Modal} />
           <Route exact path="/test-accept-modal" render={AcceptDeclineModal} />          
+          <Route exact path="/inviteplayer">
+            <InviteModal />
+          </Route>
         </Switch>
       </Router>
     </div>

@@ -1,23 +1,16 @@
-// Node Core Modules
+// Imports
 const path = require("path");
-const http = require("http");
-
-// Package Modules
-require("express-async-errors");
 const express = require("express");
-const socketIO = require("socket.io");
-
-// Custom Modules
 const routes = require("./src/routes");
+const middlewares = require("./src/middlewares/pre_route.middleware");
+const errorMiddleware = require("./src/middlewares/error.middleware");
 const { PORT } = require("./src/config");
+require("express-async-errors");
 
-// Variables
 const app = express();
-const server = http.createServer(app);
-const io = socketIO(server);
 
 // Pre-Route middlewares
-require("./src/middlewares/pre_route.middleware")(app);
+middlewares(app);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
@@ -32,20 +25,15 @@ app.get("/dbtest", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "userTest.html"));
 });
 
-// Handle Socket Connections
-io.on("connection", (socket) => {
-  require("./src/socket/")(socket);
-});
-
 // Error middlewares
-require("./src/middlewares/error.middleware")(app);
+errorMiddleware(app);
 
 // The server should start listening
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server started listening on port http://127.0.0.1:${PORT}`);
 });
 
 // Listen for server error
-server.on("error", (error) => {
+app.on("error", (error) => {
   console.error(`<::: An error occurred on the server: \n ${error}`);
 });
