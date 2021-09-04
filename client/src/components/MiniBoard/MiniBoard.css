@@ -1,10 +1,10 @@
-* {
+.mini-board {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
+.mini-board {
   font-size: 62.5%;
 }
 
@@ -17,38 +17,33 @@ html {
   border-radius: 0px;
 }
 
-.board-image {
-  /* height: 26.14rem;
-  width: 26.04rem; */
+.mini-board .board-image {
   border-radius: 0px;
 }
 
-.playerProfile {
+.mini-playerProfile {
   display: flex;
-  /* height: 32px; */
   align-items: center;
   position: relative;
 }
 
-.profile-image {
+.mini-profile-image {
   background: url("../../assets/people.png");
   height: 2.05rem;
   width: 2.05rem;
-
   border-radius: 0px;
 }
 
-.profile-image-bg {
+.mini-profile-image-bg {
   background: #acffe6;
   position: absolute;
   z-index: -20;
   height: 2.05rem;
   width: 2.05rem;
-
   border-radius: 50%;
 }
 
-.playerProfile p {
+.mini-playerProfile p {
   font-family: Lato;
   font-size: 1.6rem;
   font-style: normal;
@@ -58,28 +53,28 @@ html {
   text-align: left;
 }
 
-.asideBar {
+.mini-asideBar {
   display: flex;
   height: 4.15rem;
 }
 
-.topBar {
+.mini-topBar {
   justify-content: flex-start;
 }
 
-.bottomBar {
+.mini-bottomBar {
   justify-content: flex-end;
 }
 
-.topBar .playerProfile {
+.mini-topBar .mini-playerProfile {
   padding-left: 0.3rem;
 }
 
-.bottomBar .playerProfile {
+.mini-bottomBar .mini-playerProfile {
   padding-right: 0.3rem;
 }
 
-.asideBar p {
+.mini-asideBar p {
   padding-left: 0.4rem;
 }
 
@@ -98,7 +93,7 @@ html {
   border-radius: 0rem;
 }
 
-.bottomBar a {
+.mini-bottomBar a {
   display: flex;
   align-items: flex-end;
   text-decoration: none;

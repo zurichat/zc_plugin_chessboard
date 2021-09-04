@@ -6,11 +6,11 @@ import boardImg from "../../assets/mini-board.png";
 function MiniBoard({ id, playerOne, playerTwo }) {
   return (
     <div className="mini-board">
-      <div className="asideBar topBar">
+      <div className="mini-asideBar mini-topBar">
         {playerOne ? (
-          <div className="playerProfile playerOne">
-            <div className="profile-image"></div>
-            <div className="profile-image-bg"></div>
+          <div className="mini-playerProfile">
+            <div className="mini-profile-image"></div>
+            <div className="mini-profile-image-bg"></div>
             <p>Player 1: @{playerOne}</p>
           </div>
         ) : (
@@ -26,11 +26,11 @@ function MiniBoard({ id, playerOne, playerTwo }) {
           <img src={boardImg} alt="" />{" "}
         </a>
       </div>
-      <div className="asideBar bottomBar">
+      <div className="mini-asideBar mini-bottomBar">
         {playerTwo ? (
-          <div className="playerProfile playerTwo">
-            <div className="profile-image"></div>
-            <div className="profile-image-bg"></div>
+          <div className="mini-playerProfile playerTwo">
+            <div className="mini-profile-image"></div>
+            <div className="mini-profile-image-bg"></div>
             <p>Player 2: @{playerTwo}</p>
           </div>
         ) : (
