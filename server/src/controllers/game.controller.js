@@ -19,23 +19,22 @@ class GameController {
                 opponent_user_id: opponent_id,
                 start_time: date_ob,
                 end_time: null,
-                // moves: [
-                //     {game_owner_id,board_state},
-                //     {opponent_id,board_state}
-                // ],
+                moves: [
+                    {game_owner_id:"//default_bord_state"},
+                    {opponent_id:"//default_board_state"}
+                ],
                 result_id: null
             }
 
             // Save the new game in DB
             // db code here
+
             res.status(201).send(response("New Game Created Successfully", {new_game}));
         } catch (error) {
             console.log(error);
             throw new CustomError("Could not create a new game", "500");
-            
         }
     }
-  }
 }
 
 // Export Module
