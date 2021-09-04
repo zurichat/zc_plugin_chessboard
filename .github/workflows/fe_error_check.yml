@@ -16,7 +16,6 @@ jobs:
         ref: ${{ github.head_ref }}
     
     - name: Change to Client Folder, Install yarn modules and Run ESLint
-      run: 
       run: |
         cd client
         yarn install
