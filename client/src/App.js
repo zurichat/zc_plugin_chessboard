@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/game/chat" render={MainGame} />
           <Route exact path="/game_comments" render={GameScreen2} />
           <Route exact path="/modalpage" render={Modal} />
-          <Route exact path='/inviteplayer'>
+          <Route exact path="/inviteplayer">
             <InviteModal />
           </Route>
         </Switch>
