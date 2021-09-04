@@ -13,7 +13,7 @@ router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
 router.post("/createGame", GameCtrl.create);
 router.post("/joingame", GameCtrl.join);
-router.post('/move',GameCtrl.move);
+router.post("/move", GameCtrl.move);
 
 // temporary to test db function
 router.post("/dbWrite", UserCtrl.userCreate);
