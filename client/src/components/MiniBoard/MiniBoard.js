@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.png";
 
-function MiniBoard({ id, playerOne, playerTwo }) {
+// function MiniBoard({ id, playerOne, playerTwo }) {
+function MiniBoard({ playerOne, playerTwo }) {
   return (
     <div className="mini-board">
       <div className="mini-asideBar mini-topBar">
