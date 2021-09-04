@@ -1,12 +1,16 @@
+*{margin:0}
+
 .side-bar {
-    width: 368px;
-    border: 2px solid #808080;
+    /* width: 368px; */
+    border: 2px solid #bebcbc;
     min-height: 100vh;
     background: #fdffff;
   }
   
   .side-bar-nav {
-    padding: 1.5rem 2rem;
+    margin: 0;
+
+    padding: 1.8rem 2rem;
     padding-bottom: 0;
     display: flex;
     justify-content: space-around;
@@ -20,6 +24,7 @@
     color: #808080;
     font-weight: 400;
     padding-bottom: 0.7em;
+    margin: 0;
   }
   
   .active {
