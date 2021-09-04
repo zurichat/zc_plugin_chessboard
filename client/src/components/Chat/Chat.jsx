@@ -5,11 +5,11 @@ import './Chat.css';
 
 const Chat = () => {
     return (
-        <div id="Chat">
+        <div id="chat">
             
                <h1>Chat</h1> 
             {/* yemyem... your component enters here */}
-            
+
               <Input />
             
         </div>
