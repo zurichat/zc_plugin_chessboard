@@ -19,6 +19,8 @@ router.post("/dbWrite", UserCtrl.userCreate);
 // temporary to test db function
 router.get("/dbRead", UserCtrl.getAllUsers);
 
+router.post("/save-move", GameCtrl.saveMove)
+
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
