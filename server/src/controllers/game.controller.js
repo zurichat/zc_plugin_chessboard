@@ -1,5 +1,5 @@
 // Package Modules
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 // Custom Modules
 const response = require("../utils/response");
@@ -35,6 +35,7 @@ class GameController {
             
         }
     }
+  }
 }
 
 // Export Module
