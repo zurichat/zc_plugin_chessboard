@@ -58,9 +58,7 @@ class DatabaseConnection {
 
   async delete(id) {
     this.data.object_id = id;
-    const response = await axios.delete(
-      databaseWriteUrl
-    );
+    const response = await axios.delete(databaseWriteUrl);
     return response.data;
   }
 }
