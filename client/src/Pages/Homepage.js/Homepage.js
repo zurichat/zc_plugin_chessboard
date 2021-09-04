@@ -12,35 +12,23 @@ function Homepage() {
         </nav>
       </header>
       <div className="app__container">
-        <div className="color one">
-          <div className="box">
-            <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
-          </div>
+        <div className="mini-one">
+          <MiniBoard id="234" playerOne="Annietah" playerTwo="codeJonin" />
         </div>
-        <div className="color two">
-          <div className="box">
-            <MiniBoard id="234" playerOne="" playerTwo="odiri" />
-          </div>
+        <div className="mini-two">
+          <MiniBoard id="234" playerOne="" playerTwo="odiri" />
         </div>
-        <div className="color three">
-          <div className="box">
-            <MiniBoard id="234" playerOne="Vermilion" playerTwo="" />
-          </div>
+        <div className="mini-three">
+          <MiniBoard id="234" playerOne="Vermilion" playerTwo="" />
         </div>
-        <div className="color four">
-          <div className="box">
-            <MiniBoard id="234" playerOne="" playerTwo="" />
-          </div>
+        <div className="mini-four">
+          <MiniBoard id="234" playerOne="" playerTwo="" />
         </div>
-        <div className="color five">
-          <div className="box">
-            <MiniBoard id="234" playerOne="SOI" playerTwo="Realice" />
-          </div>
+        <div className="mini-five">
+          <MiniBoard id="234" playerOne="SOI" playerTwo="Realice" />
         </div>
-        <div className="color six">
-          <div className="box">
-            <MiniBoard id="234" playerOne="DevPriest" playerTwo="bombos" />
-          </div>
+        <div className="mini-six">
+          <MiniBoard id="234" playerOne="DevPriest" playerTwo="bombos" />
         </div>
       </div>
     </div>

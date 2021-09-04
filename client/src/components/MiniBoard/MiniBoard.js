@@ -35,7 +35,9 @@ function MiniBoard({ id, playerOne, playerTwo }) {
           </div>
         ) : (
           <Link to="/game">
-            <button className="join-button">Join as Player 2</button>
+            <button className="join-button bottom-button">
+              Join as Player 2
+            </button>
           </Link>
         )}
       </div>
