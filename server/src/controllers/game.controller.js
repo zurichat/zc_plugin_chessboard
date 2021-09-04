@@ -4,6 +4,7 @@ const uuid = require("uuid");
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
+const DatabaseConnection = require("../db/database.helper");
 
 class GameController {
   async create(req, res) {
@@ -25,6 +26,17 @@ class GameController {
       );
     } catch (error) {
       throw new CustomError("Could not create a new game", "500");
+    }
+  }
+
+  // get all game ids
+  async get_game_ids(req, res) {
+    try {
+      const dbc_instance = new DatabaseConnection("games");
+      const game_ids = await dbc_instance.fetchAll();
+      res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
+    } catch (e) {
+      res.status(400).json(response(e.message, null, false));
     }
   }
 }

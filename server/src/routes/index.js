@@ -13,6 +13,9 @@ router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
 router.get("/createGame", GameCtrl.create);
 
+// get all game ids
+router.get("/fetchgameids", GameCtrl.get_game_ids);
+
 // temporary to test db function
 router.post("/dbWrite", UserCtrl.userCreate);
 
