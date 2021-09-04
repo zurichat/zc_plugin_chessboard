@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test db_function</title>
+  </head>
+  <body>
+    <h3>Chess Room Game Result</h3>
+    <div>
+      <form action="/api/dbWrite" method="POST">
+        <label for="result_id" class="label-form">Result_id</label>
+        <input
+          type="text"
+          name="result_id"
+          placeholder="Enter user result_id"
+          required
+        />
+
+        <label for="game_id" class="label-form">Result_id</label>
+        <input
+          type="text"
+          name="game_id"
+          placeholder="Enter user game_id"
+          required
+        />
+
+        <label for="winner_id" class="label-form">Result_id</label>
+        <input
+          type="text"
+          name="winner_id"
+          placeholder="Enter user result_id"
+          required
+        />
+
+        <button type="submit">Save</button>
+        <div class="log-in">
+          <p>Already saved> <a href="/api/dbRead">Fetch user details</a></p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

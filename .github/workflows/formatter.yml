@@ -1,6 +1,6 @@
 name: Prettier Action
 
-# This action works with pull requests and pushes
+# Triggers the workflow on push
 on:
   push:
     branches:

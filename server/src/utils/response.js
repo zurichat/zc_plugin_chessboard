@@ -23,7 +23,9 @@ function formatMesaage(str) {
 const formtMessage = (objectOrMessage) => {
   return typeof objectOrMessage === "string"
     ? objectOrMessage
-    : typeof objectOrMessage === "object" && objectOrMessage.message
+    : typeof objectOrMessage === "object" &&
+      objectOrMessage &&
+      objectOrMessage.message
     ? objectOrMessage.message
     : "";
 };
