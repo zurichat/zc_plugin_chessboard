@@ -14,8 +14,11 @@
     "express-async-errors": "^3.1.1",
     "helmet": "^4.6.0",
     "joi": "^17.4.2",
+    "jscent": "^0.2.1",
     "socket.io": "^4.2.0",
-    "uuid": "^8.3.2"
+    "sockjs-client": "^1.5.2",
+    "uuid": "^8.3.2",
+    "ws": "^8.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

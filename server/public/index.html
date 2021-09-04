@@ -25,79 +25,112 @@
       <button id="send-btn">send</button>
     </div>
 
-    <script src="centrifuge.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
+
     <script>
-      const socket = io();
+      const centrifuge = new Centrifuge(
+        "ws://localhost:8000/connection/websocket"
+      );
+      centrifuge.setToken(
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NSIsImV4cCI6MTYzMTM1ODc1OH0.4c7pAxI0L242-35QYMF28mlujF9dbuZK6WRgxygrE7Q"
+      );
 
-      socket.on("message", (data) => {
-        document.querySelector("#update").innerHTML += `${data.message} <br/>`;
+      centrifuge.on("connect", function (ctx) {
+        console.log("connected", ctx);
       });
 
-      let gameId = "";
-      let playerId = "";
-
-      // new game
-      document
-        .getElementById("create-game")
-        .addEventListener("click", async () => {
-          //create a new game
-          const response = await fetch(
-            "https://chess.zuri.chat/api/createGame"
-          );
-          const body = await response.json();
-
-          // update gameId and player Id
-          gameId = body.data.game_id;
-          playerId = "player1";
-
-          document.getElementById("game-id").innerText = `Game Id: ${gameId}`;
-
-          //join the newly created game as player one
-          socket.emit("join_room", {
-            user_id: playerId,
-            game_id: gameId,
-          });
-        });
-
-      // palyer sends moves to a gaming room
-      document.getElementById("send-btn").addEventListener("click", () => {
-        const move = document.getElementById("move-input").value;
-        socket.emit("piece_moved", { move, playerId, gameId });
+      centrifuge.on("disconnect", function (ctx) {
+        console.log("disconnected", ctx);
+      });
+      centrifuge.subscribe("testla", function (ctx) {
+        console.log(ctx);
       });
 
-      // existing game
+      centrifuge.connect();
+      // const socket = io();
+
+      // socket.on("message", (data) => {
+      //   document.querySelector("#update").innerHTML += `${data.message} <br/>`;
+      // });
+
+      // let gameId = "";
+      // let playerId = "";
+
+      // // new game
+      // document
+      //   .getElementById("create-game")
+      //   .addEventListener("click", async () => {
+      //     //create a new game
+      //     const response = await fetch(
+      //       "https://chess.zuri.chat/api/createGame"
+      //     );
+      //     const body = await response.json();
+
+      //     // update gameId and player Id
+      //     gameId = body.data.game_id;
+      //     playerId = "player1";
+
+      //     document.getElementById("game-id").innerText = `Game Id: ${gameId}`;
+
+      //     //join the newly created game as player one
+      //     socket.emit("join_room", {
+      //       user_id: playerId,
+      //       game_id: gameId,
+      //     });
+      //   });
+
+      // // palyer sends moves to a gaming room
+      // document.getElementById("send-btn").addEventListener("click", () => {
+      //   const move = document.getElementById("move-input").value;
+      //   socket.emit("piece_moved", { move, playerId, gameId });
+      // });
+
+      // // existing game
       const joinGameBtn = document.getElementById("join-game");
-      const joinGameInput = document.getElementById("join-game-input");
-      const okButton = document.getElementById("Ok-btn");
+      // const joinGameInput = document.getElementById("join-game-input");
+      // const okButton = document.getElementById("Ok-btn");
 
       joinGameBtn.addEventListener("click", () => {
-        joinGameInput.style.display = "inline";
-        okButton.style.display = "inline";
-        joinGameBtn.style.display = "none";
+        centrifuge
+          .publish("testla", { input: "hello" })
+          .then(
+            function (res) {
+              console.log("successfully published");
+            },
+            function (err) {
+              console.log("publish error", err);
+            }
+          )
+          .catch((err) => {
+            console.log(err);
+          });
+        // joinGameInput.style.display = "inline";
+        // okButton.style.display = "inline";
+        // joinGameBtn.style.display = "none";
       });
 
-      okButton.addEventListener("click", () => {
-        playerId = "player2";
-        //join exiting game with inputed game id
-        socket.emit("join_room", {
-          user_id: playerId,
-          game_id: joinGameInput.value,
-        });
+      // okButton.addEventListener("click", () => {
+      //   playerId = "player2";
+      //   //join exiting game with inputed game id
+      //   socket.emit("join_room", {
+      //     user_id: playerId,
+      //     game_id: joinGameInput.value,
+      //   });
 
-        socket.emit("end_game", {
-          user_id: playerId,
-          game_id: joinGameInput.value,
-        });
+      //   socket.emit("end_game", {
+      //     user_id: playerId,
+      //     game_id: joinGameInput.value,
+      //   });
 
-        // reset view
-        joinGameInput.style.display = "none";
-        okButton.style.display = "none";
-        joinGameBtn.style.display = "inline";
+      //   // reset view
+      //   joinGameInput.style.display = "none";
+      //   okButton.style.display = "none";
+      //   joinGameBtn.style.display = "inline";
 
-        // update game Id
-        gameId = joinGameInput.value;
-        document.getElementById("game-id").innerText = `Game Id: ${gameId}`;
-      });
+      //   // update game Id
+      //   gameId = joinGameInput.value;
+      //   document.getElementById("game-id").innerText = `Game Id: ${gameId}`;
+      // });
     </script>
   </body>
 </html>
