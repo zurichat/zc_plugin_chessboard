@@ -32,6 +32,11 @@ app.get("/dbtest", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "userTest.html"));
 });
 
+// testing if the creating result for each game that is started
+app.get("/gameResultTest", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "gameTest.html"));
+});
+
 // Handle Socket Connections
 io.on("connection", (socket) => {
   require("./src/socket/")(socket);
