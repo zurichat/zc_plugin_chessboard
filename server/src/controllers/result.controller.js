@@ -28,13 +28,8 @@ class ResultController {
 
   async getResultById(req, res) {
     try {
-      const response = await Results.fetchUserResult(req.params.id);
-      console.log(response);
-      res
-        .status(200)
-        .send(appResponse(null, response, true, { count: response.length }));
+     
     } catch (error) {
-      throw new CustomError(error, "500");
     }
   }
 

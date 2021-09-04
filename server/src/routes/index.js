@@ -23,15 +23,11 @@ router.post("/dbWrite", UserCtrl.userCreate);
 // temporary to test db function
 router.put("/dbUpdate/:id", UserCtrl.userUpdate);
 
-
 // temporary to test db function
 router.post("/dbResult", ResultCtrl.resultCreate);
 
 // temporary to test db function
 router.get("/dbResult", ResultCtrl.getAllResults);
-
-// temporary to test db function
-router.get("/dbResult/:id", ResultCtrl.getResultById);
 
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
