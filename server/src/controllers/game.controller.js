@@ -10,7 +10,7 @@ class GameController {
         try {
             let game_id = uuid.v4();
             var date_ob = new Date();
-            var game_owner_id = "playerX"
+            var game_owner_id = req.params['User_id']
             var opponent_id = "playerY"
             console.log(date_ob)
             var new_game =  {
@@ -20,7 +20,7 @@ class GameController {
                 start_time: date_ob,
                 end_time: null,
                 moves: [
-                    {game_owner_id:"//default_bord_state"},
+                    {game_owner_id:"//default_board_state"},
                     {opponent_id:"//default_board_state"}
                 ],
                 result_id: null

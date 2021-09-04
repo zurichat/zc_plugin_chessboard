@@ -11,7 +11,7 @@ router.get("/info", InfoCtrl.getPluginInfo);
 
 router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
-router.get("/createGame", GameCtrl.create);
+router.get("/createGame/:User_id", GameCtrl.create);
 
 // temporary to test db function
 router.post("/dbWrite", UserCtrl.userCreate);
