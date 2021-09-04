@@ -1,5 +1,6 @@
 // Package Modules
 const uuid = require("uuid");
+const gameSchema = require("../models/Game.js");
 
 // Custom Modules
 const response = require("../utils/response");
@@ -8,7 +9,7 @@ const CustomError = require("../utils/custom-error");
 class GameController {
     async create(req, res) {
         try {
-            let game_id = uuid.v4();
+            var game_id = uuid.v4();
             var date_ob = new Date();
             var game_owner_id = req.params['User_id']
             var opponent_id = "playerY"
@@ -25,11 +26,13 @@ class GameController {
                 ],
                 result_id: null
             }
+            
+            var game = await gameSchema.validateAsync(new_game);
 
-            // Save the new game in DB
+            // TODO Save the new game in DB
             // db code here
 
-            res.status(201).send(response("New Game Created Successfully", {new_game}));
+            res.status(201).send(response("New Game Created Successfully", {game}));
         } catch (error) {
             console.log(error);
             throw new CustomError("Could not create a new game", "500");
