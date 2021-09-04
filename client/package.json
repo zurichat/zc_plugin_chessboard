@@ -6,6 +6,14 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+<<<<<<< HEAD
+=======
+    "bootstrap": "^5.1.0",
+    "chess.js": "^0.12.0",
+    "chessboardjsx": "^2.4.7",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+>>>>>>> a0fb237a2da881841425e4a29d0112d9984a569c
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -15,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js src/**/*.jsx"
   },
   "proxy": "http://127.0.0.1:5050/",
   "eslintConfig": {
@@ -35,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.25.1"
   }
 }

@@ -1,6 +1,6 @@
 // Custom Modules
-const formatMessage = require("./libs/formatMessage");
 
+<<<<<<< HEAD
 const leave_room_handler = (socket) => ({ user_id, game_id = 001 }) => {
     // generate random number
     user_id = RandomSource.getRandomInt(1, 100),
@@ -16,6 +16,11 @@ const leave_room_handler = (socket) => ({ user_id, game_id = 001 }) => {
 
     // Tell others, bla bla left the room
     socket.to(data.room).emit('message', formatMessage(user_id,  `A **userrole** just left a game called ${game_id}`));
+=======
+const leave_room_handler = (data) => {
+  console.log(data);
+  //Perform all server side logic for player leaving room
+>>>>>>> a0fb237a2da881841425e4a29d0112d9984a569c
 };
 
 module.exports = leave_room_handler;
