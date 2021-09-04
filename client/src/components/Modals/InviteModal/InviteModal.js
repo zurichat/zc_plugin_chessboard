@@ -13,7 +13,7 @@ const dummyData = [
     designation: "FrontEnd developer",
   },
   {
-    name: "Tutuman",
+    name: "tutuMANtutu",
     designation: "FrontEnd developer",
   },
   {
