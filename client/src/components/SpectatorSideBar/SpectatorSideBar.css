@@ -33,13 +33,15 @@
 .active {
   color: #00b87c;
   position: relative;
-  border-bottom: 4px solid #00b87c;
 }
 
-/* .active::before {
-  content: "jjjjj";
+.active::before {
+  content: "";
   position: absolute;
-  height: 4px;
-  width: 20rem;
+  top: 92%;
+  left: 4px;
+  right:4px;
+  height: 5px;
   background: #00b87c;
-} */
+  border-radius: 15px 15px 0 0;
+}

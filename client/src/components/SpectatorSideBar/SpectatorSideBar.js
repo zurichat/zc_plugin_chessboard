@@ -1,10 +1,11 @@
+import "./SpectatorSideBar.css";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Games from "../Games/Games";
-import Chat from "../Chat/Chat";
-import "./SpectatorSideBar.css";
-import { BrowserRouter } from "react-router-dom";
+import Chat from '../Chat/Chat.js'
 
 const SpectatorSideBar = () => {
+
+
   return (
     <aside className="side-bar">
       <nav className="side-bar-nav">
@@ -17,9 +18,7 @@ const SpectatorSideBar = () => {
       </nav>
       <Switch>
         <Route exact path="/game" component={Chat} />
-        <Route exact path="/game/chat" component={Chat} />
         <Route exact path="/game/games" component={Games} />
-        {/* <Route exact path="/games" component={Games} /> */}
       </Switch>
     </aside>
   );
