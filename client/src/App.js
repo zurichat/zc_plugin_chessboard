@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage"
-import MainGame from "./Pages/GameScreen/MainGame"
+import GameScreen2 from "./Pages/GameScreen2";
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <Switch>
           <Route exact path='/' render={HomePage} /> 
           <Route exact path='/game' render={MainGame} />
-
+          <Route exact path="/game_comments" render={GameScreen2} />
         </Switch>
       </Router>
     </div>
