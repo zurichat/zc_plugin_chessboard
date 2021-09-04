@@ -6,6 +6,7 @@ import HomePage from "./Pages/Homepage.js/Homepage";
 import GameScreen2 from "./Pages/GameScreen2";
 import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
+import InviteModal from "./components/Modals/InviteModal/InviteModal";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <Route exact path="/game/chat" render={MainGame} />
           <Route exact path="/game_comments" render={GameScreen2} />
           <Route exact path="/modalpage" render={Modal} />
+          <Route exact path='/inviteplayer'>
+            <InviteModal />
+          </Route>
         </Switch>
       </Router>
     </div>
