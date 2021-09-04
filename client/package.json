@@ -6,13 +6,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-<<<<<<< HEAD
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
-=======
     "chess.js": "^0.12.0",
     "chessboardjsx": "^2.4.7",
->>>>>>> b0138eb2bd923e8a16b67354e8f197dfaab39a7e
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
