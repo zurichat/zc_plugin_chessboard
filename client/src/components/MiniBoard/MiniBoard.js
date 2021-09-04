@@ -29,7 +29,7 @@ function MiniBoard({ playerOne, playerTwo }) {
       </div>
       <div className="mini-asideBar mini-bottomBar">
         {playerTwo ? (
-          <div className="mini-playerProfile playerTwo">
+          <div className="mini-playerProfile">
             <div className="mini-profile-image"></div>
             <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">Player 2: @{playerTwo}</p>
