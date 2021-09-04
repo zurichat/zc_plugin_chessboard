@@ -1,0 +1,115 @@
+Container{
+    width: 100%;
+    padding: 50%;
+    
+}
+.figcaption .btn-1{
+    position: absolute;
+    top: 19rem;
+    left: 9rem;
+
+
+}
+.figcaption .btn-2{
+    position: absolute;
+    top: 19rem;
+    left: 9rem;
+
+}
+
+.img-fluid1{
+    height: 500px;
+    width: 500px;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    
+    display: flex;
+}
+.img-fluid2{
+    height: 500px;
+    width: 500px;
+    margin-top: 4rem;
+    margin-bottom: 5rem;
+    
+    display: flex;
+
+}
+.btn-1{
+    background-color: rgb(61, 182, 136);
+    border-radius: 0.5rem;
+    height: 4rem;
+    width: 13rem;
+    font-size: 1.4rem;
+    color:white;
+    
+    
+}
+.btn-2{
+    background-color: rgb(61, 182, 136);
+    border-radius: 0.5rem;
+    height: 4rem;
+    width: 13rem;
+    font-size: 1.4rem;
+    color:white;
+
+    
+}
+.pic1{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+}
+.pic2{
+    position: absolute;
+    top: 38rem;
+    height: 60px;
+    width: 60px;
+    left: 17rem;
+}
+.pic3{
+    position: absolute;
+    top: 38rem;
+    height: 60px;
+    width: 60px;
+    left: 17rem;
+}
+.text1{
+    position: relative;
+    left: 5.5rem;
+    top: 3rem;
+    font-size: 1rem ;
+    color: rgb(72, 70, 70);
+
+}
+.text2{
+    position: relative;
+    left: 22rem;
+    bottom: 3.5rem;
+    font-size: 1rem ;
+    color: rgb(72, 70, 70);
+}
+.text3{
+    position: relative;
+    left: 5rem;
+    top: 2.5rem;
+    font-size: 1rem ;
+    color: rgb(72, 70, 70);
+}
+.text4{
+    position: relative;
+    left: 21.5rem;
+    bottom: 2.5rem;
+    font-size: 1rem ;
+    color: rgb(72, 70, 70);
+}
+.color{
+    color:white;
+    top: 15rem;
+}
+
+@media screen and (max-width: 978px){
+    
+}
