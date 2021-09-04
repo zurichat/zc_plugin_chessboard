@@ -2,9 +2,9 @@
 name: Chessboard Deployment Pipeline
 
 on:
-  # Triggers the workflow on push or pull request events but only for the dev branch
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [dev]
+    branches: [main]
 
 
   # Allows you to run this workflow manually from the Actions tab
@@ -24,8 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           script: |
             cd /var/www/zc_plugin_chessboard/
-            git stash
-            git pull origin dev
+            git pull origin main
             cd server
             yarn install
             yarn build
