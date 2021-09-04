@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CongratulationsModal from "../CongratulationsModal/CongratulationsModal";
+import CongratulationsModal from "../CongratulationsModal/CongratulationsModal"
 
 export default function Modal() {
   const [show, setShow] = useState(false);
