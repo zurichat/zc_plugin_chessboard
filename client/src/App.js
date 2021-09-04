@@ -1,5 +1,6 @@
 import "./App.css";
 
+
 function App() {
   return (
     <div className="App">
@@ -13,6 +14,7 @@ function App() {
 
         <button>Start Game</button>
       </section>
+      
     </div>
   );
 }
