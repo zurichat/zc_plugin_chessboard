@@ -1,11 +1,9 @@
 import "./SpectatorSideBar.css";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Games from "../Games/Games";
-import Chat from '../Chat/Chat.js'
+import Chat from "../Chat/Chat.js";
 
 const SpectatorSideBar = () => {
-
-
   return (
     <aside className="side-bar">
       <nav className="side-bar-nav">
