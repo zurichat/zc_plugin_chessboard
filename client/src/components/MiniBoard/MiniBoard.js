@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MiniBoard.css";
-import boardImg from "../../assets/mini-board.png";
+import boardImg from "../../assets/mini-board.svg";
 
 function MiniBoard({ id, playerOne, playerTwo }) {
   return (
@@ -11,7 +11,7 @@ function MiniBoard({ id, playerOne, playerTwo }) {
           <div className="mini-playerProfile">
             <div className="mini-profile-image"></div>
             <div className="mini-profile-image-bg"></div>
-            <p>Player 1: @{playerOne}</p>
+            <p className="mini-profile-name">Player 1: @{playerOne}</p>
           </div>
         ) : (
           <Link to="/game">
@@ -31,7 +31,7 @@ function MiniBoard({ id, playerOne, playerTwo }) {
           <div className="mini-playerProfile playerTwo">
             <div className="mini-profile-image"></div>
             <div className="mini-profile-image-bg"></div>
-            <p>Player 2: @{playerTwo}</p>
+            <p className="mini-profile-name">Player 2: @{playerTwo}</p>
           </div>
         ) : (
           <Link to="/game">
