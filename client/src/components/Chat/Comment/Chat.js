@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import avi from "../../../assets/ChatAvatar.png"
+import avi from "../../../assets/ChatAvatar.png";
 import moment from "moment";
-
 
 const data = {
   players: [
