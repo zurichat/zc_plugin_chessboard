@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Games from './'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import Games from './';
 
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage"
@@ -16,8 +16,6 @@ function App() {
 
         </Switch>
       </Router>
-     {/* <HomePage /> */}
-     
     </div>
   );
 }
