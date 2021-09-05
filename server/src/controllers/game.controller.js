@@ -1,66 +1,58 @@
 // Package Modules
 const uuid = require("uuid");
-// const gameSchema = require("../models/Game.js");
+const gameSchema = require("../models/Game.js");
 const { save, retrieve, deleteData } = require("../utils/cacheData");
 
 // Custom Modules
-const response = require("../utils/response");
+const appResponse = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const centrifugoController = require("../controllers/centrifugoController");
+const DatabaseConnection = require("../db/database.helper");
+const Games = new DatabaseConnection("Games");
 
 class GameController {
-    // async create(req, res) {
-    //     try {
-    //         var game_id = uuid.v4();
-    //         var date_ob = new Date();
-    //         var game_owner_id = req.params['User_id']
-    //         var opponent_id = "playerY"
-    //         console.log(date_ob)
-    //         var new_game =  {
-    //             game_id: game_id,
-    //             game_owner_user_id: game_owner_id,
-    //             opponent_user_id: opponent_id,
-    //             start_time: date_ob,
-    //             end_time: null,
-    //             moves: [
-    //                 {game_owner_id:"//default_board_state"},
-    //                 {opponent_id:"//default_board_state"}
-    //             ],
-    //             result_id: null
-    //         }
-            
-    //         var game = await gameSchema.validateAsync(new_game);
-
-    //         // TODO Save the new game in DB
-    //         // db code here
-
-    //         res.status(201).send(response("New Game Created Successfully", {game}));
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw new CustomError("Could not create a new game", "500");
-    //     }
-    // }
-  create(req, res) {
+  async create(req, res) {
     try {
-      const { playerId } = req.body;
-      let gameId = uuid.v4();
-      // Save the new game in DB
-      // Temporary cache store
-      const result = save(gameId, {
-        gameId,
-        playerOne: playerId,
-        playerTwo: false,
-      });
+      var game_id = uuid.v4();
+      var date_ob = new Date();
+      var Player1 = req.body.playerId;
+      var Player2 = "playerY"
+      var new_game =  {
+          game_id: game_id,
+          Player1: Player1,
+          Player2: Player2,
+          start_time: date_ob,
+          end_time: null,
+          moves: [
+              {Player1:"//default_board_state"},
+              {Player2:"//default_board_state"}
+          ],
+          result_id: null
+      }
+      
+      var game = await gameSchema.validateAsync(new_game);
+      const response = await Games.create("chess_games", game);
+      response['gameId'] = game_id;
 
-      res.status(201).send(
-        response("Plugin Information Retrieved", {
-          gameId,
-        })
-      );
+      res.status(200).send(appResponse("New game created successfully", response, true));
     } catch (error) {
-      throw new CustomError("Could not create a new game", "500");
+      throw new CustomError("Could not create new games", "500");
     }
   }
+
+
+  async fetchAll(req, res) {
+    try {
+      const response = await Games.fetchAll("chess_games");
+      console.log(response.data)
+      res.status(200).send(appResponse("Games", response, true, { count: response.length }));
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+      throw new CustomError("Could not fetch games", "500");
+    }
+  }
+
 
   async join(req, res) {
     try {

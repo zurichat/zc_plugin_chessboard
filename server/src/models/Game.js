@@ -3,8 +3,8 @@ const Joi = require("joi");
 // Game schema
 const gameSchema = Joi.object({
     game_id: Joi.string().guid({ version: "uuidv4" }).required(),
-    game_owner_user_id: Joi.string().required(),
-    opponent_user_id: [
+    Player1: Joi.string().required(),
+    Player2: [
         Joi.string(),
         Joi.allow(null),
     ],

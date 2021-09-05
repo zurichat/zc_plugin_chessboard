@@ -15,7 +15,8 @@ class DatabaseConnection {
     };
   }
 
-  async create(payload) {
+  async create(collection_name,payload) {
+    this.data.collection_name = collection_name;
     this.data.payload = payload;
     this.data.payload.createdAt = new Date().toISOString();
 
@@ -28,7 +29,8 @@ class DatabaseConnection {
     return response.data;
   }
 
-  async fetchAll() {
+  async fetchAll(collection_name) {
+    this.data.collection_name = collection_name;
     const response = await axios.get(
       `${databaseReadUrl}/${this.data.plugin_id}/${this.data.collection_name}/${this.data.organization_id}`
     );

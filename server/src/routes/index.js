@@ -12,7 +12,8 @@ router.get("/info", InfoCtrl.getPluginInfo);
 
 router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
-router.get("/createGame/:User_id", GameCtrl.create);
+router.post("/createGame", GameCtrl.create);
+router.get("/fetchGames", GameCtrl.fetchAll);
 router.post("/joingame", GameCtrl.join);
 router.post("/move", GameCtrl.move);
 

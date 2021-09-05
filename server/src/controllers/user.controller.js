@@ -13,7 +13,7 @@ class UserController {
       console.log(body);
 
       const user = await userSchema.validateAsync(body);
-      const response = await Users.create(user);
+      const response = await Users.create("chess_room", user);
 
       res.status(200).send(appResponse(null, response, true));
     } catch (error) {
@@ -23,7 +23,7 @@ class UserController {
 
   async getAllUsers(req, res) {
     try {
-      const response = await Users.fetchAll();
+      const response = await Users.fetchAll("chess_room");
 
       res
         .status(200)

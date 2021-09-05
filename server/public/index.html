@@ -25,6 +25,11 @@
       <button id="send-btn">send</button>
     </div>
 
+    <div>
+      <br><br>
+      <a href="/api/fetchGames">Fetch All Games</a>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
 
     <script>
@@ -73,7 +78,7 @@
           playerId = "player1";
           //create a new game
           const response = await fetch(
-            "https://chess.zuri.chat/api/creategame",
+            "http://127.0.0.1:5050/api/creategame",
             {
               method: "post",
               body: JSON.stringify({
@@ -87,7 +92,7 @@
 
           const body = await response.json();
           // update gameId and player Id
-          gameId = body.data.gameId;
+          gameId = body.gameId;
 
           document.getElementById(
             "game-id"
