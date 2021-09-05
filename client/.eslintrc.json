@@ -36,5 +36,10 @@
         "react/no-unescaped-entities": "off",
         "no-unused-vars": "off",
         "react/jsx-key": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
