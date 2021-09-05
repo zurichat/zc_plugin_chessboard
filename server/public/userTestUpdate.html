@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test db_function</title>
+</head>
+
+<body>
+  <h3>Chess Room user details</h3>
+  <div>
+    <form>
+      <label for="userName" class="label-form">Id</label>
+      <input class="id" type="text" name="id" placeholder="Enter id" required>
+
+
+      <label for="userName" class="label-form">Name</label>
+      <input class="name" type="text" name="userName" placeholder="Enter user name here" required>
+
+
+      <label for="organization" class="label-form">Organization</label>
+      <input class="organization" type="text" name="organization" placeholder="Enter company here" required>
+
+      <label for="wins" class="label-form">Description</label>
+      <input class="wins" type="number" name="wins" placeholder="Total number of wins" required>
+
+      <button type="submit" class="submit">Update</button>
+      <div class="log-in">
+        <p>Already saved> <a href="/api/dbRead">Fetch user details</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const submit = document.querySelector('.submit');
+    const name = document.querySelector('.name');
+    const wins = document.querySelector('.wins');
+    const id = document.querySelector('.id');
+    const organization = document.querySelector('.organization');
+
+    const formData = new FormData();
+
+    formData.append('userName', name.value);
+    formData.append('wins', wins.value);
+    formData.append('id', id.value);
+    formData.append('organization', organization.value);
+    console.log(formData);
+    const data = {
+      userName: name.value.toString(),
+      wins: wins.value.toString(),
+      id: id.value.toString(),
+      organization: organization.value.toString()
+    }
+    submit.addEventListener('click', async (e) => {
+      e.preventDefault();
+      console.log(name.value.toString());
+      console.log(organization.value.toString());
+      console.log(wins.value.toString());
+      console.log(id.value.toString());
+      const url = `http://localhost:5050/api/dbUpdate/${id.value}`
+
+      const response = await fetch(url, {
+        method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify( {
+      userName: name.value.toString(),
+      wins: wins.value.toString(),
+      id: id.value,
+      organization: organization.value
+    })// body data type must match "Content-Type" header
+      });
+      const dataR = await response.json();
+
+  // now do whatever you want with the data  
+      console.log(dataR);
+
+    })
+  </script>
+</body>
+
+</html>
