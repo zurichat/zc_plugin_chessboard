@@ -5,10 +5,7 @@ import Chat from "../Chat/Chat.js";
 
 const SpectatorSideBar = () => {
   return (
-
-
     <aside className="side-bar">
-      
       <nav className="side-bar-nav">
         <NavLink exact activeClassName="active" className="nav-link" to="/game">
           Chat

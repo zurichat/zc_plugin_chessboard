@@ -7,7 +7,6 @@ const Chat = () => {
     <div id="chat">
       <Comment />
       <Input />
-      
     </div>
   );
 };
