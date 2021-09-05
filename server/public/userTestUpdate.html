@@ -26,6 +26,8 @@
       <label for="wins" class="label-form">Description</label>
       <input class="wins" type="number" name="wins" placeholder="Total number of wins" required>
 
+      <div class="done"></div>
+
       <button type="submit" class="submit">Update</button>
       <div class="log-in">
         <p>Already saved> <a href="/api/dbRead">Fetch user details</a></p>
@@ -76,8 +78,12 @@
       });
       const dataR = await response.json();
 
-  // now do whatever you want with the data  
-      console.log(dataR);
+      if (response.status === 200) {
+        console.log(dataR);
+        document.querySelector('.done').innerHTML = `<p>updated success fully, fetch users to see changes}</p>`;
+      } else {
+        document.querySelector('.done').innerHTML = `<p>error occur</p>`;
+      }
 
     })
   </script>
