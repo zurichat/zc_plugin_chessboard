@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
 import GameScreen2 from "./Pages/GameScreen2";
@@ -8,6 +7,7 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import TestModal from "./components/Modals/AcceptDeclineModal/Test";
+import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
 
 function App() {
   return (
@@ -24,6 +24,11 @@ function App() {
           <Route exact path="/inviteplayer">
             <InviteModal />
           </Route>
+          <Route
+            exact
+            path="/Accept_chalengeModal"
+            render={Acceptchalengemodal}
+          />
         </Switch>
       </Router>
     </div>
