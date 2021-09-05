@@ -5,8 +5,6 @@ const { save, retrieve, deleteData } = require("../utils/cacheData");
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
-const DatabaseConnection = require("../db/database.helper");
-const Game = new DatabaseConnection("Game");
 const centrifugoController = require("../controllers/centrifugoController");
 
 class GameController {
@@ -100,16 +98,6 @@ class GameController {
       res.status(200).json({ message: "okay" });
     } catch (error) {
       throw error;
-    }
-  }
-
-  // get all game ids
-  async get_game_ids(req, res) {
-    try {
-      const game_ids = await Game.fetchAll();
-      res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
-    } catch (e) {
-      throw new CustomError("Could not retireve game ids.", "500");
     }
   }
 }
