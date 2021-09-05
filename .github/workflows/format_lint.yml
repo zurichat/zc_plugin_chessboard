@@ -1,4 +1,4 @@
-name: Prettier Action
+name: Format Code
 
 # Triggers the workflow on push
 on:
@@ -25,3 +25,23 @@ jobs:
         commit_message: same_commit
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
+
+    - name: Install yarn dependencies and Run ESLint
+      run: |
+        cd client
+        yarn install
+        yarn run lint --fix
+        git config --global user.name 'Eniola Osabiya'
+        git config --global user.email 'eni4sure@users.noreply.github.com'
+        git commit -am "EsLint"
+        git push
