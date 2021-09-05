@@ -6,7 +6,7 @@ import "./Homepage.css";
 function Homepage() {
   return (
     <div className="App">
-      <header class="main-header">
+      <header className="main-header">
         <nav className="nav">
           <h1>Chess Board Room Plugin</h1>
         </nav>
