@@ -10,6 +10,7 @@ import GameScreen2 from "./Pages/GameScreen2";
 import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
+import Exitpop from "./components/Modals/ExitPopUp/exitpopup"
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/modalpage" render={Modal} />
           <Route exact path="/test-accept-modal" component={TestModal} />
           <Route exact path="/inviteplayer">
+          <Route exact path="/exitpop" render={Exitpop} />
             <InviteModal />
           </Route>
         </Switch>
