@@ -24,8 +24,8 @@ router.get("/dbRead", UserCtrl.getAllUsers);
 
 router.get("/dbGameResult", ResultCtrl.createGameResult);
 
-// update game with result id in db 
-router.patch("/dbUpdateResult", ResultCtrl.updateGameResult)
+// update game with result id in db
+router.patch("/dbUpdateResult", ResultCtrl.updateGameResult);
 
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
