@@ -18,7 +18,7 @@ class InformationController {
         team: "HNG 8.0/Team Tesla",
         sidebar_url: "https://chess.zuri.chat/api/sideBar",
         ping_url: "https://chess.zuri.chat/api/ping",
-        homepage_url: "https://chess.zuri.chat/",
+        homepage_url: "https://chess.zuri.chat",
       };
       res.status(200).send(response("Plugin Information Retrieved", result));
     } catch (error) {

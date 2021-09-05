@@ -37,3 +37,5 @@ app.listen(PORT, () => {
 app.on("error", (error) => {
   console.error(`<::: An error occurred on the server: \n ${error}`);
 });
+
+module.exports = app;

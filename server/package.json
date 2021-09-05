@@ -22,11 +22,14 @@
     "ws": "^8.2.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "jest": "^27.1.0",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.6"
   },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "server-test": "jest --runInBand",
     "build": "cd ../client && yarn install && yarn build"
   }
 }
