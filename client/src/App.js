@@ -8,6 +8,7 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import TestModal from "./components/Modals/AcceptDeclineModal/Test";
+import Games from "./components/Games/Games";
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
         <Switch>
           <Route exact path="/" render={HomePage} />
           <Route exact path="/game" render={MainGame} />
-          <Route exact path="/game/games" render={MainGame} />
-          <Route exact path="/game/chat" render={MainGame} />
+          {/* <Route exact path="/game/games" render={MainGame} /> */}
+          {/* <Route exact path="/game/chat" render={Games} /> */}
           <Route exact path="/game_comments" render={GameScreen2} />
           <Route exact path="/modalpage" render={Modal} />
           <Route exact path="/test-accept-modal" component={TestModal} />
