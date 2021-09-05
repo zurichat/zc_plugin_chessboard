@@ -29,6 +29,5 @@ router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-router.get("/save-move", GameCtrl.saveMoveToDb)
 // Export Module
 module.exports = router;
