@@ -41,7 +41,10 @@ const ChessBoard = () => {
           darkSquareStyle={{ backgroundColor: "#3D2F19" }}
           lightSquareStyle={{ backgroundColor: "#E1B168" }}
         />
-        <PlayerName style={{ justifyContent: "flex-end", width: "100%" }} name="Bombos" />
+        <PlayerName
+          style={{ justifyContent: "flex-end", width: "100%" }}
+          name="Bombos"
+        />
       </div>
     </>
   );
