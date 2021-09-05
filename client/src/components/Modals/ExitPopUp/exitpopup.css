@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.component{
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    transform: translate(-50% -50%);
+    background-color: white;
+    height: 50vh;
+    width: 30vw;
+    padding-top: 5em;
+    text-align: center;
+    box-shadow: 0 0 10px black;
+}
+p{
+    margin-top: 1em;
+    font-size: 20px;
+}
+button{
+    margin: 2em 1em;
+    width: 100px;
+    height: 45px;
+    font-weight: 400;
+    border-radius: 4px;
+}
+button:hover{
+    cursor: pointer;
+}
+button:nth-child(1){
+    background-color: green;
+    border: 1px solid transparent;
+    color: white;
+}
+button:nth-child(2){
+    border: 1px solid red;
+    color: red;
+}
+@media screen and (max-width:1000px) and (min-width:280px){
+    .component{
+        position: absolute;
+        left: 10%;
+        width: 80vw;
+        height: 40vh;
+        padding: 3em 0em;
+    }
+    button{
+        width: 80px;
+        height: 45px;
+    }
+}
