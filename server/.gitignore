@@ -1,5 +1,5 @@
 # credentials to connect with zuri core
-src/config/config.json
+server/src/config/config.json
 
 # Logs
 logs
