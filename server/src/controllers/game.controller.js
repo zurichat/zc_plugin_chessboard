@@ -17,7 +17,7 @@ class GameController {
       // Save the new game in DB
 
       const response = await games.create({ gameId });
-      console.log(response.body);
+      // console.log(response.body);
       // Temporary cache store
       // const result = save(gameId, {
       //   gameId,
