@@ -10,14 +10,14 @@ const databaseConnection = require("../db/database.helper");
 const games = new databaseConnection("Game");
 
 class GameController {
- async create(req, res) {
+  async create(req, res) {
     try {
       const { playerId } = req.body;
       let gameId = uuid.v4();
       // Save the new game in DB
-      
-     const response = await games.create({gameId})
-     console.log(response.body);
+
+      const response = await games.create({ gameId });
+      console.log(response.body);
       // Temporary cache store
       // const result = save(gameId, {
       //   gameId,
