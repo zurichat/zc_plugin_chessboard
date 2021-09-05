@@ -3,9 +3,11 @@ name: EsLint - Checking For Errors [Frontend]
 # Triggers the workflow on pull requests
 on:
   pull_request:
-  
+    branch: [dev]
+    types: [opened, sychronize, reopened, edited]
+
 jobs:
-  build:
+  linter_job:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,8 +16,13 @@ jobs:
       with:
         # Make sure the actual branch is checked out when running on pull requests
         ref: ${{ github.head_ref }}
-    
-    - name: Change to Client Folder, Install yarn modules and Run ESLint
+        # ref: "dev" # not needed since ci alreadyruns on pull request to dev 
+        
+    - name: node function
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: install deps and lint frontend code
       run: |
         cd client
         yarn install
