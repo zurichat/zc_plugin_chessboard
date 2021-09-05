@@ -17,6 +17,7 @@ class UserController {
 
       res.status(200).send(appResponse(null, response, true));
     } catch (error) {
+      console.log(error, 111);
       throw new CustomError("Could not create user", "500");
     }
   }

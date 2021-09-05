@@ -13,6 +13,9 @@ router.get("/info", InfoCtrl.getPluginInfo);
 router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
 router.post("/createGame", GameCtrl.create);
+
+// router.post("/createDummyGame", ResultCtrl.createDummyGame);
+
 router.post("/joingame", GameCtrl.join);
 router.post("/move", GameCtrl.move);
 
@@ -21,6 +24,8 @@ router.post("/dbWrite", UserCtrl.userCreate);
 
 // temporary to test db function
 router.get("/dbRead", UserCtrl.getAllUsers);
+
+router.patch("/dbUpdateResult", ResultCtrl.updateGameResult)
 
 router.get("/dbGameResult", ResultCtrl.createGameResult);
 

@@ -3,16 +3,17 @@ const databaseWriteUrl = "https://zccore.herokuapp.com/data/write";
 const databaseReadUrl = "https://zccore.herokuapp.com/data/read";
 
 class DatabaseConnection {
-  constructor(collection_name) {
+  constructor(collection_name, ) {
     this.data = {
       plugin_id: "6132482f569dbbb7ce5b4fe5", //registered chess plug-in
       organization_id: "612a3a914acf115e685df8e3",
-      collection_name: "chess_room",
+      collection_name: collection_name,
       bulk_write: false,
       object_id: "",
       filter: {},
       payload: {},
     };
+
   }
 
   async create(payload) {
