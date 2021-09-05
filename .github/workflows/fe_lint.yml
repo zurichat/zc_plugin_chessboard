@@ -1,21 +1,21 @@
-name: EsLint - Checking For Errors [Frontend]
+name: Lint - [Frontend]
 
-# Triggers the workflow on pull requests
+# Triggers the workflow on push and pull requests
 on:
   pull_request:
   
 jobs:
-  build:
+  run-linters:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
         # Make sure the actual branch is checked out when running on pull requests
         ref: ${{ github.head_ref }}
-    
-    - name: Change to Client Folder, Install yarn modules and Run ESLint
+
+    - name: Install yarn dependencies and Run ESLint
       run: |
         cd client
         yarn install
