@@ -46,6 +46,7 @@
       };
 
       const hookUpListeners = (ctx) => {
+        console.log(ctx);
         if (ctx.data.event == "join_game") {
           joinGameHandler(ctx.data);
         } else if (ctx.data.event == "piece_move") {
