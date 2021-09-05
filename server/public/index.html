@@ -79,7 +79,7 @@
           playerId = "player1";
           //create a new game
           const response = await fetch(
-            "http://127.0.0.1:5050/api/creategame",
+            "http://chess.zuri.chat/api/creategame",
             {
               method: "post",
               body: JSON.stringify({
@@ -93,7 +93,8 @@
 
           const body = await response.json();
           // update gameId and player Id
-          gameId = body.gameId;
+          console.log(body)
+          gameId = body.data.gameId;
 
           document.getElementById(
             "game-id"

@@ -32,7 +32,9 @@ class GameController {
       
       var game = await gameSchema.validateAsync(new_game);
       const response = await Games.create("chess_games", game);
-      response['gameId'] = game_id;
+      response.gameId = game_id;
+      console.log(response);
+      console.log(game_id);
 
       res.status(200).send(appResponse("New game created successfully", response, true));
     } catch (error) {
