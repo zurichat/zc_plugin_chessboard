@@ -6,19 +6,24 @@ const { save, retrieve, deleteData } = require("../utils/cacheData");
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const centrifugoController = require("../controllers/centrifugoController");
+const databaseConnection = require("../db/database.helper");
+const games = new databaseConnection("Game");
 
 class GameController {
-  create(req, res) {
+ async create(req, res) {
     try {
       const { playerId } = req.body;
       let gameId = uuid.v4();
       // Save the new game in DB
+      
+     const response = await games.create({gameId})
+     console.log(response.body);
       // Temporary cache store
-      const result = save(gameId, {
-        gameId,
-        playerOne: playerId,
-        playerTwo: false,
-      });
+      // const result = save(gameId, {
+      //   gameId,
+      //   playerOne: playerId,
+      //   playerTwo: false,
+      // });
 
       res.status(201).send(
         response("Plugin Information Retrieved", {
