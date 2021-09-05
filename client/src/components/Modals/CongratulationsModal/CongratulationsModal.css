@@ -43,8 +43,7 @@
     height: 80px;
     background: #008B5E;
     margin: 0 auto;
-    background-image: url(../../../assets/People\ of\ Brooklyn\ Avatar.png);
-
+    /* background-image: url(../../../assets/People\ of\ Brooklyn\ Avatar.png); */
 }
 .modal-content{
     width: 308px;
