@@ -7,6 +7,7 @@ import GameScreen2 from "./Pages/GameScreen2";
 import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
+import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/game/chat" render={MainGame} />
           <Route exact path="/game_comments" render={GameScreen2} />
           <Route exact path="/modalpage" render={Modal} />
+          <Route exact path="/test-accept-modal" component={TestModal} />
           <Route exact path="/inviteplayer">
             <InviteModal />
           </Route>
