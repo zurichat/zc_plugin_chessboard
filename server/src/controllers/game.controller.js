@@ -80,12 +80,13 @@ class GameController {
 
   async move(req, res) {
     try {
-      const { name, move, gameId, permission } = req.body;
+      const { name, move, gameId, permission, player_id, gameId } = req.body;
       // do validations
       const game = retrieve(gameId);
       if (!game) return res.status(400).json({ message: "no such game" });
 
       //cache moves or save to db later
+      await saveMoveToDb({player_id, board_state, gameId})
 
       const payload = {
         event: "piece_move",
@@ -102,5 +103,24 @@ class GameController {
   }
 }
 
+const saveMoveToDb = async ({player_id, board_state, gameId}) => {
+  try{
+    const move = {player_id, board_state}
+
+    // The update method currently provided by zuri core does not allow for direct addition into moves array
+    // So fetch the game, modify the moves then update the entire game
+    const game = await Game.fetchByGameId(gameId)
+    
+    const gamePayload = game.data[0]
+    const moves = [...gamePayload.moves, move]
+    const newGamePayLoad = {game_id: gamePayload.game_id, moves}
+    
+    const object_id = gamePayload._id
+    await Game.update(object_id, newGamePayLoad)
+    
+  } catch(e){
+
+  }
+}
 // Export Module
 module.exports = new GameController();
