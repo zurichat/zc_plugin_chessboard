@@ -42,13 +42,6 @@
     const id = document.querySelector('.id');
     const organization = document.querySelector('.organization');
 
-    const formData = new FormData();
-
-    formData.append('userName', name.value);
-    formData.append('wins', wins.value);
-    formData.append('id', id.value);
-    formData.append('organization', organization.value);
-    console.log(formData);
     const data = {
       userName: name.value.toString(),
       wins: wins.value.toString(),
