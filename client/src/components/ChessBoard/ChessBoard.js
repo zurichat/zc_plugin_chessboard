@@ -25,7 +25,6 @@ const ChessBoard = () => {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    console.log(screenWidth);
     return screenWidth < 560 ? 318 : 538;
   };
 
