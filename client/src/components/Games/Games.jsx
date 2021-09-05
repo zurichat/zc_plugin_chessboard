@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./game.css";
 
 import Chessboard from "../../assets/Chessboard.png";
