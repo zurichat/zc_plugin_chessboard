@@ -5,13 +5,16 @@ const router = require("express").Router();
 const InfoCtrl = require("../controllers/info.controller");
 const GameCtrl = require("../controllers/game.controller");
 const UserCtrl = require("../controllers/user.controller");
+const ResultCtrl = require("../controllers/result.controller");
 
 // Endpoints
 router.get("/info", InfoCtrl.getPluginInfo);
 
 router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
-router.get("/createGame", GameCtrl.create);
+router.post("/createGame", GameCtrl.create);
+router.post("/joingame", GameCtrl.join);
+router.post("/move", GameCtrl.move);
 
 // get all game ids
 router.get("/fetchgameids", GameCtrl.get_game_ids);
@@ -21,6 +24,8 @@ router.post("/dbWrite", UserCtrl.userCreate);
 
 // temporary to test db function
 router.get("/dbRead", UserCtrl.getAllUsers);
+
+router.get("/dbGameResult", ResultCtrl.createGameResult);
 
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
