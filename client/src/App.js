@@ -7,7 +7,7 @@ import  GameScreenWithComments from "./Pages/GameScreen2/GameScreen2";
 import MainGame from "./Pages/GameScreen/MainGame.js";
 import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
-import Forfeit from './components/Modals/ForfeitModal/Forfeit'
+import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/game/chat" render={MainGame} />
           <Route exact path="/game_comments" render={ () =>  <GameScreenWithComments /> } />
           <Route exact path="/modalpage" render={Modal} />
-          <Route exact path="/game_comments/forfeit_modal" render={() => <Forfeit isYes={true} />} />
+          <Route exact path="/test-accept-modal" component={TestModal} />
           <Route exact path="/inviteplayer">
             <InviteModal />
           </Route>
