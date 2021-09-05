@@ -4,7 +4,7 @@ const gameSchema = require("../models/Game.js");
 const { save, retrieve, deleteData } = require("../utils/cacheData");
 
 // Custom Modules
-const appResponse = require("../utils/response");
+const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const centrifugoController = require("../controllers/centrifugoController");
 const DatabaseConnection = require("../db/database.helper");
@@ -31,12 +31,10 @@ class GameController {
       }
       
       var game = await gameSchema.validateAsync(new_game);
-      const response = await Games.create("chess_games", game);
-      response.gameId = game_id;
-      console.log(response);
-      console.log(game_id);
+      const game_response = await Games.create("chess_games", game);
+      game_response.gameId = game_id;
 
-      res.status(200).send(appResponse("New game created successfully", response, true));
+      res.status(200).send(response("New game created successfully", game_response, true));
     } catch (error) {
       throw new CustomError("Could not create new games", "500");
     }
@@ -45,9 +43,9 @@ class GameController {
 
   async fetchAll(req, res) {
     try {
-      const response = await Games.fetchAll("chess_games");
-      console.log(response.data)
-      res.status(200).send(appResponse("Games", response, true, { count: response.length }));
+      const game_response = await Games.fetchAll("chess_games");
+      console.log(game_response.data)
+      res.status(200).send(response("Games", game_response, true, { count: game_response.length }));
     } catch (error) {
       console.log(error);
       res.sendStatus(500);
