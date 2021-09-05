@@ -47,6 +47,12 @@ jobs:
         yarn install
         yarn run lint --fix
 
+    - name: Commit changes
+      if: always()
+      uses: stefanzweifel/git-auto-commit-action@v4.1.2
+      with:
+        commit_message: EsLint Fixes
+
   deploy:
     needs: eslint
 
