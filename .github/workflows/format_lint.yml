@@ -43,5 +43,5 @@ jobs:
         yarn run lint --fix
         git config --global user.name 'Eniola Osabiya'
         git config --global user.email 'eni4sure@users.noreply.github.com'
-        git commit -am "EsLint"
+        git commit -am "EsLint Fixes"
         git push
