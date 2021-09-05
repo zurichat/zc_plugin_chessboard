@@ -5,6 +5,7 @@ const router = require("express").Router();
 const InfoCtrl = require("../controllers/info.controller");
 const GameCtrl = require("../controllers/game.controller");
 const UserCtrl = require("../controllers/user.controller");
+const ResultCtrl = require("../controllers/result.controller");
 
 // Endpoints
 router.get("/info", InfoCtrl.getPluginInfo);
@@ -18,6 +19,8 @@ router.post("/dbWrite", UserCtrl.userCreate);
 
 // temporary to test db function
 router.get("/dbRead", UserCtrl.getAllUsers);
+
+router.get("/dbGameResult", ResultCtrl.createGameResult);
 
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
