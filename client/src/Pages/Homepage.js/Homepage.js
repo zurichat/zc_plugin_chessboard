@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React from "react";
 import MiniBoard from "../../components/MiniBoard/MiniBoard";
 
@@ -38,4 +36,3 @@ function Homepage() {
 }
 
 export default Homepage;
->>>>>>> a0fb237a2da881841425e4a29d0112d9984a569c
