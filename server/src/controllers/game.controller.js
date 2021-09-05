@@ -78,29 +78,29 @@ class GameController {
     }
   }
 
-  async move(req, res) {
-    try {
-      const { name, move, gameId, permission, player_id, gameId } = req.body;
-      // do validations
-      const game = retrieve(gameId);
-      if (!game) return res.status(400).json({ message: "no such game" });
+  // async move(req, res) {
+  //   try {
+  //     const { name, move, gameId, permission, player_id, gameId } = req.body;
+  //     // do validations
+  //     const game = retrieve(gameId);
+  //     if (!game) return res.status(400).json({ message: "no such game" });
 
-      //cache moves or save to db later
-      await saveMoveToDb({ player_id, board_state, gameId });
+  //     //cache moves or save to db later
+  //     await saveMoveToDb({ player_id, board_state, gameId });
 
-      const payload = {
-        event: "piece_move",
-        permission,
-        name,
-        move,
-      };
+  //     const payload = {
+  //       event: "piece_move",
+  //       permission,
+  //       name,
+  //       move,
+  //     };
 
-      await centrifugoController.publish(gameId, payload);
-      res.status(200).json({ message: "okay" });
-    } catch (error) {
-      throw error;
-    }
-  }
+  //     await centrifugoController.publish(gameId, payload);
+  //     res.status(200).json({ message: "okay" });
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }
 
 const saveMoveToDb = async ({ player_id, board_state, gameId }) => {
