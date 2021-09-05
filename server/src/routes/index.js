@@ -6,6 +6,7 @@ const InfoCtrl = require("../controllers/info.controller");
 const GameCtrl = require("../controllers/game.controller");
 const UserCtrl = require("../controllers/user.controller");
 const ResultCtrl = require("../controllers/result.controller");
+const { saveMoveToDb } = require("../controllers/game.controller")
 
 // Endpoints
 router.get("/info", InfoCtrl.getPluginInfo);
@@ -28,5 +29,6 @@ router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+router.get("/save-move", GameCtrl.saveMoveToDb)
 // Export Module
 module.exports = router;

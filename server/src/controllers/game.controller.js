@@ -1,6 +1,9 @@
 // Package Modules
 const uuid = require("uuid");
 const { save, retrieve, deleteData } = require("../utils/cacheData");
+const DatabaseConnection = require("../db/database.helper");
+const Game = new DatabaseConnection("Game")
+const ObjectId = require('mongodb').ObjectId
 
 // Custom Modules
 const response = require("../utils/response");
@@ -80,13 +83,16 @@ class GameController {
 
   async move(req, res) {
     try {
-      const { name, move, gameId, permission } = req.body;
+      const { name, move, gameId, permission, player_id, board_state } = req.body;
       // do validations
       const game = retrieve(gameId);
       if (!game) return res.status(400).json({ message: "no such game" });
 
       //cache moves or save to db later
 
+      //No one has created a function to add game to db
+      //Here i use a dummy data i added via postman
+      await saveMoveToDb({player_id: 1, board_state: 4, gameId: 11})
       const payload = {
         event: "piece_move",
         permission,
@@ -99,6 +105,33 @@ class GameController {
     } catch (error) {
       throw error;
     }
+  }
+
+  async saveMoveToDb(req, res){
+
+    try{
+      //player_id and board_stte ideally would be passed from the request
+      const move = {player_id : 1, board_state: 2}
+
+      //no function has been created to save game to the database
+      //postman used to save sample data and here's the id
+      const gameId = "11"
+
+      // The update method currently provided by zuri core does not allow for direct addition into moves array
+      // So fetch the game, modify the moves then update the entire game
+      const game = await Game.fetchByGameId(gameId)
+      const gamePayload = game.data[0]
+      const moves = [...gamePayload.moves, move]
+      const newGamePayLoad = {game_id: gamePayload.game_id, moves}
+      
+      const object_id = gamePayload._id
+      await Game.update(object_id, newGamePayLoad)
+
+      res.status(201).json({success: true, message: "move saved succesfully"})
+    } catch(e){
+
+    }
+
   }
 }
 

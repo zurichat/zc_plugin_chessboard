@@ -44,16 +44,27 @@ class DatabaseConnection {
     return response.data;
   }
 
-  async update(id, payload) {
-    this.data.payload = payload;
-    this.data.object_id = id;
-
-    const response = await axios.post(
-      databaseWriteUrl,
-      JSON.stringify(this.data)
+  async fetchByGameId(id){
+    const response = await axios.get(
+      `${databaseReadUrl}/${this.data.plugin_id}/${this.data.collection_name}/${this.data.organization_id}?game_id=${id}`
     );
-
     return response.data;
+  }
+
+  async update(id, payload) {
+    try {
+      this.data.payload = payload;
+      this.data.object_id = id;
+
+      const response = await axios.put(
+        databaseWriteUrl,
+        JSON.stringify(this.data)
+      );
+
+      return response.data;
+    } catch (error) {
+
+    }
   }
 }
 
