@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
 import GameScreenWithComments from "./Pages/GameScreen2/GameScreen2";
@@ -8,6 +7,7 @@ import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
+import Games from "./components/Games/Games";
 
 function App() {
   return (
@@ -16,8 +16,10 @@ function App() {
         <Switch>
           <Route exact path="/" render={HomePage} />
           <Route exact path="/game" render={MainGame} />
-          <Route exact path="/game/games" render={MainGame} />
-          <Route exact path="/game/chat" render={MainGame} />
+          {/* <Route exact path="/game/games" render={MainGame} /> */}
+          {/* <Route exact path="/game/chat" render={Games} /> */}
+          {/* <Route exact path="/game_comments" render={GameScreenWithComments} /> */}
+          <Route exact path="/game/games" render={Games} />
           <Route
             exact
             path="/game_comments"

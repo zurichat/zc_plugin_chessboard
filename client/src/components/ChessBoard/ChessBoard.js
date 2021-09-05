@@ -24,19 +24,27 @@ const ChessBoard = () => {
     setFen(game.current.fen());
   };
 
+  const calcWidth = ({ screenWidth, screenHeight }) => {
+    return screenWidth < 560 ? 318 : 538;
+  };
+
   return (
     <>
       <div className="chessboard">
-        <PlayerName name="Dejavu" />
+        <PlayerName style={{ width: "100%" }} name="Dejavu" />
         <Chessboard
-          width={538}
+          // width={538}
           id="startPos"
           position={fen}
           onDrop={onDrop}
-          sparePieces={true}
-          className="cboard"
+          calcWidth={calcWidth}
+          darkSquareStyle={{ backgroundColor: "#3D2F19" }}
+          lightSquareStyle={{ backgroundColor: "#E1B168" }}
         />
-        <PlayerName style={{ justifyContent: "flex-end" }} name="Bombos" />
+        <PlayerName
+          style={{ justifyContent: "flex-end", width: "100%" }}
+          name="Bombos"
+        />
       </div>
     </>
   );
