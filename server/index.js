@@ -1,9 +1,9 @@
 // Imports
 const path = require("path");
+require("express-async-errors");
 const express = require("express");
 const routes = require("./src/routes");
 const { PORT } = require("./src/config");
-require("express-async-errors");
 
 const app = express();
 
