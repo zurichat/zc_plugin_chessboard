@@ -54,7 +54,7 @@
       console.log(organization.value.toString());
       console.log(wins.value.toString());
       console.log(id.value.toString());
-      const url = `https://chess.zuri.chat/api/dbUpdate/${id.value}`
+      const url = `http://localhost:5050/api/dbUpdate/${id.value}`
 
       const response = await fetch(url, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
