@@ -1,0 +1,19 @@
+name: Lint - [Backend]
+
+# Triggers the workflow and pull requests
+on:
+  pull_request:
+  
+jobs:
+  run-linters:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Install yarn dependencies and Run ESLint
+      run: |
+        cd server
+        yarn install
+        yarn run lint
