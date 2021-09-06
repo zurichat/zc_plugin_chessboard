@@ -3,7 +3,7 @@ const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
-const centrifugoController = require("../controllers/centrifugoController");
+const centrifugoController = require("../controllers/centrifugo.controller");
 const { saveToCache, retrieveFromCache, deleteFromCache } = require("../utils/cacheData");
 
 class GameController {
@@ -27,7 +27,7 @@ class GameController {
       });
 
       // Return the game
-      res.status(200).send(response("Game created successfully", gameDBData.data));
+      res.status(201).send(response("Game created successfully", gameDBData.data));
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, "500");
     }
