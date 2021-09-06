@@ -104,9 +104,8 @@ class GameController {
     // }
   }
 
-
   // get all game ids
-  
+
   async get_game_ids(req, res) {
     try {
       const game_ids = await games.fetchAll();
