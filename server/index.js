@@ -2,15 +2,13 @@
 const path = require("path");
 const express = require("express");
 const routes = require("./src/routes");
-const middlewares = require("./src/middlewares/pre_route.middleware");
-const errorMiddleware = require("./src/middlewares/error.middleware");
 const { PORT } = require("./src/config");
 require("express-async-errors");
 
 const app = express();
 
 // Pre-Route middlewares
-middlewares(app);
+require("./src/middlewares/pre_route.middleware")(app);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
@@ -20,21 +18,8 @@ app.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-//temporary also - to be removed
-app.get("/dbtest", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "userTest.html"));
-});
-
-app.get("/gameresulttest", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "gameTest.html"));
-});
-
-app.get("/updateUser", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "userTestUpdate.html"));
-});
-
 // Error middlewares
-errorMiddleware(app);
+require("./src/middlewares/error.middleware")(app);
 
 // The server should start listening
 app.listen(PORT, () => {
