@@ -5,10 +5,10 @@ const router = require("express").Router();
 const InfoCtrl = require("../controllers/info.controller");
 
 // Plugin Info Endpoints
-// Get Plugin Info - http://localhost:5050/api/info
+// Get Plugin Info - http://127.0.0.1:5050/api/info
 router.get("/info", InfoCtrl.getPluginInfo);
 
-// Get Sidebar Links - http://localhost:5050/api/sidebar
+// Get Sidebar Links - http://127.0.0.1:5050/api/sidebar
 router.get("/sidebar", InfoCtrl.getSideBarInfo);
 
 // Game Endpoints
