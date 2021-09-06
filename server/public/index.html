@@ -1,163 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test Socket.IO</title>
-  </head>
 
-  <body>
-    <h1>Chess Game Room</h1>
-    <h3 id="game-id"></h3>
-    <div>
-      <button id="create-game">create game</button>
-      <button id="join-game">join game</button>
-      <input type="text" id="join-game-input" style="display: none" />
-      <button id="Ok-btn" style="display: none">Ok</button>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Backend Tests</title>
+</head>
 
-    <!-- Update -->
-    <h2 id="update"></h2>
+<body>
+  <h1>Chess Game Room</h1>
+  <h3 id="game-id"></h3>
+  <div>
+    <button id="create-game">create game</button>
+    <button id="join-game">join game</button>
+    <input type="text" id="join-game-input" style="display: none" />
+    <button id="Ok-btn" style="display: none">Ok</button>
+  </div>
 
-    <div>
-      <input type="text" id="move-input" />
-      <button id="send-btn">send</button>
-    </div>
+  <!-- Update -->
+  <h2 id="update"></h2>
 
-    <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
+  <div>
+    <input type="text" id="move-input" />
+    <button id="send-btn">send</button>
+  </div>
 
-    <script>
-      const joinGameHandler = (data) => {
-        document.querySelector(
-          "#update"
-        ).innerHTML += `${data.name} Joined the game with ${data.permission} permissions <br/>`;
-      };
+  <h1>List of Available Backend Endpoints</h1>
+  <ul>
+    <li> http://127.0.0.1:5050/test - GET </li>
+    <hr />
+    <li> http://127.0.0.1:5050/api/info - GET </li>
+    <li> http://127.0.0.1:5050/api/sidebar - GET </li>
+    <hr />
+    <li> http://127.0.0.1:5050/api/game/create - POST </li>
+    <li> http://127.0.0.1:5050/api/game/join - POST </li>
+    <li> http://127.0.0.1:5050/api/game/all - GET </li>
+    <hr />
+    <li> http://127.0.0.1:5050/api/result/create - POST </li>
+    <hr />
+    <li> http://127.0.0.1:5050/api/ping - GET </li>
+  </ul>
 
-      const pieceMoveHandler = (data) => {
-        document.querySelector(
-          "#update"
-        ).innerHTML += `${data.name}: ${data.move} <br/>`;
-      };
 
-      const hookUpListeners = (ctx) => {
-        console.log(ctx);
-        if (ctx.data.event == "join_game") {
-          joinGameHandler(ctx.data);
-        } else if (ctx.data.event == "piece_move") {
-          pieceMoveHandler(ctx.data);
-        }
-      };
+  <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
 
-      const centrifuge = new Centrifuge(
-        "wss://realtime.zuri.chat/connection/websocket"
-      );
+  <script>
+    const joinGameHandler = (data) => {
+      document.querySelector(
+        "#update"
+      ).innerHTML += `${data.name} Joined the game with ${data.permission} permissions <br/>`;
+    };
 
-      centrifuge.on("connect", function (ctx) {
-        console.log("connected", ctx);
-      });
+    const pieceMoveHandler = (data) => {
+      document.querySelector(
+        "#update"
+      ).innerHTML += `${data.name}: ${data.move} <br/>`;
+    };
 
-      centrifuge.on("disconnect", function (ctx) {
-        console.log("disconnected", ctx);
-      });
+    const hookUpListeners = (ctx) => {
+      console.log(ctx);
+      if (ctx.data.event == "join_game") {
+        joinGameHandler(ctx.data);
+      } else if (ctx.data.event == "piece_move") {
+        pieceMoveHandler(ctx.data);
+      }
+    };
 
-      centrifuge.connect();
+    const centrifuge = new Centrifuge(
+      "wss://realtime.zuri.chat/connection/websocket"
+    );
 
-      let gameId = "";
-      let playerId = "";
-      let subscription;
+    centrifuge.on("connect", function (ctx) {
+      console.log("connected", ctx);
+    });
 
-      // new game
-      document
-        .getElementById("create-game")
-        .addEventListener("click", async () => {
-          playerId = "player1";
-          //create a new game
-          const response = await fetch(
-            "https://chess.zuri.chat/api/creategame",
-            {
-              method: "post",
-              body: JSON.stringify({
-                playerId,
-              }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+    centrifuge.on("disconnect", function (ctx) {
+      console.log("disconnected", ctx);
+    });
 
-          const body = await response.json();
-          // update gameId and player Id
-          gameId = body.data.gameId;
+    centrifuge.connect();
 
-          document.getElementById(
-            "game-id"
-          ).innerText = `Game Id: ${gameId}. Player: ${playerId}`;
+    let gameId = "";
+    let playerId = "";
+    let subscription;
 
-          subscription = centrifuge.subscribe(gameId, hookUpListeners);
-        });
-
-      // // palyer sends moves to a gaming room
-      document
-        .getElementById("send-btn")
-        .addEventListener("click", async () => {
-          const move = document.getElementById("move-input").value;
-          const response = await fetch("https://chess.zuri.chat/api/move", {
+    // new game
+    document
+      .getElementById("create-game")
+      .addEventListener("click", async () => {
+        playerId = "player1";
+        //create a new game
+        const response = await fetch(
+          "https://chess.zuri.chat/api/creategame",
+          {
             method: "post",
             body: JSON.stringify({
-              event: "piece_move",
-              permission: "READ/WRITE",
-              name: playerId,
-              move,
-              gameId,
+              playerId,
             }),
             headers: {
               "Content-Type": "application/json",
             },
-          });
-        });
+          }
+        );
 
-      // // existing game
-      const joinGameBtn = document.getElementById("join-game");
-      const joinGameInput = document.getElementById("join-game-input");
-      const okButton = document.getElementById("Ok-btn");
+        const body = await response.json();
+        // update gameId and player Id
+        gameId = body.data.gameId;
 
-      joinGameBtn.addEventListener("click", () => {
-        joinGameInput.style.display = "inline";
-        okButton.style.display = "inline";
-        joinGameBtn.style.display = "none";
+        document.getElementById(
+          "game-id"
+        ).innerText = `Game Id: ${gameId}. Player: ${playerId}`;
+
+        subscription = centrifuge.subscribe(gameId, hookUpListeners);
       });
 
-      okButton.addEventListener("click", async () => {
-        gameId = joinGameInput.value;
-        playerId = "player2";
-
-        const response = await fetch("https://chess.zuri.chat/api/joingame", {
+    // // palyer sends moves to a gaming room
+    document
+      .getElementById("send-btn")
+      .addEventListener("click", async () => {
+        const move = document.getElementById("move-input").value;
+        const response = await fetch("https://chess.zuri.chat/api/move", {
           method: "post",
           body: JSON.stringify({
-            playerId,
+            event: "piece_move",
+            permission: "READ/WRITE",
+            name: playerId,
+            move,
             gameId,
           }),
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const body = await response.json();
-        console.log(body);
-
-        // reset view
-        joinGameInput.style.display = "none";
-        okButton.style.display = "none";
-        joinGameBtn.style.display = "inline";
-
-        subscription = centrifuge.subscribe(gameId, hookUpListeners);
-
-        // update game Id
-        gameId = joinGameInput.value;
-        document.getElementById(
-          "game-id"
-        ).innerText = `Game Id: ${gameId}. Player: ${playerId}`;
       });
-    </script>
-  </body>
+
+    // // existing game
+    const joinGameBtn = document.getElementById("join-game");
+    const joinGameInput = document.getElementById("join-game-input");
+    const okButton = document.getElementById("Ok-btn");
+
+    joinGameBtn.addEventListener("click", () => {
+      joinGameInput.style.display = "inline";
+      okButton.style.display = "inline";
+      joinGameBtn.style.display = "none";
+    });
+
+    okButton.addEventListener("click", async () => {
+      gameId = joinGameInput.value;
+      playerId = "player2";
+
+      const response = await fetch("https://chess.zuri.chat/api/joingame", {
+        method: "post",
+        body: JSON.stringify({
+          playerId,
+          gameId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const body = await response.json();
+      console.log(body);
+
+      // reset view
+      joinGameInput.style.display = "none";
+      okButton.style.display = "none";
+      joinGameBtn.style.display = "inline";
+
+      subscription = centrifuge.subscribe(gameId, hookUpListeners);
+
+      // update game Id
+      gameId = joinGameInput.value;
+      document.getElementById(
+        "game-id"
+      ).innerText = `Game Id: ${gameId}. Player: ${playerId}`;
+    });
+  </script>
+</body>
+
 </html>
