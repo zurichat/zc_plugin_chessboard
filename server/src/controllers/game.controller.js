@@ -86,24 +86,34 @@ class GameController {
 
     // async move(req, res) {
     async move() {
-    // try {
-    //   const { name, move, gameId, permission, player_id, gameId } = req.body;
-    //   // do validations
-    //   const game = retrieve(gameId);
-    //   if (!game) return res.status(400).json({ message: "no such game" });
-    //   //cache moves or save to db later
-    //   await saveMoveToDb({ player_id, board_state, gameId });
-    //   const payload = {
-    //     event: "piece_move",
-    //     permission,
-    //     name,
-    //     move,
-    //   };
-    //   await centrifugoController.publish(gameId, payload);
-    //   res.status(200).json({ message: "okay" });
-    // } catch (error) {
-    //   throw error;
-    // }
+        // try {
+        //   const { name, move, gameId, permission, player_id, gameId } = req.body;
+        //   // do validations
+        //   const game = retrieve(gameId);
+        //   if (!game) return res.status(400).json({ message: "no such game" });
+        //   //cache moves or save to db later
+        //   await saveMoveToDb({ player_id, board_state, gameId });
+        //   const payload = {
+        //     event: "piece_move",
+        //     permission,
+        //     name,
+        //     move,
+        //   };
+        //   await centrifugoController.publish(gameId, payload);
+        //   res.status(200).json({ message: "okay" });
+        // } catch (error) {
+        //   throw error;
+        // }
+    }
+
+    // get all game ids
+    async get_game_ids(req, res) {
+        try {
+            const game_ids = await Game.fetchAll();
+            res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
+        } catch (e) {
+            throw new CustomError("Could not retireve game ids.", "500");
+        }
     }
 }
 
