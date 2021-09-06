@@ -4,11 +4,8 @@ const CustomError = require("../utils/custom-error");
 const resultSchema = require("../models/result.model");
 const DatabaseConnection = require("../db/database.helper");
 
+const ResultRepo = new DatabaseConnection("001test_result");
 class ResultController {
-
-    constructor() {
-        this.Result = new DatabaseConnection("001test_result");
-    }
 
     // Create A Result
     async create(req, res) {
@@ -17,7 +14,7 @@ class ResultController {
             const result = new resultSchema(req.body);
 
             // Save the result to the database
-            const resultDBData = await this.Result.create(result);
+            const resultDBData = await ResultRepo.create(result);
 
             // Return the result
             res.status(200).send(response("Result created successfully", resultDBData.data));

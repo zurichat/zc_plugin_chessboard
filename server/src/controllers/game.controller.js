@@ -6,11 +6,8 @@ const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 const { saveToCache, retrieveFromCache } = require("../utils/cacheData");
 
+const GameRepo = new DatabaseConnection("001test_game");
 class GameController {
-
-    constructor() {
-        this.Game = new DatabaseConnection("001test_game");
-    }
 
     // Create A Game
     async create(req, res) {
@@ -19,7 +16,7 @@ class GameController {
             const game = new gameSchema(req.body);
 
             // Save the game to the database
-            const gameDBData = await this.Game.create(game);
+            const gameDBData = await GameRepo.create(game);
 
             // Save Game to the cache
             saveToCache(gameDBData.data._id, {
@@ -42,7 +39,7 @@ class GameController {
             const { gameId, userId } = req.body;
 
             // Find the game in the database
-            const gameDBData = await this.Game.fetchOne(gameId);
+            const gameDBData = await GameRepo.fetchOne(gameId);
 
             // Check if the game exists
             if (!gameDBData.data) {
@@ -59,7 +56,7 @@ class GameController {
             if (!gameCacheData.game_opponent_user_id && !gameDBData.data.game_opponent_user_id) {
 
                 // Set User ID as Player 2 in the database
-                await this.Game.update(gameId, {
+                await GameRepo.update(gameId, {
                     ...gameDBData.data,
                     game_opponent_user_id: userId,
                 });
@@ -113,7 +110,7 @@ class GameController {
         req;
         try {
             // Get all games from the database
-            const gameDBData = await this.Game.fetchAll();
+            const gameDBData = await GameRepo.fetchAll();
 
             // Return all games
             res.status(200).send(response("Games retrieved successfully", gameDBData.data));
