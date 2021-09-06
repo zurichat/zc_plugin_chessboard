@@ -10,8 +10,8 @@ router.post("/create", GameCtrl.create);
 // Join Game - http://localhost:3000/api/game/join
 router.post("/join", GameCtrl.join);
 
-// Get Game - http://localhost:3000/api/game/:id
-router.get("/:id", GameCtrl.get);
+// Get Game By Id - http://localhost:3000/api/game/:id
+router.get("/:id", GameCtrl.getById);
 
 // Get All Games - http://localhost:3000/api/game/all
 router.get("/all", GameCtrl.getAll);
