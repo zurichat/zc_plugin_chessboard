@@ -4,7 +4,7 @@ const Joi = require("joi");
 // Game Schema
 const game_schema = Joi.object({
     // Game ID is the default id by Mongoose "_id"
-    _id: Joi.string(),
+    // _id: Joi.string(),
     // Game Owner User ID
     game_owner_user_id: Joi.string().required(),
     // Opponent User ID
