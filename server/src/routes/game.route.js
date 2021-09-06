@@ -23,4 +23,4 @@ router.get("/all", GameCtrl.getAll);
 // router.put("/:id", GameCtrl.update);
 
 // Export Module
-module.exports = router
+module.exports = router;

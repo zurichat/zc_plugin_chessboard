@@ -14,4 +14,4 @@ router.post("/create", ResultCtrl.create);
 // router.get("/:id", ResultCtrl.getById);
 
 // Export Module
-module.exports = router
+module.exports = router;
