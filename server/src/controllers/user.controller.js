@@ -55,10 +55,10 @@ class UserController {
     }
   }
 
-  async userDelete(req, res) {
-    try {
-    } catch (error) {}
-  }
+  // async userDelete(req, res) {
+  //     try {
+  //     } catch (error) {}
+  // }
 }
 
 // Export Module

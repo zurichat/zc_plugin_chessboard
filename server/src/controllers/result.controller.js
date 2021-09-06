@@ -8,7 +8,7 @@ const Result = new DatabaseConnection("Result");
 const Game = new DatabaseConnection("Game");
 
 class ResultController {
-  async createGameResult() {
+  async createGameResult(req, res) {
     try {
       const { body } = req;
       body.id = uuid.v4();

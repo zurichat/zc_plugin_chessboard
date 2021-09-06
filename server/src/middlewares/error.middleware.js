@@ -16,7 +16,7 @@ module.exports = (app) => {
   });
 
   // Error handling middleware
-  app.use((error, req, res, next) => {
+  app.use((error, req, res) => {
     if (error.name == "CustomError") {
       res.status(error.status).send(response(error.message, null, false));
     } else if (errorNames.includes(error.name)) {
