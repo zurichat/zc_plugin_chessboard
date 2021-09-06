@@ -29,7 +29,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  eslint:
+  fe_eslint:
     needs: prettier
 
     runs-on: ubuntu-latest
@@ -40,6 +40,11 @@ jobs:
       with:
         # Make sure the actual branch is checked out when running on pull requests
         ref: ${{ github.head_ref }}
+    
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: client
 
     - name: Install yarn dependencies and Run ESLint
       run: |
@@ -51,10 +56,39 @@ jobs:
       if: always()
       uses: stefanzweifel/git-auto-commit-action@v4.1.2
       with:
-        commit_message: EsLint Fixes
+        commit_message: Frontend EsLint Fixes
+
+  be_eslint:
+    needs: fe_eslint
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
+    
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: server
+
+    - name: Install yarn dependencies and Run ESLint
+      run: |
+        cd server
+        yarn install
+        yarn run lint --fix
+
+    - name: Commit changes
+      if: always()
+      uses: stefanzweifel/git-auto-commit-action@v4.1.2
+      with:
+        commit_message: Backend EsLint Fixes
 
   deploy:
-    needs: eslint
+    needs: be_eslint
 
     runs-on: ubuntu-latest
 
@@ -74,4 +108,6 @@ jobs:
             cd server
             yarn install
             yarn build
-            PM2_HOME=/opt/pm2/.pm2 pm2 restart index.js
+            # Devops server currently having issues
+            # pm2 start index.js
+            # PM2_HOME=/opt/pm2/.pm2 pm2 restart index.js

@@ -4,6 +4,7 @@ const databaseReadUrl = "https://zccore.herokuapp.com/data/read";
 
 class DatabaseConnection {
   constructor(collection_name) {
+    collection_name;
     this.data = {
       plugin_id: "6132482f569dbbb7ce5b4fe5", //registered chess plug-in
       organization_id: "612a3a914acf115e685df8e3",
@@ -48,7 +49,7 @@ class DatabaseConnection {
     this.data.payload = payload;
     this.data.object_id = id;
 
-    const response = await axios.put(
+    const response = await axios.post(
       databaseWriteUrl,
       JSON.stringify(this.data)
     );

@@ -15,7 +15,7 @@ router.get("/sideBar", InfoCtrl.getSideBarInfo);
 
 router.post("/createGame", GameCtrl.create);
 router.post("/joingame", GameCtrl.join);
-router.post("/move", GameCtrl.move);
+// router.post("/move", GameCtrl.move);
 
 // get all game ids
 router.get("/fetchgameids", GameCtrl.get_game_ids);
