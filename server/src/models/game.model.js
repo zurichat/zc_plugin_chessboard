@@ -1,12 +1,12 @@
 // Package Modules
 const Joi = require("joi");
 
-//  a test user schema tobe updated based on requirements
+// Game Schema
 const game_schema = Joi.object({
     // Game ID is the default id by Mongoose "_id"
     _id: Joi.string(),
     // Game Owner User ID
-    game_owner_id: Joi.string().required(),
+    game_owner_user_id: Joi.string().required(),
     // Opponent User ID
     game_opponent_user_id: Joi.string().allow(null),
     // Game Start Time
