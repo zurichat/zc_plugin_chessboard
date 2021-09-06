@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CongratulationsModal from "../CongratulationsModal/CongratulationsModal";
-import GameOverModal from "../GameOverModal/GameOver"
+import GameOverModal from "../GameOverModal/GameOver";
 
 export default function Modal() {
   const [show, setShow] = useState(false);
@@ -11,6 +11,6 @@ export default function Modal() {
 
       <button onClick={() => setShow(true)}>Show Game-Over Modal</button>
       <GameOverModal onClose={() => setShow(false)} show={show} />
-  </div>
+    </div>
   );
 }
