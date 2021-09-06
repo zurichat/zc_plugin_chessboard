@@ -1,6 +1,6 @@
 name: Lint - [Frontend]
 
-# Triggers the workflow on push and pull requests
+# Triggers the workflow on pull requests
 on:
   pull_request:
   
