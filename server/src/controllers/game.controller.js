@@ -9,7 +9,7 @@ const { saveToCache, retrieveFromCache } = require("../utils/cacheData");
 class GameController {
 
     constructor() {
-        this.Game = new DatabaseConnection("game");
+        this.Game = new DatabaseConnection("001test_game");
     }
 
     // Create A Game

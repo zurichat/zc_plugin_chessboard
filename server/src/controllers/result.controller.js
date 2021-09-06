@@ -7,7 +7,7 @@ const DatabaseConnection = require("../db/database.helper");
 class ResultController {
 
     constructor() {
-        this.Result = new DatabaseConnection("result");
+        this.Result = new DatabaseConnection("001test_result");
     }
 
     // Create A Result
