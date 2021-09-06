@@ -11,6 +11,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: client
       
     - name: Install yarn dependencies and Run ESLint
       run: |
