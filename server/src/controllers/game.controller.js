@@ -20,14 +20,14 @@ class GameController {
       const gameDBData = await this.Game.create(game);
 
       // Save Game to the cache
-      saveToCache(gameDBData._id, {
-        game_owner_user_id: gameDBData.game_owner_user_id,
+      saveToCache(gameDBData.data._id, {
+        game_owner_user_id: gameDBData.data.game_owner_user_id,
         game_opponent_user_id: null,
         spectators: [],
       });
 
       // Return the game
-      res.status(200).send(response("Game created successfully", gameDBData));
+      res.status(200).send(response("Game created successfully", gameDBData.data));
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, "500");
     }
@@ -43,7 +43,7 @@ class GameController {
       const gameDBData = await this.Game.fetchOne(gameId);
 
       // Check if the game exists
-      if (!gameDBData) {
+      if (!gameDBData.data) {
         return res.status(400).send(response("Game not found", null, false));
       }
 
@@ -54,14 +54,14 @@ class GameController {
       let permission;
 
       // Check if Player 2 is already set
-      if (!gameCacheData.game_opponent_user_id && !gameDBData.game_opponent_user_id) {
-        
+      if (!gameCacheData.game_opponent_user_id && !gameDBData.data.game_opponent_user_id) {
+
         // Set User ID as Player 2 in the database
         await this.Game.update(gameId, {
-          ...gameDBData,
+          ...gameDBData.data,
           game_opponent_user_id: userId,
         });
-        
+
         // Set User ID as Player 2 in the game cache
         saveToCache(gameId, {
           ...gameCacheData,
@@ -96,7 +96,7 @@ class GameController {
       await centrifugoController.publish(gameId, payload);
 
       // Return the game
-      res.status(200).send(response("Game joined successfully", gameDBData));
+      res.status(200).send(response("Game joined successfully", gameDBData.data));
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, "500");
     }
@@ -106,7 +106,27 @@ class GameController {
   // async getById(req, res) {
   // }
 
+  // Get All Games
+  async getAll(req, res) {
+    req;
+    try {
+      // Get all games from the database
+      const gameDBData = await this.Game.fetchAll();
 
+      // Return all games
+      res.status(200).send(response("Games retrieved successfully", gameDBData.data));
+    } catch (error) {
+      throw new CustomError(`Unable to get all Games: ${error}`, "500");
+    }
+  }
+
+  // Get All Games By User
+  // async getAllByUser(req, res) {
+  // }
+
+  // Update Game
+  // async update(req, res) {
+  // }
 }
 
 // Export Module

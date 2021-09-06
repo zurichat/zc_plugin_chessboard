@@ -15,10 +15,10 @@ class ResultController {
       const result = new resultSchema(req.body);
 
       // Save the result to the database
-      const resultData = await this.Result.create(result);
+      const resultDBData = await this.Result.create(result);
 
       // Return the result
-      res.status(200).send(response("Result created successfully", resultData));
+      res.status(200).send(response("Result created successfully", resultDBData.data));
     } catch (error) {
       throw new CustomError(`Unable to create a Result: ${error}`, "500");
     }
