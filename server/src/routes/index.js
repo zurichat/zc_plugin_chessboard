@@ -15,7 +15,7 @@ router.get("/sidebar", InfoCtrl.getSideBarInfo);
 router.use("/game", require("./game.route"));
 
 // Result Endpoints
-router.get("/result", require("./result.route"));
+router.use("/result", require("./result.route"));
 
 router.get("/ping", (req, res) => {
     res.json({ message: "Hello from server!" });
