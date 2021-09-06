@@ -23,7 +23,7 @@
       <label for="organization" class="label-form">Organization</label>
       <input class="organization" type="text" name="organization" placeholder="Enter company here" required>
 
-      <label for="wins" class="label-form">Description</label>
+      <label for="wins" class="label-form">Wins</label>
       <input class="wins" type="number" name="wins" placeholder="Total number of wins" required>
 
       <div class="done"></div>
@@ -54,12 +54,14 @@
       console.log(organization.value.toString());
       console.log(wins.value.toString());
       console.log(id.value.toString());
-      const url = `http://localhost:5050/api/dbUpdate/${id.value}`
+      const url = `https://chess.zuri.chat/api/dbUpdate/${id.value}`
 
       const response = await fetch(url, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'*'
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify( {

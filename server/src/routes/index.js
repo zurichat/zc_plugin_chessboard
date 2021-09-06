@@ -1,7 +1,8 @@
 // Package Modules
 const router = require("express").Router();
 
-// Custom Modules
+// Custom
+
 const InfoCtrl = require("../controllers/info.controller");
 const GameCtrl = require("../controllers/game.controller");
 const UserCtrl = require("../controllers/user.controller");
