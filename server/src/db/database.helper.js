@@ -45,8 +45,8 @@ class DatabaseConnection {
     }
   }
 
-  // Read
-  async readOne(object_id) {
+  // Fetch a single object from the DB
+  async fetchOne(object_id) {
     try {
       // Make the request
       const response = await axios.get(`${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?object_id=${object_id}`);
@@ -58,8 +58,8 @@ class DatabaseConnection {
     }
   }
 
-  // Read All
-  async readAll() {
+  // Fetches all objects from the DB
+  async fetchAll() {
     try {
       // Make the request
       const response = await axios.get(`${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}`);
