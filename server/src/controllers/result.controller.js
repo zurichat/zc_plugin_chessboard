@@ -40,6 +40,28 @@ class ResultController {
       // throw new CustomError("Could not update game with result", "500");
     }
   }
+
+  async getResultByGameId(req, res) {
+    const { gameId } = req.params
+    
+    try {
+      const { data } = await Result.fetchAll();
+      
+      const result = data.find((games) => games.game_id === gameId)
+      
+      if (!result) {
+        return res.status(400).json(appResponse("Invalid game id", null, "failure"));
+        
+      }
+      
+      return res.status(200).json(appResponse("Result retrieved", result))
+      
+    } catch (error) {
+      throw new CustomError(`The result for game iD: ${gameId} could not be retrieved`, 500);
+      
+    }
+}
 }
 
 module.exports = new ResultController();
+
