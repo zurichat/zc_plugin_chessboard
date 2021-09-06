@@ -17,7 +17,7 @@ export default function Comments() {
                 <img src={avatar} alt="" />
                 <div>
                   <div>
-                    <span className="name">{item.name}</span>{" "}
+                    <span className="name">{item.name}</span>
                     <span className="faded">{item.time}</span>
                   </div>
                   <p className="comment">{item.comment}</p>
