@@ -35,7 +35,7 @@ class DatabaseConnection {
 
         try {
             // Make the request
-            const response = await axios.post(this.DB_READ_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
+            const response = await axios.post(this.DB_WRITE_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
 
             // Return the response
             return response.data;
@@ -79,7 +79,7 @@ class DatabaseConnection {
 
         try {
             // Make the request
-            const response = await axios.put(this.DB_READ_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
+            const response = await axios.put(this.DB_WRITE_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
 
             // Return the response
             return response.data;
@@ -97,7 +97,7 @@ class DatabaseConnection {
 
         try {
             // Make the request
-            const response = await axios.put(this.DB_READ_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
+            const response = await axios.put(this.DB_WRITE_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
 
             // Return the response
             return response.data;
