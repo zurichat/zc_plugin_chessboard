@@ -17,20 +17,20 @@ app.use("/api", routes);
 
 // temporary - to be removed
 app.get("/test", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 //temporary also - to be removed
 app.get("/dbtest", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "userTest.html"));
+  res.sendFile(path.join(__dirname, "public", "userTest.html"));
 });
 
 app.get("/gameresulttest", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "gameTest.html"));
+  res.sendFile(path.join(__dirname, "public", "gameTest.html"));
 });
 
 app.get("/updateUser", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "userTestUpdate.html"));
+  res.sendFile(path.join(__dirname, "public", "userTestUpdate.html"));
 });
 
 // Error middlewares
@@ -38,10 +38,10 @@ errorMiddleware(app);
 
 // The server should start listening
 app.listen(PORT, () => {
-    console.log(`Server started listening on port http://127.0.0.1:${PORT}`);
+  console.log(`Server started listening on port http://127.0.0.1:${PORT}`);
 });
 
 // Listen for server error
 app.on("error", (error) => {
-    console.error(`<::: An error occurred on the server: \n ${error}`);
+  console.error(`<::: An error occurred on the server: \n ${error}`);
 });
