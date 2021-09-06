@@ -3,7 +3,7 @@ const formatMessage = require("./libs/formatMessage");
 
 const end_game_handler =
   (socket) =>
-  ({ user_id, game_id = 001 }) => {
+  ({ user_id, game_id }) => {
     // random chess room
     (user_id = "Bla BLaa"),
       // broadcast message to all users in the chessroom  game_id

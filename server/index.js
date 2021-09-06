@@ -25,6 +25,14 @@ app.get("/dbtest", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "userTest.html"));
 });
 
+app.get("/gameresulttest", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "gameTest.html"));
+});
+
+app.get("/updateUser", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "userTestUpdate.html"));
+});
+
 // Error middlewares
 errorMiddleware(app);
 

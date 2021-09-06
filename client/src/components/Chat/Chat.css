@@ -1,7 +1,6 @@
-#chat{
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-   
+#chat {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

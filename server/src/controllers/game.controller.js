@@ -6,19 +6,24 @@ const { save, retrieve, deleteData } = require("../utils/cacheData");
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const centrifugoController = require("../controllers/centrifugoController");
+const databaseConnection = require("../db/database.helper");
+const games = new databaseConnection("Game");
 
 class GameController {
-  create(req, res) {
+  async create(req, res) {
     try {
-      const { playerId } = req.body;
+      // const { playerId } = req.body;
       let gameId = uuid.v4();
       // Save the new game in DB
+
+      const response = await games.create({ gameId });
+      // console.log(response.body);
       // Temporary cache store
-      const result = save(gameId, {
-        gameId,
-        playerOne: playerId,
-        playerTwo: false,
-      });
+      // const result = save(gameId, {
+      //   gameId,
+      //   playerOne: playerId,
+      //   playerTwo: false,
+      // });
 
       res.status(201).send(
         response("Plugin Information Retrieved", {
@@ -26,6 +31,7 @@ class GameController {
         })
       );
     } catch (error) {
+      console.log(error);
       throw new CustomError("Could not create a new game", "500");
     }
   }
@@ -74,33 +80,33 @@ class GameController {
         })
       );
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   }
 
-  async move(req, res) {
+  // get all game ids
+  async get_game_ids(req, res) {
     try {
-      const { name, move, gameId, permission } = req.body;
-      // do validations
-      const game = retrieve(gameId);
-      if (!game) return res.status(400).json({ message: "no such game" });
-
-      //cache moves or save to db later
-
-      const payload = {
-        event: "piece_move",
-        permission,
-        name,
-        move,
-      };
-
-      await centrifugoController.publish(gameId, payload);
-      res.status(200).json({ message: "okay" });
-    } catch (error) {
-      throw error;
+      const game_ids = await games.fetchAll();
+      res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
+    } catch (e) {
+      throw new CustomError("Could not retireve game ids.", "500");
     }
   }
 }
+
+// const saveMoveToDb = async ({ player_id, board_state, gameId }) => {
+//     try {
+//         const move = { player_id, board_state }; // The update method currently provided by zuri core does not allow for direct addition into moves array // So fetch the game, modify the moves then update the entire game
+
+//         const game = await Game.fetchByGameId(gameId);
+//         const gamePayload = game.data[0];
+//         const moves = [...gamePayload.moves, move];
+//         const newGamePayLoad = { game_id: gamePayload.game_id, moves };
+//         const object_id = gamePayload._id;
+//         await Game.update(object_id, newGamePayLoad);
+//     } catch (e) {}
+// };
 
 // Export Module
 module.exports = new GameController();
