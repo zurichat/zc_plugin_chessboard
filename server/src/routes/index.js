@@ -25,6 +25,9 @@ router.post("/dbWrite", UserCtrl.userCreate);
 // temporary to test db function
 router.get("/dbRead", UserCtrl.getAllUsers);
 
+// temporary to test db function
+router.put("/dbUpdate/:id", UserCtrl.userUpdate);
+
 router.get("/dbGameResult", ResultCtrl.createGameResult);
 
 // update game with result id in db

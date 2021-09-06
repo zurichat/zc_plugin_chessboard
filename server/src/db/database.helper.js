@@ -48,7 +48,7 @@ class DatabaseConnection {
     this.data.payload = payload;
     this.data.object_id = id;
 
-    const response = await axios.post(
+    const response = await axios.put(
       databaseWriteUrl,
       JSON.stringify(this.data)
     );
