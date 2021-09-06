@@ -49,7 +49,7 @@ class DatabaseConnection {
   async fetchOne(object_id) {
     try {
       // Make the request
-      const response = await axios.get(`${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?object_id=${object_id}`);
+      const response = await axios.get(`${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?_id=${object_id}`);
 
       // Return the response
       return response.data;
