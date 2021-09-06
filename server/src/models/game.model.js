@@ -20,9 +20,7 @@ const game_schema = Joi.object({
         // Board State
         board_state: Joi.string().required(),
     })),
-    game_result_id: [
-        Joi.string().allow(null),
-    ]
+    game_result_id: Joi.string().allow(null),
 });
 
 module.exports = game_schema;
