@@ -12,7 +12,7 @@ const games = new databaseConnection("Game");
 class GameController {
   async create(req, res) {
     try {
-      const { playerId } = req.body;
+      // const { playerId } = req.body;
       let gameId = uuid.v4();
       // Save the new game in DB
 
@@ -31,6 +31,7 @@ class GameController {
         })
       );
     } catch (error) {
+      console.log(error);
       throw new CustomError("Could not create a new game", "500");
     }
   }
@@ -79,33 +80,11 @@ class GameController {
         })
       );
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   }
 
-  async move(req, res) {
-    // try {
-    //   const { name, move, gameId, permission, player_id, gameId } = req.body;
-    //   // do validations
-    //   const game = retrieve(gameId);
-    //   if (!game) return res.status(400).json({ message: "no such game" });
-    //   //cache moves or save to db later
-    //   await saveMoveToDb({ player_id, board_state, gameId });
-    //   const payload = {
-    //     event: "piece_move",
-    //     permission,
-    //     name,
-    //     move,
-    //   };
-    //   await centrifugoController.publish(gameId, payload);
-    //   res.status(200).json({ message: "okay" });
-    // } catch (error) {
-    //   throw error;
-    // }
-  }
-
   // get all game ids
-
   async get_game_ids(req, res) {
     try {
       const game_ids = await games.fetchAll();
@@ -116,17 +95,18 @@ class GameController {
   }
 }
 
-const saveMoveToDb = async ({ player_id, board_state, gameId }) => {
-  try {
-    const move = { player_id, board_state }; // The update method currently provided by zuri core does not allow for direct addition into moves array // So fetch the game, modify the moves then update the entire game
+// const saveMoveToDb = async ({ player_id, board_state, gameId }) => {
+//     try {
+//         const move = { player_id, board_state }; // The update method currently provided by zuri core does not allow for direct addition into moves array // So fetch the game, modify the moves then update the entire game
 
-    const game = await Game.fetchByGameId(gameId);
-    const gamePayload = game.data[0];
-    const moves = [...gamePayload.moves, move];
-    const newGamePayLoad = { game_id: gamePayload.game_id, moves };
-    const object_id = gamePayload._id;
-    await Game.update(object_id, newGamePayLoad);
-  } catch (e) {}
-};
+//         const game = await Game.fetchByGameId(gameId);
+//         const gamePayload = game.data[0];
+//         const moves = [...gamePayload.moves, move];
+//         const newGamePayLoad = { game_id: gamePayload.game_id, moves };
+//         const object_id = gamePayload._id;
+//         await Game.update(object_id, newGamePayLoad);
+//     } catch (e) {}
+// };
+
 // Export Module
 module.exports = new GameController();
