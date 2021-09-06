@@ -38,7 +38,7 @@ router.patch("/dbUpdateResult", ResultCtrl.updateGameResult);
 router.get("/results/:gameId", ResultCtrl.getResultByGameId);
 
 router.get("/ping", (req, res) => {
-  res.json({ message: "Hello from server!" });
+    res.json({ message: "Hello from server!" });
 });
 
 // Export Module

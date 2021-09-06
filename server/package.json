@@ -33,6 +33,6 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build": "cd ../client && yarn install && yarn build",
-    "lint": "eslint src/"
+    "lint": "eslint src/ --fix"
   }
 }
