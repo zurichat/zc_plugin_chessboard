@@ -104,10 +104,12 @@ class GameController {
     // }
   }
 
+
   // get all game ids
+  
   async get_game_ids(req, res) {
     try {
-      const game_ids = await Game.fetchAll();
+      const game_ids = await games.fetchAll();
       res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
     } catch (e) {
       throw new CustomError("Could not retireve game ids.", "500");
