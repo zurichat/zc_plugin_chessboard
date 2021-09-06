@@ -103,6 +103,16 @@ class GameController {
     //   throw error;
     // }
   }
+
+  // get all game ids
+  async get_game_ids(req, res) {
+    try {
+      const game_ids = await Game.fetchAll();
+      res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
+    } catch (e) {
+      throw new CustomError("Could not retireve game ids.", "500");
+    }
+  }
 }
 
 const saveMoveToDb = async ({ player_id, board_state, gameId }) => {
