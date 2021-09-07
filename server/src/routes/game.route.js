@@ -4,23 +4,35 @@ const router = require("express").Router();
 // Custom Modules
 const GameCtrl = require("../controllers/game.controller");
 
-// Create A Game - http://127.0.0.1:5050/api/game/create
+// Create A Game
 router.post("/create", GameCtrl.create);
 
-// Join A Game - http://127.0.0.1:5050/api/game/join
+// Join A Game
 router.post("/join", GameCtrl.join);
 
-// Get Game By Id - not implemented - http://127.0.0.1:5050/api/game/:id
-// router.get("/:id", GameCtrl.getById);
-
-// Get All Games - http://127.0.0.1:5050/api/game/all
+// Get All Games
 router.get("/all", GameCtrl.getAll);
 
-// Get All Games by User - not implemented - http://127.0.0.1:5050/api/game/all/:userId
+// Watch a Game - Not implemented -- Eniola
+// router.patch('/watch', GameCtrl.addSpectator)
+
+// End Game - Not Implemented -- AfricanDev
+// router.patch("/end", GameCtrl.endGame)
+
+// Resign  - Not implemented -- Ace Anyanwu
+// router.patch('/resign', GameCtrl.resign)
+
+// Get Game By Id - Not implemented -- Moses Odunosho
+// router.get("/:id", GameCtrl.getById);
+
+// Get All Games by User - not implemented -- shauib mustapha
 // router.get("/all/:userId", GameCtrl.getAllByUser);
 
-// Update Game - not implemented - http://127.0.0.1:5050/api/game/:id
-// router.put("/:id", GameCtrl.update);
+// Piece Move route -- NotImplemented -- Ndubuisi
+// router.patch("/piecemove", GameCtrl.pieceMove)
+
+// Remove spectator -- NotImplemented
+// router.patch("/unwatch", GameCtrl.unwatch)
 
 // Export Module
 module.exports = router;

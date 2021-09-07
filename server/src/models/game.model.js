@@ -3,26 +3,61 @@ const Joi = require("joi");
 
 // Game Schema
 const game_schema = Joi.object({
-  // Game ID is the default id by Mongoose "_id"
-  // _id: Joi.string(),
-  // Game Owner User ID
-  game_owner_user_id: Joi.string().required(),
-  // Opponent User ID
-  game_opponent_user_id: Joi.string().allow(null),
-  // Game Start Time
-  game_start_time: Joi.date().default(Date.now),
-  // Game End Time
-  game_end_time: Joi.date().allow(null),
+  // Game Owner
+  owner: Joi.object({
+    user_Id: Joi.string().required(),
+    user_name: Joi.string().required(),
+    image_url: Joi.string(),
+  }).required(),
+
+  // Opposing player
+  opponent: Joi.object({
+    user_Id: Joi.string().required(),
+    user_name: Joi.string().required(),
+    image_url: Joi.string(),
+  })
+    .default(null)
+    .allow(null),
+
+  //Play time
+  start_time: Joi.date().default(Date.now).allow(null),
+  end_time: Joi.date().allow(null),
+
+  //result param
+  is_owner_winner: Joi.boolean().default(false).allow(null),
+
   // Game Moves
-  game_moves: Joi.array().items(
-    Joi.object({
-      // Player 0 - Game Owner, Player 1 - Opponent
-      player: Joi.number().required(),
-      // Board State
-      board_state: Joi.string().required(),
-    })
-  ),
-  game_result_id: Joi.string().allow(null),
+  moves: Joi.array()
+    .items(
+      Joi.object({
+        player_id: Joi.string().required(),
+        position_fen: Joi.string().required(),
+        board_state: Joi.string().required(),
+      })
+    )
+    .allow(null),
+
+  // messages
+  messages: Joi.array()
+    .items(
+      Joi.object({
+        user_name: Joi.string().required(),
+        text: Joi.string().required(),
+        image_url: Joi.string(),
+      })
+    )
+    .allow(null),
+
+  // game spectators
+  spectators: Joi.array()
+    .items(
+      Joi.object({
+        user_Id: Joi.string().required(),
+        user_name: Joi.string().required(),
+        image_url: Joi.string(),
+      })
+    )
+    .allow(null),
 });
 
 module.exports = game_schema;

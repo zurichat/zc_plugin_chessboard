@@ -2,16 +2,13 @@
 const router = require("express").Router();
 
 // Custom Modules
-const ResultCtrl = require("../controllers/result.controller");
+//const ResultCtrl = require("../controllers/result.controller");
 
-// Create Result
-router.post("/create", ResultCtrl.create);
-
-// Get All Result - not implemented - http://127.0.0.1:5050/api/result/all
+// Get Result for all games - not implemented -- Ifechukwu Uzukwu
 // router.get("/all", ResultCtrl.getAll);
 
-// Get Result By Id - not implemented - http://127.0.0.1:5050/api/result/:id
-// router.get("/:id", ResultCtrl.getById);
+// Get Result for a particular game - not implemented -- Erhabor Destiny
+// router.get("/:gameId", ResultCtrl.getById);
 
 // Export Module
 module.exports = router;
