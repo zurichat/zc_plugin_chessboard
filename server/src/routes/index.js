@@ -1,7 +1,8 @@
 // Package Modules
 const router = require("express").Router();
 
-// Custom Modules
+// Custom
+
 const InfoCtrl = require("../controllers/info.controller");
 
 // Plugin Info Endpoints
