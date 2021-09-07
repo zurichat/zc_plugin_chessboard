@@ -108,7 +108,5 @@ jobs:
             cd server
             yarn install
             yarn build
-            pm2 stop all
-            pm2 delete all
-            PM2_HOME=/opt/pm2/.pm2 pm2 list
+            PM2_HOME=/opt/pm2/.pm2 pm2 restart index
 
