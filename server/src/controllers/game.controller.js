@@ -108,8 +108,21 @@ class GameController {
   }
 
   // Get Game By Id
-  // async getById(req, res) {
-  // }
+  async getById(req, res) {
+    try{
+      const id = req.params['id']
+      const game = await GameRepo.fetchOne(id);
+      if (game.data){
+        // Game is found. Return the game
+        res.status(200).send(response("Game found", game.data));
+      }else{
+        // game is not found in db
+        res.status(400).send(response("Game not found"));
+      }
+    }catch(err){
+      throw new CustomError(`Unable to fetch Game: ${err}`, "500");
+    }
+  }
 
   // Get All Games
   async getAll(req, res) {

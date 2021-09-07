@@ -11,7 +11,7 @@ router.post("/create", GameCtrl.create);
 router.post("/join", GameCtrl.join);
 
 // Get Game By Id - not implemented - http://127.0.0.1:5050/api/game/:id
-// router.get("/:id", GameCtrl.getById);
+router.get("/:id", GameCtrl.getById);
 
 // Get All Games - http://127.0.0.1:5050/api/game/all
 router.get("/all", GameCtrl.getAll);
