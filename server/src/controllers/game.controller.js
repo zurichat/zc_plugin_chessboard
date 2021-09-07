@@ -13,13 +13,13 @@ class GameController {
     async create(req, res) {
         try {
             // Pass the request body to the schema
-            const game = new gameSchema(req.body);
+            const game = await gameSchema.validateAsync(req.body);
 
             // Save the game to the database
             const gameDBData = await GameRepo.create(game);
 
             // Save Game to the cache
-            saveToCache(gameDBData.data._id, {
+            saveToCache(gameDBData.data.object_id, {
                 game_owner_user_id: gameDBData.data.game_owner_user_id,
                 game_opponent_user_id: null,
                 spectators: [],
@@ -34,12 +34,12 @@ class GameController {
 
     // Join A Game
     async join(req, res) {
-        try {
+        // try {
             // Get the game id and user id from the request body
-            const { gameId, userId } = req.body;
+            const { game_id, user_id } = req.body;
 
             // Find the game in the database
-            const gameDBData = await GameRepo.fetchOne(gameId);
+            const gameDBData = await GameRepo.fetchOne(game_id);
 
             // Check if the game exists
             if (!gameDBData.data) {
@@ -47,8 +47,9 @@ class GameController {
             }
 
             // Get gamedate from nodecache - temporary cache
-            const gameCacheData = retrieveFromCache(gameId);
-
+            const gameCacheData = retrieveFromCache(game_id);
+            // console.log(gameCacheData);
+            
             // Variable to store user permission in game
             let permission;
 
@@ -56,15 +57,15 @@ class GameController {
             if (!gameCacheData.game_opponent_user_id && !gameDBData.data.game_opponent_user_id) {
 
                 // Set User ID as Player 2 in the database
-                await GameRepo.update(gameId, {
+                await GameRepo.update(game_id, {
                     ...gameDBData.data,
-                    game_opponent_user_id: userId,
+                    game_opponent_user_id: user_id,
                 });
 
                 // Set User ID as Player 2 in the game cache
-                saveToCache(gameId, {
+                saveToCache(game_id, {
                     ...gameCacheData,
-                    game_opponent_user_id: userId,
+                    game_opponent_user_id: user_id,
                 });
 
                 // Set permission to allow the user play the game
@@ -73,10 +74,10 @@ class GameController {
                 // Join as a Spectator
 
                 // Set User ID as Spectator in the game cache
-                gameCacheData.spectators.push(userId);
+                gameCacheData.spectators.push(user_id);
 
                 // Save the Game to the cache
-                saveToCache(gameId, {
+                saveToCache(game_id, {
                     ...gameCacheData,
                 });
 
@@ -88,17 +89,17 @@ class GameController {
             const payload = {
                 event: "join_game",
                 permission,
-                name: userId,
+                name: user_id,
             };
 
             // Publish the event to Centrifugo server
-            await centrifugoController.publish(gameId, payload);
+            await centrifugoController.publish(game_id, payload);
 
             // Return the game
             res.status(200).send(response("Game joined successfully", gameDBData.data));
-        } catch (error) {
-            throw new CustomError(`Unable to Join a Game: ${error}`, "500");
-        }
+        // } catch (error) {
+        //     throw new CustomError(`Unable to Join a Game: ${error}`, "500");
+        // }
     }
 
     // Get Game By Id

@@ -11,7 +11,7 @@ class ResultController {
     async create(req, res) {
         try {
             // Pass the request body to the schema
-            const result = new resultSchema(req.body);
+            const result = await resultSchema.validateAsync(req.body);
 
             // Save the result to the database
             const resultDBData = await ResultRepo.create(result);

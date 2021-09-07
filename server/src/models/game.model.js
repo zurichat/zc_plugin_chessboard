@@ -10,7 +10,7 @@ const game_schema = Joi.object({
     // Opponent User ID
     game_opponent_user_id: Joi.string().allow(null),
     // Game Start Time
-    game_start_time: Joi.date().required(),
+    game_start_time: Joi.date().default(Date.now),
     // Game End Time
     game_end_time: Joi.date().allow(null),
     // Game Moves
