@@ -10,23 +10,23 @@ router.post("/create", GameCtrl.create);
 // Join A Game
 router.post("/join", GameCtrl.join);
 
-// Watch a Game
-// router.post('/watch')
+// Get All Games
+router.get("/all", GameCtrl.getAll);
 
-// End Game
-// router.post("/end")
+// Watch a Game - Not implemented
+// router.post('/watch', GameCtrl.addSpectator)
+
+// End Game - Not Implemented
+// router.post("/end", GameCtrl.endGame)
+
+// Resign  - Not implemented
+// router.post('/resign', GameCtrl.resign)
 
 // Get Game By Id - Not implemented
 // router.get("/:id", GameCtrl.getById);
 
-// Get All Games -
-router.get("/all", GameCtrl.getAll);
-
-// Get All Games by User - not implemented - http://127.0.0.1:5050/api/game/all/:userId
+// Get All Games by User - not implemented
 // router.get("/all/:userId", GameCtrl.getAllByUser);
-
-// Update Game - not implemented - http://127.0.0.1:5050/api/game/:id
-// router.put("/:id", GameCtrl.update);
 
 // Export Module
 module.exports = router;

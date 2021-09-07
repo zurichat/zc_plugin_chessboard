@@ -13,8 +13,9 @@ const game_schema = Joi.object({
   // Opposing player
   opponent: Joi.object({
     user_Id: Joi.string().required(),
+    user_name: Joi.string().required(),
     image_url: Joi.string(),
-  }).required(),
+  }).default(null),
 
   //Play time
   start_time: Joi.date().default(Date.now),

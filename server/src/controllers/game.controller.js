@@ -4,15 +4,23 @@ const CustomError = require("../utils/custom-error");
 const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
-const { saveToCache, retrieveFromCache } = require("../utils/cacheData");
 
 const GameRepo = new DatabaseConnection("001test_game");
 class GameController {
   // Create A Game
   async create(req, res) {
     try {
+      // get owners details from the frontend
+      const { user_id, user_name, image_url } = req.body;
+
       // Pass the request body to the schema
-      const game = await gameSchema.validateAsync(req.body);
+      const game = await gameSchema.validateAsync({
+        owner: {
+          user_id,
+          user_name,
+          image_url,
+        },
+      });
 
       // Save the game to the database
       const gameDBData = await GameRepo.create(game);
@@ -30,62 +38,41 @@ class GameController {
   async join(req, res) {
     try {
       // Get the game id and user id from the request body
-      const { game_id, user_id } = req.body;
+      const { game_id, user_id, user_name, image_url } = req.body;
 
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id);
 
       // Check if the game exists
-      if (!gameDBData.data) {
+      if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
-      }
-
-      // Get gamedate from nodecache - temporary cache
-      const gameCacheData = retrieveFromCache(game_id);
-      // console.log(gameCacheData);
 
       // Variable to store user permission in game
       let permission;
 
-      // Check if Player 2 is already set
-      if (
-        !gameCacheData.game_opponent_user_id &&
-        !gameDBData.data.game_opponent_user_id
-      ) {
-        // Set User ID as Player 2 in the database
-        await GameRepo.update(game_id, {
-          ...gameDBData.data,
-          game_opponent_user_id: user_id,
-        });
+      // if opponent already exists return bad request
+      if (gameDBData.data.opponent)
+        return res
+          .status(400)
+          .send(response("opponent already exists", null, false));
 
-        // Set User ID as Player 2 in the game cache
-        saveToCache(game_id, {
-          ...gameCacheData,
-          game_opponent_user_id: user_id,
-        });
+      // Set opponent and save to db
+      const updated = await GameRepo.update(game_id, {
+        ...gameDBData.data,
+        opponent: {
+          user_id,
+          user_name,
+          image_url,
+        },
+      });
 
-        // Set permission to allow the user play the game
-        permission = "READ/WRITE";
-      } else {
-        // Join as a Spectator
-
-        // Set User ID as Spectator in the game cache
-        gameCacheData.spectators.push(user_id);
-
-        // Save the Game to the cache
-        saveToCache(game_id, {
-          ...gameCacheData,
-        });
-
-        // Set permission to allow the user watch the game
-        permission = "READ";
-      }
+      permission = "READ/WRITE";
 
       // Build Response
       const payload = {
         event: "join_game",
         permission,
-        name: user_id,
+        player: updated.data.opponent,
       };
 
       // Publish the event to Centrifugo server
@@ -99,10 +86,6 @@ class GameController {
       throw new CustomError(`Unable to Join a Game: ${error}`, "500");
     }
   }
-
-  // Get Game By Id
-  // async getById(req, res) {
-  // }
 
   // Get All Games
   async getAll(req, res) {
@@ -120,12 +103,23 @@ class GameController {
     }
   }
 
-  // Get All Games By User
-  // async getAllByUser(req, res) {
+  // Add spectator to game
+  // async addSpectator(req, res) {
   // }
 
-  // Update Game
-  // async update(req, res) {
+  // End game logic by checkmate or draw
+  // async endGame (req, res){
+  // }
+
+  // End game logic by resigning
+  //async resign (req, res){}
+
+  // Get Game By Id
+  // async getById(req, res) {
+  // }
+
+  // Get All Games By User
+  // async getAllByUser(req, res) {
   // }
 }
 
