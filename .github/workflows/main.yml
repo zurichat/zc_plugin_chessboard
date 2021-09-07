@@ -108,5 +108,6 @@ jobs:
             cd server
             yarn install
             yarn build
-            pm2 restart chess_plugin
+            pm2 list
+            PM2_HOME=/opt/pm2/.pm2 pm2 list
 
