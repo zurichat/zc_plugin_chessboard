@@ -5,7 +5,7 @@ const CustomError = require("../utils/custom-error");
 class CentrifugoController {
   static async publish(channel, data) {
     try {
-      const response = await axios.post(
+      await axios.post(
         SOCKET_URL,
         {
           method: "publish",

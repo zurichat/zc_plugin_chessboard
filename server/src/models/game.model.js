@@ -15,41 +15,49 @@ const game_schema = Joi.object({
     user_Id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
-  }).default(null),
+  })
+    .default(null)
+    .allow(null),
 
   //Play time
-  start_time: Joi.date().default(Date.now),
+  start_time: Joi.date().default(Date.now).allow(null),
   end_time: Joi.date().allow(null),
 
   //result param
-  is_owner_winner: Joi.boolean().default(false),
+  is_owner_winner: Joi.boolean().default(false).allow(null),
 
   // Game Moves
-  moves: Joi.array().items(
-    Joi.object({
-      player_id: Joi.string().required(),
-      position_fen: Joi.string().required(),
-      board_state: Joi.string().required(),
-    })
-  ),
+  moves: Joi.array()
+    .items(
+      Joi.object({
+        player_id: Joi.string().required(),
+        position_fen: Joi.string().required(),
+        board_state: Joi.string().required(),
+      })
+    )
+    .allow(null),
 
   // messages
-  messages: Joi.array().items(
-    Joi.object({
-      user_name: Joi.string().required(),
-      text: Joi.string().required(),
-      image_url: Joi.string(),
-    })
-  ),
+  messages: Joi.array()
+    .items(
+      Joi.object({
+        user_name: Joi.string().required(),
+        text: Joi.string().required(),
+        image_url: Joi.string(),
+      })
+    )
+    .allow(null),
 
   // game spectators
-  spectators: Joi.array().items(
-    Joi.object({
-      user_Id: Joi.string().required(),
-      user_name: Joi.string().required(),
-      image_url: Joi.string(),
-    })
-  ),
+  spectators: Joi.array()
+    .items(
+      Joi.object({
+        user_Id: Joi.string().required(),
+        user_name: Joi.string().required(),
+        image_url: Joi.string(),
+      })
+    )
+    .allow(null),
 });
 
 module.exports = game_schema;

@@ -1,6 +1,5 @@
 // Custom Modules
 const response = require("../utils/response");
-const CustomError = require("../utils/custom-error");
 const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
@@ -8,7 +7,7 @@ const centrifugoController = require("../controllers/centrifugo.controller");
 const GameRepo = new DatabaseConnection("001test_game");
 class GameController {
   // Create A Game
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
@@ -30,12 +29,12 @@ class GameController {
         .status(201)
         .send(response("Game created successfully", gameDBData.data, true));
     } catch (error) {
-      throw new CustomError(`Unable to create a Game: ${error}`);
+      next(`Unable to create a Game: ${error}`);
     }
   }
 
   // Join A Game
-  async join(req, res) {
+  async join(req, res, next) {
     try {
       // Get the game id and user id from the request body
       const { game_id, user_id, user_name, image_url } = req.body;
@@ -83,12 +82,12 @@ class GameController {
         .status(200)
         .send(response("Game joined successfully", gameDBData.data));
     } catch (error) {
-      throw new CustomError(`Unable to Join a Game: ${error}`, "500");
+      next(`Unable to Join a Game: ${error}`);
     }
   }
 
   // Get All Games
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     req;
     try {
       // Get all games from the database
@@ -99,7 +98,7 @@ class GameController {
         .status(200)
         .send(response("Games retrieved successfully", gameDBData.data));
     } catch (error) {
-      throw new CustomError(`Unable to get all Games: ${error}`, "500");
+      next(`Unable to get all Games: ${error}`);
     }
   }
 
