@@ -22,7 +22,10 @@ class InformationController {
       };
       res.status(200).send(response("Plugin Information Retrieved", result));
     } catch (error) {
-      throw new CustomError("Could not fetch plugin information", "500");
+      throw new CustomError(
+        `Could not fetch plugin information: ${error}`,
+        "500"
+      );
     }
   }
 
@@ -41,7 +44,10 @@ class InformationController {
       };
       res.status(200).send(response("SideBar Information Retrieved", result));
     } catch (error) {
-      throw new CustomError("Could not fetch sidebar information", "500");
+      throw new CustomError(
+        `Could not fetch sidebar information: ${error}`,
+        "500"
+      );
     }
   }
 }

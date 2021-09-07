@@ -11,7 +11,7 @@ router.post("/create", ResultCtrl.create);
 // router.get("/all", ResultCtrl.getAll);
 
 // Get Result By Id - not implemented - http://127.0.0.1:5050/api/result/:id
-// router.get("/:id", ResultCtrl.getById);
+// router.get("/:gameId", ResultCtrl.getById);
 
 // Export Module
 module.exports = router;

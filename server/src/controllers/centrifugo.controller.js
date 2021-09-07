@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { SOCKER_KEY, SOCKET_URL } = require("../config/index");
+const CustomError = require("../utils/custom-error");
 
 class CentrifugoController {
   static async publish(channel, data) {
@@ -20,10 +21,9 @@ class CentrifugoController {
           },
         }
       );
-      console.log(response.data);
       return true;
     } catch (error) {
-      console.log(error);
+      throw new CustomError(`Unable to publish to ${channel}: ${error}`, "500");
     }
   }
 }

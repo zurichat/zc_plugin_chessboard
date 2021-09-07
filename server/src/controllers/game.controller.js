@@ -17,19 +17,12 @@ class GameController {
       // Save the game to the database
       const gameDBData = await GameRepo.create(game);
 
-      // Save Game to the cache
-      saveToCache(gameDBData.data.object_id, {
-        game_owner_user_id: gameDBData.data.game_owner_user_id,
-        game_opponent_user_id: null,
-        spectators: [],
-      });
-
       // Return the game
       res
         .status(201)
-        .send(response("Game created successfully", gameDBData.data));
+        .send(response("Game created successfully", gameDBData.data, true));
     } catch (error) {
-      throw new CustomError(`Unable to create a Game: ${error}`, "500");
+      throw new CustomError(`Unable to create a Game: ${error}`);
     }
   }
 

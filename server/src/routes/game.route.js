@@ -4,16 +4,22 @@ const router = require("express").Router();
 // Custom Modules
 const GameCtrl = require("../controllers/game.controller");
 
-// Create A Game - http://127.0.0.1:5050/api/game/create
+// Create A Game
 router.post("/create", GameCtrl.create);
 
-// Join A Game - http://127.0.0.1:5050/api/game/join
+// Join A Game
 router.post("/join", GameCtrl.join);
 
-// Get Game By Id - not implemented - http://127.0.0.1:5050/api/game/:id
+// Watch a Game
+// router.post('/watch')
+
+// End Game
+// router.post("/end")
+
+// Get Game By Id - Not implemented
 // router.get("/:id", GameCtrl.getById);
 
-// Get All Games - http://127.0.0.1:5050/api/game/all
+// Get All Games -
 router.get("/all", GameCtrl.getAll);
 
 // Get All Games by User - not implemented - http://127.0.0.1:5050/api/game/all/:userId

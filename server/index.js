@@ -4,11 +4,13 @@ require("express-async-errors");
 const express = require("express");
 const routes = require("./src/routes");
 const { PORT } = require("./src/config");
+const errorMiddleware = require("./src/middlewares/error.middleware");
+const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
 
 const app = express();
 
 // Pre-Route middlewares
-require("./src/middlewares/pre_route.middleware")(app);
+preRouteMiddlewares(app);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
@@ -19,7 +21,7 @@ app.get("/test", (req, res) => {
 });
 
 // Error middlewares
-require("./src/middlewares/error.middleware")(app);
+errorMiddleware(app);
 
 // The server should start listening
 app.listen(PORT, () => {
