@@ -108,4 +108,5 @@ jobs:
             cd server
             yarn install
             yarn build
-            pm2 restart index
+            PORT=5050 pm2 start yarn --name "chess_plugin" --max-memory-restart 670M  -- start
+
