@@ -108,6 +108,6 @@ jobs:
             cd server
             yarn install
             yarn build
-            # Devops server currently having issues
-            # pm2 start index.js
-            # PM2_HOME=/opt/pm2/.pm2 pm2 restart index.js
+            pm2 list
+            PM2_HOME=/opt/pm2/.pm2 pm2 list
+
