@@ -17,5 +17,5 @@ module.exports = {
     ZC_CORE_DB_WRITE: "https://zccore.herokuapp.com/data/write",
     // Endpoint for the database read operations
     ZC_CORE_DB_READ: "https://zccore.herokuapp.com/data/read",
-  }
+  },
 };

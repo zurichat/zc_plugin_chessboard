@@ -6,30 +6,31 @@ const DatabaseConnection = require("../db/database.helper");
 
 const ResultRepo = new DatabaseConnection("001test_result");
 class ResultController {
+  // Create A Result
+  async create(req, res) {
+    try {
+      // Pass the request body to the schema
+      const result = await resultSchema.validateAsync(req.body);
 
-    // Create A Result
-    async create(req, res) {
-        try {
-            // Pass the request body to the schema
-            const result = await resultSchema.validateAsync(req.body);
+      // Save the result to the database
+      const resultDBData = await ResultRepo.create(result);
 
-            // Save the result to the database
-            const resultDBData = await ResultRepo.create(result);
-
-            // Return the result
-            res.status(200).send(response("Result created successfully", resultDBData.data));
-        } catch (error) {
-            throw new CustomError(`Unable to create a Result: ${error}`, "500");
-        }
+      // Return the result
+      res
+        .status(200)
+        .send(response("Result created successfully", resultDBData.data));
+    } catch (error) {
+      throw new CustomError(`Unable to create a Result: ${error}`, "500");
     }
+  }
 
-    // Get All Results
-    // async getAll(req, res) {
-    // }
+  // Get All Results
+  // async getAll(req, res) {
+  // }
 
-    // Get A Result
-    // async getById(req, res) {
-    // }
+  // Get A Result
+  // async getById(req, res) {
+  // }
 }
 
 // Export Module
