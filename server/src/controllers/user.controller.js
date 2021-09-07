@@ -2,7 +2,7 @@ const uuid = require("uuid");
 const userSchema = require("../models/User.js");
 const appResponse = require("../utils/response");
 const DatabaseConnection = require("../db/database.helper");
-const Users = new DatabaseConnection("User");
+const Users = new DatabaseConnection("001test_User");
 const CustomError = require("../utils/custom-error");
 
 class UserController {
