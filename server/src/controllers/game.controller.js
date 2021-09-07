@@ -34,7 +34,7 @@ class GameController {
 
     // Join A Game
     async join(req, res) {
-        // try {
+        try {
             // Get the game id and user id from the request body
             const { game_id, user_id } = req.body;
 
@@ -97,9 +97,9 @@ class GameController {
 
             // Return the game
             res.status(200).send(response("Game joined successfully", gameDBData.data));
-        // } catch (error) {
-        //     throw new CustomError(`Unable to Join a Game: ${error}`, "500");
-        // }
+        } catch (error) {
+            throw new CustomError(`Unable to Join a Game: ${error}`, "500");
+        }
     }
 
     // Get Game By Id
