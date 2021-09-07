@@ -26,21 +26,32 @@
     <button id="send-btn">send</button>
   </div>
 
-  <h1>List of Available Backend Endpoints</h1>
+  <h2>List of Available Backend Endpoints</h2>
   <ul>
-    <li> ✅ http://127.0.0.1:5050/test - GET </li>
+    <li>
+      ✅ - Completed and Works, ❌ - Not Completed
+    </li>
     <hr />
-    <li> ✅ http://127.0.0.1:5050/api/info - GET </li>
-    <li> ✅ http://127.0.0.1:5050/api/sidebar - GET </li>
+    <li> ✅ <a href="/test" target="__blank">/test - GET </a></li>
     <hr />
-    <li> ✅ http://127.0.0.1:5050/api/game/create - POST </li>
-    <li> ✅ http://127.0.0.1:5050/api/game/join - POST </li>
-    <li> ✅ http://127.0.0.1:5050/api/game/all - GET </li>
+    <li> ✅ <a href="/api/info" target="__blank">/api/info - GET </a></li>
+    <li> ✅ <a href="/api/sidebar" target="__blank">/api/sidebar - GET </a></li>
     <hr />
-    <li> ✅ http://127.0.0.1:5050/api/result/create - POST </li>
+    <li> ✅ <a href="/api/game/create" target="__blank">/api/game/create - POST </a></li>
+    <li> ✅ <a href="/api/game/join" target="__blank">/api/game/join - POST </a></li>
+    <li> ❌ <a href="/api/game/:id" target="__blank">/api/game/:id - GET </a></li>
+    <li> ✅ <a href="/api/game/all" target="__blank">/api/game/all - GET </a></li>
+    <li> ❌ <a href="/api/game/all/:userId" target="__blank">/api/game/all/:userId - GET </a></li>
+    <li> ❌ <a href="/api/game/:id" target="__blank">/api/game/:id - PUT </a></li>
     <hr />
-    <li> ✅ http://127.0.0.1:5050/api/ping - GET </li>
+    <li> ✅ <a href="/api/result/create" target="__blank">/api/result/create - POST </a></li>
+    <li> ❌ <a href="/api/result/all" target="__blank">/api/result/all - GET </a></li>
+    <li> ❌ <a href="/api/result/:id" target="__blank">/api/result/:id - GET </a></li>
+    <hr />
+    <li> ✅ <a href="/api/ping" target="__blank">/api/ping - GET </a></li>
   </ul>
+
+  <!-- <h2>Post Man Documentation For Endpoints</h2> -->
 
 
   <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
