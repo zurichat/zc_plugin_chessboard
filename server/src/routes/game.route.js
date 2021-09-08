@@ -16,6 +16,9 @@ router.get("/all", GameCtrl.getAll);
 // Watch a Game -- @eni4sure
 router.patch("/watch", GameCtrl.addSpectator);
 
+//Piece Move route
+router.patch("/piecemove", GameCtrl.pieceMove);
+
 // End Game - Not Implemented -- AfricanDev
 // router.patch("/end", GameCtrl.endGame)
 
@@ -27,9 +30,6 @@ router.patch("/watch", GameCtrl.addSpectator);
 
 // Get All Games by User - not implemented -- shauib mustapha
 // router.get("/all/:userId", GameCtrl.getAllByUser);
-
-//Piece Move route
-router.patch("/piecemove", GameCtrl.pieceMove)
 
 // Remove spectator -- NotImplemented
 // router.patch("/unwatch", GameCtrl.unwatch)
