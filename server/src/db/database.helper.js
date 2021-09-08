@@ -67,6 +67,27 @@ class DatabaseConnection {
     }
   }
 
+  // Fetch a object by Parameter
+  async fetchByParameter(object) {
+    try {
+      // Convert the object to a query string
+      const query_string = new URLSearchParams(object).toString();
+
+      // Make the request
+      const response = await axios.get(
+        `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?${query_string}`
+      );
+
+      // Return the response
+      return response.data;
+    } catch (error) {
+      throw new CustomError(
+        `Unable to Connect to Zuri Core DB [READ ONE]: ${error}`,
+        "500"
+      );
+    }
+  }
+
   // Fetches all objects from the DB
   async fetchAll() {
     try {
