@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 // Custom Modules
-const GameCtrl = require("../controllers/game.controller");
+const GameCtrl = require("../../controllers/game.controller");
 
 // Create A Game
 router.post("/create", GameCtrl.create);
@@ -13,7 +13,7 @@ router.post("/join", GameCtrl.join);
 // Get All Games
 router.get("/all", GameCtrl.getAll);
 
-// Watch a Game -- @eni4sure
+// Watch a Game
 router.patch("/watch", GameCtrl.addSpectator);
 
 //Piece Move route

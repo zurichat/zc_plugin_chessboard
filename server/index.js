@@ -2,7 +2,7 @@
 const path = require("path");
 require("express-async-errors");
 const express = require("express");
-const routes = require("./src/routes");
+const router = require("./src/routes/index");
 const { PORT } = require("./src/config");
 const errorMiddleware = require("./src/middlewares/error.middleware");
 const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
@@ -13,7 +13,7 @@ const app = express();
 preRouteMiddlewares(app);
 
 // All Endpoints routes for backend are defined here
-app.use("/api", routes);
+app.use("/api", router);
 
 // temporary - to be removed
 app.get("/test", (req, res) => {
