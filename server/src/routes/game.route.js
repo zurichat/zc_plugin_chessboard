@@ -13,8 +13,8 @@ router.post("/join", GameCtrl.join);
 // Get All Games
 router.get("/all", GameCtrl.getAll);
 
-// Watch a Game - Not implemented -- Eniola
-// router.patch('/watch', GameCtrl.addSpectator)
+// Watch a Game -- @eni4sure
+router.patch('/watch', GameCtrl.addSpectator)
 
 // End Game - Not Implemented -- AfricanDev
 // router.patch("/end", GameCtrl.endGame)
