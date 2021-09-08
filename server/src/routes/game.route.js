@@ -14,7 +14,7 @@ router.post("/join", GameCtrl.join);
 router.get("/all", GameCtrl.getAll);
 
 // Watch a Game -- @eni4sure
-router.patch('/watch', GameCtrl.addSpectator)
+router.patch("/watch", GameCtrl.addSpectator);
 
 // End Game - Not Implemented -- AfricanDev
 // router.patch("/end", GameCtrl.endGame)
