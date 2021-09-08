@@ -119,17 +119,27 @@ class GameController {
             response("Only players are allowed to make moves", null, false)
           );
 
+      // push new move into moves array
+      const moves = data.moves;
+      moves.push({
+        player_id,
+        position_fen,
+        board_state,
+      });
+
+      // build payload
       const payload = {
+        event: "piece_moved",
         player_id,
         position_fen,
         board_state,
       };
 
-      // push new move into moves array
-      data.moves.push(payload);
-
       // update the database
-      await GameRepo.update(game_id, data);
+      await GameRepo.update(game_id, {
+        ...data,
+        moves,
+      });
       await centrifugoController.publish(game_id, payload);
       return res.status(204);
     } catch (error) {
