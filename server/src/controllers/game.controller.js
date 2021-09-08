@@ -99,6 +99,54 @@ class GameController {
     }
   }
 
+  // Piece movement
+  async pieceMove(req, res, next) {
+    try {
+      // get data from body
+      const { game_id, player_id, position_fen, board_state } = req.body;
+
+      // Find the game in the database
+      const { data } = await GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      if (data.owner.user_id != player_id && data.opponent.user_id != player_id)
+        return res
+          .status(400)
+          .send(
+            response("Only players are allowed to make moves", null, false)
+          );
+
+      // push new move into moves array
+      const moves = data.moves;
+      moves.push({
+        player_id,
+        position_fen,
+        board_state,
+      });
+
+      // build payload
+      const payload = {
+        event: "piece_moved",
+        player_id,
+        position_fen,
+        board_state,
+      };
+
+      // update the database
+      const updated = await GameRepo.update(game_id, {
+        ...data,
+        moves,
+      });
+      await centrifugoController.publish(game_id, payload);
+      return res.status(200).send(response("pieced moved", updated, true));
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // Add spectator to game
   async addSpectator(req, res) {
     try {
