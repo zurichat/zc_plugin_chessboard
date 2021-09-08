@@ -19,6 +19,7 @@
             "error",
             "always"
         ],
-        "no-irregular-whitespace":"off"
+        "no-irregular-whitespace":"off",
+        "no-unused-vars": "off"
     }
 }
