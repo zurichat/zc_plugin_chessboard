@@ -102,6 +102,44 @@ class GameController {
     }
   }
 
+  // Piece movement
+  async pieceMove(req, res, next) {
+    try {
+      // get data from body
+      const { game_id, player_id, position_fen, board_state } = req.body;
+
+      // Find the game in the database
+      const { data } = await GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      if (data.owner.user_id != player_id && data.opponent.user_id != player_id)
+        return res
+          .status(400)
+          .send(
+            response("Only players are allowed to make moves", null, false)
+          );
+
+      const payload = {
+        player_id,
+        position_fen,
+        board_state,
+      };
+
+      // push new move into moves array
+      data.moves.push(payload);
+
+      // update the database
+      await GameRepo.update(game_id, data);
+      await centrifugoController.publish(game_id, payload);
+      return res.status(204);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // Add spectator to game
   // async addSpectator(req, res) {
   // }
