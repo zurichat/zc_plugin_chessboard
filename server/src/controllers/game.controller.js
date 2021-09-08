@@ -136,12 +136,12 @@ class GameController {
       };
 
       // update the database
-      await GameRepo.update(game_id, {
+      const updated = await GameRepo.update(game_id, {
         ...data,
         moves,
       });
       await centrifugoController.publish(game_id, payload);
-      return res.status(204);
+      return res.status(200).send(response("pieced moved", updated, true));
     } catch (error) {
       next(error);
     }
