@@ -10,10 +10,7 @@
     },
     "rules": {
         "indent": "off",
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        "linebreak-style": 0,
         "quotes": [
             "error",
             "double"
@@ -22,6 +19,7 @@
             "error",
             "always"
         ],
-        "no-irregular-whitespace":"off"
+        "no-irregular-whitespace":"off",
+        "no-unused-vars": "off"
     }
 }

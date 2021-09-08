@@ -1,5 +1,6 @@
 // Custom Modules
 const response = require("../utils/response");
+const CustomError = require("../utils/custom-error");
 const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
@@ -7,7 +8,7 @@ const centrifugoController = require("../controllers/centrifugo.controller");
 const GameRepo = new DatabaseConnection("001test_game");
 class GameController {
   // Create A Game
-  async create(req, res, next) {
+  async create(req, res) {
     try {
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
@@ -29,12 +30,12 @@ class GameController {
         .status(201)
         .send(response("Game created successfully", gameDBData.data, true));
     } catch (error) {
-      next(`Unable to create a Game: ${error}`);
+      throw new CustomError(`Unable to create a Game: ${error}`, 500);
     }
   }
 
   // Join A Game
-  async join(req, res, next) {
+  async join(req, res) {
     try {
       // Get the game id and user id from the request body
       const { game_id, user_id, user_name, image_url } = req.body;
@@ -45,9 +46,6 @@ class GameController {
       // Check if the game exists
       if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
-
-      // Variable to store user permission in game
-      let permission;
 
       // if opponent already exists return bad request
       if (gameDBData.data.opponent)
@@ -65,7 +63,8 @@ class GameController {
         },
       });
 
-      permission = "READ/WRITE";
+      // set user permission in game
+      const permission = "READ/WRITE";
 
       // Build Response
       const payload = {
@@ -78,16 +77,14 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
 
       // Return the game
-      res
-        .status(200)
-        .send(response("Game joined successfully", gameDBData.data));
+      res.status(200).send(response("Game joined successfully", updated));
     } catch (error) {
-      next(`Unable to Join a Game: ${error}`);
+      throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
   }
 
   // Get All Games
-  async getAll(req, res, next) {
+  async getAll(req, res) {
     req;
     try {
       // Get all games from the database
@@ -98,7 +95,7 @@ class GameController {
         .status(200)
         .send(response("Games retrieved successfully", gameDBData.data));
     } catch (error) {
-      next(`Unable to get all Games: ${error}`);
+      throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
 
@@ -141,8 +138,57 @@ class GameController {
   }
 
   // Add spectator to game
-  // async addSpectator(req, res) {
-  // }
+  async addSpectator(req, res) {
+    try {
+      // Get the game id and user id from the request body
+      const { game_id, user_id, user_name, image_url } = req.body;
+
+      // Find the game in the database
+      const gameDBData = await GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!gameDBData.data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      // Get specatators in the game
+      const spectators = gameDBData.data.spectators;
+
+      // Build the new spectator object
+      const spectator = {
+        user_id,
+        user_name,
+        image_url,
+      };
+
+      // Add new spectator and return the number of spectators
+      const new_number_of_specators = spectators.push(spectator);
+
+      // Save spectators back to db
+      const updated = await GameRepo.update(game_id, {
+        ...gameDBData.data,
+        spectators,
+      });
+
+      // set user permission in the game
+      const permission = "READ";
+
+      // Build Response
+      const payload = {
+        event: "spectator_joined_game",
+        permission,
+        spectator,
+        new_number_of_specators,
+      };
+
+      // Publish the event to Centrifugo server
+      await centrifugoController.publish(game_id, payload);
+
+      // Return the game
+      res.status(200).send(response("Joined as spectator successful", updated));
+    } catch (error) {
+      throw new CustomError(`Unable to add spectator: ${error}`, 500);
+    }
+  }
 
   // End game logic by checkmate or draw
   // async endGame (req, res){
