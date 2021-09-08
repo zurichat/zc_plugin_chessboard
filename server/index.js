@@ -9,9 +9,6 @@ const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
 
 const app = express();
 
-// call the express.json to accept request body
-app.use(express.json());
-
 // Pre-Route middlewares
 preRouteMiddlewares(app);
 
