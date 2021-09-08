@@ -29,7 +29,6 @@ class GameController {
         .status(201)
         .send(response("Game created successfully", gameDBData.data, true));
     } catch (error) {
-      console.log(error);
       next(`Unable to create a Game: ${error}`);
     }
   }
