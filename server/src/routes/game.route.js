@@ -29,7 +29,7 @@ router.patch("/watch", GameCtrl.addSpectator);
 // router.get("/all/:userId", GameCtrl.getAllByUser);
 
 //Piece Move route
-router.patch("/piecemove", GameCtrl.pieceMove)
+router.patch("/piecemove", GameCtrl.pieceMove);
 
 // Remove spectator -- NotImplemented
 // router.patch("/unwatch", GameCtrl.unwatch)
