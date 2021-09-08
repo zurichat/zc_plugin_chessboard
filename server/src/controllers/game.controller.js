@@ -77,9 +77,7 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
 
       // Return the game
-      res
-        .status(200)
-        .send(response("Game joined successfully", updated));
+      res.status(200).send(response("Game joined successfully", updated));
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
@@ -148,9 +146,7 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
 
       // Return the game
-      res
-        .status(200)
-        .send(response("Joined as spectator successful", updated));
+      res.status(200).send(response("Joined as spectator successful", updated));
     } catch (error) {
       throw new CustomError(`Unable to add spectator: ${error}`, 500);
     }
