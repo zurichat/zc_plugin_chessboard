@@ -19,9 +19,6 @@ app.use("/api", router);
 app.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-app.get("/test_wb", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "whiteboardtest.html"));
-});
 
 // Error middlewares
 errorMiddleware(app);

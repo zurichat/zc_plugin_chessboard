@@ -7,7 +7,18 @@ const resultRoute = require("./result.route");
 const InfoCtrl = require("../../controllers/info.controller");
 
 // Plugin Info Endpoints
-// Get Plugin Info
+
+/**
+ * @swagger
+ * /api/v1/info:
+ *    get:
+ *      description: Gets the general plugin information
+ *      responses:
+ *        200:
+ *          description: Plugin Information Retrieved
+ *        500:
+ *          description: something went wrong in the server
+ */
 router.get("/info", InfoCtrl.getPluginInfo);
 
 // Get Sidebar Links
