@@ -60,7 +60,7 @@ const game_schema = Joi.object({
     .allow(null),
 
   // game status
-  status: Joi.string().required(),
+  status: Joi.number().required(),
 });
 
 module.exports = game_schema;
