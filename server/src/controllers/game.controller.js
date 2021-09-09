@@ -203,43 +203,44 @@ class GameController {
   // End game logic by checkmate or draw
   async endGame(req, res, next) {
     try {
+      // request an info from the user
       const { game_id, user_id } = req.body;
+
+      // fetch the game from the database
       const isGameExist = await GameRepo.fetchOne(game_id);
 
+      // check if the game data exists
       if (!isGameExist.data) {
         return res
           .status(400)
           .send(response("Game does not exist", null, false));
       }
 
+      // check if that particular user exist in the database
       if (!user_id) {
         return res
           .status(400)
           .send(response("User does not exist", null, false));
       }
 
-      let winner;
-      if (isGameExist.data.owner) {
-        winner = isGameExist.data.opponent;
-      } else {
-        winner = isGameExist.data.owner;
+      // checking if user (winner) is equivalent relating to the data fetched
+      if (user_id === isGameExist.data.owner.user_id) {
+        isGameExist.data.is_owner_winner = true;
+      } else if (user_id == isGameExist.data.opponent.user_id) {
+        isGameExist.data.is_owner_winner = true;
       }
 
-      let permission;
-
+      // update the Game Info with current result
       const updated = await GameRepo.update(game_id, {
         ...isGameExist.data,
-        checkmate: {
-          winner,
-        },
+        gameWinner: isGameExist.data.is_owner_winner,
+        gameStatus: "ended",
       });
-
-      permission = null;
 
       const payload = {
         event: "end_game",
-        permission,
-        winner: updated.checkmate,
+        winner: updated.gameWinner,
+        status: updated.gameStatus,
       };
 
       await centrifugoController.publish(game_id, payload);
