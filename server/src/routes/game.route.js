@@ -31,8 +31,8 @@ router.patch("/pieceemove", GameCtrl.pieceMove);
 // Get All Games by User - not implemented -- shauib mustapha
 // router.get("/all/:userId", GameCtrl.getAllByUser);
 
-// Remove spectator -- NotImplemented
-// router.patch("/unwatch", GameCtrl.unwatch)
+// Remove spectator -- NotImplemented --ibk
+router.patch("/unwatch", GameCtrl.removeSpectator);
 
 // Export Module
 module.exports = router;
