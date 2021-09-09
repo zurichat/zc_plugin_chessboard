@@ -20,5 +20,5 @@ module.exports = {
   },
 
   // Fetch user zc_core endpoint
-  USER_URL: "https://api.zuri.chat/users/"
+  USER_URL: "https://api.zuri.chat/users/",
 };
