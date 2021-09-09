@@ -369,7 +369,53 @@
       </ul>
       <hr />
 
-      <h4>6. ALL GAME INFORMATION BY ID</h4>
+      <h4>7. ALL GAME INFORMATION BY ID</h4>
+      <p id="game_userId">
+        Returns json object game by game id 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/game/:id     ---- ❌
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          GET
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+           <strong>Required</strong> 
+            id=[integer]
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          None
+        </li>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "Game Information by id successfully",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call Test <br/>
+          <a href="/api/game/:id" target="__blank"
+            > - Game By id - POSTMAN
+          </a>
+        </li>
+      </ul>
+      <hr />
+<h4>6. ALL GAME INFORMATION BY ID</h4>
       <p id="game_userId">
         Returns json object game by game id 
       </p>
@@ -416,6 +462,7 @@
       </ul>
       <hr />
 
+      
       <!-- <ul>
         <hr />
         <li>✅ <a href="/test" target="__blank">/test - GET </a></li>

@@ -16,7 +16,7 @@ preRouteMiddlewares(app);
 app.use("/api", routes);
 
 // Plugin Documentation route
-app.get("/docs", (req, res) => {
+app.get("/api/docs/v1", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "docs.html"));
 });
 
