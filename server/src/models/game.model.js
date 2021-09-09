@@ -22,6 +22,7 @@ const game_schema = Joi.object({
   //Play time
   start_time: Joi.date().default(Date.now).allow(null),
   end_time: Joi.date().allow(null),
+  status: Joi.number().allow(null), //started=0, running = 1, completed = 2
 
   //result param
   is_owner_winner: Joi.boolean().default(false).allow(null),

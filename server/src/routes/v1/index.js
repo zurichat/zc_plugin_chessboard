@@ -5,12 +5,13 @@ const router = require("express").Router();
 const gameRoute = require("./game.route");
 const resultRoute = require("./result.route");
 const InfoCtrl = require("../../controllers/info.controller");
+const { userAuth } = require("../../middlewares/user_auth.middleware");
 
 // Plugin Info Endpoints
 router.get("/info", InfoCtrl.getPluginInfo);
 
 // Get Sidebar Links
-router.get("/sidebar", InfoCtrl.getSideBarInfo);
+router.get("/sidebar", userAuth, InfoCtrl.getSideBarInfo);
 
 // Game Endpoints
 router.use("/game", gameRoute);
