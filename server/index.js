@@ -9,16 +9,32 @@ const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
 
 const app = express();
 
+// swagger setup
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDocument = require("swagger-jsdoc");
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Chess Plugin API",
+      version: "1.0.0",
+      description: "Chess plugin api for zuri chat application documentation",
+      servers: ["https://chess.zuri.chat/api"],
+    },
+  },
+  apis: ["./src/routes/*.js"],
+};
+const swaggerDocs = swaggerJSDocument(swaggerOptions);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+
+
 // Pre-Route middlewares
 preRouteMiddlewares(app);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
-
-// Plugin Documentation route
-app.get("/api/docs/v1", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "docs.html"));
-});
 
 // temporary - to be removed
 app.get("/test", (req, res) => {
