@@ -12,6 +12,7 @@ class GameController {
     try {
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
+      
 
       // Pass the request body to the schema
       const game = await gameSchema.validateAsync({
@@ -155,13 +156,13 @@ class GameController {
 
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id);
-
       // Check if the game exists
       if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
 
       // Get specatators in the game
-      const spectators = gameDBData.data.spectators;
+      const spectators = gameDBData.data[0].spectators || [];
+      
 
       // Build the new spectator object
       const spectator = {
@@ -199,6 +200,47 @@ class GameController {
       throw new CustomError(`Unable to add spectator: ${error}`, 500);
     }
   }
+
+  // Unwatch game (remove spectator)
+  async removeSpectator(req, res) {
+    try {
+      // Get the game id and user id from the request body
+    const { game_id, user_id } = req.body;
+
+    // Find the game in the database
+    const gameDBData = await GameRepo.fetchOne(game_id);
+
+    // Check if the game exists
+    if (!gameDBData.data)
+    return res.status(400).send(response("Game not found", null, false));
+
+    // Get specatators in the game
+    const spectators = gameDBData.data[0].spectators;
+
+    // find index of user
+    const index = spectators.findIndex(o => o.user_id == "user_id");
+    console.log("index: ", index);
+
+     // Check if the user is a spectator in the game
+    if (index === -1)
+    return res.status(400).send(response("user not an active spectator", null, false));
+    spectators.splice(index,1);
+
+    // Save spectators back to db
+    const updated = await GameRepo.update(game_id, {
+      ...gameDBData.data,
+      spectators,
+    });
+
+    // Return the game
+    res.status(200).send(response("spectator removed successfully", updated));
+
+
+    } catch (error) {
+      throw new CustomError(`Unable to unwatch game: ${error}`, 500);
+    }    
+  }
+  
 
   // End game logic by checkmate or draw
   // async endGame (req, res){
