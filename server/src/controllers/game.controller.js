@@ -239,7 +239,7 @@ class GameController {
       const payload = {
         event: "end_game",
         permission,
-        player: updated.data,
+        winner: updated.checkmate,
       };
 
       await centrifugoController.publish(game_id, payload);
