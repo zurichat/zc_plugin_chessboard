@@ -5,14 +5,14 @@ const Joi = require("joi");
 const game_schema = Joi.object({
   // Game Owner
   owner: Joi.object({
-    user_Id: Joi.string().required(),
+    user_id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
   }).required(),
 
   // Opposing player
   opponent: Joi.object({
-    user_Id: Joi.string().required(),
+    user_id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
   })
@@ -52,7 +52,7 @@ const game_schema = Joi.object({
   spectators: Joi.array()
     .items(
       Joi.object({
-        user_Id: Joi.string().required(),
+        user_id: Joi.string().required(),
         user_name: Joi.string().required(),
         image_url: Joi.string(),
       })
