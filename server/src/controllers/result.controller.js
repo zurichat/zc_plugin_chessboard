@@ -12,7 +12,7 @@ class ResultController {
        const resultsDBData = await ResultRepo.fetchAll();
       res
         .status(200)
-        .send(response("Results retrieved successfully", resultsDBData.data))        
+        .send(response("Results retrieved successfully", resultsDBData.data));        
     } catch(error){
       throw new CustomError(`Unable to get all Results: ${error}`, 500);
     }
