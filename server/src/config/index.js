@@ -18,4 +18,7 @@ module.exports = {
     // Endpoint for the database read operations
     ZC_CORE_DB_READ: "https://zccore.herokuapp.com/data/read",
   },
+
+  // Fetch user zc_core endpoint
+  USER_URL: "https://api.zuri.chat/users/",
 };
