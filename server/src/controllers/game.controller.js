@@ -218,12 +218,19 @@ class GameController {
           .send(response("User does not exist", null, false));
       }
 
+      let winner;
+      if (isGameExist.data.owner) {
+        winner = isGameExist.data.opponent;
+      } else {
+        winner = isGameExist.data.owner;
+      }
+
       let permission;
 
       const updated = await GameRepo.update(game_id, {
         ...isGameExist.data,
-        player: {
-          user_id,
+        checkmate: {
+          winner,
         },
       });
 
@@ -236,7 +243,7 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
-      return res.status(200).send(response("Game ended!!!", isGameExist.data));
+      return res.status(200).send(response("Game ended!!!", updated));
     } catch (error) {
       next(`Unable to end game ${error}`);
     }
