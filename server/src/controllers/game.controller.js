@@ -230,7 +230,7 @@ class GameController {
         isGameExist.data.is_owner_winner = true;
       }
 
-      isGameExist.data.status = 3;
+      isGameExist.data.status = 2;
       // update the Game Info with current result
       const updated = await GameRepo.update(game_id, {
         ...isGameExist.data,
