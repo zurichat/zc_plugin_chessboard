@@ -201,8 +201,46 @@ class GameController {
   }
 
   // End game logic by checkmate or draw
-  // async endGame (req, res){
-  // }
+  async endGame(req, res, next) {
+    try {
+      const { game_id, user_id } = req.body;
+      const isGameExist = await GameRepo.fetchOne(game_id);
+
+      if (!isGameExist.data) {
+        return res
+          .status(400)
+          .send(response("Game does not exist", null, false));
+      }
+
+      if (!user_id) {
+        return res
+          .status(400)
+          .send(response("User does not exist", null, false));
+      }
+
+      let permission;
+
+      const updated = await GameRepo.update(game_id, {
+        ...isGameExist.data,
+        player: {
+          user_id,
+        },
+      });
+
+      permission = null;
+
+      const payload = {
+        event: "end_game",
+        permission,
+        player: updated.data,
+      };
+
+      await centrifugoController.publish(game_id, payload);
+      return res.status(200).send(response("Game ended!!!", isGameExist.data));
+    } catch (error) {
+      next(`Unable to end game ${error}`);
+    }
+  }
 
   // End game logic by resigning
   //async resign (req, res){}

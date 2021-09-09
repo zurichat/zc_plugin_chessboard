@@ -20,7 +20,7 @@ router.patch("/watch", GameCtrl.addSpectator);
 router.patch("/pieceemove", GameCtrl.pieceMove);
 
 // End Game - Not Implemented -- AfricanDev
-// router.patch("/end", GameCtrl.endGame)
+router.patch("/end", GameCtrl.endGame);
 
 // Resign  - Not implemented -- Ace Anyanwu
 // router.patch('/resign', GameCtrl.resign)
