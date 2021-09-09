@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Plugins Documentation</title>
+  </head>
+  <body>
+    <h1>Contents: Quick Refference 🚀</h1>
+<ol>
+  <li>
+    <a href="#all_plugin">Get all plugin information</a>
+  </li>
+   <li>
+    <a href="#all_sidebar">Get all sidebar information</a>
+  </li>
+   <li>
+    <a href="#create_game">Create Game</a>
+  </li>
+   <li>
+    <a href="#join_game">Join Game</a>
+  </li>
+   <li>
+    <a href="#all_game">All Game information</a>
+  </li>
+  <li>
+    <a href="#game_userId">All Game information by user id</a>
+  </li>
+  <li>
+    <a href="#game_id">Game information by game id</a>
+  </li>
+  <li>
+    <a href="#watch_game">Watch Game</a>
+  </li>
+  <li>
+    <a href="#move_game">Update Game Piece Move</a>
+  </li>
+  
+  <li>
+    <a href="#end_game">End Game</a>
+  </li>
+  <li>
+    <a href="#resign_game">Resign Game</a>
+  </li>
+  <li>
+    <a href="#game_spectator">Remove Game spectator</a>
+  </li>
+  <li>
+    <a href="#all_result">All Result information</a>
+  </li>
+  <li>
+    <a href="#result_id">All Result information by game id</a>
+  </li>
+</ol>
+
+<h1>Base Link</h1>
+  <a href="https://chess.zuri.chat/">https://chess.zuri.chat/</a>
+<hr />
+<h2>PostMan Documentation For Endpoints</h2>
+<p>Can use for testing POST, PUT, DELETE and PATCH operations</p>
+      <p> 
+        <a
+          href="https://documenter.getpostman.com/view/11664243/U16gRTMq#564ef23f-334c-452c-b2ce-5692811cc1c2"
+          target="__blank"
+          >Click Here to Open</a
+        >
+      </p>
+<table>
+  <tr>
+     <td>Implemented - Completed and Works,</td>
+     <td>Not Implemented - Not Completed</td>
+  </tr>
+  <tr>
+    <td>✅ </td>
+    <td>❌ </td>
+  </tr>
+</table>
+
+    <h2>List of Available Backend Endpoints</h2>
+
+    <main>
+      <h4>1. ALL PLUGIN INFORMATION</h4>
+      <p id="all_plugin">
+        Returns json object of all plugin information 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/info       ---- ✅
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          GET
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+          None
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          None
+        </li>
+        <br/>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "Plugins Information received",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call <br/>
+          <a href="/api/info" target="__blank">All plugin information </a>
+        </li>
+      </ul>
+      <hr/>
+
+      <h4>2. ALL SIDEBAR INFORMATION</h4>
+      <p id="all_plugin">
+        Returns json object of all sidebar information 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/sidebar       ---- ✅
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          GET
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+          None
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          None
+        </li>
+        <br/>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "sidebar Information received",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call <br/>
+          <a href="/api/sidebar" target="__blank">GET all sidebar information</a>
+        </li>
+      </ul>
+      <hr/>
+
+      <h4>3. CREATE GAME</h4>
+      <p id="create_game">
+        Returns json object game created 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/game/create      ---- ✅
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          POST
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+          None
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          <pre>
+            {
+              user_id: int [required],
+              user_name: String [required],
+              image_url: string [required], 
+            }
+          </pre>
+        </li>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "sidebar Information received",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call Test <br/>
+          <a href="/api/game/create" target="__blank"
+            > - Create Game - POSTMAN
+          </a>
+        </li>
+      </ul>
+      <hr/>
+
+      <h4>4. JOIN GAME</h4>
+      <p id="join_game">
+        Returns json object game join 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/game/join     ---- ✅
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          POST
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+          None
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          <pre>
+            {
+              game_id: int [required],
+              user_id: int [required],
+              user_name: String [required],
+              image_url: string [required], 
+            }
+          </pre>
+        </li>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "Game joined successfully",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call Test <br/>
+          <a href="/api/game/join" target="__blank"
+            > - Join Game - POSTMAN
+          </a>
+        </li>
+      </ul>
+      <hr />
+
+      <h4>5. All GAME</h4>
+      <p id="all_game">
+        Returns json object game join 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/game/all     ---- ✅
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          GET
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+          None
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          None
+        </li>
+        <br/>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "All Game retrieve successfully",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call Test <br/>
+          <a href="/api/game/all" target="__blank"
+            > - All Game 
+          </a>
+        </li>
+      </ul>
+      <hr />
+
+      <h4>6.  ALL GAME INFORMATION BY USER ID</h4>
+      <p id="game_userId">
+        Returns json object game by user id 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/game/:userId     ---- ❌
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          GET
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+           <strong>Required</strong> 
+            userId=[interger]
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          None
+        </li>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "Game Information by user id successfully",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call Test <br/>
+          <a href="/api/game/:userId" target="__blank"
+            > - Game By User id - POSTMAN
+          </a>
+        </li>
+      </ul>
+      <hr />
+
+      <h4>6. ALL GAME INFORMATION BY ID</h4>
+      <p id="game_userId">
+        Returns json object game by game id 
+      </p>
+      <ul>
+        <li><b>URL</b> <br/>
+         /api/game/:id     ---- ❌
+        </li>
+        <br/>
+        <li> <b>METHOD</b> <br/>
+          GET
+        </li>
+        <br/>
+        <li> <b>URL Params</b>  <br/>
+           <strong>Required</strong> 
+            id=[integer]
+        </li>
+        <br/>
+        <li> <b>Data Params </b><br/>
+          None
+        </li>
+        <li><b>Success Response</b>  <br/>
+          <ul><li>Code: 200</li></ul> 
+          <pre>
+            [{ 
+              "message": "Game Information by id successfully",
+              "data": < Object>
+            }]
+          </pre>
+        </li>
+        <li><b>Error Response</b>
+          <ul><li>Code: 404</li></ul>
+          <pre>
+            {
+              "message": "error",
+              "data": error< Object>
+            }
+          </pre>
+        </li>
+        <li> Simple Call Test <br/>
+          <a href="/api/game/:id" target="__blank"
+            > - Game By id - POSTMAN
+          </a>
+        </li>
+      </ul>
+      <hr />
+
+      <!-- <ul>
+        <hr />
+        <li>✅ <a href="/test" target="__blank">/test - GET </a></li>
+        <hr />
+        
+        <hr />
+        <li>
+          ✅
+          <a href="/api/result/create" target="__blank"
+            >/api/result/create - POST
+          </a>
+        </li>
+        <li>
+          ❌
+          <a href="/api/result/all" target="__blank">/api/result/all - GET </a>
+        </li>
+        <li>
+          ❌
+          <a href="/api/result/:id" target="__blank">/api/result/:id - GET </a>
+        </li>
+        <hr />
+        <li>✅ <a href="/api/ping" target="__blank">/api/ping - GET </a></li>
+      </ul> -->
+
+      
+    </main>
+  </body>
+</html>

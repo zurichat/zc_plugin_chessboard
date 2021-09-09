@@ -15,10 +15,16 @@ preRouteMiddlewares(app);
 // All Endpoints routes for backend are defined here
 app.use("/api", routes);
 
+// Plugin Documentation route
+app.get("/docs", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "docs.html"));
+});
+
 // temporary - to be removed
 app.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
 app.get("/test_wb", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "whiteboardtest.html"));
 });
