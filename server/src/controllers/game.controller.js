@@ -230,17 +230,18 @@ class GameController {
         isGameExist.data.is_owner_winner = true;
       }
 
+      isGameExist.data.status = true;
       // update the Game Info with current result
       const updated = await GameRepo.update(game_id, {
         ...isGameExist.data,
-        gameWinner: isGameExist.data.is_owner_winner,
-        gameStatus: "ended",
+        status: "end",
       });
 
       const payload = {
         event: "end_game",
-        winner: updated.gameWinner,
-        status: updated.gameStatus,
+        winner:
+          isGameExist.data.owner.user_id || isGameExist.data.opponent.user_id,
+        status: updated.status,
       };
 
       await centrifugoController.publish(game_id, payload);
