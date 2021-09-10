@@ -35,7 +35,7 @@ class InformationController {
 
   async getSideBarInfo(req, res) {
     try {
-      const { userId } = req.body;
+      const { userId } = req.params.userId;
       // fetch all data from db - Change this proceedure later
       const { data } = await GameRepo.fetchAll();
       if (!data)

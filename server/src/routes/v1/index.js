@@ -9,18 +9,6 @@ const { userAuth } = require("../../middlewares/user_auth.middleware");
 
 /**
  * @swagger
- *  definitions:
- *   sidebarInput:
- *    type: object
- *    properties:
- *     userId:
- *      type: integer
- *      description: The user id of the owner of the game
- *      example: 2
- */
-
-/**
- * @swagger
  * /api/v1/info:
  *  get:
  *   summary: Gets general plugin info
@@ -39,12 +27,10 @@ router.get("/info", InfoCtrl.getPluginInfo);
  *  get:
  *   summary: Gets sidebar info
  *   description: Returns all sidebar information for a given user
- *   requestBody:
- *    required: true
- *    content:
- *      application/json:
- *        schema:
- *          $ref: '#/definitions/sidebarInput'
+ *   parameters:
+ *    - name: userId
+ *      in: query
+ *      required: true
  *   responses:
  *    200:
  *      description: A successful response
