@@ -107,13 +107,13 @@ class GameController {
       const game_id = req.params.id;
 
       // Get all games from the database
-      const fetchedGame = await GameRepo.fetchOne(game_id);
+      const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id });
 
-      // Return all games
+      // if game id returns data, send response
       if (fetchedGame.data !== null) {
         res
           .status(200)
-          .send(response("Games retrieved successfully", fetchedGame.data));
+          .send(response("Game retrieved successfully", fetchedGame.data));
       } else {
         res.status(404).send(response("Games does not exist", null, false));
       }
@@ -121,7 +121,6 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
-
   // Piece movement
   async pieceMove(req, res, next) {
     try {
