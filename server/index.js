@@ -26,7 +26,7 @@ const swaggerOptions = {
   apis: ["./src/routes/v1/*.js"],
 };
 const swaggerDocs = swaggerJSDocument(swaggerOptions);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Pre-Route middlewares
 preRouteMiddlewares(app);
