@@ -11,7 +11,7 @@ const Games = () => {
         alignItems: "center",
       }}
     >
-      <h1>Games Component</h1>
+      {/* <h1>Games Component</h1> */}
       <Gamesection />
     </div>
   );
