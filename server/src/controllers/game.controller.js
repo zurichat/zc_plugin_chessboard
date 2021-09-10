@@ -100,6 +100,28 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
+  // Fetch a single game
+  async getById(req, res) {
+    try {
+      // request an info from the user
+      const game_id = req.params.id;
+      
+      // Get all games from the database
+      const fetchedGame = await GameRepo.fetchOne(game_id);
+
+      // Return all games
+      if (fetchedGame.data !== null) {
+        res
+        .status(200)
+        .send(response("Games retrieved successfully", fetchedGame.data));
+      }
+      else {
+        res.status(404).send(response("Games does not exist", null, false));
+      }
+    } catch (error) {
+      throw new CustomError(`Unable to get all Games: ${error}`, 500);
+    }
+  }
 
   // Piece movement
   async pieceMove(req, res, next) {
