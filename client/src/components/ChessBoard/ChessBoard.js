@@ -39,7 +39,7 @@ const ChessBoard = () => {
               width: squareWidth,
               height: squareWidth,
               display: "grid",
-              placeItems: "center"
+              placeItems: "center",
             }}
           >
             <img
@@ -48,7 +48,6 @@ const ChessBoard = () => {
               alt={c.name}
             />
           </div>
-
         );
       };
       return a;
