@@ -100,7 +100,27 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
+  // Fetch a single game
+  async getById(req, res) {
+    try {
+      // request an info from the user
+      const game_id = req.params.id;
 
+      // Get all games from the database
+      const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id });
+
+      // if game id returns data, send response
+      if (fetchedGame.data !== null) {
+        res
+          .status(200)
+          .send(response("Game retrieved successfully", fetchedGame.data));
+      } else {
+        res.status(404).send(response("Games does not exist", null, false));
+      }
+    } catch (error) {
+      throw new CustomError(`Unable to get all Games: ${error}`, 500);
+    }
+  }
   // Piece movement
   async pieceMove(req, res, next) {
     try {
@@ -291,8 +311,48 @@ class GameController {
   }
 
   // End game logic by resigning
-  //async resign (req, res){}
+  async resign(req, res) {
+    let winner_id;
+    try {
+      // retrieve game id and user id from the user
+      const { game_id, user_id } = req.body;
 
+      // fetch the game from the database
+      const isGameExist = await GameRepo.fetchOne(game_id);
+
+      // check if the game data exists
+      if (!isGameExist.data)
+        return res
+          .status(400)
+          .send(response("Game does not exist", null, false));
+
+      // checking if user resigning is owner or not
+      if (user_id === isGameExist.data.owner.user_id) {
+        isGameExist.data.is_owner_winner = false;
+        winner_id = isGameExist.data.opponent.user_id;
+      } else if (user_id === isGameExist.data.opponent.user_id) {
+        isGameExist.data.is_owner_winner = true;
+        winner_id = isGameExist.data.opponent.user_id;
+      }
+
+      isGameExist.data.status = 2;
+      // update the Game Info with current result
+      const updated = await GameRepo.update(game_id, {
+        ...isGameExist.data,
+      });
+
+      const payload = {
+        event: "end_game",
+        winner: winner_id,
+        status: isGameExist.data.status,
+      };
+
+      await centrifugoController.publish(game_id, payload);
+      return res.status(200).send(response("Game ended!!!", updated));
+    } catch (error) {
+      throw new CustomError(`Unable to end game ${error}`, 500);
+    }
+  }
   // Get Game By Id
   // async getById(req, res) {
   // }

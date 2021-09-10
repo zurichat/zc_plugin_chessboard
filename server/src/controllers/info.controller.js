@@ -35,19 +35,21 @@ class InformationController {
 
   async getSideBarInfo(req, res) {
     try {
-      const { userId } = req.query.userId;
+      const { userId } = req.query;
       // fetch all data from db - Change this proceedure later
       const { data } = await GameRepo.fetchAll();
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
 
       const usersGame = data.filter((game) => {
+        console.log(game.spectators);
         return (
-          game.status == 1 &&
-          (game.owner.user_id == userId ||
-            (game.opponent && game.opponent.user_id == userId) ||
-            (game.spectators.length > 0 &&
-              game.spectators.find((spec) => spec.user_id == userId)))
+          // game.status == 1 &&
+          game.owner.user_id == userId ||
+          (game.opponent != undefined && game.opponent.user_id == userId) ||
+          (game.spectators != undefined &&
+            Array.isArray(game.spectators) &&
+            game.spectators.find((spec) => spec.user_id == userId) != undefined)
         );
       });
 
@@ -58,6 +60,14 @@ class InformationController {
           }`,
           id: game._id,
           url: `https://chess.zuri.chat/game?id=${game._id}`,
+          unread: game.messages ? game.messages.length : 0,
+          badge_type: "info",
+          members:
+            game.spectators != null && game.spectators != undefined
+              ? game.spectators.length + 2
+              : 2,
+          icon: "spear.png",
+          action: "open",
         };
       });
 
@@ -75,10 +85,14 @@ class InformationController {
           {
             title: "Chess room",
             url: "https://chess.zuri.chat",
+            icon: "cdn.cloudflare.com/445345453345/hello.jpeg",
+            action: "open",
           },
           {
             title: "Invite Player",
             url: "https://chess.zuri.chat/inviteplayer",
+            icon: "cdn.cloudflare.com/445345453345/hello.jpeg",
+            action: "open",
           },
         ],
       };
