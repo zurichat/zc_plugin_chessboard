@@ -20,6 +20,7 @@ class GameController {
           user_name,
           image_url,
         },
+        status: 0,
       });
 
       // Save the game to the database
@@ -61,6 +62,7 @@ class GameController {
           user_name,
           image_url,
         },
+        status: 1,
       });
 
       // set user permission in game
@@ -216,7 +218,7 @@ class GameController {
       const spectators = gameDBData.data[0].spectators;
 
       // find index of user
-      const index = spectators.findIndex((o) => o.user_id == "user_id");
+      const index = spectators.findIndex((o) => o.user_id == user_id);
 
       // Check if the user is a spectator in the game
       if (index === -1)

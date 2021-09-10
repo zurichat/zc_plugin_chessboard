@@ -1,6 +1,10 @@
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
+const DatabaseConnection = require("../db/database.helper");
+const { DATABASE } = require("../config/index");
+
+const GameRepo = new DatabaseConnection("001test_game");
 
 class InformationController {
   async getPluginInfo(req, res) {
@@ -31,18 +35,57 @@ class InformationController {
 
   async getSideBarInfo(req, res) {
     try {
-      let result = {
-        new: "/api/chess/game-type",
-        quickPlay: "/api/chess/game-type/quick-play",
-        multiplayer: "/api/chess/game-type/multiplayer",
-        singleplayer: "/api/chess/game-type/singleplayer",
-        tournament: "/api/chess/tournament",
-        createTournament: "/api/chess/tournament/create",
-        joinTournament: "/api/chess/tournament/join",
-        settings: "/api/chess/settings",
-        join: "/api/chess/join-live",
+      const { userId } = req.query.userId;
+      // fetch all data from db - Change this proceedure later
+      const { data } = await GameRepo.fetchAll();
+      if (!data)
+        return res.status(404).send(response("data not available", {}, false));
+
+      const usersGame = data.filter((game) => {
+        return (
+          game.status == 1 &&
+          (game.owner.user_id == userId ||
+            (game.opponent && game.opponent.user_id == userId) ||
+            (game.spectators &&
+              game.spectators.find((spec) => spec.user_id == userId)))
+        );
+      });
+
+      const joined_rooms = usersGame.map((game) => {
+        return {
+          title: `${game.owner.user_name} vs ${
+            game.opponent ? game.opponent.user_name : "none"
+          }`,
+          id: game._id,
+          url: `https://chess.zuri.chat/game?id=${game._id}`,
+        };
+      });
+
+      const { PLUGIN_ID, ORGANISATION_ID } = DATABASE;
+      const payload = {
+        name: "Chess Plugin",
+        description: "The Chess plugin",
+        plugin_id: PLUGIN_ID,
+        organisation_id: ORGANISATION_ID,
+        user_id: userId,
+        group_name: "Chess Games",
+        show_group: true,
+        joined_rooms,
+        public_rooms: [
+          {
+            title: "Chess room",
+            url: "https://chess.zuri.chat",
+          },
+          {
+            title: "Invite Player",
+            url: "https://chess.zuri.chat/inviteplayer",
+          },
+        ],
       };
-      res.status(200).send(response("SideBar Information Retrieved", result));
+
+      return res
+        .status(200)
+        .send(response("Fetched sidebar data", payload, true));
     } catch (error) {
       throw new CustomError(
         `Could not fetch sidebar information: ${error}`,

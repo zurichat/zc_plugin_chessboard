@@ -1,27 +1,12 @@
-// Package Modules
 const router = require("express").Router();
 
-// Custom
-const gameRoute = require("./game.route");
-const resultRoute = require("./result.route");
-const InfoCtrl = require("../controllers/info.controller");
+//version one routes
+const v1 = require("./v1/index");
 
-// Plugin Info Endpoints
-// Get Plugin Info
-router.get("/info", InfoCtrl.getPluginInfo);
+// version one routes
+router.use("/v1", v1);
 
-// Get Sidebar Links
-router.get("/sidebar", InfoCtrl.getSideBarInfo);
+// version two routes - goes down here
+// router.use("/v2", v2);
 
-// Game Endpoints
-router.use("/game", gameRoute);
-
-// Result Endpoints
-router.use("/result", resultRoute);
-
-router.get("/ping", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
-
-// Export Module
 module.exports = router;

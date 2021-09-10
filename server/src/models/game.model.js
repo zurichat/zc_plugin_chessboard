@@ -23,6 +23,8 @@ const game_schema = Joi.object({
   start_time: Joi.date().default(Date.now).allow(null),
   end_time: Joi.date().allow(null),
 
+  // game status
+  status: Joi.number().required(), //started=0, running = 1, completed = 2
   //result param
   is_owner_winner: Joi.boolean().default(false).allow(null),
 
@@ -58,9 +60,6 @@ const game_schema = Joi.object({
       })
     )
     .allow(null),
-
-  // game status
-  status: Joi.number().required(),
 });
 
 module.exports = game_schema;
