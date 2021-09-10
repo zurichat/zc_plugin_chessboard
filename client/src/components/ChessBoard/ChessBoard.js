@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 import "./ChessBoard.css";
 import Chessboard from "chessboardjsx";
 import React, { useState, useEffect, useRef } from "react";
 import Chess from "chess.js";
+import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 
 const ChessBoard = () => {
@@ -28,13 +30,38 @@ const ChessBoard = () => {
     return screenWidth < 560 ? 318 : 538;
   };
 
+  const customPieces = () => {
+    return chessPieces.reduce((a, c) => {
+      a[c.name] = ({ squareWidth, isDragging }) => {
+        return (
+          <div
+            style={{
+              width: squareWidth,
+              height: squareWidth,
+              display: "grid",
+              placeItems: "center"
+            }}
+          >
+            <img
+              style={{ height: "70%", width: "70%" }}
+              src={c.image}
+              alt={c.name}
+            />
+          </div>
+
+        );
+      };
+      return a;
+    }, {});
+  };
+
   return (
     <>
       <div className="chessboard">
         <PlayerName style={{ width: "100%" }} name="Dejavu" />
         <Chessboard
-          // width={538}
-          id="startPos"
+          pieces={customPieces()}
+          id="startPcos"
           position={fen}
           onDrop={onDrop}
           calcWidth={calcWidth}
