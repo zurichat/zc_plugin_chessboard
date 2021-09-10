@@ -291,8 +291,48 @@ class GameController {
   }
 
   // End game logic by resigning
-  //async resign (req, res){}
+  async resign(req, res) {
+    let winner_id;
+    try {
+      // retrieve game id and user id from the user
+      const { game_id, user_id } = req.body;
 
+      // fetch the game from the database
+      const isGameExist = await GameRepo.fetchOne(game_id);
+
+      // check if the game data exists
+      if (!isGameExist.data)
+        return res
+          .status(400)
+          .send(response("Game does not exist", null, false));
+
+      // checking if user resigning is owner or not
+      if (user_id === isGameExist.data.owner.user_id) {
+        isGameExist.data.is_owner_winner = false;
+        winner_id = isGameExist.data.opponent.user_id;
+      } else if (user_id === isGameExist.data.opponent.user_id) {
+        isGameExist.data.is_owner_winner = true;
+        winner_id = isGameExist.data.opponent.user_id;
+      }
+
+      isGameExist.data.status = 2;
+      // update the Game Info with current result
+      const updated = await GameRepo.update(game_id, {
+        ...isGameExist.data,
+      });
+
+      const payload = {
+        event: "end_game",
+        winner: winner_id,
+        status: isGameExist.data.status,
+      };
+
+      await centrifugoController.publish(game_id, payload);
+      return res.status(200).send(response("Game ended!!!", updated));
+    } catch (e) {
+      next(`Unable to end game ${error}`);
+    }
+  }
   // Get Game By Id
   // async getById(req, res) {
   // }
