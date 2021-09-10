@@ -2,14 +2,24 @@
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
-
-const ResultRepo = new DatabaseConnection("001test_result");
+const GameRepo = new DatabaseConnection("001test_game");
+// const ResultRepo = new DatabaseConnection("001test_result");
 class ResultController {
   // Get All Results
   async getAll(req, res) {
-    req;
+    const games = await GameRepo.fetchAll();
+
     try {
-       const resultsDBData = await ResultRepo.fetchAll();
+        const resultsDBData = games.map(()=>{
+          return {
+            result: games.is_owner_winner = null ? "Draw" : "Win",
+            winner: games.is_owner_winner ? games.winner : games.opponent,
+            games: games._id
+
+          }
+        })
+
+
       res
         .status(200)
         .send(response("Results retrieved successfully", resultsDBData.data));        
