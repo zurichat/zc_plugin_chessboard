@@ -201,10 +201,94 @@ class GameController {
       throw new CustomError(`Unable to add spectator: ${error}`, 500);
     }
   }
+  // Unwatch game (remove spectator)
+  async removeSpectator(req, res) {
+    try {
+      // Get the game id and user id from the request body
+      const { game_id, user_id } = req.body;
+
+      // Find the game in the database
+      const gameDBData = await GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!gameDBData.data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      // Get specatators in the game
+      const spectators = gameDBData.data[0].spectators;
+
+      // find index of user
+      const index = spectators.findIndex((o) => o.user_id == "user_id");
+
+      // Check if the user is a spectator in the game
+      if (index === -1)
+        return res
+          .status(400)
+          .send(response("user not an active spectator", null, false));
+      spectators.splice(index, 1);
+
+      // Save spectators back to db
+      const updated = await GameRepo.update(game_id, {
+        ...gameDBData.data,
+        spectators,
+      });
+
+      // Return the game
+      res.status(200).send(response("spectator removed successfully", updated));
+    } catch (error) {
+      throw new CustomError(`Unable to unwatch game: ${error}`, 500);
+    }
+  }
 
   // End game logic by checkmate or draw
-  // async endGame (req, res){
-  // }
+  async endGame(req, res, next) {
+    try {
+      // request an info from the user
+      const { game_id, user_id } = req.body;
+
+      // fetch the game from the database
+      const isGameExist = await GameRepo.fetchOne(game_id);
+
+      // check if the game data exists
+      if (!isGameExist.data) {
+        return res
+          .status(400)
+          .send(response("Game does not exist", null, false));
+      }
+
+      // check if that particular user exist in the database
+      if (!user_id) {
+        return res
+          .status(400)
+          .send(response("User does not exist", null, false));
+      }
+
+      // checking if user (winner) is equivalent relating to the data fetched
+      if (user_id === isGameExist.data.owner.user_id) {
+        isGameExist.data.is_owner_winner = true;
+      } else if (user_id == isGameExist.data.opponent.user_id) {
+        isGameExist.data.is_owner_winner = true;
+      }
+
+      isGameExist.data.status = 2;
+      // update the Game Info with current result
+      const updated = await GameRepo.update(game_id, {
+        ...isGameExist.data,
+      });
+
+      const payload = {
+        event: "end_game",
+        winner:
+          isGameExist.data.owner.user_id || isGameExist.data.opponent.user_id,
+        status: isGameExist.data.status,
+      };
+
+      await centrifugoController.publish(game_id, payload);
+      return res.status(200).send(response("Game ended!!!", updated));
+    } catch (error) {
+      next(`Unable to end game ${error}`);
+    }
+  }
 
   // End game logic by resigning
   //async resign (req, res){}

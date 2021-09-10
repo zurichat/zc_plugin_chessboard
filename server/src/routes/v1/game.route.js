@@ -20,7 +20,7 @@ router.patch("/watch", GameCtrl.addSpectator);
 router.patch("/pieceemove", GameCtrl.pieceMove);
 
 // End Game - Not Implemented -- AfricanDev
-// router.patch("/end", GameCtrl.endGame)
+router.patch("/end", GameCtrl.endGame);
 
 // Resign  - Not implemented -- Ace Anyanwu
 // router.patch('/resign', GameCtrl.resign)
@@ -31,8 +31,8 @@ router.patch("/pieceemove", GameCtrl.pieceMove);
 // Get All Games by User - not implemented -- shauib mustapha
 // router.get("/all/:userId", GameCtrl.getAllByUser);
 
-// Remove spectator -- NotImplemented -- @ibk
-// router.patch("/unwatch", GameCtrl.unwatch)
+// Remove spectator -- NotImplemented --ibk
+router.patch("/unwatch", GameCtrl.removeSpectator);
 
 // Send messages to game -- NotImplemented
 // router.patch("/message",GameCtrl.Message);
