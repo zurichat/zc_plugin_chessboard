@@ -35,19 +35,20 @@ class InformationController {
 
   async getSideBarInfo(req, res) {
     try {
-      const { userId } = req.query.userId;
+      const { userId } = req.query;
       // fetch all data from db - Change this proceedure later
       const { data } = await GameRepo.fetchAll();
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
 
       const usersGame = data.filter((game) => {
+        console.log();
         return (
-          game.status == 1 &&
-          (game.owner.user_id == userId ||
-            (game.opponent && game.opponent.user_id == userId) ||
-            (game.spectators &&
-              game.spectators.find((spec) => spec.user_id == userId)))
+          // game.status == 1 &&
+          game.owner.user_id == userId ||
+          (game.opponent != undefined && game.opponent.user_id == userId) ||
+          (game.spectators != undefined &&
+            game.spectators.find((spec) => spec.user_id == userId) != undefined)
         );
       });
 
@@ -58,6 +59,11 @@ class InformationController {
           }`,
           id: game._id,
           url: `https://chess.zuri.chat/game?id=${game._id}`,
+          unread: game.messages ? game.messages.length : 0,
+          badge_type: "info",
+          members: game.spectators ? game.spectators.length + 2 : 2,
+          icon: "spear.png",
+          action: "open",
         };
       });
 
