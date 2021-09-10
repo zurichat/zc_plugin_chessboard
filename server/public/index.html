@@ -20,14 +20,20 @@
         <p class="col-md-8 fs-4">Here contains implementation of backend Endpoints with Centrifugo, to make frontend
           work easier</p>
         <button class="btn btn-primary btn-lg" onclick="createGame()" id="create_game_btn">Create a Game</button>
+        <form class="input-group mt-3" action="javascript:void(0)" id="join_game_room_form" onsubmit="joinGame()">
+          <input type="text" class="form-control" placeholder="Enter Game Room ID" id="join_game_room_input_id">
+          <button class="btn btn-outline-secondary">Join</button>
+        </form>
       </div>
       <div class="container-fluid py-3">
-        <p class="col-md-8 fs-4"> Game ID: <span id="game_id"></span> </p>
-        <div id="room_updates"></div>
+        <p class="fs-4"> Game ID: <span id="game_id"></span> </p>
+        <div id="room_updates">
+          <h2>Updates</h2>
+          <p>Hi Updates from the game room come up here</p>
+        </div>
       </div>
     </div>
   </div>
-
 
   <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
 </body>
@@ -46,13 +52,17 @@
     console.log("disconnected", ctx);
   });
 
+  const ChannelListener = () => {
+    { console.log(`subscribed to room ${game_id}`) }
+  }
+
   centrifuge.connect();
 
   // Functions
   const createGame = async () => {
     const sample_data = {
       "user_id": "085fc3b2",
-      "user_name": "John Doe",
+      "user_name": "John Player 1 Doe",
       "image_url": "string"
     }
     const response = await fetch(`/api/v1/game/create`, {
@@ -61,15 +71,48 @@
       headers: { "Content-Type": "application/json" }
     });
     const result = await response.json();
+    
+    if (result.success) {
+      const game_id = result.data.object_id;
 
-    const game_id = result.data.object_id;
+      document.querySelector("#game_id").innerHTML = game_id;
+      document.querySelector("#create_game_btn").style.display = "none";
+      document.querySelector("#join_game_room_form").style.display = "none";
 
-    document.querySelector("#game_id").innerHTML = game_id;
-    document.querySelector("#create_game_btn").style.display = "none";
-
-    // Subsctibe to the GameID room
-    centrifuge.subscribe(game_id, () => { console.log(`subscribed to room ${game_id}`) });
+      // Subsctibe to the GameID room on centrifugo
+      centrifuge.subscribe(game_id, () => ChannelListener);
+    } else {
+      document.querySelector("#room_updates").append = `<p>Error: ${result.message}</p>`
+    }
   }
+
+  const joinGame = async () => {
+    const game_id = document.querySelector("#join_game_room_input_id").value;
+    const sample_data = {
+      "game_id": game_id,
+      "user_id": "085fc3b2-1",
+      "user_name": "John Player 2 Doe",
+      "image_url": "string"
+    }
+    const response = await fetch(`/api/v1/game/join`, {
+      method: "POST",
+      body: JSON.stringify(sample_data),
+      headers: { "Content-Type": "application/json" }
+    });
+    const result = await response.json();
+
+    if (result.success) {
+      document.querySelector("#game_id").innerHTML = game_id;
+      document.querySelector("#create_game_btn").style.display = "none";
+      document.querySelector("#join_game_room_form").style.display = "none";
+
+      // Subsctibe to the GameID room on centrifugo
+      centrifuge.subscribe(game_id, () => ChannelListener);
+    } else {
+      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Error: ${result.message}</p>`);
+    }
+  }
+
 </script>
 
 </html>
