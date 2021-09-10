@@ -329,8 +329,8 @@ class GameController {
 
       await centrifugoController.publish(game_id, payload);
       return res.status(200).send(response("Game ended!!!", updated));
-    } catch (e) {
-      next(`Unable to end game ${error}`);
+    } catch (error) {
+      throw new CustomError(`Unable to end game ${error}`, 500);
     }
   }
   // Get Game By Id
