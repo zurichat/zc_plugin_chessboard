@@ -20,6 +20,7 @@ class GameController {
           user_name,
           image_url,
         },
+        status: 0,
       });
 
       // Save the game to the database
@@ -61,6 +62,7 @@ class GameController {
           user_name,
           image_url,
         },
+        status: 1,
       });
 
       // set user permission in game

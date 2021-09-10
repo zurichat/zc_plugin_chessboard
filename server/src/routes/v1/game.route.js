@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 // Custom Modules
-const GameCtrl = require("../controllers/game.controller");
+const GameCtrl = require("../../controllers/game.controller");
 
 // Swagger Documentation
 
@@ -87,7 +87,7 @@ router.post("/join", GameCtrl.join);
 // Get All Games
 router.get("/all", GameCtrl.getAll);
 
-// Watch a Game -- @eni4sure
+// Watch a Game
 router.patch("/watch", GameCtrl.addSpectator);
 
 //Piece Move route
@@ -107,6 +107,9 @@ router.patch("/end", GameCtrl.endGame);
 
 // Remove spectator -- NotImplemented --ibk
 router.patch("/unwatch", GameCtrl.removeSpectator);
+
+// Send messages to game -- NotImplemented
+// router.patch("/message",GameCtrl.Message);
 
 // Export Module
 module.exports = router;
