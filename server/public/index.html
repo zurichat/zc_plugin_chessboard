@@ -52,10 +52,6 @@
     console.log("disconnected", ctx);
   });
 
-  const ChannelListener = () => {
-    { console.log(`subscribed to room ${game_id}`) }
-  }
-
   centrifuge.connect();
 
   // Functions
@@ -71,7 +67,7 @@
       headers: { "Content-Type": "application/json" }
     });
     const result = await response.json();
-    
+
     if (result.success) {
       const game_id = result.data.object_id;
 
@@ -80,9 +76,9 @@
       document.querySelector("#join_game_room_form").style.display = "none";
 
       // Subsctibe to the GameID room on centrifugo
-      centrifuge.subscribe(game_id, () => ChannelListener);
+      centrifuge.subscribe(game_id, ChannelEventsListener);
     } else {
-      document.querySelector("#room_updates").append = `<p>Error: ${result.message}</p>`
+      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Error: ${result.message}</p>`);
     }
   }
 
@@ -107,9 +103,28 @@
       document.querySelector("#join_game_room_form").style.display = "none";
 
       // Subsctibe to the GameID room on centrifugo
-      centrifuge.subscribe(game_id, () => ChannelListener);
+      centrifuge.subscribe(game_id, ChannelEventsListener);
     } else {
       document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Error: ${result.message}</p>`);
+    }
+  }
+
+  // Centrifugo Events Listener and Handler
+  const ChannelEventsListener = (ctx) => {
+    console.log(`received event from room: ${ctx}`)
+
+    switch (ctx.data.event) {
+      case "join_game":
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${ctx.data.player.user_name || ctx.data.spectator.user_name} Joined the game with ${ctx.data.permission} permissions</p>`);
+        break;
+
+      // case "piece_move":
+      //   document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${ctx.data.player.user_name || ctx.data.spectator.user_name} Joined the game with ${ctx.data.permission} permissions</p>`);
+      //   break;
+
+      default:
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Unhandled event recieved</p>`);
+        break;
     }
   }
 
