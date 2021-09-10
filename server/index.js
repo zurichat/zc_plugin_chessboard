@@ -23,7 +23,7 @@ const swaggerOptions = {
       servers: ["https://chess.zuri.chat/api"],
     },
   },
-  apis: ["./src/routes/*.js"],
+  apis: ["./src/routes/v1/*.js"],
 };
 const swaggerDocs = swaggerJSDocument(swaggerOptions);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
