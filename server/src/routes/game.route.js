@@ -16,14 +16,14 @@ const GameCtrl = require("../controllers/game.controller");
  *      type: integer
  *      description: The user id of the owner of the game
  *      example: 2
- *     user_name: 
+ *     user_name:
  *      type: string
  *      description: The user name of the owner of the game
  *      required: true
  *      example: "John Doe"
  *     image_url:
  *      type: string
- *    
+ *
  *   opponent:
  *    type: object
  *    properties:
@@ -31,15 +31,14 @@ const GameCtrl = require("../controllers/game.controller");
  *      type: integer
  *      description: The user id of the owner of the game
  *      example: 2
- *     user_name: 
+ *     user_name:
  *      type: string
  *      description: The user name of the owner of the game
  *      required: true
  *      example: "John Doe"
  *     image_url:
- *      type: string                     
+ *      type: string
  */
-
 
 // Create A Game
 
@@ -60,9 +59,8 @@ const GameCtrl = require("../controllers/game.controller");
  *      description: A successful response
  *    500:
  *      description: An error occurred
-*/
+ */
 router.post("/create", GameCtrl.create);
-
 
 // Join A Game
 
@@ -83,7 +81,7 @@ router.post("/create", GameCtrl.create);
  *      description: A successful response
  *    500:
  *      description: An error occurred
-*/
+ */
 router.post("/join", GameCtrl.join);
 
 // Get All Games
