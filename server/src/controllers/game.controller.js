@@ -299,7 +299,7 @@ class GameController {
 
   // Get All Games By User
   async getAllByUser(req, res, next) {
-    const {userId} = req.params
+    const {userId} = req.params;
     try{
       const { data } = await GameRepo.fetchAll();
       const userGames = data.filter((game) => {
@@ -313,7 +313,6 @@ class GameController {
 
       return res.status(200).send(response("fetched user games successfully", userGames));
     } catch(error){
-      console.log(error)
       next(`Unable to fetch user games ${error}`);
     }
   }
