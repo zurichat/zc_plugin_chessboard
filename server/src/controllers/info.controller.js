@@ -42,12 +42,13 @@ class InformationController {
         return res.status(404).send(response("data not available", {}, false));
 
       const usersGame = data.filter((game) => {
-        console.log();
+        console.log(game.spectators);
         return (
           // game.status == 1 &&
           game.owner.user_id == userId ||
           (game.opponent != undefined && game.opponent.user_id == userId) ||
           (game.spectators != undefined &&
+            Array.isArray(game.spectators) &&
             game.spectators.find((spec) => spec.user_id == userId) != undefined)
         );
       });
@@ -61,7 +62,10 @@ class InformationController {
           url: `https://chess.zuri.chat/game?id=${game._id}`,
           unread: game.messages ? game.messages.length : 0,
           badge_type: "info",
-          members: game.spectators ? game.spectators.length + 2 : 2,
+          members:
+            game.spectators != null && game.spectators != undefined
+              ? game.spectators.length + 2
+              : 2,
           icon: "spear.png",
           action: "open",
         };
