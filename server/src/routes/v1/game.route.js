@@ -274,7 +274,6 @@ router.patch("/resign", GameCtrl.resign);
  */
 router.get("/:id", GameCtrl.getById);
 
-// Get All Games by User - not implemented -- shauib mustapha
 router.get("/all/:userId", GameCtrl.getAllByUser);
 
 // Send messages to game -- NotImplemented
