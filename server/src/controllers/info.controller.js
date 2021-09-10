@@ -81,10 +81,14 @@ class InformationController {
           {
             title: "Chess room",
             url: "https://chess.zuri.chat",
+            icon: "cdn.cloudflare.com/445345453345/hello.jpeg",
+            action: "open",
           },
           {
             title: "Invite Player",
             url: "https://chess.zuri.chat/inviteplayer",
+            icon: "cdn.cloudflare.com/445345453345/hello.jpeg",
+            action: "open",
           },
         ],
       };
