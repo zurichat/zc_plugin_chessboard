@@ -46,7 +46,7 @@ class InformationController {
           game.status == 1 &&
           (game.owner.user_id == userId ||
             (game.opponent && game.opponent.user_id == userId) ||
-            (game.spectators &&
+            (game.spectators.length > 0 &&
               game.spectators.find((spec) => spec.user_id == userId)))
         );
       });
