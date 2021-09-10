@@ -54,14 +54,16 @@ class GameController {
           .status(400)
           .send(response("opponent already exists", null, false));
 
+      const opponent = {
+        user_id,
+        user_name,
+        image_url,
+      };
+
       // Set opponent and save to db
       const updated = await GameRepo.update(game_id, {
         ...gameDBData.data,
-        opponent: {
-          user_id,
-          user_name,
-          image_url,
-        },
+        opponent,
         status: 1,
       });
 
@@ -72,7 +74,7 @@ class GameController {
       const payload = {
         event: "join_game",
         permission,
-        player: updated.data.opponent,
+        player: opponent,
       };
 
       // Publish the event to Centrifugo server
