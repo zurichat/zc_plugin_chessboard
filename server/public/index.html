@@ -111,16 +111,19 @@
 
   // Centrifugo Events Listener and Handler
   const ChannelEventsListener = (ctx) => {
-    // What do we receive?
+
+    const websocket = ctx;
+
+    // Lets see what we get
     console.log(ctx);
 
-    switch (ctx) {
-      case (ctx.data.event == "join_game"):
-        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${ctx.data.player.user_name || ctx.data.spectator.user_name} Joined the game with ${ctx.data.permission} permissions</p>`);
+    switch (ctx.data.event) {
+      case "join_game":
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket.data.player.user_name || websocket.data.spectator.user_name} Joined the game with ${websocket.data.permission} permissions</p>`);
         break;
 
-      // case (ctx.data.event == "piece_move)":
-      //   document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${ctx.data.player.user_name || ctx.data.spectator.user_name} Joined the game with ${ctx.data.permission} permissions</p>`);
+      // case "piece_move":
+      //   document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket.data.player.user_name || websocket.data.spectator.user_name} Joined the game with ${websocket.data.permission} permissions</p>`);
       //   break;
 
       default:
