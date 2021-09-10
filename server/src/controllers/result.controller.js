@@ -11,12 +11,12 @@ class ResultController {
     const games = await GameRepo.fetchAll();
 
     try {
-        let resultsDBData = games.map(()=>{
+        let resultsDBData = games.map((game)=>{
           return {
             // eslint-disable-next-line no-constant-condition
-            result: games.is_owner_winner = null ? "Draw" : "Win",
-            winner: games.is_owner_winner ? games.winner : games.opponent,
-            game_id: games._id
+            result: game.is_owner_winner = null ? "Draw" : "Win",
+            winner: game.is_owner_winner ? game.winner : game.opponent,
+            game_id: game._id
 
           };
         });
