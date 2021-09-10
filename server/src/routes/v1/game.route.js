@@ -251,8 +251,7 @@ router.patch("/end", GameCtrl.endGame);
  */
 router.patch("/unwatch", GameCtrl.removeSpectator);
 
-// Resign  - Not implemented -- Ace Anyanwu
-// router.patch('/resign', GameCtrl.resign)
+router.patch("/resign", GameCtrl.resign);
 
 /**
  * @swagger
