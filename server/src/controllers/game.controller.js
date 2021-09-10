@@ -105,17 +105,16 @@ class GameController {
     try {
       // request an info from the user
       const game_id = req.params.id;
-      
+
       // Get all games from the database
       const fetchedGame = await GameRepo.fetchOne(game_id);
 
       // Return all games
       if (fetchedGame.data !== null) {
         res
-        .status(200)
-        .send(response("Games retrieved successfully", fetchedGame.data));
-      }
-      else {
+          .status(200)
+          .send(response("Games retrieved successfully", fetchedGame.data));
+      } else {
         res.status(404).send(response("Games does not exist", null, false));
       }
     } catch (error) {
