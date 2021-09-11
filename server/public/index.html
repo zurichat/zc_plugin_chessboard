@@ -33,11 +33,10 @@
           <p>Hi Updates from the game room come up here</p>
         </div>
       </div>
-      <div class="container-fluid row py-3" id="chess_section" style="display: none;">
-      <!-- <div class="container-fluid row py-3" id="chess_section"> -->
+      <div class="container-fluid row py-3" id="chess_section" style="visibility: hidden;">
         <h2>Chess Board</h2>
         <div class="col-md-6">
-          <div id="chess_board" style="width: auto"></div>
+          <div id="chess_board" style="width: 100%"></div>
         </div>
         <div class="col-md-6">
           <h3>Game Status:</h3>
@@ -83,6 +82,7 @@
       return 'snapback';
     } else {
       // Backend Code to send move to server
+      console.log(move);
     }
     updateStatus();
   }
@@ -162,7 +162,7 @@
       document.querySelector("#game_id").innerHTML = game_id;
       document.querySelector("#create_game_btn").style.display = "none";
       document.querySelector("#join_game_room_form").style.display = "none";
-      document.querySelector("#chess_section").style.display = "block";
+      document.querySelector("#chess_section").style.visibility = "visible";
 
       // Subsctibe to the GameID room on centrifugo
       centrifuge.subscribe(game_id, ChannelEventsListener);
@@ -190,7 +190,7 @@
       document.querySelector("#game_id").innerHTML = game_id;
       document.querySelector("#create_game_btn").style.display = "none";
       document.querySelector("#join_game_room_form").style.display = "none";
-      document.querySelector("#chess_section").style.display = "block";
+      document.querySelector("#chess_section").style.visibility = "visible";
 
       // Subsctibe to the GameID room on centrifugo
       centrifuge.subscribe(game_id, ChannelEventsListener);
