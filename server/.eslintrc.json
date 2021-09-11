@@ -9,14 +9,8 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        "indent": "off",
+        "linebreak-style": 0,
         "quotes": [
             "error",
             "double"
@@ -25,6 +19,7 @@
             "error",
             "always"
         ],
-        "no-irregular-whitespace":"off"
+        "no-irregular-whitespace":"off",
+        "no-unused-vars": "off"
     }
 }
