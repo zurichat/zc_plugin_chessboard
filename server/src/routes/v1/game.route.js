@@ -211,7 +211,7 @@ router.patch("/watch", GameCtrl.addSpectator);
  *    500:
  *      description: An error occurred
  */
-router.patch("/pieceemove", GameCtrl.pieceMove);
+router.patch("/piecemove", GameCtrl.pieceMove);
 
 /**
  * @swagger

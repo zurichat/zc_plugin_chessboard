@@ -128,13 +128,16 @@ class GameController {
       const { game_id, player_id, position_fen, board_state } = req.body;
 
       // Find the game in the database
-      const { data } = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id);
 
       // Check if the game exists
-      if (!data)
+      if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
 
-      if (data.owner.user_id != player_id && data.opponent.user_id != player_id)
+      if (
+        gameDBData.data[0].owner.user_id != player_id &&
+        gameDBData.data[0].opponent.user_id != player_id
+      )
         return res
           .status(400)
           .send(
@@ -142,7 +145,7 @@ class GameController {
           );
 
       // push new move into moves array
-      const moves = data.moves;
+      const moves = gameDBData.data[0].moves;
       moves.push({
         player_id,
         position_fen,
@@ -159,7 +162,7 @@ class GameController {
 
       // update the database
       const updated = await GameRepo.update(game_id, {
-        ...data,
+        ...gameDBData.data[0],
         moves,
       });
       await centrifugoController.publish(game_id, payload);
