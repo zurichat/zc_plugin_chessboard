@@ -26,85 +26,28 @@ class InformationController {
       };
       res.status(200).send(response("Plugin Information Retrieved", result));
     } catch (error) {
-      throw new CustomError(
-        `Could not fetch plugin information: ${error}`,
-        "500"
-      );
+      throw new CustomError("Could not fetch plugin information", "500");
     }
+  }
 
   async getSideBarInfo(req, res) {
     try {
-      const { userId } = req.query;
-      // fetch all data from db - Change this proceedure later
-      const { data } = await GameRepo.fetchAll();
-      if (!data)
-        return res.status(404).send(response("data not available", {}, false));
-
-      const usersGame = data.filter((game) => {
-        console.log(game.spectators);
-        return (
-          // game.status == 1 &&
-          game.owner.user_id == userId ||
-          (game.opponent != undefined && game.opponent.user_id == userId) ||
-          (game.spectators != undefined &&
-            Array.isArray(game.spectators) &&
-            game.spectators.find((spec) => spec.user_id == userId) != undefined)
-        );
-      });
-
-      const joined_rooms = usersGame.map((game) => {
-        return {
-          title: `${game.owner.user_name} vs ${
-            game.opponent ? game.opponent.user_name : "none"
-          }`,
-          id: game._id,
-          url: `https://chess.zuri.chat/game?id=${game._id}`,
-          unread: game.messages ? game.messages.length : 0,
-          badge_type: "info",
-          members:
-            game.spectators != null && game.spectators != undefined
-              ? game.spectators.length + 2
-              : 2,
-          icon: "spear.png",
-          action: "open",
-        };
-      });
-
-      const { PLUGIN_ID, ORGANISATION_ID } = DATABASE;
-      const payload = {
-        name: "Chess Plugin",
-        description: "The Chess plugin",
-        plugin_id: PLUGIN_ID,
-        organisation_id: ORGANISATION_ID,
-        user_id: userId,
-        group_name: "Chess Games",
-        show_group: true,
-        joined_rooms,
-        public_rooms: [
-          {
-            title: "Chess room",
-            url: "https://chess.zuri.chat",
-            icon: "cdn.cloudflare.com/445345453345/hello.jpeg",
-            action: "open",
-          },
-          {
-            title: "Invite Player",
-            url: "https://chess.zuri.chat/inviteplayer",
-            icon: "cdn.cloudflare.com/445345453345/hello.jpeg",
-            action: "open",
-          },
-        ],
+      let result = {
+        new: "/api/chess/game-type",
+        quickPlay: "/api/chess/game-type/quick-play",
+        multiplayer: "/api/chess/game-type/multiplayer",
+        singleplayer: "/api/chess/game-type/singleplayer",
+        tournament: "/api/chess/tournament",
+        createTournament: "/api/chess/tournament/create",
+        joinTournament: "/api/chess/tournament/join",
+        settings: "/api/chess/settings",
+        join: "/api/chess/join-live",
       };
-
-      return res
-        .status(200)
-        .send(response("Fetched sidebar data", payload, true));
+      res.status(200).send(response("SideBar Information Retrieved", result));
     } catch (error) {
-      throw new CustomError(
-        `Could not fetch sidebar information: ${error}`,
-        "500"
-      );
+      throw new CustomError("Could not fetch sidebar information", "500");
     }
+  }
 }
 
 // Export Module
