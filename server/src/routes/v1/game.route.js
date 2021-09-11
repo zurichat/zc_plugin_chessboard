@@ -27,9 +27,13 @@ const GameCtrl = require("../../controllers/game.controller");
  *   opponent:
  *    type: object
  *    properties:
+ *     game_id:
+ *      type: string
+ *      description: The game id of the game the opponent wants to join
+ *      example: juodiejopk0e
  *     user_id:
  *      type: integer
- *      description: The user id of the owner of the game
+ *      description: The user id of the opponent of the game
  *      example: 2
  *     user_name:
  *      type: string
@@ -207,7 +211,7 @@ router.patch("/watch", GameCtrl.addSpectator);
  *    500:
  *      description: An error occurred
  */
-router.patch("/pieceemove", GameCtrl.pieceMove);
+router.patch("/piecemove", GameCtrl.pieceMove);
 
 /**
  * @swagger
@@ -251,11 +255,28 @@ router.patch("/end", GameCtrl.endGame);
  */
 router.patch("/unwatch", GameCtrl.removeSpectator);
 
-// Resign  - Not implemented -- Ace Anyanwu
-// router.patch('/resign', GameCtrl.resign)
+router.patch("/resign", GameCtrl.resign);
 
-// Get Game By Id - Not implemented -- Moses Odunosho
-// router.get("/:id", GameCtrl.getById);
+/**
+ * @swagger
+ * /api/v1/game/{gameId}:
+ *  get:
+ *   summary: Queries DB to fetch a single game
+ *   description: Uses the id of a created game to get its details
+ *   parameters:
+ *    - in: path
+ *      name: gameId
+ *      required: true
+ *
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    404:
+ *      description: Game does not exist
+ *    500:
+ *      description: An error occurred
+ */
+router.get("/:id", GameCtrl.getById);
 
 // Get All Games by User - not implemented -- shauib mustapha
 // router.get("/all/:userId", GameCtrl.getAllByUser);

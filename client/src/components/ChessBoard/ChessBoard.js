@@ -50,7 +50,6 @@ const ChessBoard = () => {
               alt={c.name}
             />
           </div>
-
         );
       };
       return a;

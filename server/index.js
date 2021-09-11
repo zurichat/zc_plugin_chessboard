@@ -39,6 +39,20 @@ app.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// temporary - to be removed, for testing purposess
+app.use("/img/chesspieces/wikipedia/*", (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname,
+      "public",
+      "img",
+      "chesspieces",
+      "wikipedia",
+      path.basename(req.originalUrl)
+    )
+  );
+});
+
 // Error middlewares
 errorMiddleware(app);
 
