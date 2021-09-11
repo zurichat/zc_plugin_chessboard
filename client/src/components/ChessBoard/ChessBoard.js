@@ -6,7 +6,7 @@ import Chess from "chess.js";
 import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 
-const ChessBoard = () => {
+const ChessBoard = ({ type }) => {
   const [fen, setFen] = useState("start");
 
   let game = useRef(null);
@@ -66,10 +66,12 @@ const ChessBoard = () => {
           calcWidth={calcWidth}
           darkSquareStyle={{ backgroundColor: "#3D2F19" }}
           lightSquareStyle={{ backgroundColor: "#E1B168" }}
+          // disables chessboard pieces movement on spectator screen
+          draggable={type === "spectator" ? false : true} 
         />
         <PlayerName
           style={{ justifyContent: "flex-end", width: "100%" }}
-          name="Bombos"
+          name={`Bombos ${type === "player"  && "(you)"}`}
         />
       </div>
     </>

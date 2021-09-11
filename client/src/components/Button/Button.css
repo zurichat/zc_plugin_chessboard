@@ -8,7 +8,6 @@
     border: none;
     color: #FFFFFF;
     cursor: pointer;
-
 }
 
 .exit-btn{
@@ -29,7 +28,6 @@
     display: inline-block;
     border-radius: 4px;  
     cursor: pointer;
-    font-size: 1.5rem;
     position: relative;
     background-color: transparent;
     color: #E70B0B;
@@ -42,6 +40,10 @@
     text-align: center;
     transition-duration: 0.4s;
     overflow: hidden;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 19px;
+    letter-spacing: -0.01em;
 }
 
 .exit-button:hover {
@@ -75,11 +77,14 @@ background-color: transparent;
   background: #B8003C;
   border: none;
     /* background-attachment: fixed; */
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 19px;
 }
 
 .forfeit-button:focus,.forfeit-button:hover{
   background: #B8003C;
-  border: 1px solid #B8003C;
+  /* border: 1px solid #B8003C; */
   opacity: 0.89; 
 }
 

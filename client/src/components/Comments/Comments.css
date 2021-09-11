@@ -8,7 +8,7 @@
 .comments_container .title {
   color: #00B87C;
   padding: 1.2rem;
-  border-bottom: .4rem solid #00B87C;
+  border-bottom: .2rem solid #00B87C;
   font-size: 2rem;
 }
 
@@ -16,13 +16,13 @@
   padding: 1.2rem;
   font-size: 1.8rem;
   position: relative;
-  max-height: 80vh;
+  height: 78vh;
   overflow: auto;
 }
 
 .comments_container .comments::-webkit-scrollbar {
   width: 8px;
-  background-color:#F3F1F1; 
+  background-color: #F3F1F1;
 }
 
 .comments_container .comments::-webkit-scrollbar-thumb {
@@ -41,7 +41,7 @@
   line-height: 1.9rem;
   width: 100%;
   text-align: center;
-  color: #747474;
+  color: #C1C1C1;
 }
 
 .comment_container {
@@ -51,12 +51,16 @@
   margin-bottom: 1.5rem;
 }
 
+.comment_container div div {
+  margin-bottom: .8rem;
+}
+
 .comment_container img {
-  width: 4rem;
+  width: 5rem;
   vertical-align: middle;
   height: auto;
   margin-top: -3rem;
-  margin-right: 1rem;
+  margin-right: .5rem;
 }
 
 .name {
@@ -64,7 +68,7 @@
   font-weight: 900;
   font-size: 1.6rem;
   line-height: 1.9rem;
-  color: #242424;
+  color: #3A3A3A;
   margin-right: .8rem;
 }
 
@@ -79,8 +83,14 @@
 
 .comment {
   font-style: normal;
-  font-weight: normal;
-  font-size: 1.5rem;
-  line-height: 140%;
+  font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
   color: #3A3A3A;
+}
+
+@media only screen and (max-width: 600px) {
+  .comments_container .title {
+    border-top: .2rem solid #00B87C;
+  }
 }
