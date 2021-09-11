@@ -283,7 +283,7 @@ router.get("/:id", GameCtrl.getById);
  * /api/v1/game/all/:userId:
  *  get:
  *   summary: Queries DB to fetch games by user id
- *   description: Uses the id of a user to get all games a user has been involved in 
+ *   description: Uses the id of a user to get all games a user has been involved in
  *   parameters:
  *    - in: path
  *      name: userId

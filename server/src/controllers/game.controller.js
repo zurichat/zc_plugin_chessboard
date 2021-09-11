@@ -364,20 +364,22 @@ class GameController {
 
   // Get All Games By User
   async getAllByUser(req, res) {
-    const {userId} = req.params;
-    try{
+    const { userId } = req.params;
+    try {
       const { data } = await GameRepo.fetchAll();
       const userGames = data.filter((game) => {
         return (
           game.owner.user_id == userId ||
-            (game.opponent && game.opponent.user_id == userId) ||
-            (game.spectators?.length > 0 &&  
-              game.spectators.find((spec) => spec.user_id == userId))
+          (game.opponent && game.opponent.user_id == userId) ||
+          (game.spectators?.length > 0 &&
+            game.spectators.find((spec) => spec.user_id == userId))
         );
       });
 
-      return res.status(200).send(response("fetched user games successfully", userGames));
-    } catch(error){
+      return res
+        .status(200)
+        .send(response("fetched user games successfully", userGames));
+    } catch (error) {
       throw new CustomError(`Unable to fetch user games: ${error}`, 500);
     }
   }
