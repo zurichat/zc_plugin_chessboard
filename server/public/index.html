@@ -282,7 +282,8 @@
       case "piece_moved":
         game.move(websocket.data.board_state);
         board.position(game.fen());
-        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.player_id} made a move</p>`);
+        updateStatus();
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.user_id} made a move</p>`);
         break;
 
       default:
