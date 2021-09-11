@@ -32,7 +32,7 @@ const game_schema = Joi.object({
   moves: Joi.array()
     .items(
       Joi.object({
-        player_id: Joi.string().required(),
+        user_id: Joi.string().required(),
         position_fen: Joi.string().required(),
         board_state: Joi.string().required(),
       })
