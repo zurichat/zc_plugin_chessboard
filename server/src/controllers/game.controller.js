@@ -5,7 +5,7 @@ const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 
-const GameRepo = new DatabaseConnection("001test_game");
+const GameRepo = new DatabaseConnection("002test_game");
 class GameController {
   // Create A Game
   async create(req, res) {
@@ -20,6 +20,9 @@ class GameController {
           user_name,
           image_url,
         },
+        moves: [],
+        messages: [],
+        spectators: [],
         status: 0,
       });
 
@@ -45,11 +48,11 @@ class GameController {
       const gameDBData = await GameRepo.fetchOne(game_id);
 
       // Check if the game exists
-      if (!gameDBData.data)
+      if (!gameDBData.data[0])
         return res.status(400).send(response("Game not found", null, false));
 
       // if opponent already exists return bad request
-      if (gameDBData.data.opponent)
+      if (gameDBData.data[0].opponent)
         return res
           .status(400)
           .send(response("opponent already exists", null, false));
@@ -62,7 +65,6 @@ class GameController {
 
       // Set opponent and save to db
       const updated = await GameRepo.update(game_id, {
-        ...gameDBData.data,
         opponent,
         status: 1,
       });
@@ -127,7 +129,7 @@ class GameController {
   async pieceMove(req, res) {
     try {
       // get data from body
-      const { game_id, player_id, position_fen, board_state } = req.body;
+      const { game_id, user_id, position_fen, board_state } = req.body;
 
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id);
@@ -137,8 +139,8 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       if (
-        gameDBData.data[0].owner.user_id != player_id &&
-        gameDBData.data[0].opponent.user_id != player_id
+        gameDBData.data[0].owner.user_id != user_id &&
+        gameDBData.data[0].opponent.user_id != user_id
       )
         return res
           .status(400)
@@ -149,7 +151,7 @@ class GameController {
       // push new move into moves array
       const moves = gameDBData.data[0].moves;
       moves.push({
-        player_id,
+        user_id,
         position_fen,
         board_state,
       });
@@ -157,16 +159,16 @@ class GameController {
       // build payload
       const payload = {
         event: "piece_moved",
-        player_id,
+        user_id,
         position_fen,
         board_state,
       };
 
       // update the database
       const updated = await GameRepo.update(game_id, {
-        ...gameDBData.data[0],
         moves,
       });
+
       await centrifugoController.publish(game_id, payload);
       return res.status(200).send(response("pieced moved", updated, true));
     } catch (error) {
@@ -188,7 +190,7 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // Get specatators in the game
-      const spectators = gameDBData.data.spectators;
+      const spectators = gameDBData.data[0].spectators;
 
       // Build the new spectator object
       const spectator = {
@@ -202,7 +204,6 @@ class GameController {
 
       // Save spectators back to db
       const updated = await GameRepo.update(game_id, {
-        ...gameDBData.data,
         spectators,
       });
 
@@ -226,6 +227,7 @@ class GameController {
       throw new CustomError(`Unable to add spectator: ${error}`, 500);
     }
   }
+
   // Unwatch game (remove spectator)
   async removeSpectator(req, res) {
     try {
