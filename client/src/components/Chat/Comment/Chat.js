@@ -60,7 +60,6 @@ function Comment() {
     setPlayers(ids);
   }, []);
 
-
   // const submitForm = () => {
   //     const time = moment().format("h:mm a");
   //     const submitted = {
@@ -79,7 +78,7 @@ function Comment() {
       {details.length ? (
         details.map(({ id, name, time, message }) => (
           <div className="chatWrapper" key={id}>
-            <img className="specAvi" src={avi} alt="avi"/>
+            <img className="specAvi" src={avi} alt="avi" />
             <div className="specNameTime">
               <div className="specInfo">
                 <h2 className="spectatorName">{name}</h2>

@@ -27,9 +27,8 @@ const ChessBoard = () => {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * .85 : 538;
+    return screenWidth < 560 ? screenWidth * 0.85 : 538;
   };
-
 
   const customPieces = () => {
     return chessPieces.reduce((a, c) => {
@@ -41,7 +40,7 @@ const ChessBoard = () => {
               height: squareWidth,
               display: "grid",
               placeItems: "center",
-              zIndex:"999"
+              zIndex: "999",
             }}
           >
             <img
@@ -56,18 +55,17 @@ const ChessBoard = () => {
     }, {});
   };
 
- 
-
   return (
     <>
-      <div className="chessboard" >
-        <PlayerName style={{paddingBottom:"28px"}} name="Dejavu" />
-        <div style={{
-          position: "relative",
-          border: "1px solid #CD9B49",
-        }} >
-
-          <ChessboardBorder/>
+      <div className="chessboard">
+        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+        <div
+          style={{
+            position: "relative",
+            border: "1px solid #CD9B49",
+          }}
+        >
+          <ChessboardBorder />
           <Chessboard
             pieces={customPieces()}
             id="startPcos"
@@ -75,13 +73,16 @@ const ChessBoard = () => {
             onDrop={onDrop}
             calcWidth={calcWidth}
             darkSquareStyle={{ backgroundColor: "#3D2F19" }}
-            lightSquareStyle={{ background: "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)" }}
+            lightSquareStyle={{
+              background:
+                "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
+            }}
             showNotation={false}
           />
         </div>
 
         <PlayerName
-          style={{ paddingTop:"28px", justifyContent: "flex-end" }}
+          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
           name="Bombos"
         />
       </div>

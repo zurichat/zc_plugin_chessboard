@@ -40,7 +40,7 @@ const ChessboardBorder = () => {
         right: "-16px",
         border: "15px solid #3D2F19",
         // background:"#554223",
-        zIndex:"-1"
+        zIndex: "-1",
       }}
     >
       <div style={borderStyles.top}>
