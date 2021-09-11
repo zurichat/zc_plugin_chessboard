@@ -365,13 +365,16 @@ class GameController {
     const { message, game_id, user_id } = req.body; // user_id to be extracted from token
     
     // find user in db with decoded token (to be implemented later)
+    if (!user_id) {
+      throw new CustomError("Unauthorized access", 402)
+    }
     
     // find game in db
     const gameExist = await GameRepo.fetchOne(game_id);
     if (!gameExist.data) {
       throw new CustomError("Game instance not found", 404);
     }
-    
+
     // players should not be able to send message (to be implemented later)
     
     // incase user gets sloppy
@@ -382,21 +385,23 @@ class GameController {
     
     const messageProps = {
          text: formattedMessage,
-        // user_name, image_url // user_name & image_url from user info in db
+         user_name: "mark",
+         image_url: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash"  // user_name & image_url from user info retrieved from db
        };
     
     // push to message collection
     // fetch message collection of game instance, if none create else update
-    if (!gameExist.data.payload.chats) {
-      gameExist.data.payload.chats = [];
+    if (!gameExist.data[0].messages) {
+      gameExist.data[0].messages = [];
     }
-    gameExist.data.payload.chats = 
-      gameExist.data.payload.chats.concat(messageProps);
+    gameExist.data[0].messages = 
+      gameExist.data[0].messages.concat(messageProps);
+
+    const response = await GameRepo.update(game_id, gameExist.data);
     
-    await GameRepo.update(game_id, gameExist.data.payload);
-    
+    console.log(response)
     // publish to centrifugo
-    await centrifugoController.publish("chats", messageProps);
+    // await centrifugoController.publish("chats", messageProps);
     
     return res.status(202).send(response("message sent", messageProps));
   }

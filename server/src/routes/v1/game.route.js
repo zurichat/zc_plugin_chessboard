@@ -111,6 +111,24 @@ const GameCtrl = require("../../controllers/game.controller");
  *      description: The Id of the game the user wants to leave
  *      required: true
  *
+ *   message:
+ *    type: object
+ *    properties:
+ *     message:
+ *      type: string
+ *      example: move the queen to protect the king
+ *      required: true
+ *     user_id:
+ *      type: string
+ *      description: The user id of the spectator
+ *      required: true
+ *      example: 613c960542a4c7d43b4cd2ad
+ *     game_id:
+ *      type: string
+ *      description: The Id of the game the user is sending messages to
+ *      example: 613b72eb3ce841615903e676
+ *      required: true
+ *
  */
 
 // Create A Game
@@ -282,7 +300,30 @@ router.get("/:id", GameCtrl.getById);
 // router.get("/all/:userId", GameCtrl.getAllByUser);
 
 // Send messages to game
- router.patch("/message",GameCtrl.Message);
+/**
+ * @swagger
+ * /api/v1/game/message:
+ *  patch:
+ *   summary: update inplay game chat messages
+ *   description: have conversations in the chat layout of a game
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/message'
+ *
+ *   responses:
+ *    202:
+ *      description: message sent
+ *    400:
+ *      description: message text cannot be empty
+ *    404:
+ *      description: Game instance not found
+ *    500:
+ *      description: Unable to Connect to Zuri Core DB
+ */
+router.patch("/message", GameCtrl.message);
 
 // Export Module
 module.exports = router;
