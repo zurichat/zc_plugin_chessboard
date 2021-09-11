@@ -79,7 +79,7 @@ const ChessBoard = ({ type }) => {
             }}
             showNotation={false}
             // disables chessboard pieces movement on spectator screen
-            draggable={type === "spectator" ? false : true} 
+            draggable={type === "spectator" ? false : true}
           />
         </div>
 
