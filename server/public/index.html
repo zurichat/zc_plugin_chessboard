@@ -81,8 +81,8 @@
     if (move === null) {
       return 'snapback';
     } else {
-      // Backend Code to send move to server
-      console.log(move);
+      // Backend Code to send move to server via API
+      updateMove(board.fen())
     }
     updateStatus();
   }
@@ -167,7 +167,7 @@
       // Subsctibe to the GameID room on centrifugo
       centrifuge.subscribe(game_id, ChannelEventsListener);
     } else {
-      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Error: ${result.message}</p>`);
+      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Create Game Error: ${result.message}</p>`);
     }
   }
 
@@ -195,7 +195,29 @@
       // Subsctibe to the GameID room on centrifugo
       centrifuge.subscribe(game_id, ChannelEventsListener);
     } else {
-      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Error: ${result.message}</p>`);
+      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Join Game Error: ${result.message}</p>`);
+    }
+  }
+
+  const updateMove = async (fen) => {
+    const game_id = document.querySelector("#game_id").innerHTML;
+    const sample_data = {
+      "user_id": "085fc3b2-1",
+      "game_id": game_id,
+      "position_fen": fen,
+      "board_state": "nothing"
+    }
+    const response = await fetch(`/api/v1/game/piecemove`, {
+      method: "PATCH",
+      body: JSON.stringify(sample_data),
+      headers: { "Content-Type": "application/json" }
+    });
+    const result = await response.json();
+
+    if (result.success) {
+      document.querySelector("#room_updates").innerHTML += `<p>Move Update Success</p>`;
+    } else {
+      document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Move Update Error: ${result.message}</p>`);
     }
   }
 
@@ -212,10 +234,9 @@
         document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket.data.player.user_name || websocket.data.spectator.user_name} Joined the game with ${websocket.data.permission} permissions</p>`);
         break;
 
-      case "piece_move":
-        // game.move(msg);
-        // board.position(game.fen());
-        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent moved a game</p>`);
+      case "piece_moved":
+        board.position(websocket.data.position_fen);
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.player_id} made a move</p>`);
         break;
 
       default:
