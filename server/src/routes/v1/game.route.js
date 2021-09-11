@@ -27,9 +27,13 @@ const GameCtrl = require("../../controllers/game.controller");
  *   opponent:
  *    type: object
  *    properties:
+ *     game_id:
+ *      type: string
+ *      description: The game id of the game the opponent wants to join
+ *      example: juodiejopk0e
  *     user_id:
  *      type: integer
- *      description: The user id of the owner of the game
+ *      description: The user id of the opponent of the game
  *      example: 2
  *     user_name:
  *      type: string
@@ -207,7 +211,7 @@ router.patch("/watch", GameCtrl.addSpectator);
  *    500:
  *      description: An error occurred
  */
-router.patch("/pieceemove", GameCtrl.pieceMove);
+router.patch("/piecemove", GameCtrl.pieceMove);
 
 /**
  * @swagger
