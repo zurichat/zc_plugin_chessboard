@@ -1,14 +1,14 @@
-/* eslint-disable no-undef */
 import "./ChessBoard.css";
 import Chessboard from "chessboardjsx";
 import React, { useState, useEffect, useRef } from "react";
 import Chess from "chess.js";
 import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
+import axios from "axios";
+import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
 const ChessBoard = ({ type }) => {
   const [fen, setFen] = useState("start");
-
   let game = useRef(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const ChessBoard = ({ type }) => {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? 318 : 538;
+    return screenWidth < 560 ? screenWidth * 0.85 : 538;
   };
 
   const customPieces = () => {
@@ -40,6 +40,7 @@ const ChessBoard = ({ type }) => {
               height: squareWidth,
               display: "grid",
               placeItems: "center",
+              zIndex: "999",
             }}
           >
             <img
@@ -57,21 +58,34 @@ const ChessBoard = ({ type }) => {
   return (
     <>
       <div className="chessboard">
-        <PlayerName style={{ width: "100%" }} name="Dejavu" />
-        <Chessboard
-          pieces={customPieces()}
-          id="startPcos"
-          position={fen}
-          onDrop={onDrop}
-          calcWidth={calcWidth}
-          darkSquareStyle={{ backgroundColor: "#3D2F19" }}
-          lightSquareStyle={{ backgroundColor: "#E1B168" }}
-          // disables chessboard pieces movement on spectator screen
-          draggable={type === "spectator" ? false : true} 
-        />
+        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+        <div
+          style={{
+            position: "relative",
+            border: "1px solid #CD9B49",
+          }}
+        >
+          <ChessboardBorder />
+          <Chessboard
+            pieces={customPieces()}
+            id="startPcos"
+            position={fen}
+            onDrop={onDrop}
+            calcWidth={calcWidth}
+            darkSquareStyle={{ backgroundColor: "#3D2F19" }}
+            lightSquareStyle={{
+              background:
+                "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
+            }}
+            showNotation={false}
+            // disables chessboard pieces movement on spectator screen
+            draggable={type === "spectator" ? false : true} 
+          />
+        </div>
+
         <PlayerName
-          style={{ justifyContent: "flex-end", width: "100%" }}
-          name={`Bombos ${type === "player"  && "(you)"}`}
+          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
+          name="Bombos"
         />
       </div>
     </>
