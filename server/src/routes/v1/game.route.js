@@ -281,8 +281,8 @@ router.get("/:id", GameCtrl.getById);
 // Get All Games by User - not implemented -- shauib mustapha
 // router.get("/all/:userId", GameCtrl.getAllByUser);
 
-// Send messages to game -- NotImplemented
-// router.patch("/message",GameCtrl.Message);
+// Send messages to game
+ router.patch("/message",GameCtrl.Message);
 
 // Export Module
 module.exports = router;

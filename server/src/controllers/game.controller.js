@@ -54,16 +54,14 @@ class GameController {
           .status(400)
           .send(response("opponent already exists", null, false));
 
-      const opponent = {
-        user_id,
-        user_name,
-        image_url,
-      };
-
       // Set opponent and save to db
       const updated = await GameRepo.update(game_id, {
         ...gameDBData.data,
-        opponent,
+        opponent: {
+          user_id,
+          user_name,
+          image_url,
+        },
         status: 1,
       });
 
@@ -74,7 +72,7 @@ class GameController {
       const payload = {
         event: "join_game",
         permission,
-        player: opponent,
+        player: updated.data.opponent,
       };
 
       // Publish the event to Centrifugo server
@@ -358,10 +356,53 @@ class GameController {
   // Get Game By Id
   // async getById(req, res) {
   // }
-
+  
+  // send message in game chat
+  async message(req, res) {
+    const { message, game_id, user_id } = req.body; // user_id to be extracted from token
+    
+    // find user in db with decoded token (to be implemented later)
+    
+    // find game in db
+    const gameExist = await GameRepo.fetchOne(game_id);
+    if (!gameExist.data) {
+      throw new CustomError("Game instance not found", 404);
+    }
+    
+    // players should not be able to send message (to be implemented later)
+    
+    // incase user gets sloppy
+    const formattedMessage = message.trim();
+    if (!formattedMessage) {
+      throw new CustomError("message text cannot be empty", 400);
+    }
+    
+    const messageProps = {
+         text: formattedMessage,
+        // user_name, image_url // user_name & image_url from user info in db
+       };
+    
+    // push to message collection
+    // fetch message collection of game instance, if none create else update
+    if (!gameExist.data.payload.chats) {
+      gameExist.data.payload.chats = [];
+    }
+    gameExist.data.payload.chats = 
+      gameExist.data.payload.chats.concat(messageProps);
+    
+    await GameRepo.update(game_id, gameExist.data.payload);
+    
+    // publish to centrifugo
+    await centrifugoController.publish("chats", messageProps);
+    
+    return res.status(202).send(response("message sent", messageProps));
+  }
+  
   // Get All Games By User
   // async getAllByUser(req, res) {
   // }
+  
+  
 }
 
 // Export Module
