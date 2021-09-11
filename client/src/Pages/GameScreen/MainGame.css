@@ -1,0 +1,44 @@
+.main-game{
+    display: flex;
+    justify-content: center;
+    
+    padding: 3rem;
+    height: 100%;
+    width: 100%;
+    }
+
+.main-game .chessboard{
+    border: 2px solid #bebcbc;
+    border-right: none
+}
+.main-game .side-bar{
+    width: 370px;
+}
+
+@media(max-width:768px){
+    .main-game{
+        flex-direction: column;
+        padding: 0;
+    }
+    .main-game .side-bar{
+        width: 100%;
+        border: none;
+    }
+}
+
+@media(max-width:500px){
+    .main-game{
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .main-game .chessboard{
+        border: none;
+        padding:1.5rem;
+    }
+
+    .main-game .side-bar-nav{
+        border-top: 3px solid #00b87c;
+
+    }
+}

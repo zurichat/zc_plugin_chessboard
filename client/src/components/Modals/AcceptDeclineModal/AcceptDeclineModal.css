@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.accept_decline_modal * {
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.accept_decline_modal {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.accept_decline_modal_active {
+    display: flex;
+    opacity: 1;
+}
+
+.accept_decline_modal_backdrop {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2001;
+    cursor: pointer;
+}
+
+
+/* Modal content */
+
+.accept_decline_modal_content {
+    width: 400px;
+    height: 350px;
+    background: #fff;
+    z-index: 2002;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /* for IE 9 */
+    -webkit-transform: translate(-50%, -50%);
+    /* for Safari */
+}
+
+.accept_decline_modal_content_wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.accept_decline_modal_header {
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+}
+
+.accept_decline_modal_header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.accept_decline_modal_body {
+    width: 65%;
+    margin: 1rem auto 1.8rem;
+}
+
+
+.accept_decline_modal_body p {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.accept_decline_modal_footer {
+    width: 65%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accept_decline_modal_footer button {
+    padding: 0.3rem 1rem;
+    color: white;
+    font-size: 1.8rem;
+    border-radius: 5rem;
+    background: #25364b;
+    width: 110px;
+    height: 34px;
+    background: #27AE60;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #27AE60;
+    font-size: 1.4rem;
+}
+
+.accept_decline_modal_footer button:nth-child(1):hover {
+    background: none;
+    color: #27AE60;
+}
+
+.accept_decline_modal_footer button:nth-child(2) {
+    border: 1px solid #B8003C;
+    border-radius: 3px;
+    background: none;
+    color: #B8003C;
+}
+
+.accept_decline_modal_footer button:nth-child(2):hover {
+    background: #B8003C;
+    color: #fff;
+}

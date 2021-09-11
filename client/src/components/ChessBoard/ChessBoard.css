@@ -1,0 +1,21 @@
+.chessboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  /* width: fit-content; */
+  height: 100%;
+  /* border: solid; */
+  /* margin: auto; */
+}
+
+.chessboard #startPos {
+  display: none;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .chessboard #startPos {
+    width: calc(60% - 5px);
+  }
+}
