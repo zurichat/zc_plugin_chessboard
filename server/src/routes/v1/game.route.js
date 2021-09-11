@@ -278,8 +278,26 @@ router.patch("/resign", GameCtrl.resign);
  */
 router.get("/:id", GameCtrl.getById);
 
-// Get All Games by User - not implemented -- shauib mustapha
-// router.get("/all/:userId", GameCtrl.getAllByUser);
+/**
+ * @swagger
+ * /api/v1/game/all/:userId:
+ *  get:
+ *   summary: Queries DB to fetch games by user id
+ *   description: Uses the id of a user to get all games a user has been involved in
+ *   parameters:
+ *    - in: path
+ *      name: userId
+ *      required: true
+ *
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    404:
+ *      description: user id does not exist
+ *    500:
+ *      description: An error occurred
+ */
+router.get("/all/:userId", GameCtrl.getAllByUser);
 
 // Send messages to game -- NotImplemented
 // router.patch("/message",GameCtrl.Message);

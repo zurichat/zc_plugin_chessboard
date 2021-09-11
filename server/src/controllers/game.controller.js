@@ -126,7 +126,7 @@ class GameController {
     }
   }
   // Piece movement
-  async pieceMove(req, res, next) {
+  async pieceMove(req, res) {
     try {
       // get data from body
       const { game_id, user_id, position_fen, board_state } = req.body;
@@ -172,7 +172,7 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
       return res.status(200).send(response("pieced moved", updated, true));
     } catch (error) {
-      next(error);
+      throw new CustomError(`Failed to move piece${error}`, 500);
     }
   }
 
@@ -268,7 +268,7 @@ class GameController {
   }
 
   // End game logic by checkmate or draw
-  async endGame(req, res, next) {
+  async endGame(req, res) {
     try {
       // request an info from the user
       const { game_id, user_id } = req.body;
@@ -313,7 +313,7 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
       return res.status(200).send(response("Game ended!!!", updated));
     } catch (error) {
-      next(`Unable to end game ${error}`);
+      throw new CustomError(`Unable to end game: ${error}`, 500);
     }
   }
 
@@ -365,8 +365,26 @@ class GameController {
   // }
 
   // Get All Games By User
-  // async getAllByUser(req, res) {
-  // }
+  async getAllByUser(req, res) {
+    const { userId } = req.params;
+    try {
+      const { data } = await GameRepo.fetchAll();
+      const userGames = data.filter((game) => {
+        return (
+          game.owner.user_id == userId ||
+          (game.opponent && game.opponent.user_id == userId) ||
+          (game.spectators?.length > 0 &&
+            game.spectators.find((spec) => spec.user_id == userId))
+        );
+      });
+
+      return res
+        .status(200)
+        .send(response("fetched user games successfully", userGames));
+    } catch (error) {
+      throw new CustomError(`Unable to fetch user games: ${error}`, 500);
+    }
+  }
 }
 
 // Export Module
