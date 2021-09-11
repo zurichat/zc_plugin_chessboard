@@ -5,7 +5,7 @@ import Chess from "chess.js";
 import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
-import ChessboardBorder from "../Notations/ChessboardBorder";
+import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
 const ChessBoard = () => {
   const [fen, setFen] = useState("start");
