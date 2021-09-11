@@ -136,7 +136,10 @@ class GameController {
       if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
 
-      if (gameDBData.data[0].owner.user_id != player_id && gameDBData.data[0].opponent.user_id != player_id)
+      if (
+        gameDBData.data[0].owner.user_id != player_id &&
+        gameDBData.data[0].opponent.user_id != player_id
+      )
         return res
           .status(400)
           .send(
