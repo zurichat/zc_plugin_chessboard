@@ -25,6 +25,7 @@ class CentrifugoController {
     } catch (error) {
       throw new CustomError(`Unable to publish to ${channel}: ${error}`, "500");
     }
+  }
 }
 
 module.exports = CentrifugoController;

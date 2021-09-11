@@ -7,90 +7,208 @@ const centrifugoController = require("../controllers/centrifugo.controller");
 
 const GameRepo = new DatabaseConnection("002test_game");
 class GameController {
+  // Create A Game
   async create(req, res) {
     try {
-      // const { playerId } = req.body;
-      let gameId = uuid.v4();
-      // Save the new game in DB
+      // get owners details from the frontend
+      const { user_id, user_name, image_url } = req.body;
 
-      const response = await games.create({ gameId });
-      // console.log(response.body);
-      // Temporary cache store
-      // const result = save(gameId, {
-      //   gameId,
-      //   playerOne: playerId,
-      //   playerTwo: false,
-      // });
+      // Pass the request body to the schema
+      const game = await gameSchema.validateAsync({
+        owner: {
+          user_id,
+          user_name,
+          image_url,
+        },
+        moves: [],
+        messages: [],
+        spectators: [],
+        status: 0,
+      });
 
-      res.status(201).send(
-        response("Plugin Information Retrieved", {
-          gameId,
-        })
-      );
+      // Save the game to the database
+      const gameDBData = await GameRepo.create(game);
+
+      // Return the game
+      res
+        .status(201)
+        .send(response("Game created successfully", gameDBData.data, true));
     } catch (error) {
-      console.log(error);
-      throw new CustomError("Could not create a new game", "500");
+      throw new CustomError(`Unable to create a Game: ${error}`, 500);
     }
   }
 
+  // Join A Game
   async join(req, res) {
     try {
-      const { playerId, gameId } = req.body;
+      // Get the game id and user id from the request body
+      const { game_id, user_id, user_name, image_url } = req.body;
 
-      // Get to temporary storage
-      const data = retrieve(gameId);
-      console.log(data);
-      if (!data) res.status(400).json({ message: "Game not found" });
+      // Find the game in the database
+      const gameDBData = await GameRepo.fetchOne(game_id);
 
-      deleteData(gameId);
+      // Check if the game exists
+      if (!gameDBData.data[0])
+        return res.status(400).send(response("Game not found", null, false));
 
-      let permission;
-      if (!data.playerTwo) {
-        // add player two
-        save(gameId, {
-          ...data,
-          playerTwo: playerId,
-          spectators: [],
-        });
-        permission = "READ/WRITE"; // for players
-      } else {
-        // add spectators later
-        data.spectators.push({ playerId });
-        save(gameId, {
-          ...data,
-        });
-        permission = "READ"; // for spectators;
-      }
+      // if opponent already exists return bad request
+      if (gameDBData.data[0].opponent)
+        return res
+          .status(400)
+          .send(response("opponent already exists", null, false));
 
+      const opponent = {
+        user_id,
+        user_name,
+        image_url,
+      };
+
+      // Set opponent and save to db
+      const updated = await GameRepo.update(game_id, {
+        opponent,
+        status: 1,
+      });
+
+      // set user permission in game
+      const permission = "READ/WRITE";
+
+      // Build Response
       const payload = {
         event: "join_game",
         permission,
-        name: playerId,
+        player: opponent,
       };
 
-      // publish event
-      await centrifugoController.publish(gameId, payload);
+      // Publish the event to Centrifugo server
+      await centrifugoController.publish(game_id, payload);
 
-      res.status(201).send(
-        response("Plugin Information Retrieved", {
-          gameId,
-        })
-      );
+      // Return the game
+      res.status(200).send(response("Game joined successfully", updated));
     } catch (error) {
-      console.log(error);
+      throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
   }
 
-  // get all game ids
-  async get_game_ids(req, res) {
+  // Get All Games
+  async getAll(req, res) {
+    req;
     try {
-      const game_ids = await games.fetchAll();
-      res.json(response("Game Ids Fetched Succussfully.", game_ids.data));
-    } catch (e) {
-      throw new CustomError("Could not retireve game ids.", "500");
+      // Get all games from the database
+      const gameDBData = await GameRepo.fetchAll();
+
+      // Return all games
+      res
+        .status(200)
+        .send(response("Games retrieved successfully", gameDBData.data));
+    } catch (error) {
+      throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
-}
+  // Fetch a single game
+  async getById(req, res) {
+    try {
+      // request an info from the user
+      const game_id = req.params.id;
+
+      // Get all games from the database
+      const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id });
+
+      // if game id returns data, send response
+      if (fetchedGame.data !== null) {
+        res
+          .status(200)
+          .send(response("Game retrieved successfully", fetchedGame.data));
+      } else {
+        res.status(404).send(response("Games does not exist", null, false));
+      }
+    } catch (error) {
+      throw new CustomError(`Unable to get all Games: ${error}`, 500);
+    }
+  }
+  // Piece movement
+  async pieceMove(req, res) {
+    try {
+      // get data from body
+      const { game_id, user_id, position_fen, board_state } = req.body;
+
+      // Find the game in the database
+      const gameDBData = await GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!gameDBData.data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      if (
+        gameDBData.data[0].owner.user_id != user_id &&
+        gameDBData.data[0].opponent.user_id != user_id
+      )
+        return res
+          .status(400)
+          .send(
+            response("Only players are allowed to make moves", null, false)
+          );
+
+      // push new move into moves array
+      const moves = gameDBData.data[0].moves;
+      moves.push({
+        user_id,
+        position_fen,
+        board_state,
+      });
+
+      // build payload
+      const payload = {
+        event: "piece_moved",
+        user_id,
+        position_fen,
+        board_state,
+      };
+
+      // update the database
+      const updated = await GameRepo.update(game_id, {
+        moves,
+      });
+
+      await centrifugoController.publish(game_id, payload);
+      return res.status(200).send(response("pieced moved", updated, true));
+    } catch (error) {
+      throw new CustomError(`Failed to move piece${error}`, 500);
+    }
+  }
+
+  // Add spectator to game
+  async addSpectator(req, res) {
+    try {
+      // Get the game id and user id from the request body
+      const { game_id, user_id, user_name, image_url } = req.body;
+
+      // Find the game in the database
+      const gameDBData = await GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!gameDBData.data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      // Get specatators in the game
+      const spectators = gameDBData.data[0].spectators;
+
+      // Build the new spectator object
+      const spectator = {
+        user_id,
+        user_name,
+        image_url,
+      };
+
+      // Add new spectator and return the number of spectators
+      const new_number_of_specators = spectators.push(spectator);
+
+      // Save spectators back to db
+      const updated = await GameRepo.update(game_id, {
+        spectators,
+      });
+
+      // set user permission in the game
+      const permission = "READ";
 
       // Build Response
       const payload = {
@@ -108,6 +226,7 @@ class GameController {
     } catch (error) {
       throw new CustomError(`Unable to add spectator: ${error}`, 500);
     }
+  }
 
   // Unwatch game (remove spectator)
   async removeSpectator(req, res) {
