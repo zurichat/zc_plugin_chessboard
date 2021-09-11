@@ -78,7 +78,6 @@ const ChessBoard = ({ type }) => {
                 "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
             }}
             showNotation={false}
-
             // disables chessboard pieces movement on spectator screen
             draggable={type === "spectator" ? false : true}
           />
