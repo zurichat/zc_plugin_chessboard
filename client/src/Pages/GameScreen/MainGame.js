@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 const MainGame = () => {
   return (
     <section className="main-game">
-      <Chessboard type="spectator"/>
+      <Chessboard type="spectator" />
       <BrowserRouter>
         <SpectatorSideBar />
       </BrowserRouter>
