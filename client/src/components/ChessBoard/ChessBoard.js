@@ -5,7 +5,7 @@ import Chess from "chess.js";
 import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
-import ChessboardBorder from "./../Notations/ChessboardBorder";
+import ChessboardBorder from "../Notations/ChessboardBorder";
 
 const ChessBoard = () => {
   const [fen, setFen] = useState("start");
@@ -56,19 +56,18 @@ const ChessBoard = () => {
     }, {});
   };
 
-  const numbers = "12345678";
+ 
 
   return (
     <>
       <div className="chessboard" >
-        <PlayerName style={{ width: "100%" }} name="Dejavu" />
+        <PlayerName style={{paddingBottom:"28px"}} name="Dejavu" />
         <div style={{
           position: "relative",
           border: "1px solid #CD9B49",
         }} >
 
-
-          <ChessboardBorder />
+          <ChessboardBorder/>
           <Chessboard
             pieces={customPieces()}
             id="startPcos"
@@ -82,7 +81,7 @@ const ChessBoard = () => {
         </div>
 
         <PlayerName
-          style={{ justifyContent: "flex-end", width: "100%" }}
+          style={{ paddingTop:"28px", justifyContent: "flex-end" }}
           name="Bombos"
         />
       </div>

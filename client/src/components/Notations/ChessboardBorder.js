@@ -1,5 +1,6 @@
-import Alphabets from "./Alphabets";
-import Numbers from "./Numbers";
+import Alphabets from "./Alphabets.js";
+import Numbers from "./Numbers.js";
+
 const ChessboardBorder = () => {
   const borderStyles = {
     top: {
@@ -38,7 +39,7 @@ const ChessboardBorder = () => {
         bottom: "-16px",
         right: "-16px",
         border: "15px solid #3D2F19",
-        background:"#554223",
+        // background:"#554223",
         zIndex:"-1"
       }}
     >
