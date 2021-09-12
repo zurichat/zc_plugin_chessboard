@@ -91,10 +91,23 @@ class GameController {
 
   // Get All Games
   async getAll(req, res) {
-    req;
     try {
-      // Get all games from the database
-      const gameDBData = await GameRepo.fetchAll();
+
+      let gameDBData;
+
+      // Get games that have started, Join as Spectator view
+      if (req.query.ongoing == 1) {
+        gameDBData = await GameRepo.fetchByParameter({
+          status: 1,
+        });
+      } else if (req.query.noPlayer2 == 1) {
+        // Get games that don't have player 2
+        gameDBData = await GameRepo.fetchByParameter({
+          status: 0,
+        });
+      } else {
+        gameDBData = await GameRepo.fetchAll();
+      }
 
       // Return all games
       res
