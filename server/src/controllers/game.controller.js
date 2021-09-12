@@ -55,7 +55,7 @@ class GameController {
       if (
         // More checks to know whether to continue game for player 1 or 2 if the tab is refreshed
         gameDBData.data[0].owner.user_id !== user_id ||
-        gameDBData.data[0]?.opponent.user_id !== user_id
+        (gameDBData.data[0].opponent && gameDBData.data[0].opponent.user_id !== user_id)
       )
         return res
           .status(400)
