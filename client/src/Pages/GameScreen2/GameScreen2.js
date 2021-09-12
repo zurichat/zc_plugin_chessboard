@@ -18,7 +18,7 @@ const GameScreenWithComments = () => {
     <main>
       <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} />
       <div id="chessboard_container">
-        <ChessBoard />
+        <ChessBoard type="player"/>
       </div>
       <div id="side_container">
         <div className="btn_container">

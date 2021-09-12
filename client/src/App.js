@@ -16,9 +16,6 @@ function App() {
         <Switch>
           <Route exact path="/" render={HomePage} />
           <Route exact path="/game" render={MainGame} />
-          {/* <Route exact path="/game/games" render={MainGame} /> */}
-          {/* <Route exact path="/game/chat" render={Games} /> */}
-          {/* <Route exact path="/game_comments" render={GameScreenWithComments} /> */}
           <Route exact path="/game/games" render={Games} />
           <Route
             exact
