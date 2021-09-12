@@ -76,7 +76,7 @@ class GameController {
       const payload = {
         event: "join_game",
         permission,
-        player: updated.data.opponent,
+        player: opponent,
       };
 
       // Publish the event to Centrifugo server
