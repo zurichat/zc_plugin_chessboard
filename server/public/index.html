@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
 </head>
 
-<body>
+<body onresize="board.resize()">
 
   <div class="container">
 
@@ -56,9 +56,23 @@
   <script src="https://cdn.jsdelivr.net/gh/centrifugal/centrifuge-js@2.X.X/dist/centrifuge.min.js"></script>
 </body>
 <script>
-
   // Chess Game Logic
   const game = new Chess();
+
+  const removeGreySquares = () => {
+    document.querySelectorAll('#chess_board .square-55d63').forEach(el => {
+      el.style.background = '';
+    });
+  }
+
+  const addGreySquares = (square) => {
+    const square_box_element = document.querySelector('#chess_board .square-' + square);
+    let background = "#a9a9a9";
+    if (square_box_element.classList.contains('black-3c85d')) {
+      background = "#696969";
+    }
+    square_box_element.style.background = background;
+  }
 
   const onDragStart = (source, piece, position, orientation) => {
     // do not pick up pieces if the game is over
@@ -69,6 +83,8 @@
   }
 
   const onDrop = (source, target) => {
+    removeGreySquares();
+
     // see if the move is legal
     const move = game.move({
       from: source,
@@ -81,10 +97,33 @@
     if (move === null) {
       return 'snapback';
     } else {
-      // Backend Code to send move to server via API
-      updateMove(board.fen())
+      // Send the move to server via API
+      updateMove(move);
     }
     updateStatus();
+  }
+
+  const onMouseoverSquare = (square, piece) => {
+    // get list of possible moves for this square
+    let moves = game.moves({
+      square: square,
+      verbose: true
+    });
+
+    // exit if there are no moves available for this square
+    if (moves.length === 0) return
+
+    // highlight the square they moused over
+    addGreySquares(square);
+
+    // highlight the possible squares for this piece
+    for (let i = 0; i < moves.length; i++) {
+      addGreySquares(moves[i].to);
+    }
+  }
+
+  const onMouseoutSquare = (square, piece) => {
+    removeGreySquares();
   }
 
   // update the board position after the piece snap
@@ -93,9 +132,9 @@
   }
 
   const updateStatus = () => {
-    var status = ''
+    let status = ''
 
-    var moveColor = 'White'
+    let moveColor = 'White'
     if (game.turn() === 'b') {
       moveColor = 'Black';
     }
@@ -125,16 +164,20 @@
     document.querySelector("#pgn").innerHTML = game.pgn();
   }
 
-  // Chess Board
+  // Initialise the Chess Board
   const board = Chessboard('chess_board', {
     draggable: true,
     position: 'start',
     onDragStart: onDragStart,
     onDrop: onDrop,
+    onMouseoutSquare: onMouseoutSquare,
+    onMouseoverSquare: onMouseoverSquare,
     onSnapEnd: onSnapEnd
   });
 </script>
 <script>
+  let global_user_id;
+
   // Connect to Centrifugo
   const centrifuge = new Centrifuge(
     "wss://realtime.zuri.chat/connection/websocket"
@@ -144,8 +187,9 @@
 
   // Functions
   const createGame = async () => {
+    global_user_id = "085fc3b2";
     const sample_data = {
-      "user_id": "085fc3b2",
+      "user_id": global_user_id,
       "user_name": "John Player 1 Doe",
       "image_url": "string"
     }
@@ -172,10 +216,11 @@
   }
 
   const joinGame = async () => {
+    global_user_id = "085fc3b2-1";
     const game_id = document.querySelector("#join_game_room_input_id").value;
     const sample_data = {
       "game_id": game_id,
-      "user_id": "085fc3b2-1",
+      "user_id": global_user_id,
       "user_name": "John Player 2 Doe",
       "image_url": "string"
     }
@@ -199,13 +244,13 @@
     }
   }
 
-  const updateMove = async (fen) => {
+  const updateMove = async (move) => {
     const game_id = document.querySelector("#game_id").innerHTML;
     const sample_data = {
-      "user_id": "085fc3b2-1",
+      "user_id": global_user_id,
       "game_id": game_id,
-      "position_fen": fen,
-      "board_state": "nothing"
+      "position_fen": game.fen(),
+      "board_state": move,
     }
     const response = await fetch(`/api/v1/game/piecemove`, {
       method: "PATCH",
@@ -235,8 +280,10 @@
         break;
 
       case "piece_moved":
-        board.position(websocket.data.position_fen);
-        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.player_id} made a move</p>`);
+        game.move(websocket.data.board_state);
+        board.position(game.fen());
+        updateStatus();
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.user_id} made a move</p>`);
         break;
 
       default:
