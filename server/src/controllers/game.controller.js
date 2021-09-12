@@ -92,7 +92,6 @@ class GameController {
   // Get All Games
   async getAll(req, res) {
     try {
-
       let gameDBData;
 
       // Get games that have started, Join as Spectator view
