@@ -392,10 +392,13 @@ class GameController {
     if (!formattedMessage) {
       throw new CustomError("message text cannot be empty", 400);
     }
-    
+
+    const testUsername = ["mark", "jack", "jane", "crystal"];
+    const random = Math.floor(Math.random() * testUsername.length);
+
     const messageProps = {
          text: formattedMessage,
-         user_name: "mark",
+         user_name: testUsername[random],
          image_url: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash"  // user_name & image_url from user info retrieved from db
        };
     
