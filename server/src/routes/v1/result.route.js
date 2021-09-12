@@ -2,13 +2,42 @@
 const router = require("express").Router();
 
 // Custom Modules
-//const ResultCtrl = require("../controllers/result.controller");
+const ResultCtrl = require("../../controllers/result.controller");
 
-// Get Result for all games - not implemented -- Ifechukwu Uzukwu
-// router.get("/all", ResultCtrl.getAll);
+/**
+ * @swagger
+ * /api/v1/result/all:
+ *  get:
+ *   summary: Gets all game results
+ *   description: Returns all the results of the games in the database
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
+router.get("/all", ResultCtrl.getAll);
 
-// Get Result for a particular game - not implemented -- Erhabor Destiny
-// router.get("/:gameId", ResultCtrl.getById);
+// Get Result for a particular game -- Erhabor Destiny
+
+/**
+ * @swagger
+ * /api/v1/result/{gameId}:
+ *  get:
+ *   summary: Gets results by game id
+ *   description: Returns all the results of the games in the database by the game id
+ *   parameters:
+ *    - in: path
+ *      name: gameId
+ *      required: true
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
+
+router.get("/:gameId", ResultCtrl.getById);
 
 // Export Module
 module.exports = router;

@@ -2,7 +2,7 @@
 const path = require("path");
 require("express-async-errors");
 const express = require("express");
-const routes = require("./src/routes");
+const router = require("./src/routes/index");
 const { PORT } = require("./src/config");
 const errorMiddleware = require("./src/middlewares/error.middleware");
 const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
@@ -20,29 +20,37 @@ const swaggerOptions = {
       title: "Chess Plugin API",
       version: "1.0.0",
       description: "Chess plugin api for zuri chat application documentation",
-      servers: ["https://chess.zuri.chat/api"]
+      servers: ["https://chess.zuri.chat/api"],
     },
   },
-  apis: ["./src/routes/*.js"],
+  apis: ["./src/routes/v1/*.js"],
 };
 const swaggerDocs = swaggerJSDocument(swaggerOptions);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-
+app.use("/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Pre-Route middlewares
 preRouteMiddlewares(app);
 
 // All Endpoints routes for backend are defined here
-app.use("/api", routes);
+app.use("/api", router);
 
 // temporary - to be removed
 app.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-app.get("/test_wb", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "whiteboardtest.html"));
+// temporary - to be removed, for testing purposess
+app.use("/img/chesspieces/wikipedia/*", (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname,
+      "public",
+      "img",
+      "chesspieces",
+      "wikipedia",
+      path.basename(req.originalUrl)
+    )
+  );
 });
 
 // Error middlewares

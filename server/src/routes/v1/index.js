@@ -7,11 +7,43 @@ const resultRoute = require("./result.route");
 const InfoCtrl = require("../../controllers/info.controller");
 const { userAuth } = require("../../middlewares/user_auth.middleware");
 
-// Plugin Info Endpoints
+/**
+ * @swagger
+ * /api/v1/info:
+ *  get:
+ *   summary: Gets general plugin info
+ *   description: Returns all the information for this plugin
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
 router.get("/info", InfoCtrl.getPluginInfo);
 
-// Get Sidebar Links
-router.get("/sidebar", userAuth, InfoCtrl.getSideBarInfo);
+/**
+ * @swagger
+ * /api/v1/sidebar:
+ *  get:
+ *   summary: Gets sidebar info
+ *   description: Returns all sidebar information for a given user
+ *   parameters:
+ *    - name: userId
+ *      in: query
+ *      required: true
+ *    - name: org
+ *      in: query
+ *      required: true
+ *    - name: token
+ *      in: query
+ *      required: true
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
+router.get("/sidebar", /*userAuth*/ InfoCtrl.getSideBarInfo);
 
 // Game Endpoints
 router.use("/game", gameRoute);

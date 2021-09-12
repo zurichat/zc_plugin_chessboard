@@ -5,8 +5,8 @@ const { USER_URL } = require("../config/index");
 // GET req to zc_core to validate and fetch user details with the provided token
 exports.userAuth = async (req, res, next) => {
   try {
-    const { org, userId } = req.body;
-    const token = req.headers.authorization.split(" ")[1];
+    const { org, userId } = req.query;
+    const token = req.query.token.split(" ")[1];
 
     const response = await axios.get(`${USER_URL}${userId}`, {
       headers: {
