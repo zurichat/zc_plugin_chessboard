@@ -57,6 +57,12 @@ class GameController {
           .status(400)
           .send(response("opponent already exists", null, false));
 
+      const opponent = {
+	user_id,
+	user_name,
+	image_url,
+      };
+
       // Set opponent and save to db
       const updated = await GameRepo.update(game_id, {
         opponent,
@@ -376,7 +382,7 @@ class GameController {
     
     // find user in db with decoded token (to be implemented later)
     if (!user_id) {
-      throw new CustomError("Unauthorized access", 402)
+      throw new CustomError("Unauthorized access", 402);
     }
     
     // find game in db
@@ -393,13 +399,15 @@ class GameController {
       throw new CustomError("message text cannot be empty", 400);
     }
 
-    const testUsername = ["mark", "jack", "jane", "crystal"];
-    const random = Math.floor(Math.random() * testUsername.length);
+    // test usernames and image_url
+    const testUsernames = ["mark", "jack", "jane", "crystal"];
+    const testImageUrl = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash";
+    const random = Math.floor(Math.random() * testUsernames.length);
 
     const messageProps = {
          text: formattedMessage,
-         user_name: testUsername[random],
-         image_url: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=robohash"  // user_name & image_url from user info retrieved from db
+         user_name: testUsernames[random],
+         image_url: testImageUrl // user_name & image_url from user info retrieved from db
        };
     
     // push to message collection
@@ -410,15 +418,20 @@ class GameController {
     gameExist.data[0].messages = 
       gameExist.data[0].messages.concat(messageProps);
 
-    const response = await GameRepo.update(game_id, gameExist.data);
+    const response = await GameRepo.update(game_id, gameExist.data[0]);
     
-    console.log(response)
+    console.log(response);
     // publish to centrifugo
-    // await centrifugoController.publish("chats", messageProps);
+    await centrifugoController.publish(game_id, {
+      ...messageProps,
+      event: "messages",
+      permission: "READ/WRITE"
+    });
     
     return res.status(202).send(response("message sent", messageProps));
   }
   
+ 
   // Get All Games By User
   async getAllByUser(req, res) {
     const { userId } = req.params;
@@ -428,7 +441,7 @@ class GameController {
         return (
           game.owner.user_id == userId ||
           (game.opponent && game.opponent.user_id == userId) ||
-          (game.spectators?.length > 0 &&
+          (game.spectators.length > 0 &&
             game.spectators.find((spec) => spec.user_id == userId))
         );
       });
@@ -440,7 +453,9 @@ class GameController {
       throw new CustomError(`Unable to fetch user games: ${error}`, 500);
     }
   }
+  
 }
 
 // Export Module
 module.exports = new GameController();
+
