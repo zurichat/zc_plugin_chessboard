@@ -42,9 +42,7 @@ class ResultController {
       if (!result) {
         throw new CustomError(`Result with id: ${gameId} not found`, 404);
       }
-      res
-        .status(200)
-        .send(response("Result retrieved successfully", result));
+      res.status(200).send(response("Result retrieved successfully", result));
     } catch (error) {
       throw new CustomError(`Unable to get Results by: ${error}`, 500);
     }
