@@ -34,8 +34,21 @@ class ResultController {
   }
 
   // Get A Result
-  // async getById(req, res) {
-  // }
+  async getById(req, res) {
+    const { gameId } = req.params;
+    const { data } = await GameRepo.fetchAll();
+    try {
+      let result = data.find((game) => game._id == gameId);
+      if (!result) {
+        throw new CustomError(`Result with id: ${gameId} not found`, 404);
+      }
+      res
+        .status(200)
+        .send(response("Result retrieved successfully", result));
+    } catch (error) {
+      throw new CustomError(`Unable to get Results by: ${error}`, 500);
+    }
+  }
 }
 
 // Export Module
