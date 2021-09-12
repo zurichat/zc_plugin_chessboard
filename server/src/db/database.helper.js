@@ -82,7 +82,7 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       throw new CustomError(
-        `Unable to Connect to Zuri Core DB [READ ONE]: ${error}`,
+        `Unable to Connect to Zuri Core DB [READ ONE BY PARAMETER]: ${error}`,
         "500"
       );
     }
