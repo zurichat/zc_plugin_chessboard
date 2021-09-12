@@ -52,7 +52,10 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // if opponent already exists return bad request
-      if (gameDBData.data[0].opponent.user_id !== user_id || gameDBData.data[0].owner.user_id !== user_id)
+      if (
+        gameDBData.data[0].opponent.user_id !== user_id ||
+        gameDBData.data[0].owner.user_id !== user_id
+      )
         return res
           .status(400)
           .send(response("opponent already exists", null, false));
