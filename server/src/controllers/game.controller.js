@@ -54,13 +54,16 @@ class GameController {
       // if opponent already exists return bad request
       if (
         // More checks to know whether to continue game for player 1 or 2 if the tab is refreshed
-        gameDBData.data[0].owner.user_id !== user_id ||
-        (gameDBData.data[0].opponent &&
-          gameDBData.data[0].opponent.user_id !== user_id)
-      )
-        return res
-          .status(400)
-          .send(response("opponent already exists", null, false));
+        gameDBData.data[0].owner.user_id !== user_id
+      ) {
+        if (gameDBData.data[0].opponent) {
+          if (gameDBData.data[0].opponent.user_id !== user_id) {
+            return res
+              .status(400)
+              .send(response("opponent already exists", null, false));
+          }
+        }
+      }
 
       // Logic to continue game if player 1 or 2 refreshes the tab
       if (!gameDBData.data[0].opponent) {
