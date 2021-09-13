@@ -3,13 +3,13 @@ const NodeCache = require("node-cache");
 const cache = new NodeCache();
 
 module.exports = {
-  save: (key, data) => {
+  saveToCache: (key, data) => {
     cache.set(key, data);
   },
-  retrieve: (key) => {
+  retrieveFromCache: (key) => {
     return cache.get(key);
   },
-  deleteData: (key) => {
+  deleteFromCache: (key) => {
     cache.del(key);
   },
 };

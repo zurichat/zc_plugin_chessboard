@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+.acceptOverlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  background-color: #2d2d2d;
+  opacity: 0.7;
+}
+
+.modalContainer {
+  background-color: rgba(255, 255, 255, 1);
+  text-align: center;
+  padding: 3rem;
+  font-family: "lato", sans-serif;
+}
+
+.acceptHeader {
+  padding: 0.5rem;
+  padding: 1rem;
+}
+
+.acceptHeader div img {
+  width: 10%;
+}
+
+.main p {
+  font-size: 1.25rem;
+  color: #505050;
+  padding: 1rem 0;
+}
+
+.acceptbtns {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.acceptbtns button {
+  padding: 0.75rem;
+  min-width: 5rem;
+  font-size: 0.75rem;
+  border-radius: 3px;
+  outline: none;
+}
+
+.acceptbtns .green_btn {
+  color: white;
+  background-color: #27ae60;
+  border: 1px solid #27ae60;
+}
+.acceptbtns .white_btn {
+  color: #b8003c;
+  border: 1px solid #b8003c;
+}

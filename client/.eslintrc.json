@@ -19,10 +19,7 @@
     ],
     "rules": {
         "indent": "off",
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        "linebreak-style": 0,
         "quotes": [
             "error",
             "double"
@@ -36,5 +33,10 @@
         "react/no-unescaped-entities": "off",
         "no-unused-vars": "off",
         "react/jsx-key": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

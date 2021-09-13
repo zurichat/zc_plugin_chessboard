@@ -1,0 +1,24 @@
+name: Lint - [Frontend]
+
+# Triggers the workflow on pull requests
+on:
+  pull_request:
+  
+jobs:
+  run-linters:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: client
+      
+    - name: Install yarn dependencies and Run ESLint
+      run: |
+        cd client
+        yarn install
+        yarn run lint

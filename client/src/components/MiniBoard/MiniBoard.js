@@ -15,7 +15,7 @@ function MiniBoard({ playerOne, playerTwo }) {
             <p className="mini-profile-name">Player 1: @{playerOne}</p>
           </div>
         ) : (
-          <Link to="/game">
+          <Link to="/game_comments">
             <button className="join-button">Join as Player 1</button>
           </Link>
         )}
@@ -23,7 +23,7 @@ function MiniBoard({ playerOne, playerTwo }) {
 
       <div className="board-image">
         {/* eslint-disable-next-line */}
-        <a href="#">
+        <a href="/game">
           <img src={boardImg} alt="" />{" "}
         </a>
       </div>
@@ -35,7 +35,7 @@ function MiniBoard({ playerOne, playerTwo }) {
             <p className="mini-profile-name">Player 2: @{playerTwo}</p>
           </div>
         ) : (
-          <Link to="/game">
+          <Link to="/game_comments">
             <button className="join-button bottom-button">
               Join as Player 2
             </button>

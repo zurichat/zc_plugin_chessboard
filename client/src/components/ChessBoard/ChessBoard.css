@@ -3,9 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: fit-content;
-  height: 100vh;
-  margin: auto;
+  padding: 0 4rem;
+  height: 100%;
 }
 
 .chessboard #startPos {
