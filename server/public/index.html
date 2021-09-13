@@ -280,8 +280,13 @@
         break;
 
       case "piece_moved":
-        game.move(websocket.data.board_state);
-        board.position(game.fen());
+        if(game.fen() == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"){
+          board.position(websocket.data.position_fen);
+          // game.move(websocket.data.board_state);
+        } else {
+          game.move(websocket.data.board_state);
+          board.position(game.fen());
+        }
         updateStatus();
         document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.user_id} made a move</p>`);
         break;
