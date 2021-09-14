@@ -1,131 +1,118 @@
-.container{
-    width: 100%;
-    padding: 5rem;
-    
-    
-}
-.figcaption .btn-1{
-    
-    top: 8rem;
-    right: 10rem;
-    width: 200px;
-    height: 5rem;
-    padding: 1rem;
-
-
-}
-.figcaption .btn-2{
-    top: 13rem;
-    right: 10rem;
-    width: 200px;
-    height: 5rem;
-    padding: 1rem;
-   
-
+.gamesection {
+  width: 100%;
+  padding: 2rem;
+  position: relative;
 }
 
-.img-fluid1{
-    position: relative;
+.gamesection figure{
     width: 280px;
-    height: 250px;
-    right: 7rem;
-    bottom: 3.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    margin-top: 1rem;
-} 
-.img-fluid2{
-    position: relative;
-    width: 280px;
-    height: 250px;
-    right: 7rem;
-    top: 2rem;
-    background: rgba(0, 0, 0, 0.5);
-    margin-bottom: 3.5rem;
-
-}
-.btn-1{
-    background-color: #1DB386;
-    border-radius: 0.5rem;
-    font-size: 1.5rem;
-    width: 200px;
-    height: 39px;
-    color:white;
-    position: absolute;
-
-
-}
-.btn-2{
-    background-color: #1DB386;
-    border-radius: 0.5rem;
-    width: 200px;
-    height: 39px;
-    font-size: 1.5rem;
-    color:white;
-    position: absolute;
-
-    
-}
-.pic1{
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    bottom: 31.5rem;
-    right: 25rem;
-   
-}
-.pic2{
-    position: absolute;
-     bottom: 1rem;
-    height: 40px;
-    width: 40px;
-    left: 6rem;
-}
-.pic3{
-    position: absolute;
-    bottom: 29rem;
-    height: 40px;
-    width: 40px;
-    right: 25rem;
-    
-}
-.pic4{
-    position: absolute;
-    top: 29rem;
-    height: 40px;
-    width: 40px;
-    left: 8rem;
-    margin-bottom: 2rem;
-}
-.text1{
-    position: relative;
-    bottom: 5rem;
-    left: 2rem;
-    font-size: 1rem ;
-    color: rgb(72, 70, 70);
-
-}
-.text2{
-    position: relative;
-    left: 11rem;
-    bottom: 2.5rem;
-    font-size: 1rem ;
-    color: rgb(72, 70, 70);
-}
-.text3{
-    position: relative;
-    bottom: 0.5rem;
-    font-size: 1rem ;
-    left: 2rem;
-    color: rgb(72, 70, 70);
-}
-.text4{
-    position: relative;
-    left: 13rem;
-    bottom: 0.3rem;
-    font-size: 1rem ;
-    color: rgb(72, 70, 70);
+    margin: 0 auto;
 }
 
-@media screen and (max-width: 978px){
-    
+
+.gamesection .profile-left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+}
+
+.gamesection .profile-right {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.figcaption .btn-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.figcaption {
+    margin: 1rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.figcaption .btn-1 {
+  width: 200px;
+  height: 5rem;
+  padding: 1rem;
+}
+.figcaption .btn-2 {
+  width: 200px;
+  height: 5rem;
+  padding: 1rem;
+}
+
+.img-fluid1 {
+  width: 280px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.img-fluid2 {
+  width: 280px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.btn-1 {
+  background-color: #1db386;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  width: 200px;
+  height: 39px;
+  color: white;
+  position: relative;
+}
+.btn-2 {
+  background-color: #1db386;
+  border-radius: 0.5rem;
+  width: 200px;
+  height: 39px;
+  font-size: 1.5rem;
+  color: white;
+  position: relative;
+}
+.pic1 {
+  height: 30px;
+  width: 30px;
+}
+.pic2 {
+  height: 30px;
+  width: 30px;
+}
+.pic3 {
+  height: 30px;
+  width: 30px;
+}
+.pic4 {
+  height: 30px;
+  width: 30px;
+}
+.text1 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+.text2 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+.text3 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+.text4 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+
+@media screen and (max-width: 978px) {
 }

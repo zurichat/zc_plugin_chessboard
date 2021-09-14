@@ -10,13 +10,13 @@ const SpectatorSideBar = () => {
         <NavLink exact activeClassName="active" className="nav-link" to="/game">
           Chat
         </NavLink>
-        <NavLink activeClassName="active" className="nav-link" to="/game/games">
+        <NavLink activeClassName="active" className="nav-link" to="/games">
           Games
         </NavLink>
       </nav>
       <Switch>
         <Route exact path="/game" component={Chat} />
-        <Route exact path="/game/games" component={Games} />
+        <Route exact path="/games" component={Games} />
       </Switch>
     </aside>
   );
