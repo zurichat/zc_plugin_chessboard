@@ -110,6 +110,19 @@ const GameCtrl = require("../../controllers/game.controller");
  *      type: string
  *      description: The Id of the game the user wants to leave
  *      required: true
+ * 
+ *   abortgameInput:
+ *    type: object
+ *    properties:
+ *     user_id:
+ *      type: integer
+ *      description: The user id of the owner of the game
+ *      required: true
+ *      example: 2
+ *     game_id:
+ *      type: string
+ *      description: The Id of the game the owner wants to end
+ *      required: true
  *
  */
 
@@ -298,6 +311,27 @@ router.get("/:id", GameCtrl.getById);
  *      description: An error occurred
  */
 router.get("/all/:userId", GameCtrl.getAllByUser);
+
+/**
+ * @swagger
+ * /api/v1/game/abort:
+ *  patch:
+ *   summary: Allows a user to abort game
+ *   description: This endpoint allows to abort game while no other opponent
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/abortgameInput'
+ *
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
+router.patch("/abort", GameCtrl.abort);
 
 // Send messages to game -- NotImplemented
 // router.patch("/message",GameCtrl.Message);

@@ -383,6 +383,56 @@ class GameController {
       throw new CustomError(`Unable to end game ${error}`, 500);
     }
   }
+
+  // End game logic by Aborting
+  async abort(req, res) {
+    try {
+      // request an info from the user
+    const { game_id, user_id } = req.body;
+
+    // fetch the game from the database
+    const isGameExist = await GameRepo.fetchOne(game_id);
+
+    // check if the game data exists
+    if (!isGameExist.data) 
+      return res
+        .status(400)
+        .send(response("Game does not exist", null, false));
+
+
+    // check if user started the game
+    if (user_id !== isGameExist.data[0].owner.user_id)
+    return res
+      .status(400)
+      .send(response("User is not an active paricipant of the game", null, false));
+    
+
+    // check if opponent exist 
+    if (isGameExist.data[0].opponent) 
+      return res
+        .status(400)
+        .send(response("An opponent has joined the game", null, false));
+
+    // set only participant to winner
+    isGameExist.data[0].is_owner_winner = true;
+
+    // set game to completed
+    isGameExist.data.status = 2;
+
+    // update the Game Info with current result
+    const updated = await GameRepo.update(game_id, {
+      ...isGameExist.data,
+    });
+
+    return res.status(200).send(response("Game aborted!!!", updated));
+
+    } catch (error) {
+      console.log(error);
+      throw new CustomError(`Unable to end game ${error}`, 500);
+    }
+  }
+
+
   // Get Game By Id
   // async getById(req, res) {
   // }
