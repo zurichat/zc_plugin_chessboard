@@ -52,38 +52,49 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // if opponent already exists return bad request
-      if (gameDBData.data[0].opponent)
-        return res
-          .status(400)
-          .send(response("opponent already exists", null, false));
+      if (
+        // More checks to know whether to continue game for player 1 or 2 if the tab is refreshed
+        gameDBData.data[0].owner.user_id !== user_id
+      ) {
+        if (gameDBData.data[0].opponent) {
+          if (gameDBData.data[0].opponent.user_id !== user_id) {
+            return res
+              .status(400)
+              .send(response("opponent already exists", null, false));
+          }
+        }
+      }
 
-      const opponent = {
-        user_id,
-        user_name,
-        image_url,
-      };
+      // Logic to continue game if player 1 or 2 refreshes the tab
+      if (!gameDBData.data[0].opponent) {
+        const opponent = {
+          user_id,
+          user_name,
+          image_url,
+        };
 
-      // Set opponent and save to db
-      const updated = await GameRepo.update(game_id, {
-        opponent,
-        status: 1,
-      });
+        // Set opponent and save to db
+        const updated = await GameRepo.update(game_id, {
+          opponent,
+          status: 1,
+        });
 
-      // set user permission in game
-      const permission = "READ/WRITE";
+        // set user permission in game
+        const permission = "READ/WRITE";
 
-      // Build Response
-      const payload = {
-        event: "join_game",
-        permission,
-        player: opponent,
-      };
+        // Build Response
+        const payload = {
+          event: "join_game",
+          permission,
+          player: opponent,
+        };
 
-      // Publish the event to Centrifugo server
-      await centrifugoController.publish(game_id, payload);
+        // Publish the event to Centrifugo server
+        await centrifugoController.publish(game_id, payload);
+      }
 
       // Return the game
-      res.status(200).send(response("Game joined successfully", updated));
+      res.status(200).send(response("Game joined successfully", game_id));
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
