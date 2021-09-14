@@ -13,6 +13,20 @@ class GameController {
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
 
+      // Still in COmment because FetchByParameter doesn't work for some reason
+      // Logic for more than 6 games not being active
+      // const CreatedGames = await GameRepo.fetchByParameter({ status: 0 });
+      // const OngoingGames = await GameRepo.fetchByParameter({ status: 1 });
+
+      // console.log(CreatedGames);
+      // console.log(OngoingGames);
+
+      // if ((CreatedGames.data.length + OngoingGames.data.length) > 6) {
+      //   return res
+      //     .status(201)
+      //     .send(response("More Than 6 Boards Exist Already", null, true));
+      // }
+
       // Pass the request body to the schema
       const game = await gameSchema.validateAsync({
         owner: {
