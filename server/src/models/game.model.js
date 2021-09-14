@@ -25,6 +25,9 @@ const game_schema = Joi.object({
   start_time: Joi.date().default(Date.now).allow(null),
   end_time: Joi.date().allow(null),
 
+  //organisation id
+  organization_id: Joi.string().required(),
+
   // game status
   status: Joi.number().required(), // created = 0, running = 1, completed = 2
   //result param
