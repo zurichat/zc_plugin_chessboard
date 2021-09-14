@@ -20,6 +20,7 @@ const ChessBoard = ({ type }) => {
 
   useEffect(() => {
     game.current = new Chess();
+    centrifuge.connect();
     centrifuge.subscribe(gameId, ChannelEventsListener);
     getGames();
   }, []);
