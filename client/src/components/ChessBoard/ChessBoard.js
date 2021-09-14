@@ -6,14 +6,63 @@ import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
+import Centrifuge from "centrifuge";
+
 
 const ChessBoard = ({ type }) => {
   const [fen, setFen] = useState("start");
+  const [gameId, setGameId] = useState("61406f77fc18824743178039");
+  const [playerTurn, setPlayerTurn] = useState("w");
+  const [playerId] = useState({ w: "085fc3b2d", b: "085fc3b2-3" });
+  const centrifuge = new Centrifuge("wss://realtime.zuri.chat/connection/websocket");
+  
   let game = useRef(null);
-
+  
   useEffect(() => {
     game.current = new Chess();
+    // createGame();
+    centrifuge.subscribe(gameId, ChannelEventsListener);
+    getGames();
   }, []);
+
+
+
+  const getGames = async () => {
+    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+    console.log(response.data.data[response.data.data.length - 2]);
+  };
+
+  const pieceMove = async (move) => {
+    const body = {
+      "user_id": playerId[playerTurn],
+      "position_fen": game.current.fen(),
+      "game_id": gameId,
+      "board_state": move
+    };
+    const response = await axios.patch("https://chess.zuri.chat/api/v1/game/piecemove", body);
+    console.log("move", response);
+  };
+
+  const ChannelEventsListener = (ctx) => {
+    const websocket = ctx;
+    console.log("ctx", ctx);
+
+    switch (ctx.data.event) {
+      case "join_game":
+        console.log("joined centrifuge");
+        break;
+
+      case "piece_moved":
+        game.move(websocket.data.board_state);
+        setFen(game.current.fen());
+        console.log("move centrifuge");
+        break;
+
+      default:
+        console.log("default");
+        break;
+    }
+  };
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
     let move = game.current.move({
@@ -24,6 +73,8 @@ const ChessBoard = ({ type }) => {
     if (move === null) return;
 
     setFen(game.current.fen());
+    setPlayerTurn(game.current.turn());
+    pieceMove(move);
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
@@ -57,7 +108,8 @@ const ChessBoard = ({ type }) => {
 
   return (
     <>
-      <div className="chessboard">
+      <div className="chessboard" >
+
         <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
         <div
           style={{
