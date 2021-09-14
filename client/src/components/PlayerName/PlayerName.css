@@ -1,5 +1,5 @@
 .player__details {
-  width: calc(100% + 15px);
+  width: calc(100% + 30px);
   display: flex;
   align-items: center;
   font-size: 1.5em;
