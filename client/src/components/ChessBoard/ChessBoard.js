@@ -11,25 +11,22 @@ import Centrifuge from "centrifuge";
 
 const ChessBoard = ({ type }) => {
   const [fen, setFen] = useState("start");
-  const [gameId, setGameId] = useState("61406f77fc18824743178039");
+  const [gameId, setGameId] = useState("61407322fc1882474317803d");
   const [playerTurn, setPlayerTurn] = useState("w");
   const [playerId] = useState({ w: "085fc3b2d", b: "085fc3b2-3" });
   const centrifuge = new Centrifuge("wss://realtime.zuri.chat/connection/websocket");
-  
+
   let game = useRef(null);
-  
+
   useEffect(() => {
     game.current = new Chess();
-    // createGame();
     centrifuge.subscribe(gameId, ChannelEventsListener);
     getGames();
   }, []);
 
-
-
   const getGames = async () => {
     const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
-    console.log(response.data.data[response.data.data.length - 2]);
+    console.log(response.data.data[response.data.data.length - 1]);
   };
 
   const pieceMove = async (move) => {
@@ -55,7 +52,7 @@ const ChessBoard = ({ type }) => {
       case "piece_moved":
         game.move(websocket.data.board_state);
         setFen(game.current.fen());
-        console.log("move centrifuge");
+        console.log("move cemtrifuge");
         break;
 
       default:
@@ -109,8 +106,8 @@ const ChessBoard = ({ type }) => {
   return (
     <>
       <div className="chessboard" >
-
-        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+     
+          <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
         <div
           style={{
             position: "relative",
@@ -135,10 +132,10 @@ const ChessBoard = ({ type }) => {
           />
         </div>
 
-        <PlayerName
-          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name="Bombos"
-        />
+          <PlayerName
+            style={{ paddingTop: "28px", justifyContent: "flex-end" }}
+            name="Bombos"
+          />
       </div>
     </>
   );
