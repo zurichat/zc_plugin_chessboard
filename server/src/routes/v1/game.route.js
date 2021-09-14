@@ -335,7 +335,7 @@ router.get("/:id", GameCtrl.getById);
 router.get("/all/:userId", GameCtrl.getAllByUser);
 
 // Send messages to game -- NotImplemented
-// router.patch("/message",GameCtrl.Message);
+router.patch("/message",GameCtrl.comment);
 
 // Export Module
 module.exports = router;
