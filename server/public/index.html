@@ -47,6 +47,16 @@
           <p id="pgn"></p>
         </div>
       </div>
+
+      <div class="container-fluid row">
+        <form class="input-group mt-3" action="javascript:void(0)" id="message" onsubmit="sendMessage()">
+          <input type="text" placeholder="messages" id="message">
+          <button class="btn btn-success">Send comment</button>
+        </form>
+
+        <!-- display -->
+        <p class="display_messages"></p>
+      </div>
     </div>
   </div>
 
@@ -244,6 +254,8 @@
     }
   }
 
+  
+
   const updateMove = async (move) => {
     const game_id = document.querySelector("#game_id").innerHTML;
     const sample_data = {
@@ -284,6 +296,11 @@
         board.position(game.fen());
         updateStatus();
         document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.user_id} made a move</p>`);
+        break;
+      
+      case "comment_made":
+        //document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket.data.player.user_name || websocket.data.spectator.user_name} Joined the game with ${websocket.data.permission} permissions</p>`);
+        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket}</p>`)
         break;
 
       default:

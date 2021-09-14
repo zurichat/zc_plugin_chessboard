@@ -89,6 +89,70 @@ class GameController {
     }
   }
 
+  // // send message
+  // async sendMessages(req,res){
+  //   try {
+  //     // Get the game id and user id from the request body
+  //     const { game_id, user_id, text, user_name, image_url } = req.body;
+
+  //     // Find the game in the database
+  //     const gameDBData = await GameRepo.fetchOne(game_id);
+
+  //     // Get specatators in the game
+  //     const spectators = gameDBData.data[0].spectators;
+
+  //     // Check if the game exists
+  //     if (!gameDBData.data[0])
+  //       return res.status(400).send(response("Game not found", null, false));
+
+  //     // find index of user
+  //     // const index = spectators.findIndex((o) => o.user_id == user_id);
+
+  //     // // Check if the user is a spectator in the game
+  //     // if (index === -1)
+  //     //   return res
+  //     //     .status(400)
+  //     //     .send(response("only spectators can comment", null, false));
+      
+  //     // Get messages in the game
+  //     const messages = gameDBData.data[0].messages;
+
+  //     // Build the new message object
+  //     const message = {
+  //       text,
+  //       user_name,
+  //       image_url,
+  //     };
+
+  //     // Add new messages and return the number of messages
+  //     const number_of_message = messages.push(message);
+
+  //     // Save messages back to db
+  //     const updated = await GameRepo.update(game_id, {
+  //       messages,
+  //     });
+
+  //     // set user permission in the game
+  //     const permission = "READ/WRITE";
+
+  //     // Build Response
+  //     const payload = {
+  //       event: "comment_made",
+  //       permission,
+  //       message,
+  //       number_of_message,
+  //     };
+
+  //     // Publish the event to Centrifugo server
+  //     await centrifugoController.publish(game_id, payload);
+  //     return res.status(200).json({success:"comment successfully", data: updated,});
+  //   } catch (error) {
+  //     throw new CustomError(`Failed to make comment ${error}`, 500);
+  //   }
+  // }
+ 
+  // get all messages (comments)
+
   // Get All Games
   async getAll(req, res) {
     try {
