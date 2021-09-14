@@ -8,13 +8,14 @@ import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 import Centrifuge from "centrifuge";
 
-
 const ChessBoard = ({ type }) => {
   const [fen, setFen] = useState("start");
   const [gameId, setGameId] = useState("61407322fc1882474317803d");
   const [playerTurn, setPlayerTurn] = useState("w");
   const [playerId] = useState({ w: "085fc3b2d", b: "085fc3b2-3" });
-  const centrifuge = new Centrifuge("wss://realtime.zuri.chat/connection/websocket");
+  const centrifuge = new Centrifuge(
+    "wss://realtime.zuri.chat/connection/websocket"
+  );
 
   let game = useRef(null);
 
@@ -32,12 +33,15 @@ const ChessBoard = ({ type }) => {
 
   const pieceMove = async (move) => {
     const body = {
-      "user_id": playerId[playerTurn],
-      "position_fen": game.current.fen(),
-      "game_id": gameId,
-      "board_state": move
+      user_id: playerId[playerTurn],
+      position_fen: game.current.fen(),
+      game_id: gameId,
+      board_state: move,
     };
-    const response = await axios.patch("https://chess.zuri.chat/api/v1/game/piecemove", body);
+    const response = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/piecemove",
+      body
+    );
     console.log("move", response);
   };
 
@@ -106,9 +110,8 @@ const ChessBoard = ({ type }) => {
 
   return (
     <>
-      <div className="chessboard" >
-     
-          <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+      <div className="chessboard">
+        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
         <div
           style={{
             position: "relative",
@@ -133,10 +136,10 @@ const ChessBoard = ({ type }) => {
           />
         </div>
 
-          <PlayerName
-            style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-            name="Bombos"
-          />
+        <PlayerName
+          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
+          name="Bombos"
+        />
       </div>
     </>
   );
