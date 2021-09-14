@@ -6,8 +6,7 @@ import axios from "../axios/axiosInstance";
 export const GamesContext = createContext();
 
 const GamesContextProvider = ({ children }) => {
-
-  // Lekandev`s work!!! 
+  // Lekandev`s work!!!
   // Get all ongoing games
   const [gamesData, setGamesData] = useState({});
 
@@ -20,13 +19,11 @@ const GamesContextProvider = ({ children }) => {
       setGamesData(games);
     } catch (err) {
       console.log(err);
-    }  
+    }
   }
-    
+
   return (
-    <GamesContext.Provider value={gamesData}>
-      {children}
-    </GamesContext.Provider>
+    <GamesContext.Provider value={gamesData}>{children}</GamesContext.Provider>
   );
 };
 
