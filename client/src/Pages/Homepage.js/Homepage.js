@@ -9,7 +9,7 @@ import pawnLogo from "../../assets/Union.png";
 
 function Homepage() {
   return (
-    <div className="App">
+    <div className="chesshome-container">
       <div className="nav chesshome-nav">
         <input type="text" placeholder="Search" id="chesshome-search" />
         <div>

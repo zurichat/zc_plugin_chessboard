@@ -1,3 +1,6 @@
+.chesshome-container{
+  overflow-x: hidden;
+}
 header {
   background: #00B87C;
   color: white;
