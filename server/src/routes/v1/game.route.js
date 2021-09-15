@@ -150,7 +150,7 @@ const GameCtrl = require("../../controllers/game.controller");
  * @swagger
  * /api/v1/game/create:
  *  post:
- *   summary: Create a new game
+ *   summary: Create a new game when the number of games is less than 6 or restartes a completed game
  *   description: Creates a new gaming room, assigns an Id to it and sets the status to started (state = 0)
  *   requestBody:
  *    required: true
@@ -377,6 +377,27 @@ router.get("/all/:userId", GameCtrl.getAllByUser);
  *      description: Unable to Connect to Zuri Core DB
  */
 router.patch("/comment",GameCtrl.comment);
+
+/**
+ * @swagger
+ * /api/v1/game/delete/:id:
+ *  delete:
+ *   summary: Deletes a game with the specified Id from the database
+ *   description: Deletes a game based on ID
+ *   parameters:
+ *    - in: path
+ *      name: id
+ *      required: true
+ *
+ *   responses:
+ *    204:
+ *      description: A successful response
+ *    404:
+ *      description: user id does not exist
+ *    500:
+ *      description: An error occurred
+ */
+router.delete("/delete/:id", GameCtrl.delete);
 
 // Export Module
 module.exports = router;
