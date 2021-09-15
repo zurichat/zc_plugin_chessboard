@@ -22,9 +22,11 @@ function Homepage() {
             <h1>
               <img src={pawnLogo} id="pawnLogo" /> Chess
             </h1>
-          <div>
-            <button id="arrow-button"><i className="arrow down"></i></button>
-          </div>
+            <div>
+              <button id="arrow-button">
+                <i className="arrow down"></i>
+              </button>
+            </div>
           </div>
           <div className="chesshome-profileImg">
             <img src={profileImg} />
