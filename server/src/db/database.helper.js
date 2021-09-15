@@ -114,7 +114,6 @@ class DatabaseConnection {
     this.DB_DEFAULTS_CONFIG.payload = payload;
     // Set the ID of the object to be updated
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
-
     try {
       // Make the request
       const response = await axios.put(

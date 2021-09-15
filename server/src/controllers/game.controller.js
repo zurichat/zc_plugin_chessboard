@@ -354,12 +354,12 @@ class GameController {
       if (user_id === isGameExist.data.owner.user_id) {
         isGameExist.data.is_owner_winner = true;
       } else if (user_id == isGameExist.data.opponent.user_id) {
-        isGameExist.data.is_owner_winner = true;
+        isGameExist.data.is_owner_winner = false;
       }
 
       isGameExist.data.status = 2;
       // update the Game Info with current result
-      const updated = await GameRepo.update(game_id, {
+      const updated = await GameRepo.update(isGameExist.data._id, {
         ...isGameExist.data,
       });
 
@@ -455,7 +455,7 @@ class GameController {
           .send(response("No such game found in the database", {}, false));
 
       await GameRepo.delete(game.data._id, game.data);
-      
+
       res.status(204).send(response("game deleted successfully", {}, false));
     } catch (error) {
       throw new CustomError(`Unable to delete game: ${error}`, 500);
