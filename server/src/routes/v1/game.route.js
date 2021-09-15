@@ -111,6 +111,19 @@ const GameCtrl = require("../../controllers/game.controller");
  *      description: The Id of the game the user wants to leave
  *      required: true
  *
+ *   resignInput:
+ *     type: object
+ *     properties:
+ *      user_id:
+ *        type: integer
+ *        description: The Id of authenticated user
+ *        required: true
+ *        example: 3
+ *      game_id:
+ *        type: string
+ *        description: The id the game user wants to forfeit
+ *        required: true
+ *
  */
 
 // Create A Game
@@ -272,6 +285,28 @@ router.patch("/end", GameCtrl.endGame);
  *      description: An error occurred
  */
 router.patch("/unwatch", GameCtrl.removeSpectator);
+
+/**
+ * @swagger
+ * /api/v1/game/resign:
+ *  patch:
+ *   summary: End game by forfeiting an ongoing game
+ *   description: This basically end game and choose the winner based on the user who forfeit the game against user that did not forfeit the game
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/resignInput'
+ *
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    404:
+ *      description: Game is not found
+ *    500:
+ *      description: An error occurred
+ */
 
 router.patch("/resign", GameCtrl.resign);
 
