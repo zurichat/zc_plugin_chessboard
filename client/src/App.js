@@ -11,9 +11,10 @@ function App() {
         <Switch>
           <Route exact path='/' render={HomePage} />
           <Route exact path='/game' render={MainGame} />
+          <Route exact path='/forfeitmodal' render={cooModal} />
         </Switch>
       </Router>
-     {/* <HomePage /> */}
+     { <HomePage /> }
     </div>
   );
 }

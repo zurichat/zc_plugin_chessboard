@@ -18,11 +18,12 @@
 .forfeit-modal {
     text-align: center;
     background-color: #fff;
-    width: 20vw;
-    height: 18vw;
-    padding: 100px;
+    width: 18vw;
+    height: 40vh;
+    padding: 80px 100px 60px 100px;
     border-radius: 3px;
-    box-shadow:  0px 100px 80px rgba(0, 0, 0, 0.07);
+    border: 2px solid #b8003c;
+    box-shadow:  0px 49.5165px 35.62px rgba(0, 0, 0, 0.0460133)
 }
 
 .forfeit-header {
@@ -30,271 +31,269 @@
 }
 
 .profile img {
-    width: 6vw;
+    width: 8.76vw;
 }
 
-.forfeit-content-title {
+.forfeit-content-text {
+    text-align: center;
     font-family: 'Lato', sans-serif;
-    font-size: 2.3rem;
-    font-weight: 400;
+    font-size: 1.25rem;
+    font-weight: normal;
     color: #505050;
-    line-height: 34px;
-    padding-bottom: 50px;
+    line-height: 24px;
+    padding-bottom: 32px;
+    text-align: center;
 }
 
 .forfeit-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0;
 }
 
-.yes {
-    height: 3vw;
-    width: 8vw;
-    background-color: #b8003c;
-    color: #fff;
-    font-family: 'Lato', sans-serif;
-    font-size: 2.6rem;
-    line-height: 17px;
-    font-weight: 400;
-    border: 1px solid #b8003c;
-    border-radius: 5px;
-    margin: 0 8px;
-    padding: 7px 14px;
+.cp button {
+    text-align: center;
+    height: 6.5vh;
+    width: 15.21vw;
+    background-color: #27ae60;
+    border: 1px solid #27ae60;
+    border-radius: 3px;
+    margin: 0 16px;
+    padding: 7px 34px;
+    box-sizing: border-box;
 }
 
-.no {
-    height: 3vw;
+.ys button {
+    height: 6.5vh;
     width: 8vw;
     background-color: #fff;
-    color: #505050;
+    border: 1px solid #b8003c;
+    border-radius: 3px;
+    margin: 0 10px;
+    padding: 7px 34px;
+    box-sizing: border-box;
+}
+
+.yes {
+    color: #b8003c;
     font-family: 'Lato', sans-serif;
-    font-size: 2.6rem;
+    font-size: 0.875rem;
     line-height: 17px;
-    font-weight: 400;
-    border: 1px solid #27ae60;
-    border-radius: 5px;
-    margin: 0 8px;
-    padding: 7px 14px;
+    font-weight: 500;
+}
+
+.continue {
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    line-height: 17px;
+    font-weight: 500;
 }
 
 
 @media (min-width: 1025px) and (max-width: 1440px) {
-        .forfeit-container {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 3;
-    }
 
     .forfeit-modal {
         text-align: center;
         background-color: #fff;
         width: 20vw;
-        height: 23vw;
-        padding: 50px;
+        height: 20vw;
+        padding: 50px 50px;
         border-radius: 3px;
         box-shadow:  0px 100px 80px rgba(0, 0, 0, 0.07);
     }
 
     .forfeit-header {
-        margin-top: 4.5em;
+        margin-top: .5em;
     }
 
     .forfeit-content-title {
         font-family: 'Lato', sans-serif;
         font-size: 1.25rem;
-        font-weight: 400;
+        font-weight: normal;
         color: #505050;
         line-height: 24px;
-        padding-bottom: 32px;
+        padding-bottom: 30px;
     }
 
-    .forfeit-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0;
-    }
-
-    .yes {
-        height: 3vw;
-        width: 15vw;
-        background-color: #b8003c;
-        color: #fff;
-        font-family: 'Lato', sans-serif;
-        font-size: 1.2rem;
-        line-height: 17px;
-        font-weight: 500;
-        border: 1px solid #b8003c;
-        border-radius: 3px;
-        margin: 0 16px;
-        padding: 7px 34px;
-    }
-
-    .no {
-        height: 3vw;
-        width: 15vw;
-        background-color: #fff;
-        color: #505050;
-        font-family: 'Lato', sans-serif;
-        font-size: 1.2rem;
-        line-height: 17px;
-        font-weight: 500;
+    .cp button {
+        text-align: center;
+        height: 6.5vh;
+        width: 12vw;
+        background-color: #27ae60;
         border: 1px solid #27ae60;
         border-radius: 3px;
         margin: 0 16px;
         padding: 7px 34px;
-}
+        box-sizing: border-box;
+    }
+
+    .ys button {
+        height: 6.5vh;
+        width: 6vw;
+        background-color: #fff;
+        border: 1px solid #b8003c;
+        border-radius: 3px;
+        margin: 0 10px;
+        padding: 7px 34px;
+        box-sizing: border-box;
+    }
+
+    .yes {
+        color: #b8003c;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.875rem;
+        line-height: 17px;
+        font-weight: 500;
+    }
+
+    .continue {
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.875rem;
+        line-height: 17px;
+        font-weight: 500;
+    }
 
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .forfeit-header {
-        margin-top: 1em;
-    } 
-    .forfeit-content-title {
+    .forfeit-modal {
+        text-align: center;
+        background-color: #fff;
+        width: 25vw;
+        height: 20vw;
+        padding: 40px 50px 80px 50px;
+    }
+
+    .forfeit-content-text {
         font-size: 1.3rem;
-        font-weight: 500;
+        font-weight: normal;
         line-height: 24px;
-        padding-bottom: 32px;
-    }
-    .forfeit-footer {
-        justify-content: space-evenly;
     }
 
-    .yes {
-        height: 3.5vw;
+    .cp button {
         width: 12vw;
-        font-size: 1.2rem;
-        line-height: 17px;
-    }
-
-    .no {
-        height: 3.5vw;
-        width: 12vw;
-        font-size: 1.2rem;
-        line-height: 17px;
+        padding: 9px 4px;
     }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-  .forfeit-header {
-        margin-top: 1.2em;
-    } 
 
     .forfeit-modal {
         text-align: center;
         background-color: #fff;
         width: 25vw;
-        height: 30vw;
+        height: 30vh;
+        padding: 30px 70px 80px 70px;
     }
 
-    .forfeit-content-title {
-        font-size: 1.6rem;
+    .forfeit-content-text {
+        font-size: 1.13rem;
         line-height: 27px;
-        padding-bottom: 55px;
     }
 
-    .forfeit-footer {
-        justify-content: space-evenly;
+    .cp button {
+        width: 17.8vw;
+        padding: 9px 4px;
+    }
+
+    .ys button {
+        width: 10vw;
+        padding: 9px 4px;
     }
 
     .yes {
         height: 4.5vw;
         width: 12vw;
-        font-size: 1.2rem;
+        font-size: .9rem;
         line-height: 17px;
     }
 
-    .no {
+    .continue {
         height: 4.5vw;
         width: 12vw;
-        font-size: 1.2rem;
+        font-size: .9rem;
         line-height: 17px;
     }
 }
 
-@media (min-width: 319px) and (max-width: 480px) {
+@media (min-width: 374px) and (max-width: 480px) {
     .forfeit-modal {
         width: 22vw;
-        height: 26vw;
-        padding: 10px 90px 100px;
-    }
-
-  .forfeit-header {
-        margin-top: 0;
+        height: 26vh;
+        padding: 30px 90px 100px;
     }
 
     .profile img {
         width: 65px;
     }
 
-    .forfeit-modal {
-        width: 25vw;
-        height: 30vw;
-    }
-
-    .forfeit-content-title {
-        font-size: .9rem;
+    .forfeit-content-text {
+        font-size: 1rem;
         line-height: 20px;
-        font-weight: 600;
-        padding-bottom: 10px;
+        font-weight: normal;
+        padding-bottom: 5px;
     }
 
-    .forfeit-footer {
-        justify-content: space-evenly;
-        text-align: center;
+    .cp button {
+        width: 32vw;
+        padding: 9px 4px;
     }
 
-    .yes {
-        height: 7vw;
-        display: flex;
-        justify-content: center;
-        font-size: 1.1rem;
-        line-height: 17px;
-        width: 12vw;
-    }
-
-    .no {
-        height: 7vw;
-        display: flex;
-        justify-content: center;
-        font-size: 1.1rem;
-        line-height: 17px;
-        width: 12vw;
+    .ys button {
+        width: 15vw;
+        padding: 9px 4px;
     }
 }
 
-@media (max-width: 320px) {
-    .forfeit-header {
-        margin-top: 0;
+@media (min-width: 319px) and (max-width: 376px) {
+    .forfeit-modal {
+        width: 22vw;
+        height: 26vh;
+        padding: 30px 90px 70px;
     }
 
+    .forfeit-content-text {
+        font-size: .9rem;
+        line-height: 17px;
+    }
+
+    .cp button {
+        width: 30vw;
+        padding: 9px 4px;
+    }
+
+    .ys button {
+        width: 15vw;
+        padding: 9px 4px;
+    }
+}
+@media(max-width: 320px) {
+    .forfeit-modal {
+        width: 22vw;
+        height: 26vh;
+        padding: 30px 90px 95px;
+    }
     .profile img {
         width: 65px;
     }
 
-    .forfeit-content-title {
-        font-size: .8rem;
-        line-height: 15px;
+    .forfeit-content-text {
+        font-size: 1rem;
+        line-height: 17px;
+        font-weight: normal;
+        padding-bottom: 5px;
     }
 
-    .yes {
-        height: 10vw;
-        display: flex;
-        justify-content: center;
+    .cp button {
+        width: 36vw;
+        padding: 9px 4px;
     }
 
-    .no {
-        height: 10vw;
-        display: flex;
-        justify-content: center;
+    .ys button {
+        width: 15vw;
+        padding: 9px 4px;
     }
 }
