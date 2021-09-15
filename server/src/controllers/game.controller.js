@@ -443,19 +443,19 @@ class GameController {
     // if opponent hasn't joined game
     if (!data.opponent) {
       return res.status(400)
-        .send(response("waiting for opponent to join...", null, false))
+        .send(response("waiting for opponent to join...", null, false));
     }
     
     // players should not be able to comment
     if (user_id === data.owner.user_id || user_id === data.opponent.user_id) {
       return res.status(400)
-        .send(response("Only spectators can comment", null, false))
+        .send(response("Only spectators can comment", null, false));
     }
     
     // incase user gets sloppy
     if (!comment || !comment.trim()) {
       return res.status(400)
-        .send(response("comment cannot be empty", null, false))
+        .send(response("comment cannot be empty", null, false));
     }
 
     const commentProps = {
@@ -480,7 +480,7 @@ class GameController {
     const payload = {
       event: "comments",
       ...commentProps
-    }
+    };
     
     await centrifugoController.publish(game_id, payload);
     
