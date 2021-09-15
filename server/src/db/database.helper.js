@@ -92,7 +92,7 @@ class DatabaseConnection {
   async fetchAll(organization_id) {
     try {
       // Make the request
-      const organizationId = organization_id || this.DB_DEFAULTS_CONFIG.organization_id
+      const organizationId = organization_id || this.DB_DEFAULTS_CONFIG.organization_id;
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${organizationId}`
       );
