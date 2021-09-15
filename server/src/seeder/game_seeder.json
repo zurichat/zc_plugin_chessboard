@@ -21,7 +21,6 @@
             }
         ],
         "messages":[],
-        "organization_id": "45556afadfa",
         "status":1,
         "is_winner_owner":false
     },
@@ -41,7 +40,6 @@
         "moves":[],
         "spectators":{},
         "messages":[],
-        "organization_id": "45556afadfa",
         "status":1,
         "is_winner_owner":false
     },
@@ -67,7 +65,6 @@
             }
         ],
         "messages":[],
-        "organization_id": "45556afadfa",
         "status":2,
         "is_winner_owner":false
     },
@@ -93,7 +90,6 @@
             }
         ],
         "messages":[],
-        "organization_id": "45556afadfa",
         "status":0,
         "is_winner_owner":false
     },
@@ -119,7 +115,6 @@
             }
         ],
         "messages":[],
-        "organization_id": "45556afadfa",
         "status":0,
         "is_winner_owner":false
     }

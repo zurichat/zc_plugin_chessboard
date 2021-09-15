@@ -187,6 +187,22 @@ router.get("/all", GameCtrl.getAll);
 
 /**
  * @swagger
+ * /api/v1/running:
+ *  get:
+ *    summary: Gets all running games for an organization
+ *    description: returns games that are currently ongoing or awaiting second player
+ *    query requirement:
+ *      organization_id
+ *    responses:
+ *      200:
+ *       description: A successful response
+ *      500:
+ *       description: An error occured
+ */
+router.get("/running", GameCtrl.getAllByOrg);
+
+/**
+ * @swagger
  * /api/v1/game/watch:
  *  patch:
  *   summary: Allows a user to watch existing game play

@@ -114,6 +114,25 @@ class GameController {
     }
   }
 
+  async getAllByOrg(req, res){
+    try {
+      const { organization_id } = req.query;
+
+      const organisationGames = await GameRepo.fetchAll(organization_id);
+      
+
+      const ongoingGames = organisationGames.data?.filter(game => {
+        return game.status == 0 || game.status == 1;
+      });
+
+      res
+      .status(200)
+      .send(response("Ongoing organisation games retrieved successfully", ongoingGames));
+    } catch (error) {
+      throw new CustomError(`Unable to get all Games: ${error}`, 500);
+    }
+  }
+
   // Get All Games
   async getAll(req, res) {
     try {
