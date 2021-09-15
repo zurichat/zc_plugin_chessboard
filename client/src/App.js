@@ -8,6 +8,7 @@ import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
 import Games from "./components/Games/Games";
+import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
           <Route exact path="/" render={HomePage} />
           <Route exact path="/game" render={MainGame} />
           <Route exact path="/game/games" render={Games} />
+          <Route
+            exact
+            path="/game_nocomments"
+            render={() => <GameScreenWithoutComments />}
+          />
           <Route
             exact
             path="/game_comments"
