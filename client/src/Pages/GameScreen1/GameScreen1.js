@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
 import ExitButton from "../../components/Button/ExitButton";
-import ForfeitButton from "../../components/Button/forfeitButton";
 import ChessBoard from "../../components/ChessBoard/ChessBoard";
-import Comments from "../../components/Comments/Comments";
-import Forfeit from "../../components/Modals/ForfeitModal/Forfeit";
-import "./style.css";
+import Exit from "../../components/Modals/ExitModal/Exit";
+import "./GameScreen1.css";
 
-const GameScreenWithComments = () => {
+const GameScreenWithoutComments = () => {
   const [openForfeitModal, setForfeitModal] = useState(false);
 
   const handleForfeitClick = () => {
@@ -16,19 +14,21 @@ const GameScreenWithComments = () => {
 
   return (
     <main>
-      <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} />
+      <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
+      {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
       <div id="chessboard_container">
         <ChessBoard type="player" />
       </div>
       <div id="side_container">
         <div className="btn_container">
           {" "}
-          <ForfeitButton handleClick={handleForfeitClick} />
+          <ExitButton handleClick={handleForfeitClick} />
+          {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
         </div>
-        <Comments />
+        <div className="title">Comments</div>
       </div>
     </main>
   );
 };
 
-export default GameScreenWithComments;
+export default GameScreenWithoutComments;
