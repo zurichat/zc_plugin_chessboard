@@ -142,25 +142,6 @@ class GameController {
     }
   }
 
-  // Get all ongoing games for an organisation
-  async getOngoingGames(req, res){
-    try {
-      const { organization_id } = req.params;
-      const organisationGames = await GameRepo.fetchByParameter({organization_id});
-      
-      const ongoingGames = organisationGames.data.filter(game => {
-        return game.status == 0 || game.status == 1;
-      });
-
-      res
-      .status(200)
-      .send(response("Ongoing organisation games retrieved successfully", ongoingGames));
-
-    } catch(error){
-      throw new CustomError(`Unable to get organisation games: ${error}`, 500);
-    }
-  }
-
   // Fetch a single game
   async getById(req, res) {
     try {

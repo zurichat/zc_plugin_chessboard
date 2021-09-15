@@ -170,23 +170,6 @@ router.post("/create", GameCtrl.create);
  */
 router.post("/join", GameCtrl.join);
 
-
-/** 
- * @swagger
- * /api/v1/organization/:organization_id
- * get:
- *  summary: Gets all running games for an organization
- *  description: Gets all games being played or games waiting for a second user to join
- *  responses:
- *    200:
- *      description: A successful response
- *    500:
- *      description: An error occurred
-*/
-
-router.get("/organization/:organization_id", GameCtrl.getOngoingGames);
-
-
 /**
  * @swagger
  * /api/v1/game/all:
