@@ -83,16 +83,16 @@ class GameController {
       const gameDBData = await GameRepo.fetchOne(game_id);
 
       // Check if the game exists
-      if (!gameDBData.data[0])
+      if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
 
       // if opponent already exists return bad request
       if (
         // More checks to know whether to continue game for player 1 or 2 if the tab is refreshed
-        gameDBData.data[0].owner.user_id !== user_id
+        gameDBData.data.owner.user_id !== user_id
       ) {
-        if (gameDBData.data[0].opponent) {
-          if (gameDBData.data[0].opponent.user_id !== user_id) {
+        if (gameDBData.data.opponent) {
+          if (gameDBData.data.opponent.user_id !== user_id) {
             return res
               .status(400)
               .send(response("opponent already exists", null, false));
@@ -101,7 +101,7 @@ class GameController {
       }
 
       // Logic to continue game if player 1 or 2 refreshes the tab
-      if (!gameDBData.data[0].opponent) {
+      if (!gameDBData.data.opponent) {
         const opponent = {
           user_id,
           user_name,
@@ -110,6 +110,7 @@ class GameController {
 
         // Set opponent and save to db
         const updated = await GameRepo.update(game_id, {
+          ...gameDBData.data,
           opponent,
           status: 1,
         });
@@ -199,8 +200,8 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       if (
-        gameDBData.data[0].owner.user_id != user_id &&
-        gameDBData.data[0].opponent.user_id != user_id
+        gameDBData.data.owner.user_id != user_id &&
+        gameDBData.data.opponent.user_id != user_id
       )
         return res
           .status(400)
@@ -209,7 +210,7 @@ class GameController {
           );
 
       // push new move into moves array
-      const moves = gameDBData.data[0].moves;
+      const moves = gameDBData.data.moves;
       moves.push({
         user_id,
         position_fen,
@@ -250,7 +251,7 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // Get specatators in the game
-      const spectators = gameDBData.data[0].spectators;
+      const spectators = gameDBData.data.spectators;
 
       // Build the new spectator object
       const spectator = {
@@ -302,7 +303,7 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // Get specatators in the game
-      const spectators = gameDBData.data[0].spectators;
+      const spectators = gameDBData.data.spectators;
 
       // find index of user
       const index = spectators.findIndex((o) => o.user_id == user_id);
@@ -446,6 +447,7 @@ class GameController {
     }
   }
 
+  // Deletes a particular game from the database
   async delete(req, res) {
     try {
       const game = await GameRepo.fetchOne(req.params.id);
