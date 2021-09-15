@@ -24,6 +24,10 @@ function App() {
             render={() => <GameScreenWithoutComments />}
           />
           <Route
+            path="/game_nocomments/:id"
+            render={() => <GameScreenWithoutComments />}
+          />
+          <Route
             exact
             path="/game_comments"
             render={() => <GameScreenWithComments />}
