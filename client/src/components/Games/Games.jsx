@@ -9,19 +9,6 @@ import Ellipse136 from "../../assets/Ellipse136.png";
 
 function Games() {
   return (
-<<<<<<< HEAD
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {/* <h1>Games Component</h1> */}
-      <Gamesection />
-=======
 
     
     <div className="gamesection">
@@ -68,7 +55,6 @@ function Games() {
 
         </div>
       </figure>
->>>>>>> 15562f064662333e790a3945e3cf27a7ebe27d2a
     </div>
   );
 }
