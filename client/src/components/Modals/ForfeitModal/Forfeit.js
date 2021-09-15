@@ -1,3 +1,4 @@
+
 import Logo from "./profile.svg";
 import "./Forfeit.css";
 import { useHistory } from "react-router-dom";
@@ -43,7 +44,7 @@ const Forfeit = ({ isYes, handleClick }) => {
         </footer>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Forfeit;

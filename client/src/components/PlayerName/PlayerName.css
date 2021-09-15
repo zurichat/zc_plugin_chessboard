@@ -1,0 +1,13 @@
+.player__details {
+  width: calc(100% + 30px);
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  padding: 13px 0 13px 0;
+}
+.player__details p {
+  padding-left: 5px;
+}
+.player__details img {
+  width: 40px;
+}

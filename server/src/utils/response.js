@@ -6,19 +6,19 @@
  */
 
 function response(message, data, success) {
-    return {
-        message: formatMesaage(message),
-        data: data || null,
-        success: success == null ? true : success
-    };
+  return {
+    message: formatMesaage(message),
+    data: data || null,
+    success: success == null ? true : success,
+  };
 }
 
 function formatMesaage(str) {
-    if (!str) return ""
+  if (!str) return "";
 
-    // Make first letter capitial
-    return str.charAt(0).toUpperCase() + str.slice(1)
+  // Make first letter capitial
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Export Module
-module.exports = response
+module.exports = response;

@@ -1,0 +1,118 @@
+.gamesection {
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+}
+
+.gamesection figure{
+    width: 280px;
+    margin: 0 auto;
+}
+
+
+.gamesection .profile-left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+}
+
+.gamesection .profile-right {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.figcaption .btn-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.figcaption {
+    margin: 1rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.figcaption .btn-1 {
+  width: 200px;
+  height: 5rem;
+  padding: 1rem;
+}
+.figcaption .btn-2 {
+  width: 200px;
+  height: 5rem;
+  padding: 1rem;
+}
+
+.img-fluid1 {
+  width: 280px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.img-fluid2 {
+  width: 280px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.btn-1 {
+  background-color: #1db386;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  width: 200px;
+  height: 39px;
+  color: white;
+  position: relative;
+}
+.btn-2 {
+  background-color: #1db386;
+  border-radius: 0.5rem;
+  width: 200px;
+  height: 39px;
+  font-size: 1.5rem;
+  color: white;
+  position: relative;
+}
+.pic1 {
+  height: 30px;
+  width: 30px;
+}
+.pic2 {
+  height: 30px;
+  width: 30px;
+}
+.pic3 {
+  height: 30px;
+  width: 30px;
+}
+.pic4 {
+  height: 30px;
+  width: 30px;
+}
+.text1 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+.text2 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+.text3 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+.text4 {
+  font-size: 1.3rem;
+  color: rgb(72, 70, 70);
+}
+
+@media screen and (max-width: 978px) {
+}

@@ -1,100 +1,165 @@
-* {
+.mini-board {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.mini-board{
- position: absolute;
- top: 0;
- width: 100%;
- bottom: 0;
+
+.mini-board {
+  font-size: 62.5%;
 }
 
-.board-image {
-  height: 100%;
-  width: 100%;
-}
-img{
-  width: 100%;
-  height: 100%;
-}
-
-.playerProfile {
+.mini-board {
+  height: 34.8rem;
+  width: 26.4rem;
   display: flex;
-  /* height: 32px; */
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0px;
+}
+
+.mini-board .board-image {
+  border-radius: 0px;
+}
+
+.mini-playerProfile {
+  display: flex;
   align-items: center;
   position: relative;
 }
 
-.profile-image {
+.mini-profile-image {
   background: url("../../assets/people.png");
-  height: 20.475000381469727px;
-  width: 20.475000381469727px;
-
+  height: 2.05rem;
+  width: 2.05rem;
   border-radius: 0px;
 }
 
-.profile-image-bg {
+.mini-profile-image-bg {
   background: #acffe6;
   position: absolute;
   z-index: -20;
-  height: 20.475000381469727px;
-  width: 20.475000381469727px;
-
-  border-radius: 50px;
+  height: 2.05rem;
+  width: 2.05rem;
+  border-radius: 50%;
 }
 
-.playerProfile p {
+.mini-playerProfile p {
   font-family: Lato;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 19px;
+  line-height: 1.9rem;
   letter-spacing: 0em;
   text-align: left;
 }
 
-.asideBar {
+.mini-asideBar {
   display: flex;
-  height: 4rem;
+  height: 4.15rem;
 }
-
-.topBar {
+.mini-profile-name {
+  margin-bottom: 0rem;
+}
+.mini-topBar {
   justify-content: flex-start;
-  padding-left: 3px;
 }
 
-.bottomBar {
+.mini-bottomBar {
   justify-content: flex-end;
-  padding-right: 3px;
-}
-.asideBar p {
-  padding-left: 4px;
 }
 
-.join-button {
-  padding: 7px 0px !important;
-  height: 32px;
-  width: 128px;
+.mini-topBar .mini-playerProfile {
+  padding-left: 0.3rem;
+}
+
+.mini-bottomBar .mini-playerProfile {
+  padding-right: 0.3rem;
+}
+
+.mini-asideBar p {
+  padding-left: 0.4rem;
+}
+
+.mini-board .join-button {
+  padding: 0.7rem 0rem !important;
+  height: 3.2rem;
+  width: 12.8rem;
   background-color: #00b87c;
-  border-radius: 0px;
-
   font-family: Lato;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 14px;
+  line-height: 1.4rem;
   letter-spacing: 0em;
   text-align: center;
-
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
-
-  background: #00b87c;
+  border-radius: 0rem;
 }
 
-.bottomBar .join-button {
-  align-self: flex-end;
+.mini-bottomBar a {
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .mini-board {
+    height: calc(34.8rem * 1.2);
+    width: calc(26.4rem * 1.25);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 1.25);
+    height: calc(26.4rem * 1.25);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 1.1);
+    height: calc(3.2rem * 1.1);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .mini-board {
+    height: calc(34.8rem * 1.1);
+    width: calc(26.4rem * 1.15);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 1.15);
+    height: calc(26.4rem * 1.15);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 1);
+    height: calc(3.2rem * 1);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .mini-board {
+    height: calc(34.8rem * 0.9);
+    width: calc(26.4rem * 0.95);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 0.9);
+    height: calc(26.4rem * 0.9);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 0.95);
+    height: calc(3.2rem * 0.95);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.1rem;
+  }
 }

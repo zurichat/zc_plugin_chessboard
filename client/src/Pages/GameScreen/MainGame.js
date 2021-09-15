@@ -1,11 +1,17 @@
-import React from 'react'
+import Chessboard from "../../components/ChessBoard/ChessBoard";
+import SpectatorSideBar from "../../components/SpectatorSideBar/SpectatorSideBar.js";
+import "./MainGame.css";
+import { BrowserRouter } from "react-router-dom";
 
 const MainGame = () => {
-    return (
-        <div className="mainGame">
-            <h1>Welcome to the Game!</h1>
-        </div>
-    )
-}
+  return (
+    <section className="main-game">
+      <Chessboard type="spectator" />
+      <BrowserRouter>
+        <SpectatorSideBar />
+      </BrowserRouter>
+    </section>
+  );
+};
 
-export default MainGame
+export default MainGame;

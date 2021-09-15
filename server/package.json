@@ -7,19 +7,29 @@
   "author": "Team Tesla",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^4.6.0",
-    "socket.io": "^4.2.0",
-    "uuid": "^8.3.2"
+    "joi": "^17.4.2",
+    "jscent": "^0.2.1",
+    "node-cache": "^5.1.2",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.12"
   },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "cd ../client && yarn install && yarn build"
+    "build": "cd ../client && yarn install && yarn build",
+    "lint": "eslint src/"
   }
 }
