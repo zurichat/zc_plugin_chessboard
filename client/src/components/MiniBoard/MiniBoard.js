@@ -15,7 +15,7 @@ function MiniBoard({ playerOne, playerTwo }) {
             <p className="mini-profile-name">Player 1: @{playerOne}</p>
           </div>
         ) : (
-          <Link to="/game_comments">
+          <Link to="/game_nocomments">
             <button className="join-button">Join as Player 1</button>
           </Link>
         )}
