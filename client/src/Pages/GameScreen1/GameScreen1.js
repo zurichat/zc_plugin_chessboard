@@ -14,8 +14,7 @@ const GameScreenWithoutComments = () => {
 
   return (
     <main>
-    
-       <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
+      <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
       <div id="chessboard_container">
         <ChessBoard type="player" />
@@ -23,10 +22,7 @@ const GameScreenWithoutComments = () => {
       <div id="side_container">
         <div className="btn_container">
           {" "}
-
-          
           <ExitButton handleClick={handleForfeitClick} />
-         
           {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
         </div>
         <div className="title">Comments</div>

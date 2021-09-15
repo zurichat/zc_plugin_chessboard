@@ -16,7 +16,6 @@ export default function GameScreen_WithComments() {
           <ExitButton />
         </div>
         <Comments />
-        
       </div>
     </main>
   );

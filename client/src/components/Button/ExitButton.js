@@ -23,5 +23,3 @@ function ExitButton({ handleClick }) {
 }
 
 export default ExitButton;
-
-
