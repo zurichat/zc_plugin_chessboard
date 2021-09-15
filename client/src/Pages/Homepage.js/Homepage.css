@@ -167,7 +167,14 @@ border: 1px solid #00B87C;
   }
 }
 
-@media (max-width: 1024px) {
+@media (min-width:1100px){
+  .chesshome-rules-holder{
+    margin: 2rem 0;
+    padding-right: 20rem;
+    text-align: right;
+    }
+}
+@media (max-width: 1100px) {
   .app__container {
     padding: 2rem 2rem;
   }
@@ -219,5 +226,4 @@ border: 1px solid #00B87C;
   }
 }
 
-@media (max-width: 500px) {
-}
+
