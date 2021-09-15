@@ -334,6 +334,8 @@ router.get("/:id", GameCtrl.getById);
  */
 router.get("/all/:userId", GameCtrl.getAllByUser);
 
+router.delete("/delete/:id", GameCtrl.delete);
+
 // Send messages to game -- NotImplemented
 // router.patch("/message",GameCtrl.Message);
 

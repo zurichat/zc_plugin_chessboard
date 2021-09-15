@@ -10,43 +10,64 @@ class GameController {
   // Create A Game
   async create(req, res) {
     try {
+      console.log("got here");
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
 
-      // Still in COmment because FetchByParameter doesn't work for some reason
-      // Logic for more than 6 games not being active
-      // const CreatedGames = await GameRepo.fetchByParameter({ status: 0 });
-      // const OngoingGames = await GameRepo.fetchByParameter({ status: 1 });
+      //Logic for more than 6 games not being active
+      const { data } = await GameRepo.fetchAll();
 
-      // console.log(CreatedGames);
-      // console.log(OngoingGames);
+      if (data.length >= 6) {
+        // look for completed game to reset and join as owner
+        let game = data.find((x) => x.status === 2);
+        if (!game)
+          return res
+            .status(400)
+            .send(response("No free boards right now", null, false));
 
-      // if ((CreatedGames.data.length + OngoingGames.data.length) > 6) {
-      //   return res
-      //     .status(201)
-      //     .send(response("More Than 6 Boards Exist Already", null, true));
-      // }
+        game = {
+          ...game,
+          owner: {
+            user_id,
+            user_name,
+            image_url,
+          },
+          moves: [],
+          messages: [],
+          spectators: [],
+          status: 0,
+        };
 
-      // Pass the request body to the schema
-      const game = await gameSchema.validateAsync({
-        owner: {
-          user_id,
-          user_name,
-          image_url,
-        },
-        moves: [],
-        messages: [],
-        spectators: [],
-        status: 0,
-      });
+        const updated = await GameRepo.update(game._id, game);
+        res
+          .status(201)
+          .send(response("Game created successfully", updated.data[0], true));
+      } else {
+        // create new game
 
-      // Save the game to the database
-      const gameDBData = await GameRepo.create(game);
+        // Pass the request body to the schema
+        const game = await gameSchema.validateAsync({
+          owner: {
+            user_id,
+            user_name,
+            image_url,
+          },
+          moves: [],
+          messages: [],
+          spectators: [],
+          status: 0,
+        });
 
-      // Return the game
-      res
-        .status(201)
-        .send(response("Game created successfully", gameDBData.data, true));
+        // Save the game to the database
+        const gameDBData = await GameRepo.create(game);
+
+        // Return the game
+        res
+          .status(201)
+          .send(
+            response("Game created successfully", gameDBData.data[0], true)
+          );
+      }
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, 500);
     }
@@ -141,9 +162,11 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
+
   // Fetch a single game
   async getById(req, res) {
     try {
+      console.log("here");
       // request an info from the user
       const game_id = req.params.id;
 
@@ -410,7 +433,7 @@ class GameController {
         return (
           game.owner.user_id == userId ||
           (game.opponent && game.opponent.user_id == userId) ||
-          (game.spectators?.length > 0 &&
+          (game.spectators.length > 0 &&
             game.spectators.find((spec) => spec.user_id == userId))
         );
       });
@@ -420,6 +443,22 @@ class GameController {
         .send(response("fetched user games successfully", userGames));
     } catch (error) {
       throw new CustomError(`Unable to fetch user games: ${error}`, 500);
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const game = await GameRepo.fetchOne(req.params.id);
+      if (!game.data)
+        res
+          .status(404)
+          .send(response("No such game found in the database", {}, false));
+
+      await GameRepo.delete(game.data._id, game.data);
+      
+      res.status(204).send(response("game deleted successfully", {}, false));
+    } catch (error) {
+      throw new CustomError(`Unable to delete game: ${error}`, 500);
     }
   }
 }

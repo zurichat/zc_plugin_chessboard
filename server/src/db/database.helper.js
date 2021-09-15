@@ -14,6 +14,8 @@ class DatabaseConnection {
     // Set Read Endpoint
     this.DB_READ_URL = DATABASE.ZC_CORE_DB_READ;
 
+    this.DB_DELETE_URL = DATABASE.DELETE_URL;
+
     // Set the default values for the DB operations
     this.DB_DEFAULTS_CONFIG = {
       plugin_id: DATABASE.PLUGIN_ID,
@@ -139,12 +141,13 @@ class DatabaseConnection {
 
     try {
       // Make the request
-      const response = await axios.put(
-        this.DB_WRITE_URL,
+      const response = await axios.post(
+        this.DB_DELETE_URL,
         JSON.stringify(this.DB_DEFAULTS_CONFIG)
       );
 
       // Return the response
+      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new CustomError(
