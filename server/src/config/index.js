@@ -17,6 +17,8 @@ module.exports = {
     ZC_CORE_DB_WRITE: "https://api.zuri.chat/data/write",
     // Endpoint for the database read operations
     ZC_CORE_DB_READ: "https://api.zuri.chat/data/read",
+    // endpoint for deleting data
+    DELETE_URL: "https://api.zuri.chat/data/delete",
   },
 
   // Fetch user zc_core endpoint
