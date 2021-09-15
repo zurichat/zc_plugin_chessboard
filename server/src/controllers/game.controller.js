@@ -439,7 +439,13 @@ class GameController {
       return res.status(404)
         .send(response("Game not found", null, false));
     }
-
+    
+    // if opponent hasn't joined game
+    if (!data.opponent) {
+      return res.status(400)
+        .send(response("waiting for opponent to join...", null, false))
+    }
+    
     // players should not be able to comment
     if (user_id === data.owner.user_id || user_id === data.opponent.user_id) {
       return res.status(400)
@@ -447,8 +453,7 @@ class GameController {
     }
     
     // incase user gets sloppy
-    const formattedComment = comment.trim();
-    if (!formattedComment) {
+    if (!comment || !comment.trim()) {
       return res.status(400)
         .send(response("comment cannot be empty", null, false))
     }
@@ -456,24 +461,21 @@ class GameController {
     const commentProps = {
       user_name,
       image_url,
-      text: formattedComment,
+      text: comment.trim(),
       timestamp: new Date().toLocaleString() // user_name & image_url from user info retrieved from db
       };
     
     // push to message collection
     // create comments data structure if none exist else update
-    if (!Array.isArray(data[0].comments) || !data[0].comments) {
-      data[0].comments = [];
+    if (!Array.isArray(data.comments) || !data.comments) {
+      data.comments = [];
     }
     
-    data[0].comments = 
-      data[0].comments.concat(commentProps);
+    data.comments = 
+      data.comments.concat(commentProps);
       
-    console.log(data[0])
-
-    //const dbResponse = await GameRepo.update(game_id, data[0]);
+    await GameRepo.update(game_id, { comments: data.comments });
     
-    //console.log(dbResponse);
     // publish to centrifugo
     const payload = {
       event: "comments",
