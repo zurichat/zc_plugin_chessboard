@@ -20,28 +20,22 @@ const GameScreenWithoutComments = ({ playerWait }) => {
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
       <div id="chessboard_container">
         <div className="gameheader-container">
-        <Header/>
+          <Header />
         </div>
-        <ChessBoard type="player" playerWait={playerWait}/>
+        <ChessBoard type="player" playerWait={playerWait} />
       </div>
       <div id="side_container">
-        {/* <div className="btn_container"> */}
-          {" "}
-          {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
+        {/* <div className="btn_container"> */}{" "}
+        {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
         {/* </div> */}
-
-
         <div className="title">
           <p>Comments</p>
         </div>
-        <div className="dummy">
-          {/* comments can go in here */}
-        </div>
+        <div className="dummy">{/* comments can go in here */}</div>
         <div className="exit_btn_container">
-        <ExitButton handleClick={handleForfeitClick} />
+          <ExitButton handleClick={handleForfeitClick} />
         </div>
       </div>
-      
     </main>
   );
 };
