@@ -2,7 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-
 .forfeit-container {
     position: fixed;
     top: 0;
@@ -13,6 +12,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    background: #000000e1;
 }
 
 .forfeit-modal{
@@ -21,26 +21,29 @@
     flex-direction: column;
     text-align: center;
     background-color: #fff;
-    width: 18vw;
-    height: 40vh;
+    width: 30vw;
+    height: 55vh;
     padding: 80px 100px 60px 100px;
     border-radius: 3px;
-    box-shadow:  0px 100px 80px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07),
+    0px 49px 35px rgba(0, 0, 0, 0.0460133),
+    0px 24.8165px 16.4998px rgba(0, 0, 0, 0.034856),
+    0px 13.729px 8.167px rgba(0, 0, 0, 0.0269394),
+    0px 7.56423px 3.94388px rgba(0, 0, 0, 0.0201337),
+    0px 3.35772px 1.53069px rgba(0, 0, 0, 0.0128302);
+    z-index: 1002;
 }
 
-.forfeit-header {
-    margin-top: .1em;
-}
-
-.profile img {
-    width: 8.76vw;
+.profile {
+    width: 6vw;
+    padding-bottom: 30px;
 }
 
 .forfeit-content-text {
     text-align: center;
     font-family: 'Lato', sans-serif;
-    font-size: 1.25rem;
-    font-weight: normal;
+    font-size: 20px;
+    font-weight: 400;
     color: #505050;
     line-height: 24px;
     padding-bottom: 32px;
@@ -52,15 +55,15 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-     padding: 1.2rem 5rem; 
+    padding: 1.2rem 5rem; 
     font-size: 1.4rem;
     letter-spacing: 1px;
- }
+}
 
 .cp button {
     text-align: center;
-    height: 6.5vh;
-    width: 15.21vw;
+    height: 6vh;
+    width: 12vw;
     background-color: #27ae60;
     border: 1px solid #27ae60;
     border-radius: 3px;
@@ -70,7 +73,7 @@
 }
 
 .ys button {
-    height: 6.5vh;
+    height: 6vh;
     width: 8vw;
     background-color: #fff;
     border: 1px solid #b8003c;
@@ -83,7 +86,7 @@
 .yes {
     color: #b8003c;
     font-family: 'Lato', sans-serif;
-    font-size: 0.875rem;
+    font-size: 14px;
     line-height: 17px;
     font-weight: 500;
 }
@@ -91,7 +94,7 @@
 .continue {
     color: #fff;
     font-family: 'Lato', sans-serif;
-    font-size: 0.875rem;
+    font-size: 14px;
     line-height: 17px;
     font-weight: 500;
 }
@@ -102,15 +105,11 @@
     .forfeit-modal {
         text-align: center;
         background-color: #fff;
-        width: 20vw;
-        height: 20vw;
+        width: 28vw;
+        height: 60vh;
         padding: 50px 50px;
         border-radius: 3px;
         box-shadow:  0px 100px 80px rgba(0, 0, 0, 0.07);
-    }
-
-    .forfeit-header {
-        margin-top: .5em;
     }
 
     .forfeit-content-title {
@@ -125,7 +124,7 @@
     .cp button {
         text-align: center;
         height: 6.5vh;
-        width: 12vw;
+        width: 12.3vw;
         background-color: #27ae60;
         border: 1px solid #27ae60;
         border-radius: 3px;
@@ -136,7 +135,7 @@
 
     .ys button {
         height: 6.5vh;
-        width: 6vw;
+        width: 8vw;
         background-color: #fff;
         border: 1px solid #b8003c;
         border-radius: 3px;
@@ -148,7 +147,7 @@
     .yes {
         color: #b8003c;
         font-family: 'Lato', sans-serif;
-        font-size: 0.875rem;
+        font-size: 14px;
         line-height: 17px;
         font-weight: 500;
     }
@@ -156,7 +155,7 @@
     .continue {
         color: #fff;
         font-family: 'Lato', sans-serif;
-        font-size: 0.875rem;
+        font-size: 14px;
         line-height: 17px;
         font-weight: 500;
     }
@@ -166,19 +165,23 @@
     .forfeit-modal {
         text-align: center;
         background-color: #fff;
-        width: 25vw;
-        height: 20vw;
+        width: 35vw;
+        height: 55vh;
         padding: 40px 50px 80px 50px;
     }
 
     .forfeit-content-text {
-        font-size: 1.3rem;
-        font-weight: normal;
+        font-size: 1.7rem;
+        font-weight: 400;
         line-height: 24px;
     }
 
     .cp button {
-        width: 12vw;
+        width: 12.3vw;
+        padding: 9px 4px;
+    }
+    .ys button {
+        width: 10vw;
         padding: 9px 4px;
     }
 }
@@ -188,116 +191,115 @@
     .forfeit-modal {
         text-align: center;
         background-color: #fff;
-        width: 25vw;
-        height: 30vh;
+        width: 40vw;
+        height: 50vh;
         padding: 30px 70px 80px 70px;
     }
 
+    .profile {
+        width: 9vw;
+    }
     .forfeit-content-text {
-        font-size: 1.13rem;
+        font-size: 1.5rem;
         line-height: 27px;
     }
 
     .cp button {
-        width: 17.8vw;
+        width: 15vw;
         padding: 9px 4px;
     }
 
     .ys button {
-        width: 10vw;
+        width: 12vw;
         padding: 9px 4px;
     }
 
     .yes {
-        height: 4.5vw;
-        width: 12vw;
-        font-size: .9rem;
+        font-size: 1.2rem;
         line-height: 17px;
     }
 
     .continue {
-        height: 4.5vw;
-        width: 12vw;
-        font-size: .9rem;
+        font-size: 1.2rem;
         line-height: 17px;
     }
 }
 
 @media (min-width: 374px) and (max-width: 480px) {
     .forfeit-modal {
-        width: 22vw;
-        height: 26vh;
+        width: 70vw;
+        height: 47vh;
         padding: 30px 90px 100px;
     }
 
-    .profile img {
-        width: 65px;
+    .profile {
+        width: 15vw;
     }
 
     .forfeit-content-text {
-        font-size: 1rem;
+        font-size: 1.4rem;
         line-height: 20px;
-        font-weight: normal;
+        font-weight: 400;
         padding-bottom: 5px;
     }
 
     .cp button {
-        width: 32vw;
+        width: 29vw;
         padding: 9px 4px;
     }
 
     .ys button {
-        width: 15vw;
+        width: 20vw;
         padding: 9px 4px;
     }
 }
 
 @media (min-width: 319px) and (max-width: 376px) {
     .forfeit-modal {
-        width: 22vw;
-        height: 26vh;
+        width: 80vw;
+        height: 45vh;
         padding: 30px 90px 70px;
     }
 
     .forfeit-content-text {
-        font-size: .9rem;
+        font-size: 1.5rem;
         line-height: 17px;
     }
 
     .cp button {
-        width: 30vw;
+        width: 33vw;
         padding: 9px 4px;
     }
 
     .ys button {
-        width: 15vw;
+        width: 22vw;
         padding: 9px 4px;
     }
 }
 @media(max-width: 320px) {
     .forfeit-modal {
-        width: 22vw;
-        height: 26vh;
+        width: 85vw;
+        height: 47vh;
         padding: 30px 90px 95px;
     }
-    .profile img {
-        width: 65px;
+    .profile  {
+        width: 20vw;
     }
 
     .forfeit-content-text {
-        font-size: 1rem;
+        font-size: 1.5rem;
         line-height: 17px;
-        font-weight: normal;
+        font-weight: 400;
         padding-bottom: 5px;
     }
 
     .cp button {
-        width: 36vw;
-        padding: 9px 4px;
+        width: 38vw;
+        padding: 9px 6px;
     }
 
     .ys button {
-        width: 15vw;
-        padding: 9px 4px;
+        width: 25vw;
+        padding: 9px 6px;
     }
 }
