@@ -1,92 +1,7 @@
-.chesshome-container{
+.chesshome-container {
   overflow-x: hidden;
 }
-header {
-  background: #00B87C;
-  color: white;
-}
 
-.nav {
-  min-height: 10vh;
-  display: flex;
-  width: 97%;
-  padding: 1rem;
-  margin: auto;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-#chesshome-search{
-  padding: 10px;
-  width: 50%;
-  border-radius: 5px;
-  border: 1px solid rgb(233, 232, 232);
- 
-}
-
-#chesshome-flex{
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.arrow {
-  border: solid #fff;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-
-#arrow-button{
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
-}
-
-.chesshome-nav{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chesshome-profileImg{
-  position: relative;
-}
-
-.chesshome-profile{
-  position: absolute;
-  border-radius: 4px;
-  top: 6%;
-}
-
-.chesshome-profile.profileOne{
-  left: 2%;
-  z-index: 1000;
-}
-
-.chesshome-profile.profileTwo{
-  left: 21%;
-  z-index: 500;
-}
-
-.chesshome-profile.profileThree{
-  left: 41%;
-}
-
-.text-300{
-  position: absolute;
-  top: 15%;
-  right: 5%;
-  font-size: 16px;
-  font-weight: bold;
-  z-index: 100;
-  color: #000;
-}
 .app__container {
   display: flex;
   flex-wrap: wrap;
@@ -96,27 +11,26 @@ header {
   padding-bottom: 4rem;
 }
 
-#pawnLogo{
+#pawnLogo {
   height: 20px;
 }
 
-.chesshome-rules-holder{
+.chesshome-rules-holder {
   height: 32px;
-width: 100%;
-margin: 2rem;
-padding-right: 13rem;
-text-align: right;
+  width: 100%;
+  margin: 2rem;
+  padding-right: 13rem;
+  text-align: right;
 }
 
-.chesshome-rules{
+.chesshome-rules {
   height: 40px;
-width: 208px;
-border-radius: 4px;
-padding: 5px 34px;
-color:#00B87C;
-background-color: #fff;
-border: 1px solid #00B87C;
-
+  width: 208px;
+  border-radius: 4px;
+  padding: 5px 34px;
+  color: #00b87c;
+  background-color: #fff;
+  border: 1px solid #00b87c;
 }
 
 .mini-one,
@@ -160,19 +74,19 @@ border: 1px solid #00B87C;
   #logo {
     padding: 1rem;
   }
-  .chesshome-rules-holder{
-  margin: 2rem 0;
-  padding-right: 0;
-  text-align: center;
+  .chesshome-rules-holder {
+    margin: 2rem 0;
+    padding-right: 0;
+    text-align: center;
   }
 }
 
-@media (min-width:1100px){
-  .chesshome-rules-holder{
+@media (min-width: 1100px) {
+  .chesshome-rules-holder {
     margin: 2rem 0;
     padding-right: 20rem;
     text-align: right;
-    }
+  }
 }
 @media (max-width: 1100px) {
   .app__container {
@@ -225,5 +139,3 @@ border: 1px solid #00B87C;
     flex-basis: 100%;
   }
 }
-
-
