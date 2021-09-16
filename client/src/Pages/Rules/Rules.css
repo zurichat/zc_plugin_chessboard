@@ -198,7 +198,6 @@
 @media (width: 1024px){
     .rules .top .pieces {
         align-items: center;
-        justify-content: flex-start;
     }
 
     .rules .top .pieces .white img{
