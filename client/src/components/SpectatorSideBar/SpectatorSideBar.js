@@ -10,8 +10,8 @@ const SpectatorSideBar = () => {
         <NavLink exact activeClassName="active" className="nav-link" to="/game">
           Comments
         </NavLink>
-        <div activeClassName="close" className="nav-link">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div activeClassName="closed" className="close">
+        <svg width="20" height="22" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M13.5 4.5L4.5 13.5" stroke="white" strokeWidth="1.56648" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M4.5 4.5L13.5 13.5" stroke="white" strokeWidth="1.56648" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>

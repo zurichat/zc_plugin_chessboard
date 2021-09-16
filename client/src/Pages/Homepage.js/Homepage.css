@@ -1,16 +1,5 @@
-header {
-  background: #131c27;
-  color: white;
-}
-
-.nav {
-  min-height: 10vh;
-  display: flex;
-  width: 90%;
-  padding: 1rem;
-  margin: auto;
-  align-items: center;
-  flex-wrap: wrap;
+.chesshome-container {
+  overflow-x: hidden;
 }
 
 .app__container {
@@ -20,6 +9,28 @@ header {
   padding-right: 12rem;
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+#pawnLogo {
+  height: 20px;
+}
+
+.chesshome-rules-holder {
+  height: 32px;
+  width: 100%;
+  margin: 2rem;
+  padding-right: 13rem;
+  text-align: right;
+}
+
+.chesshome-rules {
+  height: 40px;
+  width: 208px;
+  border-radius: 4px;
+  padding: 5px 34px;
+  color: #00b87c;
+  background-color: #fff;
+  border: 1px solid #00b87c;
 }
 
 .mini-one,
@@ -63,9 +74,21 @@ header {
   #logo {
     padding: 1rem;
   }
+  .chesshome-rules-holder {
+    margin: 2rem 0;
+    padding-right: 0;
+    text-align: center;
+  }
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 1100px) {
+  .chesshome-rules-holder {
+    margin: 2rem 0;
+    padding-right: 20rem;
+    text-align: right;
+  }
+}
+@media (max-width: 1100px) {
   .app__container {
     padding: 2rem 2rem;
   }
@@ -115,7 +138,4 @@ header {
     border-left: none;
     flex-basis: 100%;
   }
-}
-
-@media (max-width: 500px) {
 }

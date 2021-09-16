@@ -28,10 +28,10 @@
 }
 
 .mini-profile-image {
-  background: url("../../assets/people.png");
+  background: url("../../assets/Rectangle\ 892.png");
   height: 2.05rem;
   width: 2.05rem;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 .mini-profile-image-bg {

@@ -21,10 +21,12 @@
     background:white;
     display: flex;
     margin: 1rem 0;
+  
 }
 .specNameTime {
  /* line-height: 3rem; */
  margin: 0 .5rem;
+ width: 80%;
 }
 .spectatorName {
     font-size: 15px;
@@ -48,6 +50,8 @@
 }
 .spectatorMessage {
     font-size: 15px;
+    width: 100%;
+    word-wrap: break-word;
     /* line-height: 2rem; */
     font-weight: normal;
     color: rgb(63, 63, 63);
@@ -117,7 +121,6 @@ input::placeholder{
     margin-right: 1rem;
     width: 2rem;
     cursor: pointer;
-    /* color: rgb(209, 203, 203) !important; */
 }
 
 .feather {
@@ -125,9 +128,23 @@ input::placeholder{
     width: 3rem !important;
 }
 
-.down{
+.icon-down{
     border-left: 2px solid rgba(97, 96, 97, 1);
     width: 3rem !important;
+}
+
+@media only screen and (max-width: 420px) {
+    .chatContainer {
+        width:100%;
+        overflow-y: auto;
+        font-family: 'Lato', sans-serif;
+        padding: 1.5rem 1rem 1rem .5rem;   
+    }
+}
+@media only screen and (max-width: 320px) {
+    .inputIconsleft > svg , .inputIconsright> svg{
+        width: 1rem;
+    }
 }
 
 

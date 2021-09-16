@@ -4,6 +4,7 @@
 
 .side-bar {
   /* width: 368px; */
+
   display: flex;
   flex-direction: column;
    /* border-left: 1px solid #bebcbc;  */
@@ -13,7 +14,7 @@
 
 .side-bar-nav {
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 3rem 1rem 1.5rem;
   padding-bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -21,6 +22,7 @@
   color: #808080;
   background-color: #00b87c;
   margin-left: .5rem;
+  height: 5rem;
 }
 
 /* .nav-link:hover{
@@ -40,6 +42,9 @@
   color: white;
 }
 
+.close {
+  margin-top: .4rem;
+}
 /* .active::before {
   content: "";
   position: absolute;

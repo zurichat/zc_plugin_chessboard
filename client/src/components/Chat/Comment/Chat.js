@@ -151,7 +151,7 @@ function Comment() {
                   <path fillRule="evenodd" clipRule="evenodd" d="M16.125 9.375L1.875 14.625L4.875 9.375L1.875 4.125L16.125 9.375Z" stroke="#333333" strokeWidth="1.22693" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
 
-                  <svg className="down" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="icon-down" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.49988 6.75L8.99988 11.25L13.4999 6.75" stroke="#333333" strokeWidth="1.22693" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
               </div>

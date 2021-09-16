@@ -12,11 +12,12 @@ class ResultController {
     try {
       let resultsDBData = data.map((game) => {
         return {
-          // eslint-disable-next-line no-constant-condition
-          result: (game.is_owner_winner =
-            null || game.is_owner_winner == undefined ? "Draw" : "Win"),
+          result:
+            game.is_owner_winner == null || game.is_owner_winner == undefined
+              ? "Draw"
+              : "Win",
           winner:
-            game.is_owner_winner == null
+            game.is_owner_winner == null || game.is_owner_winner == undefined
               ? {}
               : game.is_owner_winner == true
               ? game.winner
@@ -35,14 +36,32 @@ class ResultController {
 
   // Get A Result
   async getById(req, res) {
-    const { gameId } = req.params;
-    const { data } = await GameRepo.fetchAll();
     try {
-      let result = data.find((game) => game._id == gameId);
-      if (!result) {
+      const { gameId } = req.params;
+      const { data } = await GameRepo.fetchAll();
+      const game = data.find((game) => game._id == gameId);
+      if (!game) {
         throw new CustomError(`Result with id: ${gameId} not found`, 404);
       }
-      res.status(200).send(response("Result retrieved successfully", result));
+      res.status(200).send(
+        response(
+          "Result retrieved successfully",
+          {
+            result:
+              game.is_owner_winner == null || game.is_owner_winner == undefined
+                ? "Draw"
+                : "Win",
+            winner:
+              game.is_owner_winner == null || game.is_owner_winner == undefined
+                ? {}
+                : game.is_owner_winner == true
+                ? game.winner
+                : game.opponent,
+            game_id: game._id,
+          },
+          true
+        )
+      );
     } catch (error) {
       throw new CustomError(`Unable to get Results by: ${error}`, 500);
     }
