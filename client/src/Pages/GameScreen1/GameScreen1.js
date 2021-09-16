@@ -18,31 +18,19 @@ const GameScreenWithoutComments = () => {
   };
 
   return (
-    
     <main>
-
       <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
-
 
       <div id="chessboard_container">
         <GameScreenNav />
 
-       
-        
+        <div className="leave__mobile">
+          <img src={LeftArrow} />
+          <h2> Chess Room </h2>
 
-         <div className ="leave__mobile">
-           <img src={LeftArrow} />
-           <h2> Chess Room </h2>
-
-           <LeaveButton handleClick={handleForfeitClick} />
-           
-           
-         </div>
-
-     
-
-          
+          <LeaveButton handleClick={handleForfeitClick} />
+        </div>
 
         <ChessBoard type="player" />
       </div>
@@ -54,15 +42,13 @@ const GameScreenWithoutComments = () => {
 
         <div className="btn_container">
           {" "}
-         
           <ExitButton handleClick={handleForfeitClick} />
           {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
         </div>
         <div className="title">Comments</div>
       </div>
-
     </main>
-      );
+  );
 };
 
 export default GameScreenWithoutComments;
