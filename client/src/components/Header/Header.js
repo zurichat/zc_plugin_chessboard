@@ -7,17 +7,16 @@ import profileTwo from "../../assets/Rectangle 894.png";
 import profileThree from "../../assets/Rectangle 896.png";
 import pawnLogo from "../../assets/Union.png";
 
-
-const Profile = ({className,src})=>{
-    return (
+const Profile = ({ className, src }) => {
+  return (
     <div className={className}>
-    <img
-      src={src}
-      style={{ border: "1px solid #fff", borderRadius: "4px" }}
-    />
-  </div>
-    );
-  };
+      <img
+        src={src}
+        style={{ border: "1px solid #fff", borderRadius: "4px" }}
+      />
+    </div>
+  );
+};
 
 const Header = () => {
   return (

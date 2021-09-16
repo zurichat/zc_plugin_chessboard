@@ -3,11 +3,10 @@ import MiniBoard from "../../components/MiniBoard/MiniBoard";
 import "./Homepage.css";
 import Header from "../../components/Header/Header";
 
-
 function Homepage() {
   return (
     <div className="chesshome-container">
-     <Header />
+      <Header />
       <div className="chesshome-rules-holder">
         <button className="chesshome-rules">Game Rules</button>
       </div>
