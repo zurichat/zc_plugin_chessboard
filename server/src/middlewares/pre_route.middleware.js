@@ -25,13 +25,23 @@ module.exports = (app) => {
   // Express body parser
   app.use(express.urlencoded({ extended: true }));
 
-  // Set Express Engine for Actual react code build 
+  // Set Express Engine for Actual react code build
   app.use(
     express.static(path.join(__dirname, "..", "..", "..", "chess", "dist"))
   );
 
   app.get("/zuri-zuri-plugin-chessboard.js", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "..", "..", "chess", "dist", "zuri-zuri-plugin-chessboard.js"));
+    res.sendFile(
+      path.join(
+        __dirname,
+        "..",
+        "..",
+        "..",
+        "chess",
+        "dist",
+        "zuri-zuri-plugin-chessboard.js"
+      )
+    );
   });
 
   // Create express static engine for our zuri_main mini app
