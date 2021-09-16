@@ -12,19 +12,21 @@ import Games from "./components/Games/Games";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 
 function App() {
-   
-  const [ playerWait, setPlayerWait] = useState(false);
+  const [playerWait, setPlayerWait] = useState(false);
 
   const handlePlayerWait = () => {
     setPlayerWait(!playerWait);
   };
 
-
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <HomePage setPlayerWait={handlePlayerWait}/>} />
+          <Route
+            exact
+            path="/"
+            render={() => <HomePage setPlayerWait={handlePlayerWait} />}
+          />
           <Route exact path="/game" render={MainGame} />
           <Route exact path="/game/games" render={Games} />
           <Route

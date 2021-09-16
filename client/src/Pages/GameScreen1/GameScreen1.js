@@ -14,7 +14,6 @@ const GameScreenWithoutComments = ({ playerWait }) => {
     setForfeitModal(!openForfeitModal);
   };
 
-
   return (
     <main>
       <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
