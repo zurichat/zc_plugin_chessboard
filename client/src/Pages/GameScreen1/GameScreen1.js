@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import ExitButton from "../../components/Button/ExitButton";
 import ChessBoard from "../../components/ChessBoard/ChessBoard";
+// import Comments from "../../components/Comments/Comments";
+import Header from "../../components/Header/Header";
 import Exit from "../../components/Modals/ExitModal/Exit";
 import "./GameScreen1.css";
 
@@ -18,16 +20,29 @@ const GameScreenWithoutComments = ({ playerWait }) => {
       <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
       <div id="chessboard_container">
+        <div className="gameheader-container">
+        <Header/>
+        </div>
         <ChessBoard type="player" playerWait={playerWait}/>
       </div>
       <div id="side_container">
-        <div className="btn_container">
+        {/* <div className="btn_container"> */}
           {" "}
-          <ExitButton handleClick={handleForfeitClick} />
           {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
+        {/* </div> */}
+
+
+        <div className="title">
+          <p>Comments</p>
         </div>
-        <div className="title">Comments</div>
+        <div className="dummy">
+          {/* comments can go in here */}
+        </div>
+        <div className="exit_btn_container">
+        <ExitButton handleClick={handleForfeitClick} />
+        </div>
       </div>
+      
     </main>
   );
 };

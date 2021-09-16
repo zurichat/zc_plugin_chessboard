@@ -27,7 +27,7 @@ const ChessBoard = ({ type, playerWait}) => {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 538;
+    return screenWidth < 560 ? screenWidth * 0.85 : 475;
   };
 
   const customPieces = () => {
@@ -85,7 +85,7 @@ const ChessBoard = ({ type, playerWait}) => {
         </div>
 
         <PlayerName
-          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
+          style={{ paddingTop: "38px", justifyContent: "flex-end" }}
           name={playerWait ? "Waiting for player 2" : "Bombos"}
         />
       </div>
