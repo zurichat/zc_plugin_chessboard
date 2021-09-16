@@ -18,9 +18,6 @@ function ExitButton({ handleClick }) {
       >
         Exit{" "}
       </button>
-
-      
-
     </div>
   );
 }
