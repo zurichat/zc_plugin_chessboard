@@ -16,7 +16,7 @@ function ExitButton({ handleClick }) {
         className="exit-button forfeit-button"
         onClick={() => handleClick()}
       >
-        Exit Game{" "}
+        Exit{" "}
       </button>
     </div>
   );

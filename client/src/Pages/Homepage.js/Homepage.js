@@ -1,16 +1,18 @@
 import React from "react";
 import MiniBoard from "../../components/MiniBoard/MiniBoard";
 import "./Homepage.css";
-import profileImg from "../../assets/Rectangle 936.png";
-import profileOne from "../../assets/Rectangle 892.png";
-import profileTwo from "../../assets/Rectangle 894.png";
-import profileThree from "../../assets/Rectangle 896.png";
-import pawnLogo from "../../assets/Union.png";
+// import profileImg from "../../assets/Rectangle 936.png";
+// import profileOne from "../../assets/Rectangle 892.png";
+// import profileTwo from "../../assets/Rectangle 894.png";
+// import profileThree from "../../assets/Rectangle 896.png";
+// import pawnLogo from "../../assets/Union.png";
+import Navbar from "./Navbar";
 
 function Homepage() {
   return (
     <div className="chesshome-container">
-      <div className="nav chesshome-nav">
+      <Navbar />
+      {/* <div className="nav chesshome-nav">
         <input type="text" placeholder="Search" id="chesshome-search" />
         <div>
           <img src={profileOne} />
@@ -51,7 +53,7 @@ function Homepage() {
             <p className="text-300">300</p>
           </div>
         </nav>
-      </header>
+      </header> */}
       <div className="chesshome-rules-holder">
         <button className="chesshome-rules">Game Rules</button>
       </div>
