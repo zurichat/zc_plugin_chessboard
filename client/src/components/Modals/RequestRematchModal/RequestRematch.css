@@ -1,0 +1,84 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+
+.RequestRematch__container {
+    border: 2px solid black;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000 !important;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.RequestRematch__modal{
+    
+    background-color: #ffffff;
+     display: flex; 
+    text-align: center;
+     flex-direction: column; 
+     gap: 2rem;
+    padding: 9.5rem 0rem;
+    width: 35%;
+    border: 2px solid yellow;
+    
+    border-radius: 5px;
+}
+
+.RequestRematch__text{
+    font-size: 18px;
+    margin: 0 auto;
+    width: 70%;
+    text-align: center;
+}
+.RequestRematch__footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+}
+
+.RequestRematch__button{
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid;
+    border-radius: 2px;
+    padding: 0;
+     padding: 1.2rem 5rem; 
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+ }
+
+.RequestRematch__button:hover{
+    opacity: 0.8;
+}
+
+.RequestRematch__button--Accept{
+     background: rgba(184, 0, 60, 1);
+    border-color: rgba(184, 0, 60, 1);
+    color: #ffffff;
+}
+
+.RequestRematch__button--Accept:hover,
+.RequestRematch__button--Accept:focus{
+    background: transparent;
+    color: black;
+    
+}
+
+.RequestRematch__button--Decline{
+    color: black;
+    border-color: rgba(39, 174, 96, 1);
+}
+
+.forfeit__button--Decline:hover,
+.forfeit__button--Decline:focus{
+    background:  rgba(39, 174, 96, 1);
+    color: #fff;
+}
