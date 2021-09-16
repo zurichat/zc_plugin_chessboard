@@ -6,6 +6,7 @@ import profileOne from "../../assets/Rectangle 892.png";
 import profileTwo from "../../assets/Rectangle 894.png";
 import profileThree from "../../assets/Rectangle 896.png";
 import pawnLogo from "../../assets/Union.png";
+import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
@@ -53,7 +54,7 @@ function Homepage() {
         </nav>
       </header>
       <div className="chesshome-rules-holder">
-        <button className="chesshome-rules">Game Rules</button>
+        <Link to="/rules"><button className="chesshome-rules">Game Rules</button></Link>
       </div>
       <div className="app__container">
         <div className="mini-one">
