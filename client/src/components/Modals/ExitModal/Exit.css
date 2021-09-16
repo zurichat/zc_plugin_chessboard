@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 
-.forfeit__container {
+.exit__container {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -16,10 +16,11 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.forfeit__modal{
+.exit__modal{
     background-color: #ffffff;
      display: flex; 
     text-align: center;
+    justify-content: center;
      flex-direction: column; 
      gap: 2rem;
     padding: 9.5rem 0rem;
@@ -28,20 +29,26 @@
     border-radius: 5px;
 }
 
-.forfeit__text{
+.exit__text{
     font-size: 18px;
     margin: 0 auto;
     width: 70%;
     text-align: center;
 }
 
-.forfeit__footer{
+.exit__footer{
     display: flex;
     justify-content: center;
     gap: 5%;
 }
 
-.forfeit__button{
+.exit__modal .profile {
+    display: inline-block;
+    width: 6vw;
+    padding-bottom: 30px;
+}
+
+.exit__button{
     display: inline-block;
     background-color: transparent;
     border: 1px solid;
@@ -52,49 +59,49 @@
     letter-spacing: 1px;
  }
 
-.forfeit__button:hover{
+.exit__button:hover{
     opacity: 0.8;
 }
 
-.forfeit__button--yes{
+.exit__button--yes{
      background: rgba(184, 0, 60, 1);
     border-color: rgba(184, 0, 60, 1);
     color: #ffffff;
 }
 
-.forfeit__button--yes:hover,
-.forfeit__button--yes:focus{
+.exit__button--yes:hover,
+.exit__button--yes:focus{
     background: transparent;
     color: black;
     
 }
 
-.forfeit__button--no{
+.exit__button--no{
     color: black;
     border-color: rgba(39, 174, 96, 1);
 }
 
-.forfeit__button--no:hover,
-.forfeit__button--no:focus{
+.exit__button--no:hover,
+.exit__button--no:focus{
     background:  rgba(39, 174, 96, 1);
     color: #fff;
 }
 
 @media (max-width: 1025px) and (max-width: 1440px) {   
-.forfeit__modal{
+.exit__modal{
     width: 50%;
 }
 }
 
 @media (max-width: 769px) and (max-width: 1024px) {
-    .forfeit__modal{
+    .exit__modal{
         width: 80%;
     }
 
 }
 
 @media (max-width: 420px) and (max-width: 480px) {
-     .forfeit__modal {
+     .exit__modal {
          width: 90%;
         }
 }
