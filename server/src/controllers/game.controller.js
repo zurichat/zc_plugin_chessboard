@@ -186,15 +186,14 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
+
   // Piece movement
   async pieceMove(req, res) {
     try {
       // get data from body
       const { game_id, user_id, position_fen, board_state } = req.body;
-
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id);
-
       // Check if the game exists
       if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
@@ -220,7 +219,11 @@ class GameController {
       // build payload
       const payload = {
         event: "piece_moved",
-        user_id,
+        playerId: user_id,
+        nextPlayerId:
+          gameDBData.data.owner.user_id == user_id
+            ? gameDBData.data.opponent.user_Id
+            : gameDBData.data.owner.user_id,
         position_fen,
         board_state,
       };
@@ -233,6 +236,7 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
       return res.status(200).send(response("pieced moved", updated, true));
     } catch (error) {
+      console.log(error);
       throw new CustomError(`Failed to move piece${error}`, 500);
     }
   }
