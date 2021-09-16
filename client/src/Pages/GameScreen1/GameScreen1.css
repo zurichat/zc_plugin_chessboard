@@ -177,10 +177,13 @@ header {
   h2{
     font-size: 17px;    
   }
- h3{
-    font-size: 15px; 
-    color: #E70B0B; 
-    cursor: pointer;  
+ 
+
+  .remove__exit{
+    display: none;
   }
 
+  .navbar-profilepix{
+    display: none;
+  }
   }

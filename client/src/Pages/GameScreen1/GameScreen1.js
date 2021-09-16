@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import ExitButton from "../../components/Button/ExitButton";
+import LeaveButton from "../../components/Button/LeaveButton";
 import ChessBoard from "../../components/ChessBoard/ChessBoard";
 import Exit from "../../components/Modals/ExitModal/Exit";
 import Navbar from "../Homepage.js/Navbar";
@@ -29,7 +30,8 @@ const GameScreenWithoutComments = () => {
            <img src={LeftArrow} />
            <h2> Chess Room </h2>
 
-           <h3  > Leave </h3>
+           <LeaveButton handleClick={handleForfeitClick} />
+           
            
          </div>
 
@@ -49,7 +51,7 @@ const GameScreenWithoutComments = () => {
 
         <div className="btn_container">
           {" "}
-          
+         
           <ExitButton handleClick={handleForfeitClick} />
           {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
         </div>

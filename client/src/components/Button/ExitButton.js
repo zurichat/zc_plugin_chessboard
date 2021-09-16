@@ -11,13 +11,16 @@ import "./Button.css";
 
 function ExitButton({ handleClick }) {
   return (
-    <div>
+    <div className="exit__button">
       <button
         className="exit-button forfeit-button"
         onClick={() => handleClick()}
       >
         Exit{" "}
       </button>
+
+      
+
     </div>
   );
 }

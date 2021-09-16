@@ -92,10 +92,16 @@
   opacity: 0.89;
 }
 
+.exit__button h3{
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
-  .exit-button {
-    font-size: 1.8rem;
-    padding: 1.5rem;
-    width: 20rem;
+  
+
+
+  .exit-button{
+    display: none;
   }
+
 }
