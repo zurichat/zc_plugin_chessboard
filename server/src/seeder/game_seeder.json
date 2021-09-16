@@ -1,0 +1,71 @@
+[
+    {
+        "owner": {
+            "user_id": "ec09072c-70a3-44ad-8ef9-7425ce133120",
+            "username": "Welbie",
+            "imageUrl": "http://dummyimage.com/188x100.png/dddddd/000000"
+        },
+        "opponent": {
+            "user_id": "d1a0686b-604d-4e65-9369-d46c30629c45",
+            "username": "Marjorie",
+            "imageUrl": "http://dummyimage.com/229x100.png/dddddd/000000"
+        },
+        "start_time":"5/4/2021",
+        "end_time":"10/19/2020",
+        "moves":[],
+        "spectators":[
+            {
+                "user_id": "085fc3b2-b936-4eb2-8217-fcc5c0a33168",
+                "username": "Pansie",
+                "imageUrl": "http://dummyimage.com/199x100.png/dddddd/000000"
+            }
+        ],
+        "messages":[],
+        "status":1,
+        "is_winner_owner":false
+    },
+    {
+        "owner": {
+            "user_id": "085fc3b2-b936-4eb2-8217-fcc5c0a33168",
+            "username": "Pansie",
+            "imageUrl": "http://dummyimage.com/199x100.png/dddddd/000000"
+        },
+        "opponent": {
+            "user_id": "d1a0686b-604d-4e65-9369-d46c30629c45",
+            "username": "Marjorie",
+            "imageUrl": "http://dummyimage.com/229x100.png/dddddd/000000"
+        },
+        "start_time":"5/4/2021",
+        "end_time":"10/19/2020",
+        "moves":[],
+        "spectators":{},
+        "messages":[],
+        "status":1,
+        "is_winner_owner":false
+    },
+    {
+        "owner": {
+            "user_id": "ec09072c-70a3-44ad-8ef9-7425ce133120",
+            "username": "Welbie",
+            "imageUrl": "http://dummyimage.com/188x100.png/dddddd/000000"
+        },
+        "opponent": {
+            "user_id": "085fc3b2-b936-4eb2-8217-fcc5c0a33168",
+            "username": "Pansie",
+            "imageUrl": "http://dummyimage.com/199x100.png/dddddd/000000"
+        },
+        "start_time":"5/4/2021",
+        "end_time":"10/19/2020",
+        "moves":[],
+        "spectators":[
+            {
+                "user_id": "d1a0686b-604d-4e65-9369-d46c30629c45",
+                "username": "Marjorie",
+                "imageUrl": "http://dummyimage.com/229x100.png/dddddd/000000"
+            }
+        ],
+        "messages":[],
+        "status":1,
+        "is_winner_owner":false
+    }
+]

@@ -10,12 +10,17 @@ module.exports = {
   // Database Credentials
   DATABASE: {
     // Get Our PluginID from ENV or use the test_id
-    PLUGIN_ID: process.env.PLUGIN_ID || "6132482f569dbbb7ce5b4fe5",
+    PLUGIN_ID: process.env.PLUGIN_ID || "614101ec6173056af01b4cc2",
     // Get Our PluginID from ENV or use the test_id
-    ORGANISATION_ID: process.env.ORGANISATION_ID || "612a3a914acf115e685df8e3",
+    ORGANISATION_ID: process.env.ORGANISATION_ID || "6133c5a68006324323416896",
     // Endpoint for the database write operations
-    ZC_CORE_DB_WRITE: "https://zccore.herokuapp.com/data/write",
+    ZC_CORE_DB_WRITE: "https://api.zuri.chat/data/write",
     // Endpoint for the database read operations
-    ZC_CORE_DB_READ: "https://zccore.herokuapp.com/data/read",
+    ZC_CORE_DB_READ: "https://api.zuri.chat/data/read",
+    // endpoint for deleting data
+    DELETE_URL: "https://api.zuri.chat/data/delete",
   },
+
+  // Fetch user zc_core endpoint
+  USER_URL: "https://api.zuri.chat/users/",
 };

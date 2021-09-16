@@ -28,10 +28,10 @@
 }
 
 .mini-profile-image {
-  background: url("../../assets/people.png");
+  background: url("../../assets/Rectangle\ 892.png");
   height: 2.05rem;
   width: 2.05rem;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 .mini-profile-image-bg {
@@ -57,7 +57,9 @@
   display: flex;
   height: 4.15rem;
 }
-
+.mini-profile-name {
+  margin-bottom: 0rem;
+}
 .mini-topBar {
   justify-content: flex-start;
 }
@@ -97,4 +99,67 @@
   display: flex;
   align-items: flex-end;
   text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .mini-board {
+    height: calc(34.8rem * 1.2);
+    width: calc(26.4rem * 1.25);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 1.25);
+    height: calc(26.4rem * 1.25);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 1.1);
+    height: calc(3.2rem * 1.1);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .mini-board {
+    height: calc(34.8rem * 1.1);
+    width: calc(26.4rem * 1.15);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 1.15);
+    height: calc(26.4rem * 1.15);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 1);
+    height: calc(3.2rem * 1);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .mini-board {
+    height: calc(34.8rem * 0.9);
+    width: calc(26.4rem * 0.95);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 0.9);
+    height: calc(26.4rem * 0.9);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 0.95);
+    height: calc(3.2rem * 0.95);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.1rem;
+  }
 }

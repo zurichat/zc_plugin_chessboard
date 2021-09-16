@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// import ExitButton from "../../components/Button/ExitButton";
+import ExitButton from "../../components/Button/ExitButton";
 import ForfeitButton from "../../components/Button/forfeitButton";
 import ChessBoard from "../../components/ChessBoard/ChessBoard";
 import Comments from "../../components/Comments/Comments";
@@ -18,7 +18,7 @@ const GameScreenWithComments = () => {
     <main>
       <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} />
       <div id="chessboard_container">
-        <ChessBoard />
+        <ChessBoard type="player" />
       </div>
       <div id="side_container">
         <div className="btn_container">

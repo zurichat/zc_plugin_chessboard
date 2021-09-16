@@ -5,16 +5,18 @@ const Joi = require("joi");
 const game_schema = Joi.object({
   // Game Owner
   owner: Joi.object({
-    user_Id: Joi.string().required(),
+    user_id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
+    // color: Joi.string(),
   }).required(),
 
   // Opposing player
   opponent: Joi.object({
-    user_Id: Joi.string().required(),
+    user_id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
+    // color: Joi.string(),
   })
     .default(null)
     .allow(null),
@@ -23,6 +25,8 @@ const game_schema = Joi.object({
   start_time: Joi.date().default(Date.now).allow(null),
   end_time: Joi.date().allow(null),
 
+  // game status
+  status: Joi.number().required(), // created = 0, running = 1, completed = 2
   //result param
   is_owner_winner: Joi.boolean().default(false).allow(null),
 
@@ -30,7 +34,7 @@ const game_schema = Joi.object({
   moves: Joi.array()
     .items(
       Joi.object({
-        player_id: Joi.string().required(),
+        user_id: Joi.string().required(),
         position_fen: Joi.string().required(),
         board_state: Joi.string().required(),
       })
@@ -52,7 +56,7 @@ const game_schema = Joi.object({
   spectators: Joi.array()
     .items(
       Joi.object({
-        user_Id: Joi.string().required(),
+        user_id: Joi.string().required(),
         user_name: Joi.string().required(),
         image_url: Joi.string(),
       })

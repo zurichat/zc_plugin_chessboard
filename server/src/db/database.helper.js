@@ -14,6 +14,8 @@ class DatabaseConnection {
     // Set Read Endpoint
     this.DB_READ_URL = DATABASE.ZC_CORE_DB_READ;
 
+    this.DB_DELETE_URL = DATABASE.DELETE_URL;
+
     // Set the default values for the DB operations
     this.DB_DEFAULTS_CONFIG = {
       plugin_id: DATABASE.PLUGIN_ID,
@@ -82,7 +84,7 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       throw new CustomError(
-        `Unable to Connect to Zuri Core DB [READ ONE]: ${error}`,
+        `Unable to Connect to Zuri Core DB [READ ONE BY PARAMETER]: ${error}`,
         "500"
       );
     }
@@ -112,7 +114,6 @@ class DatabaseConnection {
     this.DB_DEFAULTS_CONFIG.payload = payload;
     // Set the ID of the object to be updated
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
-
     try {
       // Make the request
       const response = await axios.put(
@@ -139,12 +140,13 @@ class DatabaseConnection {
 
     try {
       // Make the request
-      const response = await axios.put(
-        this.DB_WRITE_URL,
+      const response = await axios.post(
+        this.DB_DELETE_URL,
         JSON.stringify(this.DB_DEFAULTS_CONFIG)
       );
 
       // Return the response
+      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new CustomError(
