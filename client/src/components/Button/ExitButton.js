@@ -12,10 +12,7 @@ import "./Button.css";
 function ExitButton({ handleClick }) {
   return (
     <div>
-      <button
-        className="exit-button"
-        onClick={() => handleClick()}
-      >
+      <button className="exit-button" onClick={() => handleClick()}>
         Exit Game{" "}
       </button>
     </div>

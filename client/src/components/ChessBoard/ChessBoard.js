@@ -7,7 +7,7 @@ import PlayerName from "../PlayerName/PlayerName";
 // import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
-const ChessBoard = ({ type, playerWait}) => {
+const ChessBoard = ({ type, playerWait }) => {
   const [fen, setFen] = useState("start");
   let game = useRef(null);
 
@@ -61,7 +61,7 @@ const ChessBoard = ({ type, playerWait}) => {
         <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
         <div
           style={{
-            justifyContent: "flex-start" ,
+            justifyContent: "flex-start",
             position: "relative",
             border: "1px solid #CD9B49",
           }}

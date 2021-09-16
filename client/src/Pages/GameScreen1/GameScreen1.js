@@ -12,13 +12,12 @@ const GameScreenWithoutComments = ({ playerWait }) => {
     setForfeitModal(!openForfeitModal);
   };
 
-
   return (
     <main>
       <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
       <div id="chessboard_container">
-        <ChessBoard type="player" playerWait={playerWait}/>
+        <ChessBoard type="player" playerWait={playerWait} />
       </div>
       <div id="side_container">
         <div className="btn_container">
