@@ -6,14 +6,73 @@ import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
+import Centrifuge from "centrifuge";
+
+const userData = [
+  { user_id: "1", user_name: "emeka", color: "w" },
+  { user_id: "2", user_name: "ndubuisi", color: "b" }
+];
+
+const currentPlayerId = "1";
+const playerId = { w: "085fc3b2d", b: "085fc3b2-3" };
 
 const ChessBoard = ({ type }) => {
   const [fen, setFen] = useState("start");
+  const [gameId, setGameId] = useState("61407322fc1882474317803d");
+  const [playerTurn, setPlayerTurn] = useState("1");
+  const centrifuge = new Centrifuge(
+    "wss://realtime.zuri.chat/connection/websocket"
+  );
+
+
   let game = useRef(null);
 
   useEffect(() => {
     game.current = new Chess();
+    // centrifuge.connect();
+    centrifuge.subscribe(gameId, ChannelEventsListener);
+    // getGames();
   }, []);
+
+  const getGames = async () => {
+    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+    console.log(response.data.data[response.data.data.length - 1]);
+  };
+
+  const pieceMove = async (move) => {
+    const body = {
+      user_id: playerId[playerTurn],
+      position_fen: game.current.fen(),
+      game_id: gameId,
+      board_state: move,
+    };
+    const response = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/piecemove",
+      body
+    );
+    console.log("move", response);
+  };
+
+  const ChannelEventsListener = (ctx) => {
+    const websocket = ctx;
+    console.log("ctx", ctx);
+
+    switch (ctx.data.event) {
+      case "join_game":
+        console.log("joined centrifuge");
+        break;
+
+      case "piece_moved":
+        game.move(websocket.data.board_state);
+        setFen(game.current.fen());
+        console.log("move cemtrifuge");
+        break;
+
+      default:
+        console.log("default");
+        break;
+    }
+  };
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
     let move = game.current.move({
@@ -21,10 +80,13 @@ const ChessBoard = ({ type }) => {
       to: targetSquare,
     });
 
-    if (move === null) return;
+    if (move === null || playerTurn !== "1") return;
 
     setFen(game.current.fen());
+    pieceMove(move);
   };
+
+  console.log(playerTurn);
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
     return screenWidth < 560 ? screenWidth * 0.85 : 538;
@@ -79,7 +141,7 @@ const ChessBoard = ({ type }) => {
             }}
             showNotation={false}
             // disables chessboard pieces movement on spectator screen
-            draggable={type === "spectator" ? false : true}
+            draggable={type === "spectator" ? false : playerTurn === "b" ? false : true}
           />
         </div>
 
