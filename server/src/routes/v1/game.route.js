@@ -376,7 +376,7 @@ router.get("/all/:userId", GameCtrl.getAllByUser);
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/comment",GameCtrl.comment);
+router.patch("/comment", GameCtrl.comment);
 
 /**
  * @swagger

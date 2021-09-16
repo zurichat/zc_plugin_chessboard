@@ -446,39 +446,40 @@ class GameController {
       throw new CustomError(`Unable to fetch user games: ${error}`, 500);
     }
   }
-  
+
   // send comment during game
   async comment(req, res) {
     const { comment, game_id, user_id, user_name, image_url } = req.body;
-    
+
     // user details to be gotten from user auth middleware
     if (!user_id) {
-      return res.status(402)
-        .send(response("Invalid user id", null, false));
+      return res.status(402).send(response("Invalid user id", null, false));
     }
-    
+
     // find game in db
     const { data } = await GameRepo.fetchOne(game_id);
     if (!data) {
-      return res.status(404)
-        .send(response("Game not found", null, false));
+      return res.status(404).send(response("Game not found", null, false));
     }
-    
+
     // if opponent hasn't joined game
     if (!data.opponent) {
-      return res.status(400)
+      return res
+        .status(400)
         .send(response("waiting for opponent to join...", null, false));
     }
-    
+
     // players should not be able to comment
     if (user_id === data.owner.user_id || user_id === data.opponent.user_id) {
-      return res.status(400)
+      return res
+        .status(400)
         .send(response("Only spectators can comment", null, false));
     }
-    
+
     // incase user gets sloppy
     if (!comment || !comment.trim()) {
-      return res.status(400)
+      return res
+        .status(400)
         .send(response("comment cannot be empty", null, false));
     }
 
@@ -486,30 +487,28 @@ class GameController {
       user_name,
       image_url,
       text: comment.trim(),
-      timestamp: new Date().toLocaleString() // user_name & image_url from user info retrieved from db
-      };
-    
+      timestamp: new Date().toLocaleString(), // user_name & image_url from user info retrieved from db
+    };
+
     // push to message collection
     // create comments data structure if none exist else update
     if (!Array.isArray(data.comments) || !data.comments) {
       data.comments = [];
     }
-    
-    data.comments = 
-      data.comments.concat(commentProps);
-      
+
+    data.comments = data.comments.concat(commentProps);
+
     await GameRepo.update(game_id, { comments: data.comments });
-    
+
     // publish to centrifugo
     const payload = {
       event: "comments",
-      ...commentProps
+      ...commentProps,
     };
-    
+
     await centrifugoController.publish(game_id, payload);
-    
-    return res.status(202)
-      .send(response("comment sent", commentProps));
+
+    return res.status(202).send(response("comment sent", commentProps));
   }
 
   // Deletes a particular game from the database
