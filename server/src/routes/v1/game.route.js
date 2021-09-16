@@ -124,6 +124,24 @@ const GameCtrl = require("../../controllers/game.controller");
  *        description: The id the game user wants to forfeit
  *        required: true
  *
+ *   comment:
+ *    type: object
+ *    properties:
+ *     comment:
+ *      type: string
+ *      example: move the queen to protect the king
+ *      required: true
+ *     user_id:
+ *      type: string
+ *      description: The user id of the spectator
+ *      required: true
+ *      example: 613c960542a4c7d43b4cd2ad
+ *     game_id:
+ *      type: string
+ *      description: Game ID spectator is commenting on
+ *      example: 613b72eb3ce841615903e676
+ *      required: true
+ *
  */
 
 // Create A Game
@@ -334,6 +352,32 @@ router.get("/:id", GameCtrl.getById);
  */
 router.get("/all/:userId", GameCtrl.getAllByUser);
 
+// Send comment during game
+/**
+ * @swagger
+ * /api/v1/game/comment:
+ *  patch:
+ *   summary: Update game comments
+ *   description: have conversations in the comment section of a game
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/comment'
+ *
+ *   responses:
+ *    202:
+ *      description: comment sent
+ *    400:
+ *      description: comment cannot be empty
+ *    404:
+ *      description: Game not found
+ *    500:
+ *      description: Unable to Connect to Zuri Core DB
+ */
+router.patch("/comment",GameCtrl.comment);
+
 /**
  * @swagger
  * /api/v1/game/delete/:id:
@@ -354,9 +398,6 @@ router.get("/all/:userId", GameCtrl.getAllByUser);
  *      description: An error occurred
  */
 router.delete("/delete/:id", GameCtrl.delete);
-
-// Send messages to game -- NotImplemented
-// router.patch("/message",GameCtrl.Message);
 
 // Export Module
 module.exports = router;
