@@ -8,27 +8,44 @@ import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 import Centrifuge from "centrifuge";
 
-const userData = [
-  { user_id: "1", user_name: "emeka", color: "w" },
-  { user_id: "2", user_name: "ndubuisi", color: "b" },
-];
+let loggedInUser;
+
+const userData = {
+  owner: {
+    user_id: "d1a0686b-604d-4e65-9369-d46c30629c45",
+    user_name: "Marjorie",
+    color: "w",
+  },
+  opponent: {
+    user_id: "085fc3b2-b936-4eb2-8217-fcc5c0a33168",
+    user_name: "Pansie",
+    color: "b",
+  },
+};
 
 const currentPlayerId = "1";
 const playerId = { w: "085fc3b2d", b: "085fc3b2-3" };
 
-const ChessBoard = ({ type }) => {
+const ChessBoard = ({ type, loggedIn }) => {
+  console.log(loggedIn);
   const [fen, setFen] = useState("start");
-  const [gameId, setGameId] = useState("61407322fc1882474317803d");
-  const [playerTurn, setPlayerTurn] = useState("1");
+  const [gameId, setGameId] = useState("6142091d9fd1f4f655d4457f");
+  const [playerTurn, setPlayerTurn] = useState(userData.owner.user_id);
   const centrifuge = new Centrifuge(
-    "wss://realtime.zuri.chat/connection/websocket"
+    //"wss://realtime.zuri.chat/connection/websocket"
+    "ws://localhost:8000/connection/websocket"
   );
+
+  centrifuge.on("connect", (ctx) => {
+    console.log(ctx, "connected");
+  });
 
   let game = useRef(null);
 
   useEffect(() => {
+    loggedInUser = loggedIn;
     game.current = new Chess();
-    // centrifuge.connect();
+    centrifuge.connect();
     centrifuge.subscribe(gameId, ChannelEventsListener);
     // getGames();
   }, []);
@@ -40,15 +57,17 @@ const ChessBoard = ({ type }) => {
 
   const pieceMove = async (move) => {
     const body = {
-      user_id: playerId[playerTurn],
+      user_id: loggedInUser.user_id,
       position_fen: game.current.fen(),
       game_id: gameId,
       board_state: move,
     };
     const response = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/piecemove",
+      "http://localhost:5050/api/v1/game/piecemove",
+      //"https://chess.zuri.chat/api/v1/game/piecemove",
       body
     );
+
     console.log("move", response);
   };
 
@@ -62,9 +81,10 @@ const ChessBoard = ({ type }) => {
         break;
 
       case "piece_moved":
-        game.move(websocket.data.board_state);
-        setFen(game.current.fen());
-        console.log("move cemtrifuge");
+        //game.move(websocket.data.board_state);
+        setFen(ctx.data.position_fen);
+        setPlayerTurn(ctx.data.nextPlayerId);
+        console.log(ctx.data);
         break;
 
       default:
@@ -79,7 +99,11 @@ const ChessBoard = ({ type }) => {
       to: targetSquare,
     });
 
-    if (move === null || playerTurn !== "1") return;
+    console.log(loggedInUser);
+    console.log(playerTurn);
+    if (move === null || loggedInUser.user_id != playerTurn) return;
+
+    console.log(loggedInUser.user_name);
 
     setFen(game.current.fen());
     pieceMove(move);

@@ -9,6 +9,7 @@ import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
 import Games from "./components/Games/Games";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
+import ChessBoard from "./components/ChessBoard/ChessBoard";
 
 function App() {
   return (
@@ -27,6 +28,30 @@ function App() {
             exact
             path="/game_comments"
             render={() => <GameScreenWithComments />}
+          />
+          <Route
+            exact
+            path="/piecemove1"
+            render={() => (
+              <ChessBoard
+                loggedIn={{
+                  user_id: "d1a0686b-604d-4e65-9369-d46c30629c45",
+                  user_name: "Marjorie",
+                }}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/piecemove2"
+            render={() => (
+              <ChessBoard
+                loggedIn={{
+                  user_id: "085fc3b2-b936-4eb2-8217-fcc5c0a33168",
+                  user_name: "Pansie",
+                }}
+              />
+            )}
           />
           <Route exact path="/modalpage" render={Modal} />
           <Route exact path="/test-accept-modal" component={TestModal} />
