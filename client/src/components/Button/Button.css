@@ -24,7 +24,6 @@
 
 .exit-button {
   border: 1px solid #E70B0B;
-  /* box-sizing: border-box; */
   display: inline-block;
   border-radius: 4px;
   cursor: pointer;
@@ -32,13 +31,10 @@
   background-color: transparent;
   color: #E70B0B;
   padding: 0;
-  /* padding-right: 0; */
-  /* padding: 1.5rem; */
   padding: 1.5rem 5rem;
   width: 100%;
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
   text-align: center;
-  transition-duration: 0.4s;
   overflow: hidden;
   font-size: 16px;
   font-weight: bold;
@@ -47,15 +43,11 @@
 }
 
 .exit-button:hover {
-  background-color: transparent;
   background: #B8003C;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 19px;
+  color: #FFFFFF;
 }
 
-.exit-button:after {
+/* .exit-button:after {
   content: "";
   background: #e70b0b88;
   display: block;
@@ -65,19 +57,17 @@
   margin-left: -20px !important;
   margin-top: -120%;
   opacity: 0;
-  transition: all 0.8s
-}
+} */
 
-.exit-button:active:after {
+/* .exit-button:active:after {
   padding: 0;
   margin: 0;
   opacity: 1;
-  transition: 0s
-}
+} */
 
-.exit-button:focus {
+/* .exit-button:focus {
   outline: 0;
-}
+} */
 
 .forfeit-button {
   color: #fff;

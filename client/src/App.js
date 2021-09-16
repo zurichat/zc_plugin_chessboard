@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
 import GameScreenWithComments from "./Pages/GameScreen2/GameScreen2";
@@ -11,17 +12,25 @@ import Games from "./components/Games/Games";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 
 function App() {
+   
+  const [ playerWait, setPlayerWait] = useState(false);
+
+  const handlePlayerWait = () => {
+    setPlayerWait(!playerWait);
+  };
+
+
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" render={HomePage} />
+          <Route exact path="/" render={() => <HomePage setPlayerWait={handlePlayerWait}/>} />
           <Route exact path="/game" render={MainGame} />
           <Route exact path="/game/games" render={Games} />
           <Route
             exact
             path="/game_nocomments"
-            render={() => <GameScreenWithoutComments />}
+            render={() => <GameScreenWithoutComments playerWait={playerWait} />}
           />
           <Route
             exact

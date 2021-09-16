@@ -7,7 +7,7 @@ import profileTwo from "../../assets/Rectangle 894.png";
 import profileThree from "../../assets/Rectangle 896.png";
 import pawnLogo from "../../assets/Union.png";
 
-function Homepage() {
+function Homepage({setPlayerWait}) {
   return (
     <div className="chesshome-container">
       <div className="nav chesshome-nav">
@@ -57,22 +57,22 @@ function Homepage() {
       </div>
       <div className="app__container">
         <div className="mini-one">
-          <MiniBoard id="234" playerOne="Emmie4sure" playerTwo="techlead" />
+          <MiniBoard id="234" playerOne="Emmie4sure" playerTwo="techlead" playerWait = {setPlayerWait}/>
         </div>
         <div className="mini-two">
-          <MiniBoard id="234" playerOne="simideletaiwo" playerTwo="techyNkem" />
+          <MiniBoard id="234" playerOne="simideletaiwo" playerTwo="techyNkem" playerWait = {setPlayerWait}/>
         </div>
         <div className="mini-three">
-          <MiniBoard id="234" playerOne="whynotdoris" playerTwo="trustieee" />
+          <MiniBoard id="234" playerOne="whynotdoris" playerTwo="trustieee" playerWait = {setPlayerWait}/>
         </div>
         <div className="mini-four">
-          <MiniBoard id="234" playerOne="dejavu" playerTwo="" />
+          <MiniBoard id="234" playerOne="dejavu" playerTwo="" playerWait = {setPlayerWait}/>
         </div>
         <div className="mini-five">
-          <MiniBoard id="234" playerOne="pgirl" playerTwo="" />
+          <MiniBoard id="234" playerOne="pgirl" playerTwo="" playerWait = {setPlayerWait}/>
         </div>
         <div className="mini-six">
-          <MiniBoard id="234" playerOne="" playerTwo="" />
+          <MiniBoard id="234" playerOne="" playerTwo="" playerWait = {setPlayerWait}/>
         </div>
       </div>
     </div>

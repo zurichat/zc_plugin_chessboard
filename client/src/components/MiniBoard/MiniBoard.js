@@ -4,7 +4,7 @@ import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.svg";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
-function MiniBoard({ playerOne, playerTwo }) {
+function MiniBoard({ playerOne, playerTwo, playerWait}) {
   return (
     <div className="mini-board">
       <div className="mini-asideBar mini-topBar">
@@ -16,7 +16,7 @@ function MiniBoard({ playerOne, playerTwo }) {
           </div>
         ) : (
           <Link to="/game_nocomments">
-            <button className="join-button">Join as Player 1</button>
+            <button className="join-button" onClick={playerWait}>Join as Player 1</button>
           </Link>
         )}
       </div>
@@ -36,7 +36,7 @@ function MiniBoard({ playerOne, playerTwo }) {
           </div>
         ) : (
           <Link to="/game_comments">
-            <button className="join-button bottom-button">
+            <button className="join-button bottom-button" onClick={playerWait}>
               Join as Player 2
             </button>
           </Link>

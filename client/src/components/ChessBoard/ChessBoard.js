@@ -4,10 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Chess from "chess.js";
 import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
-import axios from "axios";
+// import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
-const ChessBoard = ({ type }) => {
+const ChessBoard = ({ type, playerWait}) => {
   const [fen, setFen] = useState("start");
   let game = useRef(null);
 
@@ -61,6 +61,7 @@ const ChessBoard = ({ type }) => {
         <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
         <div
           style={{
+            justifyContent: "flex-start" ,
             position: "relative",
             border: "1px solid #CD9B49",
           }}
@@ -85,7 +86,7 @@ const ChessBoard = ({ type }) => {
 
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name="Bombos"
+          name={playerWait ? "Waiting for player 2" : "Bombos"}
         />
       </div>
     </>
