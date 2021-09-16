@@ -15,7 +15,7 @@ const SpectatorSideBar = () => {
         </NavLink>
       </nav>
       <Switch>
-        <Route exact path="/game" component={Chat} />
+        <Route  exact path="/game" component={Chat} />
         <Route exact path="/games" component={Games} />
       </Switch>
     </aside>
