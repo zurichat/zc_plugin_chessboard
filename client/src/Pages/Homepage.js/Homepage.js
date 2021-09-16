@@ -2,6 +2,8 @@ import React from "react";
 import MiniBoard from "../../components/MiniBoard/MiniBoard";
 import "./Homepage.css";
 import Header from "../../components/Header/Header";
+import { Link } from "react-router-dom";
+
 
 function Homepage() {
   return (
