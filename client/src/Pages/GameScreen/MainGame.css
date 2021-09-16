@@ -1,28 +1,35 @@
 .main-game{
     display: flex;
     justify-content: center;
-    
-    padding: 3rem;
-    height: 100%;
+    /* border: 2px solid blue; */
+    padding: 1rem;
+    height: 100vh;
     width: 100%;
     }
 
 .main-game .chessboard{
-    border: 2px solid #bebcbc;
-    border-right: none
+    /* border: 2px solid red;
+    border-right: none; */
+    width: 70%;
 }
 .main-game .side-bar{
-    width: 370px;
+    width: 30%;
+    /* margin-left: 2rem; */
+    border-left: 3px solid #dbdbdb; 
 }
 
 @media(max-width:768px){
     .main-game{
         flex-direction: column;
         padding: 0;
+        height: 100%;
     }
     .main-game .side-bar{
         width: 100%;
         border: none;
+    }
+    .main-game .chessboard{
+        width: 100%;
     }
 }
 
@@ -30,15 +37,20 @@
     .main-game{
         flex-direction: column;
         padding: 0;
+        height: 100%;
+        padding: 2rem;
     }
 
     .main-game .chessboard{
         border: none;
-        padding:1.5rem;
+        padding:1.5rem 1rem 2rem 1rem;
+        width: 100%;
+        margin-bottom: 2rem;
     }
 
     .main-game .side-bar-nav{
         border-top: 3px solid #00b87c;
-
+        width: 100%;
+        margin: 0;
     }
 }
