@@ -8,10 +8,10 @@ const MainGame = () => {
   return (
     <section className="main-game">
       <div className="main-chess">
-      <Header />
-      <Chessboard type="spectator" />
+        <Header />
+        <Chessboard type="spectator" />
       </div>
-     
+
       <BrowserRouter>
         <SpectatorSideBar />
       </BrowserRouter>
