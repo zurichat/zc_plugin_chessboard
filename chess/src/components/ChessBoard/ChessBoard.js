@@ -10,7 +10,7 @@ import CongratulationsModal from "./../Modals/CongratulationsModal/Congratulatio
 // import Centrifuge from "centrifuge";
 import Portal from "../Modals/CongratulationsModal/Portal";
 
-const ChessBoard = ({ type }) => {
+const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
   const [gameId, setGameId] = useState("61407322fc1882474317803d");
   const [playerTurn, setPlayerTurn] = useState("w");
@@ -125,7 +125,10 @@ const ChessBoard = ({ type }) => {
   return (
     <>
       <div className="chessboard">
-        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+        <PlayerName
+          style={{ paddingBottom: "28px" }}
+          name={gameData?.data?.owner?.user_name}
+        />
         <div
           style={{
             position: "relative",
@@ -152,10 +155,10 @@ const ChessBoard = ({ type }) => {
 
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name="Bombos"
+          name={gameData?.data?.opponent}
         />
       </div>
-      {!gameOver && <Portal ref={modalRef}/>}
+      {gameOver && <Portal ref={modalRef}/>}
 
     </>
   );

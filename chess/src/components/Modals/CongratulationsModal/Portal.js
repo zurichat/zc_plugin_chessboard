@@ -30,13 +30,16 @@ const Portal = forwardRef((props, ref) => {
       
         <div className={"modal-wrapper"}>
                 
-                <div onClick={close} className={"modal-backdrop"}/>
-                
-                <div className={"modal-box"}>
+                <div 
+                onClick={close}                 
+                className={"modal-backdrop"}
+                />
+                <div 
+                className="modal-box">
                     <div className="modal-profile">
                         <div className="modal-img"><img src={winner} alt="winner-image" /></div>
                     </div>
-                    <div className="modal-content">
+                    <div                    className="modal-content">
                         <p>
                             <span>Congratulations</span> @EseMonday
                         </p>
