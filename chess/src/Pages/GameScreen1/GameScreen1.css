@@ -1,4 +1,4 @@
-main {
+#game__screen__main{
     /* border: 1px solid #616161; */
     display: flex;
     flex-direction: row;
@@ -37,9 +37,120 @@ main {
     font-size: 2rem;
     width: 100%;
   }
+
+.navbar-profilepix{
+   width: 100%;
+   padding: 2rem;
+   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+  
+  }
+
+  .navbar-profilepix img{
+    float: right;
+  }
+
+  
+header {
+  background: #00B87C;
+  color: white;
+}
+
+.navbar {
+  min-height: 7vh;
+  display: flex;
+  width: 97%;
+  padding: 1rem;
+  margin: auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chesshome-search{
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid rgb(233, 232, 232);
+ 
+}
+
+#chesshome-flex{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+}
+
+.arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+#arrow-button{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.chesshome-navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chesshome-profileImg{
+  position: relative;
+
+  
+}
+
+.chesshome-profilepix{
+  position: absolute;
+  border-radius: 4px;
+  top: -66%;
+}
+
+.chesshome-profilepix.profileOne{
+  left: 2%;
+  z-index: 600;
+}
+
+.chesshome-profilepix.profileTwo{
+  left: 21%;
+  z-index: 500;
+}
+
+.chesshome-profilepix.profileThree{
+  left: 41%;
+}
+
+#text-300{
+  position: absolute;
+  top: 40%;
+  right: 5%;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 100;
+  color: #000;
+}
+
+#pawnLogo{
+  height: 20px;
+}
+
+.leave__mobile{
+  display: none;
+}
+
   
   @media only screen and (max-width: 600px) {
-    main {
+    #game__screen__main {
       flex-direction: column;
     }
     #chessboard_container {
@@ -49,4 +160,30 @@ main {
       width: 100%;
       border: none;
     }
+
+    #gamescreen-nav{
+      display: none;
+    }
+
+    .leave__mobile{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+      margin: 1rem auto;
+    }
+
+  h2{
+    font-size: 20px;    
+  }
+ 
+
+  .remove__exit{
+    display: none;
+  }
+
+  .navbar-profilepix{
+    display: none;
+  }
   }
