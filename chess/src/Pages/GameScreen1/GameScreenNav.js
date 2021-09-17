@@ -1,12 +1,10 @@
 import React from "react";
-import "./Header.css";
-
+import "./GameScreen1.css";
 import profileImg from "../../assets/Rectangle 936.png";
 import profileOne from "../../assets/Rectangle 892.png";
 import profileTwo from "../../assets/Rectangle 894.png";
 import profileThree from "../../assets/Rectangle 896.png";
 import pawnLogo from "../../assets/Union.png";
-import chatBox from "../../assets/commentIcon.png";
 
 const Profile = ({ className, src }) => {
   return (
@@ -19,7 +17,7 @@ const Profile = ({ className, src }) => {
   );
 };
 
-const Header = () => {
+const GameScreenNav = () => {
   return (
     <div>
       <header className="main-header">
@@ -34,26 +32,20 @@ const Header = () => {
               </button>
             </div>
           </div>
-          <div className="chesshome-headerRight">
-            <a className="commentIcon">
-             <img src={chatBox} alt ="reply" />
-            </a>
-
           <div className="chesshome-profileImg">
             <Profile
-              className="chesshome-profile profileOne"
+              className="chesshome-profilepix profileOne"
               src={profileOne}
-              />
+            />
             <Profile
-              className="chesshome-profile profileTwo"
+              className="chesshome-profilepix profileTwo"
               src={profileTwo}
-              />
+            />
             <Profile
-              className="chesshome-profile profileThree"
+              className="chesshome-profilepix profileThree"
               src={profileThree}
-              />
+            />
             <p className="text-300">300</p>
-          </div>
           </div>
         </nav>
       </header>
@@ -61,4 +53,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default GameScreenNav;

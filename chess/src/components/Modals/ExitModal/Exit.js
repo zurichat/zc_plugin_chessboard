@@ -11,22 +11,22 @@ const Exit = ({ isYes, handleClick }) => {
   }
   // return createPortal(
   return (
-    <div className="forfeit__container">
-      <div className="forfeit__modal">
-        <article className="forfeit__header">
-          <div className="profile">
+    <div className="exit__container">
+      <div className="exit__modal">
+        <article className="exit__header">
+          <div className="exit__profile">
             <img src={Logo} alt="profile" />
           </div>
         </article>
-        <section className="forfeit__content">
-          <p className="forfeit__text">
+        <section className="exit__content">
+          <p className="exit__text">
             You are probably tired of waiting for player 2, are you sure you
             want to leave the game?
           </p>
         </section>
-        <footer className="forfeit__footer">
+        <footer className="exit__footer">
           <button
-            className="forfeit__button forfeit__button--yes"
+            className="exit__button exit__button--yes"
             onClick={() => {
               history.push("/");
             }}
@@ -34,7 +34,7 @@ const Exit = ({ isYes, handleClick }) => {
             Yes
           </button>
           <button
-            className=" forfeit__button forfeit__button--no"
+            className=" exit__button exit__button--no"
             onClick={() => handleClick()}
           >
             No

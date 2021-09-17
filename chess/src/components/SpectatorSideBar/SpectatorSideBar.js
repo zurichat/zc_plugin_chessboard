@@ -7,10 +7,10 @@ const SpectatorSideBar = () => {
   return (
     <aside className="side-bar">
       <nav className="side-bar-nav">
-        <NavLink exact activeClassName="active" className="nav-link" to="/game">
+        <NavLink  className="nav-link" to="/game">
           Comments
         </NavLink>
-        <div activeClassName="closed" className="close">
+        <div  className="close">
           <svg
             width="20"
             height="22"

@@ -2,13 +2,14 @@ import React from "react";
 import MiniBoard from "../../components/MiniBoard/MiniBoard";
 import "./Homepage.css";
 import Header from "../../components/Header/Header";
+import { Link } from "react-router-dom";
 
 function Homepage({ setPlayerWait }) {
   return (
     <div className="chesshome-container">
       <Header />
       <div className="chesshome-rules-holder">
-        <button className="chesshome-rules">Game Rules</button>
+        <Link to ="/rules"><button className="chesshome-rules">Game Rules</button></Link>
       </div>
       <div className="app__container">
         <div className="mini-one">
