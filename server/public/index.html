@@ -302,11 +302,6 @@
         updateStatus();
         document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>opponent: ${websocket.data.user_id} made a move</p>`);
         break;
-      
-      case "comment_made":
-        //document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket.data.player.user_name || websocket.data.spectator.user_name} Joined the game with ${websocket.data.permission} permissions</p>`);
-        document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>${websocket}</p>`)
-        break;
 
       default:
         document.querySelector("#room_updates").insertAdjacentHTML('afterend', `<p>Unhandled event recieved</p>`);
