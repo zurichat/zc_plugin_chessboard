@@ -4,7 +4,7 @@ import "./Homepage.css";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 
-function Homepage({ setPlayerWait }) {
+function Homepage() {
   return (
     <div className="chesshome-container">
       <Header />
@@ -17,7 +17,6 @@ function Homepage({ setPlayerWait }) {
             id="234"
             playerOne="Emmie4sure"
             playerTwo="techlead"
-            playerWait={setPlayerWait}
           />
         </div>
         <div className="mini-two">
@@ -25,7 +24,7 @@ function Homepage({ setPlayerWait }) {
             id="234"
             playerOne="simideletaiwo"
             playerTwo="techyNkem"
-            playerWait={setPlayerWait}
+
           />
         </div>
         <div className="mini-three">
@@ -33,7 +32,7 @@ function Homepage({ setPlayerWait }) {
             id="234"
             playerOne="whynotdoris"
             playerTwo="trustieee"
-            playerWait={setPlayerWait}
+
           />
         </div>
         <div className="mini-four">
@@ -41,7 +40,7 @@ function Homepage({ setPlayerWait }) {
             id="234"
             playerOne="dejavu"
             playerTwo=""
-            playerWait={setPlayerWait}
+
           />
         </div>
         <div className="mini-five">
@@ -49,7 +48,7 @@ function Homepage({ setPlayerWait }) {
             id="234"
             playerOne="pgirl"
             playerTwo=""
-            playerWait={setPlayerWait}
+
           />
         </div>
         <div className="mini-six">
@@ -57,7 +56,7 @@ function Homepage({ setPlayerWait }) {
             id="234"
             playerOne=""
             playerTwo=""
-            playerWait={setPlayerWait}
+
           />
         </div>
       </div>

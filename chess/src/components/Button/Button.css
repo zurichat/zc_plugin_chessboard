@@ -106,6 +106,24 @@ a {
   display: none;
 }
 
+.waiting_player_2_container{
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-top: 3.5rem;
+
+}
+
+.waiting_player_2{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  color: #00B87C;
+  font-style: italic;
+}
+
 @media only screen and (max-width: 600px) {
   .leave__button h3{
     display: block;
@@ -115,9 +133,9 @@ a {
   }
 
 
-  .exit_button_real{
+  /* .exit_button_real{
     display: none;
-  }
+  } */
 
   .btn {
     flex-direction: column;

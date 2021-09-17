@@ -9,7 +9,6 @@ import Exit from "../../components/Modals/ExitModal/Exit";
 import "./GameScreen1.css";
 import { useParams } from "react-router";
 import axios from "../../axios/axiosInstance";
-import GameScreenNav from "./GameScreenNav";
 import profileOne from "../../assets/Rectangle 892.png";
 import LeftArrow from "../../assets/left-arrow.png";
 
@@ -44,14 +43,14 @@ const GameScreenWithoutComments = () => {
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
 
       <div id="chessboard_container">
-        <GameScreenNav />
-
-        <div className="leave__mobile">
+        <div className="gamescreennav_container">
+        <Header/>
+        </div>
+        {/* <div className="leave__mobile">
           <img src={LeftArrow} />
           <h2> Chess Room </h2>
-
           <LeaveButton handleClick={handleForfeitClick} />
-        </div>
+        </div> */}
 
         <ChessBoard type="player" gameData={gameData} />
       </div>

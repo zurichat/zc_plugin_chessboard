@@ -13,12 +13,6 @@ import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
 
 function App() {
-  const [playerWait, setPlayerWait] = useState(false);
-
-  const handlePlayerWait = () => {
-    setPlayerWait(!playerWait);
-  };
-
   return (
     <div className="App">
       <Router basename="/chess">
@@ -26,14 +20,14 @@ function App() {
           <Route
             exact
             path="/"
-            render={() => <HomePage setPlayerWait={handlePlayerWait} />}
+            render={() => <HomePage />}
           />
           <Route exact path="/game" render={MainGame} />
           <Route exact path="/game/games" render={Games} />
           <Route
             exact
             path="/game_nocomments"
-            render={() => <GameScreenWithoutComments playerWait={playerWait} />}
+            render={() => <GameScreenWithoutComments />}
           />
           <Route
             path="/game_nocomments/:id"
