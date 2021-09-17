@@ -1,0 +1,165 @@
+.mini-board {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mini-board {
+  font-size: 62.5%;
+}
+
+.mini-board {
+  height: 34.8rem;
+  width: 26.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0px;
+}
+
+.mini-board .board-image {
+  border-radius: 0px;
+}
+
+.mini-playerProfile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.mini-profile-image {
+  background: url("../../assets/Rectangle\ 892.png");
+  height: 2.05rem;
+  width: 2.05rem;
+  border-radius: 4px;
+}
+
+.mini-profile-image-bg {
+  background: #acffe6;
+  position: absolute;
+  z-index: -20;
+  height: 2.05rem;
+  width: 2.05rem;
+  border-radius: 50%;
+}
+
+.mini-playerProfile p {
+  font-family: Lato;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.9rem;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.mini-asideBar {
+  display: flex;
+  height: 4.15rem;
+}
+.mini-profile-name {
+  margin-bottom: 0rem;
+}
+.mini-topBar {
+  justify-content: flex-start;
+}
+
+.mini-bottomBar {
+  justify-content: flex-end;
+}
+
+.mini-topBar .mini-playerProfile {
+  padding-left: 0.3rem;
+}
+
+.mini-bottomBar .mini-playerProfile {
+  padding-right: 0.3rem;
+}
+
+.mini-asideBar p {
+  padding-left: 0.4rem;
+}
+
+.mini-board .join-button {
+  padding: 0.7rem 0rem !important;
+  height: 3.2rem;
+  width: 12.8rem;
+  background-color: #00b87c;
+  font-family: Lato;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4rem;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 0rem;
+}
+
+.mini-bottomBar a {
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .mini-board {
+    height: calc(34.8rem * 1.2);
+    width: calc(26.4rem * 1.25);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 1.25);
+    height: calc(26.4rem * 1.25);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 1.1);
+    height: calc(3.2rem * 1.1);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .mini-board {
+    height: calc(34.8rem * 1.1);
+    width: calc(26.4rem * 1.15);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 1.15);
+    height: calc(26.4rem * 1.15);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 1);
+    height: calc(3.2rem * 1);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .mini-board {
+    height: calc(34.8rem * 0.9);
+    width: calc(26.4rem * 0.95);
+  }
+
+  .mini-board .board-image img {
+    border-radius: 0px;
+    width: calc(26.4rem * 0.9);
+    height: calc(26.4rem * 0.9);
+  }
+  .mini-board .join-button {
+    padding: 0.7rem 0rem !important;
+    width: calc(12.8rem * 0.95);
+    height: calc(3.2rem * 0.95);
+    background-color: #00b87c;
+    font-family: Lato;
+    font-size: 1.1rem;
+  }
+}
