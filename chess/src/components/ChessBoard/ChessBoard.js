@@ -7,13 +7,76 @@ import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
+// import Centrifuge from "centrifuge";
+import Portal from "../Modals/CongratulationsModal/Portal";
+
 const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
+  const [gameId, setGameId] = useState("61407322fc1882474317803d");
+  const [playerTurn, setPlayerTurn] = useState("w");
+  const [playerId] = useState({ w: "085fc3b2d", b: "085fc3b2-3" });
+  // const centrifuge = new Centrifuge(
+  //   "wss://realtime.zuri.chat/connection/websocket"
+  // );
+
   let game = useRef(null);
 
   useEffect(() => {
     game.current = new Chess();
+    // centrifuge.connect();
+    // centrifuge.subscribe(gameId, ChannelEventsListener);
+    getGames();
   }, []);
+
+
+  const gameOver = game.current && game.current.game_over();
+  if(gameOver) {
+    // setShow(true);
+    console.log("make api call");
+  } else {
+    console.log("still on");
+  }
+  
+  
+  const getGames = async () => {
+    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+    console.log(response.data.data[response.data.data.length - 1]);
+  };
+
+  const pieceMove = async (move) => {
+    const body = {
+      user_id: playerId[playerTurn],
+      position_fen: game.current.fen(),
+      game_id: gameId,
+      board_state: move,
+    };
+    const response = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/piecemove",
+      body
+    );
+    console.log("move", response);
+  };
+
+  const ChannelEventsListener = (ctx) => {
+    const websocket = ctx;
+    console.log("ctx", ctx);
+
+    switch (ctx.data.event) {
+      case "join_game":
+        console.log("joined centrifuge");
+        break;
+
+      case "piece_moved":
+        game.move(websocket.data.board_state);
+        setFen(game.current.fen());
+        console.log("move cemtrifuge");
+        break;
+
+      default:
+        console.log("default");
+        break;
+    }
+  };
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
     let move = game.current.move({
@@ -24,6 +87,8 @@ const ChessBoard = ({ type, gameData }) => {
     if (move === null) return;
 
     setFen(game.current.fen());
+    setPlayerTurn(game.current.turn());
+    pieceMove(move);
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
@@ -55,6 +120,8 @@ const ChessBoard = ({ type, gameData }) => {
     }, {});
   };
 
+  const modalRef = useRef();
+  
   return (
     <>
       <div className="chessboard">
@@ -91,6 +158,8 @@ const ChessBoard = ({ type, gameData }) => {
           name={gameData?.data?.opponent}
         />
       </div>
+      {gameOver && <Portal ref={modalRef}/>}
+
     </>
   );
 };

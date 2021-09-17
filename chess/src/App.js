@@ -14,7 +14,7 @@ import Rules from "./Pages/Rules/Rules";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename="/chess">
         <Switch>
           <Route exact path="/" render={HomePage} />
           <Route exact path="/game" render={MainGame} />
