@@ -31,12 +31,12 @@ const ChessBoard = ({ type }) => {
     game.current = new Chess();
     // centrifuge.connect();
     centrifuge.subscribe(gameId, ChannelEventsListener);
-    // getGames();
+    getGames();
   }, []);
 
   const getGames = async () => {
     const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
-    console.log(response.data.data[response.data.data.length - 1]);
+    console.log(response.data.data[response.data.data.length - 1]._id);
   };
 
   const pieceMove = async (move) => {
