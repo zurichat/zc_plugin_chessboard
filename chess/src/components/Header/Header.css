@@ -43,12 +43,16 @@ header {
   
   .chesshome-profileImg {
     position: relative;
+    background: #01D892;
+    border-radius: 4px;
+    width: 105px;
+    height: 30px;
   }
   
   .chesshome-profile {
     position: absolute;
     border-radius: 4px;
-    top: 6%;
+    top: 7%;
   }
   
   .chesshome-profile.profileOne {
@@ -57,20 +61,20 @@ header {
   }
   
   .chesshome-profile.profileTwo {
-    left: 21%;
+    left: 19%;
     z-index: 500;
   }
   
   .chesshome-profile.profileThree {
-    left: 41%;
+    left: 35%;
   }
   
   .text-300 {
     position: absolute;
-    top: 15%;
+    top: 18%;
     right: 5%;
     font-size: 16px;
     font-weight: bold;
     z-index: 100;
-    color: #000;
+    color: #fff;
   }
