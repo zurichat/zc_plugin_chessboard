@@ -1,19 +1,14 @@
 import React from "react";
 import "./Button.css";
 
-// function ExitButton() {
-//   return (
-//     <div>
-//       <button className="exit-button">Exit</button>
-//     </div>
-//   );
-// }
-
 function ExitButton({ handleClick }) {
   return (
-    <div>
-      <button className="exit-button" onClick={() => handleClick()}>
-        Exit Game{" "}
+    <div className="exit_button_real">
+      <button
+        className="exit-button"
+        onClick={() => handleClick()}
+      >
+        Exit{" "}
       </button>
     </div>
   );

@@ -10,6 +10,7 @@ import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
 import Games from "./components/Games/Games";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
+import Rules from "./Pages/Rules/Rules";
 
 function App() {
   const [playerWait, setPlayerWait] = useState(false);
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename="/chess">
         <Switch>
           <Route
             exact
@@ -33,6 +34,10 @@ function App() {
             exact
             path="/game_nocomments"
             render={() => <GameScreenWithoutComments playerWait={playerWait} />}
+          />
+          <Route
+            path="/game_nocomments/:id"
+            render={() => <GameScreenWithoutComments />}
           />
           <Route
             exact
@@ -49,6 +54,9 @@ function App() {
             path="/Accept_chalengeModal"
             render={Acceptchalengemodal}
           />
+          <Route exact path="/rules">
+            <Rules />
+          </Route>
         </Switch>
       </Router>
     </div>
