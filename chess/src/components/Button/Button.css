@@ -53,7 +53,6 @@
   font-size: 16px;
   font-weight: bold;
   line-height: 19px;
-  color: #fff;
 }
 
 .exit-button:after {
@@ -93,21 +92,10 @@
   opacity: 0.89;
 }
 
-.leave__button h3{
-  display: none;
-}
-
 @media only screen and (max-width: 600px) {
-  .leave__button h3{
-    display: block;
-    font-size: 15px;
-    color: #E70B0B;
-    cursor: pointer;
+  .exit-button {
+    font-size: 1.8rem;
+    padding: 1.5rem;
+    width: 20rem;
   }
-
-
-  .exit_button{
-    display: none;
-  }
-
 }

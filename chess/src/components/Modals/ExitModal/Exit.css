@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 
-.exit__container {
+.forfeit__container {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -16,7 +16,7 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.exit__modal{
+.forfeit__modal{
     background-color: #ffffff;
      display: flex; 
     text-align: center;
@@ -28,24 +28,20 @@
     border-radius: 5px;
 }
 
-.exit__modal .exit__profile{
-    display: inline-block;
-}
-
-.exit__text{
+.forfeit__text{
     font-size: 18px;
     margin: 0 auto;
     width: 70%;
     text-align: center;
 }
 
-.exit__footer{
+.forfeit__footer{
     display: flex;
     justify-content: center;
     gap: 5%;
 }
 
-.exit__button{
+.forfeit__button{
     display: inline-block;
     background-color: transparent;
     border: 1px solid;
@@ -56,49 +52,49 @@
     letter-spacing: 1px;
  }
 
-.exit__button:hover{
+.forfeit__button:hover{
     opacity: 0.8;
 }
 
-.exit__button--yes{
+.forfeit__button--yes{
      background: rgba(184, 0, 60, 1);
     border-color: rgba(184, 0, 60, 1);
     color: #ffffff;
 }
 
-.exit__button--yes:hover,
-.exit__button--yes:focus{
+.forfeit__button--yes:hover,
+.forfeit__button--yes:focus{
     background: transparent;
     color: black;
     
 }
 
-.exit__button--no{
+.forfeit__button--no{
     color: black;
     border-color: rgba(39, 174, 96, 1);
 }
 
-.exit__button--no:hover,
-.exit__button--no:focus{
+.forfeit__button--no:hover,
+.forfeit__button--no:focus{
     background:  rgba(39, 174, 96, 1);
     color: #fff;
 }
 
 @media (max-width: 1025px) and (max-width: 1440px) {   
-.exit__modal{
+.forfeit__modal{
     width: 50%;
 }
 }
 
 @media (max-width: 769px) and (max-width: 1024px) {
-    .exit__modal{
+    .forfeit__modal{
         width: 80%;
     }
 
 }
 
 @media (max-width: 420px) and (max-width: 480px) {
-     .exit__modal {
+     .forfeit__modal {
          width: 90%;
         }
 }
