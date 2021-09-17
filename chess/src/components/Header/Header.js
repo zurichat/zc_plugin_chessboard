@@ -12,7 +12,7 @@ const Profile = ({ className, src }) => {
     <div className={className}>
       <img
         src={src}
-        style={{ border: "1px solid #fff", borderRadius: "4px" }}
+        style={{ border: "1px solid #01D892", borderRadius: "4px" }}
       />
     </div>
   );
@@ -34,7 +34,6 @@ const Header = () => {
             </div>
           </div>
           <div className="chesshome-profileImg">
-            <img src={profileImg} />
             <Profile
               className="chesshome-profile profileOne"
               src={profileOne}
