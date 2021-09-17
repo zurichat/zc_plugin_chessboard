@@ -5,43 +5,18 @@ const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 
-const GameRepo = new DatabaseConnection("002test_game");
+const GameRepo = new DatabaseConnection("003test_game");
 class GameController {
   // Create A Game
   async create(req, res) {
     try {
-      console.log("got here");
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
 
       //Logic for more than 6 games not being active
-      const { data } = await GameRepo.fetchAll();
+      const gameDBData = await GameRepo.fetchAll();
 
-      if (data.length >= 6) {
-        // look for completed game to reset and join as owner
-        let game = data.find((x) => x.status === 2);
-        if (!game)
-          return res
-            .status(400)
-            .send(response("No free boards right now", null, false));
-
-        game = {
-          owner: {
-            user_id,
-            user_name,
-            image_url,
-          },
-          moves: [],
-          messages: [],
-          spectators: [],
-          status: 0,
-        };
-
-        const updated = await GameRepo.update(game._id, game);
-        res
-          .status(201)
-          .send(response("Game created successfully", updated.data[0], true));
-      } else {
+      if (gameDBData.data.length <= 6) {
         // create new game
 
         // Pass the request body to the schema
@@ -58,14 +33,43 @@ class GameController {
         });
 
         // Save the game to the database
-        const gameDBData = await GameRepo.create(game);
+        const newGameDBData = await GameRepo.create(game);
 
         // Return the game
         res
           .status(201)
           .send(
-            response("Game created successfully", gameDBData.data, true)
+            response("Origin New Game Board Created successfully", newGameDBData.data, true)
           );
+
+      } else {
+
+        // look for completed game to reset and join as owner
+        let game = gameDBData.data.find((x) => x.status === 2);
+
+        // Check if game is found
+        if (!game)
+          return res
+            .status(400)
+            .send(response("No free boards right now", null, false));
+
+        // Reset the game
+        const updateGameDBData = await GameRepo.update(game._id, {
+          owner: {
+            user_id,
+            user_name,
+            image_url,
+          },
+          opponent: null,
+          moves: [],
+          messages: [],
+          spectators: [],
+          status: 0,
+        });
+
+        res
+          .status(201)
+          .send(response("New Game Board Created successfully", { object_id: game._id }, true));
       }
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, 500);
