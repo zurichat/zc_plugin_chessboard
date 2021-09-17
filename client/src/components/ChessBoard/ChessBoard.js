@@ -23,13 +23,14 @@ const userData = {
   },
 };
 
-const currentPlayerId = "1";
-const playerId = { w: "085fc3b2d", b: "085fc3b2-3" };
 
 const ChessBoard = ({ type, loggedIn }) => {
-  console.log(loggedIn);
+  // console.log(loggedIn);
   const [fen, setFen] = useState("start");
   const [gameId, setGameId] = useState("6142091d9fd1f4f655d4457f");
+  const [squareStyles, setSquareStyles] = useState("");
+  const [pieceSquare, setPieceSquare] = useState("");
+  const [history, setHistory] = useState("");
   const [playerTurn, setPlayerTurn] = useState(userData.owner.user_id);
   const centrifuge = new Centrifuge(
     //"wss://realtime.zuri.chat/connection/websocket"
@@ -47,12 +48,63 @@ const ChessBoard = ({ type, loggedIn }) => {
     game.current = new Chess();
     centrifuge.connect();
     centrifuge.subscribe(gameId, ChannelEventsListener);
-    // getGames();
   }, []);
 
-  const getGames = async () => {
-    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
-    console.log(response.data.data[response.data.data.length - 1]);
+  const hightLightSquare = (squares) => {
+    const highLight = squares.reduce((a, c) => {
+      a[c] = {
+        background: "radial-gradient(circle, rgb(255, 255, 255, 0.5) 25%, transparent 30%, transparent 100%)",
+        borderRadius: "50%"
+      };
+      return { ...a, ...squareClickStyling(pieceSquare, history) };
+    }, {});
+
+    setSquareStyles({ ...squareStyles, ...highLight });
+  };
+
+  const onMouseOverSquare = (square) => {
+    const moves = game.current.moves({
+      square: square,
+      verbose: true
+    });
+
+    const sqaureToHighlight = [];
+
+    if (moves.length === 0) return;
+    moves.forEach(move => sqaureToHighlight.push(move.to));
+    hightLightSquare([square, ...sqaureToHighlight]);
+  };
+
+  const onMouseOutSquare = () => {
+    setSquareStyles(squareClickStyling(pieceSquare, history));
+  };
+
+  const onSquareClick = (square) => {
+    setPieceSquare(square);
+    squareClickStyling(square, history);
+    const move = game.current.move({
+      from: pieceSquare,
+      to: square,
+      promorion: "q"
+    });
+
+    if (move === null) return;
+    pieceMove(move);
+    setFen(game.current.fen());
+    setHistory(game.current.history({ verbose: true }));
+    setPieceSquare("");
+  };
+
+  const squareClickStyling = (pieceSquare, history) => {
+    const from = history.length && history[history.length - 1].from;
+    const to = history.length && history[history.length - 1].to;
+
+    return {
+      [pieceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      ...(history.length && { [from]: { backgroundColor: "rgba(255, 255, 0, 0.4)" } }),
+      ...(history.length && { [to]: { backgroundColor: "rgba(255, 255, 0, 0.4)" } }),
+    };
+
   };
 
   const pieceMove = async (move) => {
@@ -68,23 +120,18 @@ const ChessBoard = ({ type, loggedIn }) => {
       body
     );
 
-    console.log("move", response);
+    // console.log("move", response);
   };
 
   const ChannelEventsListener = (ctx) => {
-    const websocket = ctx;
-    console.log("ctx", ctx);
 
     switch (ctx.data.event) {
-      case "join_game":
-        console.log("joined centrifuge");
-        break;
-
       case "piece_moved":
-        //game.move(websocket.data.board_state);
-        setFen(ctx.data.position_fen);
+        game.current.move(ctx.data.board_state);
+        setFen(game.current.fen());
+        
+
         setPlayerTurn(ctx.data.nextPlayerId);
-        console.log(ctx.data);
         break;
 
       default:
@@ -98,18 +145,20 @@ const ChessBoard = ({ type, loggedIn }) => {
       from: sourceSquare,
       to: targetSquare,
     });
-
-    console.log(loggedInUser);
     console.log(playerTurn);
-    if (move === null || loggedInUser.user_id != playerTurn) return;
+ 
 
-    console.log(loggedInUser.user_name);
+    // console.log(loggedInUser);
+    // console.log(playerTurn);
+    if (move === null) return;
+
+    // console.log(loggedInUser.user_name);
 
     setFen(game.current.fen());
+    setHistory(game.current.history({ verbose: true }));
     pieceMove(move);
   };
 
-  console.log(playerTurn);
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
     return screenWidth < 560 ? screenWidth * 0.85 : 538;
@@ -155,6 +204,10 @@ const ChessBoard = ({ type, loggedIn }) => {
             pieces={customPieces()}
             id="startPcos"
             position={fen}
+            onMouseOverSquare={onMouseOverSquare}
+            onMouseOutSquare={onMouseOutSquare}
+            squareStyles={squareStyles}
+            onSquareClick={onSquareClick}
             onDrop={onDrop}
             calcWidth={calcWidth}
             darkSquareStyle={{ backgroundColor: "#3D2F19" }}
@@ -165,7 +218,7 @@ const ChessBoard = ({ type, loggedIn }) => {
             showNotation={false}
             // disables chessboard pieces movement on spectator screen
             draggable={
-              type === "spectator" ? false : playerTurn === "b" ? false : true
+              type === "spectator" ? false  : true
             }
           />
         </div>
