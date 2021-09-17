@@ -6,7 +6,7 @@ import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
-import CongratulationsModal from "./../Modals/CongratulationsModal/CongratulationsModal";
+
 // import Centrifuge from "centrifuge";
 import Portal from "../Modals/CongratulationsModal/Portal";
 
