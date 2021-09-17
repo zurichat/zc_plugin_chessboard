@@ -101,6 +101,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install yarn dependencies and build project
+        run: |
+          cd server
+          yarn install
+          yarn build
+
       - name: Deployment
         uses: appleboy/ssh-action@master
         with:
@@ -113,6 +119,32 @@ jobs:
             git pull origin dev
             cd server
             yarn install
-            yarn build
+
+      - name: Copy Main Chess App dist folder to server
+        uses: Creepios/sftp-action@v1.0.1
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          localPath: './chess/dist/'
+          remotePath: '/var/www/zc_plugin_chessboard/chess/dist'
+
+      - name: Copy Client dist folder to server
+        uses: Creepios/sftp-action@v1.0.1
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          localPath: './client/dist/'
+          remotePath: '/var/www/zc_plugin_chessboard/client/dist'
+
+      - name: Restart PM2 Server
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          script: |
+            cd /var/www/zc_plugin_chessboard/
             PM2_HOME=/opt/pm2/.pm2 pm2 restart index
 
