@@ -45,10 +45,7 @@ main {
   
   }
 
-  .navbar-profilepix img{
-    float: right;
-  }
-
+ 
   
 header {
   background: #00B87C;
@@ -65,13 +62,6 @@ header {
   flex-wrap: wrap;
 }
 
-.chesshome-search{
-  padding: 10px;
-  width: 80%;
-  border-radius: 5px;
-  border: 1px solid rgb(233, 232, 232);
- 
-}
 
 #chesshome-flex{
   display: flex;
@@ -113,11 +103,11 @@ header {
 .chesshome-profilepix{
   position: absolute;
   border-radius: 4px;
-  top: -1%;
+  top: -66%;
 }
 
 .chesshome-profilepix.profileOne{
-  left: 2%;
+  left: 5%;
   z-index: 600;
 }
 

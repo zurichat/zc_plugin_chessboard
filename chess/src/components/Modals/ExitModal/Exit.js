@@ -14,7 +14,7 @@ const Exit = ({ isYes, handleClick }) => {
     <div className="exit__container">
       <div className="exit__modal">
         <article className="exit__header">
-          <div className="profile">
+          <div className="exit__profile">
             <img src={Logo} alt="profile" />
           </div>
         </article>

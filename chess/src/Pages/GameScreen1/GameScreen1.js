@@ -28,6 +28,7 @@ const GameScreenWithoutComments = () => {
           <img src={LeftArrow} />
           <h2> Chess Room </h2>
 
+
           <LeaveButton handleClick={handleForfeitClick} />
         </div>
 
@@ -35,9 +36,7 @@ const GameScreenWithoutComments = () => {
       </div>
 
       <div id="side_container">
-        <div className="navbar-profilepix">
-          <img src={profileOne} />
-        </div>
+        
 
         <div className="btn_container">
           {" "}

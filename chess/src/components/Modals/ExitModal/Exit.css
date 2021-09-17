@@ -20,13 +20,16 @@
     background-color: #ffffff;
      display: flex; 
     text-align: center;
-    justify-content: center;
      flex-direction: column; 
      gap: 2rem;
     padding: 9.5rem 0rem;
     width: 35%;
     
     border-radius: 5px;
+}
+
+.exit__modal .exit__profile{
+    display: inline-block;
 }
 
 .exit__text{
@@ -40,12 +43,6 @@
     display: flex;
     justify-content: center;
     gap: 5%;
-}
-
-.exit__modal .profile {
-    display: inline-block;
-    width: 6vw;
-    padding-bottom: 30px;
 }
 
 .exit__button{
