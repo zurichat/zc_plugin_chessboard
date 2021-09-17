@@ -11,7 +11,7 @@ function MiniBoard({ playerOne, playerTwo }) {
 
   const createGame = async () => {
     const sample_data = {
-      user_id: "1234567",
+      user_id: 1234567,
       user_name: "codeJonin",
       image_url: "string",
     };
