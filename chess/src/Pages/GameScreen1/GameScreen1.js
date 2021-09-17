@@ -20,7 +20,8 @@ const GameScreenWithoutComments = () => {
       const game = await axios.get(`game/${game_id.id}`);
       // Set gamesData state to response
       setGameData(game.data);
-      console.log(gameData?.data);
+      console.log(game.data);
+      //console.log(game.data);
     } catch (err) {
       console.log(err);
     }
