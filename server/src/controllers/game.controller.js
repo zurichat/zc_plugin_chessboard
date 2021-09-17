@@ -26,7 +26,6 @@ class GameController {
             .send(response("No free boards right now", null, false));
 
         game = {
-          ...game,
           owner: {
             user_id,
             user_name,
@@ -65,7 +64,7 @@ class GameController {
         res
           .status(201)
           .send(
-            response("Game created successfully", gameDBData.data[0], true)
+            response("Game created successfully", gameDBData.data, true)
           );
       }
     } catch (error) {
