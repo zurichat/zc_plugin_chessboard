@@ -10,29 +10,63 @@ class GameController {
   // Create A Game
   async create(req, res) {
     try {
+      console.log("got here");
       // get owners details from the frontend
       const { user_id, user_name, image_url } = req.body;
 
-      // Pass the request body to the schema
-      const game = await gameSchema.validateAsync({
-        owner: {
-          user_id,
-          user_name,
-          image_url,
-        },
-        moves: [],
-        messages: [],
-        spectators: [],
-        status: 0,
-      });
+      //Logic for more than 6 games not being active
+      const { data } = await GameRepo.fetchAll();
 
-      // Save the game to the database
-      const gameDBData = await GameRepo.create(game);
+      if (data.length >= 6) {
+        // look for completed game to reset and join as owner
+        let game = data.find((x) => x.status === 2);
+        if (!game)
+          return res
+            .status(400)
+            .send(response("No free boards right now", null, false));
 
-      // Return the game
-      res
-        .status(201)
-        .send(response("Game created successfully", gameDBData.data, true));
+        game = {
+          owner: {
+            user_id,
+            user_name,
+            image_url,
+          },
+          moves: [],
+          messages: [],
+          spectators: [],
+          status: 0,
+        };
+
+        const updated = await GameRepo.update(game._id, game);
+        res
+          .status(201)
+          .send(response("Game created successfully", updated.data[0], true));
+      } else {
+        // create new game
+
+        // Pass the request body to the schema
+        const game = await gameSchema.validateAsync({
+          owner: {
+            user_id,
+            user_name,
+            image_url,
+          },
+          moves: [],
+          messages: [],
+          spectators: [],
+          status: 0,
+        });
+
+        // Save the game to the database
+        const gameDBData = await GameRepo.create(game);
+
+        // Return the game
+        res
+          .status(201)
+          .send(
+            response("Game created successfully", gameDBData.data, true)
+          );
+      }
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, 500);
     }
@@ -48,16 +82,16 @@ class GameController {
       const gameDBData = await GameRepo.fetchOne(game_id);
 
       // Check if the game exists
-      if (!gameDBData.data[0])
+      if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
 
       // if opponent already exists return bad request
       if (
         // More checks to know whether to continue game for player 1 or 2 if the tab is refreshed
-        gameDBData.data[0].owner.user_id !== user_id
+        gameDBData.data.owner.user_id !== user_id
       ) {
-        if (gameDBData.data[0].opponent) {
-          if (gameDBData.data[0].opponent.user_id !== user_id) {
+        if (gameDBData.data.opponent) {
+          if (gameDBData.data.opponent.user_id !== user_id) {
             return res
               .status(400)
               .send(response("opponent already exists", null, false));
@@ -66,7 +100,7 @@ class GameController {
       }
 
       // Logic to continue game if player 1 or 2 refreshes the tab
-      if (!gameDBData.data[0].opponent) {
+      if (!gameDBData.data.opponent) {
         const opponent = {
           user_id,
           user_name,
@@ -75,6 +109,7 @@ class GameController {
 
         // Set opponent and save to db
         const updated = await GameRepo.update(game_id, {
+          ...gameDBData.data,
           opponent,
           status: 1,
         });
@@ -100,69 +135,6 @@ class GameController {
     }
   }
 
-  // // send message
-  // async sendMessages(req,res){
-  //   try {
-  //     // Get the game id and user id from the request body
-  //     const { game_id, user_id, text, user_name, image_url } = req.body;
-
-  //     // Find the game in the database
-  //     const gameDBData = await GameRepo.fetchOne(game_id);
-
-  //     // Get specatators in the game
-  //     const spectators = gameDBData.data[0].spectators;
-
-  //     // Check if the game exists
-  //     if (!gameDBData.data[0])
-  //       return res.status(400).send(response("Game not found", null, false));
-
-  //     // find index of user
-  //     // const index = spectators.findIndex((o) => o.user_id == user_id);
-
-  //     // // Check if the user is a spectator in the game
-  //     // if (index === -1)
-  //     //   return res
-  //     //     .status(400)
-  //     //     .send(response("only spectators can comment", null, false));
-      
-  //     // Get messages in the game
-  //     const messages = gameDBData.data[0].messages;
-
-  //     // Build the new message object
-  //     const message = {
-  //       text,
-  //       user_name,
-  //       image_url,
-  //     };
-
-  //     // Add new messages and return the number of messages
-  //     const number_of_message = messages.push(message);
-
-  //     // Save messages back to db
-  //     const updated = await GameRepo.update(game_id, {
-  //       messages,
-  //     });
-
-  //     // set user permission in the game
-  //     const permission = "READ/WRITE";
-
-  //     // Build Response
-  //     const payload = {
-  //       event: "comment_made",
-  //       permission,
-  //       message,
-  //       number_of_message,
-  //     };
-
-  //     // Publish the event to Centrifugo server
-  //     await centrifugoController.publish(game_id, payload);
-  //     return res.status(200).json({success:"comment successfully", data: updated,});
-  //   } catch (error) {
-  //     throw new CustomError(`Failed to make comment ${error}`, 500);
-  //   }
-  // }
- 
-  // get all messages (comments)
 
   // Get All Games
   async getAll(req, res) {
@@ -191,9 +163,11 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
+
   // Fetch a single game
   async getById(req, res) {
     try {
+      console.log("here");
       // request an info from the user
       const game_id = req.params.id;
 
@@ -226,8 +200,8 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       if (
-        gameDBData.data[0].owner.user_id != user_id &&
-        gameDBData.data[0].opponent.user_id != user_id
+        gameDBData.data.owner.user_id != user_id &&
+        gameDBData.data.opponent.user_id != user_id
       )
         return res
           .status(400)
@@ -236,7 +210,7 @@ class GameController {
           );
 
       // push new move into moves array
-      const moves = gameDBData.data[0].moves;
+      const moves = gameDBData.data.moves;
       moves.push({
         user_id,
         position_fen,
@@ -277,7 +251,7 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // Get specatators in the game
-      const spectators = gameDBData.data[0].spectators;
+      const spectators = gameDBData.data.spectators;
 
       // Build the new spectator object
       const spectator = {
@@ -329,7 +303,7 @@ class GameController {
         return res.status(400).send(response("Game not found", null, false));
 
       // Get specatators in the game
-      const spectators = gameDBData.data[0].spectators;
+      const spectators = gameDBData.data.spectators;
 
       // find index of user
       const index = spectators.findIndex((o) => o.user_id == user_id);
@@ -381,12 +355,12 @@ class GameController {
       if (user_id === isGameExist.data.owner.user_id) {
         isGameExist.data.is_owner_winner = true;
       } else if (user_id == isGameExist.data.opponent.user_id) {
-        isGameExist.data.is_owner_winner = true;
+        isGameExist.data.is_owner_winner = false;
       }
 
       isGameExist.data.status = 2;
       // update the Game Info with current result
-      const updated = await GameRepo.update(game_id, {
+      const updated = await GameRepo.update(isGameExist.data._id, {
         ...isGameExist.data,
       });
 
@@ -460,7 +434,7 @@ class GameController {
         return (
           game.owner.user_id == userId ||
           (game.opponent && game.opponent.user_id == userId) ||
-          (game.spectators?.length > 0 &&
+          (game.spectators.length > 0 &&
             game.spectators.find((spec) => spec.user_id == userId))
         );
       });
@@ -470,6 +444,87 @@ class GameController {
         .send(response("fetched user games successfully", userGames));
     } catch (error) {
       throw new CustomError(`Unable to fetch user games: ${error}`, 500);
+    }
+  }
+
+  // send comment during game
+  async comment(req, res) {
+    const { comment, game_id, user_id, user_name, image_url } = req.body;
+
+    // user details to be gotten from user auth middleware
+    if (!user_id) {
+      return res.status(402).send(response("Invalid user id", null, false));
+    }
+
+    // find game in db
+    const { data } = await GameRepo.fetchOne(game_id);
+    if (!data) {
+      return res.status(404).send(response("Game not found", null, false));
+    }
+
+    // if opponent hasn't joined game
+    if (!data.opponent) {
+      return res
+        .status(400)
+        .send(response("waiting for opponent to join...", null, false));
+    }
+
+    // players should not be able to comment
+    if (user_id === data.owner.user_id || user_id === data.opponent.user_id) {
+      return res
+        .status(400)
+        .send(response("Only spectators can comment", null, false));
+    }
+
+    // incase user gets sloppy
+    if (!comment || !comment.trim()) {
+      return res
+        .status(400)
+        .send(response("comment cannot be empty", null, false));
+    }
+
+    const commentProps = {
+      user_name,
+      image_url,
+      text: comment.trim(),
+      timestamp: new Date().toLocaleString(), // user_name & image_url from user info retrieved from db
+    };
+
+    // push to message collection
+    // create comments data structure if none exist else update
+    if (!Array.isArray(data.comments) || !data.comments) {
+      data.comments = [];
+    }
+
+    data.comments = data.comments.concat(commentProps);
+
+    await GameRepo.update(game_id, { comments: data.comments });
+
+    // publish to centrifugo
+    const payload = {
+      event: "comments",
+      ...commentProps,
+    };
+
+    await centrifugoController.publish(game_id, payload);
+
+    return res.status(202).send(response("comment sent", commentProps));
+  }
+
+  // Deletes a particular game from the database
+  async delete(req, res) {
+    try {
+      const game = await GameRepo.fetchOne(req.params.id);
+      if (!game.data)
+        res
+          .status(404)
+          .send(response("No such game found in the database", {}, false));
+
+      await GameRepo.delete(game.data._id, game.data);
+
+      res.status(204).send(response("game deleted successfully", {}, false));
+    } catch (error) {
+      throw new CustomError(`Unable to delete game: ${error}`, 500);
     }
   }
 }

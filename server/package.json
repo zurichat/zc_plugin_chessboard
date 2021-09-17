@@ -29,7 +29,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "cd ../client && yarn install && yarn build",
+    "build": "yarn build-step-1",
+    "build-step-1": "cd ../chess && yarn install && yarn build && cd ../server && yarn build-step-2",
+    "build-step-2": "cd ../client && yarn install && yarn build",
     "lint": "eslint src/"
   }
 }

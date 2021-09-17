@@ -11,7 +11,7 @@ module.exports = (app) => {
   // Send all 404 requests not handled by node to the React app
   app.use("*", (req, res) => {
     res.sendFile(
-      path.join(__dirname, "..", "..", "..", "client", "build", "index.html")
+      path.join(__dirname, "..", "..", "..", "client", "dist", "index.html")
     );
   });
 
