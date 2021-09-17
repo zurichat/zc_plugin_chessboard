@@ -6,6 +6,7 @@ import profileOne from "../../assets/Rectangle 892.png";
 import profileTwo from "../../assets/Rectangle 894.png";
 import profileThree from "../../assets/Rectangle 896.png";
 import pawnLogo from "../../assets/Union.png";
+import chatBox from "../../assets/commentIcon.png";
 
 const Profile = ({ className, src }) => {
   return (
@@ -33,20 +34,26 @@ const Header = () => {
               </button>
             </div>
           </div>
+          <div className="chesshome-headerRight">
+            <Link to='#' className="commentIcon">
+             <img src={chatBox} alt ="reply" onClick={showComment}/>
+            </Link>
+
           <div className="chesshome-profileImg">
             <Profile
               className="chesshome-profile profileOne"
               src={profileOne}
-            />
+              />
             <Profile
               className="chesshome-profile profileTwo"
               src={profileTwo}
-            />
+              />
             <Profile
               className="chesshome-profile profileThree"
               src={profileThree}
-            />
+              />
             <p className="text-300">300</p>
+          </div>
           </div>
         </nav>
       </header>

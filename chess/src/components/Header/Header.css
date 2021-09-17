@@ -40,6 +40,19 @@ header {
     justify-content: space-between;
     align-items: center;
   }
+
+  .chesshome-headerRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .commentIcon {
+    padding-right: 2rem;
+    border-right: 3px solid white;
+    display: none;
+   }
+ 
   
   .chesshome-profileImg {
     position: relative;
