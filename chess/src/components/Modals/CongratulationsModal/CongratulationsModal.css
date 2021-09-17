@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    z-index: 0;
+    z-index: 10;
     left: 0;
     right: 0;
     bottom: 0;
@@ -21,7 +21,7 @@
     margin: 16vh auto;
     height: 400px;
     width: 500px;
-    z-index: 2;
+    z-index: 10;
     background: #FFFFFF;
     box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07),
     0px 49px 35px rgba(0, 0, 0, 0.0460133),
@@ -41,7 +41,7 @@
     width: 85px;
     border-radius: 50%;
     height: 80px;
-    background: #008B5E;
+    /* background: #008B5E; */
     margin: 0 auto;
     /* background-image: url(../../../assets/People\ of\ Brooklyn\ Avatar.png); */
 }

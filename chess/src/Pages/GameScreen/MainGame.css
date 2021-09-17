@@ -28,6 +28,25 @@
         
 }
 
+
+.main-chess > div > .main-header >.nav > .chesshome-headerRight {
+    width: 15%;
+     }
+
+@media(max-width:1080px){    
+   .main-chess > div > .main-header >.nav > .chesshome-headerRight {
+       width: 25%;
+   }
+}
+
+.main-chess > div > .main-header >.nav > .chesshome-headerRight > .commentIcon {
+    display: block;
+}
+
+.main-chess > div > .main-header >.nav > .chesshome-headerRight > .chesshome-profileImg {
+    left: 10px;
+}
+
 .main-chess .chessboard{
     /* border: 2px solid red;
     border-right: none; */
