@@ -3,8 +3,12 @@ import SpectatorSideBar from "../../components/SpectatorSideBar/SpectatorSideBar
 import "./MainGame.css";
 import Header from "../../components/Header/Header.js";
 import { BrowserRouter } from "react-router-dom";
+import { useState } from "react";
+
+
 
 const MainGame = () => {
+
   return (
     <section className="main-game">
       <div className="main-chess">
@@ -16,6 +20,7 @@ const MainGame = () => {
         <SpectatorSideBar />
       </BrowserRouter>
     </section>
+    
   );
 };
 
