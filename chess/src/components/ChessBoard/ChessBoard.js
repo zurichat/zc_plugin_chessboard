@@ -7,7 +7,7 @@ import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
-const ChessBoard = ({ type }) => {
+const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
   let game = useRef(null);
 
@@ -58,7 +58,10 @@ const ChessBoard = ({ type }) => {
   return (
     <>
       <div className="chessboard">
-        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+        <PlayerName
+          style={{ paddingBottom: "28px" }}
+          name={gameData?.data?.owner?.user_name}
+        />
         <div
           style={{
             position: "relative",
@@ -85,7 +88,7 @@ const ChessBoard = ({ type }) => {
 
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name="Bombos"
+          name={gameData?.data?.opponent}
         />
       </div>
     </>
