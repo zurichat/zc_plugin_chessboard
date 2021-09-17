@@ -64,7 +64,7 @@ class GameController {
         res
           .status(201)
           .send(
-            response("Game created successfully", gameDBData.data[0], true)
+            response("Game created successfully", gameDBData.data, true)
           );
       }
     } catch (error) {
