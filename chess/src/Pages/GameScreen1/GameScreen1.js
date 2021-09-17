@@ -43,16 +43,10 @@ const GameScreenWithoutComments = () => {
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
 
       <div id="chessboard_container">
-        <div className="gamescreennav_container">
-        <Header/>
+        <div className="gameheader-container">
+          <Header />
         </div>
-        {/* <div className="leave__mobile">
-          <img src={LeftArrow} />
-          <h2> Chess Room </h2>
-          <LeaveButton handleClick={handleForfeitClick} />
-        </div> */}
-
-        <ChessBoard type="player" gameData={gameData} />
+        <ChessBoard type="player"/>
       </div>
 
       <div id="side_container">
