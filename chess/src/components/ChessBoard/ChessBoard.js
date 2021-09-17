@@ -4,17 +4,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Chess from "chess.js";
 import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
-// import axios from "axios";
+import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 
-<<<<<<< HEAD
-const ChessBoard = ({ type, playerWait }) => {
-=======
-// import Centrifuge from "centrifuge";
-import Portal from "../Modals/CongratulationsModal/Portal";
-
-const ChessBoard = ({ type, gameData }) => {
->>>>>>> fb14809d5503998b575d9cf7705855fecc4af666
+const ChessBoard = ({ type, playerWait, gameData}) => {
   const [fen, setFen] = useState("start");
   const [gameId, setGameId] = useState("61407322fc1882474317803d");
   const [playerTurn, setPlayerTurn] = useState("w");
@@ -159,16 +152,11 @@ const ChessBoard = ({ type, gameData }) => {
         </div>
 
         <PlayerName
-<<<<<<< HEAD
           style={{ paddingTop: "38px", justifyContent: "flex-end" }}
           name={playerWait ? "Waiting for player 2" : "Bombos"}
-=======
-          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData?.data?.opponent}
->>>>>>> fb14809d5503998b575d9cf7705855fecc4af666
         />
       </div>
-      {gameOver && <Portal ref={modalRef}/>}
+      {/* {gameOver && <Portal ref={modalRef}/>} */}
 
     </>
   );

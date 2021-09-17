@@ -63,13 +63,8 @@ a {
 }
 
 .exit-button:hover {
-<<<<<<< HEAD
   background: #B8003C;
   color: #FFFFFF;
-=======
-  color:#fff;
-  background-color: #E70B0B;
->>>>>>> fb14809d5503998b575d9cf7705855fecc4af666
 }
 
 /* .exit-button:after {
