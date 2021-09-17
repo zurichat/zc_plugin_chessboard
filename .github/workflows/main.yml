@@ -46,9 +46,15 @@ jobs:
       with:
         directory: client
 
-    - name: Install yarn dependencies and Run ESLint
+    - name: Install yarn dependencies and Run ESLint for client
       run: |
         cd client
+        yarn install
+        yarn run lint --fix
+    
+    - name: Install yarn dependencies and Run ESLint for main app
+      run: |
+        cd chess
         yarn install
         yarn run lint --fix
 
