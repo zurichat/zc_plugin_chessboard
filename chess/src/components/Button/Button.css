@@ -47,12 +47,8 @@
 }
 
 .exit-button:hover {
-  background-color: transparent;
-  background: #B8003C;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 19px;
+  color:#fff;
+  background-color: #E70B0B;
 }
 
 .exit-button:after {
@@ -92,10 +88,21 @@
   opacity: 0.89;
 }
 
+.leave__button h3{
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
-  .exit-button {
-    font-size: 1.8rem;
-    padding: 1.5rem;
-    width: 20rem;
+  .leave__button h3{
+    display: block;
+    font-size: 15px;
+    color: #E70B0B;
+    cursor: pointer;
   }
+
+
+  .exit_button_real{
+    display: none;
+  }
+
 }
