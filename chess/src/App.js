@@ -9,6 +9,7 @@ import TestModal from "./components/Modals/AcceptDeclineModal/Test";
 import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
 import Games from "./components/Games/Games";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
+import Rules from "./Pages/Rules/Rules";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
             path="/Accept_chalengeModal"
             render={Acceptchalengemodal}
           />
+          <Route exact path="/rules">
+            <Rules />
+          </Route>
         </Switch>
       </Router>
     </div>
