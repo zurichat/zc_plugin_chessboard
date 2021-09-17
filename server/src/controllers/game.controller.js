@@ -26,7 +26,6 @@ class GameController {
             .send(response("No free boards right now", null, false));
 
         game = {
-          ...game,
           owner: {
             user_id,
             user_name,
