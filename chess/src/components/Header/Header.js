@@ -35,9 +35,9 @@ const Header = () => {
             </div>
           </div>
           <div className="chesshome-headerRight">
-            <Link to='#' className="commentIcon">
-             <img src={chatBox} alt ="reply" onClick={showComment}/>
-            </Link>
+            <a className="commentIcon">
+             <img src={chatBox} alt ="reply" />
+            </a>
 
           <div className="chesshome-profileImg">
             <Profile
