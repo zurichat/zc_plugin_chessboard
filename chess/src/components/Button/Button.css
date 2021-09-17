@@ -1,25 +1,45 @@
-.request-challenge-btn {
-  background: #27AE60;
-  border-radius: 3px;
-  width: 197px;
-  height: 41px;
-  font-weight: 500;
-  font-size: 14px;
-  border: none;
-  color: #FFFFFF;
-  cursor: pointer;
+.btn {
+  display: flex;
+  align-items: center;
 }
 
+.button-1 {
+  flex: 100%;
+}
+.button-2 {
+  flex: 5%;
+}
+a {
+  text-decoration: none;
+}
+.request-challenge-btn,
 .exit-btn {
-  width: 128px;
-  height: 41px;
-  border: 1px solid #B8003C;
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
   border-radius: 3px;
+  font-weight: bold !important;
+}
+
+.request-challenge-btn {
+  padding: 1.5rem 3rem;
+  background: #00B87C;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.exit-btn { 
+  width: 15rem;  
+  border: .19rem solid #B8003C;
+  box-sizing: border-box;
   margin-left: 16px;
   color: #B8003C;
   background: #FFFFFF;
   cursor: pointer;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  
 }
 
 .exit-button {
@@ -98,4 +118,23 @@
     padding: 1.5rem;
     width: 20rem;
   }
+
+  .btn {
+    flex-direction: column;
+  }
+
+  .request-challenge-btn {
+    width: 23rem;
+    height: 48px;
+    margin: 16px 0px;
+    padding: 2rem;
+}
+
+.exit-btn { 
+    margin-left: 0;
+    width: 23rem;
+    height: 48px;
+    margin-bottom: 16px;
+}
+
 }
