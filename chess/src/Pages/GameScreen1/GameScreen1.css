@@ -68,7 +68,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 1.70rem 2.2rem;
+    padding: 1.5rem 2.2rem;
     position: sticky;
     top: 0;
     z-index: 1000;

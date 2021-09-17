@@ -29,7 +29,7 @@ const GameScreenWithoutComments = ({ playerWait }) => {
         {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
         {/* </div> */}
         <div className="title">
-          <p>Comments</p>
+          <h1>Comments</h1>
         </div>
         <div className="dummy">{/* comments can go in here */}</div>
         <div className="exit_btn_container">
