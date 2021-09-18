@@ -48,7 +48,33 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     } else {
       //....
     }
-  };
+};
+  
+    //Start function for join as spectator
+              const watchGame = async () => {
+                const sample_data = {
+                  user_id: "7837488",
+                  game_id: id,
+                  user_name: "Annietah",
+                  image_url: "string"
+                };
+            
+              
+                const result = await axios.patch(
+                  "https://chess.zuri.chat/api/v1/game/watch",
+                  sample_data
+                );
+                console.log(result);
+                if (result.data.success) {
+                  const game_id = sample_data.game_id;
+                  history.push(`/game/${sample_data.game_id}`);
+                } else {
+                  // console.log(result.data.message);
+                }
+            };
+            //End function for join as spectator
+ 
+
   return (
     <div className="mini-board">
       <div className="mini-asideBar mini-topBar">
@@ -65,11 +91,11 @@ function MiniBoard({ playerOne, playerTwo, id }) {
         )}
       </div>
 
-      <div className="board-image">
+      <div className="board-image" onClick ={ watchGame  }>
         {/* eslint-disable-next-line */}
-        <a href="/game">
-          <img src={boardImg} alt="" />{" "}
-        </a>
+        
+          <img src={boardImg} alt=""  />{" "}
+        
       </div>
       <div className="mini-asideBar mini-bottomBar">
         {playerTwo && (

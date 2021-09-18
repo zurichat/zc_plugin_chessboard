@@ -18,7 +18,7 @@ function App() {
       <Router basename="/chess">
         <Switch>
           <Route exact path="/" render={() => <HomePage />} />
-          <Route exact path="/game" render={() => <MainGame />} />
+          <Route path="/game/:id" render={() => <MainGame />} />
           <Route exact path="/game/games" render={() => <Games />} />
           <Route
             exact
