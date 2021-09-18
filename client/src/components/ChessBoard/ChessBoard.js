@@ -129,8 +129,7 @@ const ChessBoard = ({ type, loggedIn }) => {
       case "piece_moved":
         game.current.move(ctx.data.board_state);
         setFen(game.current.fen());
-        
-
+        console.log(ctx.data.nextPlayerId);  
         setPlayerTurn(ctx.data.nextPlayerId);
         break;
 
