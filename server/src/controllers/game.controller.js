@@ -143,9 +143,9 @@ class GameController {
   async getAll(req, res) {
     try {
 
-      const { organization_id } = req.query
+      const { organization_id } = req.query;
 
-      const gameDBData = await GameRepo.fetchAll(organization_id)
+      const gameDBData = await GameRepo.fetchAll(organization_id);
 
       // Return all games
       res

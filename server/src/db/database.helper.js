@@ -94,7 +94,7 @@ class DatabaseConnection {
   async fetchAll(organization_id) {
 
     //option to use defult organization_id for testing purposes
-    const organizationId = organization_id || this.DB_DEFAULTS_CONFIG.organization_id
+    const organizationId = organization_id || this.DB_DEFAULTS_CONFIG.organization_id;
     try {
       // Make the request
       const response = await axios.get(
