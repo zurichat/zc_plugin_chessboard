@@ -5,7 +5,7 @@ const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 
-const GameRepo = new DatabaseConnection("002test_game");
+const GameRepo = new DatabaseConnection("003test_game");
 class GameController {
   // Create A Game
   async create(req, res) {
@@ -192,6 +192,7 @@ class GameController {
     try {
       // get data from body
       const { game_id, user_id, position_fen, board_state } = req.body;
+      // console.log(req.body);
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id);
       // Check if the game exists

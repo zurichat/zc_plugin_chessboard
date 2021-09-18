@@ -10,9 +10,9 @@ module.exports = {
   // Database Credentials
   DATABASE: {
     // Get Our PluginID from ENV or use the test_id
-    PLUGIN_ID: process.env.PLUGIN_ID || "614101ec6173056af01b4cc2",
+    PLUGIN_ID: process.env.PLUGIN_ID || "6145c915285e4a1840207403",
     // Get Our PluginID from ENV or use the test_id
-    ORGANISATION_ID: process.env.ORGANISATION_ID || "6133c5a68006324323416896",
+    ORGANISATION_ID: process.env.ORGANISATION_ID || "6145c2d0285e4a18402073f6",
     // Endpoint for the database write operations
     ZC_CORE_DB_WRITE: "https://api.zuri.chat/data/write",
     // Endpoint for the database read operations
