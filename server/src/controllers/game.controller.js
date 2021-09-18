@@ -121,7 +121,6 @@ class GameController {
 
         // Set opponent and save to db
         const updated = await GameRepo.update(game_id, {
-          ...gameDBData.data,
           opponent,
           status: 1,
         });
@@ -141,7 +140,10 @@ class GameController {
       }
 
       // Return the game
-      res.status(200).send(response("Game joined successfully", game_id));
+      res.status(200).send(response("Game joined successfully", {
+        game_id,
+      }));
+
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
