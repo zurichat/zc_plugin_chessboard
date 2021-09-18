@@ -159,7 +159,7 @@ const ChessBoard = ({ type, gameData }) => {
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
           name={gameData?.data?.opponent}/>}
       </div>
-      {/* {gameOver && <Portal ref={modalRef}/>} */}
+      {gameOver && <Portal ref={modalRef}/>}
 
     </>
   );
