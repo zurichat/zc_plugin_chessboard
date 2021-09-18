@@ -5,17 +5,25 @@ import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
 
-function MiniBoard({ playerOne, playerTwo }) {
+// function MiniBoard({ id, playerOne, playerTwo }) {
+function MiniBoard({ playerOne, playerTwo, id }) {
+  // if (!playerOne) {
+  //   player2 = ''
+  // } else {
+  //   player 2
+  // }
+
   const history = useHistory();
+  console.log(playerOne);
 
   const createGame = async () => {
     const sample_data = {
       user_id: "1234567",
+      game_id: id,
       user_name: "codeJonin",
       image_url: "string",
     };
 
-    playerOne = sample_data.user_name;
     const result = await axios.post(
       "https://chess.zuri.chat/api/v1/game/create",
       sample_data
