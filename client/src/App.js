@@ -35,8 +35,8 @@ function App() {
             render={() => (
               <ChessBoard
                 loggedIn={{
-                  user_id: "d1a0686b-604d-4e65-9369-d46c30629c45",
-                  user_name: "Marjorie",
+                  user_id: "1234567",
+                  user_name: "codeJonin",
                 }}
               />
             )}
@@ -47,8 +47,8 @@ function App() {
             render={() => (
               <ChessBoard
                 loggedIn={{
-                  user_id: "085fc3b2-b936-4eb2-8217-fcc5c0a33168",
-                  user_name: "Pansie",
+                  user_id: "player-2-id",
+                  user_name: "John Doe",
                 }}
               />
             )}

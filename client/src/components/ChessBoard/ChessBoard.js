@@ -27,7 +27,7 @@ const userData = {
 const ChessBoard = ({ type, loggedIn }) => {
   // console.log(loggedIn);
   const [fen, setFen] = useState("start");
-  const [gameId, setGameId] = useState("6142091d9fd1f4f655d4457f");
+  const [gameId, setGameId] = useState("6145e91a285e4a18402074ac");
   const [squareStyles, setSquareStyles] = useState("");
   const [pieceSquare, setPieceSquare] = useState("");
   const [history, setHistory] = useState("");
