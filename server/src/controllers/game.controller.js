@@ -348,10 +348,10 @@ class GameController {
       const { game_id, user_id } = req.body;
 
       // fetch the game from the database
-      const isGameExist = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id);
 
       // check if the game data exists
-      if (!isGameExist.data) {
+      if (!gameDBData.data) {
         return res
           .status(400)
           .send(response("Game does not exist", null, false));
@@ -364,28 +364,35 @@ class GameController {
           .send(response("User does not exist", null, false));
       }
 
+      let is_owner_winner;
+
       // checking if user (winner) is equivalent relating to the data fetched
-      if (user_id === isGameExist.data.owner.user_id) {
-        isGameExist.data.is_owner_winner = true;
-      } else if (user_id == isGameExist.data.opponent.user_id) {
-        isGameExist.data.is_owner_winner = false;
+      if (user_id === gameDBData.data.owner.user_id) {
+        is_owner_winner = true;
+      } else if (user_id == gameDBData.data.opponent.user_id) {
+        is_owner_winner = false;
       }
 
-      isGameExist.data.status = 2;
+      const status = 2;
+
       // update the Game Info with current result
-      const updated = await GameRepo.update(isGameExist.data._id, {
-        ...isGameExist.data,
+      const updated = await GameRepo.update(gameDBData.data._id, {
+        is_owner_winner,
+        status,
       });
 
       const payload = {
         event: "end_game",
-        winner:
-          isGameExist.data.owner.user_id || isGameExist.data.opponent.user_id,
-        status: isGameExist.data.status,
+        winner: is_owner_winner ? gameDBData.data.owner.user_id : gameDBData.data.opponent.user_id,
+        status,
       };
 
       await centrifugoController.publish(game_id, payload);
-      return res.status(200).send(response("Game ended!!!", updated));
+
+      return res.status(200).send(response("Game ended!!!", {
+        game_id,
+      }));
+
     } catch (error) {
       throw new CustomError(`Unable to end game: ${error}`, 500);
     }
