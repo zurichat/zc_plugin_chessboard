@@ -4,6 +4,7 @@
   "admin_password": "ad0dff75-3131-4a02-8d64-9279b4f1c57b",
   "admin_secret": "583bc4b7-0fa5-4c4a-8566-16d3ce4ad401",
   "api_key": "aaaf202f-b5f8-4b34-bf88-f6c03a1ecda6",
-  "publish": true,
+  "client_anonymous":true,
+  "anonymous":true,
   "allowed_origins": ["*"]
 }
