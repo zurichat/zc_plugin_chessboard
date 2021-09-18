@@ -7,6 +7,8 @@ import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 import Centrifuge from "centrifuge";
+import WaitingForPlayerTwo from "./../Button/WaitingForPlayerTwo";
+import Portal from "./../Modals/CongratulationsModal/Portal";
 
 let loggedInUser;
 
@@ -24,7 +26,7 @@ const userData = {
 };
 
 
-const ChessBoard = ({ type, loggedIn }) => {
+const ChessBoard = ({ type, loggedIn, gameData }) => {
   // console.log(loggedIn);
   const [fen, setFen] = useState("start");
   const [gameId, setGameId] = useState("6145e91a285e4a18402074ac");
@@ -33,23 +35,24 @@ const ChessBoard = ({ type, loggedIn }) => {
   const [history, setHistory] = useState("");
   const [playerTurn, setPlayerTurn] = useState(userData.owner.user_id);
   const centrifuge = new Centrifuge(
-    //"wss://realtime.zuri.chat/connection/websocket"
-    "ws://localhost:8000/connection/websocket"
+    "wss://realtime.zuri.chat/connection/websocket"
+    // "ws://localhost:8000/connection/websocket"
   );
-
+  
   centrifuge.on("connect", (ctx) => {
     console.log(ctx, "connected");
   });
-
+  
   let game = useRef(null);
-
+  
   useEffect(() => {
     loggedInUser = loggedIn;
     game.current = new Chess();
     centrifuge.connect();
     centrifuge.subscribe(gameId, ChannelEventsListener);
   }, []);
-
+  
+  const gameOver = game.current && game.current.game_over(); 
   const hightLightSquare = (squares) => {
     const highLight = squares.reduce((a, c) => {
       a[c] = {
@@ -115,7 +118,7 @@ const ChessBoard = ({ type, loggedIn }) => {
       board_state: move,
     };
     const response = await axios.patch(
-      "http://localhost:5050/api/v1/game/piecemove",
+      "https://chess.zuri.chat/api/v1/game/piecemove",
       //"https://chess.zuri.chat/api/v1/game/piecemove",
       body
     );
