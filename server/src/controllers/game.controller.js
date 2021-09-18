@@ -159,7 +159,6 @@ class GameController {
   // Fetch a single game
   async getById(req, res) {
     try {
-      console.log("here");
       // request an info from the user
       const game_id = req.params.id;
 
