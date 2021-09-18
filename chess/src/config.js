@@ -1,2 +1,3 @@
-// eslint-disable-next-line no-undef
-export const DOMAIN = process.env.DOMAIN;
+export const BACKEND_DOMAIN = "https://chess.zuri.chat";
+export const CORE_DOMAIN = "https://api.zuri.chat";
+export const REALTIME_DOMAIN = "wss://realtime.zuri.chat";
