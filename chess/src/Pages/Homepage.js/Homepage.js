@@ -1,36 +1,58 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import MiniBoard from "../../components/MiniBoard/MiniBoard";
 import "./Homepage.css";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Homepage() {
+  // gamesData state
+  const [gamesData, setGamesData] = useState([]);
+
+  // fetch games data and set the state to the response
+  async function getGamesData() {
+    const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+    setGamesData(games.data.data);
+    console.log(games.data.data);
+  }
+  // call get gamesData function
+  useEffect(() => {
+    getGamesData();
+  }, []);
+
+  const boards = [];
+
+  for (let i = 0; i < 6; i++) {
+    const game = gamesData[i];
+    if (game) {
+      boards.push(
+        <div className="mini-one">
+          <MiniBoard
+            key={game._id}
+            id={game._id}
+            playerOne={game.owner?.user_name}
+            playerTwo={game.opponent?.user_name}
+          />
+        </div>
+      );
+    } else {
+      boards.push(
+        <div className="mini-one">
+          <MiniBoard key={i} />
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="chesshome-container">
       <Header />
       <div className="chesshome-rules-holder">
-        <Link to ="/rules"><button className="chesshome-rules">Game Rules</button></Link>
+        <Link to="/rules">
+          <button className="chesshome-rules">Game Rules</button>
+        </Link>
       </div>
-      <div className="app__container">
-        <div className="mini-one">
-          <MiniBoard id="234" playerOne="Emmie4sure" playerTwo="techlead" />
-        </div>
-        <div className="mini-two">
-          <MiniBoard id="234" playerOne="simideletaiwo" playerTwo="techyNkem" />
-        </div>
-        <div className="mini-three">
-          <MiniBoard id="234" playerOne="whynotdoris" playerTwo="trustieee" />
-        </div>
-        <div className="mini-four">
-          <MiniBoard id="234" playerOne="dejavu" playerTwo="" />
-        </div>
-        <div className="mini-five">
-          <MiniBoard id="234" playerOne="pgirl" playerTwo="" />
-        </div>
-        <div className="mini-six">
-          <MiniBoard id="234" playerOne="" playerTwo="" />
-        </div>
-      </div>
+      <div className="app__container">{boards}</div>
     </div>
   );
 }

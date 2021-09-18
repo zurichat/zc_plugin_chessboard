@@ -44,7 +44,6 @@ a {
 
 .exit-button {
   border: 1px solid #E70B0B;
-  /* box-sizing: border-box; */
   display: inline-block;
   border-radius: 4px;
   cursor: pointer;
@@ -52,13 +51,10 @@ a {
   background-color: transparent;
   color: #E70B0B;
   padding: 0;
-  /* padding-right: 0; */
-  /* padding: 1.5rem; */
   padding: 1.5rem 5rem;
   width: 100%;
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
   text-align: center;
-  transition-duration: 0.4s;
   overflow: hidden;
   font-size: 16px;
   font-weight: bold;
@@ -71,7 +67,7 @@ a {
   background-color: #E70B0B;
 }
 
-.exit-button:after {
+/* .exit-button:after {
   content: "";
   background: #e70b0b88;
   display: block;
@@ -81,19 +77,17 @@ a {
   margin-left: -20px !important;
   margin-top: -120%;
   opacity: 0;
-  transition: all 0.8s
-}
+} */
 
-.exit-button:active:after {
+/* .exit-button:active:after {
   padding: 0;
   margin: 0;
   opacity: 1;
-  transition: 0s
-}
+} */
 
-.exit-button:focus {
+/* .exit-button:focus {
   outline: 0;
-}
+} */
 
 .forfeit-button {
   color: #fff;
@@ -112,6 +106,24 @@ a {
   display: none;
 }
 
+.waiting_player_2_container{
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-top: 3.5rem;
+
+}
+
+.waiting_player_2{
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  color: #00B87C;
+  font-style: italic;
+}
+
 @media only screen and (max-width: 600px) {
   .leave__button h3{
     display: block;
@@ -121,9 +133,9 @@ a {
   }
 
 
-  .exit_button_real{
+  /* .exit_button_real{
     display: none;
-  }
+  } */
 
   .btn {
     flex-direction: column;
