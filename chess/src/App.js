@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
 import GameScreenWithComments from "./Pages/GameScreen2/GameScreen2";
@@ -14,14 +15,22 @@ import Rules from "./Pages/Rules/Rules";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename="/chess">
         <Switch>
-          <Route exact path="/" render={HomePage} />
+          <Route
+            exact
+            path="/"
+            render={() => <HomePage />}
+          />
           <Route exact path="/game" render={MainGame} />
           <Route exact path="/game/games" render={Games} />
           <Route
             exact
             path="/game_nocomments"
+            render={() => <GameScreenWithoutComments />}
+          />
+          <Route
+            path="/game_nocomments/:id"
             render={() => <GameScreenWithoutComments />}
           />
           <Route

@@ -5,7 +5,6 @@ import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
 
-// function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo }) {
   const history = useHistory();
 
