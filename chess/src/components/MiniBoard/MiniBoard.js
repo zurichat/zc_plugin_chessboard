@@ -7,12 +7,6 @@ import axios from "axios";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo, id }) {
-  // if (!playerOne) {
-  //   player2 = ''
-  // } else {
-  //   player 2
-  // }
-
   const history = useHistory();
   console.log(playerOne);
 
@@ -33,7 +27,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
       const game_id = result.data.data.object_id;
       history.push(`/game_nocomments/${result.data.data.object_id}`);
     } else {
-      console.log(result.data.message);
+      //....
     }
   };
   return (
@@ -59,13 +53,14 @@ function MiniBoard({ playerOne, playerTwo, id }) {
         </a>
       </div>
       <div className="mini-asideBar mini-bottomBar">
-        {playerTwo ? (
+        {playerTwo && (
           <div className="mini-playerProfile">
             <div className="mini-profile-image"></div>
             <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">Player 2: @{playerTwo}</p>
           </div>
-        ) : (
+        )}
+        {playerOne && !playerTwo && (
           <Link to="/game_comments">
             <button className="join-button bottom-button">
               Join as Player 2
