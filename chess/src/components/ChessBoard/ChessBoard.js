@@ -13,9 +13,9 @@ import Portal from "../Modals/CongratulationsModal/Portal";
 
 const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
-  const [gameId, setGameId] = useState("61407322fc1882474317803d");
+  const [gameId, setGameId] = useState(gameId);
   const [playerTurn, setPlayerTurn] = useState("w");
-  const [playerId] = useState({ w: "085fc3b2d", b: "085fc3b2-3" });
+  const [playerIds, setPlayerIds] = useState({});
   // const centrifuge = new Centrifuge(
   //   "wss://realtime.zuri.chat/connection/websocket"
   // );
@@ -27,81 +27,65 @@ const ChessBoard = ({ type, gameData }) => {
     // centrifuge.connect();
     // centrifuge.subscribe(gameId, ChannelEventsListener);
     getGames();
+    
+    setPlayerIds({
+          w: gameData.data.owner.user_id,
+          b: gameData.data.opponent.user_id,
+        }); 
+        setGameId(gameData.data._id);
   }, []);
 
-
   /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
-      console.log(gameData[1]);
-      //Modal reference from Portal.js
-      const modalRef = useRef();
       
       //Conditions on Game Over
       const gameOver = game.current && game.current.game_over();
       const nextMover = fen.split(" ")[1];
-      console.log(nextMover);
-  
-      // GET PLAYER ID 
-      const playerKey = Object.keys(playerId);
-      const playerBlack = playerId.b;
-      const playerWhite = playerId.w;
-  
-      // GET PIECE COLORS
-      const whitePiece = playerKey[0];
-      const blackPiece = playerKey[1];
       
-      console.log(nextMover == blackPiece);
-      
+              
+
       // PERFORM ACTIONS ON GAME OVER
       let winner;
       if(gameOver) {
-        nextMover === blackPiece ? winner = playerWhite : winner = playerBlack; 
-        console.log(game.current.turn());
-        console.log(`the winner is ${winner}`);
+        playerTurn === "w" ? winner = gameData.data.opponent : winner = gameData.data.owner; 
+        
 
         const end = async () => {
             const gameEndData = {
-                user_id: winner,
+                user_id: winner.user_id,
                 game_id: gameId
             };
 
-          const result = await axios.post(
+
+          const result = await axios.patch(
             "https://chess.zuri.chat/api/v1/game/end",
             gameEndData
-          ).then(response => console.log(response));
-
-          return result;
-        
+          );
+          
         };
         end();
-        console.log(end());
-      } else {
-        console.log("still on");
       }
       
   /////////////////////////////////// END OF GAME END SECTION ///////////////////////////////////////////////////////////
-
+  
   const getGames = async () => {
     const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
-    console.log(response.data.data[response.data.data.length - 1]);
   };
 
   const pieceMove = async (move) => {
     const body = {
-      user_id: playerId[playerTurn],
+      // user_id: playerId[playerTurn],
       position_fen: game.current.fen(),
       game_id: gameId,
       board_state: move,
     };
-    const response = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/piecemove",
-      body
-    );
-    console.log("move", response);
+  //   const response = await axios.patch(
+  //     "https://chess.zuri.chat/api/v1/game/piecemove",
+  //     body
+  //   );
   };
 
   const ChannelEventsListener = (ctx) => {
     const websocket = ctx;
-    console.log("ctx", ctx);
 
     switch (ctx.data.event) {
       case "join_game":
@@ -127,7 +111,7 @@ const ChessBoard = ({ type, gameData }) => {
       from: sourceSquare,
       to: targetSquare,
     });
-
+    
     if (move === null) return;
 
     setFen(game.current.fen());
@@ -168,11 +152,13 @@ const ChessBoard = ({ type, gameData }) => {
   return (
     <>
       <div className="chessboard">
-        <PlayerName
-          style={{ paddingBottom: "28px" }}
-          name={gameData?.data?.owner?.user_name}
-        />
+        
+        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo/> : <PlayerName
+        style={{ paddingBottom: "28px" }}
+          
+          name={gameData?.data?.opponent.user_name}/>}
         <div
+        
           style={{
             justifyContent: "flex-start",
             position: "relative",
@@ -197,11 +183,12 @@ const ChessBoard = ({ type, gameData }) => {
           />
         </div>
 
-        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo/> : <PlayerName
+        <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData?.data?.opponent}/>}
+          name={gameData?.data?.owner?.user_name}
+        />
       </div>
-      {gameOver && <Portal champ={winner} />}
+      {gameOver && <Portal champ={winner.user_name} />}
     </>
   );
 };
