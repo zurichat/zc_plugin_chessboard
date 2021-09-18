@@ -34,10 +34,10 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     //Start function for join as spectator
               const watchGame = async () => {
                 const sample_data = {
-                "user_id": "564762",
-                "user_name": "John_Doe",
-               "game_id": "614464eed0284bc6a922370e",
-                "image_url": "string"
+                  user_id: "7837488",
+                  game_id: id,
+                  user_name: "John Doe",
+                  image_url: "string"
                 };
             
               
@@ -47,10 +47,10 @@ function MiniBoard({ playerOne, playerTwo, id }) {
                 );
                 console.log(result);
                 if (result.data.success) {
-                  // const game_id = sample_data.game_id;
+                  const game_id = sample_data.game_id;
                   history.push(`/game/${sample_data.game_id}`);
                 } else {
-                  console.log(result.data.message);
+                  // console.log(result.data.message);
                 }
             };
             //End function for join as spectator
