@@ -5,7 +5,6 @@ import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
 
-<<<<<<< HEAD
 function MiniBoard({ playerOne, playerTwo }) {
   const history = useHistory();
 
@@ -29,10 +28,6 @@ function MiniBoard({ playerOne, playerTwo }) {
       console.log(result.data.message);
     }
   };
-=======
-// function MiniBoard({ id, playerOne, playerTwo }) {
-function MiniBoard({ playerOne, playerTwo, playerWait }) {
->>>>>>> 55a3c9bd43b2375c76ec882b252887af761b5bf6
   return (
     <div className="mini-board">
       <div className="mini-asideBar mini-topBar">
@@ -43,17 +38,9 @@ function MiniBoard({ playerOne, playerTwo, playerWait }) {
             <p className="mini-profile-name">Player 1: @{playerOne}</p>
           </div>
         ) : (
-<<<<<<< HEAD
           <button className="join-button" onClick={createGame}>
             Join as Player 1
           </button>
-=======
-          <Link to="/game_nocomments">
-            <button className="join-button" onClick={playerWait}>
-              Join as Player 1
-            </button>
-          </Link>
->>>>>>> 55a3c9bd43b2375c76ec882b252887af761b5bf6
         )}
       </div>
 
