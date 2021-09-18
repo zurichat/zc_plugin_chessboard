@@ -6,6 +6,7 @@ import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
+import WaitingForPlayerTwo from "../Button/WaitingForPlayerTwo";
 
 // import Centrifuge from "centrifuge";
 import Portal from "../Modals/CongratulationsModal/Portal";
@@ -135,7 +136,7 @@ const ChessBoard = ({ type, gameData }) => {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 538;
+    return screenWidth < 560 ? screenWidth * 0.85 : 475;
   };
 
   const customPieces = () => {
@@ -173,6 +174,7 @@ const ChessBoard = ({ type, gameData }) => {
         />
         <div
           style={{
+            justifyContent: "flex-start",
             position: "relative",
             border: "1px solid #CD9B49",
           }}
@@ -195,10 +197,9 @@ const ChessBoard = ({ type, gameData }) => {
           />
         </div>
 
-        <PlayerName
+        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo/> : <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData?.data?.opponent}
-        />
+          name={gameData?.data?.opponent}/>}
       </div>
       {gameOver && <Portal champ={winner} />}
     </>

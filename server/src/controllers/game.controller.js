@@ -16,7 +16,7 @@ class GameController {
       //Logic for more than 6 games not being active
       const gameDBData = await GameRepo.fetchAll();
 
-      if (gameDBData.data.length <= 200) {
+      if (gameDBData.data.length <= 6) {
         // create new game
 
         // Pass the request body to the schema
@@ -39,11 +39,13 @@ class GameController {
         res
           .status(201)
           .send(
-            response("Origin New Game Board Created successfully", newGameDBData.data, true)
+            response(
+              "Origin New Game Board Created successfully",
+              newGameDBData.data,
+              true
+            )
           );
-
       } else {
-
         // look for completed game to reset and join as owner
         let game = gameDBData.data.find((x) => x.status === 2);
 
@@ -69,7 +71,13 @@ class GameController {
 
         res
           .status(201)
-          .send(response("New Game Board Created successfully", { object_id: game._id }, true));
+          .send(
+            response(
+              "New Game Board Created successfully",
+              { object_id: game._id },
+              true
+            )
+          );
       }
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, 500);
@@ -517,9 +525,9 @@ class GameController {
   // Deletes a particular game from the database
   async delete(req, res) {
     try {
-      const game = await GameRepo.fetchOne(req.params.id);
+      const game = await GameRepo.fetchOne(req.body.game_id);
       if (!game.data)
-        res
+        return res
           .status(404)
           .send(response("No such game found in the database", {}, false));
 

@@ -142,6 +142,14 @@ const GameCtrl = require("../../controllers/game.controller");
  *      example: 613b72eb3ce841615903e676
  *      required: true
  *
+ *   delete:
+ *    type: object
+ *    properties:
+ *     game_id:
+ *      type: string
+ *      example: eiwoeiruo232o34324234234rwe
+ *      required: true
+ *
  */
 
 // Create A Game
@@ -380,14 +388,16 @@ router.patch("/comment", GameCtrl.comment);
 
 /**
  * @swagger
- * /api/v1/game/delete/:id:
+ * /api/v1/game/delete:
  *  delete:
  *   summary: Deletes a game with the specified Id from the database
  *   description: Deletes a game based on ID
- *   parameters:
- *    - in: path
- *      name: id
- *      required: true
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/delete'
  *
  *   responses:
  *    204:
@@ -397,7 +407,7 @@ router.patch("/comment", GameCtrl.comment);
  *    500:
  *      description: An error occurred
  */
-router.delete("/delete/:id", GameCtrl.delete);
+router.delete("/delete", GameCtrl.delete);
 
 // Export Module
 module.exports = router;
