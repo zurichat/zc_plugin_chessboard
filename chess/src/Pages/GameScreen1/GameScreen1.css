@@ -1,189 +1,94 @@
-#game__screen__main{
-    /* border: 1px solid #616161; */
+main {
     display: flex;
     flex-direction: row;
-    min-height: 100vh;
+    height: 100%;
     width: 100%;
     overflow-x: hidden;
+    position: relative;
+    /* border: 2px solid red; */
   }
   
   #chessboard_container {
     width: 70%;
     box-sizing: border-box;
     font-size: 5rem;
-    min-height: 80vh;
-    text-align: center;
+    height: 100%;
   }
   
   #side_container {
     box-sizing: border-box;
-    border-left: 1px solid #616161;
+    border-left: 8px solid #C9C5C9;
     width: 30%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    
+  }
+
+  .dummy{
+    /* overflow-y: scroll; */
+    height: 70vh;
   }
   
-  .btn_container {
-    /* padding: 1.2rem; */
-    width: 90%;
-    margin: 0 auto;
+/* commented out, when we insert the comments from the DB uncomment*/
+
+  /* .dummy::-webkit-scrollbar {
+    width: 8px;
+    background-color:#F3F1F1; 
+  }
+  
+  .dummy::-webkit-scrollbar-thumb {
+    background-color: #C9C5C9;
+    border-radius: 10px;
+    height: 20px;
+  } */
+
+  .gamescreennav_container{
+    font-size: 0;
+  }
+  
+  .exit_btn_container {
+    padding: 3rem 1.2rem;
+    width: 100%;
+    margin: 1.5rem auto;
+    border-top: 0.2rem solid #C9C5C9;
   }
 
   #side_container .title {
-    color: #00B87C;
-    padding: 1.2rem;
-    border-bottom: .2rem solid #00B87C;
-    font-size: 2rem;
     width: 100%;
+    background-color: #00b87c;
+    color: #ffffff;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 1.5rem;
   }
 
-.navbar-profilepix{
-   width: 100%;
-   padding: 2rem;
-   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
-  
-  }
-
-  .navbar-profilepix img{
-    float: right;
-  }
 
   
-header {
-  background: #00B87C;
-  color: white;
-}
-
-.navbar {
-  min-height: 7vh;
-  display: flex;
-  width: 97%;
-  padding: 1rem;
-  margin: auto;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.chesshome-search{
-  padding: 10px;
-  width: 80%;
-  border-radius: 5px;
-  border: 1px solid rgb(233, 232, 232);
- 
-}
-
-#chesshome-flex{
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-
-}
-
-.arrow {
-  border: solid #fff;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-
-#arrow-button{
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
-}
-
-.chesshome-navbar{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chesshome-profileImg{
-  position: relative;
-
-  
-}
-
-.chesshome-profilepix{
-  position: absolute;
-  border-radius: 4px;
-  top: -66%;
-}
-
-.chesshome-profilepix.profileOne{
-  left: 2%;
-  z-index: 600;
-}
-
-.chesshome-profilepix.profileTwo{
-  left: 21%;
-  z-index: 500;
-}
-
-.chesshome-profilepix.profileThree{
-  left: 41%;
-}
-
-#text-300{
-  position: absolute;
-  top: 40%;
-  right: 5%;
-  font-size: 16px;
-  font-weight: bold;
-  z-index: 100;
-  color: #000;
-}
-
-#pawnLogo{
-  height: 20px;
-}
-
-.leave__mobile{
-  display: none;
-}
-
-  
-  @media only screen and (max-width: 600px) {
-    #game__screen__main {
+  @media only screen and (max-width: 1050px) {
+    main {
       flex-direction: column;
     }
     #chessboard_container {
       width: 100%;
+      /* padding-top: 5rem; */
     }
     #side_container {
+      margin-top: 6rem;
       width: 100%;
       border: none;
+      position: relative;
     }
-
-    #gamescreen-nav{
-      display: none;
-    }
-
-    .leave__mobile{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem;
-      box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
-      margin: 1rem auto;
-    }
-
-  h2{
-    font-size: 20px;    
-  }
- 
-
-  .remove__exit{
-    display: none;
-  }
-
-  .navbar-profilepix{
-    display: none;
-  }
   }

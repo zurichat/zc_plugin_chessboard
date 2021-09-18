@@ -13,22 +13,51 @@ function Homepage() {
       </div>
       <div className="app__container">
         <div className="mini-one">
-          <MiniBoard id="234" playerOne="Emmie4sure" playerTwo="techlead" />
+          <MiniBoard
+            id="234"
+            playerOne="Emmie4sure"
+            playerTwo="techlead"
+          />
         </div>
         <div className="mini-two">
-          <MiniBoard id="234" playerOne="simideletaiwo" playerTwo="techyNkem" />
+          <MiniBoard
+            id="234"
+            playerOne="simideletaiwo"
+            playerTwo="techyNkem"
+
+          />
         </div>
         <div className="mini-three">
-          <MiniBoard id="234" playerOne="whynotdoris" playerTwo="trustieee" />
+          <MiniBoard
+            id="234"
+            playerOne="whynotdoris"
+            playerTwo="trustieee"
+
+          />
         </div>
         <div className="mini-four">
-          <MiniBoard id="234" playerOne="dejavu" playerTwo="" />
+          <MiniBoard
+            id="234"
+            playerOne="dejavu"
+            playerTwo=""
+
+          />
         </div>
         <div className="mini-five">
-          <MiniBoard id="234" playerOne="pgirl" playerTwo="" />
+          <MiniBoard
+            id="234"
+            playerOne="pgirl"
+            playerTwo=""
+
+          />
         </div>
         <div className="mini-six">
-          <MiniBoard id="234" playerOne="" playerTwo="" />
+          <MiniBoard
+            id="234"
+            playerOne=""
+            playerTwo=""
+
+          />
         </div>
       </div>
     </div>
