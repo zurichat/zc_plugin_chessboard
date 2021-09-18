@@ -55,12 +55,12 @@ function MiniBoard({ playerOne, playerTwo, id }) {
                 const sample_data = {
                   user_id: "7837488",
                   game_id: id,
-                  user_name: "John Doe",
+                  user_name: "Annietah",
                   image_url: "string"
                 };
             
               
-                const result = await axios.post(
+                const result = await axios.patch(
                   "https://chess.zuri.chat/api/v1/game/watch",
                   sample_data
                 );

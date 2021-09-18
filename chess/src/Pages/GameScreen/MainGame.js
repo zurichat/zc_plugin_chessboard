@@ -12,7 +12,7 @@ const MainGame = () => {
   const [gameData, setGameData] = useState({});
 
   const game_id = useParams();
-  console.log(game_id);
+
   useEffect(() => {
     getGamebyID();
   }, []);
@@ -21,8 +21,7 @@ const MainGame = () => {
       const game = await axios.get(`game/${game_id.id}`);
       // Set gamesData state to response
       setGameData(game.data);
-      console.log(game.data);
-      //console.log(game.data);
+
     } catch (err) {
       console.log(err);
     }
@@ -32,8 +31,13 @@ const MainGame = () => {
     <section className="main-game">
       <div className="main-chess">
         <Header />
-        <Chessboard type="spectator" />
+        {/* To watch game */}
+        {
+          gameData.data && <Chessboard type="spectator" gameData={ gameData } />
+        }
+       
       </div>
+       {/* To watch game */}
 
       <BrowserRouter>
         <SpectatorSideBar />
