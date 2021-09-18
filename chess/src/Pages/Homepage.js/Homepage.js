@@ -40,7 +40,7 @@ function Homepage() {
           </div>
         ))}
 
-        {/* <div className="mini-one">
+        <div className="mini-one">
           <MiniBoard
             id="234"
             playerOne="Emmie4sure"
@@ -86,7 +86,7 @@ function Homepage() {
             playerTwo=""
 
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );

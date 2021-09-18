@@ -2,6 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 import avi from "../../../assets/ChatAvatar.png";
 import moment from "moment";
+import axios from "axios";
+
+function getComment() {
+  axios.patch("http://localhost:5050/api/v1/game/comment", 
+  {
+    comment: "would love to see a rematch",
+    game_id: "61410ebe6173056af01b4cdc",
+    user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+    user_name: "jack",
+    image_url: "https://www.gravatar.com/avatar/"  
+  }).then(res => console.log(res.comment)).catch(err => console.error(err));
+}
 
 const data = {
   players: [
@@ -55,6 +67,7 @@ function Comment() {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
+    getComment();
     const ids = data.players.map((player) => player.id);
     setDetails(data.comments);
     setPlayers(ids);
@@ -62,16 +75,19 @@ function Comment() {
 
   const submitForm = () => {
     const time = moment().format("h:mm a");
-    const submitted = {
-      id: 5,
-      message,
-      name: "Trustiiee",
-      time,
-    };
-
-    setDetails([...details, submitted]);
-    setMessage("");
+    if(message.length) {
+      const submitted = {
+        id: 5,
+        message,
+        name: "Trustiiee",
+        time,
+      };
+  
+      setDetails([...details, submitted]);
+      setMessage("");
+    }
   };
+
 
 
   return (
@@ -137,9 +153,11 @@ function Comment() {
         <>
           <div className="chatInputForm">
             <input
+              
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && submitForm()}
               placeholder="Send a comment"
             />
             <div className="inputIcons">
