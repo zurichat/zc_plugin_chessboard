@@ -17,40 +17,43 @@ function App() {
     <div className="App">
       <Router basename="/chess">
         <Switch>
-          <Route exact path="/" render={() => <HomePage />} />
-          <Route path="/game/:id" render={() => <MainGame />} />
-          <Route exact path="/game/games" render={() => <Games />} />
+          {/* View All Games */}
           <Route
             exact
-            path="/game_nocomments"
-            render={() => <GameScreenWithoutComments />}
+            path="/"
+            render={() => <HomePage />}
           />
+
+          {/* Specatator Game View */}
+          <Route
+            path="/game/:id"
+            render={() => <MainGame />}
+          />
+
+          {/* Actual Game Page for Player 1 and Player 2 */}
           <Route
             path="/game_nocomments/:id"
             render={() => <GameScreenWithoutComments />}
           />
-          <Route
-            path="/game_nocomments/:id"
-            render={() => <GameScreenWithoutComments />}
-          />
+
           <Route
             exact
             path="/game_comments"
             render={() => <GameScreenWithComments />}
           />
-          <Route exact path="/modalpage" render={() => <Modal />} />
-          <Route exact path="/test-accept-modal" component={TestModal} />
-          <Route exact path="/inviteplayer">
-            <InviteModal />
-          </Route>
+
           <Route
             exact
-            path="/Accept_chalengeModal"
-            render={() => <Acceptchalengemodal />}
+            path="/inviteplayer"
+            render={() => <InviteModal />}
           />
-          <Route exact path="/rules">
-            <Rules />
-          </Route>
+
+          {/* Rules Page */}
+          <Route
+            exact
+            path="/rules"
+            render={() => <Rules />}
+          />
         </Switch>
       </Router>
     </div>
