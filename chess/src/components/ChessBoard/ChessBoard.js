@@ -29,15 +29,56 @@ const ChessBoard = ({ type, gameData }) => {
   }, []);
 
 
-  const gameOver = game.current && game.current.game_over();
-  if(gameOver) {
-    // setShow(true);
-    console.log("make api call");
-  } else {
-    console.log("still on");
-  }
+  /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
   
+      //Modal reference from Portal.js
+      const modalRef = useRef();
+      
+      //Conditions on Game Over
+      const gameOver = game.current && game.current.game_over();
+      const nextMover = fen.split(" ")[1];
+      console.log(nextMover);
   
+      // GET PLAYER ID 
+      const playerKey = Object.keys(playerId);
+      const playerBlack = playerId.b;
+      const playerWhite = playerId.w;
+  
+      // GET PIECE COLORS
+      const whitePiece = playerKey[0];
+      const blackPiece = playerKey[1];
+      
+      console.log(nextMover == blackPiece);
+      
+      // PERFORM ACTIONS ON GAME OVER
+      let winner;
+      if(gameOver) {
+        nextMover === blackPiece ? winner = playerWhite : winner = playerBlack; 
+        
+        console.log(`the winner is ${winner}`);
+
+        const end = async () => {
+            const gameEndData = {
+                user_id: winner,
+                game_id: gameId
+            };
+
+          const result = await axios.post(
+            "https://chess.zuri.chat/api/v1/game/end",
+            gameEndData
+          ).then(response => console.log(response));
+
+          return result;
+        
+        };
+        end();
+        console.log(end());
+      } else {
+        console.log("still on");
+      }
+      
+  /////////////////////////////////// END OF GAME END SECTION ///////////////////////////////////////////////////////////
+
   const getGames = async () => {
     const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
     console.log(response.data.data[response.data.data.length - 1]);
@@ -77,6 +118,8 @@ const ChessBoard = ({ type, gameData }) => {
         break;
     }
   };
+ 
+
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
     let move = game.current.move({
@@ -120,7 +163,6 @@ const ChessBoard = ({ type, gameData }) => {
     }, {});
   };
 
-  const modalRef = useRef();
   
   return (
     <>
@@ -158,8 +200,7 @@ const ChessBoard = ({ type, gameData }) => {
           name={gameData?.data?.opponent}
         />
       </div>
-      {gameOver && <Portal ref={modalRef}/>}
-
+      {gameOver && <Portal champ={winner} />}
     </>
   );
 };
