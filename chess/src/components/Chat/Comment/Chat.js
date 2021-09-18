@@ -92,7 +92,7 @@ function Comment() {
       ) : (
         <div className="emptyComment">
           <svg className="CommentBird" width="329" height="139" viewBox="0 0 329 139" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0)">
+            <g clipPath="url(#clip0)">
             <path d="M118.813 45.5898H0.0413818V84.5806H4.54044V94.7783L14.7379 84.5806H118.813V45.5898Z" fill="#F0F0F0"/>
             <path d="M115.514 49.3867H3.34058V80.5792H115.514V49.3867Z" fill="white"/>
             <path d="M67.2692 58.7939H13.2607V60.433H67.2692V58.7939Z" fill="#F0F0F0"/>
