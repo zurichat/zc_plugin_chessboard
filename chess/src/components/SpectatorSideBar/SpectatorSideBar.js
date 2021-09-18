@@ -2,10 +2,8 @@ import "./SpectatorSideBar.css";
 import { Switch, Route, NavLink } from "react-router-dom";
 // import Games from "../Games/Games";
 import Chat from "../Chat/Chat.js";
-import { useState } from "react";
 
-const SpectatorSideBar = () => {
- const [display, setDisplay] = useState(true);
+const SpectatorSideBar = ({display, setDisplay}) => {
   return ( 
     <>
     {display && 
@@ -14,8 +12,6 @@ const SpectatorSideBar = () => {
         <NavLink exact a className="nav-link" to="/game">
           <h1>Comments</h1>
         </NavLink>
-
-        {display &&
         <a className="close" onClick={() =>
         setDisplay(false)}>
           <svg
@@ -42,7 +38,6 @@ const SpectatorSideBar = () => {
             />
           </svg>
         </a>
-        } 
 
       </nav>
       <Switch>

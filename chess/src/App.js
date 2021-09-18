@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
@@ -12,12 +13,13 @@ import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
 
 function App() {
+  const [commentDisplay, setCommentDisplay] = useState(false);
   return (
     <div className="App">
       <Router basename="/chess">
         <Switch>
           <Route exact path="/" render={HomePage} />
-          <Route exact path="/game" render={MainGame} />
+          <Route exact path="/game" render={(props) => <MainGame display={commentDisplay} setDisplay={setCommentDisplay} {...props} />} />
           <Route exact path="/game/games" render={Games} />
           <Route
             exact

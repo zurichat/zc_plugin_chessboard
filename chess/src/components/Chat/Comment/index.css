@@ -61,7 +61,7 @@
     width: 100%;
     padding: 2rem;
 } 
-.emptyComment > img {
+.emptyComment > svg {
    width: 100%;
    text-align: center;
    height: auto;
@@ -154,6 +154,7 @@ input::placeholder{
         width: 1rem;
     }
 }
+
 
 
 
