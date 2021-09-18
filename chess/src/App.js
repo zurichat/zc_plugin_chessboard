@@ -17,13 +17,9 @@ function App() {
     <div className="App">
       <Router basename="/chess">
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <HomePage />}
-          />
-          <Route exact path="/game" render={MainGame} />
-          <Route exact path="/game/games" render={Games} />
+          <Route exact path="/" render={() => <HomePage />} />
+          <Route exact path="/game" render={() => <MainGame />} />
+          <Route exact path="/game/games" render={() => <Games />} />
           <Route
             exact
             path="/game_nocomments"
@@ -42,7 +38,7 @@ function App() {
             path="/game_comments"
             render={() => <GameScreenWithComments />}
           />
-          <Route exact path="/modalpage" render={Modal} />
+          <Route exact path="/modalpage" render={() => <Modal />} />
           <Route exact path="/test-accept-modal" component={TestModal} />
           <Route exact path="/inviteplayer">
             <InviteModal />
@@ -50,7 +46,7 @@ function App() {
           <Route
             exact
             path="/Accept_chalengeModal"
-            render={Acceptchalengemodal}
+            render={() => <Acceptchalengemodal />}
           />
           <Route exact path="/rules">
             <Rules />
