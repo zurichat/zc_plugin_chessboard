@@ -31,7 +31,7 @@ const ChessBoard = ({ type, gameData }) => {
 
 
   /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
-  
+      console.log(gameData[1]);
       //Modal reference from Portal.js
       const modalRef = useRef();
       
@@ -55,7 +55,7 @@ const ChessBoard = ({ type, gameData }) => {
       let winner;
       if(gameOver) {
         nextMover === blackPiece ? winner = playerWhite : winner = playerBlack; 
-        
+        console.log(game.current.turn());
         console.log(`the winner is ${winner}`);
 
         const end = async () => {
