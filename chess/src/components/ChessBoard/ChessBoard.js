@@ -31,6 +31,7 @@ const ChessBoard = ({ type, gameData }) => {
 
 
   const gameOver = game.current && game.current.game_over();
+
   if(gameOver) {
     // setShow(true);
     console.log("make api call");
@@ -157,7 +158,7 @@ const ChessBoard = ({ type, gameData }) => {
 
         {gameData?.data?.status === 0 ? <WaitingForPlayerTwo/> : <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData?.data?.opponent}/>}
+          name={gameData?.data?.opponent.user_name}/>}
       </div>
       {gameOver && <Portal ref={modalRef}/>}
 

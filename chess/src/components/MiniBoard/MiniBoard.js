@@ -17,13 +17,13 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     };
 
     const result = await axios.post(
-      "https://chess.zuri.chat/api/v1/games/create",
+      "https://chess.zuri.chat/api/v1/game/create",
       sample_data
     );
-  
+
     if (result.data.success) {
       const game_id = result.data.data.object_id;
-      history.push(`/game_nocomments/${result.data.data.object_id}`);
+      history.push(`/game_nocomments/${game_id}`);
     } else {
       //....
     }
@@ -41,7 +41,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
       "https://chess.zuri.chat/api/v1/game/join",
       sample_data
     );
-    console.log(result);
+
     if (result.data.success) {
       const game_id = result.data.data.game_id;
       history.push(`/game_nocomments/${game_id}`);
@@ -80,11 +80,9 @@ function MiniBoard({ playerOne, playerTwo, id }) {
           </div>
         )}
         {playerOne && !playerTwo && (
-        
-            <button className="join-button bottom-button" onClick={joinGame}>
-              Join as Player 2
-            </button>
-         
+          <button className="join-button bottom-button" onClick={joinGame}>
+            Join as Player 2
+          </button>
         )}
       </div>
     </div>
