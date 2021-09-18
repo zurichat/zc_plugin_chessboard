@@ -1,14 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from "react";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
 import GameScreenWithComments from "./Pages/GameScreen2/GameScreen2";
 import MainGame from "./Pages/GameScreen/MainGame.js";
-import Modal from "./components/Modals/ModalPage/Modal";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
-import TestModal from "./components/Modals/AcceptDeclineModal/Test";
-import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
-import Games from "./components/Games/Games";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
 
