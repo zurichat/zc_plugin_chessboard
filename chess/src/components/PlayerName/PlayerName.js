@@ -6,7 +6,7 @@ const PlayerName = (props) => {
   return (
     <div className="player__details" style={props.style}>
       <img src={Avatar} alt="" />
-      <p>@{props.name}</p>
+      <p>{props.name}</p>
     </div>
   );
 };

@@ -26,16 +26,14 @@ const Header = ({display, setDisplay}) => {
   return (
     <div>
       <header className="main-header">
-        <nav className="nav chesshome-nav">
+        <div className="nav chesshome-nav">
           <div id="chesshome-flex">
             <h1>
               <img src={pawnLogo} id="pawnLogo" /> Chess
             </h1>
-            <div>
               <button id="arrow-button">
                 <i className="arrow down"></i>
               </button>
-            </div>
           </div>
           <div className="chesshome-headerRight">
             <a className="commentIcon" onClick={() => setDisplay(true)}>
@@ -58,7 +56,7 @@ const Header = ({display, setDisplay}) => {
             <p className="text-300">300</p>
           </div>
           </div>
-        </nav>
+        </div>
       </header>
     </div>
   );
