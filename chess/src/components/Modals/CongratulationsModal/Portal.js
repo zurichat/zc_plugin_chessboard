@@ -5,33 +5,14 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import winner from "../../../assets/winner.png";
 
-const Portal = forwardRef((props, ref) => {
+const Portal =  (champ) => {
 
-    const [display, setDisplay] = useState(true);
 
-    useImperativeHandle(ref, () => {
-        return {
-            openModal: () => open(),
-            close: () => close()
-        };
-    });
-
-    const open = () => {
-        setDisplay(true);
-    };
-
-    const close = () => {
-        setDisplay(false);
-    };
-    
-    if(display) {
-        
       return (
-      
+       
         <div className={"modal-wrapper"}>
                 
-                <div 
-                onClick={close}                 
+                <div                 
                 className={"modal-backdrop"}
                 />
                 <div 
@@ -41,7 +22,7 @@ const Portal = forwardRef((props, ref) => {
                     </div>
                     <div                    className="modal-content">
                         <p>
-                            <span>Congratulations</span> @EseMonday
+                            <span>Congratulations</span> {champ.champ}
                         </p>
                         <p>You won this round</p>
                     </div>
@@ -52,11 +33,61 @@ const Portal = forwardRef((props, ref) => {
         </div>
 
     );
-    }
-
-    return null;
-});
-
-Portal.displayName = "Portal";
+    };
 
 export default Portal;
+
+// const Portal = forwardRef((props, ref, champ) => {
+
+//     const [display, setDisplay] = useState(true);
+
+//     useImperativeHandle(ref, () => {
+//         return {
+//             openModal: () => open(),
+//             close: () => close()
+//         };
+//     });
+
+//     const open = () => {
+//         setDisplay(true);
+//     };
+
+//     const close = () => {
+//         setDisplay(false);
+//     };
+    
+//     if(display) {
+//       return (
+       
+//         <div className={"modal-wrapper"}>
+                
+//                 <div 
+//                 onClick={close}                 
+//                 className={"modal-backdrop"}
+//                 />
+//                 <div 
+//                 className="modal-box">
+//                     <div className="modal-profile">
+//                         <div className="modal-img"><img src={winner} alt="winner-image" /></div>
+//                     </div>
+//                     <div                    className="modal-content">
+//                         <p>
+//                             <span>Congratulations</span> {champ}
+//                         </p>
+//                         <p>You won this round</p>
+//                     </div>
+//                     <div className="btn-group">
+//                         <Button />
+//                     </div>
+//                 </div>
+//         </div>
+
+//     );
+//     }
+
+//     return null;
+// });
+
+// Portal.displayName = "Portal";
+
+// export default Portal;
