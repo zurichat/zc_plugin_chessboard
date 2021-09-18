@@ -24,7 +24,7 @@ function Homepage() {
 
   for (let i = 0; i < 6; i++) {
     const game = gamesData[i];
-    if (game) {
+    if (game && game.status !== 2) {
       boards.push(
         <div className="mini-one">
           <MiniBoard

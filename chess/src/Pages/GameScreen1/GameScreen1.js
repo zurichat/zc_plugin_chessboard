@@ -46,7 +46,7 @@ const GameScreenWithoutComments = () => {
         <div className="gameheader-container">
           <Header />
         </div>
-        <ChessBoard type="player"/>
+        <ChessBoard type="player" gameData={gameData} />
       </div>
 
       <div id="side_container">
