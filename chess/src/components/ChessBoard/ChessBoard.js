@@ -49,12 +49,14 @@ const ChessBoard = ({ type, gameData }) => {
         break;
 
       case "piece_moved":
+        console.log("a player moved a piece")
         chessGameBoard.move(websocket.data.board_state);
-        // setFen(chessGameBoard.fen());
+        setFen(chessGameBoard.fen());
         break;
 
       case "spectator_joined_game":
         // New Specator Joined Game Code Here
+        console.log("spectator joined")
         break;
 
       case "end_game":
