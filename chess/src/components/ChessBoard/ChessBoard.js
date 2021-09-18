@@ -8,7 +8,7 @@ import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
 import WaitingForPlayerTwo from "../Button/WaitingForPlayerTwo";
 
-// import Centrifuge from "centrifuge";
+import Centrifuge from "centrifuge";
 import Portal from "../Modals/CongratulationsModal/Portal";
 
 const ChessBoard = ({ type, gameData }) => {
@@ -16,86 +16,53 @@ const ChessBoard = ({ type, gameData }) => {
   const [gameId, setGameId] = useState(gameId);
   const [playerTurn, setPlayerTurn] = useState("w");
   const [playerIds, setPlayerIds] = useState({});
-  // const centrifuge = new Centrifuge(
-  //   "wss://realtime.zuri.chat/connection/websocket"
-  // );
 
-  let game = useRef(null);
+  // Centrifugee Stuffss
+  const centrifuge = new Centrifuge(
+    "wss://realtime.zuri.chat/connection/websocket"
+  );
+
+  const chessGameBoard = new Chess();
 
   useEffect(() => {
-    game.current = new Chess();
-    // centrifuge.connect();
-    // centrifuge.subscribe(gameId, ChannelEventsListener);
+    // chessGameBoard = new Chess();
     getGames();
-    
     setPlayerIds({
-          w: gameData.data.owner.user_id,
-          b: gameData.data.opponent.user_id,
-        }); 
-        setGameId(gameData.data._id);
+      w: gameData.data.owner.user_id,
+      b: gameData.data.opponent.user_id,
+    });
+    setGameId(gameData.data._id);
+
+    // Connect to Centrigo
+    centrifuge.connect();
+
+    // Subsctibe to the GameID room on centrifugo
+    centrifuge.subscribe(gameData.data._id, ChannelEventsListener);
   }, []);
-
-  /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
-      
-      //Conditions on Game Over
-      const gameOver = game.current && game.current.game_over();
-      const nextMover = fen.split(" ")[1];
-      
-              
-
-      // PERFORM ACTIONS ON GAME OVER
-      let winner;
-      if(gameOver) {
-        playerTurn === "w" ? winner = gameData.data.opponent : winner = gameData.data.owner; 
-        
-
-        const end = async () => {
-            const gameEndData = {
-                user_id: winner.user_id,
-                game_id: gameId
-            };
-
-
-          const result = await axios.patch(
-            "https://chess.zuri.chat/api/v1/game/end",
-            gameEndData
-          );
-          
-        };
-        end();
-      }
-      
-  /////////////////////////////////// END OF GAME END SECTION ///////////////////////////////////////////////////////////
-  
-  const getGames = async () => {
-    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
-  };
-
-  const pieceMove = async (move) => {
-    const body = {
-      // user_id: playerId[playerTurn],
-      position_fen: game.current.fen(),
-      game_id: gameId,
-      board_state: move,
-    };
-  //   const response = await axios.patch(
-  //     "https://chess.zuri.chat/api/v1/game/piecemove",
-  //     body
-  //   );
-  };
 
   const ChannelEventsListener = (ctx) => {
     const websocket = ctx;
 
     switch (ctx.data.event) {
       case "join_game":
-        console.log("joined centrifuge");
+        console.log("someone centrifuge");
         break;
 
       case "piece_moved":
-        game.move(websocket.data.board_state);
-        setFen(game.current.fen());
-        console.log("move cemtrifuge");
+        chessGameBoard.move(websocket.data.board_state);
+        // setFen(chessGameBoard.fen());
+        break;
+
+      case "spectator_joined_game":
+        // New Specator Joined Game Code Here
+        break;
+
+      case "end_game":
+        // The Game Has been ended by one of the players
+        break;
+
+      case "comments":
+        // New Comment added
         break;
 
       default:
@@ -103,19 +70,63 @@ const ChessBoard = ({ type, gameData }) => {
         break;
     }
   };
- 
 
+  /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
+
+  //Conditions on Game Over
+  const gameOver = chessGameBoard && chessGameBoard.game_over();
+  const nextMover = fen.split(" ")[1];
+
+  // PERFORM ACTIONS ON GAME OVER
+  let winner;
+  if (gameOver) {
+    playerTurn === "w" ? winner = gameData.data.opponent : winner = gameData.data.owner;
+
+
+    const end = async () => {
+      const gameEndData = {
+        user_id: winner.user_id,
+        game_id: gameId
+      };
+
+      const result = await axios.patch(
+        "https://chess.zuri.chat/api/v1/game/end",
+        gameEndData
+      );
+    };
+    end();
+  }
+
+  /////////////////////////////////// END OF GAME END SECTION ///////////////////////////////////////////////////////////
+
+  const getGames = async () => {
+    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+  };
+
+  const pieceMove = async (move) => {
+    const body = {
+      user_id: playerIds[playerTurn],
+      position_fen: chessGameBoard.fen(),
+      game_id: gameId,
+      board_state: move,
+    };
+
+    const response = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/piecemove",
+      body
+    );
+  };
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
-    let move = game.current.move({
+    let move = chessGameBoard.move({
       from: sourceSquare,
       to: targetSquare,
     });
-    
+
     if (move === null) return;
 
-    setFen(game.current.fen());
-    setPlayerTurn(game.current.turn());
+    setFen(chessGameBoard.fen());
+    setPlayerTurn(chessGameBoard.turn());
     pieceMove(move);
   };
 
@@ -148,17 +159,16 @@ const ChessBoard = ({ type, gameData }) => {
     }, {});
   };
 
-  
   return (
     <>
       <div className="chessboard">
-        
-        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo/> : <PlayerName
-        style={{ paddingBottom: "28px" }}
-          
-          name={gameData?.data?.opponent.user_name}/>}
+
+        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo /> : <PlayerName
+          style={{ paddingBottom: "28px" }}
+
+          name={gameData?.data?.opponent.user_name} />}
         <div
-        
+
           style={{
             justifyContent: "flex-start",
             position: "relative",
