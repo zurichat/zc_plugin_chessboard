@@ -13,19 +13,56 @@ const MainGame = () => {
   const [commentDisplay, setCommentDisplay] = useState(false);
   const [gameData, setGameData] = useState({});
 
-  const game_id = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     getGamebyID();
+
+    // When a user loads this page
+    registerUserAsSpectator();
+
+    // When a user is about to close this page
+    return () => {
+      removeUserAsSpectator();
+    }
   }, []);
+
+  // Add the user as a spectator from DB
+  const registerUserAsSpectator = async () => {
+    const sample_data = {
+      user_id: "7837488",
+      game_id: id,
+      user_name: "Annietah",
+      image_url: "string"
+    };
+
+    const result = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/watch",
+      sample_data
+    );
+  };
+
+  // Remove the user as a spectator from DB
+  const removeUserAsSpectator = async () => {
+    const sample_data = {
+      user_id: "7837488",
+      game_id: id,
+    };
+
+    const result = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/unwatch",
+      sample_data
+    );
+  };
+
   async function getGamebyID() {
     try {
-      const game = await axios.get(`game/${game_id.id}`);
+      const game = await axios.get(`game/${id}`);
       // Set gamesData state to response
       setGameData(game.data);
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 
@@ -35,11 +72,11 @@ const MainGame = () => {
         <Header setDisplay={setCommentDisplay}  />
         {/* To watch game */}
         {
-          gameData.data && <Chessboard type="spectator" gameData={ gameData } />
+          gameData.data && <Chessboard type="spectator" gameData={gameData} />
         }
-       
+
       </div>
-       {/* To watch game */}
+      {/* To watch game */}
 
       <BrowserRouter>
         <SpectatorSideBar display={commentDisplay} setDisplay={setCommentDisplay}  />

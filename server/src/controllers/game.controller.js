@@ -180,7 +180,6 @@ class GameController {
   // Fetch a single game
   async getById(req, res) {
     try {
-      console.log("here");
       // request an info from the user
       const game_id = req.params.id;
 
@@ -326,13 +325,24 @@ class GameController {
         return res
           .status(400)
           .send(response("user not an active spectator", null, false));
-      spectators.splice(index, 1);
+
+      const spectator = spectators.splice(index, 1);
 
       // Save spectators back to db
       const updated = await GameRepo.update(game_id, {
-        ...gameDBData.data,
         spectators,
       });
+
+      // Build Response
+      const payload = {
+        event: "spectator_left_game",
+        permission,
+        spectator,
+        new_number_of_specators: spectators.length,
+      };
+
+      // Publish the event to Centrifugo server
+      await centrifugoController.publish(game_id, payload);
 
       // Return the game
       res.status(200).send(response("spectator removed successfully", updated));

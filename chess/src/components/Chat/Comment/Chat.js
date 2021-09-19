@@ -12,7 +12,7 @@ function getComment() {
     user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
     user_name: "jack",
     image_url: "https://www.gravatar.com/avatar/"  
-  }).then(res => console.log(res.comment)).catch(err => console.error(err));
+  }).then(res => console.log(res)).catch(err => console.error(err));
 }
 
 const data = {

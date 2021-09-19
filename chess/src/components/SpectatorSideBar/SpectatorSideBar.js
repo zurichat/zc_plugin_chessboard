@@ -9,7 +9,7 @@ const SpectatorSideBar = ({display, setDisplay}) => {
     {display && 
     <aside className="side-bar">
       <nav className="side-bar-nav">
-        <NavLink exact className="nav-link" to="/game">
+        <NavLink className="navLink" to="/game">
           <h1>Comments</h1>
         </NavLink>
         <a className="close" onClick={() =>

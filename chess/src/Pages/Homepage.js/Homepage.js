@@ -13,8 +13,8 @@ function Homepage() {
   async function getGamesData() {
     const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
     setGamesData(games.data.data);
-    console.log(games.data.data);
   }
+
   // call get gamesData function
   useEffect(() => {
     getGamesData();

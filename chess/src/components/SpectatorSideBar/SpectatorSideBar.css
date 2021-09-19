@@ -29,21 +29,21 @@
   color: unset !important;
 } */
 
-.nav-link {
+.navLink {
   text-decoration: none;
-  color: #808080;
+  color: #ffffff;
   font-weight: 400;
   padding-bottom: 0.7em;
   margin: 0;
   transition: 0.3s all linear;
 }
 
-.active {
+/* .active {
   color: white;
-}
+} */
 
 .close {
-  margin-top: .8rem;
+  margin-top: .6rem;
   font-weight: 900;
   cursor: pointer;
 }
