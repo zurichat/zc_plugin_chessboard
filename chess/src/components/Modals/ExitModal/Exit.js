@@ -13,7 +13,7 @@ const Exit = ({ isYes, handleClick, gameData }) => {
     return null;
   }
   // return createPortal(
-const [gameId, setGameId] = useState('');
+const [gameId, setGameId] = useState(gameId);
 
 useEffect(() => {
   
@@ -37,11 +37,11 @@ useEffect(() => {
       );
       if (result.data.success) {
         
-        history.push('/');
+        history.push("/");
       } else {
         //....
       }
-      console.log
+      
     };
 
   return (
