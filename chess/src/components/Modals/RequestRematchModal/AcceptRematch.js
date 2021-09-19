@@ -1,5 +1,5 @@
 import React from "react";
-import SquareAvatar from "./Rectangle 892.png";
+import SquareAvatar from "./profile.png";
 import "./RequestRematch.css";
 
 const AcceptRematch = () => {

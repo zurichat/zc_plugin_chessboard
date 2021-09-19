@@ -1,10 +1,8 @@
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p');
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-
-
-.RequestRematch__container {
-    border: 2px solid black;
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
+*{
+    font-family: 'Lato', sans-serif;
+}
+.RequestRematch__container{
     position: fixed;
     top: 0;
     bottom: 0;
@@ -16,39 +14,63 @@
     z-index: 1000 !important;
     background-color: rgba(0, 0, 0, 0.7);
 }
-
 .RequestRematch__modal{
-    
-    background-color: #ffffff;
-     display: flex; 
-    text-align: center;
-     flex-direction: column; 
-     gap: 2rem;
-    padding: 9.5rem 0rem;
-    width: 35%;
-    border: 2px solid yellow;
-    
-    border-radius: 5px;
+    margin: 16vh auto;
+    height: 400px;
+    width: 456px; 
+    z-index: 2;
+    background: #FFFFFF;
+    box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07),
+    0px 49px 35px rgba(0, 0, 0, 0.0460133),
+    0px 24.8165px 16.4998px rgba(0, 0, 0, 0.034856),
+    0px 13.729px 8.167px rgba(0, 0, 0, 0.0269394),
+    0px 7.56423px 3.94388px rgba(0, 0, 0, 0.0201337),
+    0px 3.35772px 1.53069px rgba(0, 0, 0, 0.0128302);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
-.RequestRematch__text{
-    font-size: 18px;
+.profile{
+    margin-top: 8em;
+} 
+
+/* .modal-img{
+    width: 80px;
+    border-radius: 13.3px;
+    height: 80px;
+    margin: 0 auto;
+
+} */
+
+/* img{
+    width: 100%;
+} */ 
+
+.RequestRematch__content{
+    font-size: 20px;
     margin: 0 auto;
     width: 70%;
     text-align: center;
+    
+}
+p{
+    margin: 0;
 }
 .RequestRematch__footer{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 5%;
+    margin-top: 2.5rem;
 }
 
 .RequestRematch__button{
     display: inline-block;
     background-color: transparent;
     border: 1px solid;
-    border-radius: 2px;
+    border-radius: 3px;
     padding: 0;
      padding: 1.2rem 5rem; 
     font-size: 1.4rem;
@@ -60,25 +82,29 @@
 }
 
 .RequestRematch__button--Accept{
-     background: rgba(184, 0, 60, 1);
-    border-color: rgba(184, 0, 60, 1);
+     background: rgba(39, 174, 96, 1);
+     border-color: rgba(39, 174, 96, 1);
     color: #ffffff;
 }
 
 .RequestRematch__button--Accept:hover,
 .RequestRematch__button--Accept:focus{
     background: transparent;
-    color: black;
+    color: rgba(39, 174, 96, 1);
     
 }
 
 .RequestRematch__button--Decline{
-    color: black;
-    border-color: rgba(39, 174, 96, 1);
+    color: rgba(184, 0, 60, 1);
+    border-color: rgba(184, 0, 60, 1);
+}
+.RequestRematch__button--Decline:hover{
+    background:  rgba(184, 0, 60, 1);
+    color: #fff;
 }
 
-.forfeit__button--Decline:hover,
-.forfeit__button--Decline:focus{
-    background:  rgba(39, 174, 96, 1);
-    color: #fff;
+.RequestRematch__button--Decline,
+.RequestRematch__button--Decline:focus{
+    background:  #fff;
+    color: rgba(184, 0, 60, 1);
 }

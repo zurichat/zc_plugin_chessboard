@@ -14,9 +14,9 @@ const CongratulationsModal = (props) => {
         </div>
         <div className="modal-content">
           <p>
-            <span>Congratulations</span> @EseMonday
+            <span>Congratulations</span> @simideletaiwo!
           </p>
-          <p>You won this round</p>
+          <p>You won this challenge</p>
         </div>
         <div className="btn-group">
           <Button />
