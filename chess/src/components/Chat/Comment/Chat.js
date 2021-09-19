@@ -5,27 +5,32 @@ import moment from "moment";
 import axios from "axios";
 
 function getComment() {
-  axios.patch("http://localhost:5050/api/v1/game/comment", 
+   axios.get("http://localhost:5050/api/v1/game/comment", 
+  // {
+  //   comment: "would love to see a rematch",
+  //   game_id: "61410ebe6173056af01b4cdc",
+  //   user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+  //   user_name: "jack",
+  //   image_url: "https://www.gravatar.com/avatar/"  
+  // }
+  ).then(res => console.log(res)).catch(err => console.error(err));
+}
+
+function sendComment() {
+   axios.patch("http://localhost:5050/api/v1/game/comment", 
   {
     comment: "would love to see a rematch",
     game_id: "61410ebe6173056af01b4cdc",
     user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
     user_name: "jack",
     image_url: "https://www.gravatar.com/avatar/"  
-  }).then(res => console.log(res)).catch(err => console.error(err));
+  }
+  ).then(res => console.log(res)).catch(err => console.error(err));
 }
+sendComment();
 
 const data = {
-  players: [
-    {
-      id: 10,
-      name: "Abiola",
-    },
-    {
-      id: 11,
-      name: "Ode",
-    },
-  ],
+  players: [],
   comments: [],
 };
 
