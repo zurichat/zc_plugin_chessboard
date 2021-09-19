@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const LandingPage = () => {
     return ( 
         <div className="landing-page">
-                <img src={ CoverImage } alt="cover image" />
+                <div className="image"><img src={ CoverImage } alt="cover image" /></div>
                 <Link to = "/chess"><button>PROCEED TO APP</button></Link>
         </div>
      );
