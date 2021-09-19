@@ -5,7 +5,6 @@ import "./RequestRematch.css";
 
 const RequestRematchPlayer = () => {
  
- 
     return (
         <div className="RequestRematch__container">
           <div className="RequestRematch__modal">
