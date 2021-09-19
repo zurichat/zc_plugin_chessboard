@@ -429,7 +429,7 @@ class GameController {
         winner_id = isGameExist.data.opponent.user_id;
       } else if (user_id === isGameExist.data.opponent.user_id) {
         isGameExist.data.is_owner_winner = true;
-        winner_id = isGameExist.data.opponent.user_id;
+        winner_id = isGameExist.data.owner.user_id;
       }
 
       isGameExist.data.status = 2;
