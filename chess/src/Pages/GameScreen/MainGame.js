@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Chessboard from "../../components/ChessBoard/ChessBoard";
 import SpectatorSideBar from "../../components/SpectatorSideBar/SpectatorSideBar.js";
@@ -9,7 +8,6 @@ import { useParams } from "react-router";
 import axios from "../../axios/axiosInstance";
 
 const MainGame = () => {
-
   const [commentDisplay, setCommentDisplay] = useState(false);
   const [gameData, setGameData] = useState({});
 
@@ -33,7 +31,7 @@ const MainGame = () => {
       user_id: "7837488",
       game_id: id,
       user_name: "Annietah",
-      image_url: "string"
+      image_url: "string",
     };
 
     const result = await axios.patch(
@@ -60,7 +58,6 @@ const MainGame = () => {
       const game = await axios.get(`game/${id}`);
       // Set gamesData state to response
       setGameData(game.data);
-
     } catch (err) {
       // console.log(err);
     }
@@ -69,20 +66,19 @@ const MainGame = () => {
   return (
     <section className="main-game">
       <div className="main-chess">
-        <Header setDisplay={setCommentDisplay}  />
+        <Header setDisplay={setCommentDisplay} />
         {/* To watch game */}
-        {
-          gameData.data && <Chessboard type="spectator" gameData={gameData} />
-        }
-
+        {gameData.data && <Chessboard type="spectator" gameData={gameData} />}
       </div>
       {/* To watch game */}
 
       <BrowserRouter>
-        <SpectatorSideBar display={commentDisplay} setDisplay={setCommentDisplay}  />
+        <SpectatorSideBar
+          display={commentDisplay}
+          setDisplay={setCommentDisplay}
+        />
       </BrowserRouter>
     </section>
-    
   );
 };
 

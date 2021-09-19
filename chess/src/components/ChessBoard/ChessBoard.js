@@ -16,11 +16,15 @@ const ChessBoard = ({ type, gameData }) => {
   const [gameId, setGameId] = useState(gameId);
   const [playerTurn, setPlayerTurn] = useState("w");
   const [playerIds, setPlayerIds] = useState({});
+  const [playerNames, setPlayerNames] = useState({
+    w: gameData.data.owner.user_name,
+    b: gameData.data.opponent ? gameData.data.opponent.user_name : "",
+  });
   const [squareStyles, setSquareStyles] = useState("");
   const [pieceSquare, setPieceSquare] = useState("");
   const [history, setHistory] = useState("");
 
-  // Centrifugee Stuffss
+  //Centrifugee Stuffss
   const centrifuge = new Centrifuge(
     "wss://realtime.zuri.chat/connection/websocket"
   );
@@ -32,8 +36,9 @@ const ChessBoard = ({ type, gameData }) => {
     getGames();
     setPlayerIds({
       w: gameData.data.owner.user_id,
-      b: gameData.data.opponent ? gameData.data.opponent.user_id: "",
+      b: gameData.data.opponent ? gameData.data.opponent.user_id : "",
     });
+
     setGameId(gameData.data._id);
 
     // Connect to Centrigo
@@ -49,6 +54,11 @@ const ChessBoard = ({ type, gameData }) => {
     switch (ctx.data.event) {
       case "join_game":
         console.log("someone centrifuge");
+        setPlayerNames({
+          ...playerNames,
+          b: websocket.data.player.user_name,
+        });
+
         break;
 
       case "piece_moved":
@@ -61,7 +71,7 @@ const ChessBoard = ({ type, gameData }) => {
         // New Specator Joined Game Code Here
         console.log("spectator joined");
         break;
-      
+
       case "spectator_left_game":
         // New Specator Joined Game Code Here
         console.log("a spectator left the game");
@@ -90,13 +100,14 @@ const ChessBoard = ({ type, gameData }) => {
   // PERFORM ACTIONS ON GAME OVER
   let winner;
   if (gameOver) {
-    playerTurn === "w" ? winner = gameData.data.opponent : winner = gameData.data.owner;
-
+    playerTurn === "w"
+      ? (winner = gameData.data.opponent)
+      : (winner = gameData.data.owner);
 
     const end = async () => {
       const gameEndData = {
         user_id: winner.user_id,
-        game_id: gameId
+        game_id: gameId,
       };
 
       const result = await axios.patch(
@@ -173,8 +184,9 @@ const ChessBoard = ({ type, gameData }) => {
   const hightLightSquare = (squares) => {
     const highLight = squares.reduce((a, c) => {
       a[c] = {
-        background: "radial-gradient(circle, rgb(255, 255, 255, 0.5) 25%, transparent 30%, transparent 100%)",
-        borderRadius: "50%"
+        background:
+          "radial-gradient(circle, rgb(255, 255, 255, 0.5) 25%, transparent 30%, transparent 100%)",
+        borderRadius: "50%",
       };
       return { ...a, ...squareClickStyling(pieceSquare, history) };
     }, {});
@@ -185,13 +197,13 @@ const ChessBoard = ({ type, gameData }) => {
   const onMouseOverSquare = (square) => {
     const moves = game.current.moves({
       square: square,
-      verbose: true
+      verbose: true,
     });
 
     const sqaureToHighlight = [];
 
     if (moves.length === 0) return;
-    moves.forEach(move => sqaureToHighlight.push(move.to));
+    moves.forEach((move) => sqaureToHighlight.push(move.to));
     hightLightSquare([square, ...sqaureToHighlight]);
   };
 
@@ -205,7 +217,7 @@ const ChessBoard = ({ type, gameData }) => {
     const move = game.current.move({
       from: pieceSquare,
       to: square,
-      promorion: "q"
+      promotion: "q",
     });
 
     if (move === null) return;
@@ -221,22 +233,24 @@ const ChessBoard = ({ type, gameData }) => {
 
     return {
       [pieceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
-      ...(history.length && { [from]: { backgroundColor: "rgba(255, 255, 0, 0.4)" } }),
-      ...(history.length && { [to]: { backgroundColor: "rgba(255, 255, 0, 0.4)" } }),
+      ...(history.length && {
+        [from]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      }),
+      ...(history.length && {
+        [to]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      }),
     };
-
   };
 
   return (
     <>
       <div className="chessboard">
-
-        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo /> : <PlayerName
-          style={{ paddingBottom: "28px" }}
-
-          name={gameData?.data?.opponent.user_name} />}
+        {gameData?.data?.status === 0 ? (
+          <WaitingForPlayerTwo />
+        ) : (
+          <PlayerName style={{ paddingBottom: "28px" }} name={playerNames.b} />
+        )}
         <div
-
           style={{
             justifyContent: "flex-start",
             position: "relative",
@@ -267,7 +281,7 @@ const ChessBoard = ({ type, gameData }) => {
 
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData?.data?.owner?.user_name}
+          name={playerNames.w}
         />
       </div>
       {gameOver && <Portal champ={winner.user_name} />}

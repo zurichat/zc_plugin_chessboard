@@ -27,6 +27,7 @@ const GameScreenWithoutComments = () => {
       const game = await axios.get(`game/${game_id.id}`);
       // Set gamesData state to response
       setGameData(game.data);
+      console.log(game.data);
     } catch (err) {
       // console.log(err);
     }
@@ -39,7 +40,11 @@ const GameScreenWithoutComments = () => {
 
   return (
     <main id="game__screen__main">
-      <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} />
+      <Exit
+        isYes={openForfeitModal}
+        handleClick={handleForfeitClick}
+        gameData={gameData}
+      />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
 
       <div id="chessboard_container">
