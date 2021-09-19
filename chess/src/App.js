@@ -9,7 +9,7 @@ import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
 
 // Zuri Cross Import
-import { GetUserInfo } from '@zuri/zuri-control';
+import { GetUserInfo } from "@zuri/zuri-control";
 
 function App() {
   return (
