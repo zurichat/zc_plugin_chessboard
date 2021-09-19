@@ -1,3 +1,12 @@
-import './LandingPage.css';
+import "./LandingPage.css";
+import CoverImage from "../../assets/Cover.png";
 
-sfc
+const LandingPage = () => {
+    return ( 
+        <div className="landing-page">
+                <img src={ CoverImage } alt="" />
+        </div>
+     );
+};
+ 
+export default LandingPage;

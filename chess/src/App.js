@@ -6,6 +6,7 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
+import LandingPage from "./Pages/LandingPage/LandingPage";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route
             exact
             path="/home"
-            render={() => <h1>Landing Home Page</h1>}
+            render={() => <LandingPage /> }
           />
 
           {/* Specatator Game View */}
