@@ -16,7 +16,7 @@ width: 100%;
     object-fit: fill;
 }
 
-.landing-page button{
+.landing_page_button{
     position: absolute;
     width: 35%;
     height: 7rem;
