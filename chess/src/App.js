@@ -18,15 +18,24 @@ function App() {
             path="/"
             render={() => <HomePage />}
           />
+          
+          {/* Landing Home Page */}
+          <Route
+            exact
+            path="/home"
+            render={() => <h1>Landing Home Page</h1>}
+          />
 
           {/* Specatator Game View */}
           <Route
+          exact
             path="/game/:id"
             render={() => <MainGame />}
           />
 
           {/* Actual Game Page for Player 1 and Player 2 */}
           <Route
+          exact
             path="/game_nocomments/:id"
             render={() => <GameScreenWithoutComments />}
           />
