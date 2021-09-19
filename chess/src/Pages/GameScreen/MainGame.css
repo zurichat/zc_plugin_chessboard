@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap');
+
 .main-game{
     display: flex;
     justify-content: space-between;
-    /* border: 2px solid blue; */
+    font-family: 'Lato', sans-serif !important;
     padding: 0;
-    /* height: 100vh; */
     width: 100%;
     }
 
@@ -28,17 +29,6 @@
         
 }
 
-
-/* .main-chess > div > .main-header >.nav > .chesshome-headerRight {
-    width: 7rem;
-     } */
-
-/* @media(max-width:1080px){    
-   .main-chess > div > .main-header >.nav > .chesshome-headerRight {
-       width: 25%;
-   }
-} */
-
 .main-chess > div > .main-header >.nav > .chesshome-headerRight > .commentIcon {
     display: block;
     cursor: pointer;
@@ -50,10 +40,7 @@
 }
 
 .main-chess .chessboard{
-    /* border: 2px solid red;
-    border-right: none; */
     width: 100%;
-    /* height: 80vh; */
 }
 .main-game .side-bar{
     max-width: 30%;
@@ -61,6 +48,7 @@
     min-height: 100vh;
     /* margin-left: 2rem; */
     border-left: 5px solid #dbdbdb; 
+    font-family: 'Lato', sans-serif;
 }
 
 @media (width: 1024px) {

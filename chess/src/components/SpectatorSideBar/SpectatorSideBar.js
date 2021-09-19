@@ -16,8 +16,8 @@ const SpectatorSideBar = ({display, setDisplay}) => {
         setDisplay(false)}>
           <svg
             className="closeIcon"
-            width="25"
-            height="22"
+            width="22"
+            height="20"
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

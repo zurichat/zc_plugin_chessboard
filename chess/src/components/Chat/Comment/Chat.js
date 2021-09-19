@@ -74,12 +74,14 @@ function Comment() {
       {details.length ? (
         details.map(({ id, name, time, message }) => (
           <div className="chatWrapper" key={id}>
+            <div className="specHead">
             <img className="specAvi" src={avi} alt="avi" />
-            <div className="specNameTime">
               <div className="specInfo">
                 <h2 className="spectatorName">{name}</h2>
                 {time ? <p className="time-muted">{time}</p> : null}
               </div>
+              </div>
+              <div className="specNameTime">
               <p className="spectatorMessage">{message}</p>
             </div>
           </div>
