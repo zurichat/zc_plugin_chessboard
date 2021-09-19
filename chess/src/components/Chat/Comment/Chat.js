@@ -4,34 +4,29 @@ import avi from "../../../assets/ChatAvatar.png";
 import moment from "moment";
 import axios from "axios";
 
-function getComment() {
-   axios.get("http://localhost:5050/api/v1/game/comment", 
-  // {
-  //   comment: "would love to see a rematch",
-  //   game_id: "61410ebe6173056af01b4cdc",
-  //   user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
-  //   user_name: "jack",
-  //   image_url: "https://www.gravatar.com/avatar/"  
-  // }
-  ).then(res => console.log(res)).catch(err => console.error(err));
-}
+// function getComment() {
+//    axios.get("https://cors-anywhere.herokuapp.com/http://localhost:5050/api/v1/game/comment", 
+//   // {
+//   //   comment: "would love to see a rematch",
+//   //   game_id: "61410ebe6173056af01b4cdc",
+//   //   user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+//   //   user_name: "jack",
+//   //   image_url: "https://www.gravatar.com/avatar/"  
+//   // }
+//   ).then(res => console.log(res)).catch(err => console.error(err));
+// }
 
 function sendComment() {
    axios.patch("http://localhost:5050/api/v1/game/comment", 
   {
     comment: "would love to see a rematch",
-    game_id: "61410ebe6173056af01b4cdc",
+    game_id: "614709007a5f68bf661231ff",
     user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
     user_name: "jack",
-    image_url: "https://www.gravatar.com/avatar/"  
+    image_url: "https://www.gravatar.com/avatar/" , 
   }
-  ).then(res => console.log(res)).catch(err => console.error(err));
+  ).then(res => console.log(res.data)).catch(err => console.log(err));
 }
-sendComment();
-
-        
-
-
 const data = {
   players: [],
   comments: [],
@@ -49,25 +44,45 @@ function Comment() {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    getComment();
     const ids = data.players.map((player) => player.id);
     setDetails(data.comments);
     setPlayers(ids);
   }, []);
 
   const submitForm = () => {
-    const time = moment().format("h:mm a");
     if(message.length) {
-      const submitted = {
-        id: 5,
-        message,
-        name: "Trustiiee",
-        time,
-      };
-  
-      setDetails([...details, submitted]);
-      setMessage("");
+      axios.patch("http://localhost:5050/api/v1/game/comment", 
+      {
+        comment: message,
+        game_id: "614709007a5f68bf661231ff",
+        user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+        user_name: "jack",
+        image_url: "https://www.gravatar.com/avatar/" , 
+      }
+      ).then(({data}) => {
+        const submitted = {
+          id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+          message: data.data.text,
+          name: data.data.user_name,
+          time: moment(data.timestamp).format("h:mm a"),
+          image: data.data.image_url
+        };
+        setDetails([...details, submitted]);
+        setMessage("");
+      }).catch(err => console.log(err));
     }
+    // if(message.length) {
+    //   const submitted = {
+    //     id: 5,
+    //     message,
+    //     name: "Trustiiee",
+    //     time,
+    //     image: 'https://www.gravatar.com/avatar/'
+    //   };
+  
+    //   setDetails([...details, submitted]);
+    //   setMessage("");
+    // }
   };
 
 
@@ -75,10 +90,10 @@ function Comment() {
   return (
     <div className="chatContainer">
       {details.length ? (
-        details.map(({ id, name, time, message }) => (
+        details.map(({ id, name, time, message, image }) => (
           <div className="chatWrapper" key={id}>
             <div className="specHead">
-            <img className="specAvi" src={avi} alt="avi" />
+            <img className="specAvi" src={image} alt="avi" />
               <div className="specInfo">
                 <h2 className="spectatorName">{name}</h2>
                 {time ? <p className="time-muted">{time}</p> : null}
