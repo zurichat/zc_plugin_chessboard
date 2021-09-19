@@ -35,7 +35,7 @@ const ChessBoard = ({ type, gameData }) => {
     game.current = new Chess();
     setPlayerIds({
       w: gameData.data.owner.user_id,
-      b: gameData.data.opponent.user_id,
+      b: gameData.data.opponent ? gameData.data.opponent.user_id: "",
     });
     setGameId(gameData.data._id);
 
