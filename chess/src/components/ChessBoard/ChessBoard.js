@@ -19,8 +19,10 @@ const ChessBoard = ({ type, gameData }) => {
 
   // Centrifugee Stuffss
   const centrifuge = new Centrifuge(
-    "wss://realtime.zuri.chat/connection/websocket"
+        "ws://localhost:8000/connection/websocket"
+
   );
+  // const game = useRef(null);
 
   const chessGameBoard = new Chess();
 
@@ -35,6 +37,7 @@ const ChessBoard = ({ type, gameData }) => {
 
     // Connect to Centrigo
     centrifuge.connect();
+    // centrifuge.onConnect(() => { console.log("connected");});
 
     // Subsctibe to the GameID room on centrifugo
     centrifuge.subscribe(gameData.data._id, ChannelEventsListener);
@@ -130,7 +133,7 @@ const ChessBoard = ({ type, gameData }) => {
       to: targetSquare,
     });
 
-    if (move === null || playerTurn !== "1") return;
+    if (move === null) return;
 
     setFen(chessGameBoard.fen());
     setPlayerTurn(chessGameBoard.turn());
