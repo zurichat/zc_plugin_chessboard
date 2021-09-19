@@ -22,7 +22,7 @@ const MainGame = () => {
     // When a user is about to close this page
     return () => {
       removeUserAsSpectator();
-    }
+    };
   }, []);
 
   // Add the user as a spectator from DB
