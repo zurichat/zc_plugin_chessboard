@@ -217,7 +217,7 @@ const ChessBoard = ({ type, gameData }) => {
     const move = game.current.move({
       from: pieceSquare,
       to: square,
-      promorion: "q",
+      promotion: "q",
     });
 
     if (move === null) return;
