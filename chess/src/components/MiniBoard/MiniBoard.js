@@ -73,9 +73,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
 
       <div className="board-image" onClick={proceedTowatchGame}>
         {/* eslint-disable-next-line */}
-
         <img src={boardImg} alt="" />{" "}
-
       </div>
       <div className="mini-asideBar mini-bottomBar">
         {playerTwo && (
