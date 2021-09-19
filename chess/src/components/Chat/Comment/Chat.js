@@ -26,33 +26,7 @@ const data = {
       name: "Ode",
     },
   ],
-  comments: [
-    // {
-    //   id: 1,
-    //   name: "Abby",
-    //   message: "@Yemyemm, I challenge you to a match when these guys are done",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Success",
-    //   message: "My teammates are frustrated, maybe a game can help them",
-    // },
-    // {
-    //   id: 3,
-    //   name: "DevPriest",
-    //   message: "Move the queen next",
-    // },
-    // {
-    //   id: 4,
-    //   name: "Blaze",
-    //   message: "Who wants to challenge me after this game",
-    // },
-    // {
-    //   id: 5,
-    //   name: "Odiri",
-    //   message: "I am a proud goat",
-    // },
-  ],
+  comments: [],
 };
 
 const mainUser = {
