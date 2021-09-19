@@ -16,20 +16,23 @@ const ChessBoard = ({ type, gameData }) => {
   const [gameId, setGameId] = useState(gameId);
   const [playerTurn, setPlayerTurn] = useState("w");
   const [playerIds, setPlayerIds] = useState({});
+  const [squareStyles, setSquareStyles] = useState("");
+  const [pieceSquare, setPieceSquare] = useState("");
+  const [history, setHistory] = useState("");
 
   // Centrifugee Stuffss
   const centrifuge = new Centrifuge(
     "wss://realtime.zuri.chat/connection/websocket"
   );
 
-  const chessGameBoard = new Chess();
+  const game = useRef(null);
 
   useEffect(() => {
-    // chessGameBoard = new Chess();
+    game.current = new Chess();
     getGames();
     setPlayerIds({
       w: gameData.data.owner.user_id,
-      b: gameData.data.opponent.user_id,
+      b: gameData.data.opponent ? gameData.data.opponent.user_id: "",
     });
     setGameId(gameData.data._id);
 
@@ -50,8 +53,8 @@ const ChessBoard = ({ type, gameData }) => {
 
       case "piece_moved":
         console.log("a player moved a piece");
-        chessGameBoard.move(websocket.data.board_state);
-        setFen(chessGameBoard.fen());
+        game.current.move(websocket.data.board_state);
+        setFen(game.current.fen());
         break;
 
       case "spectator_joined_game":
@@ -81,7 +84,7 @@ const ChessBoard = ({ type, gameData }) => {
   /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
 
   //Conditions on Game Over
-  const gameOver = chessGameBoard && chessGameBoard.game_over();
+  const gameOver = game.current && game.current.game_over();
   const nextMover = fen.split(" ")[1];
 
   // PERFORM ACTIONS ON GAME OVER
@@ -113,7 +116,7 @@ const ChessBoard = ({ type, gameData }) => {
   const pieceMove = async (move) => {
     const body = {
       user_id: playerIds[playerTurn],
-      position_fen: chessGameBoard.fen(),
+      position_fen: game.current.fen(),
       game_id: gameId,
       board_state: move,
     };
@@ -125,15 +128,16 @@ const ChessBoard = ({ type, gameData }) => {
   };
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
-    let move = chessGameBoard.move({
+    let move = game.current.move({
       from: sourceSquare,
       to: targetSquare,
     });
 
     if (move === null) return;
 
-    setFen(chessGameBoard.fen());
-    setPlayerTurn(chessGameBoard.turn());
+    setFen(game.current.fen());
+    setPlayerTurn(game.current.turn());
+    setHistory(game.current.history({ verbose: true }));
     pieceMove(move);
   };
 
@@ -166,6 +170,63 @@ const ChessBoard = ({ type, gameData }) => {
     }, {});
   };
 
+  const hightLightSquare = (squares) => {
+    const highLight = squares.reduce((a, c) => {
+      a[c] = {
+        background: "radial-gradient(circle, rgb(255, 255, 255, 0.5) 25%, transparent 30%, transparent 100%)",
+        borderRadius: "50%"
+      };
+      return { ...a, ...squareClickStyling(pieceSquare, history) };
+    }, {});
+
+    setSquareStyles({ ...squareStyles, ...highLight });
+  };
+
+  const onMouseOverSquare = (square) => {
+    const moves = game.current.moves({
+      square: square,
+      verbose: true
+    });
+
+    const sqaureToHighlight = [];
+
+    if (moves.length === 0) return;
+    moves.forEach(move => sqaureToHighlight.push(move.to));
+    hightLightSquare([square, ...sqaureToHighlight]);
+  };
+
+  const onMouseOutSquare = () => {
+    setSquareStyles(squareClickStyling(pieceSquare, history));
+  };
+
+  const onSquareClick = (square) => {
+    setPieceSquare(square);
+    squareClickStyling(square, history);
+    const move = game.current.move({
+      from: pieceSquare,
+      to: square,
+      promorion: "q"
+    });
+
+    if (move === null) return;
+    pieceMove(move);
+    setFen(game.current.fen());
+    setHistory(game.current.history({ verbose: true }));
+    setPieceSquare("");
+  };
+
+  const squareClickStyling = (pieceSquare, history) => {
+    const from = history.length && history[history.length - 1].from;
+    const to = history.length && history[history.length - 1].to;
+
+    return {
+      [pieceSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" },
+      ...(history.length && { [from]: { backgroundColor: "rgba(255, 255, 0, 0.4)" } }),
+      ...(history.length && { [to]: { backgroundColor: "rgba(255, 255, 0, 0.4)" } }),
+    };
+
+  };
+
   return (
     <>
       <div className="chessboard">
@@ -188,6 +249,10 @@ const ChessBoard = ({ type, gameData }) => {
             id="startPcos"
             position={fen}
             onDrop={onDrop}
+            onMouseOverSquare={onMouseOverSquare}
+            onMouseOutSquare={onMouseOutSquare}
+            squareStyles={squareStyles}
+            onSquareClick={onSquareClick}
             calcWidth={calcWidth}
             darkSquareStyle={{ backgroundColor: "#3D2F19" }}
             lightSquareStyle={{
