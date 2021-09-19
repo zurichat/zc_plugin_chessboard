@@ -8,7 +8,7 @@ position: relative;
     object-fit: contain;
 }
 
-.landing-page button{
+.landing_page_button{
     position: absolute;
     width: 40%;
     height: 4rem;
@@ -19,6 +19,7 @@ position: relative;
     text-align: center;
     outline: none;
     border-radius: .2rem;
+
 }
 
 .landing-page button:hover{
