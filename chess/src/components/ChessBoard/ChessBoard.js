@@ -10,7 +10,7 @@ import Centrifuge from "centrifuge";
 
 const userData = [
   { user_id: "1", user_name: "emeka", color: "w" },
-  { user_id: "2", user_name: "ndubuisi", color: "b" }
+  { user_id: "2", user_name: "ndubuisi", color: "b" },
 ];
 
 const currentPlayerId = "1";
@@ -23,7 +23,6 @@ const ChessBoard = ({ type }) => {
   const centrifuge = new Centrifuge(
     "wss://realtime.zuri.chat/connection/websocket"
   );
-
 
   let game = useRef(null);
 
@@ -141,7 +140,9 @@ const ChessBoard = ({ type }) => {
             }}
             showNotation={false}
             // disables chessboard pieces movement on spectator screen
-            draggable={type === "spectator" ? false : playerTurn === "b" ? false : true}
+            draggable={
+              type === "spectator" ? false : playerTurn === "b" ? false : true
+            }
           />
         </div>
 
