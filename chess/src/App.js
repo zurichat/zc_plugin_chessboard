@@ -7,7 +7,9 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
-import LandingPage from "./Pages/LandingPage/LandingPage";
+
+// Zuri Cross Import
+import { GetUserInfo } from '@zuri/zuri-control';
 
 function App() {
   return (
@@ -20,12 +22,12 @@ function App() {
             path="/"
             render={() => <HomePage />}
           />
-          
-          {/* Landing Home Page */}
+
+          {/* ZC Main Comm Test Page */}
           <Route
             exact
-            path="/home"
-            render={() => <LandingPage /> }
+            path="/zc_main_test"
+            render={() => console.log(GetUserInfo()) }
           />
 
           {/* Specatator Game View */}
