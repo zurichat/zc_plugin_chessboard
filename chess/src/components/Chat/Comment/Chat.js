@@ -29,6 +29,9 @@ function sendComment() {
 }
 sendComment();
 
+        
+
+
 const data = {
   players: [],
   comments: [],
