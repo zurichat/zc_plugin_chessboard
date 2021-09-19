@@ -6,65 +6,70 @@ import { chessPieces } from "./chessPieces";
 import PlayerName from "../PlayerName/PlayerName";
 import axios from "axios";
 import ChessboardBorder from "../ChessboardBorder/ChessboardBorder";
+import WaitingForPlayerTwo from "../Button/WaitingForPlayerTwo";
+
 import Centrifuge from "centrifuge";
+import Portal from "../Modals/CongratulationsModal/Portal";
 
-const userData = [
-  { user_id: "1", user_name: "emeka", color: "w" },
-  { user_id: "2", user_name: "ndubuisi", color: "b" },
-];
-
-const currentPlayerId = "1";
-const playerId = { w: "085fc3b2d", b: "085fc3b2-3" };
-
-const ChessBoard = ({ type }) => {
+const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
-  const [gameId, setGameId] = useState("61407322fc1882474317803d");
-  const [playerTurn, setPlayerTurn] = useState("1");
+  const [gameId, setGameId] = useState(gameId);
+  const [playerTurn, setPlayerTurn] = useState("w");
+  const [playerIds, setPlayerIds] = useState({});
+
+  // Centrifugee Stuffss
   const centrifuge = new Centrifuge(
     "wss://realtime.zuri.chat/connection/websocket"
   );
 
-  let game = useRef(null);
+  const chessGameBoard = new Chess();
 
   useEffect(() => {
-    game.current = new Chess();
-    // centrifuge.connect();
-    centrifuge.subscribe(gameId, ChannelEventsListener);
+    // chessGameBoard = new Chess();
     getGames();
+    setPlayerIds({
+      w: gameData.data.owner.user_id,
+      b: gameData.data.opponent.user_id,
+    });
+    setGameId(gameData.data._id);
+
+    // Connect to Centrigo
+    centrifuge.connect();
+
+    // Subsctibe to the GameID room on centrifugo
+    centrifuge.subscribe(gameData.data._id, ChannelEventsListener);
   }, []);
-
-  const getGames = async () => {
-    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
-    console.log(response.data.data[response.data.data.length - 1]._id);
-  };
-
-  const pieceMove = async (move) => {
-    const body = {
-      user_id: playerId[playerTurn],
-      position_fen: game.current.fen(),
-      game_id: gameId,
-      board_state: move,
-    };
-    const response = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/piecemove",
-      body
-    );
-    console.log("move", response);
-  };
 
   const ChannelEventsListener = (ctx) => {
     const websocket = ctx;
-    console.log("ctx", ctx);
 
     switch (ctx.data.event) {
       case "join_game":
-        console.log("joined centrifuge");
+        console.log("someone centrifuge");
         break;
 
       case "piece_moved":
-        game.move(websocket.data.board_state);
-        setFen(game.current.fen());
-        console.log("move cemtrifuge");
+        console.log("a player moved a piece");
+        chessGameBoard.move(websocket.data.board_state);
+        setFen(chessGameBoard.fen());
+        break;
+
+      case "spectator_joined_game":
+        // New Specator Joined Game Code Here
+        console.log("spectator joined");
+        break;
+      
+      case "spectator_left_game":
+        // New Specator Joined Game Code Here
+        console.log("a spectator left the game");
+        break;
+
+      case "end_game":
+        // The Game Has been ended by one of the players
+        break;
+
+      case "comments":
+        // New Comment added
         break;
 
       default:
@@ -73,22 +78,69 @@ const ChessBoard = ({ type }) => {
     }
   };
 
+  /////////////////////////////////// GAME END SECTION ///////////////////////////////////////////////////////////
+
+  //Conditions on Game Over
+  const gameOver = chessGameBoard && chessGameBoard.game_over();
+  const nextMover = fen.split(" ")[1];
+
+  // PERFORM ACTIONS ON GAME OVER
+  let winner;
+  if (gameOver) {
+    playerTurn === "w" ? winner = gameData.data.opponent : winner = gameData.data.owner;
+
+
+    const end = async () => {
+      const gameEndData = {
+        user_id: winner.user_id,
+        game_id: gameId
+      };
+
+      const result = await axios.patch(
+        "https://chess.zuri.chat/api/v1/game/end",
+        gameEndData
+      );
+    };
+    end();
+  }
+
+  /////////////////////////////////// END OF GAME END SECTION ///////////////////////////////////////////////////////////
+
+  const getGames = async () => {
+    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+  };
+
+  const pieceMove = async (move) => {
+    const body = {
+      user_id: playerIds[playerTurn],
+      position_fen: chessGameBoard.fen(),
+      game_id: gameId,
+      board_state: move,
+    };
+
+    const response = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/piecemove",
+      body
+    );
+  };
+
   const onDrop = ({ sourceSquare, targetSquare }) => {
-    let move = game.current.move({
+    let move = chessGameBoard.move({
       from: sourceSquare,
       to: targetSquare,
     });
 
     if (move === null || playerTurn !== "1") return;
 
-    setFen(game.current.fen());
+    setFen(chessGameBoard.fen());
+    setPlayerTurn(chessGameBoard.turn());
     pieceMove(move);
   };
 
   console.log(playerTurn);
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 538;
+    return screenWidth < 560 ? screenWidth * 0.85 : 475;
   };
 
   const customPieces = () => {
@@ -119,9 +171,15 @@ const ChessBoard = ({ type }) => {
   return (
     <>
       <div className="chessboard">
-        <PlayerName style={{ paddingBottom: "28px" }} name="Dejavu" />
+
+        {gameData?.data?.status === 0 ? <WaitingForPlayerTwo /> : <PlayerName
+          style={{ paddingBottom: "28px" }}
+
+          name={gameData?.data?.opponent.user_name} />}
         <div
+
           style={{
+            justifyContent: "flex-start",
             position: "relative",
             border: "1px solid #CD9B49",
           }}
@@ -148,9 +206,10 @@ const ChessBoard = ({ type }) => {
 
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name="Bombos"
+          name={gameData?.data?.owner?.user_name}
         />
       </div>
+      {gameOver && <Portal champ={winner.user_name} />}
     </>
   );
 };

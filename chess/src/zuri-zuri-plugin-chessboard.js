@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import singleSpaReact from "single-spa-react";
 import App from "./App.js";
 import "./index.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const lifecycles = singleSpaReact({
   React,

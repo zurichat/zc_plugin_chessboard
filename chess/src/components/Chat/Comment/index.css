@@ -8,23 +8,18 @@
 
 .chatContainer {
     width:100%;
-    /* max-height: 70%; */
-    /* padding: 2rem; */
     overflow-y: auto;
     font-family: 'Lato', sans-serif;
     padding: 1.5rem 2rem 1rem 1rem;
-    /* position: relative; */
 }
 .chatWrapper {
     width: 100%;
-    /* line-height: 2rem;  */
     background:white;
     display: flex;
     margin: 1rem 0;
   
 }
 .specNameTime {
- /* line-height: 3rem; */
  margin: 0 .5rem;
  width: 80%;
 }
@@ -61,7 +56,7 @@
     width: 100%;
     padding: 2rem;
 } 
-.emptyComment > img {
+.emptyComment > svg {
    width: 100%;
    text-align: center;
    height: auto;
@@ -85,8 +80,7 @@
     flex-direction: column;
     width: 100%;
     margin: 2rem 0;
-    padding: 1rem;
-    /* position: fixed; */
+    padding: 1rem 0 1rem 1rem;
     bottom: 0;
     left: 0;
     right: 0;
@@ -95,7 +89,6 @@
 }
 
 .chatInputForm > input {
-    /* height: 4rem; */
     border: none;
     width: 100%;
     padding: .5rem 0;
@@ -118,18 +111,26 @@ input::placeholder{
     margin: .3rem 0;
 }
 .inputIconsleft > svg , .inputIconsright> svg{
-    margin-right: 1rem;
+    margin-right: .8rem;
     width: 2rem;
     cursor: pointer;
 }
 
 .feather {
-    border-right: 2px solid rgba(176, 175, 176, 1);
+    border-right: 2px solid rgb(197, 196, 197);
     width: 3rem !important;
 }
 
+.submit:hover {
+    stroke: rgb(224, 223, 224);
+    fill: white;
+    background-color:#00b87b93 ;
+
+    border: .5px solid #19d395;
+}
+
 .icon-down{
-    border-left: 2px solid rgba(97, 96, 97, 1);
+    border-left: 2px solid rgb(196, 195, 196);
     width: 3rem !important;
 }
 
@@ -146,6 +147,7 @@ input::placeholder{
         width: 1rem;
     }
 }
+
 
 
 
