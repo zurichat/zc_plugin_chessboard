@@ -21,7 +21,7 @@
   font-size: 20px;
   color: #808080;
   background-color: #00b87c;
-  margin-left: .5rem;
+  /* margin-left: .5rem; */
   height: 5rem;
 }
 
@@ -29,29 +29,30 @@
   color: unset !important;
 } */
 
-.nav-link {
+.navLink {
   text-decoration: none;
-  color: #808080;
+  color: #ffffff;
   font-weight: 400;
   padding-bottom: 0.7em;
   margin: 0;
   transition: 0.3s all linear;
 }
 
-.active {
+/* .active {
   color: white;
-}
+} */
 
 .close {
-  margin-top: .4rem;
+  margin-top: .6rem;
+  font-weight: 900;
+  cursor: pointer;
 }
-/* .active::before {
-  content: "";
-  position: absolute;
-  top: 92%;
-  left: -5px;
-  right:-5px;
-  height: 5px;
-  background: #00b87c;
-  border-radius: 15px 15px 0 0;
-} */
+
+.closeIcon:hover path {
+  stroke: #d1dada !important;
+}
+.closeIcon path {
+  stroke: #ffffff !important;
+}
+
+

@@ -1,14 +1,16 @@
+
+import React, { useState, useEffect } from "react";
 import Chessboard from "../../components/ChessBoard/ChessBoard";
 import SpectatorSideBar from "../../components/SpectatorSideBar/SpectatorSideBar.js";
 import "./MainGame.css";
 import Header from "../../components/Header/Header.js";
 import { BrowserRouter } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "../../axios/axiosInstance";
 
 const MainGame = () => {
 
+  const [commentDisplay, setCommentDisplay] = useState(false);
   const [gameData, setGameData] = useState({});
 
   const { id } = useParams();
@@ -67,7 +69,7 @@ const MainGame = () => {
   return (
     <section className="main-game">
       <div className="main-chess">
-        <Header />
+        <Header setDisplay={setCommentDisplay}  />
         {/* To watch game */}
         {
           gameData.data && <Chessboard type="spectator" gameData={gameData} />
@@ -77,9 +79,10 @@ const MainGame = () => {
       {/* To watch game */}
 
       <BrowserRouter>
-        <SpectatorSideBar />
+        <SpectatorSideBar display={commentDisplay} setDisplay={setCommentDisplay}  />
       </BrowserRouter>
     </section>
+    
   );
 };
 

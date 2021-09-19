@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Header.css";
 
 import profileImg from "../../assets/Rectangle 936.png";
@@ -19,7 +19,10 @@ const Profile = ({ className, src }) => {
   );
 };
 
-const Header = () => {
+const Header = ({ setDisplay}) => {
+// const [display, setDisplay] = useState('');
+// console.log('Header', display);
+
   return (
     <div>
       <header className="main-header">
@@ -33,7 +36,7 @@ const Header = () => {
               </button>
           </div>
           <div className="chesshome-headerRight">
-            <a className="commentIcon">
+            <a className="commentIcon" onClick={() => setDisplay(true)}>
              <img src={chatBox} alt ="reply" />
             </a>
 
