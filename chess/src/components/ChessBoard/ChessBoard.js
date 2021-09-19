@@ -22,14 +22,10 @@ const ChessBoard = ({ type, gameData }) => {
 
   // Centrifugee Stuffss
   const centrifuge = new Centrifuge(
-        "ws://localhost:8000/connection/websocket"
+    "wss://realtime.zuri.chat/connection/websocket"
 
   );
   const game = useRef(null);
-  centrifuge.on("connect", (ctx) => {
-    console.log(ctx, "connected");
-  });
-
 
   useEffect(() => {
     game.current = new Chess();
@@ -184,7 +180,6 @@ const ChessBoard = ({ type, gameData }) => {
       "https://chess.zuri.chat/api/v1/game/piecemove",
       body
     );
-    console.log(response);
   };
 
   const onDrop = ({ sourceSquare, targetSquare }) => {
