@@ -24,32 +24,31 @@ a {
 
 .request-challenge-btn {
   padding: 1.5rem 3rem;
-  background: #00B87C;
+  background: #00b87c;
   cursor: pointer;
   text-decoration: none;
 }
 
-.exit-btn { 
-  width: 15rem;  
-  border: .19rem solid #B8003C;
+.exit-btn {
+  width: 15rem;
+  border: 0.19rem solid #b8003c;
   box-sizing: border-box;
   margin-left: 16px;
-  color: #B8003C;
-  background: #FFFFFF;
+  color: #b8003c;
+  background: #ffffff;
   cursor: pointer;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  
 }
 
 .exit-button {
-  border: 1px solid #E70B0B;
+  border: 1px solid #e70b0b;
   display: inline-block;
   border-radius: 4px;
   cursor: pointer;
   position: relative;
   background-color: transparent;
-  color: #E70B0B;
+  color: #e70b0b;
   padding: 0;
   padding: 1.5rem 5rem;
   width: 100%;
@@ -63,8 +62,8 @@ a {
 }
 
 .exit-button:hover {
-  color:#fff;
-  background-color: #E70B0B;
+  color: #fff;
+  background-color: #e70b0b;
 }
 
 /* .exit-button:after {
@@ -91,47 +90,56 @@ a {
 
 .forfeit-button {
   color: #fff;
-  background: #B8003C;
+  background: #b8003c;
   border: none;
   /* background-attachment: fixed; */
 }
 
-.forfeit-button:focus, .forfeit-button:hover {
-  background: #B8003C;
+.forfeit-button:focus,
+.forfeit-button:hover {
+  background: #b8003c;
   /* border: 1px solid #B8003C; */
   opacity: 0.89;
 }
 
-.leave__button h3{
+.leave__button h3 {
   display: none;
 }
 
-.waiting_player_2_container{
+.waiting_player_2_container {
   padding: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: auto;
+  align-self: flex-start;
   margin-top: 3.5rem;
-
+  padding-bottom: 3rem;
+  padding-left: 1.2rem;
 }
 
-.waiting_player_2{
+.waiting_player_2 {
   background-color: transparent;
   padding: 0;
   margin: 0;
-  color: #00B87C;
+  color: #00b87c;
+  font-style: italic;
+}
+
+.waiting_player_2:hover {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  color: #00b87c;
   font-style: italic;
 }
 
 @media only screen and (max-width: 600px) {
-  .leave__button h3{
+  .leave__button h3 {
     display: block;
     font-size: 15px;
-    color: #E70B0B;
+    color: #e70b0b;
     cursor: pointer;
   }
-
 
   /* .exit_button_real{
     display: none;
@@ -146,13 +154,12 @@ a {
     height: 48px;
     margin: 16px 0px;
     padding: 2rem;
-}
+  }
 
-.exit-btn { 
+  .exit-btn {
     margin-left: 0;
     width: 23rem;
     height: 48px;
     margin-bottom: 16px;
-}
-
+  }
 }
