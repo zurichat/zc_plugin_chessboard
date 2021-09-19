@@ -9,7 +9,7 @@ const SpectatorSideBar = ({display, setDisplay}) => {
     {display && 
     <aside className="side-bar">
       <nav className="side-bar-nav">
-        <NavLink exact a className="nav-link" to="/game">
+        <NavLink exact className="nav-link" to="/game">
           <h1>Comments</h1>
         </NavLink>
         <a className="close" onClick={() =>
@@ -40,10 +40,7 @@ const SpectatorSideBar = ({display, setDisplay}) => {
         </a>
 
       </nav>
-      <Switch>
-        <Route exact path="/game" component={Chat} />
-        {/* <Route exact path="/games" component={Games} /> */}
-      </Switch>
+      <Chat />
     </aside>
     }
     </>

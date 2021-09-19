@@ -8,7 +8,7 @@ const game_schema = Joi.object({
     user_id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
-    // color: Joi.string(),
+    color: Joi.string().default("w"),
   }).required(),
 
   // Opposing player
@@ -16,7 +16,7 @@ const game_schema = Joi.object({
     user_id: Joi.string().required(),
     user_name: Joi.string().required(),
     image_url: Joi.string(),
-    // color: Joi.string(),
+    color: Joi.string().default("b"),
   })
     .default(null)
     .allow(null),

@@ -19,7 +19,7 @@ const Profile = ({ className, src }) => {
   );
 };
 
-const Header = ({display, setDisplay}) => {
+const Header = ({ setDisplay}) => {
 // const [display, setDisplay] = useState('');
 // console.log('Header', display);
 

@@ -11,24 +11,24 @@ import { useParams } from "react-router";
 import axios from "../../axios/axiosInstance";
 import profileOne from "../../assets/Rectangle 892.png";
 import LeftArrow from "../../assets/left-arrow.png";
+import ForfeitButton from "../../components/Button/forfeitButton";
 
 const GameScreenWithoutComments = () => {
   const [gameData, setGameData] = useState({});
 
   const game_id = useParams();
-  console.log(game_id);
+
   useEffect(() => {
     getGamebyID();
   }, []);
+
   async function getGamebyID() {
     try {
       const game = await axios.get(`game/${game_id.id}`);
       // Set gamesData state to response
       setGameData(game.data);
-      console.log(game.data);
-      //console.log(game.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
   const [openForfeitModal, setForfeitModal] = useState(false);
@@ -46,13 +46,13 @@ const GameScreenWithoutComments = () => {
         <div className="gameheader-container">
           <Header />
         </div>
-        <ChessBoard type="player"/>
+        {gameData.data && <ChessBoard type="player" gameData={gameData} />}
       </div>
 
       <div id="side_container">
-        {/* <div className="btn_container"> */}{" "}
-        {/* <ForfeitButton handleClick={handleForfeitClick} /> */}
-        {/* </div> */}
+        {/* <div className="btn_container">{" "}
+        <ForfeitButton handleClick={handleForfeitClick} />
+        </div> */}
         <div className="title">
           <h1>Comments</h1>
         </div>

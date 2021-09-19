@@ -20,6 +20,30 @@ function Homepage() {
     getGamesData();
   }, []);
 
+  const boards = [];
+
+  for (let i = 0; i < 6; i++) {
+    const game = gamesData[i];
+    if (game && game.status !== 2) {
+      boards.push(
+        <div className="mini-one">
+          <MiniBoard
+            key={game._id}
+            id={game._id}
+            playerOne={game.owner?.user_name}
+            playerTwo={game.opponent?.user_name}
+          />
+        </div>
+      );
+    } else {
+      boards.push(
+        <div className="mini-one">
+          <MiniBoard key={i} />
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="chesshome-container">
       <Header />
@@ -28,66 +52,7 @@ function Homepage() {
           <button className="chesshome-rules">Game Rules</button>
         </Link>
       </div>
-      <div className="app__container">
-        {/*slice gamesDat to get only six games then map through to produce a mini-board for each game */}
-        {gamesData.slice(0, 6).map((game) => (
-          <div className="mini-one">
-            <MiniBoard
-              id={game._id}
-              playerOne={game.owner.username}
-              playerTwo={game.opponent?.username}
-            />
-          </div>
-        ))}
-
-        <div className="mini-one">
-          <MiniBoard
-            id="234"
-            playerOne="Emmie4sure"
-            playerTwo="techlead"
-          />
-        </div>
-        <div className="mini-two">
-          <MiniBoard
-            id="234"
-            playerOne="simideletaiwo"
-            playerTwo="techyNkem"
-
-          />
-        </div>
-        <div className="mini-three">
-          <MiniBoard
-            id="234"
-            playerOne="whynotdoris"
-            playerTwo="trustieee"
-
-          />
-        </div>
-        <div className="mini-four">
-          <MiniBoard
-            id="234"
-            playerOne="dejavu"
-            playerTwo=""
-
-          />
-        </div>
-        <div className="mini-five">
-          <MiniBoard
-            id="234"
-            playerOne="pgirl"
-            playerTwo=""
-
-          />
-        </div>
-        <div className="mini-six">
-          <MiniBoard
-            id="234"
-            playerOne=""
-            playerTwo=""
-
-          />
-        </div>
-      </div>
+      <div className="app__container">{boards}</div>
     </div>
   );
 }
