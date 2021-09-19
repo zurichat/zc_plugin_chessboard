@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.board-image :hover{
+  cursor: pointer;
+}
+
 .mini-board {
   font-size: 62.5%;
 }
