@@ -58,6 +58,11 @@ const ChessBoard = ({ type, gameData }) => {
         // New Specator Joined Game Code Here
         console.log("spectator joined")
         break;
+      
+      case "spectator_left_game":
+        // New Specator Joined Game Code Here
+        console.log("a spectator left the game")
+        break;
 
       case "end_game":
         // The Game Has been ended by one of the players
