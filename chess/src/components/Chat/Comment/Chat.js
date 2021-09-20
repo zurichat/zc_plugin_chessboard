@@ -1,32 +1,72 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import "./index.css";
-import avi from "../../../assets/ChatAvatar.png";
 import moment from "moment";
 import axios from "axios";
 
-// function getComment() {
-//    axios.get("https://cors-anywhere.herokuapp.com/http://localhost:5050/api/v1/game/comment", 
-//   // {
-//   //   comment: "would love to see a rematch",
-//   //   game_id: "61410ebe6173056af01b4cdc",
-//   //   user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
-//   //   user_name: "jack",
-//   //   image_url: "https://www.gravatar.com/avatar/"  
-//   // }
-//   ).then(res => console.log(res)).catch(err => console.error(err));
+
+// function sendComment() {
+//    axios.patch("http://chess.zuri.chat/api/v1/game/comment", 
+//   {
+//     comment: "would love to see a rematch",
+//     game_id: "614709007a5f68bf661231ff",
+//     user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+//     user_name: "jack",
+//     image_url: "https://www.gravatar.com/avatar/" , 
+//   }
+//   ).then(res => console.log(res.data)).catch(err => console.log(err));
+// }
+// const res = {
+//   _id: '6148058ae4b2aebf8ec8c85f',
+//   comments: [
+//     {
+//       image_url: 'https://www.gravatar.com/avatar/HASH/?d=retro',
+//       text: 'stop copying her moves',
+//       timestamp: '9/20/2021, 11:44:22 AM',
+//       user_name: 'Trustie'
+//     },
+//     {
+//       image_url: 'https://www.gravatar.com/avatar/HASH/?d=retro',
+//       text: 'this will be fun to watch, my money on yemyemm',
+//       timestamp: '9/20/2021, 11:45:50 AM',
+//       user_name: 'whynotdoris'
+//     },
+//     {
+//       image_url: 'https://www.gravatar.com/avatar/HASH/?d=retro',
+//       text: 'doris i think brave will win',
+//       timestamp: '9/20/2021, 11:47:06 AM',
+//       user_name: 'alexis'
+//     },
+//     {
+//       image_url: 'https://www.gravatar.com/avatar/HASH/?d=retro',
+//       text: 'make sure you complete task once game is over',
+//       timestamp: '9/20/2021, 11:48:31 AM',
+//       user_name: 'mark'
+//     },
+//     {
+//       image_url: 'https://www.gravatar.com/avatar/HASH/?d=retro',
+//       text: 'hope yall heard what the boss said',
+//       timestamp: '9/20/2021, 11:49:17 AM',
+//       user_name: 'naza'
+//     }
+//   ],
+
+//   opponent: {
+//     image_url: 'string',
+//     user_id: 'player_two_user_id',
+//     user_name: 'michael'
+//   },
+
+//   owner: {
+//     color: 'w',
+//     image_url: 'string',
+//     user_id: 'player_one_user_id',
+//     user_name: 'codeJonin'
+//   },
 // }
 
-function sendComment() {
-   axios.patch("http://localhost:5050/api/v1/game/comment", 
-  {
-    comment: "would love to see a rematch",
-    game_id: "614709007a5f68bf661231ff",
-    user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
-    user_name: "jack",
-    image_url: "https://www.gravatar.com/avatar/" , 
-  }
-  ).then(res => console.log(res.data)).catch(err => console.log(err));
-}
+
+
 const data = {
   players: [],
   comments: [],
@@ -38,23 +78,27 @@ const mainUser = {
   message: "hello there",
 };
 
+
 function Comment() {
   const [message, setMessage] = useState("");
-  const [details, setDetails] = useState([]);
-  const [players, setPlayers] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [playerIds, setPlayerIds] = useState([]);
+  const {pathname} = useLocation();
+  const id = pathname.replace('/chess/game/', '');
+  
 
-  useEffect(() => {
-    const ids = data.players.map((player) => player.id);
-    setDetails(data.comments);
-    setPlayers(ids);
+  useEffect(async () => {
+    const {data} = await axios.get(`/api/v1/game/${id}`)
+    setComments(data.comments);
+    setPlayerIds([data.owner.user_id, data.opponent.user_id])
   }, []);
 
   const submitForm = () => {
     if(message.length) {
-      axios.patch("http://localhost:5050/api/v1/game/comment", 
+      axios.patch("https://chess.zuri.chat/api/v1/game/comment",  
       {
         comment: message,
-        game_id: "614709007a5f68bf661231ff",
+        game_id: id,
         user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
         user_name: "jack",
         image_url: "https://www.gravatar.com/avatar/" , 
@@ -89,8 +133,8 @@ function Comment() {
 
   return (
     <div className="chatContainer">
-      {details.length ? (
-        details.map(({ id, name, time, message, image }) => (
+      {comments.length ? (
+        comments.map(({ id, name, time, message, image }) => (
           <div className="chatWrapper" key={id}>
             <div className="specHead">
             <img className="specAvi" src={image} alt="avi" />
@@ -148,7 +192,7 @@ function Comment() {
         </div>
       )}
 
-      {players.includes(mainUser.id) ? null : (
+      {playerIds.includes(mainUser.id) ? null : (
         <>
           <div className="chatInputForm">
             <input
