@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Header.css";
 
 import profileImg from "../../assets/Rectangle 936.png";
@@ -19,9 +19,9 @@ const Profile = ({ className, src }) => {
   );
 };
 
-const Header = ({ setDisplay}) => {
-// const [display, setDisplay] = useState('');
-// console.log('Header', display);
+const Header = ({ setDisplay }) => {
+  // const [display, setDisplay] = useState('');
+  // console.log('Header', display);
 
   return (
     <div>
@@ -31,30 +31,30 @@ const Header = ({ setDisplay}) => {
             <h1>
               <img src={pawnLogo} id="pawnLogo" /> Chess
             </h1>
-              <button id="arrow-button">
-                <i className="arrow down"></i>
-              </button>
+            <button id="arrow-button">
+              <i className="arrow down"></i>
+            </button>
           </div>
           <div className="chesshome-headerRight">
             <a className="commentIcon" onClick={() => setDisplay(true)}>
-             <img src={chatBox} alt ="reply" />
+              <img src={chatBox} alt="reply" />
             </a>
 
-          <div className="chesshome-profileImg">
-            <Profile
-              className="chesshome-profile profileOne"
-              src={profileOne}
+            <div className="chesshome-profileImg">
+              <Profile
+                className="chesshome-profile profileOne"
+                src={profileOne}
               />
-            <Profile
-              className="chesshome-profile profileTwo"
-              src={profileTwo}
+              <Profile
+                className="chesshome-profile profileTwo"
+                src={profileTwo}
               />
-            <Profile
-              className="chesshome-profile profileThree"
-              src={profileThree}
+              <Profile
+                className="chesshome-profile profileThree"
+                src={profileThree}
               />
-            <p className="text-300">300</p>
-          </div>
+              <p className="text-300">300</p>
+            </div>
           </div>
         </div>
       </header>

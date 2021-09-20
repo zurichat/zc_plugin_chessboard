@@ -15,21 +15,30 @@
 .chatWrapper {
     width: 100%;
     background:white;
-    display: flex;
     margin: 1rem 0;
-  
+}
+.specHead {
+    display: flex;
+    align-items: center;
 }
 .specNameTime {
- margin: 0 .5rem;
- width: 80%;
+   width: 100%;
+   padding-left: 4.7rem;
+   padding-right: 2rem;
+   margin-top: -1.3rem;
 }
 .spectatorName {
     font-size: 15px;
     font-weight: 900;
-    margin-right: 1rem ;
+    margin-right: 1rem;
+    line-height: normal;
 }
 .specInfo {
     display: flex;
+    align-items: center;
+    margin: 0 .5rem;
+    width: 80%;
+    padding-bottom: 1.2rem;
 }
 .time-muted{
     color: gray;
@@ -42,6 +51,7 @@
     margin:.5rem;
     height: 3rem;
     max-width: 4rem; 
+
 }
 .spectatorMessage {
     font-size: 15px;

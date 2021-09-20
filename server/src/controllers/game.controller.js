@@ -140,10 +140,11 @@ class GameController {
       }
 
       // Return the game
-      res.status(200).send(response("Game joined successfully", {
-        game_id,
-      }));
-
+      res.status(200).send(
+        response("Game joined successfully", {
+          game_id,
+        })
+      );
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
@@ -392,16 +393,19 @@ class GameController {
 
       const payload = {
         event: "end_game",
-        winner: is_owner_winner ? gameDBData.data.owner.user_id : gameDBData.data.opponent.user_id,
+        winner: is_owner_winner
+          ? gameDBData.data.owner.user_id
+          : gameDBData.data.opponent.user_id,
         status,
       };
 
       await centrifugoController.publish(game_id, payload);
 
-      return res.status(200).send(response("Game ended!!!", {
-        game_id,
-      }));
-
+      return res.status(200).send(
+        response("Game ended!!!", {
+          game_id,
+        })
+      );
     } catch (error) {
       throw new CustomError(`Unable to end game: ${error}`, 500);
     }

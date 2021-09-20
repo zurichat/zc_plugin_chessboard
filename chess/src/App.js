@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
@@ -17,29 +17,21 @@ function App() {
       <Router basename="/chess">
         <Switch>
           {/* View All Games */}
-          <Route
-            exact
-            path="/"
-            render={() => <HomePage />}
-          />
+          <Route exact path="/" render={() => <HomePage />} />
 
           {/* ZC Main Comm Test Page */}
           <Route
             exact
             path="/zc_main_test"
-            render={() => console.log(GetUserInfo()) }
+            render={() => console.log(GetUserInfo())}
           />
 
           {/* Specatator Game View */}
-          <Route
-          exact
-            path="/game/:id"
-            render={() => <MainGame />}
-          />
+          <Route exact path="/game/:id" render={() => <MainGame />} />
 
           {/* Actual Game Page for Player 1 and Player 2 */}
           <Route
-          exact
+            exact
             path="/game_nocomments/:id"
             render={() => <GameScreenWithoutComments />}
           />
@@ -50,18 +42,10 @@ function App() {
             render={() => <GameScreenWithComments />}
           />
 
-          <Route
-            exact
-            path="/inviteplayer"
-            render={() => <InviteModal />}
-          />
+          <Route exact path="/inviteplayer" render={() => <InviteModal />} />
 
           {/* Rules Page */}
-          <Route
-            exact
-            path="/rules"
-            render={() => <Rules />}
-          />
+          <Route exact path="/rules" render={() => <Rules />} />
         </Switch>
       </Router>
     </div>

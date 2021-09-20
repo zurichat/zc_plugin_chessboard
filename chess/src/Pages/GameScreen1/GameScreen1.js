@@ -20,7 +20,6 @@ const GameScreenWithoutComments = () => {
 
   useEffect(() => {
     getGamebyID();
-    
   }, []);
 
   async function getGamebyID() {
@@ -41,7 +40,11 @@ const GameScreenWithoutComments = () => {
 
   return (
     <main id="game__screen__main">
-      <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} gameData={gameData} />
+      <Exit
+        isYes={openForfeitModal}
+        handleClick={handleForfeitClick}
+        gameData={gameData}
+      />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
 
       <div id="chessboard_container">
