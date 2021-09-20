@@ -287,6 +287,7 @@ class GameController {
       // Build Response
       const payload = {
         event: "spectator_joined_game",
+        permission,
         spectator,
         new_number_of_specators,
       };
@@ -336,7 +337,6 @@ class GameController {
       // Build Response
       const payload = {
         event: "spectator_left_game",
-        permission,
         spectator,
         new_number_of_specators: spectators.length,
       };
