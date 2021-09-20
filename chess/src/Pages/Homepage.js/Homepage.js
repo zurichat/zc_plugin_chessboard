@@ -12,7 +12,6 @@ function Homepage() {
 
   // fetch games data and set the state to the response
   async function getGamesData() {
-    
     const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
     setGamesData(games.data.data);
     console.log(games.data);
