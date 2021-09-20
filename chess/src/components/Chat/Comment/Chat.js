@@ -48,7 +48,7 @@ function Comment() {
           time: moment(data.timestamp).format("h:mm a"),
           image: data.data.image_url
         };
-        setDetails([...details, submitted]);
+        setComments([...comments, submitted]);
         setMessage("");
       }).catch(err => console.log(err));
     }
