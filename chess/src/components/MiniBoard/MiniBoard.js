@@ -4,6 +4,7 @@ import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { BACKEND_DOMAIN } from "../../config";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo, id }) {
@@ -16,7 +17,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     };
 
     const result = await axios.post(
-      "https://chess.zuri.chat/api/v1/game/create",
+      `${BACKEND_DOMAIN}/api/v1/game/create`,
       sample_data
     );
 
@@ -37,7 +38,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     };
 
     const result = await axios.post(
-      "https://chess.zuri.chat/api/v1/game/join",
+      `${BACKEND_DOMAIN}/api/v1/game/join`,
       sample_data
     );
 
