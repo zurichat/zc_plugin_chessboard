@@ -9,7 +9,7 @@ export default function Comments() {
     <div className="comments_container">
       <div className="title">Comments</div>
       <div className="comments">
-        {!(comments) ? (
+        {!comments ? (
           <span className="text-muted">Spectators' comments go here</span>
         ) : (
           comments.map((item, id) => {
