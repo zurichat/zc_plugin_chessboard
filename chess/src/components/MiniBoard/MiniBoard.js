@@ -4,15 +4,15 @@ import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
-import { GetUserInfo } from "@zuri/zuri-control";
+// import { GetUserInfo } from "@zuri/zuri-control";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo, id, userPerson }) {
   const history = useHistory();
   console.log(userPerson);
-  if (userPerson) {
-    GetUserInfo();
-  }
+  // if (userPerson) {
+  //   GetUserInfo();
+  // }
   const createGame = async () => {
     const sample_data = {
       user_id: userPerson.id,

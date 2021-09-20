@@ -10,7 +10,7 @@ import Rules from "./Pages/Rules/Rules";
 import UserContextProvider from "./contexts/UserContext";
 
 // Zuri Cross Import
-import { GetUserInfo } from "@zuri/zuri-control";
+// import { GetUserInfo } from "@zuri/zuri-control";
 
 function App() {
   return (
@@ -22,11 +22,11 @@ function App() {
             <Route exact path="/" render={() => <HomePage />} />
 
             {/* ZC Main Comm Test Page */}
-            <Route
+            {/* <Route
               exact
               path="/zc_main_test"
               render={() => console.log(GetUserInfo())}
-            />
+            /> */}
 
             {/* Specatator Game View */}
             <Route exact path="/game/:id" render={() => <MainGame />} />
