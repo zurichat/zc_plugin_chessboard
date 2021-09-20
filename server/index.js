@@ -8,11 +8,11 @@ const { PORT } = require("./src/config");
 const errorMiddleware = require("./src/middlewares/error.middleware");
 const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
 const morgan = require("morgan");
-const cors = require("cors");
+//const cors = require("cors");
 
 const app = express();
 
-app.use(cors());
+//app.use(cors());
 //morgan
 
 app.use(morgan("dev"));
