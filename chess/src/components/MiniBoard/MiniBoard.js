@@ -8,7 +8,6 @@ import axios from "axios";
 // function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo, id }) {
   const history = useHistory();
-
   const createGame = async () => {
     const sample_data = {
       user_id: "1234567",
