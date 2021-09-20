@@ -16,7 +16,7 @@ class GameController {
       //Logic for more than 6 games not being active
       const gameDBData = await GameRepo.fetchAll();
 
-      if (gameDBData.data.length < 7) {
+      if (!gameDBData.data || gameDBData.data.length < 7) {
         // create new game
 
         // Pass the request body to the schema
