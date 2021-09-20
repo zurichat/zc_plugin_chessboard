@@ -4,7 +4,6 @@
 
 .side-bar {
   /* width: 368px; */
-
   display: flex;
   flex-direction: column;
   /* border-left: 1px solid #bebcbc;  */
