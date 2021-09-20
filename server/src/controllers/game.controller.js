@@ -451,7 +451,7 @@ class GameController {
       // update the Game Info with current result
       const updated = await GameRepo.update(game_id, {
         is_owner_winner: data.is_owner_winner,
-        status: data.status
+        status: data.status,
       });
 
       const payload = {
