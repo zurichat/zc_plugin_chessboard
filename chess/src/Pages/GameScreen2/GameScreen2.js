@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import ExitButton from "../../components/Button/ExitButton";
 import ForfeitButton from "../../components/Button/forfeitButton";
 import ChessBoard from "../../components/ChessBoard/ChessBoard";
@@ -9,15 +8,15 @@ import "./style.css";
 
 const GameScreenWithComments = () => {
   const [openForfeitModal, setForfeitModal] = useState(false);
-
   const handleForfeitClick = () => {
     setForfeitModal(!openForfeitModal);
   };
-
   return (
     <main>
       <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} />
+
       <div id="chessboard_container">
+
         <ChessBoard type="player" />
       </div>
       <div id="side_container">
