@@ -10,10 +10,10 @@ const cors = require("cors");
 module.exports = (app) => {
   // enable CORS
   app.use(
-    cors({
-      // Allow all Origins so we can use the live api for local testing
-      origin: ["*"],
-    })
+    cors()
+    //   // Allow all Origins so we can use the live api for local testing
+    //   origin: ["*"],
+    // }
   );
 
   // Secure the app by setting various HTTP headers off.
