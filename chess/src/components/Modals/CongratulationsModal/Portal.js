@@ -1,39 +1,33 @@
-import React, {forwardRef, useImperativeHandle} from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import "./Portal.css";
 import Button from "./../../Button/Button";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import winner from "../../../assets/winner.png";
 
-const Portal =  (champ) => {
-
-
-      return (
-       
-        <div className={"modal-wrapper"}>
-                
-                <div                 
-                className={"modal-backdrop"}
-                />
-                <div 
-                className="modal-box">
-                    <div className="modal-profile">
-                        <div className="modal-img"><img src={winner} alt="winner-image" /></div>
-                    </div>
-                    <div                    className="modal-content">
-                        <p>
-                            <span>Congratulations</span> {champ.champ}
-                        </p>
-                        <p>You won this round</p>
-                    </div>
-                    <div className="btn-group">
-                        <Button />
-                    </div>
-                </div>
+const Portal = (champ) => {
+  return (
+    <div className={"modal-wrapper"}>
+      <div className={"modal-backdrop"} />
+      <div className="modal-box">
+        <div className="modal-profile">
+          <div className="modal-img">
+            <img src={winner} alt="winner-image" />
+          </div>
         </div>
-
-    );
-    };
+        <div className="modal-content">
+          <p>
+            <span>Congratulations</span> {champ.champ}
+          </p>
+          <p>You won this round</p>
+        </div>
+        <div className="btn-group">
+          <Button />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Portal;
 
@@ -55,17 +49,17 @@ export default Portal;
 //     const close = () => {
 //         setDisplay(false);
 //     };
-    
+
 //     if(display) {
 //       return (
-       
+
 //         <div className={"modal-wrapper"}>
-                
-//                 <div 
-//                 onClick={close}                 
+
+//                 <div
+//                 onClick={close}
 //                 className={"modal-backdrop"}
 //                 />
-//                 <div 
+//                 <div
 //                 className="modal-box">
 //                     <div className="modal-profile">
 //                         <div className="modal-img"><img src={winner} alt="winner-image" /></div>
