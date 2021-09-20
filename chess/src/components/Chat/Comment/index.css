@@ -153,6 +153,17 @@ input::placeholder{
         height: auto;
      }
 }
+@media (max-width: 768px) {
+    .emptyComment > svg {
+        width: 70%;
+     }
+    }
+
+@media (max-width: 420px) {
+    .emptyComment > svg {
+        width: 100%;
+    }
+}
 
 @media only screen and (max-width: 420px) {
     .chatContainer {
