@@ -15,42 +15,41 @@ const mainUser = {
   message: "hello there",
 };
 
-
 function Comment() {
   const [message, setMessage] = useState("");
   const [comments, setComments] = useState([]);
   const [playerIds, setPlayerIds] = useState([]);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const id = pathname.replace("/chess/game/", "");
-  
 
   useEffect(async () => {
-    const {data} = await axios.get(`/api/v1/game/${id}`);
+    const { data } = await axios.get(`/api/v1/game/${id}`);
     setComments(data.comments);
     setPlayerIds([data.owner.user_id, data.opponent.user_id]);
   }, []);
 
   const submitForm = () => {
-    if(message.length) {
-      axios.patch("https://chess.zuri.chat/api/v1/game/comment",  
-      {
-        comment: message,
-        game_id: id,
-        user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
-        user_name: "jack",
-        image_url: "https://www.gravatar.com/avatar/" , 
-      }
-      ).then(({data}) => {
-        const submitted = {
-          id: "d1a0686b-604d-4e65-9369-d46c30629c75",
-          message: data.data.text,
-          name: data.data.user_name,
-          time: moment(data.timestamp).format("h:mm a"),
-          image: data.data.image_url
-        };
-        setComments([...comments, submitted]);
-        setMessage("");
-      }).catch(err => console.log(err));
+    if (message.length) {
+      axios
+        .patch("https://chess.zuri.chat/api/v1/game/comment", {
+          comment: message,
+          game_id: id,
+          user_id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+          user_name: "jack",
+          image_url: "https://www.gravatar.com/avatar/",
+        })
+        .then(({ data }) => {
+          const submitted = {
+            id: "d1a0686b-604d-4e65-9369-d46c30629c75",
+            message: data.data.text,
+            name: data.data.user_name,
+            time: moment(data.timestamp).format("h:mm a"),
+            image: data.data.image_url,
+          };
+          setComments([...comments, submitted]);
+          setMessage("");
+        })
+        .catch((err) => console.log(err));
     }
     // if(message.length) {
     //   const submitted = {
