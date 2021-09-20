@@ -21,13 +21,13 @@ function Comment() {
   const [comments, setComments] = useState([]);
   const [playerIds, setPlayerIds] = useState([]);
   const {pathname} = useLocation();
-  const id = pathname.replace('/chess/game/', '');
+  const id = pathname.replace("/chess/game/", "");
   
 
   useEffect(async () => {
-    const {data} = await axios.get(`/api/v1/game/${id}`)
+    const {data} = await axios.get(`/api/v1/game/${id}`);
     setComments(data.comments);
-    setPlayerIds([data.owner.user_id, data.opponent.user_id])
+    setPlayerIds([data.owner.user_id, data.opponent.user_id]);
   }, []);
 
   const submitForm = () => {
