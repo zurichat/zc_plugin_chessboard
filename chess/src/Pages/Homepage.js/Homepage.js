@@ -13,13 +13,15 @@ function Homepage() {
   async function getGamesData() {
     const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
     setGamesData(games.data.data);
+    console.log(games.data);
   }
 
   // call get gamesData function
-  useEffect(() => {
-    getGamesData();
+  useEffect(async () => {
+    await getGamesData();
   }, []);
 
+  console.log(gamesData);
   const boards = [];
 
   for (let i = 0; i < 6; i++) {

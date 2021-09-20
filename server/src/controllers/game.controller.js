@@ -172,7 +172,12 @@ class GameController {
       // Return all games
       res
         .status(200)
-        .send(response("Games retrieved successfully", gameDBData.data));
+        .send(
+          response(
+            "Games retrieved successfully",
+            gameDBData.data == null ? [] : gameDBData.data
+          )
+        );
     } catch (error) {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
