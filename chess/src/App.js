@@ -7,51 +7,48 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
-import UserContextProvider from "./contexts/UserContext";
 
 // Zuri Cross Import
 import { GetUserInfo } from "@zuri/zuri-control";
 
 function App() {
   return (
-    <UserContextProvider>
-      <div className="App">
-        <Router basename="/chess">
-          <Switch>
-            {/* View All Games */}
-            <Route exact path="/" render={() => <HomePage />} />
+    <div className="App">
+      <Router basename="/chess">
+        <Switch>
+          {/* View All Games */}
+          <Route exact path="/" render={() => <HomePage />} />
 
-            {/* ZC Main Comm Test Page */}
-            <Route
-              exact
-              path="/zc_main_test"
-              render={() => console.log(GetUserInfo())}
-            />
+          {/* ZC Main Comm Test Page */}
+          <Route
+            exact
+            path="/zc_main_test"
+            render={() => console.log(GetUserInfo())}
+          />
 
-            {/* Specatator Game View */}
-            <Route exact path="/game/:id" render={() => <MainGame />} />
+          {/* Specatator Game View */}
+          <Route exact path="/game/:id" render={() => <MainGame />} />
 
-            {/* Actual Game Page for Player 1 and Player 2 */}
-            <Route
-              exact
-              path="/game_nocomments/:id"
-              render={() => <GameScreenWithoutComments />}
-            />
+          {/* Actual Game Page for Player 1 and Player 2 */}
+          <Route
+            exact
+            path="/game_nocomments/:id"
+            render={() => <GameScreenWithoutComments />}
+          />
 
-            <Route
-              exact
-              path="/game_comments/:id"
-              render={() => <GameScreenWithComments />}
-            />
+          <Route
+            exact
+            path="/game_comments"
+            render={() => <GameScreenWithComments />}
+          />
 
-            <Route exact path="/inviteplayer" render={() => <InviteModal />} />
+          <Route exact path="/inviteplayer" render={() => <InviteModal />} />
 
-            {/* Rules Page */}
-            <Route exact path="/rules" render={() => <Rules />} />
-          </Switch>
-        </Router>
-      </div>
-    </UserContextProvider>
+          {/* Rules Page */}
+          <Route exact path="/rules" render={() => <Rules />} />
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
