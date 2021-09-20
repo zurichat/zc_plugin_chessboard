@@ -2,16 +2,17 @@ import React from "react";
 import commentsData from "./Comments.json";
 import "./Comments.css";
 import avatar from "../../assets/avatar.svg";
+import { comments } from "../ChessBoard/ChessBoard";
 
 export default function Comments() {
   return (
     <div className="comments_container">
       <div className="title">Comments</div>
       <div className="comments">
-        {!commentsData.length ? (
+        {!(comments) ? (
           <span className="text-muted">Spectators' comments go here</span>
         ) : (
-          commentsData.map((item, id) => {
+          comments.map((item, id) => {
             return (
               <div key={`comment-${id + 1}`} className="comment_container">
                 <img src={avatar} alt="" />
