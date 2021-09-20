@@ -85,7 +85,7 @@ const ChessBoard = ({ type, gameData }) => {
 
       case "comments":
         // New Comment added
-        console.log('new comment', websocket.data);
+        console.log("new comment", websocket.data);
         comments.push(websocket.data.comment);
         break;
 
