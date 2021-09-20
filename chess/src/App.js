@@ -49,8 +49,10 @@ function App() {
           <Route exact path="/rules" render={() => <Rules />} />
 
           {/* Request Rematch Modal */}
-          <Route exact path="/request"
-          render={() => <RequestRematchPlayer />} 
+          <Route
+            exact
+            path="/request"
+            render={() => <RequestRematchPlayer />}
           />
         </Switch>
       </Router>
