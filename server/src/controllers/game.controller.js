@@ -140,10 +140,11 @@ class GameController {
       }
 
       // Return the game
-      res.status(200).send(response("Game joined successfully", {
-        game_id,
-      }));
-
+      res.status(200).send(
+        response("Game joined successfully", {
+          game_id,
+        })
+      );
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
@@ -392,16 +393,19 @@ class GameController {
 
       const payload = {
         event: "end_game",
-        winner: is_owner_winner ? gameDBData.data.owner.user_id : gameDBData.data.opponent.user_id,
+        winner: is_owner_winner
+          ? gameDBData.data.owner.user_id
+          : gameDBData.data.opponent.user_id,
         status,
       };
 
       await centrifugoController.publish(game_id, payload);
 
-      return res.status(200).send(response("Game ended!!!", {
-        game_id,
-      }));
-
+      return res.status(200).send(
+        response("Game ended!!!", {
+          game_id,
+        })
+      );
     } catch (error) {
       throw new CustomError(`Unable to end game: ${error}`, 500);
     }
@@ -415,33 +419,40 @@ class GameController {
       const { game_id, user_id } = req.body;
 
       // fetch the game from the database
-      const isGameExist = await GameRepo.fetchOne(game_id);
+      const { data } = await GameRepo.fetchOne(game_id);
 
       // check if the game data exists
-      if (!isGameExist.data)
+      if (!data)
         return res
           .status(400)
           .send(response("Game does not exist", null, false));
 
       // checking if user resigning is owner or not
-      if (user_id === isGameExist.data.owner.user_id) {
-        isGameExist.data.is_owner_winner = false;
-        winner_id = isGameExist.data.opponent.user_id;
-      } else if (user_id === isGameExist.data.opponent.user_id) {
-        isGameExist.data.is_owner_winner = true;
-        winner_id = isGameExist.data.owner.user_id;
+      if (user_id === data.owner.user_id) {
+        data.is_owner_winner = false;
+        winner_id = data.opponent.user_id;
+      } else if (user_id === data.opponent.user_id) {
+        data.is_owner_winner = true;
+        winner_id = data.owner.user_id;
+      } else {
+        return res
+          .status(400)
+          .send(
+            response("You are not a participant of this game.", null, false)
+          );
       }
 
-      isGameExist.data.status = 2;
+      data.status = 2;
       // update the Game Info with current result
       const updated = await GameRepo.update(game_id, {
-        ...isGameExist.data,
+        is_owner_winner: data.is_owner_winner,
+        status: data.status
       });
 
       const payload = {
         event: "end_game",
         winner: winner_id,
-        status: isGameExist.data.status,
+        status: data.status,
       };
 
       await centrifugoController.publish(game_id, payload);
