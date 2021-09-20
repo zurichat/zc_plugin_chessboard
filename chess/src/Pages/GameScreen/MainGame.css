@@ -20,6 +20,7 @@
 
 .main-chess > div > .main-header{
    width: 100%;
+   height: fit-content;
    
         
 }
