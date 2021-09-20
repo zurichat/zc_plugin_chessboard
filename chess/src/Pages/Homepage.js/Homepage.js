@@ -4,25 +4,26 @@ import "./Homepage.css";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "../../contexts/UserContext";
+//import { GetUserInfo } from "@zuri/zuri-control";
 
 function Homepage() {
   // gamesData state
   const [gamesData, setGamesData] = useState([]);
-  const { userData, loginUser } = useUser();
 
   // fetch games data and set the state to the response
   async function getGamesData() {
     const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
     setGamesData(games.data.data);
+    console.log(games.data);
   }
 
   // call get gamesData function
-  useEffect(() => {
-    getGamesData();
-    loginUser();
+  useEffect(async () => {
+    //console.log(GetUserInfo());
+    await getGamesData();
   }, []);
 
+  console.log(gamesData);
   const boards = [];
 
   for (let i = 0; i < 6; i++) {
@@ -32,7 +33,6 @@ function Homepage() {
         <div className="mini-one">
           <MiniBoard
             key={game._id}
-            userPerson={userData}
             id={game._id}
             playerOne={game.owner?.user_name}
             playerTwo={game.opponent?.user_name}
@@ -42,7 +42,7 @@ function Homepage() {
     } else {
       boards.push(
         <div className="mini-one">
-          <MiniBoard key={i} userPerson={userData} />
+          <MiniBoard key={i} />
         </div>
       );
     }
@@ -56,7 +56,7 @@ function Homepage() {
           <button className="chesshome-rules">Game Rules</button>
         </Link>
       </div>
-      <div className="app__container">{userData.id && boards}</div>
+      <div className="app__container">{boards}</div>
     </div>
   );
 }
