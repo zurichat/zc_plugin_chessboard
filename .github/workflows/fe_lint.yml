@@ -17,13 +17,18 @@ jobs:
       with:
         directory: client
       
-    - name: Install yarn dependencies and Run ESLint for client
+    - name: Install yarn dependencies and Run ESLint for root-config
       run: |
         cd client
         yarn install
         yarn run lint
 
-    - name: Install yarn dependencies and Run ESLint for main app
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: chess
+
+    - name: Install yarn dependencies and Run ESLint for chess spa
       run: |
         cd chess
         yarn install

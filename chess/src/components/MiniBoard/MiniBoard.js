@@ -8,7 +8,6 @@ import axios from "axios";
 // function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo, id }) {
   const history = useHistory();
-
   const createGame = async () => {
     const sample_data = {
       user_id: "1234567",
@@ -23,7 +22,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
 
     if (result.data.success) {
       const game_id = result.data.data.object_id;
-      history.push(`/game_nocomments/${game_id}`);
+      history.push(`/game_comments/${game_id}`);
     } else {
       //....
     }
@@ -73,9 +72,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
 
       <div className="board-image" onClick={proceedTowatchGame}>
         {/* eslint-disable-next-line */}
-
         <img src={boardImg} alt="" />{" "}
-
       </div>
       <div className="mini-asideBar mini-bottomBar">
         {playerTwo && (

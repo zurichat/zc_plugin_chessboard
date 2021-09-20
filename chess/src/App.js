@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./Pages/Homepage.js/Homepage";
@@ -7,7 +7,10 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
-import LandingPage from "./Pages/LandingPage/LandingPage";
+import RequestRematchPlayer from "./components/Modals/RequestRematchModal/RequestRematchPlayer";
+
+// Zuri Cross Import
+// import { GetUserInfo } from "@zuri/zuri-control";
 
 function App() {
   return (
@@ -15,29 +18,21 @@ function App() {
       <Router basename="/chess">
         <Switch>
           {/* View All Games */}
-          <Route
+          <Route exact path="/" render={() => <HomePage />} />
+
+          {/* ZC Main Comm Test Page */}
+          {/* <Route
             exact
-            path="/"
-            render={() => <HomePage />}
-          />
-          
-          {/* Landing Home Page */}
-          <Route
-            exact
-            path="/home"
-            render={() => <LandingPage /> }
-          />
+            path="/zc_main_test"
+            render={() => console.log(GetUserInfo())}
+          /> */}
 
           {/* Specatator Game View */}
-          <Route
-          exact
-            path="/game/:id"
-            render={() => <MainGame />}
-          />
+          <Route exact path="/game/:id" render={() => <MainGame />} />
 
           {/* Actual Game Page for Player 1 and Player 2 */}
           <Route
-          exact
+            exact
             path="/game_nocomments/:id"
             render={() => <GameScreenWithoutComments />}
           />
@@ -48,17 +43,16 @@ function App() {
             render={() => <GameScreenWithComments />}
           />
 
-          <Route
-            exact
-            path="/inviteplayer"
-            render={() => <InviteModal />}
-          />
+          <Route exact path="/inviteplayer" render={() => <InviteModal />} />
 
           {/* Rules Page */}
+          <Route exact path="/rules" render={() => <Rules />} />
+
+          {/* Request Rematch Modal */}
           <Route
             exact
-            path="/rules"
-            render={() => <Rules />}
+            path="/request"
+            render={() => <RequestRematchPlayer />}
           />
         </Switch>
       </Router>

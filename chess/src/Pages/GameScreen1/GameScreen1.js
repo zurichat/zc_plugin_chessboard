@@ -12,6 +12,7 @@ import axios from "../../axios/axiosInstance";
 import profileOne from "../../assets/Rectangle 892.png";
 import LeftArrow from "../../assets/left-arrow.png";
 import ForfeitButton from "../../components/Button/forfeitButton";
+import Comments from "../../components/Comments/Comments";
 
 const GameScreenWithoutComments = () => {
   const [gameData, setGameData] = useState({});
@@ -20,7 +21,6 @@ const GameScreenWithoutComments = () => {
 
   useEffect(() => {
     getGamebyID();
-    
   }, []);
 
   async function getGamebyID() {
@@ -41,7 +41,11 @@ const GameScreenWithoutComments = () => {
 
   return (
     <main id="game__screen__main">
-      <Exit isYes={openForfeitModal} handleClick={handleForfeitClick} gameData={gameData} />
+      <Exit
+        isYes={openForfeitModal}
+        handleClick={handleForfeitClick}
+        gameData={gameData}
+      />
       {/* <Forfeit isYes={openForfeitModal} handleClick={handleForfeitClick} /> */}
 
       <div id="chessboard_container">
@@ -55,10 +59,7 @@ const GameScreenWithoutComments = () => {
         {/* <div className="btn_container">{" "}
         <ForfeitButton handleClick={handleForfeitClick} />
         </div> */}
-        <div className="title">
-          <h1>Comments</h1>
-        </div>
-        <div className="dummy">{/* comments can go in here */}</div>
+        <Comments />
         <div className="exit_btn_container">
           <ExitButton handleClick={handleForfeitClick} />
         </div>

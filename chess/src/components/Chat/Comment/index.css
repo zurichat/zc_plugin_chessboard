@@ -15,21 +15,31 @@
 .chatWrapper {
     width: 100%;
     background:white;
-    display: flex;
     margin: 1rem 0;
-  
+}
+.specHead {
+    display: flex;
+    align-items: center;
 }
 .specNameTime {
- margin: 0 .5rem;
- width: 80%;
+   width: 100%;
+   padding-left: 4.7rem;
+   padding-right: 2rem;
+   margin-top: -1.3rem;
 }
-.spectatorName {
+.spectatorName h2{
     font-size: 15px;
     font-weight: 900;
-    margin-right: 1rem ;
+    margin-right: 1rem!important;
+    line-height: normal !important;
+    color: black!important;
 }
 .specInfo {
     display: flex;
+    align-items: center;
+    margin: 0 .5rem!important;
+    width: 80%;
+    padding-bottom: 1.2rem;
 }
 .time-muted{
     color: gray;
@@ -42,12 +52,12 @@
     margin:.5rem;
     height: 3rem;
     max-width: 4rem; 
+
 }
 .spectatorMessage {
     font-size: 15px;
     width: 100%;
     word-wrap: break-word;
-    /* line-height: 2rem; */
     font-weight: normal;
     color: rgb(63, 63, 63);
 }
@@ -55,6 +65,8 @@
 .emptyComment {
     width: 100%;
     padding: 2rem;
+    margin: auto;
+    text-align: center;
 } 
 .emptyComment > svg {
    width: 100%;
@@ -112,7 +124,7 @@ input::placeholder{
 }
 .inputIconsleft > svg , .inputIconsright> svg{
     margin-right: .8rem;
-    width: 2rem;
+    width: 1.5rem;
     cursor: pointer;
 }
 
@@ -134,6 +146,25 @@ input::placeholder{
     width: 3rem !important;
 }
 
+@media (width: 1024px) {
+    .emptyComment > svg {
+        width: 70%;
+        text-align: center;
+        height: auto;
+     }
+}
+@media (max-width: 768px) {
+    .emptyComment > svg {
+        width: 70%;
+     }
+    }
+
+@media (max-width: 420px) {
+    .emptyComment > svg {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 420px) {
     .chatContainer {
         width:100%;
@@ -144,7 +175,7 @@ input::placeholder{
 }
 @media only screen and (max-width: 320px) {
     .inputIconsleft > svg , .inputIconsright> svg{
-        width: 1rem;
+        width: 1rem !important;
     }
 }
 
