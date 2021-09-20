@@ -6,18 +6,15 @@ import Header from "../../components/Header/Header.js";
 import { BrowserRouter } from "react-router-dom";
 import { useParams } from "react-router";
 import axios from "../../axios/axiosInstance";
-import { useUser } from "../../contexts/UserContext";
 
 const MainGame = () => {
   const [commentDisplay, setCommentDisplay] = useState(false);
   const [gameData, setGameData] = useState({});
-  const { userData, loginUser } = useUser();
 
   const { id } = useParams();
 
   useEffect(() => {
     getGamebyID();
-    loginUser();
 
     // When a user loads this page
     registerUserAsSpectator();
@@ -31,9 +28,9 @@ const MainGame = () => {
   // Add the user as a spectator from DB
   const registerUserAsSpectator = async () => {
     const sample_data = {
-      user_id: userData.id,
+      user_id: "7837488",
       game_id: id,
-      user_name: userData.first_name,
+      user_name: "Annietah",
       image_url: "string",
     };
 

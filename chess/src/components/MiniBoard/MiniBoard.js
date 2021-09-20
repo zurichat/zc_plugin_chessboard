@@ -4,19 +4,14 @@ import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
-// import { GetUserInfo } from "@zuri/zuri-control";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
-function MiniBoard({ playerOne, playerTwo, id, userPerson }) {
+function MiniBoard({ playerOne, playerTwo, id }) {
   const history = useHistory();
-  console.log(userPerson);
-  // if (userPerson) {
-  //   GetUserInfo();
-  // }
   const createGame = async () => {
     const sample_data = {
-      user_id: userPerson.id,
-      user_name: userPerson.first_name,
+      user_id: "1234567",
+      user_name: "codeJonin",
       image_url: "string",
     };
 
@@ -35,9 +30,9 @@ function MiniBoard({ playerOne, playerTwo, id, userPerson }) {
 
   const joinGame = async () => {
     const sample_data = {
-      user_id: userPerson.id,
+      user_id: "player-2-1234567",
       game_id: id,
-      user_name: userPerson.first_name,
+      user_name: "michael",
       image_url: "string",
     };
 
@@ -48,7 +43,7 @@ function MiniBoard({ playerOne, playerTwo, id, userPerson }) {
 
     if (result.data.success) {
       const game_id = result.data.data.game_id;
-      history.push(`/game_comments/${game_id}`);
+      history.push(`/game_nocomments/${game_id}`);
     } else {
       //....
     }
