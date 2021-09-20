@@ -8,6 +8,7 @@ import axios from "axios";
 function Homepage() {
   // gamesData state
   const [gamesData, setGamesData] = useState([]);
+  const [user, setUser] = useState({});
 
   // fetch games data and set the state to the response
   async function getGamesData() {
@@ -15,9 +16,19 @@ function Homepage() {
     setGamesData(games.data.data);
   }
 
+  const loginUser = async () => {
+    const response = await axios.post("https://api.zuri.chat/auth/login", {
+      email: "pid@oxy.com",
+      password: "pidoxy.com",
+    });
+    console.log(response.data.data.user);
+    setUser(response.data.data.user);
+  };
+
   // call get gamesData function
   useEffect(() => {
     getGamesData();
+    loginUser();
   }, []);
 
   const boards = [];
@@ -29,6 +40,7 @@ function Homepage() {
         <div className="mini-one">
           <MiniBoard
             key={game._id}
+            user={user}
             id={game._id}
             playerOne={game.owner?.user_name}
             playerTwo={game.opponent?.user_name}
@@ -38,7 +50,7 @@ function Homepage() {
     } else {
       boards.push(
         <div className="mini-one">
-          <MiniBoard key={i} />
+          <MiniBoard key={i} user={user} />
         </div>
       );
     }
@@ -52,7 +64,7 @@ function Homepage() {
           <button className="chesshome-rules">Game Rules</button>
         </Link>
       </div>
-      <div className="app__container">{boards}</div>
+      <div className="app__container">{user.id && boards}</div>
     </div>
   );
 }

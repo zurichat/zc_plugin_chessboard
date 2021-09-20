@@ -6,13 +6,13 @@ import { useHistory } from "react-router";
 import axios from "axios";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
-function MiniBoard({ playerOne, playerTwo, id }) {
+function MiniBoard({ playerOne, playerTwo, id, user }) {
   const history = useHistory();
-
+  console.log(user);
   const createGame = async () => {
     const sample_data = {
-      user_id: "1234567",
-      user_name: "codeJonin",
+      user_id: user.id,
+      user_name: user.first_name,
       image_url: "string",
     };
 
@@ -31,9 +31,9 @@ function MiniBoard({ playerOne, playerTwo, id }) {
 
   const joinGame = async () => {
     const sample_data = {
-      user_id: "player-2-1234567",
+      user_id: user.id,
       game_id: id,
-      user_name: "michael",
+      user_name: user.first_name,
       image_url: "string",
     };
 
