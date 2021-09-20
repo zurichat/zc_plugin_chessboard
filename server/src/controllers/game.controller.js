@@ -287,7 +287,6 @@ class GameController {
       // Build Response
       const payload = {
         event: "spectator_joined_game",
-        permission,
         spectator,
         new_number_of_specators,
       };
