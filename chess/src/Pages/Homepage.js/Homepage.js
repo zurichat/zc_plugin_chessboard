@@ -4,6 +4,7 @@ import "./Homepage.css";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
+//import { GetUserInfo } from "@zuri/zuri-control";
 
 function Homepage() {
   // gamesData state
@@ -11,13 +12,15 @@ function Homepage() {
 
   // fetch games data and set the state to the response
   async function getGamesData() {
-    const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+    const games = await axios.get("http://localhost:5050/api/v1/game/all");
+    //const games = await axios.get("https://chess.zuri.chat/api/v1/game/all");
     setGamesData(games.data.data);
     console.log(games.data);
   }
 
   // call get gamesData function
   useEffect(async () => {
+    //console.log(GetUserInfo());
     await getGamesData();
   }, []);
 
