@@ -65,6 +65,8 @@
 .emptyComment {
     width: 100%;
     padding: 2rem;
+    margin: auto;
+    text-align: center;
 } 
 .emptyComment > svg {
    width: 100%;
@@ -142,6 +144,14 @@ input::placeholder{
 .icon-down{
     border-left: 2px solid rgb(196, 195, 196);
     width: 3rem !important;
+}
+
+@media (width: 1024px) {
+    .emptyComment > svg {
+        width: 70%;
+        text-align: center;
+        height: auto;
+     }
 }
 
 @media only screen and (max-width: 420px) {
