@@ -20,7 +20,6 @@ const GameScreenWithComments = () => {
       </div>
       <div id="side_container">
         <div className="btn_container">
-          {" "}
           <ForfeitButton handleClick={handleForfeitClick} />
         </div>
         <Comments />
