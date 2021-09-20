@@ -11,6 +11,8 @@ import WaitingForPlayerTwo from "../Button/WaitingForPlayerTwo";
 import Centrifuge from "centrifuge";
 import Portal from "../Modals/CongratulationsModal/Portal";
 
+export const comments = [];
+
 const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
   const [gameId, setGameId] = useState(gameId);
@@ -83,6 +85,8 @@ const ChessBoard = ({ type, gameData }) => {
 
       case "comments":
         // New Comment added
+        console.log("new comment", websocket.data);
+        comments.push(websocket.data.comment);
         break;
 
       default:
