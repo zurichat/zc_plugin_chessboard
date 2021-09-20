@@ -7,13 +7,8 @@ const router = require("./src/routes/index");
 const { PORT } = require("./src/config");
 const errorMiddleware = require("./src/middlewares/error.middleware");
 const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
-const morgan = require("morgan");
-const cors = require("cors");
 
 const app = express();
-
-//morgan
-app.use(morgan("dev"));
 
 // swagger setup
 const swaggerUi = require("swagger-ui-express");
@@ -38,7 +33,7 @@ app.use("/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 preRouteMiddlewares(app);
 
 // All Endpoints routes for backend are defined here
-app.use("/api", cors(), router);
+app.use("/api", router);
 
 // temporary - to be removed
 app.get("/test", (req, res) => {
