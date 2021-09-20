@@ -4,10 +4,12 @@ import "./Homepage.css";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useUser } from "../../contexts/UserContext";
 
 function Homepage() {
   // gamesData state
   const [gamesData, setGamesData] = useState([]);
+  const { userData, loginUser } = useUser();
 
   // fetch games data and set the state to the response
   async function getGamesData() {
@@ -18,6 +20,7 @@ function Homepage() {
   // call get gamesData function
   useEffect(() => {
     getGamesData();
+    loginUser();
   }, []);
 
   const boards = [];
@@ -29,6 +32,7 @@ function Homepage() {
         <div className="mini-one">
           <MiniBoard
             key={game._id}
+            userPerson={userData}
             id={game._id}
             playerOne={game.owner?.user_name}
             playerTwo={game.opponent?.user_name}
@@ -38,7 +42,7 @@ function Homepage() {
     } else {
       boards.push(
         <div className="mini-one">
-          <MiniBoard key={i} />
+          <MiniBoard key={i} userPerson={userData} />
         </div>
       );
     }
@@ -52,7 +56,7 @@ function Homepage() {
           <button className="chesshome-rules">Game Rules</button>
         </Link>
       </div>
-      <div className="app__container">{boards}</div>
+      <div className="app__container">{userData.id && boards}</div>
     </div>
   );
 }
