@@ -2,9 +2,9 @@
 const router = require("express").Router();
 const cors = require("cors");
 const corsOptions = {
-    origin: "http://zuri.chat",
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  };
+  origin: "http://zuri.chat",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 // Custom Modules
 const GameCtrl = require("../../controllers/game.controller");
