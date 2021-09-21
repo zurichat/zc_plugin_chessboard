@@ -11,6 +11,7 @@ import { getLoggedInUserData } from '../../adapters/auth';
 import Chess from 'chess.js';
 import Chessboard from 'chessboardjsx';
 import PlayerName from "../PlayerName";
+import ChessBoardBorder from "../ChessBoardBorder";
 import GameWinnerModal from "../Modals/GameWinnerModal";
 
 function ChessBoard({ type, gameData }) {
@@ -191,9 +192,13 @@ function ChessBoard({ type, gameData }) {
 
 	return (
 		<>
-			<h1>ChessBoard: {type}</h1>
 			<div className="chessboard">
-				<PlayerName style={{ paddingBottom: "28px" }} name={gameData.owner.user_name} />
+				<h1>rendering for: {type}</h1>
+				<PlayerName
+					style={{ paddingBottom: "28px" }}
+					name={gameData.owner.user_name}
+				/>
+
 				<div
 					style={{
 						justifyContent: 'flex-start',
@@ -201,6 +206,7 @@ function ChessBoard({ type, gameData }) {
 						border: '3px solid #000',
 					}}
 				>
+					<ChessBoardBorder />
 					<Chessboard
 						// Set custom Chess Pieces
 						pieces={chessPieces()}
@@ -239,6 +245,9 @@ function ChessBoard({ type, gameData }) {
 							background:
 								'linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)',
 						}}
+
+						// Show Notations on the board
+						showNotations={false}
 					/>
 				</div>
 
