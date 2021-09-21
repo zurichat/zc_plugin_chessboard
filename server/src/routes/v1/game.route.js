@@ -1,6 +1,10 @@
 // Package Modules
 const router = require("express").Router();
 const cors = require("cors");
+const corsOptions = {
+    origin: "http://zuri.chat",
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
 
 // Custom Modules
 const GameCtrl = require("../../controllers/game.controller");
@@ -173,7 +177,7 @@ const GameCtrl = require("../../controllers/game.controller");
  *    500:
  *      description: An error occurred
  */
-router.post("/create", cors(), GameCtrl.create);
+router.post("/create", cors(corsOptions), GameCtrl.create);
 
 // Join A Game
 
@@ -195,7 +199,7 @@ router.post("/create", cors(), GameCtrl.create);
  *    500:
  *      description: An error occurred
  */
-router.post("/join", cors(), GameCtrl.join);
+router.post("/join", cors(corsOptions), GameCtrl.join);
 
 /**
  * @swagger
@@ -230,7 +234,7 @@ router.get("/all", GameCtrl.getAll);
  *    500:
  *      description: An error occurred
  */
-router.patch("/watch", cors(), GameCtrl.addSpectator);
+router.patch("/watch", cors(corsOptions), GameCtrl.addSpectator);
 
 /**
  * @swagger
@@ -251,7 +255,7 @@ router.patch("/watch", cors(), GameCtrl.addSpectator);
  *    500:
  *      description: An error occurred
  */
-router.patch("/piecemove", cors(), GameCtrl.pieceMove);
+router.patch("/piecemove", cors(corsOptions), GameCtrl.pieceMove);
 
 /**
  * @swagger
@@ -272,7 +276,7 @@ router.patch("/piecemove", cors(), GameCtrl.pieceMove);
  *    500:
  *      description: An error occurred
  */
-router.patch("/end", cors(), GameCtrl.endGame);
+router.patch("/end", cors(corsOptions), GameCtrl.endGame);
 
 /**
  * @swagger
@@ -293,7 +297,7 @@ router.patch("/end", cors(), GameCtrl.endGame);
  *    500:
  *      description: An error occurred
  */
-router.patch("/unwatch", cors(), GameCtrl.removeSpectator);
+router.patch("/unwatch", cors(corsOptions), GameCtrl.removeSpectator);
 
 /**
  * @swagger
@@ -317,7 +321,7 @@ router.patch("/unwatch", cors(), GameCtrl.removeSpectator);
  *      description: An error occurred
  */
 
-router.patch("/resign", cors(), GameCtrl.resign);
+router.patch("/resign", cors(corsOptions), GameCtrl.resign);
 
 /**
  * @swagger
@@ -385,7 +389,7 @@ router.get("/all/:userId", GameCtrl.getAllByUser);
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/comment", cors(), GameCtrl.comment);
+router.patch("/comment", cors(corsOptions), GameCtrl.comment);
 
 /**
  * @swagger
@@ -398,7 +402,7 @@ router.patch("/comment", cors(), GameCtrl.comment);
  *    content:
  *      application/json:
  *        schema:
- *          $ref: '#/definitions/delete'
+ *          $ref: '#/definitions/delete'*******************************
  *
  *   responses:
  *    204:
@@ -408,7 +412,7 @@ router.patch("/comment", cors(), GameCtrl.comment);
  *    500:
  *      description: An error occurred
  */
-router.delete("/delete", cors(), GameCtrl.delete);
+router.delete("/delete", cors(corsOptions), GameCtrl.delete);
 
 // Export Module
 module.exports = router;
