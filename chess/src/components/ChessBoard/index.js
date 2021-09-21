@@ -196,7 +196,7 @@ function ChessBoard({ type, gameData }) {
 				<h1>rendering for: {type}</h1>
 				<PlayerName
 					style={{ paddingBottom: "28px" }}
-					name={gameData.owner.user_name}
+					name={gameData.opponent?.user_name}
 				/>
 
 				<div
@@ -253,7 +253,7 @@ function ChessBoard({ type, gameData }) {
 
 				<PlayerName
 					style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-					name={gameData.opponent?.user_name}
+					name={gameData.owner.user_name}
 				/>
 			</div>
 			{showGameWinnerModal ? <GameWinnerModal winner={gameWinner} /> : null}
