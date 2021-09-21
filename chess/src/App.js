@@ -39,7 +39,7 @@ function App() {
 
           <Route
             exact
-            path="/game_comments"
+            path="/game_comments:id"
             render={() => <GameScreenWithComments />}
           />
 
