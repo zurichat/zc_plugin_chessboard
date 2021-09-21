@@ -81,71 +81,72 @@
     <% } %>
     <!-- landing page styles start -->
     <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
       .landing-page{
     position: relative;
     height: 100vh;
     width: 100%;
     }
-    
-    .landing-page .image{
-        object-fit: contain;
-        width: 100%;
-        height: 100%;
-    }
-    
-    .landing-page img{
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-    }
-    
-    .landing-page button{
-        position: absolute;
-        width: 35%;
-        height: 5rem;
-        bottom: 5%;
-        left: 7%;
-        color: white;
-        border: 2px solid white;
-        text-align: center;
-        outline: none;
-        border-radius: .2rem;
-        z-index: 2;
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: .2rem 0;
-        font-size: 2rem;
-    }
-    
-    .landing-page button:hover{
-        border: 3px solid black;
-        color: black;
-        background: white;
-        border-radius: .2rem;
-        outline: none;
-        transition: none;
+
+    .landing-page .landing-image{
+      width: 100%;
+      height: 100%;
     }
 
-    .landing-page a{
-        text-decoration: none;
+  .landing-page .landing-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+    .landing-page .landing-content{
+    position: absolute;
+    z-index: 2;
+    top: 40%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    }
+
+  .landing-page .landing-content h1{
+    margin-bottom: 3rem;
+    color: whitesmoke;
+    font-size: 2rem;
     }
     
-    @media  (min-width: 320px) and (max-width: 480px){
-        .landing-page .image img{
-            width: 500px;
-            height: 100vh;
-            object-fit: fill;
-            position: absolute;
-        }
-    
-        .landing-page{
-            overflow-x: hidden;
-        }
-    
-        .landing-page button{
-            width: 50%;
-            font-size: 1.5rem;
-        }
-    }
+.landing-page .landing-content button{
+  width: 50%;
+  height: 5rem;
+  padding: .3rem .1rem;
+  border: 2px solid rgba(0, 21, 29, 0.733);
+  color:  white;
+  background: rgba(0, 21, 29, 0.733);
+  outline: none;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+}  
+
+.landing-page .landing-content button:hover{
+  border: 3px solid rgba(0, 21, 29, 0.733);
+  color:  whitesmoke;
+  background: rgba(0, 0, 0, 1);
+  transition: none;
+  outline: none;
+}
+
+@media (min-width: 320) and (max-width: 767){
+  .landing-page .landing-content h1{
+    font-size: 1rem;
+  }
+}
+
+
     </style>
     <!-- landing page styles end -->
   </head>
