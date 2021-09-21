@@ -7,6 +7,7 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
+import AcceptDeclineModal from "./components/Modals/AcceptDeclineModal";
 import RequestRematchPlayer from "./components/Modals/RequestRematchModal/RequestRematchPlayer";
 
 // Zuri Cross Import
@@ -44,6 +45,8 @@ function App() {
           />
 
           <Route exact path="/inviteplayer" render={() => <InviteModal />} />
+
+          <Route exact path="/accept_invite" render={() => <AcceptDeclineModal showModal={true} />} />      
 
           {/* Rules Page */}
           <Route exact path="/rules" render={() => <Rules />} />
