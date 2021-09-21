@@ -1,5 +1,4 @@
-const path = require("path");
-
+const path = require('path');
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react");
 
@@ -13,9 +12,7 @@ module.exports = (webpackConfigEnv, argv) => {
 
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
-    entry: {
-      js: './src/zuri-zuri-plugin-chessboard.js',
-    },
+    context: path.resolve(__dirname, 'src'),
     devServer: {
       historyApiFallback: true,
       headers: {
@@ -25,9 +22,6 @@ module.exports = (webpackConfigEnv, argv) => {
         "Access-Control-Allow-Headers":
           "X-Requested-With, content-type, Authorization",
       },
-    },
-    stats: {
-      errorDetails: true,
     },
   });
 };
