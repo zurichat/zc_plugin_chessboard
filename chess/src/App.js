@@ -7,9 +7,10 @@ import MainGame from "./Pages/GameScreen/MainGame.js";
 import InviteModal from "./components/Modals/InviteModal/InviteModal";
 import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
 import Rules from "./Pages/Rules/Rules";
+import RequestRematchPlayer from "./components/Modals/RequestRematchModal/RequestRematchPlayer";
 
 // Zuri Cross Import
-import { GetUserInfo } from "@zuri/zuri-control";
+// import { GetUserInfo } from "@zuri/zuri-control";
 
 function App() {
   return (
@@ -20,11 +21,11 @@ function App() {
           <Route exact path="/" render={() => <HomePage />} />
 
           {/* ZC Main Comm Test Page */}
-          <Route
+          {/* <Route
             exact
             path="/zc_main_test"
             render={() => console.log(GetUserInfo())}
-          />
+          /> */}
 
           {/* Specatator Game View */}
           <Route exact path="/game/:id" render={() => <MainGame />} />
@@ -46,6 +47,13 @@ function App() {
 
           {/* Rules Page */}
           <Route exact path="/rules" render={() => <Rules />} />
+
+          {/* Request Rematch Modal */}
+          <Route
+            exact
+            path="/request"
+            render={() => <RequestRematchPlayer />}
+          />
         </Switch>
       </Router>
     </div>

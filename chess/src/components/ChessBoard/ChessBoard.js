@@ -10,6 +10,9 @@ import WaitingForPlayerTwo from "../Button/WaitingForPlayerTwo";
 
 import Centrifuge from "centrifuge";
 import Portal from "../Modals/CongratulationsModal/Portal";
+import { BACKEND_DOMAIN, REALTIME_DOMAIN } from "../../config";
+
+export const comments = [];
 
 const ChessBoard = ({ type, gameData }) => {
   const [fen, setFen] = useState("start");
@@ -25,9 +28,7 @@ const ChessBoard = ({ type, gameData }) => {
   const [history, setHistory] = useState("");
 
   //Centrifugee Stuffss
-  const centrifuge = new Centrifuge(
-    "wss://realtime.zuri.chat/connection/websocket"
-  );
+  const centrifuge = new Centrifuge(`${REALTIME_DOMAIN}/connection/websocket`);
 
   const game = useRef(null);
 
@@ -83,6 +84,8 @@ const ChessBoard = ({ type, gameData }) => {
 
       case "comments":
         // New Comment added
+        console.log("new comment", websocket.data);
+        comments.push(websocket.data.comment);
         break;
 
       default:
@@ -111,7 +114,7 @@ const ChessBoard = ({ type, gameData }) => {
       };
 
       const result = await axios.patch(
-        "https://chess.zuri.chat/api/v1/game/end",
+        `${BACKEND_DOMAIN}/api/v1/game/end`,
         gameEndData
       );
     };
@@ -121,7 +124,7 @@ const ChessBoard = ({ type, gameData }) => {
   /////////////////////////////////// END OF GAME END SECTION ///////////////////////////////////////////////////////////
 
   const getGames = async () => {
-    const response = await axios.get("https://chess.zuri.chat/api/v1/game/all");
+    const response = await axios.get(`${BACKEND_DOMAIN}/api/v1/game/all`);
   };
 
   const pieceMove = async (move) => {
@@ -133,7 +136,7 @@ const ChessBoard = ({ type, gameData }) => {
     };
 
     const response = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/piecemove",
+      `${BACKEND_DOMAIN}/api/v1/game/piecemove`,
       body
     );
   };

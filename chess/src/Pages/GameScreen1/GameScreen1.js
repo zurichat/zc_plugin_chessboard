@@ -12,6 +12,7 @@ import axios from "../../axios/axiosInstance";
 import profileOne from "../../assets/Rectangle 892.png";
 import LeftArrow from "../../assets/left-arrow.png";
 import ForfeitButton from "../../components/Button/forfeitButton";
+import Comments from "../../components/Comments/Comments";
 
 const GameScreenWithoutComments = () => {
   const [gameData, setGameData] = useState({});
@@ -58,10 +59,7 @@ const GameScreenWithoutComments = () => {
         {/* <div className="btn_container">{" "}
         <ForfeitButton handleClick={handleForfeitClick} />
         </div> */}
-        <div className="title">
-          <h1>Comments</h1>
-        </div>
-        <div className="dummy">{/* comments can go in here */}</div>
+        <Comments />
         <div className="exit_btn_container">
           <ExitButton handleClick={handleForfeitClick} />
         </div>

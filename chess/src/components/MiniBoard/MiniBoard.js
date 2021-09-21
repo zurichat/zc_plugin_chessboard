@@ -4,11 +4,11 @@ import "./MiniBoard.css";
 import boardImg from "../../assets/mini-board.svg";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { BACKEND_DOMAIN } from "../../config";
 
 // function MiniBoard({ id, playerOne, playerTwo }) {
 function MiniBoard({ playerOne, playerTwo, id }) {
   const history = useHistory();
-
   const createGame = async () => {
     const sample_data = {
       user_id: "1234567",
@@ -17,13 +17,13 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     };
 
     const result = await axios.post(
-      "https://chess.zuri.chat/api/v1/game/create",
+      `${BACKEND_DOMAIN}/api/v1/game/create`,
       sample_data
     );
 
     if (result.data.success) {
       const game_id = result.data.data.object_id;
-      history.push(`/game_nocomments/${game_id}`);
+      history.push(`/game_comments/${game_id}`);
     } else {
       //....
     }
@@ -38,7 +38,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
     };
 
     const result = await axios.post(
-      "https://chess.zuri.chat/api/v1/game/join",
+      `${BACKEND_DOMAIN}/api/v1/game/join`,
       sample_data
     );
 
