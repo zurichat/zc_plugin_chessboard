@@ -23,7 +23,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
 
     if (result.data.success) {
       const game_id = result.data.data.object_id;
-      history.push(`/game_comments/${game_id}`);
+      history.push(`/game_nocomments/${game_id}`);
     } else {
       //....
     }
@@ -44,7 +44,7 @@ function MiniBoard({ playerOne, playerTwo, id }) {
 
     if (result.data.success) {
       const game_id = result.data.data.game_id;
-      history.push(`/game_nocomments/${game_id}`);
+      history.push(`/game_comments/${game_id}`);
     } else {
       //....
     }
