@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./microfrontend-layout.css">
+
 <single-spa-router>
   <!--
 
@@ -7,14 +9,12 @@
   -->
 
   <route default>
-    <div class="landing-page">
-      <h1>Chess Plugin Landing Page</h1>
-      <a href="/chess">Chess Plugin</a>
-    </div>
+    <h1>Landing</h1>
   </route>
 
   <route path="/chess">
     <application name="@zuri/zuri-plugin-chessboard"></application>
   </route>
+
 
 </single-spa-router>
