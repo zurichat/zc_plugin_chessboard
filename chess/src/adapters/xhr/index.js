@@ -2,8 +2,8 @@ import Axios from "axios";
 
 function returnAxiosInstance() {
   return Axios.create({
-    // baseURL: 'https://chess.zuri.chat/api/v1/',
-    baseURL: "//localhost:5050/api/v1/",
+    baseURL: "https://chess.zuri.chat/api/v1/",
+    // baseURL: "//localhost:5050/api/v1/",
     headers: {
       "Content-Type": "application/json",
       // 'Authorization': 'Bearer ' + localStorage.getItem('access_token')
