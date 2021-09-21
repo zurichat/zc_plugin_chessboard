@@ -6,7 +6,7 @@ export function getLoggedInUserData() {
     return {
         user_id: "player_one_user_id",
         user_name: "codeJonin",
-        image_url: "string",
+        image_url: "https://www.gravatar.com/avatar/",
     };
 }
 
@@ -14,7 +14,7 @@ export function testPlayerTwoData() {
     return {
         user_id: "player_two_user_id",
         user_name: "michael",
-        image_url: "string",
+        image_url: "https://www.gravatar.com/avatar/",
     };
 }
 

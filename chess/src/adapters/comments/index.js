@@ -1,7 +1,8 @@
 // Import api call adapter
 import { patch } from "../xhr";
+import { getLoggedInUserData } from "../auth";
 
-export function addComment(game_id, comment) {
+export function sendComment(game_id, comment) {
     const body = {
         user_id: getLoggedInUserData().user_id,
         user_name: getLoggedInUserData().user_name,

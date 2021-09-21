@@ -98,7 +98,7 @@ function Game() {
         <ChessBoard type="opponent" gameData={gameData} />
       )
       SideBarToRender = (
-        <SpectatorSideBar type="owner" gameData={gameData} />
+        <SpectatorSideBar type="opponent" gameData={gameData} />
       );
     } else {
       // Render the ChessBoard with spectator type
@@ -106,7 +106,7 @@ function Game() {
         <ChessBoard type="spectator" gameData={gameData} />
       )
       SideBarToRender = (
-        <SpectatorSideBar type="owner" gameData={gameData} />
+        <SpectatorSideBar type="spectator" gameData={gameData} />
       );
     }
   }
