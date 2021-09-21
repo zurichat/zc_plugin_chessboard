@@ -114,6 +114,7 @@ class GameController {
       // Logic to continue game if player 1 or 2 refreshes the tab
       if (!gameDBData.data.opponent) {
         const opponent = {
+          color: "b",
           user_id,
           user_name,
           image_url,
