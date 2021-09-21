@@ -1,12 +1,121 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function Game() {
+// Import CSS for this page
+import "./game.css";
 
-  let { game_id } = useParams();
+// Import Adaptors
+import { CentrifugeSetup, getGameData } from "../../adapters/game";
+import { getLoggedInUserData } from "../../adapters/auth";
+import { UpdatePieceMove } from '../../adapters/chessboard';
+
+// Import Components
+import Header from "../../components/Header";
+import ChessBoard from "../../components/ChessBoard";
+
+function Game() {
+  const [gameData, setGameData] = useState(null);
+  const { game_id } = useParams();
+
+  // Setup Centrifuge Setup
+  CentrifugeSetup(game_id, (ctx) => {
+    const websocket = ctx;
+    switch (ctx?.data.event) {
+      case 'join_game':
+        console.log('someone centrifuge');
+        setPlayerNames({
+          ...playerNames,
+          b: websocket.data.player.user_name,
+        });
+        break;
+
+      case 'piece_moved':
+        console.log('centrifuge: a player moved a piece');
+        game.current.move(websocket.data.board_state);
+        set_board_position(GameEngine.current.fen());
+        break;
+
+      case 'spectator_joined_game':
+        // New Specator Joined Game Code Here
+        console.log(
+          'centrifuge: a spectator just joined this game room'
+        );
+        break;
+
+      case 'spectator_left_game':
+        // New Specator Left Game Code Here
+        console.log('centrifuge: a spectator just left this game room');
+        break;
+
+      case 'end_game':
+        // The Game Has been ended by one of the players
+        console.log(
+          'centrifuge: the game ended event listener was heard, do something'
+        );
+        break;
+
+      case 'comments':
+        // New Comment added
+        console.log('centrifuge: a new comment was sent to the room');
+        break;
+
+      default:
+        console.log('centrifuge: event listener not listened for', ctx?.data);
+        break;
+    }
+  });
+
+  useEffect(() => {
+    // Get game data
+    getGameData(game_id).then((response) => {
+      if (!response.data.success) {
+        // TODO: Handle error with Toasts
+        console.log("Unable to Get Game: ", response.data.message);
+      } else {
+        setGameData(response.data.data)
+      };
+    });
+  }, []);
+
+  let BoardToRender = null;
+
+  // If GameData State has been set
+  if (gameData !== null) {
+    // If LoggedIn User is the owner of the Game
+    if (gameData?.owner?.user_id == getLoggedInUserData().user_id) {
+      // Render the Chessboard with owner defaults
+      BoardToRender = (
+        <ChessBoard type="owner" gameData={gameData} />
+      );
+      // If LoggedIn User is the opponent in the Game
+    } else if (gameData?.opponent?.user_id == getLoggedInUserData().user_id) {
+      // Render the Chessboard with opponent defaults
+      BoardToRender = (
+        <ChessBoard type="opponent" gameData={gameData} />
+      )
+    } else {
+      // Render the ChessBoard with spectator type
+      BoardToRender = (
+        <ChessBoard type="spectator" gameData={gameData} />
+      )
+    }
+  }
 
   return (
-    <h1>Game: {game_id}</h1>
-  );
+    <section className="main-game">
+      <div className="main-chess">
+        <Header />
+        {BoardToRender}
+      </div>
+
+      {/* <BrowserRouter>
+        <SpectatorSideBar
+          display={commentDisplay}
+          setDisplay={setCommentDisplay}
+        />
+      </BrowserRouter> */}
+    </section>
+  )
 }
 
 export default Game;
