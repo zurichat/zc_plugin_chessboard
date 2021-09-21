@@ -1,5 +1,6 @@
 // Package Modules
 const router = require("express").Router();
+const cors = require("cors");
 
 // Custom Modules
 const GameCtrl = require("../../controllers/game.controller");
@@ -172,7 +173,7 @@ const GameCtrl = require("../../controllers/game.controller");
  *    500:
  *      description: An error occurred
  */
-router.post("/create", GameCtrl.create);
+router.post("/create", cors(), GameCtrl.create);
 
 // Join A Game
 
@@ -194,7 +195,7 @@ router.post("/create", GameCtrl.create);
  *    500:
  *      description: An error occurred
  */
-router.post("/join", GameCtrl.join);
+router.post("/join", cors(), GameCtrl.join);
 
 /**
  * @swagger
@@ -229,7 +230,7 @@ router.get("/all", GameCtrl.getAll);
  *    500:
  *      description: An error occurred
  */
-router.patch("/watch", GameCtrl.addSpectator);
+router.patch("/watch", cors(), GameCtrl.addSpectator);
 
 /**
  * @swagger
@@ -250,7 +251,7 @@ router.patch("/watch", GameCtrl.addSpectator);
  *    500:
  *      description: An error occurred
  */
-router.patch("/piecemove", GameCtrl.pieceMove);
+router.patch("/piecemove", cors(), GameCtrl.pieceMove);
 
 /**
  * @swagger
@@ -271,7 +272,7 @@ router.patch("/piecemove", GameCtrl.pieceMove);
  *    500:
  *      description: An error occurred
  */
-router.patch("/end", GameCtrl.endGame);
+router.patch("/end", cors(), GameCtrl.endGame);
 
 /**
  * @swagger
@@ -292,7 +293,7 @@ router.patch("/end", GameCtrl.endGame);
  *    500:
  *      description: An error occurred
  */
-router.patch("/unwatch", GameCtrl.removeSpectator);
+router.patch("/unwatch", cors(), GameCtrl.removeSpectator);
 
 /**
  * @swagger
@@ -316,7 +317,7 @@ router.patch("/unwatch", GameCtrl.removeSpectator);
  *      description: An error occurred
  */
 
-router.patch("/resign", GameCtrl.resign);
+router.patch("/resign", cors(), GameCtrl.resign);
 
 /**
  * @swagger
@@ -384,7 +385,7 @@ router.get("/all/:userId", GameCtrl.getAllByUser);
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/comment", GameCtrl.comment);
+router.patch("/comment", cors(), GameCtrl.comment);
 
 /**
  * @swagger
@@ -407,7 +408,7 @@ router.patch("/comment", GameCtrl.comment);
  *    500:
  *      description: An error occurred
  */
-router.delete("/delete", GameCtrl.delete);
+router.delete("/delete", cors(), GameCtrl.delete);
 
 // Export Module
 module.exports = router;

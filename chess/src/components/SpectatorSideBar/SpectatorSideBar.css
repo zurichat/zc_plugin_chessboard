@@ -3,11 +3,8 @@
 }
 
 .side-bar {
-  /* width: 368px; */
-
   display: flex;
   flex-direction: column;
-  /* border-left: 1px solid #bebcbc;  */
   min-height: 100%;
   background: #fdffff;
 }
@@ -19,12 +16,8 @@
   justify-content: space-between;
   color: #808080;
   background-color: #00b87c;
-  /* margin-left: .5rem; */
+  align-items: center;
 }
-
-/* .nav-link:hover{
-  color: unset !important;
-} */
 
 .navLink {
   text-decoration: none;
@@ -32,10 +25,6 @@
   font-weight: 400;
   transition: 0.3s all linear;
 }
-
-/* .active {
-  color: white;
-} */
 
 .close {
   margin-top: 0.6rem;

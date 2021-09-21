@@ -27,16 +27,17 @@
    padding-right: 2rem;
    margin-top: -1.3rem;
 }
-.spectatorName {
+.spectatorName h2{
     font-size: 15px;
     font-weight: 900;
-    margin-right: 1rem;
-    line-height: normal;
+    margin-right: 1rem!important;
+    line-height: normal !important;
+    color: black!important;
 }
 .specInfo {
     display: flex;
     align-items: center;
-    margin: 0 .5rem;
+    margin: 0 .5rem!important;
     width: 80%;
     padding-bottom: 1.2rem;
 }
@@ -57,7 +58,6 @@
     font-size: 15px;
     width: 100%;
     word-wrap: break-word;
-    /* line-height: 2rem; */
     font-weight: normal;
     color: rgb(63, 63, 63);
 }
@@ -65,6 +65,8 @@
 .emptyComment {
     width: 100%;
     padding: 2rem;
+    margin: auto;
+    text-align: center;
 } 
 .emptyComment > svg {
    width: 100%;
@@ -122,7 +124,7 @@ input::placeholder{
 }
 .inputIconsleft > svg , .inputIconsright> svg{
     margin-right: .8rem;
-    width: 2rem;
+    width: 1.5rem;
     cursor: pointer;
 }
 
@@ -144,6 +146,25 @@ input::placeholder{
     width: 3rem !important;
 }
 
+@media (width: 1024px) {
+    .emptyComment > svg {
+        width: 70%;
+        text-align: center;
+        height: auto;
+     }
+}
+@media (max-width: 768px) {
+    .emptyComment > svg {
+        width: 70%;
+     }
+    }
+
+@media (max-width: 420px) {
+    .emptyComment > svg {
+        width: 100%;
+    }
+}
+
 @media only screen and (max-width: 420px) {
     .chatContainer {
         width:100%;
@@ -154,7 +175,7 @@ input::placeholder{
 }
 @media only screen and (max-width: 320px) {
     .inputIconsleft > svg , .inputIconsright> svg{
-        width: 1rem;
+        width: 1rem !important;
     }
 }
 

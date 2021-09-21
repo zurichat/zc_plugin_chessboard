@@ -6,6 +6,7 @@ import Header from "../../components/Header/Header.js";
 import { BrowserRouter } from "react-router-dom";
 import { useParams } from "react-router";
 import axios from "../../axios/axiosInstance";
+import { BACKEND_DOMAIN } from "../../config";
 
 const MainGame = () => {
   const [commentDisplay, setCommentDisplay] = useState(false);
@@ -35,7 +36,7 @@ const MainGame = () => {
     };
 
     const result = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/watch",
+      `${BACKEND_DOMAIN}/api/v1/game/watch`,
       sample_data
     );
   };
@@ -48,14 +49,14 @@ const MainGame = () => {
     };
 
     const result = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/unwatch",
+      `${BACKEND_DOMAIN}/api/v1/game/unwatch`,
       sample_data
     );
   };
 
   async function getGamebyID() {
     try {
-      const game = await axios.get(`game/${id}`);
+      const game = await axios.get(`${BACKEND_DOMAIN}/api/v1/game/${id}`);
       // Set gamesData state to response
       setGameData(game.data);
     } catch (err) {
