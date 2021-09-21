@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { BrowserRouter, useParams } from "react-router-dom";
 
 // Import CSS for this page
 import "./game.css";
@@ -7,11 +7,11 @@ import "./game.css";
 // Import Adaptors
 import { CentrifugeSetup, getGameData } from "../../adapters/game";
 import { getLoggedInUserData } from "../../adapters/auth";
-import { UpdatePieceMove } from '../../adapters/chessboard';
 
 // Import Components
 import Header from "../../components/Header";
 import ChessBoard from "../../components/ChessBoard";
+import SpectatorSideBar from "../../components/SpectatorSideBar";
 
 function Game() {
   const [gameData, setGameData] = useState(null);
@@ -78,6 +78,7 @@ function Game() {
   }, []);
 
   let BoardToRender = null;
+  let SideBarToRender = null;
 
   // If GameData State has been set
   if (gameData !== null) {
@@ -87,17 +88,26 @@ function Game() {
       BoardToRender = (
         <ChessBoard type="owner" gameData={gameData} />
       );
+      SideBarToRender = (
+        <SpectatorSideBar type="owner" gameData={gameData} />
+      );
       // If LoggedIn User is the opponent in the Game
     } else if (gameData?.opponent?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with opponent defaults
       BoardToRender = (
         <ChessBoard type="opponent" gameData={gameData} />
       )
+      SideBarToRender = (
+        <SpectatorSideBar type="owner" gameData={gameData} />
+      );
     } else {
       // Render the ChessBoard with spectator type
       BoardToRender = (
         <ChessBoard type="spectator" gameData={gameData} />
       )
+      SideBarToRender = (
+        <SpectatorSideBar type="owner" gameData={gameData} />
+      );
     }
   }
 
@@ -107,13 +117,7 @@ function Game() {
         <Header />
         {BoardToRender}
       </div>
-
-      {/* <BrowserRouter>
-        <SpectatorSideBar
-          display={commentDisplay}
-          setDisplay={setCommentDisplay}
-        />
-      </BrowserRouter> */}
+      {SideBarToRender}
     </section>
   )
 }
