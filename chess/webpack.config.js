@@ -21,8 +21,5 @@ module.exports = (webpackConfigEnv, argv) => {
           "X-Requested-With, content-type, Authorization",
       },
     },
-    stats: {
-      errorDetails: true,
-    }
   });
 };
