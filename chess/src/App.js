@@ -46,7 +46,11 @@ function App() {
 
           <Route exact path="/inviteplayer" render={() => <InviteModal />} />
 
-          <Route exact path="/accept_invite" render={() => <AcceptDeclineModal showModal={true} />} />      
+          <Route
+            exact
+            path="/accept_invite"
+            render={() => <AcceptDeclineModal showModal={true} />}
+          />
 
           {/* Rules Page */}
           <Route exact path="/rules" render={() => <Rules />} />
