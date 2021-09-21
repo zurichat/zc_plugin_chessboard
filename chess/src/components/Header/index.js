@@ -33,7 +33,8 @@ function Header() {
             </button>
           </div>
           <div className="chesshome-headerRight">
-            <a className="commentIcon" onClick={() => setDisplay(true)}>
+            {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
+            <a className="commentIcon">
               <img src={CommentIcon} alt="reply" />
             </a>
 

@@ -19,6 +19,6 @@ export function testPlayerTwoData() {
 }
 
 export function zc_main_user_info() {
-  GetUserInfo();
-  console.log(GetUserInfo());
+  // GetUserInfo();
+  // console.log(GetUserInfo());
 }

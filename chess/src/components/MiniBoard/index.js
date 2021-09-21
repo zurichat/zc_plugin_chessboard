@@ -58,7 +58,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           <img src={MiniBoardImage} alt={`game-board-${game_id}`} />
         </Link>
       ) : (
-        <img src={MiniBoardImage} alt={`game-board`} />
+        <img src={MiniBoardImage} alt={"game-board"} />
       )}
 
       <div className="mini-asideBar mini-bottomBar">

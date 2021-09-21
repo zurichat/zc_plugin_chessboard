@@ -23,16 +23,16 @@ function Game() {
     switch (ctx?.data.event) {
       case "join_game":
         console.log("someone centrifuge");
-        setPlayerNames({
-          ...playerNames,
-          b: websocket.data.player.user_name,
-        });
+        // setPlayerNames({
+        //   ...playerNames,
+        //   b: websocket.data.player.user_name,
+        // });
         break;
 
       case "piece_moved":
         console.log("centrifuge: a player moved a piece");
-        game.current.move(websocket.data.board_state);
-        set_board_position(GameEngine.current.fen());
+        // game.current.move(websocket.data.board_state);
+        // set_board_position(GameEngine.current.fen());
         break;
 
       case "spectator_joined_game":
