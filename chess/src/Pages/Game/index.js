@@ -21,46 +21,44 @@ function Game() {
   CentrifugeSetup(game_id, (ctx) => {
     const websocket = ctx;
     switch (ctx?.data.event) {
-      case 'join_game':
-        console.log('someone centrifuge');
+      case "join_game":
+        console.log("someone centrifuge");
         setPlayerNames({
           ...playerNames,
           b: websocket.data.player.user_name,
         });
         break;
 
-      case 'piece_moved':
-        console.log('centrifuge: a player moved a piece');
+      case "piece_moved":
+        console.log("centrifuge: a player moved a piece");
         game.current.move(websocket.data.board_state);
         set_board_position(GameEngine.current.fen());
         break;
 
-      case 'spectator_joined_game':
+      case "spectator_joined_game":
         // New Specator Joined Game Code Here
-        console.log(
-          'centrifuge: a spectator just joined this game room'
-        );
+        console.log("centrifuge: a spectator just joined this game room");
         break;
 
-      case 'spectator_left_game':
+      case "spectator_left_game":
         // New Specator Left Game Code Here
-        console.log('centrifuge: a spectator just left this game room');
+        console.log("centrifuge: a spectator just left this game room");
         break;
 
-      case 'end_game':
+      case "end_game":
         // The Game Has been ended by one of the players
         console.log(
-          'centrifuge: the game ended event listener was heard, do something'
+          "centrifuge: the game ended event listener was heard, do something"
         );
         break;
 
-      case 'comments':
+      case "comments":
         // New Comment added
-        console.log('centrifuge: a new comment was sent to the room');
+        console.log("centrifuge: a new comment was sent to the room");
         break;
 
       default:
-        console.log('centrifuge: event listener not listened for', ctx?.data);
+        console.log("centrifuge: event listener not listened for", ctx?.data);
         break;
     }
   });
@@ -72,8 +70,8 @@ function Game() {
         // TODO: Handle error with Toasts
         console.log("Unable to Get Game: ", response.data.message);
       } else {
-        setGameData(response.data.data)
-      };
+        setGameData(response.data.data);
+      }
     });
   }, []);
 
@@ -85,26 +83,18 @@ function Game() {
     // If LoggedIn User is the owner of the Game
     if (gameData?.owner?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with owner defaults
-      BoardToRender = (
-        <ChessBoard type="owner" gameData={gameData} />
-      );
-      SideBarToRender = (
-        <SpectatorSideBar type="owner" gameData={gameData} />
-      );
+      BoardToRender = <ChessBoard type="owner" gameData={gameData} />;
+      SideBarToRender = <SpectatorSideBar type="owner" gameData={gameData} />;
       // If LoggedIn User is the opponent in the Game
     } else if (gameData?.opponent?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with opponent defaults
-      BoardToRender = (
-        <ChessBoard type="opponent" gameData={gameData} />
-      )
+      BoardToRender = <ChessBoard type="opponent" gameData={gameData} />;
       SideBarToRender = (
         <SpectatorSideBar type="opponent" gameData={gameData} />
       );
     } else {
       // Render the ChessBoard with spectator type
-      BoardToRender = (
-        <ChessBoard type="spectator" gameData={gameData} />
-      )
+      BoardToRender = <ChessBoard type="spectator" gameData={gameData} />;
       SideBarToRender = (
         <SpectatorSideBar type="spectator" gameData={gameData} />
       );
@@ -119,7 +109,7 @@ function Game() {
       </div>
       {SideBarToRender}
     </section>
-  )
+  );
 }
 
 export default Game;

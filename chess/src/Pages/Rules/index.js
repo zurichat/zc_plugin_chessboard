@@ -126,7 +126,6 @@ function Rules() {
         </Link>
       </div>
     </div>
-
   );
 }
 

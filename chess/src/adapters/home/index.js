@@ -2,5 +2,5 @@
 import { get } from "../xhr";
 
 export function getAllGames() {
-    return get("/game/all");
+  return get("/game/all");
 }

@@ -12,7 +12,6 @@ import Header from "../../components/Header";
 import MiniBoard from "../../components/MiniBoard";
 
 function Homepage() {
-
   // Set Games State
   const [games, setGames] = useState([]);
 
@@ -22,8 +21,8 @@ function Homepage() {
         // TODO: Handle error with Toasts
         console.log("Unable to Get All Games: ", response.data.message);
       } else {
-        setGames(response.data.data)
-      };
+        setGames(response.data.data);
+      }
     });
   }, []);
 
