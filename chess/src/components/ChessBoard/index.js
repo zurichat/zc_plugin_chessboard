@@ -177,8 +177,6 @@ function ChessBoard({ type, gameData }) {
 
 			setGameWinner({ winner });
 
-			console.log(winner);
-
 			// Update Game winner API Call
 			UpdateGameWinner(game_id, winner.user_id).then((response) => {
 				if (!response.data.success) {

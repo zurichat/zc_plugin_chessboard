@@ -17,7 +17,14 @@ function Homepage() {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    getAllGames().then((response) => setGames(response.data.data));
+    getAllGames().then((response) => {
+      if (!response.data.success) {
+        // TODO: Handle error with Toasts
+        console.log("Unable to Get All Games: ", response.data.message);
+      } else {
+        setGames(response.data.data)
+      };
+    });
   }, []);
 
   // Calculate Boards to render

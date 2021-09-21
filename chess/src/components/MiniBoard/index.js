@@ -20,7 +20,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
                 history.push(`/game/${game_id}`);
             } else {
                 // TODO: Handle error with Toasts
-                console.log(response.data.message);
+                console.log("Unable to Create Game: ", response.data.message);
             }
         });
     }
@@ -32,7 +32,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
                 history.push(`/game/${game_id}`);
             } else {
                 // TODO: Handle error with Toasts
-                console.log(response.data.message);
+                console.log("Unable to Join Game: ", response.data.message);
             }
         });
     }

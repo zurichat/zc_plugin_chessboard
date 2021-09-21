@@ -13,8 +13,8 @@ export function CentrifugeSetup(game_id, ChannelEventsListener) {
     );
 
     // Connect to Centrifuge Server
-    // centrifuge.connect();
+    centrifuge.connect();
 
     // Subscribe to room with ID: GameId on Centrifugo Server
-    // centrifuge.subscribe(game_id, ChannelEventsListener());
+    centrifuge.subscribe(game_id, ChannelEventsListener());
 }
