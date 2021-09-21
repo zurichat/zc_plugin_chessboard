@@ -23,7 +23,7 @@ function Homepage() {
     await getGamesData();
   }, []);
 
-  console.log(gamesData);
+  // console.log(gamesData);
   const boards = [];
 
   for (let i = 0; i < 6; i++) {
