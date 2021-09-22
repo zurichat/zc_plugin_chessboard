@@ -110,7 +110,7 @@ jobs:
         run: |
           cd chess
           yarn install
-          yarn build --stats-error-details
+          yarn build
 
       - name: Deployment
         uses: appleboy/ssh-action@master

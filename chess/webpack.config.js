@@ -13,6 +13,15 @@ module.exports = (webpackConfigEnv, argv) => {
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
     context: path.resolve(__dirname, 'src'),
+    entry: "./src/zuri-zuri-plugin-chessboard.js",
+    resolve: {    
+      modules: [
+        /* assuming that one up is where your node_modules sit,
+           relative to the currently executing script
+        */
+        path.join(__dirname, '../node_modules')
+      ]
+    },
     stats: {
       errorDetails: true,
       errorStack: true,
