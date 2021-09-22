@@ -1,3 +1,5 @@
+/* eslint-disable */ 
+
 import React, { useState, useEffect, useRef } from "react";
 
 // Import CSS for this page
@@ -48,18 +50,18 @@ function ChessBoard({ type, gameData }) {
 
   const chessPieces = () => {
     return [
-      { name: "bR", image: "../../assets/chess-pieces/bR.svg" },
-      { name: "bB", image: "../../assets/chess-pieces/bB.svg" },
-      { name: "bK", image: "../../assets/chess-pieces/bK.svg" },
-      { name: "bQ", image: "../../assets/chess-pieces/bQ.svg" },
-      { name: "bN", image: "../../assets/chess-pieces/bN.svg" },
-      { name: "bP", image: "../../assets/chess-pieces/bP.svg" },
-      { name: "wR", image: "../../assets/chess-pieces/wR.svg" },
-      { name: "wB", image: "../../assets/chess-pieces/wB.svg" },
-      { name: "wN", image: "../../assets/chess-pieces/wN.svg" },
-      { name: "wQ", image: "../../assets/chess-pieces/wQ.svg" },
-      { name: "wK", image: "../../assets/chess-pieces/wK.svg" },
-      { name: "wP", image: "../../assets/chess-pieces/wP.svg" },
+      { name: "bR", image: require("../../assets/chess-pieces/bR.svg") },
+      { name: "bB", image: require("../../assets/chess-pieces/bB.svg") },
+      { name: "bK", image: require("../../assets/chess-pieces/bK.svg") },
+      { name: "bQ", image: require("../../assets/chess-pieces/bQ.svg") },
+      { name: "bN", image: require("../../assets/chess-pieces/bN.svg") },
+      { name: "bP", image: require("../../assets/chess-pieces/bP.svg") },
+      { name: "wR", image: require("../../assets/chess-pieces/wR.svg") },
+      { name: "wB", image: require("../../assets/chess-pieces/wB.svg") },
+      { name: "wN", image: require("../../assets/chess-pieces/wN.svg") },
+      { name: "wQ", image: require("../../assets/chess-pieces/wQ.svg") },
+      { name: "wK", image: require("../../assets/chess-pieces/wK.svg") },
+      { name: "wP", image: require("../../assets/chess-pieces/wP.svg") },
     ].reduce((a, c) => {
       a[c.name] = ({ squareWidth, isDragging }) => {
         return (
