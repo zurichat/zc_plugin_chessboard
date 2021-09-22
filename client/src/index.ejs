@@ -51,32 +51,29 @@
 
   <% if (isLocal) { %>
     <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@single-spa/welcome": "//unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
-        "@zuri/root-config": "//chess.zuri.chat/zuri-root-config.js",
-        "@zuri/zuri-plugin-chessboard": "//chess.zuri.chat/zuri-zuri-plugin-chessboard.js",
-        "@zuri/zuri-control": "//zuri.chat/zuri-control.js"
+      {
+        "imports": {
+          "@single-spa/welcome": "//unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
+          "@zuri/root-config": "//chess.zuri.chat/zuri-root-config.js",
+          "@zuri/zuri-plugin-chessboard": "//chess.zuri.chat/zuri-zuri-plugin-chessboard.js",
+          "@zuri/zuri-control": "//zuri.chat/zuri-control.js"
+        }
       }
-    }
-  </script>
-    <% } %>
+    </script>
+  <% } %>
 
-      <!--
-    If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
-    Learn more about why at //single-spa.js.org/docs/ecosystem-angular/#zonejs
-  -->
-      <!-- <script src="//cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
+  <!-- If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
+  Learn more about why at //single-spa.js.org/docs/ecosystem-angular/#zonejs -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
 
-      <script src="//cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
-      <% if (isLocal) { %>
-        <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
-        <% } else { %>
-          <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-          <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-          <% } %>
-
+  <script src="//cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+  <% if (isLocal) { %>
+    <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+  <% } else { %>
+    <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+  <% } %>
 </head>
 <style>
   * {
@@ -144,7 +141,6 @@
     }
   }
 </style>
-
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
