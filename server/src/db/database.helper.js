@@ -35,7 +35,7 @@ class DatabaseConnection {
     this.DB_DEFAULTS_CONFIG.payload = payload;
 
     // use default organization_id if organization_id is not supplied
-    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id;
     try {
       // Make the request
       const response = await axios.post(
@@ -57,7 +57,7 @@ class DatabaseConnection {
   async fetchOne(object_id, organization_id) {
     try {
       //use default organization_id if organization_id is not supplied
-      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id;
       // Make the request
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?_id=${object_id}`
@@ -80,7 +80,7 @@ class DatabaseConnection {
       const query_string = new URLSearchParams(object).toString();
 
       //use default organization_id if organization_id is not supplied
-      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id;
       // Make the request
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?${query_string}`
@@ -101,7 +101,7 @@ class DatabaseConnection {
     try {
 
             //use default organization_id if organization_id is not supplied
-      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id;
 
       // Make the request
       const response = await axios.get(
@@ -126,7 +126,7 @@ class DatabaseConnection {
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
 
     //use default organization_id if organization_id is not supplied
-    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id;
  
     try {
       // Make the request
@@ -153,7 +153,7 @@ class DatabaseConnection {
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
 
     //use default organization_id if organization_id is not supplied
-    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id;
     try {
       // Make the request
       const response = await axios.post(

@@ -157,7 +157,7 @@ class GameController {
       let gameDBData;
 
       // get organization_id from frontend
-      const {organization_id} = req.query
+      const {organization_id} = req.query;
       // Get games that have started, Join as Spectator view
       if (req.query.ongoing == 1) {
         gameDBData = await GameRepo.fetchByParameter({
@@ -192,7 +192,7 @@ class GameController {
       // request an info from the user
       const game_id = req.params.id;
 
-      const {organization_id} = req.query
+      const {organization_id} = req.query;
       // Get all games from the database
       const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id }, organization_id);
 
@@ -215,7 +215,7 @@ class GameController {
       const { game_id, user_id, position_fen, board_state } = req.body;
 
       // get organization_id from frontend
-      const {organization_id} = req.query
+      const {organization_id} = req.query;
 
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
@@ -269,7 +269,7 @@ class GameController {
       const { game_id, user_id, user_name, image_url } = req.body;
 
       // get organization_id from frontend
-      const {organization_id} = req.query
+      const {organization_id} = req.query;
       
       // Find the game in the database
       const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
@@ -483,7 +483,7 @@ class GameController {
   // Get All Games By User
   async getAllByUser(req, res) {
     const { userId } = req.params;
-    const {organization_id} = req.query
+    const {organization_id} = req.query;
     try {
       const { data } = await GameRepo.fetchAll(organization_id);
       const userGames = data.filter((game) => {
@@ -560,7 +560,7 @@ class GameController {
   // Deletes a particular game from the database
   async delete(req, res) {
     try {
-      const {game_id, organization_id} = req.body
+      const {game_id, organization_id} = req.body;
       const game = await GameRepo.fetchOne(game_id, organization_id);
       if (!game.data)
         return res
