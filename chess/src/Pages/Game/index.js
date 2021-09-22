@@ -22,17 +22,11 @@ function Game() {
     const websocket = ctx;
     switch (ctx?.data.event) {
       case "join_game":
-        console.log("someone centrifuge");
-        // setPlayerNames({
-        //   ...playerNames,
-        //   b: websocket.data.player.user_name,
-        // });
+        setGameData({ opponent: websocket.data.player });
         break;
 
       case "piece_moved":
-        console.log("centrifuge: a player moved a piece");
-        // game.current.move(websocket.data.board_state);
-        // set_board_position(GameEngine.current.fen());
+        setGameData({ moves: [...gameData.moves, { user_id: websocket.data.user_id, position_fen: websocket.data.position_fen, board_state: websocket.data.board_state }] });
         break;
 
       case "spectator_joined_game":
@@ -53,7 +47,8 @@ function Game() {
         break;
 
       case "comments":
-        // New Comment added
+        // A new comment was sent
+        setGameData({ messages: [...gameData.messages, { user_name: websocket.data.user_name, image_url: websocket.data.image_url, text: websocket.data.text, timestamp: websocket.data.timestamp }] });
         console.log("centrifuge: a new comment was sent to the room");
         break;
 
