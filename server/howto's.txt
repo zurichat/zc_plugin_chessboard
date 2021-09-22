@@ -4,5 +4,5 @@ Run
 cd server
 node
 const DatabaseConnection = require("./src/db/database.helper");
-const GameRepo = new DatabaseConnection("<collection-name>");
-GameRepo.create(require("./src/seeder/game_seeder.json")[1]);
+const GameRepo = new DatabaseConnection("003test_game");
+let response = GameRepo.create(require("./src/seeder/game_seeder.json")[0]);

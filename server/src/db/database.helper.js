@@ -44,7 +44,6 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
-      console.log("[CREATE]", error);
       throw new CustomError(
         `Unable to Connect to Zuri Core DB [CREATE]: ${error}`,
         "500"
@@ -102,7 +101,6 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
-      console.log("[FETCH ALL]", error);
       throw new CustomError(
         `Unable to Connect to Zuri Core DB [READ ALL]: ${error}`,
         "500"
@@ -148,7 +146,6 @@ class DatabaseConnection {
       );
 
       // Return the response
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new CustomError(

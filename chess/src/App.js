@@ -1,59 +1,28 @@
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from "react";
+
+// Import the CSS
 import "./App.css";
-import HomePage from "./Pages/Homepage.js/Homepage";
-import GameScreenWithComments from "./Pages/GameScreen2/GameScreen2";
-import MainGame from "./Pages/GameScreen/MainGame.js";
-import Modal from "./components/Modals/ModalPage/Modal";
-import InviteModal from "./components/Modals/InviteModal/InviteModal";
-import TestModal from "./components/Modals/AcceptDeclineModal/Test";
-import Acceptchalengemodal from "./components/Modals/Accept_chalengeModal/accept_chalenge_modal";
-import Games from "./components/Games/Games";
-import GameScreenWithoutComments from "./Pages/GameScreen1/GameScreen1";
-import Rules from "./Pages/Rules/Rules";
+
+// Import Pages
+import Homepage from "./Pages/Home";
+import Game from "./Pages/Game";
+import Rules from "./Pages/Rules";
 
 function App() {
   return (
-    <div className="App">
-      <Router basename="/chess">
-        <Switch>
-          <Route exact path="/" render={() => <HomePage />} />
-          <Route exact path="/game" render={() => <MainGame />} />
-          <Route exact path="/game/games" render={() => <Games />} />
-          <Route
-            exact
-            path="/game_nocomments"
-            render={() => <GameScreenWithoutComments />}
-          />
-          <Route
-            path="/game_nocomments/:id"
-            render={() => <GameScreenWithoutComments />}
-          />
-          <Route
-            path="/game_nocomments/:id"
-            render={() => <GameScreenWithoutComments />}
-          />
-          <Route
-            exact
-            path="/game_comments"
-            render={() => <GameScreenWithComments />}
-          />
-          <Route exact path="/modalpage" render={() => <Modal />} />
-          <Route exact path="/test-accept-modal" component={TestModal} />
-          <Route exact path="/inviteplayer">
-            <InviteModal />
-          </Route>
-          <Route
-            exact
-            path="/Accept_chalengeModal"
-            render={() => <Acceptchalengemodal />}
-          />
-          <Route exact path="/rules">
-            <Rules />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <Router basename="/chess">
+      <Switch>
+        {/* Home Page/ View Board Games in Organisation */}
+        <Route exact path="/" component={Homepage} />
+
+        {/* Game Page/ Play a Game/ Spectator View */}
+        <Route exact path="/game/:game_id" component={Game} />
+
+        {/* Rules Page */}
+        <Route exact path="/rules" component={Rules} />
+      </Switch>
+    </Router>
   );
 }
 

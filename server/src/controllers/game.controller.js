@@ -16,7 +16,7 @@ class GameController {
       //Logic for more than 6 games not being active
       const gameDBData = await GameRepo.fetchAll();
 
-      if (gameDBData.data.length <= 200) {
+      if (gameDBData.data.length < 7) {
         // create new game
 
         // Pass the request body to the schema
@@ -39,11 +39,13 @@ class GameController {
         res
           .status(201)
           .send(
-            response("Origin New Game Board Created successfully", newGameDBData.data, true)
+            response(
+              "Origin New Game Board Created successfully",
+              newGameDBData.data,
+              true
+            )
           );
-
       } else {
-
         // look for completed game to reset and join as owner
         let game = gameDBData.data.find((x) => x.status === 2);
 
@@ -69,7 +71,13 @@ class GameController {
 
         res
           .status(201)
-          .send(response("New Game Board Created successfully", { object_id: game._id }, true));
+          .send(
+            response(
+              "New Game Board Created successfully",
+              { object_id: game._id },
+              true
+            )
+          );
       }
     } catch (error) {
       throw new CustomError(`Unable to create a Game: ${error}`, 500);
@@ -106,6 +114,7 @@ class GameController {
       // Logic to continue game if player 1 or 2 refreshes the tab
       if (!gameDBData.data.opponent) {
         const opponent = {
+          color: "b",
           user_id,
           user_name,
           image_url,
@@ -113,7 +122,6 @@ class GameController {
 
         // Set opponent and save to db
         const updated = await GameRepo.update(game_id, {
-          ...gameDBData.data,
           opponent,
           status: 1,
         });
@@ -133,7 +141,11 @@ class GameController {
       }
 
       // Return the game
-      res.status(200).send(response("Game joined successfully", game_id));
+      res.status(200).send(
+        response("Game joined successfully", {
+          game_id,
+        })
+      );
     } catch (error) {
       throw new CustomError(`Unable to Join a Game: ${error}`, 500);
     }
@@ -171,7 +183,6 @@ class GameController {
   // Fetch a single game
   async getById(req, res) {
     try {
-      console.log("here");
       // request an info from the user
       const game_id = req.params.id;
 
@@ -317,13 +328,23 @@ class GameController {
         return res
           .status(400)
           .send(response("user not an active spectator", null, false));
-      spectators.splice(index, 1);
+
+      const spectator = spectators.splice(index, 1);
 
       // Save spectators back to db
       const updated = await GameRepo.update(game_id, {
-        ...gameDBData.data,
         spectators,
       });
+
+      // Build Response
+      const payload = {
+        event: "spectator_left_game",
+        spectator,
+        new_number_of_specators: spectators.length,
+      };
+
+      // Publish the event to Centrifugo server
+      await centrifugoController.publish(game_id, payload);
 
       // Return the game
       res.status(200).send(response("spectator removed successfully", updated));
@@ -339,10 +360,10 @@ class GameController {
       const { game_id, user_id } = req.body;
 
       // fetch the game from the database
-      const isGameExist = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id);
 
       // check if the game data exists
-      if (!isGameExist.data) {
+      if (!gameDBData.data) {
         return res
           .status(400)
           .send(response("Game does not exist", null, false));
@@ -355,28 +376,38 @@ class GameController {
           .send(response("User does not exist", null, false));
       }
 
+      let is_owner_winner;
+
       // checking if user (winner) is equivalent relating to the data fetched
-      if (user_id === isGameExist.data.owner.user_id) {
-        isGameExist.data.is_owner_winner = true;
-      } else if (user_id == isGameExist.data.opponent.user_id) {
-        isGameExist.data.is_owner_winner = false;
+      if (user_id === gameDBData.data.owner.user_id) {
+        is_owner_winner = true;
+      } else if (user_id == gameDBData.data.opponent.user_id) {
+        is_owner_winner = false;
       }
 
-      isGameExist.data.status = 2;
+      const status = 2;
+
       // update the Game Info with current result
-      const updated = await GameRepo.update(isGameExist.data._id, {
-        ...isGameExist.data,
+      const updated = await GameRepo.update(gameDBData.data._id, {
+        is_owner_winner,
+        status,
       });
 
       const payload = {
         event: "end_game",
-        winner:
-          isGameExist.data.owner.user_id || isGameExist.data.opponent.user_id,
-        status: isGameExist.data.status,
+        winner: is_owner_winner
+          ? gameDBData.data.owner.user_id
+          : gameDBData.data.opponent.user_id,
+        status,
       };
 
       await centrifugoController.publish(game_id, payload);
-      return res.status(200).send(response("Game ended!!!", updated));
+
+      return res.status(200).send(
+        response("Game ended!!!", {
+          game_id,
+        })
+      );
     } catch (error) {
       throw new CustomError(`Unable to end game: ${error}`, 500);
     }
@@ -404,7 +435,7 @@ class GameController {
         winner_id = isGameExist.data.opponent.user_id;
       } else if (user_id === isGameExist.data.opponent.user_id) {
         isGameExist.data.is_owner_winner = true;
-        winner_id = isGameExist.data.opponent.user_id;
+        winner_id = isGameExist.data.owner.user_id;
       }
 
       isGameExist.data.status = 2;
@@ -461,66 +492,56 @@ class GameController {
     }
 
     // find game in db
-    const { data } = await GameRepo.fetchOne(game_id);
-    if (!data) {
+    const gameDBData = await GameRepo.fetchOne(game_id);
+
+    if (!gameDBData.data) {
       return res.status(404).send(response("Game not found", null, false));
     }
 
-    // if opponent hasn't joined game
-    if (!data.opponent) {
-      return res
-        .status(400)
-        .send(response("waiting for opponent to join...", null, false));
-    }
-
     // players should not be able to comment
-    if (user_id === data.owner.user_id || user_id === data.opponent.user_id) {
-      return res
-        .status(400)
-        .send(response("Only spectators can comment", null, false));
-    }
+    // if (user_id === data.owner.user_id || user_id === data.opponent.user_id) {
+    //   return res
+    //     .status(400)
+    //     .send(response("Only spectators can comment", null, false));
+    // }
 
     // incase user gets sloppy
-    if (!comment || !comment.trim()) {
+    if (!comment || comment.trim().length === 0) {
       return res
         .status(400)
         .send(response("comment cannot be empty", null, false));
     }
 
-    const commentProps = {
+    const single_comment = {
       user_name,
       image_url,
       text: comment.trim(),
       timestamp: new Date().toLocaleString(), // user_name & image_url from user info retrieved from db
     };
 
-    // push to message collection
-    // create comments data structure if none exist else update
-    if (!Array.isArray(data.comments) || !data.comments) {
-      data.comments = [];
-    }
+    const comments = gameDBData.data.messages;
 
-    data.comments = data.comments.concat(commentProps);
+    comments.push(single_comment);
 
-    await GameRepo.update(game_id, { comments: data.comments });
+    const updated = await GameRepo.update(game_id, { messages: comments });
 
     // publish to centrifugo
     const payload = {
       event: "comments",
-      ...commentProps,
+      comment,
     };
 
     await centrifugoController.publish(game_id, payload);
 
-    return res.status(202).send(response("comment sent", commentProps));
+    return res.status(202).send(response("comment sent", single_comment));
   }
 
   // Deletes a particular game from the database
   async delete(req, res) {
     try {
-      const game = await GameRepo.fetchOne(req.params.id);
+      const game = await GameRepo.fetchOne(req.body.game_id);
       if (!game.data)
-        res
+        return res
           .status(404)
           .send(response("No such game found in the database", {}, false));
 

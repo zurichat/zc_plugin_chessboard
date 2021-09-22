@@ -7,6 +7,20 @@
   -->
 
   <route default>
+    <div class="landing-page">
+      <div class="landing-image">
+        <img src="https://i.ibb.co/Dgwsf2P/chesspieces.jpg" alt="cover image">
+      </div>
+      <div class="landing-content">
+        <h1>Welcome to the Chess Board Room</h1>
+        <a href="/chess">
+          <button>Join Room</button>
+        </a>
+      </div>
+    </div>
+  </route>
+
+  <route path="/chess">
     <application name="@zuri/zuri-plugin-chessboard"></application>
   </route>
 
