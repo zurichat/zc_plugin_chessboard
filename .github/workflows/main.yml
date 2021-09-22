@@ -108,9 +108,9 @@ jobs:
 
       - name: Install yarn dependencies and build project
         run: |
-          cd server
+          cd chess
           yarn install
-          yarn build
+          yarn build --stats-error-details
 
       - name: Deployment
         uses: appleboy/ssh-action@master
