@@ -26,7 +26,16 @@ function Game() {
         break;
 
       case "piece_moved":
-        setGameData({ moves: [...gameData.moves, { user_id: websocket.data.user_id, position_fen: websocket.data.position_fen, board_state: websocket.data.board_state }] });
+        setGameData({
+          moves: [
+            ...gameData.moves,
+            {
+              user_id: websocket.data.user_id,
+              position_fen: websocket.data.position_fen,
+              board_state: websocket.data.board_state,
+            },
+          ],
+        });
         break;
 
       case "spectator_joined_game":
@@ -48,7 +57,17 @@ function Game() {
 
       case "comments":
         // A new comment was sent
-        setGameData({ messages: [...gameData.messages, { user_name: websocket.data.user_name, image_url: websocket.data.image_url, text: websocket.data.text, timestamp: websocket.data.timestamp }] });
+        setGameData({
+          messages: [
+            ...gameData.messages,
+            {
+              user_name: websocket.data.user_name,
+              image_url: websocket.data.image_url,
+              text: websocket.data.text,
+              timestamp: websocket.data.timestamp,
+            },
+          ],
+        });
         console.log("centrifuge: a new comment was sent to the room");
         break;
 
