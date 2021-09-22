@@ -4,6 +4,7 @@ const path = require("path");
 // Package Modules
 const express = require("express");
 // const helmet = require('helmet');
+const cors = require("cors");
 
 // Export Module
 module.exports = (app) => {
@@ -14,12 +15,9 @@ module.exports = (app) => {
   //     origin: ["*"],
   //   })
   // );
-<<<<<<< HEAD
-=======
 
   // enable Cors for all routes
   app.use(cors());
->>>>>>> 3365e578efa4d28bbc873f9ac7578472998826be
 
   // Secure the app by setting various HTTP headers off.
   // app.use(helmet());

@@ -11,10 +11,10 @@ class GameController {
   async create(req, res) {
     try {
       // get owners details from the frontend
-      const { user_id, user_name, image_url } = req.body;
-
+      const { user_id, user_name, image_url, organization_id } = req.body;
+      
       //Logic for more than 6 games not being active
-      const gameDBData = await GameRepo.fetchAll();
+      const gameDBData = await GameRepo.fetchAll(organization_id);
 
       if (!gameDBData.data || gameDBData.data.length < 7) {
         // create new game
@@ -33,7 +33,7 @@ class GameController {
         });
 
         // Save the game to the database
-        const newGameDBData = await GameRepo.create(game);
+        const newGameDBData = await GameRepo.create(game, organization_id);
 
         // Return the game
         res
@@ -67,7 +67,7 @@ class GameController {
           messages: [],
           spectators: [],
           status: 0,
-        });
+        }, organization_id);
 
         res
           .status(201)
@@ -88,10 +88,10 @@ class GameController {
   async join(req, res) {
     try {
       // Get the game id and user id from the request body
-      const { game_id, user_id, user_name, image_url } = req.body;
+      const { game_id, user_id, user_name, image_url, organization_id } = req.body;
 
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -124,7 +124,7 @@ class GameController {
         const updated = await GameRepo.update(game_id, {
           opponent,
           status: 1,
-        });
+        }, organization_id);
 
         // set user permission in game
         const permission = "READ/WRITE";
@@ -156,18 +156,20 @@ class GameController {
     try {
       let gameDBData;
 
+      // get organization_id from frontend
+      const {organization_id} = req.query
       // Get games that have started, Join as Spectator view
       if (req.query.ongoing == 1) {
         gameDBData = await GameRepo.fetchByParameter({
           status: 1,
-        });
+        }, organization_id);
       } else if (req.query.noPlayer2 == 1) {
         // Get games that don't have player 2
         gameDBData = await GameRepo.fetchByParameter({
           status: 0,
-        });
+        }, organization_id);
       } else {
-        gameDBData = await GameRepo.fetchAll();
+        gameDBData = await GameRepo.fetchAll(organization_id);
       }
 
       // Return all games
@@ -190,8 +192,9 @@ class GameController {
       // request an info from the user
       const game_id = req.params.id;
 
+      const {organization_id} = req.query
       // Get all games from the database
-      const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id });
+      const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id }, organization_id);
 
       // if game id returns data, send response
       if (fetchedGame.data !== null) {
@@ -211,8 +214,11 @@ class GameController {
       // get data from body
       const { game_id, user_id, position_fen, board_state } = req.body;
 
+      // get organization_id from frontend
+      const {organization_id} = req.query
+
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -247,7 +253,7 @@ class GameController {
       // update the database
       const updated = await GameRepo.update(game_id, {
         moves,
-      });
+      }, organization_id);
 
       await centrifugoController.publish(game_id, payload);
       return res.status(200).send(response("pieced moved", updated, true));
@@ -262,8 +268,11 @@ class GameController {
       // Get the game id and user id from the request body
       const { game_id, user_id, user_name, image_url } = req.body;
 
+      // get organization_id from frontend
+      const {organization_id} = req.query
+      
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -285,7 +294,7 @@ class GameController {
       // Save spectators back to db
       const updated = await GameRepo.update(game_id, {
         spectators,
-      });
+      }, organization_id);
 
       // set user permission in the game
       const permission = "READ";
@@ -312,10 +321,10 @@ class GameController {
   async removeSpectator(req, res) {
     try {
       // Get the game id and user id from the request body
-      const { game_id, user_id } = req.body;
+      const { game_id, user_id, organization_id } = req.body;
 
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -338,7 +347,7 @@ class GameController {
       // Save spectators back to db
       const updated = await GameRepo.update(game_id, {
         spectators,
-      });
+      }, organization_id);
 
       // Build Response
       const payload = {
@@ -361,10 +370,10 @@ class GameController {
   async endGame(req, res) {
     try {
       // request an info from the user
-      const { game_id, user_id } = req.body;
+      const { game_id, user_id, organization_id } = req.body;
 
       // fetch the game from the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
 
       // check if the game data exists
       if (!gameDBData.data) {
@@ -395,7 +404,7 @@ class GameController {
       const updated = await GameRepo.update(gameDBData.data._id, {
         is_owner_winner,
         status,
-      });
+      }, organization_id);
 
       const payload = {
         event: "end_game",
@@ -422,10 +431,10 @@ class GameController {
     let winner_id;
     try {
       // retrieve game id and user id from the user
-      const { game_id, user_id } = req.body;
+      const { game_id, user_id, organization_id } = req.body;
 
       // fetch the game from the database
-      const { data } = await GameRepo.fetchOne(game_id);
+      const { data } = await GameRepo.fetchOne(game_id, organization_id);
 
       // check if the game data exists
       if (!data)
@@ -453,7 +462,7 @@ class GameController {
       const updated = await GameRepo.update(game_id, {
         is_owner_winner: data.is_owner_winner,
         status: data.status,
-      });
+      }, organization_id);
 
       const payload = {
         event: "end_game",
@@ -474,8 +483,9 @@ class GameController {
   // Get All Games By User
   async getAllByUser(req, res) {
     const { userId } = req.params;
+    const {organization_id} = req.query
     try {
-      const { data } = await GameRepo.fetchAll();
+      const { data } = await GameRepo.fetchAll(organization_id);
       const userGames = data.filter((game) => {
         return (
           game.owner.user_id == userId ||
@@ -495,7 +505,7 @@ class GameController {
 
   // send comment during game
   async comment(req, res) {
-    const { comment, game_id, user_id, user_name, image_url } = req.body;
+    const { comment, game_id, user_id, user_name, image_url, organization_id } = req.body;
 
     // user details to be gotten from user auth middleware
     if (!user_id) {
@@ -503,7 +513,7 @@ class GameController {
     }
 
     // find game in db
-    const gameDBData = await GameRepo.fetchOne(game_id);
+    const gameDBData = await GameRepo.fetchOne(game_id, organization_id);
 
     if (!gameDBData.data) {
       return res.status(404).send(response("Game not found", null, false));
@@ -534,7 +544,7 @@ class GameController {
 
     comments.push(single_comment);
 
-    const updated = await GameRepo.update(game_id, { messages: comments });
+    const updated = await GameRepo.update(game_id, { messages: comments }, organization_id);
 
     // publish to centrifugo
     const payload = {
@@ -550,13 +560,14 @@ class GameController {
   // Deletes a particular game from the database
   async delete(req, res) {
     try {
-      const game = await GameRepo.fetchOne(req.body.game_id);
+      const {game_id, organization_id} = req.body
+      const game = await GameRepo.fetchOne(game_id, organization_id);
       if (!game.data)
         return res
           .status(404)
           .send(response("No such game found in the database", {}, false));
 
-      await GameRepo.delete(game.data._id, game.data);
+      await GameRepo.delete(game.data._id, game.data, organization_id);
 
       res.status(204).send(response("game deleted successfully", {}, false));
     } catch (error) {

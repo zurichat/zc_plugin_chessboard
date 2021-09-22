@@ -30,10 +30,12 @@ class DatabaseConnection {
   }
 
   // Create
-  async create(payload) {
+  async create(payload, organization_id) {
     // Set the payload
     this.DB_DEFAULTS_CONFIG.payload = payload;
 
+    // use default organization_id if organization_id is not supplied
+    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
     try {
       // Make the request
       const response = await axios.post(
@@ -52,8 +54,10 @@ class DatabaseConnection {
   }
 
   // Fetch a single object from the DB
-  async fetchOne(object_id) {
+  async fetchOne(object_id, organization_id) {
     try {
+      //use default organization_id if organization_id is not supplied
+      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
       // Make the request
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?_id=${object_id}`
@@ -70,11 +74,13 @@ class DatabaseConnection {
   }
 
   // Fetch a object by Parameter
-  async fetchByParameter(object) {
+  async fetchByParameter(object, organization_id) {
     try {
       // Convert the object to a query string
       const query_string = new URLSearchParams(object).toString();
 
+      //use default organization_id if organization_id is not supplied
+      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
       // Make the request
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?${query_string}`
@@ -91,8 +97,12 @@ class DatabaseConnection {
   }
 
   // Fetches all objects from the DB
-  async fetchAll() {
+  async fetchAll(organization_id) {
     try {
+
+            //use default organization_id if organization_id is not supplied
+      if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+
       // Make the request
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}`
@@ -109,11 +119,15 @@ class DatabaseConnection {
   }
 
   // Update
-  async update(object_id, payload) {
+  async update(object_id, payload, organization_id) {
     // Set the payload
     this.DB_DEFAULTS_CONFIG.payload = payload;
     // Set the ID of the object to be updated
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
+
+    //use default organization_id if organization_id is not supplied
+    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
+ 
     try {
       // Make the request
       const response = await axios.put(
@@ -132,12 +146,14 @@ class DatabaseConnection {
   }
 
   // Delete - Not Implemented in Zuri Core API yet
-  async delete(object_id, payload) {
+  async delete(object_id, payload, organization_id) {
     // Set the payload
     this.DB_DEFAULTS_CONFIG.payload = payload;
     // Set the ID of the object to be deleted
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
 
+    //use default organization_id if organization_id is not supplied
+    if(organization_id) this.DB_DEFAULTS_CONFIG.organization_id = organization_id
     try {
       // Make the request
       const response = await axios.post(
