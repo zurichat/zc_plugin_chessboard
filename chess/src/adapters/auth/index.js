@@ -1,6 +1,6 @@
 // Import api call adapter
 import { get } from "../xhr";
-// import { GetUserInfo  } from "@zuri/zuri-control"
+// import { GetUserInfo } from "@zuri/zuri-control";
 
 export function getLoggedInUserData() {
   return {
