@@ -15,15 +15,11 @@ module.exports = (webpackConfigEnv, argv) => {
     context: path.resolve(__dirname, "src"),
     entry: path.resolve(__dirname, "src", "zuri-zuri-plugin-chessboard.js"),
     resolve: {
+      mainFiles: ['index'],
       modules: [
-        /* assuming that one up is where your node_modules sit,
-           relative to the currently executing script
-        */
-        path.join(__dirname, "src"),
         path.join(__dirname, "./node_modules"),
       ],
     },
-    aliasFields: ['browser'],
     stats: {
       errorDetails: true,
       errorStack: true,
