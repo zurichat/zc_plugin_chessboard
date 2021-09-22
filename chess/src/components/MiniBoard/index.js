@@ -72,7 +72,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
         {playerOne && !playerTwo && (
           <button
             className="join-button bottom-button"
-            onClick={HandleJoinGame(game_id)}
+            onClick={()=>HandleJoinGame(game_id)}
           >
             Join as Player 2
           </button>
