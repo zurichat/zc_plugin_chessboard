@@ -12,7 +12,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   const [commentMsg, setCommentMsg] = useState("");
   const [commentsFromGameData, setCommentsFromGameData] = useState(
-    [...gameData.messages]
+    gameData.messages
   );
 
   useEffect(() => {
