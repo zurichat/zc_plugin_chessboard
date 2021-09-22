@@ -11,5 +11,10 @@ module.exports = (webpackConfigEnv, argv) => {
 
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
+    stats: {
+      errorDetails: true,
+      errorStack: true,
+      reasons: true,
+    },
   });
 };
