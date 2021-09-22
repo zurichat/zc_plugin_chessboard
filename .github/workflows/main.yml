@@ -109,6 +109,11 @@ jobs:
       - name: Install yarn dependencies and build project
         run: |
           cd server
+          # yarn install
+          cd ../client
+          yarn install
+          yarn build
+          cd ../chess
           yarn install
           yarn build
 
