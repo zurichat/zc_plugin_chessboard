@@ -324,7 +324,7 @@ function ChessBoard({ type, gameData }) {
 
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData.owner.user_name}
+          name={gameData.owner?.user_name}
         />
       </div>
 
