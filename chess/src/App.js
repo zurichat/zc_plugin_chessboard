@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 // Import Pages
-import Homepage from "./pages/Home";
-import Game from "./pages/Game";
-import Rules from "./pages/Rules";
+import Homepage from "./Pages/Home";
+import Game from "./Pages/Game";
+import Rules from "./Pages/Rules";
 
 function App() {
   return (
