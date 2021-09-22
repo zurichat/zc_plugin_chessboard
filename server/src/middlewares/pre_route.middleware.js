@@ -14,6 +14,12 @@ module.exports = (app) => {
   //     origin: ["*"],
   //   })
   // );
+<<<<<<< HEAD
+=======
+
+  // enable Cors for all routes
+  app.use(cors());
+>>>>>>> 3365e578efa4d28bbc873f9ac7578472998826be
 
   // Secure the app by setting various HTTP headers off.
   // app.use(helmet());
