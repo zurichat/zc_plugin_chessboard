@@ -121,9 +121,9 @@ jobs:
           script: |
             cd /var/www/zc_plugin_chessboard/
             git stash
-            git pull origin dev
+            git pull -f origin dev
             cd server
-            # yarn install
+            yarn install
 
       - name: Copy Main Chess App dist folder to server
         uses: Creepios/sftp-action@v1.0.1
