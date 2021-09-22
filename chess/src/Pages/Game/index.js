@@ -28,7 +28,7 @@ function Game() {
       case "piece_moved":
         setGameData({
           moves: [
-            ...gameData.moves,
+            ...gameData?.moves,
             {
               user_id: websocket.data.user_id,
               position_fen: websocket.data.position_fen,
@@ -59,7 +59,7 @@ function Game() {
         // A new comment was sent
         setGameData({
           messages: [
-            ...gameData.messages,
+            ...gameData?.messages,
             {
               user_name: websocket.data.user_name,
               image_url: websocket.data.image_url,
