@@ -22,13 +22,13 @@ function ChessBoard({ type, gameData }) {
   const GameEngine = useRef(null);
   const game_id = gameData._id;
   const players_to_color_map = {
-    [gameData.owner.user_id]: gameData.owner.color,
-    [gameData.opponent?.user_id]: gameData.opponent?.color,
+    // [gameData.owner.user_id]: gameData.owner.color,
+    // [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
 
   // Get Latest Previous Board positon or Initialize the board position
   const [board_position, set_board_position] = useState(
-    gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
+   "start"
   );
   const [color_to_play, set_color_to_play] = useState(null);
   const [squareStyles, setSquareStyles] = useState({});
@@ -292,11 +292,11 @@ function ChessBoard({ type, gameData }) {
             // disables chessboard pieces movement on spectator screen
             draggable={type == "spectator" ? false : true}
             // Set the board to face player with his color
-            orientation={
-              players_to_color_map[getLoggedInUserData().user_id] == "b"
-                ? "black"
-                : "white"
-            }
+            // orientation={
+            //   players_to_color_map[getLoggedInUserData().user_id] == "b"
+            //     ? "black"
+            //     : "white"
+            // }
             // Setting the board Postion
             position={board_position}
             // Determine if the board can be moved by the player now
