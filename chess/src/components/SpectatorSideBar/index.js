@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-
+import Forfeit from "../Modals/ForfeitModal/Forfeit";
 // Import CSS for this component
 import "./spectatorsidebar.css";
 
@@ -35,11 +35,18 @@ const SpectatorSideBar = ({ type, gameData }) => {
       console.log("CommentMsg is empty");
     }
   };
+  const [isModalOpen, setmodalIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setmodalIsOpen(true);
+    
+  };
 
   let id = 0;
 
   return (
     <>
+      
       <aside className="side-bar">
         <nav className="side-bar-nav">
           <div className="navLink">
@@ -73,6 +80,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
         </nav>
 
         <div id="chat">
+        <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} handleClick={handleClick}/>
           <div className="chatContainer">
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
@@ -447,9 +455,10 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   </div>
                 </div>
               </div>
-            ) : null}
+            ) :<button className="btn-Exit" onClick={handleClick}>Forfeit Game</button>}
           </div>
         </div>
+        
       </aside>
     </>
   );

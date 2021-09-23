@@ -1,16 +1,23 @@
-import Logo from "./profile.svg";
+import Logo from "../../../assets/modal/profile_img.svg";
+import Close from "../../../assets/modal/close.svg";
 import "./Forfeit.css";
 import { useHistory } from "react-router-dom";
 
-const Forfeit = ({ isYes, handleClick }) => {
-  let history = useHistory();
-  if (!isYes) {
+const Forfeit = ({ isModalOpen, setmodalIsOpen, handleClick }) => {
+
+  const close = () => setmodalIsOpen();
+
+  const history = useHistory();
+  if (!isModalOpen) {
     return null;
   }
 
   return (
     <div className="forfeit-container">
       <div className="forfeit-modal">
+        <button className="btn-forfeit-modal-close" onClick={close}>
+          <img className="" src={Close} alt="Close" />
+        </button>
         <div className="forfeit-header">
           <img className="profile" src={Logo} alt="profile" />
         </div>
@@ -21,20 +28,23 @@ const Forfeit = ({ isYes, handleClick }) => {
           </h2>
         </div>
         <footer className="forfeit-footer">
-          <div className="cp">
-            <button className=" btn continue" onClick={() => handleClick()}>
-              Continue Playing
-            </button>
-          </div>
-
-          <div className="ys">
+          <div className="btn-forfeit-game">
             <button
-              className="btn yes"
+              className="btn-forfeit-modal btn-accept-forfeit"
               onClick={() => {
                 history.push("/");
               }}
             >
-              Yes
+              Accept
+            </button>
+          </div>
+
+          <div className="btn-forfeit-game">
+            <button
+              className="btn-forfeit-modal btn-decline-forfeit"
+              onClick={close}
+            >
+              Decline
             </button>
           </div>
         </footer>
