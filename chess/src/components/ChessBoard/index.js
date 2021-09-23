@@ -126,6 +126,33 @@ function ChessBoard({ type, gameData }) {
     );
   };
 
+  const onSquareClick = (square) => {
+    setPieceSquare(square);
+    squareStyling(square, history);
+    const move = GameEngine.current.move({
+      from: pieceSquare,
+      to: square,
+      promotion: "q"
+    });
+
+    if (move === null) return;
+    set_board_position(GameEngine.current.fen());
+    setHistory(GameEngine.current.history({ verbose: true }));
+    setPieceSquare("");
+    set_color_to_play(GameEngine.current.fen().split(" ")[1]);
+
+    // Piece Move API Call
+    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+      (response) => {
+        if (!response.data.success) {
+          // TODO: Handle error with Toasts        } else {
+          // Update the Board with last move
+          setHistory(GameEngine.current.history({ verbose: true }));
+        }
+      }
+    );
+  };
+
   const onMouseOverSquare = (square) => {
     // get list of possible moves for this square
     const moves = GameEngine.current.moves({
@@ -175,6 +202,7 @@ function ChessBoard({ type, gameData }) {
       }),
     };
   };
+
 
   let gameWinner = null;
   if (GameEngine.current && GameEngine.current.in_checkmate() === true) {
@@ -244,6 +272,9 @@ function ChessBoard({ type, gameData }) {
               background:
                 "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
             }}
+
+            // Allow click and move
+            onSquareClick={onSquareClick}
             // Show Notations on the board
             showNotations={false}
           />
