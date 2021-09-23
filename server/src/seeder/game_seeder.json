@@ -1,0 +1,15 @@
+[
+  {
+    "is_owner_winner": false,
+    "messages": [],
+    "moves": [],
+    "opponent": null,
+    "owner": {
+      "image_url": "string",
+      "user_id": "default-user-id",
+      "user_name": "Default Game"
+    },
+    "spectators": [],
+    "status": 2
+  }
+]

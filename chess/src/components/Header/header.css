@@ -1,0 +1,92 @@
+header {
+	background: #00b87c;
+	color: white;
+}
+
+.nav {
+	display: flex;
+	width: 97%;
+	padding: 1.5rem;
+	margin: auto;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+#chesshome-flex {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
+.arrow {
+	border: solid #fff;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+}
+
+.down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+
+#arrow-button {
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+}
+
+.chesshome-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chesshome-headerRight {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.commentIcon {
+	padding-right: 2rem;
+	border-right: 3px solid white;
+	display: none;
+}
+
+.chesshome-profileImg {
+	position: relative;
+	background: #01d892;
+	border-radius: 4px;
+	width: 105px;
+	height: 30px;
+}
+
+.chesshome-profile {
+	position: absolute;
+	border-radius: 4px;
+	top: 7%;
+}
+
+.chesshome-profile.profileOne {
+	left: 2%;
+	z-index: 1000;
+}
+
+.chesshome-profile.profileTwo {
+	left: 19%;
+	z-index: 500;
+}
+
+.chesshome-profile.profileThree {
+	left: 35%;
+}
+
+.text-300 {
+	position: absolute;
+	top: 18%;
+	right: 5%;
+	font-size: 16px;
+	font-weight: bold;
+	z-index: 100;
+	color: #fff;
+}
