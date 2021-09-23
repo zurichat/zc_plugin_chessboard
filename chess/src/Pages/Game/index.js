@@ -78,23 +78,19 @@ function Game() {
   // If GameData State has been set
   if (gameData !== null) {
     // If LoggedIn User is the owner of the Game
-    if (gameData?.owner?.user_id == getLoggedInUserData().user_id) {
+    if (gameData.owner?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with owner defaults
       BoardToRender = <ChessBoard type="owner" gameData={gameData} />;
       SideBarToRender = <SpectatorSideBar type="owner" gameData={gameData} />;
       // If LoggedIn User is the opponent in the Game
-    } else if (gameData.opponent.user_id == getLoggedInUserData().user_id) {
+    } else if (gameData.opponent?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with opponent defaults
       BoardToRender = <ChessBoard type="opponent" gameData={gameData} />;
-      SideBarToRender = (
-        <SpectatorSideBar type="opponent" gameData={gameData} />
-      );
+      SideBarToRender = <SpectatorSideBar type="opponent" gameData={gameData} />;
     } else {
       // Render the ChessBoard with spectator type
       BoardToRender = <ChessBoard type="spectator" gameData={gameData} />;
-      SideBarToRender = (
-        <SpectatorSideBar type="spectator" gameData={gameData} />
-      );
+      SideBarToRender = <SpectatorSideBar type="spectator" gameData={gameData} />;
     }
   }
 
