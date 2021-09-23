@@ -27,6 +27,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
   };
 
   const HandleJoinGame = (game_id) => {
+    console.log("join");
     joinGame(game_id).then((response) => {
       if (response.data.success) {
         const game_id = response.data.data.game_id;
@@ -48,7 +49,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
             <p className="mini-profile-name">Player 1: @{playerOne.user_name}</p>
           </div>
         ) : (
-          <button className="join-button" onClick={() => HandleCreateGame}>
+          <button className="join-button" onClick={HandleCreateGame}>
             Join as Player 1
           </button>
         )}
