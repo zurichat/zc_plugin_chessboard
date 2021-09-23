@@ -2,12 +2,15 @@ header {
 	background: #00b87c;
 	color: white;
 	height: 7vh;
+	display: flex;
+	margin: auto;
+	align-items: center;
+	justify-content: center;
 }
 
 .nav {
 	display: flex;
 	width: 97%;
-	padding: 1.5rem;
 	margin: auto;
 	align-items: center;
 	flex-wrap: wrap;
