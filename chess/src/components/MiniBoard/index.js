@@ -27,7 +27,6 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
   };
 
   const HandleJoinGame = (game_id) => {
-    console.log("join");
     joinGame(game_id).then((response) => {
       if (response.data.success) {
         const game_id = response.data.data.game_id;
