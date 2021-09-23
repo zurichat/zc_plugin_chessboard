@@ -1,7 +1,7 @@
 // Import api call adapter
 import { get } from "../xhr";
 import axios from "axios";
-import { GetUserInfo } from "@zuri/zuri-control";
+import { GetUserInfo } from "@zuri/control";
 
 async function login() {
   const { data } = await axios.post("https://api.zuri.chat/auth/login", {
