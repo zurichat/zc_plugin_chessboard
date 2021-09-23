@@ -10,7 +10,7 @@
 }
 
 .side-bar-nav {
-	margin: 0;
+    height: 7vh;
 	padding: 1rem;
 	display: flex;
 	justify-content: space-between;

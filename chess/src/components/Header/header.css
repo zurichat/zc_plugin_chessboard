@@ -3,7 +3,6 @@ header {
 	color: white;
 	height: 7vh;
 	display: flex;
-	margin: auto;
 	align-items: center;
 	justify-content: center;
 }
@@ -11,7 +10,7 @@ header {
 .nav {
 	display: flex;
 	width: 97%;
-	margin: auto;
+	/* margin: auto; */
 	align-items: center;
 	flex-wrap: wrap;
 }
@@ -26,7 +25,7 @@ header {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	font-size: 2.6em;
+	font-size: 1.8em;
 	padding: 0;
 }
 
@@ -102,7 +101,7 @@ header {
 	position: absolute;
 	top: 18%;
 	right: 5%;
-	font-size: 16px;
+	font-size: 1.8em;
 	font-weight: bold;
 	z-index: 100;
 	color: #fff;
