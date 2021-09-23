@@ -43,7 +43,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
       <aside className="side-bar">
         <nav className="side-bar-nav">
           <div className="navLink">
-            <h1>Live Comments</h1>
+            <h1> Comments</h1>
           </div>
           <a className="close">
             <svg
