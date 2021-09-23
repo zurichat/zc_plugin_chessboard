@@ -17,66 +17,6 @@ function Game() {
   const [gameData, setGameData] = useState(null);
   const { game_id } = useParams();
 
-  // Setup Centrifuge Setup
-  CentrifugeSetup(game_id, (ctx) => {
-    const websocket = ctx;
-    switch (ctx?.data.event) {
-      case "join_game":
-        setGameData({ opponent: websocket.data.player });
-        break;
-
-      case "piece_moved":
-        setGameData({
-          moves: [
-            ...gameData.moves,
-            {
-              user_id: websocket.data.user_id,
-              position_fen: websocket.data.position_fen,
-              board_state: websocket.data.board_state,
-            },
-          ],
-        });
-        break;
-
-      case "spectator_joined_game":
-        // New Specator Joined Game Code Here
-        console.log("centrifuge: a spectator just joined this game room");
-        break;
-
-      case "spectator_left_game":
-        // New Specator Left Game Code Here
-        console.log("centrifuge: a spectator just left this game room");
-        break;
-
-      case "end_game":
-        // The Game Has been ended by one of the players
-        console.log(
-          "centrifuge: the game ended event listener was heard, do something"
-        );
-        break;
-
-      case "comments":
-        // A new comment was sent
-        setGameData({
-          messages: [
-            ...gameData.messages,
-            {
-              user_name: websocket.data.user_name,
-              image_url: websocket.data.image_url,
-              text: websocket.data.text,
-              timestamp: websocket.data.timestamp,
-            },
-          ],
-        });
-        console.log("centrifuge: a new comment was sent to the room");
-        break;
-
-      default:
-        console.log("centrifuge: event listener not listened for", ctx?.data);
-        break;
-    }
-  });
-
   useEffect(() => {
     // Get game data
     getGameData(game_id).then((response) => {
@@ -89,6 +29,49 @@ function Game() {
     });
   }, []);
 
+  let run_once = false;
+  // Setup Centrifuge Setup
+  if (gameData && !run_once) {
+    CentrifugeSetup(game_id, (ctx) => {
+      const websocket = ctx;
+      switch (ctx.data.event) {
+        case "join_game":
+          // completed - DO NOT EDIT!!
+          setGameData({ opponent: websocket.data.player });
+          break;
+
+        case "piece_moved":
+          // completed - DO NOT EDIT!!
+          gameData.moves.push(websocket.data.move);
+          break;
+
+        case "spectator_joined_game":
+          // New Specator Joined Game Code Here
+          console.log("centrifuge: a spectator just joined this game room");
+          break;
+
+        case "spectator_left_game":
+          // New Specator Left Game Code Here
+          console.log("centrifuge: a spectator just left this game room");
+          break;
+
+        // NOT IN USE AGAIN !!!! _ GO annd Beat @odizee / @emeka if ou question it
+        // case "end_game":
+        //   break;
+
+        case "comments":
+          // completed - DO NOT EDIT!!
+          gameData.messages.push(websocket.data.comment);
+          break;
+
+        default:
+          console.log("centrifuge: event listener not listened for", ctx?.data);
+          break;
+      }
+    }).connect();
+    run_once = true;
+  }
+
   let BoardToRender = null;
   let SideBarToRender = null;
 
@@ -100,7 +83,7 @@ function Game() {
       BoardToRender = <ChessBoard type="owner" gameData={gameData} />;
       SideBarToRender = <SpectatorSideBar type="owner" gameData={gameData} />;
       // If LoggedIn User is the opponent in the Game
-    } else if (gameData?.opponent?.user_id == getLoggedInUserData().user_id) {
+    } else if (gameData.opponent.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with opponent defaults
       BoardToRender = <ChessBoard type="opponent" gameData={gameData} />;
       SideBarToRender = (

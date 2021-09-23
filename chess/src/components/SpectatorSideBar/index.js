@@ -19,8 +19,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
     setCommentsFromGameData(gameData.messages);
   }, [gameData.messages]);
 
-  console.log(commentsFromGameData);
-
   const handleAddComment = () => {
     if (commentMsg.trim().length) {
       sendComment(game_id, commentMsg).then((response) => {

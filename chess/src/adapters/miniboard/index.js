@@ -12,10 +12,10 @@ export function createGame() {
 
 export function joinGame(game_id) {
   // Get the authenticated user data
-  // const user = getLoggedInUserData();
+  const user = getLoggedInUserData();
 
   // Dummy Data For player 2 - to be removed
-  const user = testPlayerTwoData();
+  // const user = testPlayerTwoData();
 
   // Set User Data and Game Data to Body
   let body = user;
