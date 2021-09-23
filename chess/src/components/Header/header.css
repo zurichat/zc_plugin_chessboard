@@ -21,6 +21,19 @@ header {
 	gap: 2rem;
 	align-items: center;
 }
+
+#chesshome-name {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 2.6em;
+	padding: 0;
+}
+
+#chesshome-name > img{
+	margin-top: 1px;
+}
+
 .arrow {
 	border: solid #fff;
 	border-width: 0 3px 3px 0;
