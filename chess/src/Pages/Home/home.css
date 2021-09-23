@@ -16,14 +16,19 @@
 }
 
 .chesshome-rules-holder {
+	display: flex;
+	justify-content: flex-end;
 	height: 32px;
+	margin: 2rem 0 2rem 0;
 	width: 100%;
-	margin: 2rem;
-	padding-right: 13rem;
-	text-align: right;
+	padding: 0 12rem 0 12rem;
 }
 
 .chesshome-rules {
+	flex: flex-end;
+}
+
+.btn-chesshome-rules {
 	height: 40px;
 	width: 208px;
 	border-radius: 4px;
@@ -74,20 +79,15 @@
 	#logo {
 		padding: 1rem;
 	}
+
+}
+
+@media (max-width: 1050px) {
 	.chesshome-rules-holder {
-		margin: 2rem 0;
-		padding-right: 0;
-		text-align: center;
+		justify-content: center;
 	}
 }
 
-@media (min-width: 1100px) {
-	.chesshome-rules-holder {
-		margin: 2rem 0;
-		padding-right: 20rem;
-		text-align: right;
-	}
-}
 @media (max-width: 1100px) {
 	.app__container {
 		padding: 2rem 2rem;
