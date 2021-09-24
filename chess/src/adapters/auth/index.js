@@ -40,7 +40,7 @@ export function getLoggedInUserData() {
       image_url: "https://www.gravatar.com/avatar/",
     };
   } else {
-    var logged_in_user_from_zc_main = localStorage.getItem('user');
+    var logged_in_user_from_zc_main = sessionStorage.getItem('user');
 
     if (!user) {
       // Omooo, no user info, so return empty object
