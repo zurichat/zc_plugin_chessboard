@@ -9,12 +9,7 @@ import Homepage from "./Pages/Home";
 import Game from "./Pages/Game";
 import Rules from "./Pages/Rules";
 
-// Import auth from adapters
-import { getLoggedInUserData } from "./adapters/auth";
-
 function App() {
-
-  console.log(getLoggedInUserData());
 
   return (
     <Router basename="/chess">
