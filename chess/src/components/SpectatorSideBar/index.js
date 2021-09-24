@@ -80,7 +80,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
         </nav>
 
         <div id="chat">
-        <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} handleClick={handleClick}/>
+        <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} gameData= {gameData} handleClick={handleClick}/>
           <div className="chatContainer">
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
