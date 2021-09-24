@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
+import Exit from "../Modals/ExitModal/Exit";
+
 // Import CSS for this component
 import "./spectatorsidebar.css";
 
@@ -35,12 +37,23 @@ const SpectatorSideBar = ({ type, gameData }) => {
       console.log("CommentMsg is empty");
     }
   };
+
+
+
   const [isModalOpen, setmodalIsOpen] = useState(false);
 
   const handleClick = () => {
     setmodalIsOpen(true);
-    
   };
+
+  //for exit button
+  const [isOpen, setIsOpen] = useState(false);
+  
+  //for exit button
+  const handleButton = () => {
+    setIsOpen(true);
+  };
+
 
   let id = 0;
 
@@ -81,6 +94,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
         <div id="chat">
         <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} handleClick={handleClick}/>
+        <Exit isOpen={isOpen}  setIsOpen={setIsOpen} handleButton={handleButton} gameData={gameData} />
           <div className="chatContainer">
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
@@ -239,6 +253,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
             )}
 
             {type === "spectator" ? (
+
               <div className="chatInputForm">
                 <input
                   type="text"
@@ -455,7 +470,12 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   </div>
                 </div>
               </div>
-            ) :<button className="btn-Exit" onClick={handleClick}>Forfeit Game</button>}
+            ) :  null
+}
+
+        {gameData.status === 0 ? (
+           <button className="btn-Exit" onClick={handleButton}> Exit </button>
+        ): <button className="btn-Exit" onClick={handleClick}> Forfeit Game </button>}
           </div>
         </div>
         
