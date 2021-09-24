@@ -72,7 +72,6 @@ const ChessBoardBorder = () => {
         bottom: "-16px",
         right: "-16px",
         border: "15px solid #3D2F19",
-        background:"#554223",
       }}
     >
       <div style={borderStyles.top}>
