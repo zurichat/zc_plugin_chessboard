@@ -45,9 +45,9 @@ export function getLoggedInUserData() {
     if (!user) {
       // Omooo, no user info, so return empty object
       return {
-        user_id: "",
-        user_name: "",
-        image_url: "",
+        user_id: "not-logged-user-id",
+        user_name: "Anonymous",
+        image_url: "https://ui-avatars.com/api/?name=Anonymous&background=random",
       };
     }
 
