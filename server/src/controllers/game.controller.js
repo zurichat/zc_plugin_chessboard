@@ -27,7 +27,7 @@ class GameController {
             image_url,
           },
           moves: [],
-          comments: [],
+          messages: [],
           spectators: [],
           status: 0,
         });
@@ -64,7 +64,7 @@ class GameController {
           },
           opponent: null,
           moves: [],
-          comments: [],
+          messages: [],
           spectators: [],
           status: 0,
         });
