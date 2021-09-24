@@ -6,9 +6,12 @@ import "./gamewinnermodal.css";
 // Import Assets
 import winner_image from "../../assets/modal/winner_image.png";
 
+//import style-components
+import { ModalWrapper} from "./GameWinnerModalStyle";
+
 const GameWinnerModal = ({ winner }) => {
   return (
-    <div className="modal-wrapper">
+    <ModalWrapper className="modal-wrapper">
       <div className="modal-backdrop" />
       <div className="modal-box">
         <div className="modal-profile">
@@ -36,7 +39,7 @@ const GameWinnerModal = ({ winner }) => {
           </div>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 };
 
