@@ -27,7 +27,6 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
   };
 
   const HandleJoinGame = (game_id) => {
-    console.log("join");
     joinGame(game_id).then((response) => {
       if (response.data.success) {
         const game_id = response.data.data.game_id;
@@ -72,7 +71,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           </div>
         )}
 
-        {playerOne && !playerTwo && (getLoggedInUserData().user_id !== playerOne.user_id) && (
+        {playerOne && !playerTwo && (getLoggedInUserData().user_id === playerOne.user_id) && (
           <button
             className="join-button bottom-button"
             onClick={() => HandleJoinGame(game_id)}
@@ -81,7 +80,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           </button>
         )}
 
-        {playerOne && !playerTwo && (getLoggedInUserData().user_id === playerOne.user_id) && (
+        {playerOne && !playerTwo && (getLoggedInUserData().user_id !== playerOne.user_id) && (
           <button
             className="join-button bottom-button"
           >

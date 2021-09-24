@@ -58,10 +58,12 @@ function Homepage() {
     <>
       <div className="chesshome-container">
         <Header />
-        <div className="chesshome-rules-holder">
-          <Link to="/rules">
-            <button className="chesshome-rules">Game Rules</button>
-          </Link>
+        <div className="chesshome-rules-holder">  
+            <div className="chesshome-rules">
+              <Link to="/rules">
+                <button className="btn-chesshome-rules">Game Rules</button>
+              </Link>
+            </div>
         </div>
         <div className="app__container">{boards}</div>
       </div>

@@ -46,14 +46,14 @@ button {
 	color: white;
 	font-size: 1.8rem;
 	border-radius: 5rem;
-	background: #25364b;
+	/* background: #25364b; */
 }
 
-button:hover {
+/* button:hover {
 	background: #121a24;
 	cursor: pointer;
 	transition: background 0.5s ease 0.2s;
-}
+} */
 
 body {
 	font-family: 'Lato', sans-serif;
