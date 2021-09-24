@@ -40,7 +40,7 @@ export function getLoggedInUserData() {
       image_url: "https://www.gravatar.com/avatar/",
     };
   } else {
-    let logged_in_user_from_zc_main = JSON.parse(sessionStorage.getItem('user'))
+    let logged_in_user_from_zc_main = JSON.parse(sessionStorage.getItem("user"));
 
     if (!logged_in_user_from_zc_main) {
       // Omooo, no user info, so return empty object
