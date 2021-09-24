@@ -226,7 +226,7 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <div className="chessboard">
-        <h1>rendering for: {type}</h1>
+        <h4> { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
