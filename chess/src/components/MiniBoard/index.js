@@ -11,10 +11,6 @@ import MiniBoardImage from "../../assets/miniboard/mini-board.svg";
 import { createGame, joinGame } from "../../adapters/miniboard";
 import { getLoggedInUserData } from "../../adapters/auth";
 
-// Import Toastify
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 function MiniBoard({ playerOne, playerTwo, game_id }) {
   const history = useHistory();
 
@@ -25,7 +21,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
         history.push(`/game/${game_id}`);
       } else {
         // TODO: Handle error with Toasts
-        console.log(`Unable to Create Game: ${response.data.message}`);
+        console.log("Unable to Create Game:", response.data.message);
       }
     });
   };
@@ -39,14 +35,12 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
       } else {
         // TODO: Handle error with Toasts
         // console.log("Unable to Join Game: ", response.data.message);
-        console.log(`Unable to Join Game: ${response.data.message}`);
+        console.log("Unable to Join Game:", response.data.message);
       }
     });
   };
 
   return (
-    <>
-      <ToastContainer />
       <div className="mini-board">
         <div className="mini-asideBar mini-topBar">
           {playerOne ? (
@@ -88,7 +82,6 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           )}
         </div>
       </div>
-    </>
   );
 }
 
