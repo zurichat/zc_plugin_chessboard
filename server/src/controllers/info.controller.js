@@ -28,7 +28,7 @@ class InformationController {
         version: "v1.0",
         developer_name: "HNG 8.0/Team Tesla",
         developer_email: "hello@zuri.com",
-        sidebar_url: "https://chess.zuri.chat/api/v1/sideBar",
+        sidebar_url: "https://zuri.chat/chess/api/v1/sideBar",
         ping_url: "https://chess.zuri.chat/api/v1/ping",
         homepage_url: "https://chess.zuri.chat/",
         install_url: "https://chess.zuri.chat/",
@@ -67,15 +67,15 @@ class InformationController {
           title: `${game.owner.user_name} vs ${
             game.opponent ? game.opponent.user_name : "none"
           }`,
-          id: game._id,
-          url: `https://chess.zuri.chat/game?id=${game._id}`,
+          id: game._id,   
+          url: `https://zuri.chat/chess/game/${game._id}`,
           unread: game.messages ? game.messages.length : 0,
           badge_type: "info",
           members:
             game.spectators != null && game.spectators != undefined
               ? game.spectators.length + 2
               : 2,
-          icon: "spear.png",
+          icon_url: "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
           action: "open",
         };
       });
@@ -93,9 +93,9 @@ class InformationController {
         public_rooms: [
           {
             title: "Chess room",
-            url: "https://chess.zuri.chat",
+            url: "https://zuri.chat/chess",
             icon_url:
-              "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80",
+              "https://www.svgrepo.com/show/12072/chess-board.svg",
             action: "open",
           },
         ],
