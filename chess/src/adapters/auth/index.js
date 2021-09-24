@@ -45,7 +45,7 @@ export function getLoggedInUserData() {
     if (!logged_in_user_from_zc_main) {
       // Omooo, no user info, so return empty object
       return {
-        user_id: "not-logged-user-id",
+        user_id: "anonymous",
         user_name: "Anonymous",
         image_url: "https://ui-avatars.com/api/?name=Anonymous&background=random",
       };
