@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Header from "../../components/Header/index";
 
 // Import CSS for this page
 import "./rules.css";
@@ -14,7 +15,9 @@ import PawnW from "../../assets/chess-pieces/wP.svg";
 
 function Rules() {
   return (
-    <div className="rules">
+    <>
+      <Header/>
+     <div className="rules">
       <div className="top">
         <div className="content">
           <h4>Game Rule</h4>
@@ -126,6 +129,7 @@ function Rules() {
         </Link>
       </div>
     </div>
+    </>
   );
 }
 
