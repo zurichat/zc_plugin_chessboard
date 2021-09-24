@@ -6,15 +6,12 @@ import "./home.css";
 
 // Import Adaptors
 import { getAllGames } from "../../adapters/home";
-import { zc_main_user_info } from "../../adapters/auth";
 
 // Import Components
 import Header from "../../components/Header";
 import MiniBoard from "../../components/MiniBoard";
 
 function Homepage() {
-
-  zc_main_user_info();
 
   // Set Games State
   const [games, setGames] = useState([]);
