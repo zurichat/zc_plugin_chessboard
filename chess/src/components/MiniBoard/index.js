@@ -26,7 +26,6 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
     });
   };
 
-
   const HandleJoinGame = (game_id) => {
     joinGame(game_id).then((response) => {
       if (response.data.success) {
@@ -34,54 +33,62 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
         history.push(`/game/${game_id}`);
       } else {
         // TODO: Handle error with Toasts
-        // console.log("Unable to Join Game: ", response.data.message);
         console.log("Unable to Join Game: ", response.data.message);
       }
     });
   };
 
   return (
-      <div className="mini-board">
-        <div className="mini-asideBar mini-topBar">
-          {playerOne ? (
-            <div className="mini-playerProfile">
-              <div className="mini-profile-image"></div>
-              <div className="mini-profile-image-bg"></div>
-              <p className="mini-profile-name">Player 1: @{playerOne}</p>
-            </div>
-          ) : (
-            <button className="join-button" onClick={HandleCreateGame}>
-              Join as Player 1
-            </button>
-          )}
-        </div>
-
-        {game_id && playerOne ? (
-          <Link to={`/game/${game_id}`}>
-            <img src={MiniBoardImage} alt={`game-board-${game_id}`} />
-          </Link>
+    <div className="mini-board">
+      <div className="mini-asideBar mini-topBar">
+        {playerOne ? (
+          <div className="mini-playerProfile">
+            <div className="mini-profile-image"></div>
+            <div className="mini-profile-image-bg"></div>
+            <p className="mini-profile-name">Player 1: @{playerOne.user_name}</p>
+          </div>
         ) : (
-          <img src={MiniBoardImage} alt={"game-board"} />
+          <button className="join-button" onClick={HandleCreateGame}>
+            Join as Player 1
+          </button>
+        )}
+      </div>
+
+      {game_id && playerOne ? (
+        <Link to={`/game/${game_id}`}>
+          <img src={MiniBoardImage} alt={`game-board-${game_id}`} />
+        </Link>
+      ) : (
+        <img src={MiniBoardImage} alt={"game-board"} />
+      )}
+
+      <div className="mini-asideBar mini-bottomBar">
+        {playerTwo && (
+          <div className="mini-playerProfile">
+            <div className="mini-profile-image"></div>
+            <div className="mini-profile-image-bg"></div>
+            <p className="mini-profile-name">Player 2: @{playerTwo.user_name}</p>
+          </div>
         )}
 
-        <div className="mini-asideBar mini-bottomBar">
-          {playerTwo && (
-            <div className="mini-playerProfile">
-              <div className="mini-profile-image"></div>
-              <div className="mini-profile-image-bg"></div>
-              <p className="mini-profile-name">Player 2: @{playerTwo}</p>
-            </div>
-          )}
-          {playerOne && !playerTwo && (
-            <button
-              className="join-button bottom-button"
-              onClick={HandleJoinGame(game_id)}
-            >
-              Join as Player 2
-            </button>
-          )}
-        </div>
+        {playerOne && !playerTwo && (getLoggedInUserData().user_id === playerOne.user_id) && (
+          <button
+            className="join-button bottom-button"
+            onClick={() => HandleJoinGame(game_id)}
+          >
+            Join as Player 2
+          </button>
+        )}
+
+        {playerOne && !playerTwo && (getLoggedInUserData().user_id !== playerOne.user_id) && (
+          <button
+            className="join-button bottom-button"
+          >
+            Waiting for Player 2
+          </button>
+        )}
       </div>
+    </div>
   );
 }
 
