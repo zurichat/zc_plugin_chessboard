@@ -9,6 +9,7 @@ import Homepage from "./Pages/Home";
 import Game from "./Pages/Game";
 import Rules from "./Pages/Rules";
 
+
 function App() {
   return (
     <Router basename="/chess">
