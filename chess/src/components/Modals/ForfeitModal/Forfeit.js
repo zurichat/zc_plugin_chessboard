@@ -1,6 +1,6 @@
 import Logo from "../../../assets/modal/profile_img.svg";
 import Close from "../../../assets/modal/close.svg";
-import "./Forfeit.css";
+// import "./Forfeit.css";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
