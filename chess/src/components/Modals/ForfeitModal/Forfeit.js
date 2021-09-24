@@ -1,14 +1,46 @@
 import Logo from "../../../assets/modal/profile_img.svg";
 import Close from "../../../assets/modal/close.svg";
-// import "./Forfeit.css";
+import "./Forfeit.css";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+// import { CentrifugeSetup, getGameData } from "../../../adapters/game/index";
 
 //import style-components
 import { ForfeitContainer, ForfeitModal, ForfeitModalClose, ForfeitHeader, ForfeitContent, ForfeitFooter, ForfeitGameBtn } from "./ForfeitStyle";
 
-const Forfeit = ({ isModalOpen, setmodalIsOpen, handleClick }) => {
+const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData,  handleClick }) => {
+  //get game id 
+  const [gameId, setGameId] = useState(gameId);
+  // console.log("Game data "+ gameData._id);
+
+
+  useEffect(() => {
+    setGameId(gameData._id);
+    // console.log(gameId);
+    // console.log(gameData.owner.user_id);
+  }, []);
 
   const close = () => setmodalIsOpen();
+
+  const forfeitGame = async () => {
+    const gameEndData = {
+      user_id: gameData.owner.user_id,
+      game_id: gameId
+    };
+
+    const res = await axios.patch(
+      "https://chess.zuri.chat/api/v1/game/end", 
+        gameEndData
+    );
+
+    if(res.data.success) {
+        history.push("/");
+    }else{
+      //.
+      console.log("Unable to end game " + res.data.message);
+    }  
+  };
 
   const history = useHistory();
   if (!isModalOpen) {
@@ -34,9 +66,10 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, handleClick }) => {
           <ForfeitGameBtn className="btn-forfeit-game">
             <button
               className="btn-forfeit-modal btn-accept-forfeit"
-              onClick={() => {
-                history.push("/");
-              }}
+              // onClick={() => {
+              //   history.push("/");
+              // }}
+              onClick={forfeitGame}
             >
               Accept
             </button>
