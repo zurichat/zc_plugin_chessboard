@@ -25,23 +25,26 @@ function ChessBoard({ type, gameData }) {
     [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
 
-  const [board_position, set_board_position] = useState("");
+  const [board_position, set_board_position] = useState((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : "start");
   const [color_to_play, set_color_to_play] = useState(null);
   const [squareStyles, setSquareStyles] = useState({});
   const [history, setHistory] = useState([]);
   const [pieceSquare, setPieceSquare] = useState(null);
 
   useEffect(() => {
+
+    GameEngine.current = new Chess(void((gameData.moves.length > 0) && gameData.moves.at(-1).position_fen));
+
     // Continue Game Functionality
-    if (gameData.moves.length > 0) {
-      // Set Chess engine to use Previous Board positons or Initialize the new
-      GameEngine.current = new Chess(gameData.moves.at(-1).position_fen);
-      // Get Latest Previous Board positon or Initialize the board position
-      set_board_position(gameData.moves.at(-1).position_fen)
-    } else {
-      GameEngine.current = new Chess();
-      set_board_position("start");
-    }
+    // if (gameData.moves.length > 0) {
+    //   // Set Chess engine to use Previous Board positons or Initialize the new
+    //   GameEngine.current = new Chess(gameData.moves.at(-1).position_fen);
+    //   // Get Latest Previous Board positon or Initialize the board position
+    //   set_board_position(gameData.moves.at(-1).position_fen);
+    // } else {
+    //   GameEngine.current = new Chess();
+    //   set_board_position("start");
+    // }
 
     // Set Color to play
     set_color_to_play(GameEngine.current.fen().split(" ")[1]);
@@ -108,6 +111,8 @@ function ChessBoard({ type, gameData }) {
       promotion: "q",
     });
 
+    console.log(move);
+
     // illegal move
     if (move === null) return "snapback";
 
@@ -134,6 +139,8 @@ function ChessBoard({ type, gameData }) {
       to: square,
       promotion: "q"
     });
+
+    console.log(move);
 
     if (move === null) return;
     set_board_position(GameEngine.current.fen());
@@ -202,7 +209,6 @@ function ChessBoard({ type, gameData }) {
       }),
     };
   };
-
 
   let gameWinner = null;
   if (GameEngine.current && GameEngine.current.in_checkmate() === true) {
@@ -273,7 +279,6 @@ function ChessBoard({ type, gameData }) {
               background:
                 "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
             }}
-
             // Allow click and move
             onSquareClick={onSquareClick}
             // Show Notations on the board

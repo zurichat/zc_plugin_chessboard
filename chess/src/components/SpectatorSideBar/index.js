@@ -51,7 +51,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   //for exit button
   const [isOpen, setIsOpen] = useState(false);
-  
+
   //for exit button
   const handleButton = () => {
     setIsOpen(true);
@@ -62,7 +62,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   return (
     <>
-      
+
       <Sidebar className="side-bar">
         <SidebarNav className="side-bar-nav">
           <div className="navLink">
@@ -96,8 +96,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
         </SidebarNav>
 
         <Chat id="chat">
-          <Exit isOpen={isOpen}  setIsOpen={setIsOpen} gameData= {gameData} handleButton={handleButton} />
-        <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} gameData= {gameData} handleClick={handleClick}/>
+          <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} handleButton={handleButton} />
+          <Forfeit className="" isModalOpen={isModalOpen} setmodalIsOpen={setmodalIsOpen} gameData={gameData} handleClick={handleClick} />
           <div className="chatContainer">
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
@@ -475,13 +475,16 @@ const SpectatorSideBar = ({ type, gameData }) => {
             ) : null
             }
 
-            {type !== "spectator" && gameData.status === 0 ?
-             ( <ExitBtn className="btn-Exit" onClick={handleButton}>Exit Game</ExitBtn> 
-             ) : <ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>
-            }
+            {type !== "spectator" && gameData.status === 0 && (
+              <ExitBtn className="btn-Exit" onClick={handleButton}>Exit Game</ExitBtn>
+            )}
+
+            {type !== "spectator" && gameData.status === 1 && (
+              <ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>
+            )}
           </div>
         </Chat>
-        
+
       </Sidebar>
     </>
   );

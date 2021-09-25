@@ -43,6 +43,7 @@ function Game() {
         case "piece_moved":
           // completed - DO NOT EDIT!!
           gameData.moves.push(websocket.data.move);
+          setGameData({ moves: gameData.moves });
           break;
 
         case "spectator_joined_game":
@@ -62,6 +63,7 @@ function Game() {
         case "comments":
           // completed - DO NOT EDIT!!
           gameData.messages.push(websocket.data.comment);
+          setGameData({ messages: gameData.messages });
           break;
 
         default:
