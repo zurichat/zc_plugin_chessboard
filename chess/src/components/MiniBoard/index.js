@@ -88,8 +88,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
             </p>
           </div>
         )}
-
-        {/* NO ONE SHOULD TOUCH THE CODE FROM HERE DOWN AGAIN, PLEASE -- Chat with me @eni4sure, or have a call with the team if ou feel the logic here is wrong */}
+        
         {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id !== playerOne.user_id && (
