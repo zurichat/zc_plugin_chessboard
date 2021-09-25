@@ -53,6 +53,7 @@
 
 .exit__button{
     display: inline-block;
+    cursor: pointer;
     background-color: transparent;
     border: 1px solid;
     border-radius: 2px;
