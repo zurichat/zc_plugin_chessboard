@@ -88,6 +88,7 @@
 }
 
 .mini-board .join-button {
+	cursor: pointer;
 	padding: 0.7rem 0rem !important;
 	height: 3.2rem;
 	width: 12.8rem;
