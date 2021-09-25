@@ -45,7 +45,11 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           <div className="mini-playerProfile">
             <div
               className="mini-profile-image"
-              style={{ background: `url(${playerOne.image_url})` }}
+              style={{
+                background: `url(${playerOne.image_url})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
             ></div>
             <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">
@@ -72,7 +76,11 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           <div className="mini-playerProfile">
             <div
               className="mini-profile-image"
-              style={{ background: `url(${playerTwo.image_url})` }}
+              style={{
+                background: `url(${playerTwo.image_url})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
             ></div>
             <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">

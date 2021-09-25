@@ -63,19 +63,16 @@ class InformationController {
 
       const joined_rooms = data.map((game) => {
         return {
-          title: `${game.owner.user_name} vs ${
+          room_name: `${game.owner.user_name} vs ${
             game.opponent ? game.opponent.user_name : "none"
           }`,
-          id: game._id,
-          url: `https://zuri.chat/chess/game/${game._id}`,
-          unread: game.messages ? game.messages.length : 0,
-          badge_type: "info",
-          members:
+          room_image: "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
+          room_url: `https://zuri.chat/chess/game/${game._id}`,
+          room_id: game._id,
+          room_member_count:
             game.spectators != null && game.spectators != undefined
               ? game.spectators.length + 2
               : 2,
-          icon_url: "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
-          action: "open",
         };
       });
 
@@ -85,18 +82,17 @@ class InformationController {
         description: "The Chess plugin",
         plugin_id: PLUGIN_ID,
         organisation_id: ORGANISATION_ID,
-        user_id: userId,
+        user_id: "test_user_id",
         group_name: "Chess Games",
         show_group: true,
-        joined_rooms,
         public_rooms: [
           {
-            title: "Chess room",
-            url: "https://zuri.chat/chess",
-            icon_url: "https://www.svgrepo.com/show/12072/chess-board.svg",
-            action: "open",
+            room_name: "Chess room",
+            room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+            room_url: "https://zuri.chat/chess",
           },
         ],
+        joined_rooms,
       };
 
       return res
