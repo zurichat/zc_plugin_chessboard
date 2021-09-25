@@ -44,22 +44,11 @@ class InformationController {
 
   async getSideBarInfo(req, res) {
     try {
-      const { userId } = req.query;
+      const { user, org } = req.query;
       // fetch all data from db - Change this proceedure later
       const { data } = await GameRepo.fetchAll();
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
-
-      // const usersGame = data.filter((game) => {
-      //   return (
-      //     // game.status == 1 &&
-      //     game.owner.user_id == userId ||
-      //     (game.opponent != undefined && game.opponent.user_id == userId) ||
-      //     (game.spectators != undefined &&
-      //       Array.isArray(game.spectators) &&
-      //       game.spectators.find((spec) => spec.user_id == userId) != undefined)
-      //   );
-      // });
 
       const joined_rooms = data.map((game) => {
         return {
@@ -68,21 +57,16 @@ class InformationController {
           }`,
           room_image: "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
           room_url: `https://zuri.chat/chess/game/${game._id}`,
-          room_id: game._id,
-          room_member_count:
-            game.spectators != null && game.spectators != undefined
-              ? game.spectators.length + 2
-              : 2,
         };
       });
 
-      const { PLUGIN_ID, ORGANISATION_ID } = DATABASE;
+      const { PLUGIN_ID /*ORGANISATION_ID*/ } = DATABASE;
       const payload = {
         name: "Chess Plugin",
         description: "The Chess plugin",
         plugin_id: PLUGIN_ID,
-        organisation_id: ORGANISATION_ID,
-        user_id: "test_user_id",
+        organisation_id: org,
+        user_id: user,
         group_name: "Chess Games",
         show_group: true,
         public_rooms: [
