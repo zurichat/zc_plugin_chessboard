@@ -33,7 +33,9 @@ export function getLoggedInUserData() {
   // }
 
   // Workaround for now (since we use a shared domain)
-  if (location.hostname === "localhost" && location.hostname === "127.0.0.1") {
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+
+    // On localhost return this
     return {
       user_id: "localhost_user_id",
       user_name: "LocalhostUser",
@@ -43,7 +45,7 @@ export function getLoggedInUserData() {
     let logged_in_user_from_zc_main = JSON.parse(sessionStorage.getItem("user"));
 
     if (!logged_in_user_from_zc_main) {
-      // Omooo, no user info, so return empty object
+      // Not Logged In, so return anonymous user info
       return {
         user_id: "anonymous",
         user_name: "Anonymous",
@@ -51,6 +53,7 @@ export function getLoggedInUserData() {
       };
     }
  
+    // Logged In, so return user info
     return {
       user_id: logged_in_user_from_zc_main.id,
       user_name: logged_in_user_from_zc_main.first_name + " " + logged_in_user_from_zc_main.last_name,
