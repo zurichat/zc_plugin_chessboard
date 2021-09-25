@@ -89,7 +89,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           </div>
         )}
 
-        {/* {playerOne &&
+        {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id === playerOne.user_id && (
             <button
@@ -98,7 +98,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
             >
               Waiting as Player 2
             </button>
-          )} */}
+          )}
 
         {playerOne &&
           !playerTwo &&
