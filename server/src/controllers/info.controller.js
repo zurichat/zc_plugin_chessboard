@@ -4,7 +4,7 @@ const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
 const { DATABASE } = require("../config/index");
 
-const GameRepo = new DatabaseConnection("001test_game");
+const GameRepo = new DatabaseConnection("003test_game");
 
 class InformationController {
   async getPluginInfo(req, res) {
@@ -50,19 +50,18 @@ class InformationController {
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
 
-      const usersGame = data.filter((game) => {
-        console.log(game.spectators);
-        return (
-          // game.status == 1 &&
-          game.owner.user_id == userId ||
-          (game.opponent != undefined && game.opponent.user_id == userId) ||
-          (game.spectators != undefined &&
-            Array.isArray(game.spectators) &&
-            game.spectators.find((spec) => spec.user_id == userId) != undefined)
-        );
-      });
+      // const usersGame = data.filter((game) => {
+      //   return (
+      //     // game.status == 1 &&
+      //     game.owner.user_id == userId ||
+      //     (game.opponent != undefined && game.opponent.user_id == userId) ||
+      //     (game.spectators != undefined &&
+      //       Array.isArray(game.spectators) &&
+      //       game.spectators.find((spec) => spec.user_id == userId) != undefined)
+      //   );
+      // });
 
-      const joined_rooms = usersGame.map((game) => {
+      const joined_rooms = data.map((game) => {
         return {
           title: `${game.owner.user_name} vs ${
             game.opponent ? game.opponent.user_name : "none"
