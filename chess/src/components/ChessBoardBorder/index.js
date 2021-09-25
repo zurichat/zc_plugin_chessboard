@@ -7,6 +7,7 @@ import { AlphabetSection, NumberSection } from "./styles";
 
 const Alphabets = () => {
   return (
+    
     <AlphabetSection>
       <div className="wrapper">
         {[..."abcdefgh"].map((item, ind) => {
@@ -76,6 +77,7 @@ const ChessBoardBorder = () => {
         bottom: "-16px",
         right: "-16px",
         border: "15px solid #3D2F19",
+        zIndex:"-1"
       }}
     >
       <div style={borderStyles.top}>

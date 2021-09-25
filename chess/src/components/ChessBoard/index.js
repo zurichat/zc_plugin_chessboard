@@ -230,9 +230,9 @@ function ChessBoard({ type, gameData }) {
 
         <div
           style={{
-            justifyContent: "flex-start",
             position: "relative",
-            border: "3px solid #000",
+            border: "3px solid #E1B168",
+            zIndex:"1"
           }}
         >
           {/* <ChessBoardBorder /> */}
