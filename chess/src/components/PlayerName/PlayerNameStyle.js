@@ -6,6 +6,19 @@ const PlayerDetails = styled.div`
 	font-size: 1.5em;
 	padding: 13px 0;
 	width: 100%;
+    padding-top: 28px;
+    justify-content: flex-end; 
+    justify-content: flex-end; 
+
+    p {
+	    padding-left: 5px;
+    }
+
+    img {
+	    width: 4rem;
+    }
+
+
 `;
 
 const WaitingPlayer2Container = styled.div`
