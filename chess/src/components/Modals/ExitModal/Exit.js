@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { UpdateGameWinner } from "../../../adapters/chessboard";
 
 
-const Exit = ({ isOpen, setIsOpen, handleButton, gameData }) => {
+const Exit = ({ isOpen, setIsOpen, gameData }) => {
 
   const close = () => setIsOpen();
 

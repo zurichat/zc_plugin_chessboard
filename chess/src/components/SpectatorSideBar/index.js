@@ -96,6 +96,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
         </SidebarNav>
 
         <Chat id="chat">
+          <Exit isOpen={isOpen}  setIsOpen={setIsOpen} gameData= {gameData} handleButton={handleButton} />
         <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} gameData= {gameData} handleClick={handleClick}/>
           <div className="chatContainer">
             {commentsFromGameData.length ? (
@@ -471,7 +472,14 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   </div>
                 </div>
               </ChatInputForm>
-            ) :<ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>}
+            ) : null
+            }
+
+            {
+              gameData.status === 0 ?
+             ( <ExitBtn className="btn-Exit" onClick={handleButton}>Exit Game</ExitBtn> 
+             ) : <ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>
+            }
           </div>
         </Chat>
         
