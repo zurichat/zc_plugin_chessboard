@@ -1,6 +1,7 @@
 // Import CSS for this page
 import "./header.css";
 
+
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
 import CommentIcon from "../../assets/header/CommentIcon.png";
