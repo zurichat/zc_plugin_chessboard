@@ -23,7 +23,7 @@ function ChessBoard({ type, gameData }) {
   const game_id = gameData._id;
 
   // Restore or initiate Game From Chess Engine
-  const GameEngine = new Chess((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : null);
+  const GameEngine = new Chess((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : undefined);
 
   const players_to_color_map = {
     [gameData.owner.user_id]: gameData.owner.color,
