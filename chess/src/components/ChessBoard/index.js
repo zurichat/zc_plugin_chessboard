@@ -226,10 +226,11 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <div className="chessboard">
-        <h4> { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
+        <h4> Game { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
+          image_url={gameData.opponent?.image_url}
         />
 
         <div
@@ -283,6 +284,7 @@ function ChessBoard({ type, gameData }) {
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
           name={gameData.owner.user_name}
+          image_url={gameData.owner.image_url}
         />
       </div>
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}

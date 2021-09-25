@@ -18,7 +18,7 @@ const PlayerName = (props) => {
 
   return (
     <PlayerDetails className="player__details" style={props.style}>
-      <img src={Avatar} alt="" />
+      <img src={props.image_url} alt="" />
       <p>{props.name}</p>
     </PlayerDetails>
   );

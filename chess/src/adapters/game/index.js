@@ -21,3 +21,13 @@ export function CentrifugeSetup(game_id, ChannelEventsListener) {
   // Return Centrifugo Instance
   return centrifuge;
 }
+
+// Watch Game
+export function watchGame(game_id) {
+
+}
+
+// unwatch Game
+export function unwatchGame(game_id) {
+
+}

@@ -81,9 +81,10 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           </div>
         )}
 
+        {/* NO ONE SHOULD TOUCH THE CODE FROM HERE DOWN AGAIN, PLEASE -- Chat with me @eni4sure, or have a call with the team if ou feel the logic here is wrong */}
         {playerOne &&
           !playerTwo &&
-          getLoggedInUserData().user_id === playerOne.user_id && (
+          getLoggedInUserData().user_id !== playerOne.user_id && (
             <button
               className="join-button bottom-button"
               onClick={() => HandleJoinGame(game_id)}
@@ -94,7 +95,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
 
         {playerOne &&
           !playerTwo &&
-          getLoggedInUserData().user_id !== playerOne.user_id && (
+          getLoggedInUserData().user_id === playerOne.user_id && (
             <button className="join-button bottom-button">
               Waiting for Player 2
             </button>
