@@ -61,6 +61,7 @@ class GameController {
             user_id,
             user_name,
             image_url,
+            color: "w",
           },
           opponent: null,
           moves: [],

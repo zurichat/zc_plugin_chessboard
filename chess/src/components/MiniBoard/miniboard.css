@@ -32,10 +32,11 @@
 }
 
 .mini-profile-image {
-	background: url('../../assets/miniboard/miniProfileImage.png');
+	/* background: url('../../assets/miniboard/miniProfileImage.png'); */
 	height: 2.05rem;
 	width: 2.05rem;
 	border-radius: 4px;
+	background-size: contain;
 }
 
 .mini-profile-image-bg {
