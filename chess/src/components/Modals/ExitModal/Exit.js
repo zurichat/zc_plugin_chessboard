@@ -31,7 +31,7 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
             //....
           }
         });
-      }
+      };
 
  
   return (
