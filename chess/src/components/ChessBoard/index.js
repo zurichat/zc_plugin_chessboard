@@ -36,18 +36,18 @@ function ChessBoard({ type, gameData }) {
 
   useEffect(() => {
 
-    GameEngine.current = new Chess(void((gameData.moves.length > 0) && gameData.moves.at(-1).position_fen));
+    // GameEngine.current = new Chess(void((gameData.moves.length > 0) && gameData.moves.at(-1).position_fen));
 
     // Continue Game Functionality
-    // if (gameData.moves.length > 0) {
-    //   // Set Chess engine to use Previous Board positons or Initialize the new
-    //   GameEngine.current = new Chess(gameData.moves.at(-1).position_fen);
-    //   // Get Latest Previous Board positon or Initialize the board position
-    //   set_board_position(gameData.moves.at(-1).position_fen);
-    // } else {
-    //   GameEngine.current = new Chess();
-    //   set_board_position("start");
-    // }
+    if (gameData.moves.length > 0) {
+      // Set Chess engine to use Previous Board positons or Initialize the new
+      GameEngine.current = new Chess(gameData.moves.at(-1).position_fen);
+      // Get Latest Previous Board positon or Initialize the board position
+      set_board_position(gameData.moves.at(-1).position_fen);
+    } else {
+      GameEngine.current = new Chess();
+      set_board_position("start");
+    }
 
     // Set Color to play
     set_color_to_play(GameEngine.current.fen().split(" ")[1]);
@@ -244,9 +244,9 @@ function ChessBoard({ type, gameData }) {
 
         <div
           style={{
-            justifyContent: "flex-start",
             position: "relative",
-            border: "3px solid #000",
+            border: "3px solid #E1B168",
+            zIndex:"1"
           }}
         >
           <ChessBoardBorder />
@@ -285,7 +285,7 @@ function ChessBoard({ type, gameData }) {
             // Allow click and move
             onSquareClick={onSquareClick}
             // Show Notations on the board
-            showNotations={false}
+            showNotation={false}
           />
         </div>
 
