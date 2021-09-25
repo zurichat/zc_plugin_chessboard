@@ -43,11 +43,11 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
       <div className="mini-asideBar mini-topBar">
         {playerOne ? (
           <div className="mini-playerProfile">
-            <div className="mini-profile-image"></div>
             <div
-              className="mini-profile-image-bg"
+              className="mini-profile-image"
               style={{ background: `url(${playerOne.image_url})` }}
             ></div>
+            <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">
               Player 1: @{playerOne.user_name}
             </p>
@@ -70,11 +70,11 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
       <div className="mini-asideBar mini-bottomBar">
         {playerTwo && (
           <div className="mini-playerProfile">
-            <div className="mini-profile-image"></div>
             <div
-              className="mini-profile-image-bg"
+              className="mini-profile-image"
               style={{ background: `url(${playerTwo.image_url})` }}
             ></div>
+            <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">
               Player 2: @{playerTwo.user_name}
             </p>
