@@ -45,7 +45,11 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           <div className="mini-playerProfile">
             <div
               className="mini-profile-image"
-              style={{ background: `url(${playerOne.image_url})` }}
+              style={{
+                background: `url(${playerOne.image_url})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
             ></div>
             <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">
@@ -72,7 +76,11 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
           <div className="mini-playerProfile">
             <div
               className="mini-profile-image"
-              style={{ background: `url(${playerTwo.image_url})` }}
+              style={{
+                background: `url(${playerTwo.image_url})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
             ></div>
             <div className="mini-profile-image-bg"></div>
             <p className="mini-profile-name">
@@ -92,14 +100,14 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
               Join as Player 2
             </button>
           )}
-
+        {/* 
         {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id === playerOne.user_id && (
             <button className="join-button bottom-button">
               Waiting for Player 2
             </button>
-          )}
+          )} */}
       </div>
     </div>
   );
