@@ -145,7 +145,7 @@ function ChessBoard({ type, gameData }) {
 
     console.log(move);
 
-    if (move === null) return;
+    if (move === null||type == "spectator"||allowDrag===false) return;
     set_board_position(GameEngine.current.fen());
     setHistory(GameEngine.current.history({ verbose: true }));
     setPieceSquare("");
@@ -285,7 +285,7 @@ function ChessBoard({ type, gameData }) {
             // Allow click and move
             onSquareClick={onSquareClick}
             // Show Notations on the board
-            showNotation={false}
+            showNotations={false}
           />
         </div>
 
