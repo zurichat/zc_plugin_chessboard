@@ -20,38 +20,20 @@ import ChessBoardBorder from "../ChessBoardBorder";
 import GameWinnerModal from "../Modals/GameWinnerModal";
 
 function ChessBoard({ type, gameData }) {
-  // Initiate the Chess Game Engine
-  const GameEngine = useRef(null);
   const game_id = gameData._id;
+
+  // Restore or initiate Game From Chess Engine
+  const GameEngine = new Chess((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : null);
+
   const players_to_color_map = {
     [gameData.owner.user_id]: gameData.owner.color,
     [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
 
   const [board_position, set_board_position] = useState((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : "start");
-  const [color_to_play, set_color_to_play] = useState(null);
   const [squareStyles, setSquareStyles] = useState({});
+  const [pieceSquare, setPieceSquare] = useState("");
   const [history, setHistory] = useState([]);
-  const [pieceSquare, setPieceSquare] = useState(null);
-
-  useEffect(() => {
-
-    GameEngine.current = new Chess(void((gameData.moves.length > 0) && gameData.moves.at(-1).position_fen));
-
-    // Continue Game Functionality
-    // if (gameData.moves.length > 0) {
-    //   // Set Chess engine to use Previous Board positons or Initialize the new
-    //   GameEngine.current = new Chess(gameData.moves.at(-1).position_fen);
-    //   // Get Latest Previous Board positon or Initialize the board position
-    //   set_board_position(gameData.moves.at(-1).position_fen);
-    // } else {
-    //   GameEngine.current = new Chess();
-    //   set_board_position("start");
-    // }
-
-    // Set Color to play
-    set_color_to_play(GameEngine.current.fen().split(" ")[1]);
-  }, [gameData]);
 
   const chessPieces = () => {
     return [
@@ -95,10 +77,10 @@ function ChessBoard({ type, gameData }) {
     return screenWidth < 560 ? screenWidth * 0.85 : 475;
   };
 
-  const allowDrag = ({ piece, position }) => {
+  const allowDrag = ({ piece, position }) => { 
     if (
-      GameEngine.current.game_over() ||
-      color_to_play != players_to_color_map[getLoggedInUserData().user_id]
+      GameEngine.game_over() ||
+      GameEngine.turn() !== players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
@@ -106,66 +88,70 @@ function ChessBoard({ type, gameData }) {
     }
   };
 
-  const onDrop = ({ sourceSquare, targetSquare }) => {
+  const onDrop = ({ sourceSquare, targetSquare, piece }) => {
     // see if the move is legal
-    const move = GameEngine.current.move({
+    const move = GameEngine.move({
+      piece,
       from: sourceSquare,
       to: targetSquare,
       promotion: "q",
     });
 
-    console.log(move);
-
     // illegal move
-    if (move === null) return "snapback";
+    if (move === null) return;
 
-    set_board_position(GameEngine.current.fen());
-    set_color_to_play(GameEngine.current.fen().split(" ")[1]);
+    set_board_position(GameEngine.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+    UpdatePieceMove(game_id, move, GameEngine.fen()).then(
       (response) => {
         if (!response.data.success) {
-          // TODO: Handle error with Toasts        } else {
+          // TODO: Handle error with Toasts
           // Update the Board with last move
-          setHistory(GameEngine.current.history({ verbose: true }));
+        } else {
+          setHistory(GameEngine.history({ verbose: true }));
+          squareStyling({ pieceSquare, history });
         }
       }
     );
   };
 
   const onSquareClick = (square) => {
-    setPieceSquare(square);
     squareStyling(square, history);
-    const move = GameEngine.current.move({
+    setPieceSquare(square);
+
+    const move = GameEngine.move({
       from: pieceSquare,
       to: square,
       promotion: "q"
     });
 
-    console.log(move);
-
     if (move === null) return;
-    set_board_position(GameEngine.current.fen());
-    setHistory(GameEngine.current.history({ verbose: true }));
-    setPieceSquare("");
-    set_color_to_play(GameEngine.current.fen().split(" ")[1]);
+
+    set_board_position(GameEngine.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+    UpdatePieceMove(game_id, move, GameEngine.fen()).then(
       (response) => {
         if (!response.data.success) {
-          // TODO: Handle error with Toasts        } else {
+          // TODO: Handle error with Toasts
           // Update the Board with last move
-          setHistory(GameEngine.current.history({ verbose: true }));
+        } else {
+          setHistory(GameEngine.history({ verbose: true }));
+          setPieceSquare("");
         }
       }
     );
   };
 
+  const onSquareRightClick = (square) => {
+    setPieceSquare(square);
+    squareStyling(square, history);
+  };
+
   const onMouseOverSquare = (square) => {
     // get list of possible moves for this square
-    const moves = GameEngine.current.moves({
+    const moves = GameEngine.moves({
       square: square,
       verbose: true,
     });
@@ -214,9 +200,9 @@ function ChessBoard({ type, gameData }) {
   };
 
   let gameWinner = null;
-  if (GameEngine.current && GameEngine.current.in_checkmate() === true) {
+  if (GameEngine && GameEngine.in_checkmate() === true) {
 
-    color_to_play === "w"
+    GameEngine.turn() === "w"
       ? (gameWinner = gameData.opponent)
       : (gameWinner = gameData.owner);
 
@@ -235,7 +221,7 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        <h4> Game { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
+        <h4> Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
@@ -249,14 +235,14 @@ function ChessBoard({ type, gameData }) {
             border: "3px solid #000",
           }}
         >
-          <ChessBoardBorder />
+          {/* <ChessBoardBorder /> */}
           <Chessboard
             // Set custom Chess Pieces
             pieces={chessPieces()}
             // Automatically adjust the board size to the screen
             calcWidth={calcWidth}
             // Set Board Id
-            id={`game_${gameData.user_id}`}
+            id={`game_${game_id}`}
             // disables chessboard pieces movement on spectator screen
             draggable={type == "spectator" ? false : true}
             // Set the board to face player with his color
@@ -284,8 +270,9 @@ function ChessBoard({ type, gameData }) {
             }}
             // Allow click and move
             onSquareClick={onSquareClick}
+            onSquareRightClick={onSquareRightClick}
             // Show Notations on the board
-            showNotations={false}
+            showNotation={false}
           />
         </div>
 
@@ -300,4 +287,4 @@ function ChessBoard({ type, gameData }) {
   );
 }
 
-export default ChessBoard;
+export default React.memo(ChessBoard);

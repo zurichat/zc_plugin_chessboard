@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, useParams } from "react-router-dom";
 
 // Import CSS for this page
@@ -15,6 +15,7 @@ import SpectatorSideBar from "../../components/SpectatorSideBar";
 
 function Game() {
   const [gameData, setGameData] = useState(null);
+  const [canCallCentrifuge, setcanCallCentrifuge] = useState(false);
   const { game_id } = useParams();
 
   useEffect(() => {
@@ -27,23 +28,23 @@ function Game() {
         setGameData(response.data.data);
       }
     });
+
+    setcanCallCentrifuge(true);
   }, []);
 
-  let run_once = false;
-  // Setup Centrifuge Setup
-  if (gameData && !run_once) {
+  if (canCallCentrifuge && gameData) {
     CentrifugeSetup(game_id, (ctx) => {
       const websocket = ctx;
       switch (ctx.data.event) {
         case "join_game":
           // completed - DO NOT EDIT!!
-          setGameData({ opponent: websocket.data.player });
+          setGameData({ ...gameData, opponent: websocket.data.player });
           break;
 
         case "piece_moved":
           // completed - DO NOT EDIT!!
           gameData.moves.push(websocket.data.move);
-          setGameData({ moves: gameData.moves });
+          setGameData({ ...gameData, moves: gameData.moves });
           break;
 
         case "spectator_joined_game":
@@ -63,15 +64,14 @@ function Game() {
         case "comments":
           // completed - DO NOT EDIT!!
           gameData.messages.push(websocket.data.comment);
-          setGameData({ messages: gameData.messages });
+          setGameData({ ...gameData, messages: gameData.messages });
           break;
 
         default:
           console.log("centrifuge: event listener not listened for", ctx?.data);
           break;
       }
-    }).connect();
-    run_once = true;
+    });
   }
 
   let BoardToRender = null;
@@ -107,4 +107,4 @@ function Game() {
   );
 }
 
-export default Game;
+export default React.memo(Game);

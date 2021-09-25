@@ -4,24 +4,19 @@ import Close from "../../../assets/modal/close.svg";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-// import { CentrifugeSetup, getGameData } from "../../../adapters/game/index";
 
 //import style-components
 import { ForfeitContainer, ForfeitModal, ForfeitModalClose, ForfeitHeader, ForfeitContent, ForfeitFooter, ForfeitGameBtn } from "./ForfeitStyle";
 
-const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData,  handleClick }) => {
-  //get game id 
-  const [gameId, setGameId] = useState(gameId);
-  // console.log("Game data "+ gameData._id);
+const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
 
+  const history = useHistory();
+  const [gameId, setGameId] = useState(gameId);
+  const close = () => setmodalIsOpen(false);
 
   useEffect(() => {
     setGameId(gameData._id);
-    // console.log(gameId);
-    // console.log(gameData.owner.user_id);
   }, []);
-
-  const close = () => setmodalIsOpen();
 
   const forfeitGame = async () => {
     const gameEndData = {
@@ -30,19 +25,18 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData,  handleClick }) => {
     };
 
     const res = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/end", 
-        gameEndData
+      "https://chess.zuri.chat/api/v1/game/end",
+      gameEndData
     );
 
-    if(res.data.success) {
-        history.push("/");
-    }else{
+    if (res.data.success) {
+      history.push("/");
+    } else {
       //.
       console.log("Unable to end game " + res.data.message);
-    }  
+    }
   };
 
-  const history = useHistory();
   if (!isModalOpen) {
     return null;
   }

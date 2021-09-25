@@ -4,10 +4,10 @@ module.exports = {
 
   // Cetrifugo Credentials
   SOCKER_KEY:
-    process.env.SOCKER_TOKEN || "58c2400b-831d-411d-8fe8-31b6e337738b",
-  // process.env.SOCKER_TOKEN || "12a0bbf4-d29b-441d-8e31-bd4634dc8919",
-  SOCKET_URL: process.env.SOCKET_URL || "https://realtime.zuri.chat/api",
-  // SOCKET_URL: process.env.SOCKET_URL || "http://localhost:8000/api",
+    // process.env.SOCKER_TOKEN || "58c2400b-831d-411d-8fe8-31b6e337738b",
+  process.env.SOCKER_TOKEN || "12a0bbf4-d29b-441d-8e31-bd4634dc8919",
+  // SOCKET_URL: process.env.SOCKET_URL || "https://realtime.zuri.chat/api",
+  SOCKET_URL: process.env.SOCKET_URL || "http://localhost:8000/api",
 
   // Database Credentials
   DATABASE: {

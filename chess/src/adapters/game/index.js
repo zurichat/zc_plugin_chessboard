@@ -13,13 +13,19 @@ export function CentrifugeSetup(game_id, ChannelEventsListener) {
     // "ws://localhost:8000/connection/websocket"
   );
 
+  // Disconnect from Centrifugo (if any)
+  centrifuge.disconnect();
+
   // Subscribe to room with ID: GameId on Centrifugo Server
   centrifuge.subscribe(game_id, (ctx) => {
     ChannelEventsListener(ctx);
   });
 
-  // Return Centrifugo Instance
-  return centrifuge;
+  // Connect to Centrifugo Server
+  centrifuge.connect();
+
+  // // Return Centrifugo Instance
+  // return centrifuge;
 }
 
 // Watch Game
