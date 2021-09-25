@@ -3,7 +3,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
 // Import CSS for this page
-import "./chessboard.css";
+// import "./chessboard.css";
+
+// Import style for this page
+import { ChessboardContainer } from "./styles";
 
 // Import Adapters
 import { UpdatePieceMove, UpdateGameWinner } from "../../adapters/chessboard";
@@ -231,7 +234,7 @@ function ChessBoard({ type, gameData }) {
 
   return (
     <>
-      <div className="chessboard">
+      <ChessboardContainer>
         <h4> Game { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
@@ -291,7 +294,7 @@ function ChessBoard({ type, gameData }) {
           name={gameData.owner.user_name}
           image_url={gameData.owner.image_url}
         />
-      </div>
+      </ChessboardContainer>
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
     </>
   );
