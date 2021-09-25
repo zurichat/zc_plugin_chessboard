@@ -97,7 +97,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
               className="join-button bottom-button"
               onClick={() => HandleJoinGame(game_id)}
             >
-              Join as Player 2
+              Waiting as Player 2
             </button>
           )}
 
