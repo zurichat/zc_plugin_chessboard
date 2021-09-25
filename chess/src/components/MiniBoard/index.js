@@ -43,9 +43,18 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
       <div className="mini-asideBar mini-topBar">
         {playerOne ? (
           <div className="mini-playerProfile">
-            <div className="mini-profile-image"></div>
+            <div
+              className="mini-profile-image"
+              style={{
+                background: `url(${playerOne.image_url})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
+            ></div>
             <div className="mini-profile-image-bg"></div>
-            <p className="mini-profile-name">Player 1: @{playerOne.user_name}</p>
+            <p className="mini-profile-name">
+              Player 1: @{playerOne.user_name}
+            </p>
           </div>
         ) : (
           <button className="join-button" onClick={HandleCreateGame}>
@@ -65,28 +74,39 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
       <div className="mini-asideBar mini-bottomBar">
         {playerTwo && (
           <div className="mini-playerProfile">
-            <div className="mini-profile-image"></div>
+            <div
+              className="mini-profile-image"
+              style={{
+                background: `url(${playerTwo.image_url})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
+            ></div>
             <div className="mini-profile-image-bg"></div>
-            <p className="mini-profile-name">Player 2: @{playerTwo.user_name}</p>
+            <p className="mini-profile-name">
+              Player 2: @{playerTwo.user_name}
+            </p>
           </div>
         )}
 
-        {playerOne && !playerTwo && (getLoggedInUserData().user_id === playerOne.user_id) && (
-          <button
-            className="join-button bottom-button"
-            onClick={() => HandleJoinGame(game_id)}
-          >
-            Join as Player 2
-          </button>
-        )}
-
-        {playerOne && !playerTwo && (getLoggedInUserData().user_id !== playerOne.user_id) && (
-          <button
-            className="join-button bottom-button"
-          >
-            Waiting for Player 2
-          </button>
-        )}
+        {playerOne &&
+          !playerTwo &&
+          getLoggedInUserData().user_id === playerOne.user_id && (
+            <button
+              className="join-button bottom-button"
+              onClick={() => HandleJoinGame(game_id)}
+            >
+              Join as Player 2
+            </button>
+          )}
+        {/* 
+        {playerOne &&
+          !playerTwo &&
+          getLoggedInUserData().user_id !== playerOne.user_id && (
+            <button className="join-button bottom-button">
+              Waiting for Player 2
+            </button>
+          )} */}
       </div>
     </div>
   );

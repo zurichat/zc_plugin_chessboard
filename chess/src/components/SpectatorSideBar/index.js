@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
+import Exit from "../Modals/ExitModal/Exit";
+
 // Import CSS for this component
-import "./spectatorsidebar.css";
+// import "./spectatorsidebar.css";
 
 // Import Adapters
 import { sendComment } from "../../adapters/comments";
+
+//import style-components
+import { Chat, ChatInputForm, ChatWrapper, EmptyComment, ExitBtn, Sidebar, SidebarNav } from "./SpectatorSidebarStyle";
 
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
@@ -35,20 +40,31 @@ const SpectatorSideBar = ({ type, gameData }) => {
       console.log("CommentMsg is empty");
     }
   };
+
+
+
   const [isModalOpen, setmodalIsOpen] = useState(false);
 
   const handleClick = () => {
     setmodalIsOpen(true);
-    
   };
+
+  //for exit button
+  const [isOpen, setIsOpen] = useState(false);
+  
+  //for exit button
+  const handleButton = () => {
+    setIsOpen(true);
+  };
+
 
   let id = 0;
 
   return (
     <>
       
-      <aside className="side-bar">
-        <nav className="side-bar-nav">
+      <Sidebar className="side-bar">
+        <SidebarNav className="side-bar-nav">
           <div className="navLink">
             <h1> Comments</h1>
           </div>
@@ -77,16 +93,17 @@ const SpectatorSideBar = ({ type, gameData }) => {
               />
             </svg>
           </a>
-        </nav>
+        </SidebarNav>
 
-        <div id="chat">
+        <Chat id="chat">
+          <Exit isOpen={isOpen}  setIsOpen={setIsOpen} gameData= {gameData} handleButton={handleButton} />
         <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} gameData= {gameData} handleClick={handleClick}/>
           <div className="chatContainer">
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
                 ({ user_name, image_url, text, timestamp }) => {
                   return (
-                    <div className="chatWrapper" key={id++}>
+                    <ChatWrapper className="chatWrapper" key={id++}>
                       <div className="specHead">
                         <img className="specAvi" src={image_url} alt="avi" />
                         <div className="specInfo">
@@ -97,12 +114,12 @@ const SpectatorSideBar = ({ type, gameData }) => {
                       <div className="specNameTime">
                         <p className="spectatorMessage">{text}</p>
                       </div>
-                    </div>
+                    </ChatWrapper>
                   );
                 }
               )
             ) : (
-              <div className="emptyComment">
+              <EmptyComment className="emptyComment">
                 <svg
                   className="CommentBird"
                   width="329"
@@ -235,11 +252,11 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
                 <h3>It's Quiet Here!</h3>
                 <p>You can make a comment at any point.</p>
-              </div>
+              </EmptyComment>
             )}
 
             {type === "spectator" ? (
-              <div className="chatInputForm">
+              <ChatInputForm className="chatInputForm">
                 <input
                   type="text"
                   value={commentMsg}
@@ -454,12 +471,19 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
                   </div>
                 </div>
-              </div>
-            ) :<button className="btn-Exit" onClick={handleClick}>Forfeit Game</button>}
+              </ChatInputForm>
+            ) : null
+            }
+
+            {
+              gameData.status === 0 ?
+             ( <ExitBtn className="btn-Exit" onClick={handleButton}>Exit Game</ExitBtn> 
+             ) : <ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>
+            }
           </div>
-        </div>
+        </Chat>
         
-      </aside>
+      </Sidebar>
     </>
   );
 };
