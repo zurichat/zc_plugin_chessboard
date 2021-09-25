@@ -32,10 +32,11 @@
 }
 
 .mini-profile-image {
-	background: url('../../assets/miniboard/miniProfileImage.png');
+	/* background: url('../../assets/miniboard/miniProfileImage.png'); */
 	height: 2.05rem;
 	width: 2.05rem;
 	border-radius: 4px;
+	background-size: contain;
 }
 
 .mini-profile-image-bg {
@@ -109,8 +110,8 @@
 
 @media (max-width: 1024px) {
 	.mini-board {
-		height: calc(34.8rem * 1.2);
-		width: calc(26.4rem * 1.25);
+		/* height: calc(34.8rem * 1.2);
+		width: calc(26.4rem * 1.25); */
 	}
 
 	.mini-board .board-image img {
@@ -130,8 +131,8 @@
 
 @media (max-width: 360px) {
 	.mini-board {
-		height: calc(34.8rem * 1.1);
-		width: calc(26.4rem * 1.15);
+		/* height: calc(34.8rem * 1.1);
+		width: calc(26.4rem * 1.15); */
 	}
 
 	.mini-board .board-image img {
@@ -151,8 +152,8 @@
 
 @media (max-width: 330px) {
 	.mini-board {
-		height: calc(34.8rem * 0.9);
-		width: calc(26.4rem * 0.95);
+		/* height: calc(34.8rem * 0.9);
+		width: calc(26.4rem * 0.95); */
 	}
 
 	.mini-board .board-image img {

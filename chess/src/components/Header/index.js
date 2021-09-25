@@ -1,8 +1,9 @@
 // Import CSS for this page
 import "./header.css";
 
+
 // Import Assets
-import ChessPieceUnionImage from "../../assets/header/ChessPieceUnionImage.png";
+import ChessImage from "../../assets/header/chess_piece.svg";
 import CommentIcon from "../../assets/header/CommentIcon.png";
 import imageProfileOne from "../../assets/header/imageProfileOne.png";
 import imageProfileTwo from "../../assets/header/imageProfileTwo.png";
@@ -25,8 +26,9 @@ function Header() {
       <header className="main-header">
         <div className="nav chesshome-nav">
           <div id="chesshome-flex">
-            <h1>
-              <img src={ChessPieceUnionImage} id="pawnLogo" /> Chess
+            <h1 id="chesshome-name">
+              <img src={ChessImage} id="pawnLogo" /> 
+              Chess
             </h1>
             <button id="arrow-button">
               <i className="arrow down"></i>

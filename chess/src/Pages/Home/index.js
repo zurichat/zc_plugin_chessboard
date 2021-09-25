@@ -12,6 +12,7 @@ import Header from "../../components/Header";
 import MiniBoard from "../../components/MiniBoard";
 
 function Homepage() {
+
   // Set Games State
   const [games, setGames] = useState([]);
 
@@ -36,8 +37,8 @@ function Homepage() {
           <MiniBoard
             key={game._id}
             game_id={game._id}
-            playerOne={game.owner?.user_name}
-            playerTwo={game.opponent?.user_name}
+            playerOne={game.owner}
+            playerTwo={game.opponent}
           />
         </div>
       );
@@ -54,10 +55,12 @@ function Homepage() {
     <>
       <div className="chesshome-container">
         <Header />
-        <div className="chesshome-rules-holder">
-          <Link to="/rules">
-            <button className="chesshome-rules">Game Rules</button>
-          </Link>
+        <div className="chesshome-rules-holder">  
+            <div className="chesshome-rules">
+              <Link to="/rules">
+                <button className="btn-chesshome-rules">Game Rules</button>
+              </Link>
+            </div>
         </div>
         <div className="app__container">{boards}</div>
       </div>

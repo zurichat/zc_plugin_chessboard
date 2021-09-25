@@ -3,7 +3,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
 // Import CSS for this page
-import "./chessboard.css";
+// import "./chessboard.css";
+
+// Import style for this page
+import { ChessboardContainer } from "./styles";
 
 // Import Adapters
 import { UpdatePieceMove, UpdateGameWinner } from "../../adapters/chessboard";
@@ -25,28 +28,30 @@ function ChessBoard({ type, gameData }) {
     [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
 
-  // Get Latest Previous Board positon or Initialize the board position
-  const [board_position, set_board_position] = useState(
-    gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
-  );
+  const [board_position, set_board_position] = useState((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : "start");
   const [color_to_play, set_color_to_play] = useState(null);
   const [squareStyles, setSquareStyles] = useState({});
   const [history, setHistory] = useState([]);
   const [pieceSquare, setPieceSquare] = useState(null);
 
-  // State of Game Winner Modal
-  const [gameWinner, setGameWinner] = useState(null);
-  const [showGameWinnerModal, setShowGameWinnerModal] = useState(false);
-
   useEffect(() => {
-    // Set Chess engine to use Previous Board positons or Initialize the new
-    GameEngine.current = new Chess(
-      gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : ""
-    );
+
+    // GameEngine.current = new Chess(void((gameData.moves.length > 0) && gameData.moves.at(-1).position_fen));
+
+    // Continue Game Functionality
+    if (gameData.moves.length > 0) {
+      // Set Chess engine to use Previous Board positons or Initialize the new
+      GameEngine.current = new Chess(gameData.moves.at(-1).position_fen);
+      // Get Latest Previous Board positon or Initialize the board position
+      set_board_position(gameData.moves.at(-1).position_fen);
+    } else {
+      GameEngine.current = new Chess();
+      set_board_position("start");
+    }
 
     // Set Color to play
     set_color_to_play(GameEngine.current.fen().split(" ")[1]);
-  }, []);
+  }, [gameData]);
 
   const chessPieces = () => {
     return [
@@ -109,6 +114,8 @@ function ChessBoard({ type, gameData }) {
       promotion: "q",
     });
 
+    console.log(move);
+
     // illegal move
     if (move === null) return "snapback";
 
@@ -119,9 +126,36 @@ function ChessBoard({ type, gameData }) {
     UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
       (response) => {
         if (!response.data.success) {
-          // TODO: Handle error with Toasts
-          console.log("Piece Move Not Successful: ", response.data.message);
-        } else {
+          // TODO: Handle error with Toasts        } else {
+          // Update the Board with last move
+          setHistory(GameEngine.current.history({ verbose: true }));
+        }
+      }
+    );
+  };
+
+  const onSquareClick = (square) => {
+    setPieceSquare(square);
+    squareStyling(square, history);
+    const move = GameEngine.current.move({
+      from: pieceSquare,
+      to: square,
+      promotion: "q"
+    });
+
+    console.log(move);
+
+    if (move === null||type == "spectator"||allowDrag===false) return;
+    set_board_position(GameEngine.current.fen());
+    setHistory(GameEngine.current.history({ verbose: true }));
+    setPieceSquare("");
+    set_color_to_play(GameEngine.current.fen().split(" ")[1]);
+
+    // Piece Move API Call
+    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+      (response) => {
+        if (!response.data.success) {
+          // TODO: Handle error with Toasts        } else {
           // Update the Board with last move
           setHistory(GameEngine.current.history({ verbose: true }));
         }
@@ -179,24 +213,20 @@ function ChessBoard({ type, gameData }) {
     };
   };
 
-  if (GameEngine.current) {
-    // Game Over Handler
-    if (GameEngine.current.in_checkmate() === true) {
-      let winner;
+  let gameWinner = null;
+  if (GameEngine.current && GameEngine.current.in_checkmate() === true) {
 
-      color_to_play === "w"
-        ? (winner = gameData.opponent)
-        : (winner = gameData.owner);
+    color_to_play === "w"
+      ? (gameWinner = gameData.opponent)
+      : (gameWinner = gameData.owner);
 
-      setGameWinner({ winner });
-
-      // Update Game winner API Call
-      UpdateGameWinner(game_id, winner.user_id).then((response) => {
+    // Winner Has Not Been Announced
+    if (gameData.status !== 2 && gameData.owner.user_id !== getLoggedInUserData().user_id || gameData.opponent?.user_id !== getLoggedInUserData().user_id) {
+      // Update Game winner API Call (Announce Winner)  
+      UpdateGameWinner(game_id, gameWinner.user_id).then((response) => {
         if (!response.data.success) {
           // TODO: Handle error with Toasts
-          console.log("Unable to Set Game Winner: ", response.data.message);
-        } else {
-          setShowGameWinnerModal(true);
+          console.log("Error updating game winner");
         }
       });
     }
@@ -204,18 +234,19 @@ function ChessBoard({ type, gameData }) {
 
   return (
     <>
-      <div className="chessboard">
-        <h1>rendering for: {type}</h1>
+      <ChessboardContainer>
+        <h4> Game { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
+          image_url={gameData.opponent?.image_url}
         />
 
         <div
           style={{
-            justifyContent: "flex-start",
             position: "relative",
-            border: "3px solid #000",
+            border: "3px solid #E1B168",
+            zIndex:"1"
           }}
         >
           <ChessBoardBorder />
@@ -251,6 +282,8 @@ function ChessBoard({ type, gameData }) {
               background:
                 "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
             }}
+            // Allow click and move
+            onSquareClick={onSquareClick}
             // Show Notations on the board
             showNotations={false}
           />
@@ -259,9 +292,10 @@ function ChessBoard({ type, gameData }) {
         <PlayerName
           style={{ paddingTop: "28px", justifyContent: "flex-end" }}
           name={gameData.owner.user_name}
+          image_url={gameData.owner.image_url}
         />
-      </div>
-      {showGameWinnerModal ? <GameWinnerModal winner={gameWinner} /> : null}
+      </ChessboardContainer>
+      {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
     </>
   );
 }

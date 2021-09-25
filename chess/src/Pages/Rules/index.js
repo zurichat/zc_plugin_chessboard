@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import Header from "../../components/Header/index";
 
 // Import CSS for this page
-import "./rules.css";
+// import "./rules.css";
+
+// Import style for this page
+import { RulesContainer } from "./styles";
 
 // Import Assets for this page
 import Pawn from "../../assets/chess-pieces/bP.svg";
@@ -14,7 +18,9 @@ import PawnW from "../../assets/chess-pieces/wP.svg";
 
 function Rules() {
   return (
-    <div className="rules">
+    <>
+      <Header/>
+     <RulesContainer>
       <div className="top">
         <div className="content">
           <h4>Game Rule</h4>
@@ -125,7 +131,8 @@ function Rules() {
           <button>Back to Game</button>
         </Link>
       </div>
-    </div>
+    </RulesContainer>
+    </>
   );
 }
 
