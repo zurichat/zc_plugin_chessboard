@@ -111,6 +111,8 @@ function ChessBoard({ type, gameData }) {
       promotion: "q",
     });
 
+    console.log(move);
+
     // illegal move
     if (move === null) return "snapback";
 
@@ -137,6 +139,8 @@ function ChessBoard({ type, gameData }) {
       to: square,
       promotion: "q"
     });
+
+    console.log(move);
 
     if (move === null) return;
     set_board_position(GameEngine.current.fen());
