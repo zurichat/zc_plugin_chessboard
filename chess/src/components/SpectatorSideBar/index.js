@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
+import Exit from "../Modals/ExitModal/Exit";
+
 // Import CSS for this component
 // import "./spectatorsidebar.css";
 
@@ -38,12 +40,23 @@ const SpectatorSideBar = ({ type, gameData }) => {
       console.log("CommentMsg is empty");
     }
   };
+
+
+
   const [isModalOpen, setmodalIsOpen] = useState(false);
 
   const handleClick = () => {
     setmodalIsOpen(true);
-    
   };
+
+  //for exit button
+  const [isOpen, setIsOpen] = useState(false);
+  
+  //for exit button
+  const handleButton = () => {
+    setIsOpen(true);
+  };
+
 
   let id = 0;
 
@@ -83,6 +96,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
         </SidebarNav>
 
         <Chat id="chat">
+          <Exit isOpen={isOpen}  setIsOpen={setIsOpen} gameData= {gameData} handleButton={handleButton} />
         <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} gameData= {gameData} handleClick={handleClick}/>
           <div className="chatContainer">
             {commentsFromGameData.length ? (
@@ -458,7 +472,14 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   </div>
                 </div>
               </ChatInputForm>
-            ) :<ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>}
+            ) : null
+            }
+
+            {
+              gameData.status === 0 ?
+             ( <ExitBtn className="btn-Exit" onClick={handleButton}>Exit Game</ExitBtn> 
+             ) : <ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>
+            }
           </div>
         </Chat>
         
