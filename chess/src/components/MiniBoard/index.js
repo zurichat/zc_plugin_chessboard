@@ -99,14 +99,14 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
               Join as Player 2
             </button>
           )}
-
+        {/* 
         {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id !== playerOne.user_id && (
             <button className="join-button bottom-button">
               Waiting for Player 2
             </button>
-          )}
+          )} */}
       </div>
     </div>
   );
