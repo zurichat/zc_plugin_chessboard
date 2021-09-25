@@ -27,16 +27,6 @@ router.get("/info", InfoCtrl.getPluginInfo);
  *  get:
  *   summary: Gets sidebar info
  *   description: Returns all sidebar information for a given user
- *   parameters:
- *    - name: userId
- *      in: query
- *      required: true
- *    - name: org
- *      in: query
- *      required: true
- *    - name: token
- *      in: query
- *      required: true
  *   responses:
  *    200:
  *      description: A successful response

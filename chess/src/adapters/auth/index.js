@@ -50,7 +50,7 @@ export function getLoggedInUserData() {
         image_url: "https://ui-avatars.com/api/?name=Anonymous&background=random",
       };
     }
-
+ 
     return {
       user_id: logged_in_user_from_zc_main.id,
       user_name: logged_in_user_from_zc_main.first_name + " " + logged_in_user_from_zc_main.last_name,

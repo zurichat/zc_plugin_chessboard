@@ -16,7 +16,7 @@ class GameController {
       //Logic for more than 6 games not being active
       const gameDBData = await GameRepo.fetchAll();
 
-      if (gameDBData.data.length < 7) {
+      if (gameDBData.data.length < 6) {
         // create new game
 
         // Pass the request body to the schema
@@ -431,7 +431,7 @@ class GameController {
         return res
           .status(400)
           .send(response("Game does not exist.", null, false));
-      
+
       // check if game is already ended
       if (isGameExist.data.status === 2)
         return res
