@@ -94,7 +94,7 @@ function ChessBoard({ type, gameData }) {
       GameEngine.current.game_over() ||
       color_to_play != players_to_color_map[getLoggedInUserData().user_id]
     ) {
-      return true;
+      return false;
     } else {
       return true;
     }
@@ -212,7 +212,7 @@ function ChessBoard({ type, gameData }) {
       : (gameWinner = gameData.owner);
 
     // Winner Has Not Been Announced
-    if (gameData.status !== 2 && gameData.owner.user_id !== getLoggedInUserData().user_id || gameData.opponent.user_id !== getLoggedInUserData().user_id) {
+    if (gameData.status !== 2 && gameData.owner.user_id !== getLoggedInUserData().user_id || gameData.opponent?.user_id !== getLoggedInUserData().user_id) {
       // Update Game winner API Call (Announce Winner)  
       UpdateGameWinner(game_id, gameWinner.user_id).then((response) => {
         if (!response.data.success) {
@@ -226,7 +226,7 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <div className="chessboard">
-        <h1>rendering for: {type}</h1>
+        <h4> { type.charAt(0).toUpperCase() + type.slice(1) } Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
