@@ -7,7 +7,8 @@
     "owner": {
       "image_url": "string",
       "user_id": "default-user-id",
-      "user_name": "Default Game"
+      "user_name": "Default Game",
+      "color": "w"
     },
     "spectators": [],
     "status": 2
