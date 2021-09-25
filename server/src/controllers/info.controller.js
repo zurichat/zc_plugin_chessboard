@@ -28,7 +28,7 @@ class InformationController {
         version: "v1.0",
         developer_name: "HNG 8.0/Team Tesla",
         developer_email: "hello@zuri.com",
-        sidebar_url: "https://zuri.chat/chess/api/v1/sideBar",
+        sidebar_url: "https://chess.zuri.chat/api/v1/sideBar",
         ping_url: "https://chess.zuri.chat/api/v1/ping",
         homepage_url: "https://chess.zuri.chat/",
         install_url: "https://chess.zuri.chat/",
@@ -67,7 +67,7 @@ class InformationController {
           title: `${game.owner.user_name} vs ${
             game.opponent ? game.opponent.user_name : "none"
           }`,
-          id: game._id,   
+          id: game._id,
           url: `https://zuri.chat/chess/game/${game._id}`,
           unread: game.messages ? game.messages.length : 0,
           badge_type: "info",
@@ -94,8 +94,7 @@ class InformationController {
           {
             title: "Chess room",
             url: "https://zuri.chat/chess",
-            icon_url:
-              "https://www.svgrepo.com/show/12072/chess-board.svg",
+            icon_url: "https://www.svgrepo.com/show/12072/chess-board.svg",
             action: "open",
           },
         ],
