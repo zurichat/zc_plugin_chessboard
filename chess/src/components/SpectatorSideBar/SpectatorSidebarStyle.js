@@ -24,12 +24,12 @@ const SidebarNav = styled.nav`
 
         }
 
-        > h1{
+        > h2{
             text-decoration: none;
             color: #ffffff;
             font-weight: 600;
             transition: 0.3s all linear;
-            font-size: 2.6rem!important;
+            font-size: 2rem!important;
         }
     }
 
@@ -60,19 +60,23 @@ const Chat = styled.div `
         width:100%;
         overflow-y: auto;
         font-family: 'Lato', sans-serif;
-        padding: 1.5rem 2rem 1rem 1rem;
+        padding: 1.5rem 2rem .5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
+        justify-content: space-between;
     }
 `;
 
-const ChatWrapper = styled.div`
-        
+const ChatWrapper = styled.div`      
     width: 100%;
     background: white;
     margin: 1rem 0;
+    
 
     @media only screen and (max-width: 420px) {
         width:100%;
-        overflow-y: auto;
+        /* overflow-y: auto; */
         font-family: 'Lato', sans-serif;
         padding: 1.5rem 1rem 1rem .5rem;  
 
@@ -164,6 +168,8 @@ const ChatInputForm = styled.div`
     right: 0;
     border: 1px solid rgb(228, 227, 227);
     border-radius: 5px;
+    position: sticky;        
+    background-color: #fff;
 
     input {
         border: none;
