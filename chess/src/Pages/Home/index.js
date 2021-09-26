@@ -21,7 +21,10 @@ function Homepage() {
         // TODO: Handle error with Toasts
         console.log("Unable to Get All Games: ", response.data.message);
       } else {
-        setGames(response.data.data);
+        // Allow us to have empty DB
+        if (response.data.data !== null) {
+          setGames(response.data.data);
+        }
       }
     });
   }, []);
