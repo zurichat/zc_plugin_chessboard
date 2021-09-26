@@ -1,45 +1,39 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../../assets/modal/profile_img.svg";
 import Close from "../../../assets/modal/close.svg";
 import "./Exit.css";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { UpdateGameWinner } from "../../../adapters/chessboard";
 
-
 const Exit = ({ isOpen, setIsOpen, gameData }) => {
+  const history = useHistory();
+  const [gameId, setGameId] = useState(gameId);
+  const close = () => setIsOpen(false);
 
-  const close = () => setIsOpen();
+  useEffect(() => {
+    setGameId(gameData._id);
+  }, []);
 
-      let history = useHistory();
-      if (!isOpen) {
-        return null;
+  const exitGame = async () => {
+    UpdateGameWinner(gameId, gameData.owner.user_id).then((response) => {
+      if (response.data.success) {
+        history.push("/");
+      } else {
+        //....
       }
-    
-      const [gameId, setGameId] = useState(gameId);
+    });
+  };
 
-      useEffect(() => { 
-        setGameId(gameData._id);
-            
-      }, []);
+  if (!isOpen) {
+    return null;
+  }
 
-    const exitGame = async () => {
-      UpdateGameWinner(gameId, gameData.owner.user_id).then((response) => {
-        if (response.data.success) {
-          history.push("/");
-          } else {
-            //....
-          }
-        });
-      };
-
- 
   return (
     <div className="exit__container">
       <div className="exit__modal">
         <button className="btn-exit-modal-close" onClick={close}>
-            <img className="" src={Close} alt="Close" />
-          </button>
+          <img className="" src={Close} alt="Close" />
+        </button>
 
         <article className="exit__header">
           <div className="exit__profile">
@@ -55,23 +49,15 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
         </section>
 
         <footer className="exit__footer">
-          <button
-            className="exit__button exit__button--yes"
-           onClick = {exitGame}
-          >
+          <button className="exit__button exit__button--yes" onClick={exitGame}>
             Yes
           </button>
-          <button
-            className=" exit__button exit__button--no"
-            onClick={close}
-          >
+          <button className=" exit__button exit__button--no" onClick={close}>
             No
           </button>
         </footer>
-
       </div>
     </div>
-
   );
 };
 

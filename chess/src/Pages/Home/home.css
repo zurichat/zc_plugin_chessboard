@@ -29,6 +29,7 @@
 }
 
 .btn-chesshome-rules {
+	cursor: pointer;
 	height: 40px;
 	width: 208px;
 	border-radius: 4px;

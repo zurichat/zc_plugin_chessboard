@@ -5,7 +5,7 @@
 import Avatar from "../../assets/playername/user.png";
 
 //import style-components
-import { PlayerDetails, WaitingPlayer2Container, } from "./PlayerNameStyle";
+import { PlayerDetails, WaitingPlayer2Container } from "./PlayerNameStyle";
 
 const PlayerName = (props) => {
   if (!props.name) {
@@ -18,7 +18,7 @@ const PlayerName = (props) => {
 
   return (
     <PlayerDetails className="player__details" style={props.style}>
-      <img src={Avatar} alt="" />
+      <img src={props.image_url} alt="" />
       <p>{props.name}</p>
     </PlayerDetails>
   );

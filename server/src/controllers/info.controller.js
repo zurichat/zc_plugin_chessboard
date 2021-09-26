@@ -50,15 +50,18 @@ class InformationController {
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
 
-      const joined_rooms = data.map((game) => {
-        return {
-          room_name: `${game.owner.user_name} vs ${
-            game.opponent ? game.opponent.user_name : "none"
-          }`,
-          room_image: "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
-          room_url: `https://zuri.chat/chess/game/${game._id}`,
-        };
-      });
+      const joined_rooms = data
+        .filter((x) => x.status !== 2)
+        .map((game) => {
+          return {
+            room_name: `${game.owner.user_name} vs ${
+              game.opponent ? game.opponent.user_name : "none"
+            }`,
+            room_image:
+              "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
+            room_url: `https://zuri.chat/chess/game/${game._id}`,
+          };
+        });
 
       const { PLUGIN_ID /*ORGANISATION_ID*/ } = DATABASE;
       const payload = {
@@ -79,9 +82,13 @@ class InformationController {
         joined_rooms,
       };
 
-      return res
-        .status(200)
-        .send(response("Fetched sidebar data", payload, true));
+      // Won't be using our response formatter due to the format zc_main needs it
+      // return res
+      //   .status(200)
+      //   .send(response("Fetched sidebar data", payload, true));
+
+      // Just return the payload
+      return res.status(200).json(payload);
     } catch (error) {
       throw new CustomError(
         `Could not fetch sidebar information: ${error}`,

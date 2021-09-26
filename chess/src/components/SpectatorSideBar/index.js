@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
 import Exit from "../Modals/ExitModal/Exit";
@@ -10,19 +10,24 @@ import Exit from "../Modals/ExitModal/Exit";
 import { sendComment } from "../../adapters/comments";
 
 //import style-components
-import { Chat, ChatInputForm, ChatWrapper, EmptyComment, ExitBtn, Sidebar, SidebarNav } from "./SpectatorSidebarStyle";
+import {
+  Chat,
+  ChatInputForm,
+  ChatWrapper,
+  EmptyComment,
+  ExitBtn,
+  Sidebar,
+  SidebarNav,
+} from "./SpectatorSidebarStyle";
 
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
 
   const [commentMsg, setCommentMsg] = useState("");
-  const [commentsFromGameData, setCommentsFromGameData] = useState(
-    gameData.messages
-  );
+  const [commentsFromGameData] = useState(gameData.messages);
 
-  useEffect(() => {
-    setCommentsFromGameData(gameData.messages);
-  }, [gameData.messages]);
+  const [isModalOpen, setmodalIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleAddComment = () => {
     if (commentMsg.trim().length) {
@@ -41,34 +46,24 @@ const SpectatorSideBar = ({ type, gameData }) => {
     }
   };
 
-
-
-  const [isModalOpen, setmodalIsOpen] = useState(false);
-
-  const handleClick = () => {
+  const handleForfeitModal = () => {
     setmodalIsOpen(true);
   };
 
-  //for exit button
-  const [isOpen, setIsOpen] = useState(false);
-  
-  //for exit button
-  const handleButton = () => {
+  const handleExitModal = () => {
     setIsOpen(true);
   };
 
-
-  let id = 0;
+  let comment_id = 0;
 
   return (
     <>
-      
       <Sidebar className="side-bar">
         <SidebarNav className="side-bar-nav">
           <div className="navLink">
-            <h1> Comments</h1>
+            <h2>Comments</h2>
           </div>
-          <a className="close">
+          {/* <a className="close">
             <svg
               className="closeIcon"
               width="22"
@@ -92,18 +87,23 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </a> */}
         </SidebarNav>
 
         <Chat id="chat">
-          <Exit isOpen={isOpen}  setIsOpen={setIsOpen} gameData= {gameData} handleButton={handleButton} />
-        <Forfeit className="" isModalOpen={isModalOpen}  setmodalIsOpen={setmodalIsOpen} gameData= {gameData} handleClick={handleClick}/>
+          <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
+          <Forfeit
+            isModalOpen={isModalOpen}
+            setmodalIsOpen={setmodalIsOpen}
+            gameData={gameData}
+          />
+
           <div className="chatContainer">
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
                 ({ user_name, image_url, text, timestamp }) => {
                   return (
-                    <ChatWrapper className="chatWrapper" key={id++}>
+                    <ChatWrapper className="chatWrapper" key={comment_id++}>
                       <div className="specHead">
                         <img className="specAvi" src={image_url} alt="avi" />
                         <div className="specInfo">
@@ -472,20 +472,24 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   </div>
                 </div>
               </ChatInputForm>
-            ) : null
-            }
+            ) : null}
 
-            {
-              gameData.status === 0 ?
-             ( <ExitBtn className="btn-Exit" onClick={handleButton}>Exit Game</ExitBtn> 
-             ) : <ExitBtn className="btn-Exit" onClick={handleClick}>Forfeit Game</ExitBtn>
-            }
+            {type !== "spectator" && gameData.status === 0 && (
+              <ExitBtn className="btn-Exit" onClick={handleExitModal}>
+                Exit Game
+              </ExitBtn>
+            )}
+
+            {type !== "spectator" && gameData.status === 1 && (
+              <ExitBtn className="btn-Exit" onClick={handleForfeitModal}>
+                Forfeit Game
+              </ExitBtn>
+            )}
           </div>
         </Chat>
-        
       </Sidebar>
     </>
   );
 };
 
-export default SpectatorSideBar;
+export default React.memo(SpectatorSideBar);

@@ -1,9 +1,12 @@
 // Import CSS for this page
-import "./chessboardborder.css";
+// import "./chessboardborder.css";
+
+// Import style for this page
+import { AlphabetSection, NumberSection } from "./styles";
 
 const Alphabets = () => {
   return (
-    <section id="alphabets">
+    <AlphabetSection>
       <div className="wrapper">
         {[..."abcdefgh"].map((item, ind) => {
           return (
@@ -13,13 +16,13 @@ const Alphabets = () => {
           );
         })}
       </div>
-    </section>
+    </AlphabetSection>
   );
 };
 
 const Numbers = () => {
   return (
-    <section id="numbers">
+    <NumberSection>
       <div className="wrapper">
         {[..."87654321"].map((item, ind) => {
           return (
@@ -29,7 +32,7 @@ const Numbers = () => {
           );
         })}
       </div>
-    </section>
+    </NumberSection>
   );
 };
 
@@ -72,6 +75,7 @@ const ChessBoardBorder = () => {
         bottom: "-16px",
         right: "-16px",
         border: "15px solid #3D2F19",
+        zIndex: "-1",
       }}
     >
       <div style={borderStyles.top}>
