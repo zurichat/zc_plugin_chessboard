@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { BrowserRouter, useParams } from "react-router-dom";
 
 // Import CSS for this page
-import style from "./game.module.css";
+import styles from "./game.module.css";
 
 // Import Adaptors
 import {
@@ -160,8 +160,8 @@ function Game() {
   }
 
   return (
-    <section className={style["main-game"]}>
-      <div className={style["main-chess"]}>
+    <section className={styles["main-game"]}>
+      <div className={styles["main-chess"]}>
         <Header gameData={gameData} />
         {BoardToRender}
       </div>
