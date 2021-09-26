@@ -79,27 +79,24 @@ function Game() {
           break;
 
         case "spectator_joined_game":
-          // New Specator Joined Game Code Here
-          console.log("centrifuge: a spectator just joined this game room");
-
+          // completed - DO NOT EDIT!!
           gameData.spectators.push(websocket.data.spectator);
           setGameData({ ...gameData, spectators: gameData.spectators });
           break;
 
-        case "spectator_left_game":
-          // New Specator Left Game Code Here
-          console.log("centrifuge: a spectator just left this game room");
-
+        case "spectator_left_game": {
+          // completed - DO NOT EDIT!!
           // Find Index of recently exited spectator in spectators array
-          const index = gameData.spectators.findIndex(
-            (o) => o.user_id == websocket.data.spectator.user_id
-          );
-          // User not a spectator, just ignore the event
+          const index = gameData.spectators.findIndex((spectator) => {
+            spectator.user_id == websocket.data.spectator.user_id;
+          });
+          // Check if user not a spectator, then just ignore the event
           if (index !== -1) {
             gameData.spectators.splice(index, 1);
             setGameData({ ...gameData, spectators: gameData.spectators });
           }
           break;
+        }
 
         // NOT IN USE AGAIN !!!! _ GO annd Beat @odizee / @emeka if ou question it
         // case "end_game":
