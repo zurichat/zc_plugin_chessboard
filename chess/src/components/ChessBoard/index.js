@@ -118,36 +118,36 @@ function ChessBoard({ type, gameData }) {
     });
   };
 
-  const onSquareClick = (square) => {
-    squareStyling(square, history);
-    setPieceSquare(square);
+  // const onSquareClick = (square) => {
+  //   squareStyling(square, history);
+  //   setPieceSquare(square);
 
-    const move = GameEngine.move({
-      from: pieceSquare,
-      to: square,
-      promotion: "q",
-    });
+  //   const move = GameEngine.move({
+  //     from: pieceSquare,
+  //     to: square,
+  //     promotion: "q",
+  //   });
 
-    if (move === null) return;
+  //   if (move === null) return;
 
-    set_board_position(GameEngine.fen());
+  //   set_board_position(GameEngine.fen());
 
-    // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.fen()).then((response) => {
-      if (!response.data.success) {
-        // TODO: Handle error with Toasts
-        // Update the Board with last move
-      } else {
-        setHistory(GameEngine.history({ verbose: true }));
-        setPieceSquare("");
-      }
-    });
-  };
+  //   // Piece Move API Call
+  //   UpdatePieceMove(game_id, move, GameEngine.fen()).then((response) => {
+  //     if (!response.data.success) {
+  //       // TODO: Handle error with Toasts
+  //       // Update the Board with last move
+  //     } else {
+  //       setHistory(GameEngine.history({ verbose: true }));
+  //       setPieceSquare("");
+  //     }
+  //   });
+  // };
 
-  const onSquareRightClick = (square) => {
-    setPieceSquare(square);
-    squareStyling(square, history);
-  };
+  // const onSquareRightClick = (square) => {
+  //   setPieceSquare(square);
+  //   squareStyling(square, history);
+  // };
 
   const onMouseOverSquare = (square) => {
     // get list of possible moves for this square
@@ -234,11 +234,20 @@ function ChessBoard({ type, gameData }) {
           {" "}
           Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
         </h4>
-        <PlayerName
-          style={{ paddingBottom: "28px" }}
-          name={gameData.opponent?.user_name}
-          image_url={gameData.opponent?.image_url}
-        />
+
+        {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
+          <PlayerName
+            style={{ paddingBottom: "28px" }}
+            name={gameData.owner.user_name}
+            image_url={gameData.owner.image_url}
+          />
+        ) : (
+          <PlayerName
+            style={{ paddingBottom: "28px" }}
+            name={gameData.opponent?.user_name}
+            image_url={gameData.opponent?.image_url}
+          />
+        )}
 
         <div
           style={{
@@ -281,18 +290,27 @@ function ChessBoard({ type, gameData }) {
                 "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
             }}
             // Allow click and move
-            onSquareClick={onSquareClick}
-            onSquareRightClick={onSquareRightClick}
+            // onSquareClick={onSquareClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
+            // onSquareRightClick={onSquareRightClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
             // Show Notations on the board
             showNotation={false}
           />
         </div>
 
-        <PlayerName
-          style={{ paddingTop: "28px", justifyContent: "flex-end" }}
-          name={gameData.owner.user_name}
-          image_url={gameData.owner.image_url}
-        />
+        {players_to_color_map[getLoggedInUserData().user_id] == "w" ? (
+          <PlayerName
+            style={{ paddingBottom: "28px" }}
+            name={gameData.owner.user_name}
+            image_url={gameData.owner.image_url}
+          />
+        ) : (
+          <PlayerName
+            style={{ paddingBottom: "28px" }}
+            name={gameData.opponent?.user_name}
+            image_url={gameData.opponent?.image_url}
+          />
+        )}
+
       </ChessboardContainer>
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
     </>
