@@ -6,10 +6,17 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 //import style-components
-import { ForfeitContainer, ForfeitModal, ForfeitModalClose, ForfeitHeader, ForfeitContent, ForfeitFooter, ForfeitGameBtn } from "./ForfeitStyle";
+import {
+  ForfeitContainer,
+  ForfeitModal,
+  ForfeitModalClose,
+  ForfeitHeader,
+  ForfeitContent,
+  ForfeitFooter,
+  ForfeitGameBtn,
+} from "./ForfeitStyle";
 
 const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
-
   const history = useHistory();
   const [gameId, setGameId] = useState(gameId);
   const close = () => setmodalIsOpen(false);
@@ -21,7 +28,7 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
   const forfeitGame = async () => {
     const gameEndData = {
       user_id: gameData.owner.user_id,
-      game_id: gameId
+      game_id: gameId,
     };
 
     const res = await axios.patch(

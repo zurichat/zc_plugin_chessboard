@@ -135,18 +135,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/info | GET  |      false |       false |
+
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /info | GET    | false      | false       |
 
 - PARAMS[URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -157,6 +156,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -206,8 +206,9 @@ This return a json formatted response payload to the client browser display in a
 ```
 
 - message : "Could not fetch plugin information"
-  
+
 ## Sidebar Information
+
 <!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application sidebar.
@@ -224,20 +225,19 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/sidebar | GET  | True        | False       |
+
+| URL      | METHOD | URL PARAMS | DATA PARAMS |
+| -------- | ------ | ---------- | ----------- |
+| /sidebar | GET    | True       | False       |
 
 - URL PARAMS if True
   - The URL parameter is passed in the endpoint as a query parameter
 
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|user |string     | true     |
-|org  |string     | true     |
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+| user | string    | true     |
+| org  | string    | true     |
 
 - complete url format : <https://www.chess.zuri.chat/api/v1?{user}?{org}/>
 
@@ -250,6 +250,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -294,8 +295,9 @@ This return a json formatted response payload to the client browser display in a
 ```
 
 - message : "Could not fetch sidebar information"
-  
+
 ## Create Game
+
 <!-- descriptions -->
 
 When this endpoint is used, it Creates a new gaming room, assigns an Id to it and sets the status to started (state = 0).
@@ -316,20 +318,19 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/game/create | POST  | false      | true       |
+
+| URL          | METHOD | URL PARAMS | DATA PARAMS |
+| ------------ | ------ | ---------- | ----------- |
+| /game/create | POST   | false      | true        |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|   user_id|integer| true    |
-|user_name| string| true     |
-| image_url| string| false   |
+
+| NAME      | DATA TYPE | REQUIRED |
+| --------- | --------- | -------- |
+| user_id   | integer   | true     |
+| user_name | string    | true     |
+| image_url | string    | false    |
 
 ### Responses
 
@@ -340,6 +341,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -371,8 +373,9 @@ Error object
 
 - message_1 : "Unable to create a Game"
 - message_2 : "No free boards right now"
-  
+
 ## Join Game
+
 <!-- descriptions -->
 
 When this endpoint is used, its check if an opponent already exist, if not it join as the opponent.
@@ -393,21 +396,21 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/join | POST  | false        | true       |
+
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /join | POST   | false      | true        |
 
 - PARAMS[URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-| game_id| string |   true   |
-| user_id|integer |true      |
-| user_name|string|true      |
-|image_url|string |false     |
+
+| NAME      | DATA TYPE | REQUIRED |
+| --------- | --------- | -------- |
+| game_id   | string    | true     |
+| user_id   | integer   | true     |
+| user_name | string    | true     |
+| image_url | string    | false    |
+
 ### Responses
 
 This is the end result send back to the client on successful execution or when an error occur. Below are the response on this two scenarios
@@ -417,6 +420,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -447,8 +451,9 @@ Error object
 - message_1 : "Unable to join a game"
 - message_2: "opponent already exists"
 - message_3: "Game not found"
-  
+
 ## All Game
+
 <!-- descriptions -->
 
 When this endpoint is used, it returns all the game objects in the database of this chess application plugin.
@@ -468,18 +473,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/game/all | GET  | false       | false      |
+
+| URL       | METHOD | URL PARAMS | DATA PARAMS |
+| --------- | ------ | ---------- | ----------- |
+| /game/all | GET    | false      | false       |
 
 - PARAMS [URL OR DATA] if required
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -490,6 +494,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -517,39 +522,42 @@ Error object
 ```
 
 - message : "Unable to get all Games"
-  
+
 ## Watch Game
+
 <!-- descriptions -->
 
 When this endpoint is used, it sends out a single piecemove so that the other player and spectators can view it.
+
 ### How To Use
 
 This is a PATCH Method.
 
- When successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+When successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
   - Once the link is clicked, a spectator can enter the game to view and comments on the ongoing game.
+
 ### Features
 
 This involves the baseUrl, body request type, all required and non required parameters, methods and url for this endpoint.
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/watch | PATCH  | false        | true    |
+
+| URL    | METHOD | URL PARAMS | DATA PARAMS |
+| ------ | ------ | ---------- | ----------- |
+| /watch | PATCH  | false      | true        |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|game_id|string | true |
-|user_id | string| true|
-|user_name | string | true |
+
+| NAME      | DATA TYPE | REQUIRED |
+| --------- | --------- | -------- |
+| game_id   | string    | true     |
+| user_id   | string    | true     |
+| user_name | string    | true     |
+
 ### Responses
 
 This is the end result send back to the client on successful execution or when an error occur. Below are the response on this two scenarios
@@ -559,6 +567,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -567,7 +576,7 @@ This return a json formatted response payload to the client browser display in a
 ```
   {
     payload
-  }  
+  }
 ```
 
 - message : "Joined as spectator successfully"
@@ -589,8 +598,9 @@ Error object
 
 - message_1 : "Unable to add spectator successfully"
 - message_2 : "Game not found"
-  
+
 ## Move Piece
+
 <!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application plugin.
@@ -610,21 +620,21 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/piecemove | PATCH  | false| true   |
+
+| URL        | METHOD | URL PARAMS | DATA PARAMS |
+| ---------- | ------ | ---------- | ----------- |
+| /piecemove | PATCH  | false      | true        |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|position_fen| string |true  |
-|user_id     |string|true|
-|game_id|string |true|
-|board_state |string|true |
+
+| NAME         | DATA TYPE | REQUIRED |
+| ------------ | --------- | -------- |
+| position_fen | string    | true     |
+| user_id      | string    | true     |
+| game_id      | string    | true     |
+| board_state  | string    | true     |
+
 ### Responses
 
 This is the end result send back to the client on successful execution or when an error occur. Below are the response on this two scenarios
@@ -634,6 +644,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -665,11 +676,9 @@ Error object
 - message_1 : "Failed to move piece"
 - message_2 : "Game not found"
 
-
 ## End Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES
+
 <!-- descriptions -->
-
-
 
 ### How To Used
 
@@ -683,18 +692,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/info | GET  | None        | None       |
+
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /info | GET    | None       | None        |
 
 - DATA PARAMS if required
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -705,6 +713,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -749,11 +758,13 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```<Error object>
+
 ```
 
 - message : "Could not fetch plugin information"
-  
+
 ## Unwatch Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES
+
 <!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application plugin.
@@ -770,18 +781,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|/info | GET  | None        | None       |
+
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /info | GET    | None       | None        |
 
 - DATA PARAMS if required
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -792,6 +802,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -836,11 +847,13 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```<Error object>
+
 ```
 
 - message : "Could not fetch plugin information"
-  
+
 ## Resign Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES
+
 <!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application plugin.
@@ -857,18 +870,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|   |  |         |       |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -879,6 +891,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -907,11 +920,11 @@ Error object
 ```
 
 - message : "Could not fetch plugin information"
-  
-  
-  
+
 <!-- IfOnlyIcan -->
+
 ## Game by id
+
 <!-- descriptions -->
 
 When this endpoint is used,
@@ -925,7 +938,8 @@ Input the endpoint in the browser and hit enter, when successful, [onSuccess](#o
 - Guidance Example on the <https://zuri.chat/chess> application :
 
 <!-- description on how to use on our app : leave if not implemented in the FE yet -->
-  -
+
+-
 
 ### Features
 
@@ -933,18 +947,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|    |   |         |        |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -955,6 +968,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -983,9 +997,11 @@ Error object
 ```
 
 - message : ""
-  
+
 <!--ifOnlyIcan  -->
+
 ## Game by user id
+
 <!-- descriptions -->
 
 When this endpoint is used,
@@ -999,7 +1015,8 @@ Input the endpoint in the browser and hit enter, when successful, [onSuccess](#o
 - Guidance Example on the <https://zuri.chat/chess> application :
 
 <!-- description on how to use on our app : leave if not implemented in the FE yet -->
-  -
+
+-
 
 ### Features
 
@@ -1007,18 +1024,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|   |   |        |        |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -1029,6 +1045,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -1061,11 +1078,13 @@ This return a json formatted response payload to the client browser display in a
   <!--ifOnlyiIcan  -->
 
 ## Game Comments
+
 <!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application plugin.
 
 ### How To Use
+
 <!-- brief description -->
 
 When successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
@@ -1073,7 +1092,8 @@ When successful, [onSuccess](#onsuccess) response is display as JSON formatted i
 - Guidance Example on the <https://zuri.chat/chess> application :
 
 <!-- description on how to use on our app : leave if not implemented in the FE yet -->
-  -
+
+-
 
 ### Features
 
@@ -1081,18 +1101,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-| |   |         |        |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 - complete endpoint url format :
 
@@ -1105,6 +1124,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -1137,6 +1157,7 @@ Error object
   <!-- OnlyIfIcan  -->
 
 ## Game delete
+
 <!-- descriptions -->
 
 ### How To Use
@@ -1148,7 +1169,8 @@ Error object
 - Guidance Example on the <https://zuri.chat/chess> application :
 
 <!-- description on how to use on our app : leave if not implemented in the FE yet -->
-  -
+
+-
 
 ### Features
 
@@ -1156,18 +1178,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|    |        |            |        |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS[URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 - complete endpoint url format :
 
@@ -1180,6 +1201,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -1209,10 +1231,11 @@ Error object
 ```
 
 - message : ""
-  
+
   <!-- ifOnlyIcan -->
 
 ## All Results
+
 <!-- descriptions -->
 
 ### How To Used
@@ -1233,18 +1256,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|    |     |        |      |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 - complete endpoint format :
 
@@ -1257,6 +1279,7 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
@@ -1289,6 +1312,7 @@ Error object
   <!-- ifOnlyIcan  -->
 
 ## Results by game id
+
 <!-- descriptions -->
 
 ### How To Use
@@ -1300,7 +1324,8 @@ Input the endpoint complete url in the browser and hit enter, when successful, [
 - Guidance Example on the <https://zuri.chat/chess> application :
 
 <!-- description on how to use on our app : leave if not implemented in the FE yet -->
-  -
+
+-
 
 ### Features
 
@@ -1308,18 +1333,17 @@ This involves the baseUrl, body request type, all required and non required para
 
 - BaseURL : <https://www.chess.zuri.chat/api/v1>
 - Request Body Schema : application/json
-  
 - General endpoint
-  
-| URL| METHOD | URL PARAMS | DATA PARAMS |
-| ---|--------|------------|-------------|
-|    |        |        |       |
+
+| URL | METHOD | URL PARAMS | DATA PARAMS |
+| --- | ------ | ---------- | ----------- |
+|     |        |            |             |
 
 - PARAMS [URL OR DATA] if true
-  
-|NAME | DATA TYPE | REQUIRED |
-|-----|-----------|----------|
-|     |           |          |
+
+| NAME | DATA TYPE | REQUIRED |
+| ---- | --------- | -------- |
+|      |           |          |
 
 ### Responses
 
@@ -1330,13 +1354,14 @@ This is the end result send back to the client on successful execution or when a
 This return a json formatted response payload to the client browser display in addition to the code.
 
 - code :
+
   - 2xx -> This success ranges originate from the server, usually from a successful request(200). etc
 
 - payload :
   - result
 
 ```[
-  
+
 ]
 
 ```

@@ -35,8 +35,8 @@ export function watchGame(game_id) {
     game_id,
     user_id: getLoggedInUserData().user_id,
     user_name: getLoggedInUserData().user_name,
-    image_url: getLoggedInUserData().image_url
-  }
+    image_url: getLoggedInUserData().image_url,
+  };
 
   return patch("/game/watch", body);
 }
@@ -46,7 +46,7 @@ export function unwatchGame(game_id) {
   const body = {
     game_id,
     user_id: getLoggedInUserData().user_id,
-  }
+  };
 
   return patch("/game/unwatch", body);
 }

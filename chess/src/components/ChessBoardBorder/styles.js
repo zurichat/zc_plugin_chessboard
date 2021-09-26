@@ -13,14 +13,14 @@ export const AlphabetSection = styled.section`
 
   .letters {
     font-weight: bold;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 13px;
-    
+
     @media (max-width: 414px) {
-        font-size: 10px;
-        line-height: 1.5;
+      font-size: 10px;
+      line-height: 1.5;
+    }
   }
-}
 `;
 
 export const NumberSection = styled.section`
@@ -41,7 +41,7 @@ export const NumberSection = styled.section`
     font-weight: bold;
     font-family: "Roboto", sans-serif;
     font-size: 13px;
-    
+
     @media (max-width: 414px) {
       font-size: 10px;
     }

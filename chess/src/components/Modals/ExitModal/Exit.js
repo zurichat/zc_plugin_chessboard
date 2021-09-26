@@ -5,9 +5,7 @@ import "./Exit.css";
 import { useHistory } from "react-router-dom";
 import { UpdateGameWinner } from "../../../adapters/chessboard";
 
-
 const Exit = ({ isOpen, setIsOpen, gameData }) => {
-
   const history = useHistory();
   const [gameId, setGameId] = useState(gameId);
   const close = () => setIsOpen(false);
@@ -51,20 +49,13 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
         </section>
 
         <footer className="exit__footer">
-          <button
-            className="exit__button exit__button--yes"
-            onClick={exitGame}
-          >
+          <button className="exit__button exit__button--yes" onClick={exitGame}>
             Yes
           </button>
-          <button
-            className=" exit__button exit__button--no"
-            onClick={close}
-          >
+          <button className=" exit__button exit__button--no" onClick={close}>
             No
           </button>
         </footer>
-
       </div>
     </div>
   );

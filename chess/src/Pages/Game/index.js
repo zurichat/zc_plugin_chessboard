@@ -6,7 +6,12 @@ import { BrowserRouter, useParams } from "react-router-dom";
 import "./game.css";
 
 // Import Adaptors
-import { CentrifugeSetup, getGameData, unwatchGame, watchGame } from "../../adapters/game";
+import {
+  CentrifugeSetup,
+  getGameData,
+  unwatchGame,
+  watchGame,
+} from "../../adapters/game";
 import { getLoggedInUserData } from "../../adapters/auth";
 
 // Import Components
@@ -18,7 +23,7 @@ function Game() {
   const [gameData, setGameData] = useState(null);
   const gameDataRef = useRef(null);
   const [canCallCentrifuge, setcanCallCentrifuge] = useState(false);
-  const [canCallWatchGame, setcanCallWatchGame ] = useState(false);
+  const [canCallWatchGame, setcanCallWatchGame] = useState(false);
   const { game_id } = useParams();
   const history = useHistory();
 
@@ -44,7 +49,10 @@ function Game() {
 
     // If user is about to leave this game, unwatch - ComponentWillUnmount (Not the best right now, cause this is called for every user, instead of spectators only)
     return () => {
-      if (gameDataRef.current.owner.user_id !== getLoggedInUserData().user_id && gameDataRef.current.opponent?.user_id !== getLoggedInUserData().user_id) {
+      if (
+        gameDataRef.current.owner.user_id !== getLoggedInUserData().user_id &&
+        gameDataRef.current.opponent?.user_id !== getLoggedInUserData().user_id
+      ) {
         unwatchGame(game_id).then((response) => {
           if (!response.data.success) {
             // TODO: Handle error with Toasts
@@ -52,7 +60,7 @@ function Game() {
           }
         });
       }
-    }
+    };
   }, []);
 
   if (canCallCentrifuge && gameData) {
@@ -83,7 +91,9 @@ function Game() {
           console.log("centrifuge: a spectator just left this game room");
 
           // Find Index of recently exited spectator in spectators array
-          const index = gameData.spectators.findIndex((o) => o.user_id == websocket.data.spectator.user_id);
+          const index = gameData.spectators.findIndex(
+            (o) => o.user_id == websocket.data.spectator.user_id
+          );
           // User not a spectator, just ignore the event
           if (index !== -1) {
             gameData.spectators.splice(index, 1);
@@ -110,7 +120,10 @@ function Game() {
   }
 
   if (canCallWatchGame && gameData) {
-    if (gameData.owner.user_id !== getLoggedInUserData().user_id && gameData.opponent?.user_id !== getLoggedInUserData().user_id) {
+    if (
+      gameData.owner.user_id !== getLoggedInUserData().user_id &&
+      gameData.opponent?.user_id !== getLoggedInUserData().user_id
+    ) {
       // Call the Watch Game Adapter
       watchGame(game_id).then((response) => {
         if (!response.data.success) {
@@ -136,11 +149,15 @@ function Game() {
     } else if (gameData.opponent?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with opponent defaults
       BoardToRender = <ChessBoard type="opponent" gameData={gameData} />;
-      SideBarToRender = <SpectatorSideBar type="opponent" gameData={gameData} />;
+      SideBarToRender = (
+        <SpectatorSideBar type="opponent" gameData={gameData} />
+      );
     } else {
       // Render the ChessBoard with spectator type
       BoardToRender = <ChessBoard type="spectator" gameData={gameData} />;
-      SideBarToRender = <SpectatorSideBar type="spectator" gameData={gameData} />;
+      SideBarToRender = (
+        <SpectatorSideBar type="spectator" gameData={gameData} />
+      );
     }
   }
 

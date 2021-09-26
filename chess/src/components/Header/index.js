@@ -22,7 +22,6 @@ const Profile = ({ className, src }) => {
 };
 
 function Header({ gameData }) {
-
   let number_of_users_in_room = 0;
 
   if (gameData) {
@@ -65,7 +64,7 @@ function Header({ gameData }) {
               <img src={CommentIcon} alt="reply" />
             </a> */}
 
-            {(number_of_users_in_room > 0) ? (
+            {number_of_users_in_room > 0 ? (
               <div className="chesshome-profileImg">
                 <Profile
                   className="chesshome-profile profileOne"
@@ -79,7 +78,9 @@ function Header({ gameData }) {
                   className="chesshome-profile profileThree"
                   src={imageProfileThree}
                 />
-                <p className="text-300">{padLeadingZeros(number_of_users_in_room, 3)}</p>
+                <p className="text-300">
+                  {padLeadingZeros(number_of_users_in_room, 3)}
+                </p>
               </div>
             ) : null}
           </div>

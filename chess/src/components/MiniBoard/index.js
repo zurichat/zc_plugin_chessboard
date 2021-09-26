@@ -88,7 +88,7 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
             </p>
           </div>
         )}
-        
+
         {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id !== playerOne.user_id && (

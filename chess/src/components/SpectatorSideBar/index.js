@@ -10,7 +10,15 @@ import Exit from "../Modals/ExitModal/Exit";
 import { sendComment } from "../../adapters/comments";
 
 //import style-components
-import { Chat, ChatInputForm, ChatWrapper, EmptyComment, ExitBtn, Sidebar, SidebarNav } from "./SpectatorSidebarStyle";
+import {
+  Chat,
+  ChatInputForm,
+  ChatWrapper,
+  EmptyComment,
+  ExitBtn,
+  Sidebar,
+  SidebarNav,
+} from "./SpectatorSidebarStyle";
 
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
@@ -84,7 +92,11 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
         <Chat id="chat">
           <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
-          <Forfeit isModalOpen={isModalOpen} setmodalIsOpen={setmodalIsOpen} gameData={gameData} />
+          <Forfeit
+            isModalOpen={isModalOpen}
+            setmodalIsOpen={setmodalIsOpen}
+            gameData={gameData}
+          />
 
           <div className="chatContainer">
             {commentsFromGameData.length ? (
@@ -463,15 +475,18 @@ const SpectatorSideBar = ({ type, gameData }) => {
             ) : null}
 
             {type !== "spectator" && gameData.status === 0 && (
-              <ExitBtn className="btn-Exit" onClick={handleExitModal}>Exit Game</ExitBtn>
+              <ExitBtn className="btn-Exit" onClick={handleExitModal}>
+                Exit Game
+              </ExitBtn>
             )}
 
             {type !== "spectator" && gameData.status === 1 && (
-              <ExitBtn className="btn-Exit" onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+              <ExitBtn className="btn-Exit" onClick={handleForfeitModal}>
+                Forfeit Game
+              </ExitBtn>
             )}
           </div>
         </Chat>
-
       </Sidebar>
     </>
   );

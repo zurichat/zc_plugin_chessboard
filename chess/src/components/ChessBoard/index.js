@@ -23,14 +23,18 @@ function ChessBoard({ type, gameData }) {
   const game_id = gameData._id;
 
   // Restore or initiate Game From Chess Engine
-  const GameEngine = new Chess((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : undefined);
+  const GameEngine = new Chess(
+    gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : undefined
+  );
 
   const players_to_color_map = {
     [gameData.owner.user_id]: gameData.owner.color,
     [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
 
-  const [board_position, set_board_position] = useState((gameData.moves.length > 0) ? gameData.moves.at(-1).position_fen : "start");
+  const [board_position, set_board_position] = useState(
+    gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
+  );
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
   const [history, setHistory] = useState([]);
@@ -77,7 +81,7 @@ function ChessBoard({ type, gameData }) {
     return screenWidth < 560 ? screenWidth * 0.85 : 475;
   };
 
-  const allowDrag = ({ piece, position }) => { 
+  const allowDrag = ({ piece, position }) => {
     if (
       GameEngine.game_over() ||
       GameEngine.turn() !== players_to_color_map[getLoggedInUserData().user_id]
@@ -103,17 +107,15 @@ function ChessBoard({ type, gameData }) {
     set_board_position(GameEngine.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.fen()).then(
-      (response) => {
-        if (!response.data.success) {
-          // TODO: Handle error with Toasts
-          // Update the Board with last move
-        } else {
-          setHistory(GameEngine.history({ verbose: true }));
-          squareStyling({ pieceSquare, history });
-        }
+    UpdatePieceMove(game_id, move, GameEngine.fen()).then((response) => {
+      if (!response.data.success) {
+        // TODO: Handle error with Toasts
+        // Update the Board with last move
+      } else {
+        setHistory(GameEngine.history({ verbose: true }));
+        squareStyling({ pieceSquare, history });
       }
-    );
+    });
   };
 
   const onSquareClick = (square) => {
@@ -123,7 +125,7 @@ function ChessBoard({ type, gameData }) {
     const move = GameEngine.move({
       from: pieceSquare,
       to: square,
-      promotion: "q"
+      promotion: "q",
     });
 
     if (move === null) return;
@@ -131,17 +133,15 @@ function ChessBoard({ type, gameData }) {
     set_board_position(GameEngine.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.fen()).then(
-      (response) => {
-        if (!response.data.success) {
-          // TODO: Handle error with Toasts
-          // Update the Board with last move
-        } else {
-          setHistory(GameEngine.history({ verbose: true }));
-          setPieceSquare("");
-        }
+    UpdatePieceMove(game_id, move, GameEngine.fen()).then((response) => {
+      if (!response.data.success) {
+        // TODO: Handle error with Toasts
+        // Update the Board with last move
+      } else {
+        setHistory(GameEngine.history({ verbose: true }));
+        setPieceSquare("");
       }
-    );
+    });
   };
 
   const onSquareRightClick = (square) => {
@@ -201,14 +201,17 @@ function ChessBoard({ type, gameData }) {
 
   let gameWinner = null;
   if (GameEngine && GameEngine.in_checkmate() === true) {
-
     GameEngine.turn() === "w"
       ? (gameWinner = gameData.opponent)
       : (gameWinner = gameData.owner);
 
     // Winner Has Not Been Announced
-    if (gameData.status !== 2 && gameData.owner.user_id !== getLoggedInUserData().user_id || gameData.opponent?.user_id !== getLoggedInUserData().user_id) {
-      // Update Game winner API Call (Announce Winner)  
+    if (
+      (gameData.status !== 2 &&
+        gameData.owner.user_id !== getLoggedInUserData().user_id) ||
+      gameData.opponent?.user_id !== getLoggedInUserData().user_id
+    ) {
+      // Update Game winner API Call (Announce Winner)
       UpdateGameWinner(game_id, gameWinner.user_id).then((response) => {
         if (!response.data.success) {
           // TODO: Handle error with Toasts
@@ -221,7 +224,16 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        <h4 style={{textAlign: "center", fontSize: "2.5rem", paddingTop: "1rem" }}> Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode</h4>
+        <h4
+          style={{
+            textAlign: "center",
+            fontSize: "2.5rem",
+            paddingTop: "1rem",
+          }}
+        >
+          {" "}
+          Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
+        </h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
@@ -232,7 +244,7 @@ function ChessBoard({ type, gameData }) {
           style={{
             position: "relative",
             border: "3px solid #E1B168",
-            zIndex:"1"
+            zIndex: "1",
           }}
         >
           {/* <ChessBoardBorder /> */}

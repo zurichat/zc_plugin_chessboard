@@ -89,7 +89,6 @@ class InformationController {
 
       // Just return the payload
       return res.status(200).json(payload);
-
     } catch (error) {
       throw new CustomError(
         `Could not fetch sidebar information: ${error}`,
