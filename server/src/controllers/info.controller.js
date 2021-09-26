@@ -58,7 +58,7 @@ class InformationController {
               }`,
             room_image:
               "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
-            room_url: `https://zuri.chat/chess/game/${game._id}`,
+            room_url: `/chess/game/${game._id}`,
           };
         });
 
@@ -75,7 +75,7 @@ class InformationController {
           {
             room_name: "Chess room",
             room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
-            room_url: "https://zuri.chat/chess",
+            room_url: "/chess",
           },
         ],
         joined_rooms: [
@@ -83,7 +83,7 @@ class InformationController {
           {
             room_name: "Main Chess Room",
             room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
-            room_url: "https://zuri.chat/chess",
+            room_url: "/chess",
           },
           // To be removed
           ...joined_rooms,
