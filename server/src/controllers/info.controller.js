@@ -54,9 +54,8 @@ class InformationController {
         .filter((x) => x.status !== 2)
         .map((game) => {
           return {
-            room_name: `${game.owner.user_name} vs ${
-              game.opponent ? game.opponent.user_name : "none"
-            }`,
+            room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"
+              }`,
             room_image:
               "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
             room_url: `https://zuri.chat/chess/game/${game._id}`,
@@ -79,7 +78,16 @@ class InformationController {
             room_url: "https://zuri.chat/chess",
           },
         ],
-        joined_rooms,
+        joined_rooms: [
+          // To be removed
+          {
+            room_name: "Main Chess Room",
+            room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+            room_url: "https://zuri.chat/chess",
+          },
+          // To be removed
+          ...joined_rooms,
+        ]
       };
 
       // Won't be using our response formatter due to the format zc_main needs it
