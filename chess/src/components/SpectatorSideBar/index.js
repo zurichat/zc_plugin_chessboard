@@ -4,7 +4,7 @@ import Forfeit from "../Modals/ForfeitModal/Forfeit";
 import Exit from "../Modals/ExitModal/Exit";
 
 // Import CSS for this component
-// import "./spectatorsidebar.css";
+import styles from  "./spectatorsidebar.module.css";
 
 // Import Adapters
 import { sendComment } from "../../adapters/comments";
@@ -58,9 +58,9 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   return (
     <>
-      <Sidebar className="side-bar">
-        <SidebarNav className="side-bar-nav">
-          <div className="navLink">
+      <aside className={styles["side-bar"]}>
+        <nav className={styles["side-bar-nav"]}>
+          <div className={styles.navLink}>
             <h2>Comments</h2>
           </div>
           {/* <a className="close">
@@ -88,9 +88,9 @@ const SpectatorSideBar = ({ type, gameData }) => {
               />
             </svg>
           </a> */}
-        </SidebarNav>
+        </nav>
 
-        <Chat id="chat">
+        <div id={styles.chat}>
           <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
           <Forfeit
             isModalOpen={isModalOpen}
@@ -98,30 +98,31 @@ const SpectatorSideBar = ({ type, gameData }) => {
             gameData={gameData}
           />
 
-          <div className="chatContainer">
+          <div className={styles.chatContainer}>
+            <div>
             {commentsFromGameData.length ? (
               commentsFromGameData.map(
                 ({ user_name, image_url, text, timestamp }) => {
                   return (
-                    <ChatWrapper className="chatWrapper" key={comment_id++}>
-                      <div className="specHead">
-                        <img className="specAvi" src={image_url} alt="avi" />
-                        <div className="specInfo">
-                          <h2 className="spectatorName">{user_name}</h2>
-                          <p className="time-muted">{timestamp}</p>
+                    <div className={styles.chatWrapper} key={comment_id++}>
+                      <div className={styles.specHead}>
+                        <img className={styles.specAvi} src={image_url} alt="avi" />
+                        <div className={styles.specInfo}>
+                          <h2 className={styles.spectatorName}>{user_name}</h2>
+                          <p className={styles["time-muted"]}>{timestamp}</p>
                         </div>
                       </div>
-                      <div className="specNameTime">
-                        <p className="spectatorMessage">{text}</p>
+                      <div className={styles.specNameTime}>
+                        <p className={styles.spectatorMessage}>{text}</p>
                       </div>
-                    </ChatWrapper>
+                    </div>
                   );
                 }
               )
-            ) : (
-              <EmptyComment className="emptyComment">
+            )  : (
+              <div className={styles.emptyComment}>
                 <svg
-                  className="CommentBird"
+                  className={styles.CommentBird}
                   width="329"
                   height="139"
                   viewBox="0 0 329 139"
@@ -252,11 +253,12 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
                 <h3>It's Quiet Here!</h3>
                 <p>You can make a comment at any point.</p>
-              </EmptyComment>
+              </div>
             )}
+            </div>
 
             {type === "spectator" ? (
-              <ChatInputForm className="chatInputForm">
+              <div className={styles.chatInputForm}>
                 <input
                   type="text"
                   value={commentMsg}
@@ -264,10 +266,10 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
                   placeholder="Send a comment"
                 />
-                <div className="inputIcons">
-                  <div className="inputIconsleft">
-                    <svg
-                      className="feather"
+                <div className={styles.inputIcons}>
+                  <div className={styles.inputIconsleft}>
+                    {/* <svg
+                      className={styles.feather}
                       width="17"
                       height="16"
                       viewBox="0 0 17 16"
@@ -398,10 +400,10 @@ const SpectatorSideBar = ({ type, gameData }) => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </svg>
+                    </svg> */}
                   </div>
-                  <div className="inputIconsright">
-                    <svg
+                  <div className={styles.inputIconsright}>
+                    {/* <svg
                       width="17"
                       height="16"
                       viewBox="0 0 17 16"
@@ -434,7 +436,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
-                      className="submit"
+                      className={styles["submit"]}
                       onClick={handleAddComment}
                       width="18"
                       height="18"
@@ -454,7 +456,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
-                      className="icon-down"
+                      className={styles["icon-down"]}
                       width="18"
                       height="18"
                       viewBox="0 0 18 18"
@@ -468,26 +470,27 @@ const SpectatorSideBar = ({ type, gameData }) => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </svg>
+                    </svg> */}
                   </div>
                 </div>
-              </ChatInputForm>
+              </div>
             ) : null}
 
             {type !== "spectator" && gameData.status === 0 && (
-              <ExitBtn className="btn-Exit" onClick={handleExitModal}>
+              
+              <ExitBtn onClick={handleExitModal}>
                 Exit Game
               </ExitBtn>
             )}
 
             {type !== "spectator" && gameData.status === 1 && (
-              <ExitBtn className="btn-Exit" onClick={handleForfeitModal}>
+              <ExitBtn onClick={handleForfeitModal}>
                 Forfeit Game
               </ExitBtn>
             )}
           </div>
-        </Chat>
-      </Sidebar>
+        </div>
+      </aside>
     </>
   );
 };
