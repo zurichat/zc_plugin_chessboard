@@ -221,7 +221,7 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        <h4> Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode</h4>
+        <h4 style={{textAlign: "center", fontSize: "2.5rem", paddingTop: "1rem" }}> Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode</h4>
         <PlayerName
           style={{ paddingBottom: "28px" }}
           name={gameData.opponent?.user_name}
