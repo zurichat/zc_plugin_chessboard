@@ -82,9 +82,14 @@ class InformationController {
         joined_rooms,
       };
 
-      return res
-        .status(200)
-        .send(response("Fetched sidebar data", payload, true));
+      // Won't be using our response formatter due to the format zc_main needs it
+      // return res
+      //   .status(200)
+      //   .send(response("Fetched sidebar data", payload, true));
+
+      // Just return the payload
+      return res.status(200).json(payload);
+
     } catch (error) {
       throw new CustomError(
         `Could not fetch sidebar information: ${error}`,
