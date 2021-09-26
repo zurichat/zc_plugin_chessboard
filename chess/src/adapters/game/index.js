@@ -1,5 +1,6 @@
 // Import api call adapter
-import { get } from "../xhr";
+import { get, patch } from "../xhr";
+import { getLoggedInUserData } from "../auth";
 import Centrifuge from "centrifuge";
 
 export function getGameData(game_id) {
@@ -30,10 +31,22 @@ export function CentrifugeSetup(game_id, ChannelEventsListener) {
 
 // Watch Game
 export function watchGame(game_id) {
+  const body = {
+    game_id,
+    user_id: getLoggedInUserData().user_id,
+    user_name: getLoggedInUserData().user_name,
+    image_url: getLoggedInUserData().image_url
+  }
 
+  return patch("/game/watch", body);
 }
 
 // unwatch Game
 export function unwatchGame(game_id) {
+  const body = {
+    game_id,
+    user_id: getLoggedInUserData().user_id,
+  }
 
+  return patch("/game/unwatch", body);
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { BrowserRouter, useParams } from "react-router-dom";
 
@@ -6,7 +6,7 @@ import { BrowserRouter, useParams } from "react-router-dom";
 import "./game.css";
 
 // Import Adaptors
-import { CentrifugeSetup, getGameData } from "../../adapters/game";
+import { CentrifugeSetup, getGameData, unwatchGame, watchGame } from "../../adapters/game";
 import { getLoggedInUserData } from "../../adapters/auth";
 
 // Import Components
@@ -16,9 +16,15 @@ import SpectatorSideBar from "../../components/SpectatorSideBar";
 
 function Game() {
   const [gameData, setGameData] = useState(null);
+  const gameDataRef = useRef(null);
   const [canCallCentrifuge, setcanCallCentrifuge] = useState(false);
   const { game_id } = useParams();
   const history = useHistory();
+
+  // Why this? checkout - https://stackoverflow.com/questions/63224151/how-can-i-access-state-in-an-useeffect-without-re-firing-the-useeffect
+  useEffect(() => {
+    gameDataRef.current = gameData;
+  });
 
   useEffect(() => {
     // Get game data
@@ -33,6 +39,18 @@ function Game() {
     });
 
     setcanCallCentrifuge(true);
+
+    // If user is about to leave this game, unwatch - ComponentWillUnmount (Not the best right now, cause this is called for every user, instead of spectators only)
+    return () => {
+      if (gameDataRef.current.owner?.user_id !== getLoggedInUserData().user_id && gameDataRef.current.opponent?.user_id !== getLoggedInUserData().user_id) {
+        unwatchGame(game_id).then((response) => {
+          if (!response.data.success) {
+            // TODO: Handle error with Toasts
+            console.log("Unable to unWatch Game: ", response.data.message);
+          }
+        });
+      }
+    }
   }, []);
 
   if (canCallCentrifuge && gameData) {
@@ -53,11 +71,22 @@ function Game() {
         case "spectator_joined_game":
           // New Specator Joined Game Code Here
           console.log("centrifuge: a spectator just joined this game room");
+
+          gameData.spectators.push(websocket.data.spectator);
+          setGameData({ ...gameData, spectators: gameData.spectators });
           break;
 
         case "spectator_left_game":
           // New Specator Left Game Code Here
           console.log("centrifuge: a spectator just left this game room");
+
+          // Find Index of recently exited spectator in spectators array
+          const index = gameData.spectators.findIndex((o) => o.user_id == websocket.data.spectator.user_id);
+          // User not a spectator, just ignore the event
+          if (index !== -1) {
+            gameData.spectators.splice(index, 1);
+            setGameData({ ...gameData, spectators: gameData.spectators });
+          }
           break;
 
         // NOT IN USE AGAIN !!!! _ GO annd Beat @odizee / @emeka if ou question it
@@ -96,6 +125,14 @@ function Game() {
       // Render the ChessBoard with spectator type
       BoardToRender = <ChessBoard type="spectator" gameData={gameData} />;
       SideBarToRender = <SpectatorSideBar type="spectator" gameData={gameData} />;
+
+      // Call the Watch Game Adapter
+      watchGame(game_id).then((response) => {
+        if (!response.data.success) {
+          // TODO: Handle error with Toasts
+          console.log("Unable to Watch Game: ", response.data.message);
+        }
+      });
     }
   }
 
