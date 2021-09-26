@@ -1,6 +1,7 @@
+import React from "react";
+
 // Import CSS for this page
 import "./header.css";
-
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -20,41 +21,67 @@ const Profile = ({ className, src }) => {
   );
 };
 
-function Header() {
+function Header({ gameData }) {
+
+  let number_of_users_in_room = 0;
+
+  if (gameData) {
+    if (gameData.owner) {
+      number_of_users_in_room++;
+    }
+
+    if (gameData.opponent) {
+      number_of_users_in_room++;
+    }
+
+    if (gameData.spectators.length > 0) {
+      number_of_users_in_room += gameData.spectators.length;
+    }
+  }
+
+  // pad leading zeros
+  function padLeadingZeros(num, size) {
+    var s = num + "";
+    while (s.length < size) s = "0" + s;
+    return s;
+  }
+
   return (
     <div>
       <header className="main-header">
         <div className="nav chesshome-nav">
           <div id="chesshome-flex">
             <h1 id="chesshome-name">
-              <img src={ChessImage} id="pawnLogo" /> 
+              <img src={ChessImage} id="pawnLogo" />
               Chess
             </h1>
-            <button id="arrow-button">
+            {/* <button id="arrow-button">
               <i className="arrow down"></i>
-            </button>
+            </button> */}
           </div>
           <div className="chesshome-headerRight">
             {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
-            <a className="commentIcon">
+            {/* <a className="commentIcon">
               <img src={CommentIcon} alt="reply" />
-            </a>
+            </a> */}
 
-            <div className="chesshome-profileImg">
-              <Profile
-                className="chesshome-profile profileOne"
-                src={imageProfileOne}
-              />
-              <Profile
-                className="chesshome-profile profileTwo"
-                src={imageProfileTwo}
-              />
-              <Profile
-                className="chesshome-profile profileThree"
-                src={imageProfileThree}
-              />
-              <p className="text-300">300</p>
-            </div>
+            {(number_of_users_in_room > 0) ? (
+              <div className="chesshome-profileImg">
+                <Profile
+                  className="chesshome-profile profileOne"
+                  src={imageProfileOne}
+                />
+                <Profile
+                  className="chesshome-profile profileTwo"
+                  src={imageProfileTwo}
+                />
+                <Profile
+                  className="chesshome-profile profileThree"
+                  src={imageProfileThree}
+                />
+                <p className="text-300">{padLeadingZeros(number_of_users_in_room, 3)}</p>
+              </div>
+            ) : null}
           </div>
         </div>
       </header>
@@ -62,4 +89,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default React.memo(Header);

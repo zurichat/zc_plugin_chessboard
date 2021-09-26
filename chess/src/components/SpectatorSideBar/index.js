@@ -55,7 +55,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
           <div className="navLink">
             <h2>Comments</h2>
           </div>
-          <a className="close">
+          {/* <a className="close">
             <svg
               className="closeIcon"
               width="22"
@@ -79,7 +79,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </a> */}
         </SidebarNav>
 
         <Chat id="chat">

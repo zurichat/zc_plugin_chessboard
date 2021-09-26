@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { BrowserRouter, useParams } from "react-router-dom";
 
 // Import CSS for this page
@@ -17,12 +18,14 @@ function Game() {
   const [gameData, setGameData] = useState(null);
   const [canCallCentrifuge, setcanCallCentrifuge] = useState(false);
   const { game_id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     // Get game data
     getGameData(game_id).then((response) => {
       if (!response.data.success) {
         // TODO: Handle error with Toasts
+        history.push("/");
         console.log("Unable to Get Game: ", response.data.message);
       } else {
         setGameData(response.data.data);
@@ -99,7 +102,7 @@ function Game() {
   return (
     <section className="main-game">
       <div className="main-chess">
-        <Header />
+        <Header gameData={gameData} />
         {BoardToRender}
       </div>
       {SideBarToRender}
