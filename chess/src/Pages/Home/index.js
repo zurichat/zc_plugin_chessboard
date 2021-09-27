@@ -60,7 +60,9 @@ function Homepage() {
         <div className={styles["chesshome-rules-holder"]}>
           <div className={styles["chesshome-rules"]}>
             <Link to="/rules">
-              <button className={styles["btn-chesshome-rules"]}>Game Rules</button>
+              <button className={styles["btn-chesshome-rules"]}>
+                Game Rules
+              </button>
             </Link>
           </div>
         </div>

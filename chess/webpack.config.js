@@ -32,40 +32,39 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   return mergeWithRules(mergeRules)(defaultConfig, {
-      // modify the webpack config however you'd like to by adding to this object
-      output: {
-        path: path.join(__dirname, "..", "dist"), // string (default)
-        // filename: "[name].js", // string (default)
-        // publicPath: path.join(__dirname, '..', 'dist', 'assets') // string
-      },
-      // resolve: {
-      //   fallback: {
-      //     fs: false,
-      //     path: false,
-      //     http: false,
-      //     tty: false,
-      //     buffer: false,
-      //   },
-      // },
-      module: {
-        rules: [
-          {
-            test: /\.css$/i,
-            use: [
-              "style-loader",
-              {
-                loader: "css-loader",
-                options: {
-                  importLoaders: 1,
-                  modules: {
-                    localIdentName: "[local]--[hash:base64:5]__[name]",
-                  },
+    // modify the webpack config however you'd like to by adding to this object
+    output: {
+      path: path.join(__dirname, "..", "dist"), // string (default)
+      // filename: "[name].js", // string (default)
+      // publicPath: path.join(__dirname, '..', 'dist', 'assets') // string
+    },
+    // resolve: {
+    //   fallback: {
+    //     fs: false,
+    //     path: false,
+    //     http: false,
+    //     tty: false,
+    //     buffer: false,
+    //   },
+    // },
+    module: {
+      rules: [
+        {
+          test: /\.css$/i,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 1,
+                modules: {
+                  localIdentName: "[local]--[hash:base64:5]__[name]",
                 },
               },
-            ],
-          },
-        ],
-      },
-    }
-  );
+            },
+          ],
+        },
+      ],
+    },
+  });
 };
