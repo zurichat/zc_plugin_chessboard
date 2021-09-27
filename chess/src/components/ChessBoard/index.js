@@ -36,7 +36,9 @@ function ChessBoard({ type, gameData }) {
 
   useEffect(() => {
     // Update Board and Engine on New Move
-    GameEngine.current = new Chess((moves.length > 0) ? moves.at(-1).position_fen : undefined);
+    GameEngine.current = new Chess(
+      moves.length > 0 ? moves.at(-1).position_fen : undefined
+    );
     set_board_position(GameEngine.current.fen());
   });
 
@@ -89,7 +91,8 @@ function ChessBoard({ type, gameData }) {
   const allowDrag = ({ piece, position }) => {
     if (
       GameEngine.current.game_over() ||
-      GameEngine.current.turn() !== players_to_color_map[getLoggedInUserData().user_id]
+      GameEngine.current.turn() !==
+        players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
@@ -112,14 +115,16 @@ function ChessBoard({ type, gameData }) {
     // set_board_position(GameEngine.current.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then((response) => {
-      if (!response.data.success) {
-        // TODO: Handle error with Toasts
-        // Update the Board with last move
-      } else {
-        setHistory(GameEngine.current.history({ verbose: true }));
+    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+      (response) => {
+        if (!response.data.success) {
+          // TODO: Handle error with Toasts
+          // Update the Board with last move
+        } else {
+          setHistory(GameEngine.current.history({ verbose: true }));
+        }
       }
-    });
+    );
   };
 
   // const onSquareClick = (square) => {
