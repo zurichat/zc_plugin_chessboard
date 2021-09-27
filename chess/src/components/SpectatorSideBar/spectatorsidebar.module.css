@@ -159,6 +159,10 @@
   right: 0;
   border: 1px solid rgb(228, 227, 227);
   border-radius: 5px;
+  position: sticky;
+  top: 0;
+  bottom: 0;  
+  background-color: #fff;
 }
 
 .chatInputForm > input {
