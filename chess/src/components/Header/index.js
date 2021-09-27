@@ -1,7 +1,7 @@
 import React from "react";
 
 // Import CSS for this page
-import "./header.css";
+import styles from "./header.module.css";
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -47,38 +47,38 @@ function Header({ gameData }) {
 
   return (
     <div>
-      <header className="main-header">
-        <div className="nav chesshome-nav">
-          <div id="chesshome-flex">
-            <h1 id="chesshome-name">
-              <img src={ChessImage} id="pawnLogo" />
+      <header className={styles["main-header"]}>
+        <div className={`${styles.nav} ${styles["chesshome-nav"]}`}>
+          <div id={styles["chesshome-flex"]}>
+            <h1 id={styles["chesshome-name"]}>
+              <img src={ChessImage} id={styles["pawnLogo"]} />
               Chess
             </h1>
             {/* <button id="arrow-button">
               <i className="arrow down"></i>
             </button> */}
           </div>
-          <div className="chesshome-headerRight">
+          <div className={styles["chesshome-headerRight"]}>
             {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
             {/* <a className="commentIcon">
               <img src={CommentIcon} alt="reply" />
             </a> */}
 
             {number_of_users_in_room > 0 ? (
-              <div className="chesshome-profileImg">
+              <div className={styles["chesshome-profileImg"]}>
                 <Profile
-                  className="chesshome-profile profileOne"
+                  className={`${styles["chesshome-profile"]} ${styles.profileOne}`}
                   src={imageProfileOne}
                 />
                 <Profile
-                  className="chesshome-profile profileTwo"
+                  className={`${styles["chesshome-profile"]} ${styles.profileTwo}`}
                   src={imageProfileTwo}
                 />
                 <Profile
-                  className="chesshome-profile profileThree"
+                  className={`${styles["chesshome-profile"]} ${styles.profileThree}`}
                   src={imageProfileThree}
                 />
-                <p className="text-300">
+                <p className={styles["text-300"]}>
                   {padLeadingZeros(number_of_users_in_room, 3)}
                 </p>
               </div>

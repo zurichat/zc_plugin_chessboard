@@ -55,11 +55,11 @@ class InformationController {
         .map((game) => {
           return {
             room_name: `${game.owner.user_name} vs ${
-              game.opponent ? game.opponent.user_name : "none"
+              game.opponent ? game.opponent.user_name : "-----"
             }`,
             room_image:
               "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
-            room_url: `https://zuri.chat/chess/game/${game._id}`,
+            room_url: `/chess/game/${game._id}`,
           };
         });
 
@@ -76,10 +76,19 @@ class InformationController {
           {
             room_name: "Chess room",
             room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
-            room_url: "https://zuri.chat/chess",
+            room_url: "/chess",
           },
         ],
-        joined_rooms,
+        joined_rooms: [
+          // To be removed
+          {
+            room_name: "Main Chess Room",
+            room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+            room_url: "/chess",
+          },
+          // To be removed
+          ...joined_rooms,
+        ],
       };
 
       // Won't be using our response formatter due to the format zc_main needs it

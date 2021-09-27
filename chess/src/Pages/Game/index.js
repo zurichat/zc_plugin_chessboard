@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { BrowserRouter, useParams } from "react-router-dom";
 
 // Import CSS for this page
-import "./game.css";
+import styles from "./game.module.css";
 
 // Import Adaptors
 import {
@@ -86,15 +86,16 @@ function Game() {
 
         case "spectator_left_game": {
           // completed - DO NOT EDIT!!
-          // Find Index of recently exited spectator in spectators array
-          const index = gameData.spectators.findIndex((spectator) => {
-            spectator.user_id == websocket.data.spectator.user_id;
-          });
-          // Check if user not a spectator, then just ignore the event
-          if (index !== -1) {
-            gameData.spectators.splice(index, 1);
-            setGameData({ ...gameData, spectators: gameData.spectators });
+          for (let i = gameData.spectators.length - 1; i >= 0; i--) {
+            // Loop through spectators list and remove the spectator
+            if (
+              gameData.spectators[i].user_id ===
+              websocket.data.spectator[0].user_id
+            ) {
+              gameData.spectators.splice(i, 1);
+            }
           }
+          setGameData({ ...gameData, spectators: gameData.spectators });
           break;
         }
 
@@ -159,8 +160,8 @@ function Game() {
   }
 
   return (
-    <section className="main-game">
-      <div className="main-chess">
+    <section className={styles["main-game"]}>
+      <div className={styles["main-chess"]}>
         <Header gameData={gameData} />
         {BoardToRender}
       </div>
@@ -169,4 +170,4 @@ function Game() {
   );
 }
 
-export default React.memo(Game);
+export default Game;
