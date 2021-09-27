@@ -310,7 +310,6 @@ function ChessBoard({ type, gameData }) {
             image_url={gameData.owner.image_url}
           />
         )}
-
       </ChessboardContainer>
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
     </>
