@@ -297,17 +297,17 @@ function ChessBoard({ type, gameData }) {
           />
         </div>
 
-        {players_to_color_map[getLoggedInUserData().user_id] == "w" ? (
-          <PlayerName
-            style={{ paddingBottom: "28px" }}
-            name={gameData.owner.user_name}
-            image_url={gameData.owner.image_url}
-          />
-        ) : (
+        {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
             style={{ paddingBottom: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
+          />
+        ) : (
+          <PlayerName
+            style={{ paddingBottom: "28px" }}
+            name={gameData.owner.user_name}
+            image_url={gameData.owner.image_url}
           />
         )}
 
