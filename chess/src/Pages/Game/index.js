@@ -88,7 +88,10 @@ function Game() {
           // completed - DO NOT EDIT!!
           for (let i = gameData.spectators.length - 1; i >= 0; i--) {
             // Loop through spectators list and remove the spectator
-            if (gameData.spectators[i].user_id === websocket.data.spectator[0].user_id) {
+            if (
+              gameData.spectators[i].user_id ===
+              websocket.data.spectator[0].user_id
+            ) {
               gameData.spectators.splice(i, 1);
             }
           }
