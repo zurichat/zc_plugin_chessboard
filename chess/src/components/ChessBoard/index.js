@@ -21,11 +21,9 @@ import GameWinnerModal from "../Modals/GameWinnerModal";
 
 function ChessBoard({ type, gameData }) {
   const game_id = gameData._id;
+  const GameEngine = useRef(new Chess());
 
-  // Restore or initiate Game From Chess Engine
-  const GameEngine = new Chess(
-    gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : undefined
-  );
+  const [moves, setMoves] = useState(gameData.moves);
 
   const players_to_color_map = {
     [gameData.owner.user_id]: gameData.owner.color,
@@ -35,6 +33,13 @@ function ChessBoard({ type, gameData }) {
   const [board_position, set_board_position] = useState(
     gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
   );
+
+  useEffect(() => {
+    // Update Board and Engine on New Move
+    GameEngine.current = new Chess((moves.length > 0) ? moves.at(-1).position_fen : undefined);
+    set_board_position(GameEngine.current.fen());
+  });
+
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
   const [history, setHistory] = useState([]);
@@ -83,8 +88,8 @@ function ChessBoard({ type, gameData }) {
 
   const allowDrag = ({ piece, position }) => {
     if (
-      GameEngine.game_over() ||
-      GameEngine.turn() !== players_to_color_map[getLoggedInUserData().user_id]
+      GameEngine.current.game_over() ||
+      GameEngine.current.turn() !== players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
@@ -94,7 +99,7 @@ function ChessBoard({ type, gameData }) {
 
   const onDrop = ({ sourceSquare, targetSquare, piece }) => {
     // see if the move is legal
-    const move = GameEngine.move({
+    const move = GameEngine.current.move({
       piece,
       from: sourceSquare,
       to: targetSquare,
@@ -104,16 +109,15 @@ function ChessBoard({ type, gameData }) {
     // illegal move
     if (move === null) return;
 
-    set_board_position(GameEngine.fen());
+    // set_board_position(GameEngine.current.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.fen()).then((response) => {
+    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then((response) => {
       if (!response.data.success) {
         // TODO: Handle error with Toasts
         // Update the Board with last move
       } else {
-        setHistory(GameEngine.history({ verbose: true }));
-        squareStyling({ pieceSquare, history });
+        setHistory(GameEngine.current.history({ verbose: true }));
       }
     });
   };
@@ -122,7 +126,7 @@ function ChessBoard({ type, gameData }) {
   //   squareStyling(square, history);
   //   setPieceSquare(square);
 
-  //   const move = GameEngine.move({
+  //   const move = GameEngine.current.move({
   //     from: pieceSquare,
   //     to: square,
   //     promotion: "q",
@@ -130,15 +134,15 @@ function ChessBoard({ type, gameData }) {
 
   //   if (move === null) return;
 
-  //   set_board_position(GameEngine.fen());
+  //   set_board_position(GameEngine.current.fen());
 
   //   // Piece Move API Call
-  //   UpdatePieceMove(game_id, move, GameEngine.fen()).then((response) => {
+  //   UpdatePieceMove(game_id, move, GameEngine.current.fen()).then((response) => {
   //     if (!response.data.success) {
   //       // TODO: Handle error with Toasts
   //       // Update the Board with last move
   //     } else {
-  //       setHistory(GameEngine.history({ verbose: true }));
+  //       setHistory(GameEngine.current.history({ verbose: true }));
   //       setPieceSquare("");
   //     }
   //   });
@@ -151,7 +155,7 @@ function ChessBoard({ type, gameData }) {
 
   const onMouseOverSquare = (square) => {
     // get list of possible moves for this square
-    const moves = GameEngine.moves({
+    const moves = GameEngine.current.moves({
       square: square,
       verbose: true,
     });
@@ -200,8 +204,8 @@ function ChessBoard({ type, gameData }) {
   };
 
   let gameWinner = null;
-  if (GameEngine && GameEngine.in_checkmate() === true) {
-    GameEngine.turn() === "w"
+  if (GameEngine.current && GameEngine.current.in_checkmate() === true) {
+    GameEngine.current.turn() === "w"
       ? (gameWinner = gameData.opponent)
       : (gameWinner = gameData.owner);
 
