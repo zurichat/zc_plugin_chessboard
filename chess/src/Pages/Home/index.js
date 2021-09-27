@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Import CSS for this page
-import "./home.css";
+import styles from "./home.module.css";
 
 // Import Adaptors
 import { getAllGames } from "../../adapters/home";
@@ -35,7 +35,7 @@ function Homepage() {
     const game = games[i];
     if (game && game.status !== 2) {
       boards.push(
-        <div className="mini-one" key={game._id}>
+        <div className={styles["mini-one"]} key={game._id}>
           <MiniBoard
             key={game._id}
             game_id={game._id}
@@ -46,7 +46,7 @@ function Homepage() {
       );
     } else {
       boards.push(
-        <div className="mini-one" key={i}>
+        <div className={styles["mini-one"]} key={i}>
           <MiniBoard key={i} />
         </div>
       );
@@ -55,16 +55,16 @@ function Homepage() {
 
   return (
     <>
-      <div className="chesshome-container">
+      <div className={styles["chesshome-container"]}>
         <Header />
-        <div className="chesshome-rules-holder">
-          <div className="chesshome-rules">
+        <div className={styles["chesshome-rules-holder"]}>
+          <div className={styles["chesshome-rules"]}>
             <Link to="/rules">
-              <button className="btn-chesshome-rules">Game Rules</button>
+              <button className={styles["btn-chesshome-rules"]}>Game Rules</button>
             </Link>
           </div>
         </div>
-        <div className="app__container">{boards}</div>
+        <div className={styles.app__container}>{boards}</div>
       </div>
     </>
   );
