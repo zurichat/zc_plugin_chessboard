@@ -256,7 +256,7 @@ function ChessBoard({ type, gameData }) {
             zIndex: "1",
           }}
         >
-          {/* <ChessBoardBorder /> */}
+          <ChessBoardBorder />
           <Chessboard
             // Set custom Chess Pieces
             pieces={chessPieces()}
