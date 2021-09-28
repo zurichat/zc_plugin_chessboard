@@ -85,7 +85,7 @@ function ChessBoard({ type, gameData }) {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 410;
+    return screenWidth < 560 ? screenWidth * 0.85 : screenWidth < 800 ? screenWidth * 0.48 : screenHeight < 650 ? 350 : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
@@ -233,7 +233,7 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        <h4
+        {/* <h4
           style={{
             textAlign: "center",
             fontSize: "1.5rem",
@@ -244,7 +244,7 @@ function ChessBoard({ type, gameData }) {
         >
           {" "}
           Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
-        </h4>
+        </h4> */}
 
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
@@ -254,7 +254,7 @@ function ChessBoard({ type, gameData }) {
           />
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
