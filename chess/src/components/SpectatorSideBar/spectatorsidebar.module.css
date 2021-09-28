@@ -76,6 +76,15 @@
   justify-content: space-between;
 }
 
+.chatWrapperContainer {
+      box-sizing: border-box;
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 8px;
+      -webkit-user-select: text;
+      width: 100%;
+}
+
 .chatWrapper {
   width: 100%;
   background: white;
