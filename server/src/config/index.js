@@ -23,6 +23,6 @@ module.exports = {
     DELETE_URL: "https://api.zuri.chat/data/delete",
   },
 
-  // Fetch user zc_core endpoint
-  USER_URL: "https://api.zuri.chat/users/",
+  // Verify user auth status with this URL
+  WELCOME_URL: "https://api.zuri.chat/v1/welcome",
 };
