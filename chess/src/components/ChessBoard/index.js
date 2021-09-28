@@ -238,7 +238,7 @@ function ChessBoard({ type, gameData }) {
             textAlign: "center",
             fontSize: "1.5rem",
             paddingTop: "1rem",
-            
+
             top: "0px",
           }}
         >
