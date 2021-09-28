@@ -85,7 +85,7 @@ function ChessBoard({ type, gameData }) {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 455;
+    return screenWidth < 560 ? screenWidth * 0.85 : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
@@ -236,8 +236,10 @@ function ChessBoard({ type, gameData }) {
         <h4
           style={{
             textAlign: "center",
-            fontSize: "2.5rem",
+            fontSize: "1.5rem",
             paddingTop: "1rem",
+
+            top: "0px",
           }}
         >
           {" "}
