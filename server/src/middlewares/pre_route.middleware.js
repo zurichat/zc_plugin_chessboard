@@ -9,12 +9,7 @@ const cors = require("cors");
 // Export Module
 module.exports = (app) => {
   // enable CORS
-  app.use(
-    cors({
-      // Allow all Origins so we can use the live api for local testing
-      origin: ["*"],
-    })
-  );
+  app.use(cors());
 
   // enable Cors for all routes
   // app.use(cors());

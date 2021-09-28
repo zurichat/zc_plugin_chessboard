@@ -16,7 +16,7 @@ class GameController {
       //Logic for more than 6 games not being active
       const gameDBData = await GameRepo.fetchAll();
 
-      if (gameDBData.data.length < 6) {
+      if (!gameDBData.data || gameDBData.data.length < 7) {
         // create new game
 
         // Pass the request body to the schema
@@ -174,7 +174,12 @@ class GameController {
       // Return all games
       res
         .status(200)
-        .send(response("Games retrieved successfully", gameDBData.data));
+        .send(
+          response(
+            "Games retrieved successfully",
+            gameDBData.data == null ? [] : gameDBData.data
+          )
+        );
     } catch (error) {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }

@@ -50,14 +50,13 @@
   <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
 
   <% if (isLocal) { %>
-    <script type="systemjs-importmap">
-      {
-        "imports": {
-          "@single-spa/welcome": "//unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
-          "@zuri/root-config": "//chess.zuri.chat/zuri-root-config.js",
-          "@zuri/zuri-plugin-chessboard": "//chess.zuri.chat/zuri-zuri-plugin-chessboard.js",
-          "@zuri/control": "//zuri.chat/zuri-control.js"
-        }
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
+        "@zuri/root-config": "https://chess.zuri.chat/zuri-root-config.js",
+        "@zuri/zuri-plugin-chessboard": "https://chess.zuri.chat/zuri-zuri-plugin-chessboard.js",
+        "@zuri/zuri-control": "https://zuri.chat/zuri-control.js"
       }
     </script>
   <% } %>
