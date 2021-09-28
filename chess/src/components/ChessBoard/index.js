@@ -40,7 +40,7 @@ function ChessBoard({ type, gameData }) {
       moves.length > 0 ? moves.at(-1).position_fen : undefined
     );
     set_board_position(GameEngine.current.fen());
-  });
+  }, []);
 
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
@@ -112,8 +112,6 @@ function ChessBoard({ type, gameData }) {
     // illegal move
     if (move === null) return;
 
-    // set_board_position(GameEngine.current.fen());
-
     // Piece Move API Call
     UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
       (response) => {
@@ -125,6 +123,8 @@ function ChessBoard({ type, gameData }) {
         }
       }
     );
+
+    set_board_position(GameEngine.current.fen());
   };
 
   // const onSquareClick = (square) => {
