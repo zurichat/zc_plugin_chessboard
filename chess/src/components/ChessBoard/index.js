@@ -236,9 +236,9 @@ function ChessBoard({ type, gameData }) {
         <h4
           style={{
             textAlign: "center",
-            fontSize: "2.5rem",
+            fontSize: "1.5rem",
             paddingTop: "1rem",
-            position: "absolute",
+            
             top: "0px",
           }}
         >
