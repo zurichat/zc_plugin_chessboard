@@ -12,7 +12,7 @@ const app = express();
 // swagger setup
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDocument = require("swagger-jsdoc");
-const {generateImage} = require("./src/utils/imageHelper");
+const { generateImage } = require("./src/utils/imageHelper");
 
 const swaggerOptions = {
   definition: {
