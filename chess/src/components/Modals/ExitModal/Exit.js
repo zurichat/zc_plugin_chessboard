@@ -1,71 +1,69 @@
-// import { createPortal } from "react-dom";
 import React, { useState, useEffect } from "react";
-import Logo from "./profile.png";
-import "./Exit.css";
-import axios from "axios";
+import Logo from "../../../assets/modal/profile_img.svg";
+import Close from "../../../assets/modal/close.svg";
+import styles from "./exit.module.css";
 import { useHistory } from "react-router-dom";
+import { UpdateGameWinner } from "../../../adapters/chessboard";
 
-// const Forfeit = ({ isYes, onClose }) => {
-
-const Exit = ({ isYes, handleClick, gameData }) => {
-  let history = useHistory();
-  if (!isYes) {
-    return null;
-  }
-  // return createPortal(
+const Exit = ({ isOpen, setIsOpen, gameData }) => {
+  const history = useHistory();
   const [gameId, setGameId] = useState(gameId);
+  const close = () => setIsOpen(false);
 
   useEffect(() => {
-    setGameId(gameData.data._id);
-    console.log(gameId);
+    setGameId(gameData._id);
   }, []);
 
   const exitGame = async () => {
-    const gameEndData = {
-      user_id: gameData.data.owner.user_id,
-      game_id: gameId,
-    };
-
-    const result = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/end",
-      gameEndData
-    );
-    if (result.data.success) {
-      history.push("/");
-    } else {
-      //....
-    }
+    UpdateGameWinner(gameId, gameData.owner.user_id).then((response) => {
+      if (response.data.success) {
+        history.push("/");
+      } else {
+        //....
+      }
+    });
   };
 
+  if (!isOpen) {
+    return null;
+  }
+
   return (
-    <div className="exit__container">
-      <div className="exit__modal">
-        <article className="exit__header">
-          <div className="exit__profile">
+    <div className={styles.exit__container}>
+      <div className={styles.exit__modal}>
+        <button className={styles["btn-exit-modal-close"]} onClick={close}>
+          <img className="" src={Close} alt="Close" />
+        </button>
+
+        <article className={styles.exit__header}>
+          <div className={styles.exit__profile}>
             <img src={Logo} alt="profile" />
           </div>
         </article>
-        <section className="exit__content">
-          <p className="exit__text">
+
+        <section className={styles.exit__content}>
+          <p className={styles.exit__text}>
             You are probably tired of waiting for player 2, are you sure you
             want to leave the game?
           </p>
         </section>
-        <footer className="exit__footer">
-          <button className="exit__button exit__button--yes" onClick={exitGame}>
+
+        <footer className={styles.exit__footer}>
+          <button
+            className={styles["exit__button exit__button--yes"]}
+            onClick={exitGame}
+          >
             Yes
           </button>
           <button
-            className=" exit__button exit__button--no"
-            onClick={() => handleClick()}
+            className={styles[" exit__button exit__button--no"]}
+            onClick={close}
           >
             No
           </button>
         </footer>
       </div>
     </div>
-
-    // ,document.getElementById("forfeit")
   );
 };
 

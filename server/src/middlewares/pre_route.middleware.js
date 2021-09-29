@@ -16,6 +16,9 @@ module.exports = (app) => {
     })
   );
 
+  // enable Cors for all routes
+  // app.use(cors());
+
   // Secure the app by setting various HTTP headers off.
   // app.use(helmet());
 
