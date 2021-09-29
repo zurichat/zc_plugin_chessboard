@@ -21,11 +21,6 @@ const generateImage = async (imag1, imag2, org) => {
         x: 32,
         y: 0,
       },
-      {
-        src: "https://res.cloudinary.com/ndubuisijr/image/upload/v1632833889/versus_jdgm6k.png", //vs image
-        x: 24,
-        y: 0,
-      },
     ],
     {
       Canvas: Canvas,
