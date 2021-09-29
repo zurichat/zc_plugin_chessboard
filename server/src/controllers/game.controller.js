@@ -43,6 +43,7 @@ class GameController {
           res.locals.organisation_id,
           user_id,
           {
+            event: "sidebar_update",
             sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
           }
         );
@@ -86,6 +87,7 @@ class GameController {
           res.locals.organisation_id,
           user_id,
           {
+            event: "sidebar_update",
             sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
           }
         );
@@ -163,6 +165,7 @@ class GameController {
           res.locals.organisation_id,
           user_id,
           {
+            event: "sidebar_update",
             sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
           }
         );
@@ -331,6 +334,7 @@ class GameController {
         res.locals.organisation_id,
         user_id,
         {
+          event: "sidebar_update",
           sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
         }
       );
@@ -386,6 +390,7 @@ class GameController {
         res.locals.organisation_id,
         user_id,
         {
+          event: "sidebar_update",
           sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
         }
       );
@@ -450,6 +455,7 @@ class GameController {
         res.locals.organisation_id,
         user_id,
         {
+          event: "sidebar_update",
           sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
         }
       );
@@ -520,6 +526,7 @@ class GameController {
         res.locals.organisation_id,
         user_id,
         {
+          event: "sidebar_update",
           sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
         }
       );
