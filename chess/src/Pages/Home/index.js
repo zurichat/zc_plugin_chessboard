@@ -55,8 +55,8 @@ function Homepage() {
 
   return (
     <>
+    <Header />
       <div className={styles["chesshome-container"]}>
-        <Header />
         <div className={styles["chesshome-rules-holder"]}>
           <div className={styles["chesshome-rules"]}>
             <Link to="/rules">
