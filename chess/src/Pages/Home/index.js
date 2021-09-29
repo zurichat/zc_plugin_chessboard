@@ -55,7 +55,7 @@ function Homepage() {
 
   return (
     <>
-    <Header />
+      <Header />
       <div className={styles["chesshome-container"]}>
         <div className={styles["chesshome-rules-holder"]}>
           <div className={styles["chesshome-rules"]}>
