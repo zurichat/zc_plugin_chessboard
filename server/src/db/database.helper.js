@@ -105,6 +105,10 @@ class DatabaseConnection {
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}`
       );
 
+      if (response.data.data == null) {
+        return { data: [] };
+      }
+
       // Return the response
       return response.data;
     } catch (error) {
