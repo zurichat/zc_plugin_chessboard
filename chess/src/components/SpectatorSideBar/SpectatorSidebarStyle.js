@@ -60,7 +60,7 @@ const Chat = styled.div`
     padding: 1.5rem 2rem 0.5rem 1rem;
     display: flex;
     flex-direction: column;
-    height: 90vh;
+    height: 100vh;
     justify-content: space-between;
   }
 `;
@@ -68,7 +68,7 @@ const Chat = styled.div`
 const ChatWrapper = styled.div`
   width: 100%;
   background: white;
-  margin: 1rem 0;
+  margin: 1rem 0 2rem 0;
 
   @media only screen and (max-width: 420px) {
     width: 100%;
@@ -191,6 +191,14 @@ const ChatInputForm = styled.div`
       width: 3rem !important;
     }
 
+    .svgNotneeded {
+      display: none;
+    }
+
+    .svgNomargin {
+      margin-right: none !important;
+    }
+
     .submit {
       :hover {
         stroke: rgb(224, 223, 224);
@@ -204,6 +212,10 @@ const ChatInputForm = styled.div`
     .icon-down {
       border-left: 2px solid rgb(196, 195, 196);
       width: 3rem !important;
+      margin-right: 0 !important;
+      @media only screen and (max-width: 420px) {
+        display: none;
+      }
     }
 
     .inputIconsleft > svg,
@@ -212,15 +224,17 @@ const ChatInputForm = styled.div`
       width: 2rem;
       cursor: pointer;
       @media only screen and (max-width: 320px) {
-        width: 1rem;
+        width: 2rem !important;
       }
     }
   }
 `;
 
 const ExitBtn = styled.button`
-  position: relative;
-  bottom: 5%;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 30%;
   width: inherit;
   border-radius: 4px;
   border: 0.5px solid #b8003c;
