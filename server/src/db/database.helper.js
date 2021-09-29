@@ -7,7 +7,7 @@ const CustomError = require("../utils/custom-error");
 
 class DatabaseConnection {
   // First, we set the collection to work with when starting the DB connection
-  constructor(collection_name) {
+  constructor(collection_name, organisation_id) {
     // Set Write Endpoint
     this.DB_WRITE_URL = DATABASE.ZC_CORE_DB_WRITE;
 
@@ -19,7 +19,7 @@ class DatabaseConnection {
     // Set the default values for the DB operations
     this.DB_DEFAULTS_CONFIG = {
       plugin_id: DATABASE.PLUGIN_ID,
-      organization_id: DATABASE.ORGANISATION_ID,
+      organization_id: organisation_id,
       // Set the name of the collection to use
       collection_name: collection_name,
       bulk_write: false,
@@ -83,6 +83,11 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
+
+      if (error.response.data.status == 404 && error.response.data.message == "collection not found") {
+        return { data: [] };
+      }
+
       throw new CustomError(
         `Unable to Connect to Zuri Core DB [READ ONE BY PARAMETER]: ${error}`,
         "500"
@@ -101,6 +106,11 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
+
+      if (error.response.data.status == 404 && error.response.data.message == "collection not found") {
+        return { data: [] };
+      }
+
       throw new CustomError(
         `Unable to Connect to Zuri Core DB [READ ALL]: ${error}`,
         "500"
