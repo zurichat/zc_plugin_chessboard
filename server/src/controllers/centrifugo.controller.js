@@ -30,16 +30,6 @@ class CentrifugoController {
   static async publishToSideBar(organisation_id, user_id, data) {
     let channel = `${organisation_id}_${user_id}_sidebar`;
 
-    // {
-    //   sidebar_url: "https://plugin.zuri.chat/sidebar"
-    //   action: "add" // either add or remove
-    //   update: {
-    //     room_name: 'Room name',
-    //     room_image: "https://url",
-    //     room_url: "/plugin"
-    //   }
-    // }
-
     try {
       await axios.post(
         SOCKET_URL,
