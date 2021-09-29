@@ -4,7 +4,7 @@ const { Canvas, Image } = require("canvas");
 const path = require("path");
 const { unlink, writeFile, readdir } = require("fs").promises;
 
-const generateImage = async (imag1, imag2, org) => {
+const generateImage = async (imag1, imag2, game_id, org) => {
   const image = await mergeImages(
     [
       {
@@ -31,7 +31,7 @@ const generateImage = async (imag1, imag2, org) => {
     }
   );
 
-  const file = `${new Date().getTime()}_${org}_sidebar.png`;
+  const file = `${game_id}_${org}_sidebar.png`;
 
   await writeFile(
     path.join(__dirname, "..", "..", "..", "chess", "dist", file),
@@ -43,7 +43,7 @@ const generateImage = async (imag1, imag2, org) => {
   return file;
 };
 
-const disposeImage = async (org) => {
+const disposeImages = async (org) => {
   const dirName = path.join(__dirname, "..", "..", "..", "chess", "dist");
   const names = await readdir(dirName);
   for (let file of names) {
@@ -53,7 +53,18 @@ const disposeImage = async (org) => {
   }
 };
 
+const disposeImage = async (org, game_id) => {
+  const dirName = path.join(__dirname, "..", "..", "..", "chess", "dist");
+  const names = await readdir(dirName);
+  for (let file of names) {
+    if (file.includes(`_${game_id}_${org}`)) {
+      await unlink(path.join(dirName, file));
+    }
+  }
+};
+
 module.exports = {
   generateImage,
   disposeImage,
+  disposeImages,
 };

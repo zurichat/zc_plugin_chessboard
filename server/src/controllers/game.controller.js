@@ -4,6 +4,7 @@ const CustomError = require("../utils/custom-error");
 const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
+const { disposeImage } = require("../utils/imageHelper");
 
 class GameController {
   constructor(organisation_id) {
@@ -37,6 +38,14 @@ class GameController {
 
         // Save the game to the database
         const newGameDBData = await this.GameRepo.create(game);
+
+        await centrifugoController.publishToSideBar(
+          res.locals.organisation_id,
+          user_id,
+          {
+            sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+          }
+        );
 
         // Return the game
         res
@@ -72,6 +81,14 @@ class GameController {
           spectators: [],
           status: 0,
         });
+
+        await centrifugoController.publishToSideBar(
+          res.locals.organisation_id,
+          user_id,
+          {
+            sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+          }
+        );
 
         res
           .status(201)
@@ -142,6 +159,13 @@ class GameController {
 
         // Publish the event to Centrifugo server
         await centrifugoController.publish(game_id, payload);
+        await centrifugoController.publishToSideBar(
+          res.locals.organisation_id,
+          user_id,
+          {
+            sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+          }
+        );
       }
 
       // Return the game
@@ -303,7 +327,13 @@ class GameController {
 
       // Publish the event to Centrifugo server
       await centrifugoController.publish(game_id, payload);
-
+      await centrifugoController.publishToSideBar(
+        res.locals.organisation_id,
+        user_id,
+        {
+          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+        }
+      );
       // Return the game
       res.status(200).send(response("Joined as spectator successful", updated));
     } catch (error) {
@@ -352,7 +382,13 @@ class GameController {
 
       // Publish the event to Centrifugo server
       await centrifugoController.publish(game_id, payload);
-
+      await centrifugoController.publishToSideBar(
+        res.locals.organisation_id,
+        user_id,
+        {
+          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+        }
+      );
       // Return the game
       res.status(200).send(response("spectator removed successfully", updated));
     } catch (error) {
@@ -410,6 +446,14 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
+      await centrifugoController.publishToSideBar(
+        res.locals.organisation_id,
+        user_id,
+        {
+          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+        }
+      );
+      await disposeImage(res.locals.organisation_id, game_id);
 
       return res.status(200).send(
         response("Game ended!!!", {
@@ -472,6 +516,14 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
+      await centrifugoController.publishToSideBar(
+        res.locals.organisation_id,
+        user_id,
+        {
+          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+        }
+      );
+      await disposeImage(res.locals.organisation_id, game_id);
       return res.status(200).send(response("Game ended!!!", updated));
     } catch (error) {
       throw new CustomError(`Unable to end game ${error}`, 500);

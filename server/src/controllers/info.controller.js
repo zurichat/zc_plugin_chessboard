@@ -3,9 +3,7 @@ const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
 const { DATABASE } = require("../config/index");
-const { generateImage, disposeImage } = require("../utils/imageHelper");
-
-const GameRepo = new DatabaseConnection("003test_game");
+const { generateImage, disposeImages } = require("../utils/imageHelper");
 
 class InformationController {
   async getPluginInfo(req, res) {
@@ -47,9 +45,6 @@ class InformationController {
     try {
       const { user, org } = req.query;
 
-      // delete exiting sidebar icons for this organisation
-      disposeImage(org);
-
       // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
       const GameRepo = new DatabaseConnection("003test_game", org);
       const { data } = await GameRepo.fetchAll();
@@ -57,7 +52,14 @@ class InformationController {
         return res.status(404).send(response("data not available", {}, false));
 
       // pick running games
-      const filtered = data.filter((x) => x.status !== 2);
+      const filtered = data.filter((x) => {
+        return (
+          x.status !== 2 &&
+          (x.owner.user_id == user ||
+            (x.opponent && x.opponent.user_id == user) ||
+            x.spectators.filter((y) => y.user_id == user).length > 1)
+        );
+      });
 
       const joined_rooms = [];
       for (let game of filtered) {
@@ -65,6 +67,7 @@ class InformationController {
         const imageName = await generateImage(
           game.owner.image_url ? game.owner.image_url : null,
           game.opponent ? game.opponent.image_url : null,
+          game._id,
           org
         );
 
