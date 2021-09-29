@@ -192,11 +192,11 @@ const ChatInputForm = styled.div`
     }
 
     .svgNotneeded {
-      display:none;
+      display: none;
     }
 
     .svgNomargin {
-      margin-right:none !important;
+      margin-right: none !important;
     }
 
     .submit {

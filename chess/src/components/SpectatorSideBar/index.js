@@ -99,7 +99,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
           />
 
           <div className={styles.chatContainer}>
-            <div className= {styles.chatWrapperContainer}>
+            <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 commentsFromGameData.map(
                   ({ user_name, image_url, text, timestamp }) => {
@@ -312,7 +312,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
-                    className={styles.svgNotneeded}
+                      className={styles.svgNotneeded}
                       width="18"
                       height="16"
                       viewBox="0 0 18 18"
@@ -343,7 +343,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
-                    className={styles.svgNomargin}
+                      className={styles.svgNomargin}
                       width="17"
                       height="16"
                       viewBox="0 0 17 16"
@@ -365,7 +365,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
-                    className={styles.svgNotneeded}
+                      className={styles.svgNotneeded}
                       width="16"
                       height="15"
                       viewBox="0 0 16 15"
