@@ -6,6 +6,3 @@ https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js
 
 @zuri/control
 https://zuri.chat/zuri-control.js
-
-@zuri/plugin-header
-https://zuri.chat/zuri-plugin-header.js
