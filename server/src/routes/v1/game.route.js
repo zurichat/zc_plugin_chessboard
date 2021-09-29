@@ -176,7 +176,9 @@ const GameCtrl = require("../../controllers/game.controller");
  *    500:
  *      description: An error occurred
  */
-router.post("/create", (req, res) => { new GameCtrl(res.locals.organisation_id).create(req, res); });
+router.post("/create", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).create(req, res);
+});
 
 // Join A Game
 
@@ -198,7 +200,9 @@ router.post("/create", (req, res) => { new GameCtrl(res.locals.organisation_id).
  *    500:
  *      description: An error occurred
  */
-router.post("/join", (req, res) => { new GameCtrl(res.locals.organisation_id).join(req, res); });
+router.post("/join", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).join(req, res);
+});
 
 /**
  * @swagger
@@ -212,7 +216,9 @@ router.post("/join", (req, res) => { new GameCtrl(res.locals.organisation_id).jo
  *    500:
  *      description: An error occurred
  */
-router.get("/all", (req, res) => { new GameCtrl(res.locals.organisation_id).getAll(req, res); });
+router.get("/all", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).getAll(req, res);
+});
 
 /**
  * @swagger
@@ -233,7 +239,9 @@ router.get("/all", (req, res) => { new GameCtrl(res.locals.organisation_id).getA
  *    500:
  *      description: An error occurred
  */
-router.patch("/watch", (req, res) => { new GameCtrl(res.locals.organisation_id).addSpectator(req, res); });
+router.patch("/watch", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).addSpectator(req, res);
+});
 
 /**
  * @swagger
@@ -254,7 +262,9 @@ router.patch("/watch", (req, res) => { new GameCtrl(res.locals.organisation_id).
  *    500:
  *      description: An error occurred
  */
-router.patch("/piecemove", (req, res) => { new GameCtrl(res.locals.organisation_id).pieceMove(req, res); });
+router.patch("/piecemove", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).pieceMove(req, res);
+});
 
 /**
  * @swagger
@@ -275,7 +285,9 @@ router.patch("/piecemove", (req, res) => { new GameCtrl(res.locals.organisation_
  *    500:
  *      description: An error occurred
  */
-router.patch("/end", (req, res) => { new GameCtrl(res.locals.organisation_id).endGame(req, res); });
+router.patch("/end", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).endGame(req, res);
+});
 
 /**
  * @swagger
@@ -296,7 +308,9 @@ router.patch("/end", (req, res) => { new GameCtrl(res.locals.organisation_id).en
  *    500:
  *      description: An error occurred
  */
-router.patch("/unwatch", (req, res) => { new GameCtrl(res.locals.organisation_id).removeSpectator(req, res); });
+router.patch("/unwatch", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).removeSpectator(req, res);
+});
 
 /**
  * @swagger
@@ -320,7 +334,9 @@ router.patch("/unwatch", (req, res) => { new GameCtrl(res.locals.organisation_id
  *      description: An error occurred
  */
 
-router.patch("/resign", (req, res) => { new GameCtrl(res.locals.organisation_id).resign(req, res); });
+router.patch("/resign", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).resign(req, res);
+});
 
 /**
  * @swagger
@@ -341,7 +357,9 @@ router.patch("/resign", (req, res) => { new GameCtrl(res.locals.organisation_id)
  *    500:
  *      description: An error occurred
  */
-router.get("/:id", (req, res) => { new GameCtrl(res.locals.organisation_id).getById(req, res); });
+router.get("/:id", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).getById(req, res);
+});
 
 /**
  * @swagger
@@ -362,7 +380,9 @@ router.get("/:id", (req, res) => { new GameCtrl(res.locals.organisation_id).getB
  *    500:
  *      description: An error occurred
  */
-router.get("/all/:userId", (req, res) => { new GameCtrl(res.locals.organisation_id).getAllByUser(req, res); });
+router.get("/all/:userId", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).getAllByUser(req, res);
+});
 
 // Send comment during game
 /**
@@ -388,7 +408,9 @@ router.get("/all/:userId", (req, res) => { new GameCtrl(res.locals.organisation_
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/comment", (req, res) => { new GameCtrl(res.locals.organisation_id).comment(req, res); });
+router.patch("/comment", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).comment(req, res);
+});
 
 /**
  * @swagger
@@ -411,7 +433,9 @@ router.patch("/comment", (req, res) => { new GameCtrl(res.locals.organisation_id
  *    500:
  *      description: An error occurred
  */
-router.delete("/delete", (req, res) => { new GameCtrl(res.locals.organisation_id).delete(req, res); });
+router.delete("/delete", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).delete(req, res);
+});
 
 // Export Module
 module.exports = router;

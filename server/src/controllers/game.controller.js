@@ -6,7 +6,6 @@ const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 
 class GameController {
-
   constructor(organisation_id) {
     this.GameRepo = new DatabaseConnection("003test_game", organisation_id);
   }
@@ -187,12 +186,13 @@ class GameController {
   // Fetch a single game
   async getById(req, res) {
     try {
-
       // request an info from the user
       const game_id = req.params.id;
 
       // Get all games from the database
-      const fetchedGame = await this.GameRepo.fetchByParameter({ _id: game_id });
+      const fetchedGame = await this.GameRepo.fetchByParameter({
+        _id: game_id,
+      });
 
       // if game id returns data, send response
       if (fetchedGame.data !== null) {

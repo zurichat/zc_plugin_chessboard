@@ -83,8 +83,10 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
-
-      if (error.response.data.status == 404 && error.response.data.message == "collection not found") {
+      if (
+        error.response.data.status == 404 &&
+        error.response.data.message == "collection not found"
+      ) {
         return { data: [] };
       }
 
@@ -106,8 +108,10 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
-
-      if (error.response.data.status == 404 && error.response.data.message == "collection not found") {
+      if (
+        error.response.data.status == 404 &&
+        error.response.data.message == "collection not found"
+      ) {
         return { data: [] };
       }
 

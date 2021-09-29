@@ -7,7 +7,7 @@ function returnAxiosInstance() {
     // baseURL: "//localhost:5050/api/v1/",
     headers: {
       "Content-Type": "application/json",
-      "Organisation": getCurrentOrganisation(),
+      Organisation: getCurrentOrganisation(),
       // 'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     },
     validateStatus: function (status) {
