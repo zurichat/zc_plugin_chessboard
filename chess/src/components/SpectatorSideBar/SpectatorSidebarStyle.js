@@ -63,11 +63,6 @@ const Chat = styled.div`
     height: 100vh;
     justify-content: space-between;
   }
-
-  .subChatContainer {
-    height: 90%;
-    overflow-y: auto;
-  }
 `;
 
 const ChatWrapper = styled.div`
@@ -218,6 +213,9 @@ const ChatInputForm = styled.div`
       border-left: 2px solid rgb(196, 195, 196);
       width: 3rem !important;
       margin-right: 0 !important;
+      @media only screen and (max-width: 420px) {
+        display: none;
+      }
     }
 
     .inputIconsleft > svg,

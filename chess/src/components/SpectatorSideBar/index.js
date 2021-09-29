@@ -99,7 +99,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
           />
 
           <div className={styles.chatContainer}>
-            <div className= {styles. subChatContainer}>
+            <div className= {styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 commentsFromGameData.map(
                   ({ user_name, image_url, text, timestamp }) => {
