@@ -40,11 +40,11 @@
     color: white;
   } */
 
-.close {
+/* .close {
   margin-top: 0.6rem;
   font-weight: 900;
   cursor: pointer;
-}
+} */
 
 .closeIcon:hover path {
   stroke: #d1dada !important;
@@ -73,9 +73,10 @@
   padding: 1.5rem 2rem 0.5rem 1rem;
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 100vh;
   -webkit-box-pack: justify;
   justify-content: space-between;
+  position: relative;
 }
 
 .chatWrapperContainer {
@@ -90,10 +91,10 @@
 .chatWrapper {
   width: 100%;
   background: white;
-  margin: 1rem 0;
+  margin: 1rem 0 2rem 0;
 }
 
-.specHead {
+.specHead { 
   display: flex;
   align-items: center;
 }
@@ -210,6 +211,14 @@ input::placeholder {
   width: 3rem !important;
 }
 
+.svgNotneeded {
+  display: none;
+}
+
+.svgNomargin {
+  margin-right:0 !important;
+}
+
 .submit:hover {
   stroke: rgb(224, 223, 224);
   fill: white;
@@ -219,8 +228,10 @@ input::placeholder {
 }
 
 .btn-Exit {
-  position: relative;
-  bottom: 5%;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: inherit;
   border-radius: 4px;
   border: 0.5px solid #b8003c;
@@ -231,6 +242,7 @@ input::placeholder {
 .icon-down {
   border-left: 2px solid rgb(196, 195, 196);
   width: 3rem !important;
+  margin-right: 0 !important;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -249,11 +261,13 @@ input::placeholder {
   .navLink {
     font-size: 1.8rem !important;
   }
- 
+  .icon-down {
+    display: none;
+  }
 }
 @media only screen and (max-width: 320px) {
   .inputIconsleft > svg,
-  .inputIconsright > svg {
-    width: 1rem;
+  .inputIconsright > svg , .feather , .icon-down{
+    width: 2rem !important;
   }
 }
