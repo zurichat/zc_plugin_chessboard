@@ -51,6 +51,7 @@ class InformationController {
       disposeImage(org);
 
       // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
+      const GameRepo = new DatabaseConnection("003test_game", org);
       const { data } = await GameRepo.fetchAll();
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
@@ -77,7 +78,7 @@ class InformationController {
         });
       }
 
-      const { PLUGIN_ID /*ORGANISATION_ID*/ } = DATABASE;
+      const { PLUGIN_ID } = DATABASE;
       const payload = {
         name: "Chess Plugin",
         description: "The Chess plugin",
