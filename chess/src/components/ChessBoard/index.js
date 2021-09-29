@@ -85,7 +85,13 @@ function ChessBoard({ type, gameData }) {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : screenWidth < 800 ? screenWidth * 0.48 : screenHeight < 650 ? 350 : 410;
+    return screenWidth < 560
+      ? screenWidth * 0.85
+      : screenWidth < 800
+      ? screenWidth * 0.48
+      : screenHeight < 650
+      ? 350
+      : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
