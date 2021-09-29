@@ -25,48 +25,37 @@ const Profile = ({ className, src }) => {
   );
 };
 
-
-
-
 function Header({ gameData }) {
-
   function numUsers() {
-  let number_of_users_in_room = 0;
-  if (gameData) {
-    if (gameData.owner) {
-      number_of_users_in_room++;
+    let number_of_users_in_room = 0;
+    if (gameData) {
+      if (gameData.owner) {
+        number_of_users_in_room++;
+      }
+
+      if (gameData.opponent) {
+        number_of_users_in_room++;
+      }
+
+      if (gameData.spectators.length > 0) {
+        number_of_users_in_room += gameData.spectators.length;
+      }
     }
+    return number_of_users_in_room;
+  }
 
-    if (gameData.opponent) {
-     number_of_users_in_room++;
-    }
-
-    if (gameData.spectators.length > 0) {
-      number_of_users_in_room += gameData.spectators.length;
-    }
-
-  } 
-  return number_of_users_in_room;
-}
-
-
-const pluginConfig = {
-  
+  const pluginConfig = {
     name: "Chess Plugin", //Name on header
     icon: ChessImage, //Image on header
-    thumbnailUrl: [
-      imageProfileOne,
-      imageProfileTwo,
-      imageProfileThree
-    ], //Replace with images of users
+    thumbnailUrl: [imageProfileOne, imageProfileTwo, imageProfileThree], //Replace with images of users
     userCount: padLeadingZeros(numUsers(), 3), //User count on header
-   eventTitle: () => {
+    eventTitle: () => {
       //Block of code to be triggered on title click
     },
     eventThumbnail: () => {
       //Block of code to be triggered on thumbnail click
     },
-    hasThumbnail: true //set false if you don't want thumbnail on the header
+    hasThumbnail: true, //set false if you don't want thumbnail on the header
   };
 
   // console.log(number_of_users_in_room);
@@ -82,7 +71,7 @@ const pluginConfig = {
       <Parcel
         config={pluginHeader}
         wrapWith="div"
-        wrapStyle={{width: "100%" }}
+        wrapStyle={{ width: "100%" }}
         headerConfig={pluginConfig}
       />
       {/* <header className={styles["main-header"]}>
@@ -92,16 +81,16 @@ const pluginConfig = {
               <img src={ChessImage} id={styles["pawnLogo"]} />
               Chess
             </h1> */}
-            {/* <button id="arrow-button">
+      {/* <button id="arrow-button">
               <i className="arrow down"></i>
             </button> */}
-          {/* </div>
+      {/* </div>
           <div className={styles["chesshome-headerRight"]}> */}
-            {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
-            {/* <a className="commentIcon">
+      {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
+      {/* <a className="commentIcon">
               <img src={CommentIcon} alt="reply" />
             </a> */}
-{/* 
+      {/* 
             {number_of_users_in_room > 0 ? (
               <div className={styles["chesshome-profileImg"]}>
                 <Profile
@@ -124,7 +113,7 @@ const pluginConfig = {
           </div>
         </div>
             </header> */}
-    </div> 
+    </div>
   );
 }
 
