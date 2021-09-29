@@ -5,10 +5,12 @@
 .side-bar {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 85vh;
   background: #fdffff;
   min-width: 30%;
   border-left: 5px solid #dbdbdb;
+  border-bottom: 5px solid #dbdbdb;
+  overflow: hidden;
 }
 
 .side-bar-nav {
@@ -56,7 +58,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 85vh;
+  height: 80vh;
 }
 
 * {
@@ -76,10 +78,6 @@
   justify-content: space-between;
   position: relative;
 }
-/* .subChatContainer {
-  height: 90%;
-  overflow-y: auto;
-} */
 
 .chatWrapperContainer {
       box-sizing: border-box;
@@ -245,6 +243,12 @@ input::placeholder {
   border-left: 2px solid rgb(196, 195, 196);
   width: 3rem !important;
   margin-right: 0 !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .side-bar{
+    border-left: none;
+  }
 }
 
 @media only screen and (max-width: 420px) {

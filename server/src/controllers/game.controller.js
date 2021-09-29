@@ -5,8 +5,11 @@ const gameSchema = require("../models/game.model");
 const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 
-const GameRepo = new DatabaseConnection("003test_game");
 class GameController {
+  constructor(organisation_id) {
+    this.GameRepo = new DatabaseConnection("003test_game", organisation_id);
+  }
+
   // Create A Game
   async create(req, res) {
     try {
@@ -14,7 +17,7 @@ class GameController {
       const { user_id, user_name, image_url } = req.body;
 
       //Logic for more than 6 games not being active
-      const gameDBData = await GameRepo.fetchAll();
+      const gameDBData = await this.GameRepo.fetchAll();
 
       if (gameDBData.data.length < 6) {
         // create new game
@@ -33,7 +36,7 @@ class GameController {
         });
 
         // Save the game to the database
-        const newGameDBData = await GameRepo.create(game);
+        const newGameDBData = await this.GameRepo.create(game);
 
         // Return the game
         res
@@ -56,7 +59,7 @@ class GameController {
             .send(response("No free boards right now", null, false));
 
         // Reset the game
-        const updateGameDBData = await GameRepo.update(game._id, {
+        const updateGameDBData = await this.GameRepo.update(game._id, {
           owner: {
             user_id,
             user_name,
@@ -92,7 +95,7 @@ class GameController {
       const { game_id, user_id, user_name, image_url } = req.body;
 
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -122,7 +125,7 @@ class GameController {
         };
 
         // Set opponent and save to db
-        const updated = await GameRepo.update(game_id, {
+        const updated = await this.GameRepo.update(game_id, {
           opponent,
           status: 1,
         });
@@ -159,16 +162,16 @@ class GameController {
 
       // Get games that have started, Join as Spectator view
       if (req.query.ongoing == 1) {
-        gameDBData = await GameRepo.fetchByParameter({
+        gameDBData = await this.GameRepo.fetchByParameter({
           status: 1,
         });
       } else if (req.query.noPlayer2 == 1) {
         // Get games that don't have player 2
-        gameDBData = await GameRepo.fetchByParameter({
+        gameDBData = await this.GameRepo.fetchByParameter({
           status: 0,
         });
       } else {
-        gameDBData = await GameRepo.fetchAll();
+        gameDBData = await this.GameRepo.fetchAll();
       }
 
       // Return all games
@@ -187,7 +190,9 @@ class GameController {
       const game_id = req.params.id;
 
       // Get all games from the database
-      const fetchedGame = await GameRepo.fetchByParameter({ _id: game_id });
+      const fetchedGame = await this.GameRepo.fetchByParameter({
+        _id: game_id,
+      });
 
       // if game id returns data, send response
       if (fetchedGame.data !== null) {
@@ -208,7 +213,7 @@ class GameController {
       const { game_id, user_id, position_fen, board_state } = req.body;
 
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -243,7 +248,7 @@ class GameController {
       };
 
       // update the database
-      const updated = await GameRepo.update(game_id, {
+      const updated = await this.GameRepo.update(game_id, {
         moves,
       });
 
@@ -261,7 +266,7 @@ class GameController {
       const { game_id, user_id, user_name, image_url } = req.body;
 
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -281,7 +286,7 @@ class GameController {
       const new_number_of_specators = spectators.push(spectator);
 
       // Save spectators back to db
-      const updated = await GameRepo.update(game_id, {
+      const updated = await this.GameRepo.update(game_id, {
         spectators,
       });
 
@@ -313,7 +318,7 @@ class GameController {
       const { game_id, user_id } = req.body;
 
       // Find the game in the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
 
       // Check if the game exists
       if (!gameDBData.data)
@@ -334,7 +339,7 @@ class GameController {
       const spectator = spectators.splice(index, 1);
 
       // Save spectators back to db
-      const updated = await GameRepo.update(game_id, {
+      const updated = await this.GameRepo.update(game_id, {
         spectators,
       });
 
@@ -362,7 +367,7 @@ class GameController {
       const { game_id, user_id } = req.body;
 
       // fetch the game from the database
-      const gameDBData = await GameRepo.fetchOne(game_id);
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
 
       // check if the game data exists
       if (!gameDBData.data) {
@@ -390,7 +395,7 @@ class GameController {
       const status = 2;
 
       // update the Game Info with current result
-      const updated = await GameRepo.update(gameDBData.data._id, {
+      const updated = await this.GameRepo.update(gameDBData.data._id, {
         is_owner_winner,
         status,
       });
@@ -424,7 +429,7 @@ class GameController {
       const { game_id, user_id } = req.body;
 
       // fetch the game from the database
-      const isGameExist = await GameRepo.fetchOne(game_id);
+      const isGameExist = await this.GameRepo.fetchOne(game_id);
 
       // check if the game data exists
       if (!isGameExist.data)
@@ -455,7 +460,7 @@ class GameController {
 
       isGameExist.data.status = 2;
       // update the Game Info with current result
-      const updated = await GameRepo.update(game_id, {
+      const updated = await this.GameRepo.update(game_id, {
         status: isGameExist.data.status,
         is_owner_winner: isGameExist.data.is_owner_winner,
       });
@@ -480,7 +485,7 @@ class GameController {
   async getAllByUser(req, res) {
     const { userId } = req.params;
     try {
-      const { data } = await GameRepo.fetchAll();
+      const { data } = await this.GameRepo.fetchAll();
       const userGames = data.filter((game) => {
         return (
           game.owner.user_id == userId ||
@@ -508,7 +513,7 @@ class GameController {
     }
 
     // find game in db
-    const gameDBData = await GameRepo.fetchOne(game_id);
+    const gameDBData = await this.GameRepo.fetchOne(game_id);
 
     if (!gameDBData.data) {
       return res.status(404).send(response("Game not found", null, false));
@@ -539,7 +544,7 @@ class GameController {
 
     comments.push(single_comment);
 
-    const updated = await GameRepo.update(game_id, { messages: comments });
+    const updated = await this.GameRepo.update(game_id, { messages: comments });
 
     // publish to centrifugo
     const payload = {
@@ -555,13 +560,13 @@ class GameController {
   // Deletes a particular game from the database
   async delete(req, res) {
     try {
-      const game = await GameRepo.fetchOne(req.body.game_id);
+      const game = await this.GameRepo.fetchOne(req.body.game_id);
       if (!game.data)
         return res
           .status(404)
           .send(response("No such game found in the database", {}, false));
 
-      await GameRepo.delete(game.data._id, game.data);
+      await this.GameRepo.delete(game.data._id, game.data);
 
       res.status(204).send(response("game deleted successfully", {}, false));
     } catch (error) {
@@ -571,4 +576,4 @@ class GameController {
 }
 
 // Export Module
-module.exports = new GameController();
+module.exports = GameController;
