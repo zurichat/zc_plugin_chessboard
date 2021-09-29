@@ -231,6 +231,12 @@ input::placeholder {
   width: 3rem !important;
 }
 
+@media only screen and (max-width: 1024px) {
+  .side-bar{
+    border-left: none;
+  }
+}
+
 @media only screen and (max-width: 420px) {
   .chatContainer {
     width: 100%;
@@ -241,6 +247,7 @@ input::placeholder {
   .navLink {
     font-size: 1.8rem !important;
   }
+ 
 }
 @media only screen and (max-width: 320px) {
   .inputIconsleft > svg,
