@@ -1,6 +1,9 @@
 /* eslint-disable */
 
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { GetUserInfo } from "@zuri/control";
+import { GetWorkspaceUser } from "@zuri/control";
 
 // Import CSS for this page
 // import "./chessboard.css";
@@ -40,7 +43,16 @@ function ChessBoard({ type, gameData }) {
       moves.length > 0 ? moves.at(-1).position_fen : undefined
     );
     set_board_position(GameEngine.current.fen());
+    getUser();
+
   });
+
+  // console.log(sessionStorage.getItem("user"));
+
+  const getUser = () => {
+    GetWorkspaceUser("odizeeplatform@gmail.com").then(res => console.log("userinfo", res))
+  }
+
 
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
@@ -92,7 +104,7 @@ function ChessBoard({ type, gameData }) {
     if (
       GameEngine.current.game_over() ||
       GameEngine.current.turn() !==
-        players_to_color_map[getLoggedInUserData().user_id]
+      players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
