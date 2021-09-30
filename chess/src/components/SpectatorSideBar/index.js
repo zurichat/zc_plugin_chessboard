@@ -37,9 +37,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
           console.log("Unable to send comment: ", response.data.message);
         } else {
           // Clear the comment message input
-          setCommentMsg("");
         }
-      });
+      }, setCommentMsg(""));
     } else {
       // TODO: Handle error with Toasts
       console.log("CommentMsg is empty");
