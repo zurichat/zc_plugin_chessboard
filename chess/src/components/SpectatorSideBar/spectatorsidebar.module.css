@@ -5,7 +5,7 @@
 .side-bar {
   display: flex;
   flex-direction: column;
-  height: 85vh;
+  height: 100vh;
   background: #fdffff;
   min-width: 30%;
   border-left: 5px solid #dbdbdb;
@@ -14,7 +14,7 @@
 }
 
 .side-bar-nav {
-  height: 7vh;
+  height: 4.5em;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -58,7 +58,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80vh;
+  height: 90vh;
 }
 
 * {
@@ -245,7 +245,7 @@ input::placeholder {
   margin-right: 0 !important;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .side-bar{
     border-left: none;
   }
