@@ -78,3 +78,7 @@ export function getLoggedInUserData() {
     };
   }
 }
+
+export function getCurrentOrganisation() {
+  return localStorage.getItem("currentWorkspace");
+}

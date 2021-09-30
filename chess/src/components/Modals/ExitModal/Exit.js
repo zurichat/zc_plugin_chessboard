@@ -19,7 +19,8 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
       if (response.data.success) {
         history.push("/");
       } else {
-        //....
+        // TODO: Handle error with Toasts
+        console.log("Unable to exit Game: ", response.data.message);
       }
     });
   };

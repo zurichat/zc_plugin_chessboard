@@ -37,9 +37,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
           console.log("Unable to send comment: ", response.data.message);
         } else {
           // Clear the comment message input
-          setCommentMsg("");
         }
-      });
+      }, setCommentMsg(""));
     } else {
       // TODO: Handle error with Toasts
       console.log("CommentMsg is empty");
@@ -99,7 +98,15 @@ const SpectatorSideBar = ({ type, gameData }) => {
           />
 
           <div className={styles.chatContainer}>
-            <div>
+            {type !== "spectator" && gameData.status === 0 && (
+              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
+            )}
+
+            {type !== "spectator" && gameData.status === 1 && (
+              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+            )}
+
+            <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 commentsFromGameData.map(
                   ({ user_name, image_url, text, timestamp }) => {
@@ -312,6 +319,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
+                      className={styles.svgNotneeded}
                       width="18"
                       height="16"
                       viewBox="0 0 18 18"
@@ -342,6 +350,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
+                      className={styles.svgNomargin}
                       width="17"
                       height="16"
                       viewBox="0 0 17 16"
@@ -363,6 +372,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
+                      className={styles.svgNotneeded}
                       width="16"
                       height="15"
                       viewBox="0 0 16 15"
@@ -481,14 +491,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 </div>
               </div>
             ) : null}
-
-            {type !== "spectator" && gameData.status === 0 && (
-              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
-            )}
-
-            {type !== "spectator" && gameData.status === 1 && (
-              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
-            )}
           </div>
         </div>
       </aside>

@@ -44,8 +44,7 @@ function ChessBoard({ type, gameData }) {
     );
     set_board_position(GameEngine.current.fen());
     getUser();
-
-  });
+  }, [moves]);
 
   // console.log(sessionStorage.getItem("user"));
 
@@ -97,7 +96,13 @@ function ChessBoard({ type, gameData }) {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 475;
+    return screenWidth < 560
+      ? screenWidth * 0.85
+      : screenWidth < 800
+      ? screenWidth * 0.48
+      : screenHeight < 650
+      ? 350
+      : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
@@ -124,7 +129,7 @@ function ChessBoard({ type, gameData }) {
     // illegal move
     if (move === null) return;
 
-    // set_board_position(GameEngine.current.fen());
+    set_board_position(GameEngine.current.fen());
 
     // Piece Move API Call
     UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
@@ -245,16 +250,18 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        <h4
+        {/* <h4
           style={{
             textAlign: "center",
-            fontSize: "2.5rem",
+            fontSize: "1.5rem",
             paddingTop: "1rem",
+
+            top: "0px",
           }}
         >
           {" "}
           Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
-        </h4>
+        </h4> */}
 
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
@@ -264,7 +271,7 @@ function ChessBoard({ type, gameData }) {
           />
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />

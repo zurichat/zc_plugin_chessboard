@@ -3,8 +3,7 @@ const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
 const { DATABASE } = require("../config/index");
-
-const GameRepo = new DatabaseConnection("003test_game");
+const { generateImage, disposeImages } = require("../utils/imageHelper");
 
 class InformationController {
   async getPluginInfo(req, res) {
@@ -45,25 +44,44 @@ class InformationController {
   async getSideBarInfo(req, res) {
     try {
       const { user, org } = req.query;
-      // fetch all data from db - Change this proceedure later
+
+      // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
+      const GameRepo = new DatabaseConnection("003test_game", org);
       const { data } = await GameRepo.fetchAll();
       if (!data)
         return res.status(404).send(response("data not available", {}, false));
 
-      const joined_rooms = data
-        .filter((x) => x.status !== 2)
-        .map((game) => {
-          return {
-            room_name: `${game.owner.user_name} vs ${
-              game.opponent ? game.opponent.user_name : "-----"
-            }`,
-            room_image:
-              "https://cdn-icons-png.flaticon.com/128/5093/5093415.png",
-            room_url: `/chess/game/${game._id}`,
-          };
-        });
+      // pick running games
+      const filtered = data.filter((x) => {
+        return (
+          x.status !== 2 &&
+          (x.owner.user_id == user ||
+            (x.opponent && x.opponent.user_id == user) ||
+            x.spectators.filter((y) => y.user_id == user).length > 1)
+        );
+      });
 
-      const { PLUGIN_ID /*ORGANISATION_ID*/ } = DATABASE;
+      const joined_rooms = [];
+      for (let game of filtered) {
+        // generate dynamic sidebar icons
+        const imageName = await generateImage(
+          game.owner.image_url ? game.owner.image_url : null,
+          game.opponent ? game.opponent.image_url : null,
+          game._id,
+          org
+        );
+
+        // add to room collection
+        joined_rooms.push({
+          room_name: `${game.owner.user_name} vs ${
+            game.opponent ? game.opponent.user_name : "-----"
+          }`,
+          room_image: `https://chess.zuri.chat/${imageName}`,
+          room_url: `/chess/game/${game._id}`,
+        });
+      }
+
+      const { PLUGIN_ID } = DATABASE;
       const payload = {
         name: "Chess Plugin",
         description: "The Chess plugin",
@@ -80,21 +98,16 @@ class InformationController {
           },
         ],
         joined_rooms: [
-          // To be removed
+          // To be removed - why?
           {
             room_name: "Main Chess Room",
             room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
             room_url: "/chess",
           },
-          // To be removed
+          // To be removed - why?
           ...joined_rooms,
         ],
       };
-
-      // Won't be using our response formatter due to the format zc_main needs it
-      // return res
-      //   .status(200)
-      //   .send(response("Fetched sidebar data", payload, true));
 
       // Just return the payload
       return res.status(200).json(payload);
