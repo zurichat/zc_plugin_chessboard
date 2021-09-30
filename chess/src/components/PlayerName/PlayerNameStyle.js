@@ -3,7 +3,7 @@ import styled from "styled-components";
 const PlayerDetails = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1em;
   padding: 13px 0;
   width: 100%;
   padding-top: 28px;
@@ -11,11 +11,13 @@ const PlayerDetails = styled.div`
   justify-content: flex-end;
 
   p {
+    font-size: 1.8em;
+    font-weight: bold;
     padding-left: 5px;
   }
 
   img {
-    width: 4rem;
+    width: 3rem;
   }
 `;
 

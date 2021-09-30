@@ -1,7 +1,11 @@
 import React from "react";
 
+//Zuri Header
+import Parcel from "single-spa-react/parcel";
+import { pluginHeader } from "@zuri/plugin-header";
+
 // Import CSS for this page
-import "./header.css";
+import styles from "./header.module.css";
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -22,22 +26,39 @@ const Profile = ({ className, src }) => {
 };
 
 function Header({ gameData }) {
-  let number_of_users_in_room = 0;
+  function numUsers() {
+    let number_of_users_in_room = 0;
+    if (gameData) {
+      if (gameData.owner) {
+        number_of_users_in_room++;
+      }
 
-  if (gameData) {
-    if (gameData.owner) {
-      number_of_users_in_room++;
-    }
+      if (gameData.opponent) {
+        number_of_users_in_room++;
+      }
 
-    if (gameData.opponent) {
-      number_of_users_in_room++;
+      if (gameData.spectators.length > 0) {
+        number_of_users_in_room += gameData.spectators.length;
+      }
     }
-
-    if (gameData.spectators.length > 0) {
-      number_of_users_in_room += gameData.spectators.length;
-    }
+    return number_of_users_in_room;
   }
 
+  const pluginConfig = {
+    name: "Chess Plugin", //Name on header
+    icon: ChessImage, //Image on header
+    thumbnailUrl: [imageProfileOne, imageProfileTwo, imageProfileThree], //Replace with images of users
+    userCount: padLeadingZeros(numUsers(), 3), //User count on header
+    eventTitle: () => {
+      //Block of code to be triggered on title click
+    },
+    eventThumbnail: () => {
+      //Block of code to be triggered on thumbnail click
+    },
+    hasThumbnail: true, //set false if you don't want thumbnail on the header
+  };
+
+  // console.log(number_of_users_in_room);
   // pad leading zeros
   function padLeadingZeros(num, size) {
     var s = num + "";
@@ -47,45 +68,51 @@ function Header({ gameData }) {
 
   return (
     <div>
-      <header className="main-header">
-        <div className="nav chesshome-nav">
-          <div id="chesshome-flex">
-            <h1 id="chesshome-name">
-              <img src={ChessImage} id="pawnLogo" />
+      <Parcel
+        config={pluginHeader}
+        wrapWith="div"
+        wrapStyle={{ width: "100%" }}
+        headerConfig={pluginConfig}
+      />
+      {/* <header className={styles["main-header"]}>
+        <div className={`${styles.nav} ${styles["chesshome-nav"]}`}>
+          <div id={styles["chesshome-flex"]}>
+            <h1 id={styles["chesshome-name"]}>
+              <img src={ChessImage} id={styles["pawnLogo"]} />
               Chess
-            </h1>
-            {/* <button id="arrow-button">
+            </h1> */}
+      {/* <button id="arrow-button">
               <i className="arrow down"></i>
             </button> */}
-          </div>
-          <div className="chesshome-headerRight">
-            {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
-            {/* <a className="commentIcon">
+      {/* </div>
+          <div className={styles["chesshome-headerRight"]}> */}
+      {/* <a className="commentIcon" onClick={() => setDisplay(true)}> */}
+      {/* <a className="commentIcon">
               <img src={CommentIcon} alt="reply" />
             </a> */}
-
+      {/* 
             {number_of_users_in_room > 0 ? (
-              <div className="chesshome-profileImg">
+              <div className={styles["chesshome-profileImg"]}>
                 <Profile
-                  className="chesshome-profile profileOne"
+                  className={`${styles["chesshome-profile"]} ${styles.profileOne}`}
                   src={imageProfileOne}
                 />
                 <Profile
-                  className="chesshome-profile profileTwo"
+                  className={`${styles["chesshome-profile"]} ${styles.profileTwo}`}
                   src={imageProfileTwo}
                 />
                 <Profile
-                  className="chesshome-profile profileThree"
+                  className={`${styles["chesshome-profile"]} ${styles.profileThree}`}
                   src={imageProfileThree}
                 />
-                <p className="text-300">
+                <p className={styles["text-300"]}>
                   {padLeadingZeros(number_of_users_in_room, 3)}
                 </p>
               </div>
             ) : null}
           </div>
         </div>
-      </header>
+            </header> */}
     </div>
   );
 }

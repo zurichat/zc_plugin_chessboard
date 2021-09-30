@@ -1,32 +1,36 @@
 // Import api call adapter
 import { get, patch } from "../xhr";
 import { getLoggedInUserData } from "../auth";
-import Centrifuge from "centrifuge";
+import { SubscribeToChannel } from "@zuri/control";
+// import Centrifuge from "centrifuge";
 
 export function getGameData(game_id) {
   return get(`/game/${game_id}`);
 }
 
 export function CentrifugeSetup(game_id, ChannelEventsListener) {
-  // Setup Centrifugo Route
-  const centrifuge = new Centrifuge(
-    "wss://realtime.zuri.chat/connection/websocket"
-    // "ws://localhost:8000/connection/websocket"
-  );
+  // // Setup Centrifugo Route
+  // const centrifuge = new Centrifuge(
+  //   "wss://realtime.zuri.chat/connection/websocket"
+  //   // "ws://localhost:8000/connection/websocket"
+  // );
 
-  // Disconnect from Centrifugo (if any)
-  centrifuge.disconnect();
+  // // Disconnect from Centrifugo (if any)
+  // centrifuge.disconnect();
 
-  // Subscribe to room with ID: GameId on Centrifugo Server
-  centrifuge.subscribe(game_id, (ctx) => {
-    ChannelEventsListener(ctx);
-  });
+  // // Subscribe to room with ID: GameId on Centrifugo Server
+  // centrifuge.subscribe(game_id, (ctx) => {
+  //   ChannelEventsListener(ctx);
+  // });
 
-  // Connect to Centrifugo Server
-  centrifuge.connect();
+  // // Connect to Centrifugo Server
+  // centrifuge.connect();
 
-  // // Return Centrifugo Instance
-  // return centrifuge;
+  // // // Return Centrifugo Instance
+  // // return centrifuge;
+
+  // Switched to ZC_MAIN SINGLE RTC METHOD
+  SubscribeToChannel(game_id, ChannelEventsListener);
 }
 
 // Watch Game

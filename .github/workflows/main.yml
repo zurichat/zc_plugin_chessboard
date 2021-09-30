@@ -151,6 +151,7 @@ jobs:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           script: |
-            cd /var/www/zc_plugin_chessboard/
+            cd /var/www/zc_plugin_chessboard/server
+            yarn install
             PM2_HOME=/opt/pm2/.pm2 pm2 restart index
 
