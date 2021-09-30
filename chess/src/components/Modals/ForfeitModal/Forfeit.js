@@ -3,9 +3,8 @@ import Close from "../../../assets/modal/close.svg";
 // import "./Forfeit.css";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { endGame } from "../../../adapters/game";
 
-//import style-components
 import {
   ForfeitContainer,
   ForfeitModal,
@@ -25,23 +24,21 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
     setGameId(gameData._id);
   }, []);
 
-  const forfeitGame = async () => {
+
+  const handleForfeitGame = async () => {
     const gameEndData = {
       user_id: gameData.owner.user_id,
       game_id: gameId,
     };
 
-    const res = await axios.patch(
-      "https://chess.zuri.chat/api/v1/game/end",
-      gameEndData
-    );
-
-    if (res.data.success) {
-      history.push("/");
-    } else {
-      //.
-      console.log("Unable to end game " + res.data.message);
-    }
+    endGame(gameId).then((response) => {
+      if (response.data.success) {
+        history.push("/");
+      } else {
+        // TODO: Handle error with Toasts
+        console.log("Unable to forfeit Game: ", response.data.message);
+      }
+    });
   };
 
   if (!isModalOpen) {
@@ -70,7 +67,7 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
               // onClick={() => {
               //   history.push("/");
               // }}
-              onClick={forfeitGame}
+              onClick={handleForfeitGame}
             >
               Accept
             </button>

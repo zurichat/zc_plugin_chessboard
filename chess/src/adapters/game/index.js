@@ -54,3 +54,13 @@ export function unwatchGame(game_id) {
 
   return patch("/game/unwatch", body);
 }
+
+// End Game
+export function endGame(game_id) {
+  const body = {
+    user_id: getLoggedInUserData().user_id,
+    game_id,
+  };
+
+  return patch("/game/end", body);
+}
