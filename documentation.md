@@ -115,9 +115,9 @@ Our API is organized around using HTTP verbs and REST. This API accepts and retu
 
 User must be authenticated to use the API
 
-| HEADERS  |        |
-| -------- |--------| 
-| Authorization | "Bearer {token}"
+| HEADERS       |                  |
+| ------------- | ---------------- |
+| Authorization | "Bearer {token}" |
 
 ## Plugin Information
 
@@ -128,7 +128,6 @@ When this endpoint is used, it Returns all the information for this chess applic
 This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
 
 Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
-
 
 ### Features
 
@@ -141,7 +140,6 @@ This involves the baseUrl, body request type, all required and non required para
 | URL   | METHOD | URL PARAMS | DATA PARAMS |
 | ----- | ------ | ---------- | ----------- |
 | /info | GET    | false      | false       |
-
 
 ### Responses
 
@@ -471,7 +469,6 @@ This involves the baseUrl, body request type, all required and non required para
 | --------- | ------ | ---------- | ----------- |
 | /game/all | GET    | false      | false       |
 
-
 ### Responses
 
 This is the end result send back to the client on successful execution or when an error occur. Below are the response on this two scenarios
@@ -598,7 +595,7 @@ This is a PATCH endpoint.
 
 This can be tested from the client side by calling the api or using Postman.
 
- [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
   - Once the link is clicked, a user can enter the game as either player or player 2 and get to move game piece based of the game rules
@@ -675,10 +672,10 @@ This is a PATCH endpoint.
 
 This can be tested from the client side by calling the api or using Postman.
 
- [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
- - Guidance Example on the <https://zuri.chat/chess> application :
-  - Once the link is clicked, a user can click the forfeit button to end an ongoing game.
+- Guidance Example on the <https://zuri.chat/chess> application :
+- Once the link is clicked, a user can click the forfeit button to end an ongoing game.
 
 ### Features
 
@@ -688,16 +685,16 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL   | METHOD | URL PARAMS | DATA PARAMS |
-| ----- | ------ | ---------- | ----------- |
-| /end | PATCH   | None       | True       |
+| URL  | METHOD | URL PARAMS | DATA PARAMS |
+| ---- | ------ | ---------- | ----------- |
+| /end | PATCH  | None       | True        |
 
 - DATA PARAMS if required
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-| game_id | string |   true |
-| user_id | string | true |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
+| user_id | string    | true     |
 
 ### Responses
 
@@ -716,7 +713,7 @@ This return a json formatted response payload to the client browser display in a
 
 ```
   {
-    payload 
+    payload
   }
 ```
 
@@ -751,11 +748,11 @@ This is a PATCH endpoint.
 
 This can be tested from the client side by calling the api or using Postman.
 
- [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
   - Once the link is clicked, the spectator can unwatch and leave the ongoing game by clicking the leave button
-  
+
 ### Features
 
 This involves the baseUrl, body request type, all required and non required parameters, methods and url for this endpoint.
@@ -764,16 +761,16 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL   | METHOD | URL PARAMS | DATA PARAMS |
-| ----- | ------ | ---------- | ----------- |
-| /unwatch | PATCH   | None       | True       |
+| URL      | METHOD | URL PARAMS | DATA PARAMS |
+| -------- | ------ | ---------- | ----------- |
+| /unwatch | PATCH  | None       | True        |
 
 - DATA PARAMS if required
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-| game_id | string |   true |
-| user_id | string | true |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
+| user_id | string    | true     |
 
 ### Responses
 
@@ -814,6 +811,7 @@ This return a json formatted response payload to the client browser display in a
 
 - message_1 : "User do not exist"
 - message_2 : "Game do not exist"
+
 ## Resign Game
 
 End game by forfeiting an ongoing game. This basically end game and choose the winner based on the user who forfeit the game against user that did not forfeit the game
@@ -823,8 +821,8 @@ End game by forfeiting an ongoing game. This basically end game and choose the w
 This is a PATCH endpoint.
 
 This can be tested from the client side by calling the api or using Postman.
- 
- [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 ### Features
 
@@ -834,16 +832,16 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-| /resign | Patch | false  |  true |
+| URL     | METHOD | URL PARAMS | DATA PARAMS |
+| ------- | ------ | ---------- | ----------- |
+| /resign | Patch  | false      | true        |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-| game_id |  string | true |
-| user_id | string | true |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
+| user_id | string    | true     |
 
 ### Responses
 
