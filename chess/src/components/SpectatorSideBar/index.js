@@ -99,6 +99,14 @@ const SpectatorSideBar = ({ type, gameData }) => {
           />
 
           <div className={styles.chatContainer}>
+            {type !== "spectator" && gameData.status === 0 && (
+              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
+            )}
+
+            {type !== "spectator" && gameData.status === 1 && (
+              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+            )}
+
             <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 commentsFromGameData.map(
@@ -484,14 +492,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 </div>
               </div>
             ) : null}
-
-            {type !== "spectator" && gameData.status === 0 && (
-              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
-            )}
-
-            {type !== "spectator" && gameData.status === 1 && (
-              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
-            )}
           </div>
         </div>
       </aside>
