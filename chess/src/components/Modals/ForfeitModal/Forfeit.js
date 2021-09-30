@@ -24,7 +24,6 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
     setGameId(gameData._id);
   }, []);
 
-
   const handleForfeitGame = async () => {
     const gameEndData = {
       user_id: gameData.owner.user_id,
