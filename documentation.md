@@ -949,15 +949,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|   /game |  GET     |        true    |     false        |
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /game | GET    | true       | false       |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|   game_id  |      string     |  true        |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
 
 ### Responses
 
@@ -1026,15 +1026,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|   /game  |   GET     |         true   |      false       |
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /game | GET    | true       | false       |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|    user_Id  |      string     |    true      |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| user_Id | string    | true     |
 
 ### Responses
 
@@ -1106,19 +1106,21 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|   /comment  |   PATCH     |       false     |      true      |
+| URL      | METHOD | URL PARAMS | DATA PARAMS |
+| -------- | ------ | ---------- | ----------- |
+| /comment | PATCH  | false      | true        |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|  user_name    |       string     |      true    |
-|  image_url    |       string     |      true    |
-|  text   |       string     |      true    |
-|  timestamp   |       string     |      true    |
+| NAME      | DATA TYPE | REQUIRED |
+| --------- | --------- | -------- |
+| user_name | string    | true     |
+| image_url | string    | true     |
+| text      | string    | true     |
+| timestamp | string    | true     |
+
 - complete endpoint url format : <https://www.chess.zuri.chat/api/v1/comment>
+
 ### Responses
 
 This is the end result send back to the client on successful execution or when an error occur. Below are the response on this two scenarios
@@ -1164,6 +1166,7 @@ This return a json formatted response payload to the client browser display in a
 ## Game delete
 
 <!-- descriptions -->
+
 When this endpoint is used, it deletes a particular game from the database .
 
 ### How To Use
@@ -1188,15 +1191,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|   /delete  |     DELETE   |      false     |     true      |
+| URL     | METHOD | URL PARAMS | DATA PARAMS |
+| ------- | ------ | ---------- | ----------- |
+| /delete | DELETE | false      | true        |
 
 - PARAMS[URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|    game_id  |    string       |     true     |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
 
 - complete endpoint url format : <https://www.chess.zuri.chat/api/v1/delete>
 
@@ -1246,6 +1249,7 @@ This return a json formatted response payload to the client browser display in a
 ## All Results
 
 <!-- descriptions -->
+
 When this endpoint is used, it returns results of all games from the database .
 
 ### How To Used
@@ -1268,9 +1272,9 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|  /result/all   |    GET    |     false       |      false       |
+| URL         | METHOD | URL PARAMS | DATA PARAMS |
+| ----------- | ------ | ---------- | ----------- |
+| /result/all | GET    | false      | false       |
 
 - PARAMS [URL OR DATA] if true
 
@@ -1326,7 +1330,8 @@ This return a json formatted response payload to the client browser display in a
 ## Results by game id
 
 <!-- descriptions -->
-When this endpoint is used, it returns result of  particular game from the database base on it's Id .
+
+When this endpoint is used, it returns result of particular game from the database base on it's Id .
 
 ### How To Use
 
@@ -1348,15 +1353,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|   /result  |    GET    |      true      |    false         |
+| URL     | METHOD | URL PARAMS | DATA PARAMS |
+| ------- | ------ | ---------- | ----------- |
+| /result | GET    | true       | false       |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|  game_id    | string    |    true      |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
 
 ### Responses
 
