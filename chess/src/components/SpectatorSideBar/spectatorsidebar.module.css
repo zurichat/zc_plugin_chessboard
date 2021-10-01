@@ -46,12 +46,7 @@
   cursor: pointer;
 } */
 
-/* .closeIcon:hover path {
-  stroke: #d1dada !important;
-}
-.closeIcon path {
-  stroke: #ffffff !important;
-} */
+/* Í */
 
 #chat {
   height: 100%;
@@ -80,12 +75,12 @@
 }
 
 .chatWrapperContainer {
-      box-sizing: border-box;
-      flex: 1;
-      overflow-y: auto;
-      padding-bottom: 8px;
-      -webkit-user-select: text;
-      width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 8px;
+  -webkit-user-select: text;
+  width: 100%;
 }
 
 .chatWrapper {
@@ -94,7 +89,7 @@
   margin: 1rem 0 2rem 0;
 }
 
-.specHead { 
+.specHead {
   display: flex;
   align-items: center;
 }
@@ -174,7 +169,7 @@
   border-radius: 5px;
   position: sticky;
   top: 0;
-  bottom: 0;  
+  bottom: 0;
   background-color: #fff;
 }
 
@@ -201,7 +196,7 @@ input::placeholder {
   margin: 0.3rem 0;
 }
 
-.inputIconsleft ,
+.inputIconsleft,
 .inputIconsright {
   display: flex;
   align-items: center;
@@ -210,14 +205,13 @@ input::placeholder {
 }
 
 .feather {
-  width: 1.6em ;
+  width: 1.6em;
   /* margin-right: 1.2em;  */
-  color: #BEBEBE;
-
+  color: #bebebe;
 }
 
 .submit {
-  width: 1.8em ;
+  width: 1.8em;
 }
 
 .submit:hover {
@@ -241,12 +235,11 @@ input::placeholder {
 .icon-down {
   /* border-left: 2px solid rgb(196, 195, 196); */
   margin-right: 1em;
-  width: 1.6em ;
-
+  width: 1.6em;
 }
 
 @media only screen and (max-width: 768px) {
-  .side-bar{
+  .side-bar {
     border-left: none;
   }
 }
@@ -267,7 +260,9 @@ input::placeholder {
 }
 @media only screen and (max-width: 320px) {
   .inputIconsleft > img,
-  .inputIconsright > img , .feather , .icon-down{
+  .inputIconsright > img,
+  .feather,
+  .icon-down {
     width: 2rem !important;
   }
 }

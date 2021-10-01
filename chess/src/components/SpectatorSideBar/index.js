@@ -83,7 +83,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
             <h2>Comments</h2>
           </div>
           <a className="close">
-            <img src={close} alt="" className={styles.closeIcon}/>
+            <img src={close} alt="" className={styles.closeIcon} />
           </a>
         </nav>
 
@@ -155,25 +155,22 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 />
                 <div className={styles.inputIcons}>
                   <div className={styles.inputIconsleft}>
-                    <img src={zap} className={styles.feather}/> 
-                    <img src={div1} className=""/> 
-                    <img src={bold} className={styles.feather}/> 
-                    <img src={link} className={styles.feather}/> 
+                    <img src={zap} className={styles.feather} />
+                    <img src={div1} className="" />
+                    <img src={bold} className={styles.feather} />
+                    <img src={link} className={styles.feather} />
                   </div>
 
                   <div className={styles.inputIconsright}>
-                    <img src={at} className={styles.feather}/> 
-                    <img src={clip} className={styles.feather}/> 
-                    <img src={send} className={styles["submit"]} onClick={handleAddComment}/> 
-                    <img src={div2} className=""/> 
-                    <img src={dropdown}  className={styles["icon-down"]}/> 
-                  
-
-                   
-
-                
-                    
-
+                    <img src={at} className={styles.feather} />
+                    <img src={clip} className={styles.feather} />
+                    <img
+                      src={send}
+                      className={styles["submit"]}
+                      onClick={handleAddComment}
+                    />
+                    <img src={div2} className="" />
+                    <img src={dropdown} className={styles["icon-down"]} />
                   </div>
                 </div>
               </div>
