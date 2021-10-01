@@ -132,7 +132,9 @@ const SpectatorSideBar = ({ type, gameData }) => {
                               <h2 className={styles.spectatorName}>
                                 {user_name}
                               </h2>
-                              <p className={styles["time-muted"]}>{timestamp}</p>
+                              <p className={styles["time-muted"]}>
+                                {timestamp}
+                              </p>
                             </div>
                           </div>
                           <div className={styles.specNameTime}>
