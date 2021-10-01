@@ -8,7 +8,6 @@ let profileImage;
 async function getUserProfileImage(email) {
   const { image_url } = await GetWorkspaceUser(email);
   profileImage = image_url;
-  console.log("image", profileImage);
 }
 export function getLoggedInUserData() {
   // // Variable to get User Info Data - Mocking Global Variables 
@@ -40,7 +39,7 @@ export function getLoggedInUserData() {
   // }
 
   // Workaround for now (since we use a shared domain)
-  if (location.hostname === "localhost" || location.hostname === "emeka") { 
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.0.1") { 
     // On localhost return this
     return {
       user_id: "localhost_user_id",

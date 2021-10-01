@@ -44,15 +44,7 @@ function ChessBoard({ type, gameData }) {
       moves.length > 0 ? moves.at(-1).position_fen : undefined
     );
     set_board_position(GameEngine.current.fen());
-    getUser();
   }, [moves]);
-
-  // console.log(sessionStorage.getItem("user"));
-
-  const getUser = () => {
-    GetWorkspaceUser("odizeeplatform@gmail.com").then(res => console.log("userinfo", res))
-  }
-
 
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
@@ -100,10 +92,10 @@ function ChessBoard({ type, gameData }) {
     return screenWidth < 560
       ? screenWidth * 0.85
       : screenWidth < 800
-      ? screenWidth * 0.48
-      : screenHeight < 650
-      ? 350
-      : 410;
+        ? screenWidth * 0.48
+        : screenHeight < 650
+          ? 350
+          : 410;
   };
 
   const allowDrag = ({ piece, position }) => {

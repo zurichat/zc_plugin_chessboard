@@ -22,7 +22,7 @@
   },
   "scripts": {
     "lint": "eslint src --ext js",
-    "start": "webpack serve --port 1010",
+    "start": "webpack serve",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently yarn:build:*",
     "build:webpack": "webpack --mode=production",
