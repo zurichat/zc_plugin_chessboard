@@ -39,7 +39,7 @@ export function getLoggedInUserData() {
   // }
 
   // Workaround for now (since we use a shared domain)
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.0.1") { 
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") { 
     // On localhost return this
     return {
       user_id: "localhost_user_id",
