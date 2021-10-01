@@ -1,0 +1,42 @@
+
+.nextTurn{
+    background-color: rgba(39, 174, 96, 1);
+    display: flex; 
+    flex-direction: column; 
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+    padding: 1em 0;
+    margin: 1em 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.nextTurnText{ 
+  top: 50%;
+  font-size: 16px;
+  line-height: 1.5em;
+  animation-name: moveInFromLeft;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes moveInFromLeft {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    80% {
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(0.8);
+    }
+  }
+
+  .nextTurnTexting{
+    color: #fff;
+    font-size: 12px;
+    line-height: 1em
+  }

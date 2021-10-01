@@ -5,7 +5,7 @@
 import Avatar from "../../assets/playername/user.png";
 
 //import style-components
-import { PlayerDetails, WaitingPlayer2Container, } from "./PlayerNameStyle";
+import { PlayerDetails, WaitingPlayer2Container } from "./PlayerNameStyle";
 
 const PlayerName = (props) => {
   if (!props.name) {

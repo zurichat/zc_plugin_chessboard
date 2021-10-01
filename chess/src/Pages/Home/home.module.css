@@ -1,5 +1,8 @@
 .chesshome-container {
 	overflow-x: hidden;
+	height: 100vh;
+	overflow-y: scroll;
+	
 }
 
 .app__container {
@@ -29,6 +32,7 @@
 }
 
 .btn-chesshome-rules {
+	cursor: pointer;
 	height: 40px;
 	width: 208px;
 	border-radius: 4px;

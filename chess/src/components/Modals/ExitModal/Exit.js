@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../../assets/modal/profile_img.svg";
 import Close from "../../../assets/modal/close.svg";
-import "./Exit.css";
+import styles from "./exit.module.css";
 import { useHistory } from "react-router-dom";
 import { UpdateGameWinner } from "../../../adapters/chessboard";
 
-
 const Exit = ({ isOpen, setIsOpen, gameData }) => {
-
   const history = useHistory();
   const [gameId, setGameId] = useState(gameId);
   const close = () => setIsOpen(false);
@@ -21,7 +19,8 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
       if (response.data.success) {
         history.push("/");
       } else {
-        //....
+        // TODO: Handle error with Toasts
+        console.log("Unable to exit Game: ", response.data.message);
       }
     });
   };
@@ -31,40 +30,39 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
   }
 
   return (
-    <div className="exit__container">
-      <div className="exit__modal">
-        <button className="btn-exit-modal-close" onClick={close}>
+    <div className={styles.exit__container}>
+      <div className={styles.exit__modal}>
+        <button className={styles["btn-exit-modal-close"]} onClick={close}>
           <img className="" src={Close} alt="Close" />
         </button>
 
-        <article className="exit__header">
-          <div className="exit__profile">
+        <article className={styles.exit__header}>
+          <div className={styles.exit__profile}>
             <img src={Logo} alt="profile" />
           </div>
         </article>
 
-        <section className="exit__content">
-          <p className="exit__text">
+        <section className={styles.exit__content}>
+          <p className={styles.exit__text}>
             You are probably tired of waiting for player 2, are you sure you
             want to leave the game?
           </p>
         </section>
 
-        <footer className="exit__footer">
+        <footer className={styles.exit__footer}>
           <button
-            className="exit__button exit__button--yes"
+            className={styles["exit__button exit__button--yes"]}
             onClick={exitGame}
           >
             Yes
           </button>
           <button
-            className=" exit__button exit__button--no"
+            className={styles[" exit__button exit__button--no"]}
             onClick={close}
           >
             No
           </button>
         </footer>
-
       </div>
     </div>
   );

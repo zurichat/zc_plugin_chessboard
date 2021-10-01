@@ -19,6 +19,7 @@ header {
 	display: flex;
 	gap: 2rem;
 	align-items: center;
+	justify-content: center;
 }
 
 #chesshome-name {
@@ -49,6 +50,9 @@ header {
 	background-color: transparent;
 	padding: 0;
 	margin: 0;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .chesshome-nav {
@@ -75,6 +79,8 @@ header {
 	border-radius: 4px;
 	width: 105px;
 	height: 30px;
+	left: 0 !important;
+	margin-left: 1.5rem;
 }
 
 .chesshome-profile {
@@ -99,7 +105,7 @@ header {
 
 .text-300 {
 	position: absolute;
-	top: 18%;
+	top: 9%;
 	right: 5%;
 	font-weight: bold;
 	z-index: 100;

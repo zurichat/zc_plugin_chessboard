@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 // Import CSS for this page
-import "./miniboard.css";
+import styles from "./miniboard.module.css";
 
 // Import Assets
 import MiniBoardImage from "../../assets/miniboard/mini-board.svg";
@@ -39,25 +39,25 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
   };
 
   return (
-    <div className="mini-board">
-      <div className="mini-asideBar mini-topBar">
+    <div className={styles["mini-board"]}>
+      <div className={`${styles["mini-asideBar"]} ${styles["mini-topBar"]}`}>
         {playerOne ? (
-          <div className="mini-playerProfile">
+          <div className={styles["mini-playerProfile"]}>
             <div
-              className="mini-profile-image"
+              className={styles["mini-profile-image"]}
               style={{
                 background: `url(${playerOne.image_url})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
               }}
             ></div>
-            <div className="mini-profile-image-bg"></div>
-            <p className="mini-profile-name">
+            <div className={styles["mini-profile-image-bg"]}></div>
+            <p className={styles["mini-profile-name"]}>
               Player 1: @{playerOne.user_name}
             </p>
           </div>
         ) : (
-          <button className="join-button" onClick={HandleCreateGame}>
+          <button className={styles["join-button"]} onClick={HandleCreateGame}>
             Join as Player 1
           </button>
         )}
@@ -71,29 +71,29 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
         <img src={MiniBoardImage} alt={"game-board"} />
       )}
 
-      <div className="mini-asideBar mini-bottomBar">
+      <div className={`${styles["mini-asideBar"]} ${styles["mini-bottomBar"]}`}>
         {playerTwo && (
-          <div className="mini-playerProfile">
+          <div className={styles["mini-playerProfile"]}>
             <div
-              className="mini-profile-image"
+              className={styles["mini-profile-image"]}
               style={{
                 background: `url(${playerTwo.image_url})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
               }}
             ></div>
-            <div className="mini-profile-image-bg"></div>
-            <p className="mini-profile-name">
+            <div className={styles["mini-profile-image-bg"]}></div>
+            <p className={styles["mini-profile-name"]}>
               Player 2: @{playerTwo.user_name}
             </p>
           </div>
         )}
-        
+
         {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id !== playerOne.user_id && (
             <button
-              className="join-button bottom-button"
+              className={`${styles["join-button"]} ${styles["bottom-button"]}`}
               onClick={() => HandleJoinGame(game_id)}
             >
               Join as Player 2
@@ -103,7 +103,9 @@ function MiniBoard({ playerOne, playerTwo, game_id }) {
         {playerOne &&
           !playerTwo &&
           getLoggedInUserData().user_id === playerOne.user_id && (
-            <button className="join-button bottom-button">
+            <button
+              className={`${styles["join-button"]} ${styles["bottom-button"]}`}
+            >
               Waiting for Player 2
             </button>
           )}

@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 import winner_image from "../../assets/modal/winner_image.png";
 
 //import style-components
-import { ModalWrapper, ModalBackdrop, ModalBox, ModalContent, Button, } from "./GameWinnerModalStyle";
+import {
+  ModalWrapper,
+  ModalBackdrop,
+  ModalBox,
+  ModalContent,
+  Button,
+} from "./GameWinnerModalStyle";
 
 const GameWinnerModal = ({ winner }) => {
   return (

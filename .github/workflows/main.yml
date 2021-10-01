@@ -10,96 +10,96 @@ on:
   workflow_dispatch:
 
 jobs:
-#   prettier:
-#     runs-on: ubuntu-latest
+  prettier:
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2
-#       with:
-#         # Make sure the actual branch is checked out when running on pull requests
-#         ref: ${{ github.head_ref }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
 
-#     - name: Prettify code
-#       uses: creyD/prettier_action@v3.1
-#       with:
-#         # This part is also where you can pass other options, for example:
-#         prettier_options: --write **/*.{js,md}
-#         commit_message: Prettier Action
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Prettify code
+      uses: creyD/prettier_action@v3.1
+      with:
+        # This part is also where you can pass other options, for example:
+        prettier_options: --write **/*.{js,md}
+        commit_message: Prettier Action
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#   fe_eslint:
-#     needs: prettier
+  fe_eslint:
+    needs: prettier
 
-#     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2
-#       with:
-#         # Make sure the actual branch is checked out when running on pull requests
-#         ref: ${{ github.head_ref }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
     
-#     - name: Use cached node_modules
-#       uses: c-hive/gha-yarn-cache@v2
-#       with:
-#         directory: client
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: client
 
-#     - name: Install yarn dependencies and Run ESLint for client
-#       run: |
-#         cd client
-#         yarn install
-#         yarn run lint --fix
+    - name: Install yarn dependencies and Run ESLint for client
+      run: |
+        cd client
+        yarn install
+        yarn run lint --fix
 
-#     - name: Use cached node_modules
-#       uses: c-hive/gha-yarn-cache@v2
-#       with:
-#         directory: chess
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: chess
     
-#     - name: Install yarn dependencies and Run ESLint for main app
-#       run: |
-#         cd chess
-#         yarn install
-#         yarn run lint --fix
+    - name: Install yarn dependencies and Run ESLint for main app
+      run: |
+        cd chess
+        yarn install
+        yarn run lint --fix
 
-#     - name: Commit changes
-#       if: always()
-#       uses: stefanzweifel/git-auto-commit-action@v4.1.2
-#       with:
-#         commit_message: Frontend EsLint Fixes
+    - name: Commit changes
+      if: always()
+      uses: stefanzweifel/git-auto-commit-action@v4.1.2
+      with:
+        commit_message: Frontend EsLint Fixes
 
-#   be_eslint:
-#     needs: fe_eslint
+  be_eslint:
+    needs: fe_eslint
 
-#     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2
-#       with:
-#         # Make sure the actual branch is checked out when running on pull requests
-#         ref: ${{ github.head_ref }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        # Make sure the actual branch is checked out when running on pull requests
+        ref: ${{ github.head_ref }}
     
-#     - name: Use cached node_modules
-#       uses: c-hive/gha-yarn-cache@v2
-#       with:
-#         directory: server
+    - name: Use cached node_modules
+      uses: c-hive/gha-yarn-cache@v2
+      with:
+        directory: server
 
-#     - name: Install yarn dependencies and Run ESLint
-#       run: |
-#         cd server
-#         yarn install
-#         yarn run lint --fix
+    - name: Install yarn dependencies and Run ESLint
+      run: |
+        cd server
+        yarn install
+        yarn run lint --fix
 
-#     - name: Commit changes
-#       if: always()
-#       uses: stefanzweifel/git-auto-commit-action@v4.1.2
-#       with:
-#         commit_message: Backend EsLint Fixes
+    - name: Commit changes
+      if: always()
+      uses: stefanzweifel/git-auto-commit-action@v4.1.2
+      with:
+        commit_message: Backend EsLint Fixes
 
   deploy:
-#     needs: be_eslint
+    needs: be_eslint
 
     runs-on: ubuntu-latest
 
@@ -151,6 +151,7 @@ jobs:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           script: |
-            cd /var/www/zc_plugin_chessboard/
+            cd /var/www/zc_plugin_chessboard/server
+            yarn install
             PM2_HOME=/opt/pm2/.pm2 pm2 restart index
 
