@@ -2,6 +2,7 @@
 import { get } from "../xhr";
 import { GetUserInfo } from "@zuri/control";
 import { GetWorkspaceUser } from "@zuri/control";
+import botImage from "../../assets/bot/bot-image.svg";
 
 let profileImage;
 
@@ -81,4 +82,15 @@ export function getLoggedInUserData() {
 
 export function getCurrentOrganisation() {
   return localStorage.getItem("currentWorkspace");
+}
+
+export function getChessBotData() {
+  // Later may change to check Bot Info from API call to Backend
+
+  // Temp Fix for now
+  return {
+    user_id: "chessbot",
+    user_name: "Chess Bot",
+    image_url: botImage,
+  };
 }
