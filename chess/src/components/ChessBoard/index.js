@@ -87,13 +87,13 @@ function ChessBoard({ type, gameData }) {
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
     return screenWidth < 560
-      ? screenWidth * 0.80
+      ? screenWidth * 0.8
       : screenWidth < 800
       ? screenWidth * 0.48
       : screenWidth < 1000
       ? screenWidth * 0.35
       : screenWidth < 1300
-      ? screenWidth * 0.30
+      ? screenWidth * 0.3
       : screenHeight < 650
       ? 350
       : 410;
