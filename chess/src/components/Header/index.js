@@ -6,7 +6,7 @@ import { pluginHeader } from "@zuri/plugin-header";
 
 // Import CSS for this page
 import styles from "./header.module.css";
-import LoadUser from  "../Modals/LoadUserModal/LoadUser";
+import LoadUser from "../Modals/LoadUserModal/LoadUser";
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -27,7 +27,6 @@ const Profile = ({ className, src }) => {
 };
 
 function Header({ gameData }) {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleViewAllSpectatorsModal = () => {
@@ -64,7 +63,7 @@ function Header({ gameData }) {
       //Block of code to be triggered on thumbnail click
       handleViewAllSpectatorsModal();
     },
-    hasThumbnail: (!gameData) ? false : true, //set false if you don't want thumbnail on the header
+    hasThumbnail: !gameData ? false : true, //set false if you don't want thumbnail on the header
   };
 
   // pad leading zeros
