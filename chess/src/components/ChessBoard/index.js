@@ -273,9 +273,10 @@ function ChessBoard({ type, gameData }) {
           style={{
             display: "flex",
             justifyContent: "space-around",
+            alignItems: "center",
             zIndex: "1",
             width: "80%",
-            margin : "3em 0 1em 0"
+            margin : "3em 0 0 0"
           }}
           >
             <NextTurn 
@@ -303,8 +304,7 @@ function ChessBoard({ type, gameData }) {
           zIndex:"10",
         }}
         > 
-        
-        {/* <NextTurn gameData={gameData} /> */}
+      
           
         <div
           style={{
@@ -368,8 +368,11 @@ function ChessBoard({ type, gameData }) {
             style={{
             display: "flex",
             justifyContent: "space-around",
+            alignItems: "center",
             zIndex: "1",
-            width: "80%"
+            width: "80%",
+           
+          
           }}
           >
             <NextTurn 
@@ -391,7 +394,7 @@ function ChessBoard({ type, gameData }) {
       />}
       </ChessboardContainer>
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
-      
+
     </>
   );
 }
