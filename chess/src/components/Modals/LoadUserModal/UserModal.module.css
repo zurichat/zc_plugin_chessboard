@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
+
+.load-user__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(45,45,45,.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lato";
+    z-index: 20;
+  }
+
+  .load-user__modal {
+    width: 453px;
+    max-width: 80%;
+    height: 75vh;
+    background: #fff;
+    color: #262626;
+    padding: 1.5rem 0;
+    overflow-y: overlay;
+    z-index: 21;
+  }
+  
+  .room_header{
+    font-weight: 900;
+    font-size: 2.25rem;
+    margin-top: 1rem;
+    margin: 1rem 1.5rem 0 1.5rem;
+  }
+  
+  .room_para{
+    font-size: 1.8rem;
+    margin: 0.5rem 1.5rem;
+  }
+
+  .room_notification{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 2rem;
+    width: 85%;
+    margin: 0.2rem 1.5rem;
+  }
+
+  .room_notify{
+    border: 1px solid black;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+  }
+  
+  .load-user__form {
+    margin: 1rem 1.5rem;
+  }
+  
+  .searchbar {
+    font-size: 1.8rem;
+    padding: 0.3rem;
+    width: 95%;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 4px;
+  }
+  
+  .searchbar:focus {
+    outline: none;
+  }
+  
+  .load-user__users {
+    width: 100%;
+  
+  }
+  
+  .load-user__user {
+    padding: 0.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .load-user__user:hover {
+    background: #27AE60;
+  }
+
+
+  
+  .load-user__user:hover * {
+    color: #fff;
+    fill: #fff;
+  }
+  
+  .load-user__user--info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .load-user__user--img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-img{
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .load-user__user--details {
+    margin: 0 1rem;
+    font-size: 0.5rem;
+  }
+  
+  .stack {
+    margin: 0.2rem 0;
+    color: rgba(0,0,0,.3);
+    font-size: 1.8rem;
+  }
+  
+  .load-user__user--name{
+    font-weight: 510;
+    font-size: 1.8rem;
+
+  }
+  
+  .load-user__no-user {
+    text-align: center;
+    margin: 2rem 0;
+  } 
