@@ -28,7 +28,6 @@ function ChessBoard({ type, gameData }) {
   const initialIndex = -1;
   const [replayIndex, setReplayIndex] = useState(initialIndex);
 
-
   const game_id = gameData._id;
   const GameEngine = useRef(new Chess());
 
@@ -411,9 +410,15 @@ function ChessBoard({ type, gameData }) {
           />
         )}
 
-         <div style={{ display: "flex"  , gap: "0.8em", width:"inherit", justifyContent: "center", marginBottom: "1em"}}>
-         
-
+        <div
+          style={{
+            display: "flex",
+            gap: "0.8em",
+            width: "inherit",
+            justifyContent: "center",
+            marginBottom: "1em",
+          }}
+        >
           {/* Back buttons  */}
           {moves.length + 1 > Math.abs(replayIndex) && (
             <button
@@ -424,9 +429,9 @@ function ChessBoard({ type, gameData }) {
               Back
             </button>
           )}
-          
-           {/* Replay Buttons */}
-           {replayIndex !== -1 && (
+
+          {/* Replay Buttons */}
+          {replayIndex !== -1 && (
             <button
               onClick={() => handleCurrent()}
               className={styles.btn_current}
