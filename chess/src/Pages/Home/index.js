@@ -11,6 +11,8 @@ import { getAllGames } from "../../adapters/home";
 import Header from "../../components/Header";
 import MiniBoard from "../../components/MiniBoard";
 
+import GameHistory from "../../components/History";
+
 function Homepage() {
   // Set Games State
   const [games, setGames] = useState([]);
@@ -60,6 +62,8 @@ function Homepage() {
           </Link>
         </div>
         <div className="app__container">{boards}</div>
+
+        <GameHistory />
       </div>
     </>
   );
