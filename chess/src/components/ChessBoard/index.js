@@ -87,9 +87,13 @@ function ChessBoard({ type, gameData }) {
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
     return screenWidth < 560
-      ? screenWidth * 0.85
+      ? screenWidth * 0.8
       : screenWidth < 800
       ? screenWidth * 0.48
+      : screenWidth < 1000
+      ? screenWidth * 0.35
+      : screenWidth < 1300
+      ? screenWidth * 0.3
       : screenHeight < 650
       ? 350
       : 410;
@@ -272,7 +276,7 @@ function ChessBoard({ type, gameData }) {
               margin: "3em 0 0 0",
             }}
           >
-            <NextTurn gameData={gameData} name={gameData.opponent?.user_name} />
+            {/* <NextTurn gameData={gameData} name={gameData.opponent?.user_name} /> */}
             <PlayerName
               style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
               name={gameData.opponent?.user_name}
@@ -281,7 +285,7 @@ function ChessBoard({ type, gameData }) {
           </div>
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+            style={{ paddingBottom: "28px", paddingTop: "10px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
@@ -345,7 +349,7 @@ function ChessBoard({ type, gameData }) {
 
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
@@ -359,7 +363,7 @@ function ChessBoard({ type, gameData }) {
               width: "80%",
             }}
           >
-            <NextTurn gameData={gameData} name={gameData.owner.user_name} />
+            {/* <NextTurn gameData={gameData} name={gameData.owner.user_name} /> */}
             <PlayerName
               style={{ paddingBottom: "28px" }}
               name={gameData.owner.user_name}
@@ -368,7 +372,7 @@ function ChessBoard({ type, gameData }) {
           </div>
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
