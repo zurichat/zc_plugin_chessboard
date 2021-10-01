@@ -14,7 +14,7 @@
 }
 
 .side-bar-nav {
-  height: 7vh;
+  height: 4.5em;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -245,7 +245,7 @@ input::placeholder {
   margin-right: 0 !important;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .side-bar{
     border-left: none;
   }

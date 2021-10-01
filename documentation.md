@@ -52,19 +52,19 @@ Zuri chess plugin is a web based recreational and competitive board game played 
     - [Responses](#responses-6)
       - [onSuccess](#onsuccess-6)
       - [onError](#onerror-6)
-  - [End Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES](#end-game--not-implemented-yet---working-on-it---still-dummy-values)
+  - [End Game](#end-game)
     - [How To Used](#how-to-used)
     - [Features](#features-7)
     - [Responses](#responses-7)
       - [onSuccess](#onsuccess-7)
       - [onError](#onerror-7)
-  - [Unwatch Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES](#unwatch-game--not-implemented-yet---working-on-it---still-dummy-values)
+  - [Unwatch Game](#unwatch-game)
     - [How To Used](#how-to-used-1)
     - [Features](#features-8)
     - [Responses](#responses-8)
       - [onSuccess](#onsuccess-8)
       - [onError](#onerror-8)
-  - [Resign Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES](#resign-game--not-implemented-yet---working-on-it---still-dummy-values)
+  - [Resign Game](#resign-game)
     - [How To Used](#how-to-used-2)
     - [Features](#features-9)
     - [Responses](#responses-9)
@@ -115,11 +115,11 @@ Our API is organized around using HTTP verbs and REST. This API accepts and retu
 
 User must be authenticated to use the API
 
-<!-- create table -->
+| HEADERS       |                  |
+| ------------- | ---------------- |
+| Authorization | "Bearer {token}" |
 
 ## Plugin Information
-
-<!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application plugin.
 
@@ -140,12 +140,6 @@ This involves the baseUrl, body request type, all required and non required para
 | URL   | METHOD | URL PARAMS | DATA PARAMS |
 | ----- | ------ | ---------- | ----------- |
 | /info | GET    | false      | false       |
-
-- PARAMS[URL OR DATA] if true
-
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
 
 ### Responses
 
@@ -208,8 +202,6 @@ This return a json formatted response payload to the client browser display in a
 - message : "Could not fetch plugin information"
 
 ## Sidebar Information
-
-<!-- descriptions -->
 
 When this endpoint is used, it Returns all the information for this chess application sidebar.
 
@@ -353,7 +345,7 @@ This return a json formatted response payload to the client browser display in a
 
 ```
 
-- message : " "New Game Board Created successfully",
+- message : "New Game Board Created successfully",
 
 #### onError
 
@@ -402,7 +394,7 @@ This involves the baseUrl, body request type, all required and non required para
 | ----- | ------ | ---------- | ----------- |
 | /join | POST   | false      | true        |
 
-- PARAMS[URL OR DATA] if true
+- PARAMS [URL OR DATA] if true
 
 | NAME      | DATA TYPE | REQUIRED |
 | --------- | --------- | -------- |
@@ -454,8 +446,6 @@ Error object
 
 ## All Game
 
-<!-- descriptions -->
-
 When this endpoint is used, it returns all the game objects in the database of this chess application plugin.
 
 ### How To Use
@@ -464,7 +454,7 @@ This is a GET endpoint and it simple means that your browser e.g chrome, edge, e
 
 Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
-- Guidance Example on the <https://zuri.chat/chess> application :
+- Guidance Example on the <https://zuri.chat/chess> application:
   - Once the link is open, user see all games in the game box
 
 ### Features
@@ -478,12 +468,6 @@ This involves the baseUrl, body request type, all required and non required para
 | URL       | METHOD | URL PARAMS | DATA PARAMS |
 | --------- | ------ | ---------- | ----------- |
 | /game/all | GET    | false      | false       |
-
-- PARAMS [URL OR DATA] if required
-
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
 
 ### Responses
 
@@ -504,7 +488,7 @@ This return a json formatted response payload to the client browser display in a
 gameData
 ```
 
-- message : " Game retrieve successfully"
+- message : "Game retrieve successfully"
 
 #### onError
 
@@ -525,18 +509,18 @@ Error object
 
 ## Watch Game
 
-<!-- descriptions -->
-
-When this endpoint is used, it sends out a single piecemove so that the other player and spectators can view it.
+When this endpoint is used, it allows a user to watch existing game play.
 
 ### How To Use
 
-This is a PATCH Method.
+This is a PATCH Method and it Enters a game as spectator.
+
+This can be tested from the client side by calling the api or using Postman.
 
 When successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
-  - Once the link is clicked, a spectator can enter the game to view and comments on the ongoing game.
+  - Once the link is clicked,join as a spectator can and get the right to view and comments on the ongoing game.
 
 ### Features
 
@@ -603,13 +587,15 @@ Error object
 
 <!-- descriptions -->
 
-When this endpoint is used, it Returns all the information for this chess application plugin.
+When this endpoint is used, it Returns all the information for a chess piece moved. This endpoint sends out a single piecemove so that the other player and spectators can view it
 
 ### How To Use
 
 This is a PATCH endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+This can be tested from the client side by calling the api or using Postman.
+
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
   - Once the link is clicked, a user can enter the game as either player or player 2 and get to move game piece based of the game rules
@@ -676,15 +662,20 @@ Error object
 - message_1 : "Failed to move piece"
 - message_2 : "Game not found"
 
-## End Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES
+## End Game
 
-<!-- descriptions -->
+Ends a game based on win. This endpoint is for ending a game that has a winner (not for draw)
 
 ### How To Used
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a PATCH endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+This can be tested from the client side by calling the api or using Postman.
+
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+
+- Guidance Example on the <https://zuri.chat/chess> application :
+- Once the link is clicked, a user can click the forfeit button to end an ongoing game.
 
 ### Features
 
@@ -694,15 +685,16 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL   | METHOD | URL PARAMS | DATA PARAMS |
-| ----- | ------ | ---------- | ----------- |
-| /info | GET    | None       | None        |
+| URL  | METHOD | URL PARAMS | DATA PARAMS |
+| ---- | ------ | ---------- | ----------- |
+| /end | PATCH  | None       | True        |
 
 - DATA PARAMS if required
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
+| user_id | string    | true     |
 
 ### Responses
 
@@ -719,32 +711,13 @@ This return a json formatted response payload to the client browser display in a
 - payload :
   - result
 
-```[
+```
   {
-    plugin_id: "61448b7c976307hjc83Cdh5",
-    name: "Chess Plugin",
-    description:
-      "Ease stress in Zuri's chess room while running business deals, socialize with friends and colleagues by engaging in a friendly chess match. You could also decide to spectate a chess game and make comments while you watch.",
-    category: "Games",
-    pictures: [
-      "https://res.cloudinary.com/kyloren/image/upload/v1631878728/Chess%20MarketPlace/intro_gk0icz.png",
-      ],
-    icon_url:
-      "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?",
-    scaffold_structure: "Single SPA",
-    version: "v1.0",
-    developer_name: "HNG 8.0/Team Tesla",
-    developer_email: "hello@zuri.com",
-    sidebar_url: "https://chess.zuri.chat/api/v1/sideBar",
-    ping_url: "https://chess.zuri.chat/api/v1/ping",
-    homepage_url: "https://chess.zuri.chat/",
-    install_url: "https://chess.zuri.chat/",
+    payload
   }
-]
-
 ```
 
-- message : "Plugin Information Retrieved"
+- message : "Game ended!!!"
 
 #### onError
 
@@ -757,23 +730,28 @@ This return a json formatted response payload to the client browser display in a
 - payload :
   - error
 
-```<Error object>
+```
+<Error object>
 
 ```
 
-- message : "Could not fetch plugin information"
+- message_1 : "User do not exist"
+- message_2 : "Game do not exist"
 
-## Unwatch Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES
+## Unwatch Game
 
-<!-- descriptions -->
-
-When this endpoint is used, it Returns all the information for this chess application plugin.
+When this endpoint is used, it Removes a spectator from a game Room
 
 ### How To Used
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a PATCH endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+This can be tested from the client side by calling the api or using Postman.
+
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+
+- Guidance Example on the <https://zuri.chat/chess> application :
+  - Once the link is clicked, the spectator can unwatch and leave the ongoing game by clicking the leave button
 
 ### Features
 
@@ -783,15 +761,16 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL   | METHOD | URL PARAMS | DATA PARAMS |
-| ----- | ------ | ---------- | ----------- |
-| /info | GET    | None       | None        |
+| URL      | METHOD | URL PARAMS | DATA PARAMS |
+| -------- | ------ | ---------- | ----------- |
+| /unwatch | PATCH  | None       | True        |
 
 - DATA PARAMS if required
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
+| user_id | string    | true     |
 
 ### Responses
 
@@ -808,32 +787,11 @@ This return a json formatted response payload to the client browser display in a
 - payload :
   - result
 
-```[
-  {
-    plugin_id: "61448b7c976307hjc83Cdh5",
-    name: "Chess Plugin",
-    description:
-      "Ease stress in Zuri's chess room while running business deals, socialize with friends and colleagues by engaging in a friendly chess match. You could also decide to spectate a chess game and make comments while you watch.",
-    category: "Games",
-    pictures: [
-      "https://res.cloudinary.com/kyloren/image/upload/v1631878728/Chess%20MarketPlace/intro_gk0icz.png",
-      ],
-    icon_url:
-      "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?",
-    scaffold_structure: "Single SPA",
-    version: "v1.0",
-    developer_name: "HNG 8.0/Team Tesla",
-    developer_email: "hello@zuri.com",
-    sidebar_url: "https://chess.zuri.chat/api/v1/sideBar",
-    ping_url: "https://chess.zuri.chat/api/v1/ping",
-    homepage_url: "https://chess.zuri.chat/",
-    install_url: "https://chess.zuri.chat/",
-  }
-]
-
+```
+  <payload >
 ```
 
-- message : "Plugin Information Retrieved"
+- message : "Game ended!!!"
 
 #### onError
 
@@ -846,23 +804,25 @@ This return a json formatted response payload to the client browser display in a
 - payload :
   - error
 
-```<Error object>
+```
+<Error object>
 
 ```
 
-- message : "Could not fetch plugin information"
+- message_1 : "User do not exist"
+- message_2 : "Game do not exist"
 
-## Resign Game -NOT IMPLEMENTED YET - WORKING ON IT - STILL DUMMY VALUES
+## Resign Game
 
-<!-- descriptions -->
-
-When this endpoint is used, it Returns all the information for this chess application plugin.
+End game by forfeiting an ongoing game. This basically end game and choose the winner based on the user who forfeit the game against user that did not forfeit the game
 
 ### How To Used
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a PATCH endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+This can be tested from the client side by calling the api or using Postman.
+
+[onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
 
 ### Features
 
@@ -872,15 +832,16 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL     | METHOD | URL PARAMS | DATA PARAMS |
+| ------- | ------ | ---------- | ----------- |
+| /resign | Patch  | false      | true        |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
+| user_id | string    | true     |
 
 ### Responses
 
@@ -898,10 +859,10 @@ This return a json formatted response payload to the client browser display in a
   - result
 
 ```
-
+  <payload>
 ```
 
-- message : ""
+- message : "successful"
 
 #### onError
 
@@ -915,6 +876,7 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```
+
 Error object
 
 ```
@@ -927,13 +889,13 @@ Error object
 
 <!-- descriptions -->
 
-When this endpoint is used,
+When this endpoint is used, it returns a particular game using it's Id
 
 ### How To Use
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information). You can also use Postman or other API testing platform to make request to the endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+Input the endpoint in the browser, or any API testing platform and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser ( or the API testing platform). when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
 
@@ -949,15 +911,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /game | GET    | true       | false       |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
 
 ### Responses
 
@@ -978,7 +940,7 @@ This return a json formatted response payload to the client browser display in a
 
 ```
 
-- message : ""
+- message : "Game retrieved successfully"
 
 #### onError
 
@@ -996,7 +958,7 @@ Error object
 
 ```
 
-- message : ""
+- message : "Game not found"
 
 <!--ifOnlyIcan  -->
 
@@ -1004,13 +966,13 @@ Error object
 
 <!-- descriptions -->
 
-When this endpoint is used,
+When this endpoint is used, it retrieves a game base on user Id being provided.
 
 ### How To Use
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information). You can also use Postman or other API testing platform to make request to the endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+Input the endpoint in the browser, or any API testing platform and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser ( or the API testing platform). when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
 
@@ -1026,15 +988,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL   | METHOD | URL PARAMS | DATA PARAMS |
+| ----- | ------ | ---------- | ----------- |
+| /game | GET    | true       | false       |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| user_Id | string    | true     |
 
 ### Responses
 
@@ -1052,10 +1014,12 @@ This return a json formatted response payload to the client browser display in a
   - result
 
 ```
-
+{
+  payload
+}
 ```
 
-- message : ""
+- message : "Game retrieved successfully"
 
 #### onError
 
@@ -1069,11 +1033,10 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```
-  Error object
-
+  <Error object/>
 ```
 
-- message : ""
+- message : "Game not found"
 
   <!--ifOnlyiIcan  -->
 
@@ -1081,13 +1044,15 @@ This return a json formatted response payload to the client browser display in a
 
 <!-- descriptions -->
 
-When this endpoint is used, it Returns all the information for this chess application plugin.
+When this endpoint is used, it updates the comments being made by the spectators .
 
 ### How To Use
 
 <!-- brief description -->
 
-When successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+This is a PATCH endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information). You can also use Postman or other API testing platform to make request to the endpoint.
+
+Input the endpoint in the browser, or any API testing platform and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser ( or the API testing platform). when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
 
@@ -1103,17 +1068,20 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL      | METHOD | URL PARAMS | DATA PARAMS |
+| -------- | ------ | ---------- | ----------- |
+| /comment | PATCH  | false      | true        |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME      | DATA TYPE | REQUIRED |
+| --------- | --------- | -------- |
+| user_name | string    | true     |
+| image_url | string    | true     |
+| text      | string    | true     |
+| timestamp | string    | true     |
 
-- complete endpoint url format :
+- complete endpoint url format : <https://www.chess.zuri.chat/api/v1/comment>
 
 ### Responses
 
@@ -1131,10 +1099,12 @@ This return a json formatted response payload to the client browser display in a
   - result
 
 ```
-
+{
+  payload
+}
 ```
 
-- message : ""
+- message : "Comment Sent"
 
 #### onError
 
@@ -1148,11 +1118,10 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```
-Error object
-
+<Error Object/>
 ```
 
-- message :
+- message : "Comment cannot be empty"
 
   <!-- OnlyIfIcan  -->
 
@@ -1160,11 +1129,15 @@ Error object
 
 <!-- descriptions -->
 
+When this endpoint is used, it deletes a particular game from the database .
+
 ### How To Use
 
 <!-- brief description -->
 
-, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+This is a DELETE endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information). You can also use Postman or other API testing platform to make request to the endpoint.
+
+Input the endpoint in the browser, or any API testing platform and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser ( or the API testing platform). when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
 
@@ -1180,17 +1153,17 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL     | METHOD | URL PARAMS | DATA PARAMS |
+| ------- | ------ | ---------- | ----------- |
+| /delete | DELETE | false      | true        |
 
 - PARAMS[URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
 
-- complete endpoint url format :
+- complete endpoint url format : <https://www.chess.zuri.chat/api/v1/delete>
 
 ### Responses
 
@@ -1208,11 +1181,12 @@ This return a json formatted response payload to the client browser display in a
   - result
 
 ```
-
-
+{
+  payload
+}
 ```
 
-- message : ""
+- message : "game deleted successfully"
 
 #### onError
 
@@ -1226,11 +1200,11 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```
-Error object
+<Error object/>
 
 ```
 
-- message : ""
+- message : "Unable to delete game"
 
   <!-- ifOnlyIcan -->
 
@@ -1238,11 +1212,13 @@ Error object
 
 <!-- descriptions -->
 
+When this endpoint is used, it returns results of all games from the database .
+
 ### How To Used
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information). You can also use Postman or other API testing platform to make request to the endpoint.
 
-Input the endpoint in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+Input the endpoint in the browser, or any API testing platform and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser ( or the API testing platform). when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
 
@@ -1258,9 +1234,9 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL         | METHOD | URL PARAMS | DATA PARAMS |
+| ----------- | ------ | ---------- | ----------- |
+| /result/all | GET    | false      | false       |
 
 - PARAMS [URL OR DATA] if true
 
@@ -1268,7 +1244,7 @@ This involves the baseUrl, body request type, all required and non required para
 | ---- | --------- | -------- |
 |      |           |          |
 
-- complete endpoint format :
+- complete endpoint format : <https://www.chess.zuri.chat/api/v1/result/all>
 
 ### Responses
 
@@ -1286,10 +1262,12 @@ This return a json formatted response payload to the client browser display in a
   - result
 
 ```
-
+{
+  payload
+}
 ```
 
-- message : ""
+- message : "Results retrieved successfully"
 
 #### onError
 
@@ -1303,11 +1281,11 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```
-Error object
+<Error object/>
 
 ```
 
-- message : ""
+- message : "Unable to get all Results"
 
   <!-- ifOnlyIcan  -->
 
@@ -1315,11 +1293,13 @@ Error object
 
 <!-- descriptions -->
 
+When this endpoint is used, it returns result of particular game from the database base on it's Id .
+
 ### How To Use
 
-This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information).
+This is a GET endpoint and it simple means that your browser e.g chrome, edge, etc can make request (i.e write/send the endpoint in their browser engine) and see the response (i.e the plugin information). You can also use Postman or other API testing platform to make request to the endpoint.
 
-Input the endpoint complete url in the browser and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser. when an error occur [onError](#onerror) is thrown.
+Input the endpoint in the browser, or any API testing platform and hit enter, when successful, [onSuccess](#onsuccess) response is display as JSON formatted in the browser ( or the API testing platform). when an error occur [onError](#onerror) is thrown.
 
 - Guidance Example on the <https://zuri.chat/chess> application :
 
@@ -1335,15 +1315,15 @@ This involves the baseUrl, body request type, all required and non required para
 - Request Body Schema : application/json
 - General endpoint
 
-| URL | METHOD | URL PARAMS | DATA PARAMS |
-| --- | ------ | ---------- | ----------- |
-|     |        |            |             |
+| URL     | METHOD | URL PARAMS | DATA PARAMS |
+| ------- | ------ | ---------- | ----------- |
+| /result | GET    | true       | false       |
 
 - PARAMS [URL OR DATA] if true
 
-| NAME | DATA TYPE | REQUIRED |
-| ---- | --------- | -------- |
-|      |           |          |
+| NAME    | DATA TYPE | REQUIRED |
+| ------- | --------- | -------- |
+| game_id | string    | true     |
 
 ### Responses
 
@@ -1360,13 +1340,14 @@ This return a json formatted response payload to the client browser display in a
 - payload :
   - result
 
-```[
-
+```
+[
+payload
 ]
 
 ```
 
-- message : ""
+- message : "Result retrieved successfully"
 
 #### onError
 
@@ -1380,8 +1361,8 @@ This return a json formatted response payload to the client browser display in a
   - error
 
 ```
-  Error object
+ < Error object/>
 
 ```
 
-- message : ""
+- message : "Unable to get Result"

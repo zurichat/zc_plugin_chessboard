@@ -37,9 +37,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
           console.log("Unable to send comment: ", response.data.message);
         } else {
           // Clear the comment message input
-          setCommentMsg("");
         }
-      });
+      }, setCommentMsg(""));
     } else {
       // TODO: Handle error with Toasts
       console.log("CommentMsg is empty");
@@ -99,6 +98,14 @@ const SpectatorSideBar = ({ type, gameData }) => {
           />
 
           <div className={styles.chatContainer}>
+            {type !== "spectator" && gameData.status === 0 && (
+              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
+            )}
+
+            {type !== "spectator" && gameData.status === 1 && (
+              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+            )}
+
             <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 commentsFromGameData.map(
@@ -484,6 +491,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 </div>
               </div>
             ) : null}
+<<<<<<< HEAD
 
             {type !== "spectator" && gameData.status === 0 && (
               <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
@@ -492,6 +500,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
             {type !== "spectator" && gameData.status === 1 && (
               <ExitBtn onClick={handleExitModal}>Forfeit Game</ExitBtn>
             )}
+=======
+>>>>>>> 57c529ce87fb73aff1bcd23da3fceb4ff45666bb
           </div>
         </div>
       </aside>
