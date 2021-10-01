@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ChessboardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   padding: 0 4rem;
   height: 100%;

@@ -86,7 +86,7 @@ function ChessBoard({ type, gameData }) {
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
     return screenWidth < 560
-      ? screenWidth * 0.85
+      ? screenWidth * 0.80
       : screenWidth < 800
       ? screenWidth * 0.48
       : screenHeight < 650
@@ -260,7 +260,7 @@ function ChessBoard({ type, gameData }) {
           />
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+            style={{ paddingBottom: "28px", paddingTop: "10px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
@@ -316,13 +316,13 @@ function ChessBoard({ type, gameData }) {
 
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
