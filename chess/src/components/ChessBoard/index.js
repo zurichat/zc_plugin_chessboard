@@ -1,9 +1,7 @@
 /* eslint-disable */
 
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { GetUserInfo } from "@zuri/control";
-import { GetWorkspaceUser } from "@zuri/control";
+
 
 // Import CSS for this page
 // import "./chessboard.css";
