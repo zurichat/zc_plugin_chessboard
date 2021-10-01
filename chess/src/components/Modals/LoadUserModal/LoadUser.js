@@ -5,7 +5,6 @@ import LoadUserInfo from "./LoadUserInfo";
 import Styles from "./UserModal.module.css";
 
 const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
-
   const close = () => setIsModalOpen(false);
 
   if (!isModalOpen) {
@@ -13,7 +12,9 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   }
 
   const [usersDetails, setUsersDetails] = useState([...gameData.spectators]);
-  const [filterUserDetails, setFilterUserDetails] = useState([...gameData.spectators]);
+  const [filterUserDetails, setFilterUserDetails] = useState([
+    ...gameData.spectators,
+  ]);
   const [noUser, setNoUser] = useState(false);
 
   const handleInput = (e) => {
