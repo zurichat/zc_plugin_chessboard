@@ -490,7 +490,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
             )}
 
             {type !== "spectator" && gameData.status === 1 && (
-              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+              <ExitBtn onClick={handleExitModal}>Forfeit Game</ExitBtn>
             )}
           </div>
         </div>

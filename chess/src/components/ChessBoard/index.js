@@ -18,6 +18,7 @@ import Chessboard from "chessboardjsx";
 import PlayerName from "../PlayerName";
 import ChessBoardBorder from "../ChessBoardBorder";
 import GameWinnerModal from "../Modals/GameWinnerModal";
+import NextTurn from "../Modals/NextTurnModal/NextTurn";
 
 function ChessBoard({ type, gameData }) {
   const game_id = gameData._id;
@@ -117,6 +118,12 @@ function ChessBoard({ type, gameData }) {
 
     // illegal move
     if (move === null) return;
+
+    // if (GameEngine.current.turn() === "w")
+
+    
+
+  
 
     set_board_position(GameEngine.current.fen());
 
@@ -238,7 +245,10 @@ function ChessBoard({ type, gameData }) {
 
   return (
     <>
+    
       <ChessboardContainer>
+
+        
         {/* <h4
           style={{
             textAlign: "center",
@@ -258,14 +268,44 @@ function ChessBoard({ type, gameData }) {
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
-        ) : (
+        ) : GameEngine.current.turn() === "b" ? (
+          <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            zIndex: "1",
+            width: "80%",
+            margin : "3em 0 1em 0"
+          }}
+          >
+            <NextTurn 
+             gameData= {gameData} 
+             name={gameData.opponent?.user_name}
+            /> 
           <PlayerName
             style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
-        )}
+           
+          </div>
+        ): 
+        <PlayerName
+        style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+        name={gameData.opponent?.user_name}
+        image_url={gameData.opponent?.image_url}
+      />
+        }
 
+        <div
+        style={{
+          display:"flex",
+          zIndex:"10",
+        }}
+        > 
+        
+        {/* <NextTurn gameData={gameData} /> */}
+          
         <div
           style={{
             position: "relative",
@@ -274,6 +314,7 @@ function ChessBoard({ type, gameData }) {
           }}
         >
           <ChessBoardBorder />
+          
           <Chessboard
             // Set custom Chess Pieces
             pieces={chessPieces()}
@@ -314,21 +355,43 @@ function ChessBoard({ type, gameData }) {
           />
         </div>
 
+        </div>
+
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
             style={{ paddingBottom: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
-        ) : (
+        ) : GameEngine.current.turn() === "w" ? (
+          <div 
+            style={{
+            display: "flex",
+            justifyContent: "space-around",
+            zIndex: "1",
+            width: "80%"
+          }}
+          >
+            <NextTurn 
+            gameData={gameData}
+            name={gameData.owner.user_name} />
           <PlayerName
             style={{ paddingBottom: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
-        )}
+          
+
+          </div>
+        ) :  
+        <PlayerName
+        style={{ paddingBottom: "28px" }}
+        name={gameData.owner.user_name}
+        image_url={gameData.owner.image_url}
+      />}
       </ChessboardContainer>
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
+      
     </>
   );
 }
