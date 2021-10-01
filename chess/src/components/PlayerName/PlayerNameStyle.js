@@ -5,8 +5,8 @@ const PlayerDetails = styled.div`
   align-items: center;
   font-size: 1em;
   padding: 13px 0;
-  width: 100%;
-  padding-top: 28px;
+  width: 50%;
+  /* padding-top: 28px; */
   justify-content: flex-end;
   justify-content: flex-end;
 

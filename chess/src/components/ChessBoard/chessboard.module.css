@@ -1,0 +1,38 @@
+.btn_current {
+  padding: 1em 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  width: fit-content;
+  height: 40px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #3d2f19;
+}
+
+.btn_back {
+  padding: 1em 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  width: fit-content;
+  height: 40px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #d6a863;
+}
+
+.btn_forward {
+  padding: 1em 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2em;
+  width: fit-content;
+  height: 40px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #d6a863;
+}
