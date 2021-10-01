@@ -330,7 +330,7 @@ class GameController {
 
       // Publish the event to Centrifugo server
       await centrifugoController.publish(game_id, payload);
-      
+
       // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
       // await centrifugoController.publishToSideBar(
       //   res.locals.organisation_id,
@@ -388,7 +388,7 @@ class GameController {
 
       // Publish the event to Centrifugo server
       await centrifugoController.publish(game_id, payload);
-      
+
       // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
       // await centrifugoController.publishToSideBar(
       //   res.locals.organisation_id,
