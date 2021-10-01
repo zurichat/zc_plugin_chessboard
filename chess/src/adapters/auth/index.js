@@ -9,6 +9,7 @@ async function getUserProfileImage(email) {
   const { image_url } = await GetWorkspaceUser(email);
   profileImage = image_url;
 }
+
 export function getLoggedInUserData() {
   // // Variable to get User Info Data - Mocking Global Variables
   // let logged_in_user_from_zc_main;
@@ -50,7 +51,8 @@ export function getLoggedInUserData() {
     let logged_in_user_from_zc_main = JSON.parse(
       sessionStorage.getItem("user")
     );
-    getUserProfileImage(logged_in_user_from_zc_main.email);
+
+    getUserProfileImage(logged_in_user_from_zc_main?.email);
 
     if (!logged_in_user_from_zc_main) {
       // Not Logged In, so return anonymous user info
