@@ -8,7 +8,6 @@ import { startGameWithBot } from "../../adapters/game";
 import { PlayerDetails, WaitingPlayer2Container } from "./PlayerNameStyle";
 
 const PlayerName = ({ game_id, name, image_url, style }) => {
-
   const SetBotAsPlayer2 = () => {
     startGameWithBot(game_id).then((response) => {
       if (!response.data.success) {
@@ -25,7 +24,15 @@ const PlayerName = ({ game_id, name, image_url, style }) => {
           <button className="waiting_player_2"> Waiting for player</button>
         </WaitingPlayer2Container>
 
-        <button style={{ padding: "1rem 5rem", border: "none", color: "white", background: "#25364b"}} onClick={() => SetBotAsPlayer2()}>
+        <button
+          style={{
+            padding: "1rem 5rem",
+            border: "none",
+            color: "white",
+            background: "#25364b",
+          }}
+          onClick={() => SetBotAsPlayer2()}
+        >
           Play Bot
         </button>
       </>
