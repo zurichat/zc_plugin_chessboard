@@ -14,7 +14,7 @@
 }
 
 .side-bar-nav {
-  height: 4.5em;
+  height: 4.4em;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -46,12 +46,12 @@
   cursor: pointer;
 } */
 
-.closeIcon:hover path {
+/* .closeIcon:hover path {
   stroke: #d1dada !important;
 }
 .closeIcon path {
   stroke: #ffffff !important;
-}
+} */
 
 #chat {
   height: 100%;
@@ -143,7 +143,7 @@
   width: 100%;
   padding: 2rem;
 }
-.emptyComment > svg {
+.emptyComment > img {
   width: 100%;
   text-align: center;
   height: auto;
@@ -197,33 +197,32 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
+  align-items: center;
   margin: 0.3rem 0;
 }
-.inputIconsleft > svg,
-.inputIconsright > svg {
-  margin-right: 0.8rem;
-  width: 2rem;
+
+.inputIconsleft ,
+.inputIconsright {
+  display: flex;
+  align-items: center;
+  gap: 1em;
   cursor: pointer;
 }
 
 .feather {
-  border-right: 2px solid rgb(197, 196, 197);
-  width: 3rem !important;
+  width: 1.6em ;
+  /* margin-right: 1.2em;  */
+  color: #BEBEBE;
+
 }
 
-.svgNotneeded {
-  display: none;
-}
-
-.svgNomargin {
-  margin-right:0 !important;
+.submit {
+  width: 1.8em ;
 }
 
 .submit:hover {
-  stroke: rgb(224, 223, 224);
   fill: white;
-  background-color: #00b87b93;
-
+  color: #00b87b93;
   border: 0.5px solid #19d395;
 }
 
@@ -240,9 +239,10 @@ input::placeholder {
 }
 
 .icon-down {
-  border-left: 2px solid rgb(196, 195, 196);
-  width: 3rem !important;
-  margin-right: 0 !important;
+  /* border-left: 2px solid rgb(196, 195, 196); */
+  margin-right: 1em;
+  width: 1.6em ;
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -266,8 +266,8 @@ input::placeholder {
   }
 }
 @media only screen and (max-width: 320px) {
-  .inputIconsleft > svg,
-  .inputIconsright > svg , .feather , .icon-down{
+  .inputIconsleft > img,
+  .inputIconsright > img , .feather , .icon-down{
     width: 2rem !important;
   }
 }
