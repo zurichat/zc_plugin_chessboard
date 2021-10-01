@@ -34,7 +34,7 @@ module.exports = (webpackConfigEnv, argv) => {
   return mergeWithRules(mergeRules)(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
     output: {
-      path: path.join(__dirname, "..", "dist"), // string (default)
+      path: path.join(__dirname, "dist"), // string (default)
       // filename: "[name].js", // string (default)
       // publicPath: path.join(__dirname, '..', 'dist', 'assets') // string
     },

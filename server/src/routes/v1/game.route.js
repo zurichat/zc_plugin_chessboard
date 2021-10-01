@@ -1,6 +1,10 @@
 // Package Modules
 const router = require("express").Router();
 
+const OrganisationMiddleware = require("../../middlewares/organisation.middleware");
+
+OrganisationMiddleware(router);
+
 // Custom Modules
 const GameCtrl = require("../../controllers/game.controller");
 
@@ -172,7 +176,9 @@ const GameCtrl = require("../../controllers/game.controller");
  *    500:
  *      description: An error occurred
  */
-router.post("/create", GameCtrl.create);
+router.post("/create", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).create(req, res);
+});
 
 // Join A Game
 
@@ -194,7 +200,9 @@ router.post("/create", GameCtrl.create);
  *    500:
  *      description: An error occurred
  */
-router.post("/join", GameCtrl.join);
+router.post("/join", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).join(req, res);
+});
 
 /**
  * @swagger
@@ -208,7 +216,9 @@ router.post("/join", GameCtrl.join);
  *    500:
  *      description: An error occurred
  */
-router.get("/all", GameCtrl.getAll);
+router.get("/all", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).getAll(req, res);
+});
 
 /**
  * @swagger
@@ -229,7 +239,9 @@ router.get("/all", GameCtrl.getAll);
  *    500:
  *      description: An error occurred
  */
-router.patch("/watch", GameCtrl.addSpectator);
+router.patch("/watch", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).addSpectator(req, res);
+});
 
 /**
  * @swagger
@@ -250,7 +262,9 @@ router.patch("/watch", GameCtrl.addSpectator);
  *    500:
  *      description: An error occurred
  */
-router.patch("/piecemove", GameCtrl.pieceMove);
+router.patch("/piecemove", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).pieceMove(req, res);
+});
 
 /**
  * @swagger
@@ -271,7 +285,9 @@ router.patch("/piecemove", GameCtrl.pieceMove);
  *    500:
  *      description: An error occurred
  */
-router.patch("/end", GameCtrl.endGame);
+router.patch("/end", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).endGame(req, res);
+});
 
 /**
  * @swagger
@@ -292,7 +308,9 @@ router.patch("/end", GameCtrl.endGame);
  *    500:
  *      description: An error occurred
  */
-router.patch("/unwatch", GameCtrl.removeSpectator);
+router.patch("/unwatch", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).removeSpectator(req, res);
+});
 
 /**
  * @swagger
@@ -316,7 +334,9 @@ router.patch("/unwatch", GameCtrl.removeSpectator);
  *      description: An error occurred
  */
 
-router.patch("/resign", GameCtrl.resign);
+router.patch("/resign", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).resign(req, res);
+});
 
 /**
  * @swagger
@@ -337,7 +357,9 @@ router.patch("/resign", GameCtrl.resign);
  *    500:
  *      description: An error occurred
  */
-router.get("/:id", GameCtrl.getById);
+router.get("/:id", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).getById(req, res);
+});
 
 /**
  * @swagger
@@ -358,7 +380,9 @@ router.get("/:id", GameCtrl.getById);
  *    500:
  *      description: An error occurred
  */
-router.get("/all/:userId", GameCtrl.getAllByUser);
+router.get("/all/:userId", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).getAllByUser(req, res);
+});
 
 // Send comment during game
 /**
@@ -384,7 +408,9 @@ router.get("/all/:userId", GameCtrl.getAllByUser);
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/comment", GameCtrl.comment);
+router.patch("/comment", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).comment(req, res);
+});
 
 /**
  * @swagger
@@ -407,7 +433,9 @@ router.patch("/comment", GameCtrl.comment);
  *    500:
  *      description: An error occurred
  */
-router.delete("/delete", GameCtrl.delete);
+router.delete("/delete", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).delete(req, res);
+});
 
 // Export Module
 module.exports = router;

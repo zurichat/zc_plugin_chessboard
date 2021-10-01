@@ -4,9 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 
 // Import CSS for this page
 // import "./chessboard.css";
+import styles from "./chessboard.module.css";
 
 // Import style for this page
 import { ChessboardContainer } from "./styles";
+import back from "../../assets/chess-pieces/back.svg";
+import left from "../../assets/chess-pieces/left.svg";
+import right from "../../assets/chess-pieces/right.svg";
 
 // Import Adapters
 import { UpdatePieceMove, UpdateGameWinner } from "../../adapters/chessboard";
@@ -18,8 +22,12 @@ import Chessboard from "chessboardjsx";
 import PlayerName from "../PlayerName";
 import ChessBoardBorder from "../ChessBoardBorder";
 import GameWinnerModal from "../Modals/GameWinnerModal";
+import NextTurn from "../Modals/NextTurnModal/NextTurn";
 
 function ChessBoard({ type, gameData }) {
+  const initialIndex = -1;
+  const [replayIndex, setReplayIndex] = useState(initialIndex);
+
   const game_id = gameData._id;
   const GameEngine = useRef(new Chess());
 
@@ -29,6 +37,34 @@ function ChessBoard({ type, gameData }) {
     [gameData.owner.user_id]: gameData.owner.color,
     [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
+
+  // Allow spectators to reset game to live
+  const handleCurrent = () => {
+    setReplayIndex(-1);
+    set_board_position(GameEngine.current.fen());
+  };
+
+  // Allow spectators to be able to replay the game
+  const handleMoveReplay = (move) => {
+    if (move == "-1") {
+      setReplayIndex(replayIndex - 1);
+    } else if ((move = "+1")) {
+      setReplayIndex(1 + replayIndex);
+      set_board_position(moves.at(replayIndex).position_fen);
+    } else if ((move = "0")) {
+      setReplayIndex(-1);
+      set_board_position(moves.at(-1).position_fen);
+    }
+  };
+  useEffect(() => {
+    // if(replayIndex === -2 ){
+    if (Math.abs(replayIndex) != moves.length + 1) {
+      set_board_position(moves.at(replayIndex).position_fen);
+    } else {
+      set_board_position("start");
+    }
+    // }
+  }, [replayIndex]);
 
   const [board_position, set_board_position] = useState(
     gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
@@ -40,7 +76,7 @@ function ChessBoard({ type, gameData }) {
       moves.length > 0 ? moves.at(-1).position_fen : undefined
     );
     set_board_position(GameEngine.current.fen());
-  });
+  }, [moves]);
 
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
@@ -85,7 +121,17 @@ function ChessBoard({ type, gameData }) {
   };
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
-    return screenWidth < 560 ? screenWidth * 0.85 : 475;
+    return screenWidth < 560
+      ? screenWidth * 0.8
+      : screenWidth < 800
+      ? screenWidth * 0.48
+      : screenWidth < 1000
+      ? screenWidth * 0.35
+      : screenWidth < 1300
+      ? screenWidth * 0.3
+      : screenHeight < 650
+      ? 350
+      : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
@@ -94,7 +140,7 @@ function ChessBoard({ type, gameData }) {
       GameEngine.current.turn() !==
         players_to_color_map[getLoggedInUserData().user_id]
     ) {
-      return false;
+      return true;
     } else {
       return true;
     }
@@ -112,7 +158,9 @@ function ChessBoard({ type, gameData }) {
     // illegal move
     if (move === null) return;
 
-    // set_board_position(GameEngine.current.fen());
+    // if (GameEngine.current.turn() === "w")
+
+    set_board_position(GameEngine.current.fen());
 
     // Piece Move API Call
     UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
@@ -233,93 +281,179 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        <h4
+        {/* <h4
           style={{
             textAlign: "center",
-            fontSize: "2.5rem",
+            fontSize: "1.5rem",
             paddingTop: "1rem",
+
+            top: "0px",
           }}
         >
           {" "}
           Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
-        </h4>
-
+        </h4> */}
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
             style={{ paddingBottom: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
+        ) : GameEngine.current.turn() === "b" ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              zIndex: "1",
+              width: "80%",
+              margin: "3em 0 0 0",
+            }}
+          >
+            {/* <NextTurn gameData={gameData} name={gameData.opponent?.user_name} /> */}
+            <PlayerName
+              style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+              name={gameData.opponent?.user_name}
+              image_url={gameData.opponent?.image_url}
+            />
+          </div>
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px" }}
+            style={{ paddingBottom: "20px", paddingTop: "10px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
+          />
+        )}
+        <div
+          style={{
+            display: "flex",
+            zIndex: "10",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              border: "3px solid #E1B168",
+              zIndex: "1",
+            }}
+          >
+            <ChessBoardBorder />
+
+            <Chessboard
+              // Set custom Chess Pieces
+              pieces={chessPieces()}
+              // Automatically adjust the board size to the screen
+              calcWidth={calcWidth}
+              // Set Board Id
+              id={`game_${game_id}`}
+              // disables chessboard pieces movement on spectator screen
+              draggable={type == "spectator" ? false : true}
+              // Set the board to face player with his color
+              orientation={
+                players_to_color_map[getLoggedInUserData().user_id] == "b"
+                  ? "black"
+                  : "white"
+              }
+              // Setting the board Postion
+              position={board_position}
+              // Determine if the board can be moved by the player now
+              allowDrag={allowDrag}
+              // On Drop/Click (for game on mobile devices) Of A Piece On the Chess Board
+              onDrop={onDrop}
+              // When Mouse is hovered on a square, draw possible moves for the piece
+              onMouseOverSquare={onMouseOverSquare}
+              onMouseOutSquare={onMouseOutSquare}
+              // Prop to manage the styling of the board squares
+              squareStyles={squareStyles}
+              // Custom Square styling for the board
+              darkSquareStyle={{ backgroundColor: "#3D2F19" }}
+              lightSquareStyle={{
+                background:
+                  "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
+              }}
+              // Allow click and move
+              // onSquareClick={onSquareClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
+              // onSquareRightClick={onSquareRightClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
+              // Show Notations on the board
+              showNotation={false}
+            />
+          </div>
+        </div>
+        {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
+          <PlayerName
+            style={{ paddingBottom: "28px", paddingTop: "28px" }}
+            name={gameData.opponent?.user_name}
+            image_url={gameData.opponent?.image_url}
+          />
+        ) : GameEngine.current.turn() === "w" ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              zIndex: "1",
+              width: "80%",
+            }}
+          >
+            {/* <NextTurn gameData={gameData} name={gameData.owner.user_name} /> */}
+            <PlayerName
+              style={{ paddingBottom: "28px" }}
+              name={gameData.owner.user_name}
+              image_url={gameData.owner.image_url}
+            />
+          </div>
+        ) : (
+          <PlayerName
+            style={{ paddingBottom: "28px", paddingTop: "28px" }}
+            name={gameData.owner.user_name}
+            image_url={gameData.owner.image_url}
           />
         )}
 
         <div
           style={{
-            position: "relative",
-            border: "3px solid #E1B168",
-            zIndex: "1",
+            display: "flex",
+            gap: "0.8em",
+            width: "inherit",
+            justifyContent: "center",
+            marginBottom: "1em",
           }}
         >
-          <ChessBoardBorder />
-          <Chessboard
-            // Set custom Chess Pieces
-            pieces={chessPieces()}
-            // Automatically adjust the board size to the screen
-            calcWidth={calcWidth}
-            // Set Board Id
-            id={`game_${game_id}`}
-            // disables chessboard pieces movement on spectator screen
-            draggable={type == "spectator" ? false : true}
-            // Set the board to face player with his color
-            orientation={
-              players_to_color_map[getLoggedInUserData().user_id] == "b"
-                ? "black"
-                : "white"
-            }
-            // Setting the board Postion
-            position={board_position}
-            // Determine if the board can be moved by the player now
-            allowDrag={allowDrag}
-            // On Drop/Click (for game on mobile devices) Of A Piece On the Chess Board
-            onDrop={onDrop}
-            // When Mouse is hovered on a square, draw possible moves for the piece
-            onMouseOverSquare={onMouseOverSquare}
-            onMouseOutSquare={onMouseOutSquare}
-            // Prop to manage the styling of the board squares
-            squareStyles={squareStyles}
-            // Custom Square styling for the board
-            darkSquareStyle={{ backgroundColor: "#3D2F19" }}
-            lightSquareStyle={{
-              background:
-                "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
-            }}
-            // Allow click and move
-            // onSquareClick={onSquareClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
-            // onSquareRightClick={onSquareRightClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
-            // Show Notations on the board
-            showNotation={false}
-          />
-        </div>
+          {/* Back buttons  */}
+          {moves.length + 1 > Math.abs(replayIndex) && (
+            <button
+              onClick={() => handleMoveReplay("-1")}
+              className={styles.btn_back}
+            >
+              <img src={left} alt="" style={{ width: "16px" }} />
+              Back
+            </button>
+          )}
 
-        {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
-          <PlayerName
-            style={{ paddingBottom: "28px" }}
-            name={gameData.opponent?.user_name}
-            image_url={gameData.opponent?.image_url}
-          />
-        ) : (
-          <PlayerName
-            style={{ paddingBottom: "28px" }}
-            name={gameData.owner.user_name}
-            image_url={gameData.owner.image_url}
-          />
-        )}
+          {/* Replay Buttons */}
+          {replayIndex !== -1 && (
+            <button
+              onClick={() => handleCurrent()}
+              className={styles.btn_current}
+            >
+              <img src={back} alt="" style={{ width: "16px" }} />
+              Reset to Live Game
+            </button>
+          )}
+
+          {/* Forward Button  */}
+          {-1 != replayIndex && (
+            <button
+              onClick={() => handleMoveReplay("+1")}
+              className={styles.btn_forward}
+            >
+              Forward
+              <img src={right} alt="" style={{ width: "16px" }} />
+            </button>
+          )}
+        </div>
       </ChessboardContainer>
+
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
     </>
   );

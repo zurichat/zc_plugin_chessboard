@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
 import Exit from "../Modals/ExitModal/Exit";
@@ -29,6 +29,15 @@ const SpectatorSideBar = ({ type, gameData }) => {
   const [isModalOpen, setmodalIsOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  });
+
   const handleAddComment = () => {
     if (commentMsg.trim().length) {
       sendComment(game_id, commentMsg).then((response) => {
@@ -37,9 +46,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
           console.log("Unable to send comment: ", response.data.message);
         } else {
           // Clear the comment message input
-          setCommentMsg("");
         }
-      });
+      }, setCommentMsg(""));
     } else {
       // TODO: Handle error with Toasts
       console.log("CommentMsg is empty");
@@ -99,32 +107,45 @@ const SpectatorSideBar = ({ type, gameData }) => {
           />
 
           <div className={styles.chatContainer}>
-            <div>
+            {type !== "spectator" && gameData.status === 0 && (
+              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
+            )}
+
+            {type !== "spectator" && gameData.status === 1 && (
+              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+            )}
+
+            <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
-                commentsFromGameData.map(
-                  ({ user_name, image_url, text, timestamp }) => {
-                    return (
-                      <div className={styles.chatWrapper} key={comment_id++}>
-                        <div className={styles.specHead}>
-                          <img
-                            className={styles.specAvi}
-                            src={image_url}
-                            alt="avi"
-                          />
-                          <div className={styles.specInfo}>
-                            <h2 className={styles.spectatorName}>
-                              {user_name}
-                            </h2>
-                            <p className={styles["time-muted"]}>{timestamp}</p>
+                <>
+                  {commentsFromGameData.map(
+                    ({ user_name, image_url, text, timestamp }) => {
+                      return (
+                        <div className={styles.chatWrapper} key={comment_id++}>
+                          <div className={styles.specHead}>
+                            <img
+                              className={styles.specAvi}
+                              src={image_url}
+                              alt="avi"
+                            />
+                            <div className={styles.specInfo}>
+                              <h2 className={styles.spectatorName}>
+                                {user_name}
+                              </h2>
+                              <p className={styles["time-muted"]}>
+                                {timestamp}
+                              </p>
+                            </div>
+                          </div>
+                          <div className={styles.specNameTime}>
+                            <p className={styles.spectatorMessage}>{text}</p>
                           </div>
                         </div>
-                        <div className={styles.specNameTime}>
-                          <p className={styles.spectatorMessage}>{text}</p>
-                        </div>
-                      </div>
-                    );
-                  }
-                )
+                      );
+                    }
+                  )}
+                  <div ref={messagesEndRef} />
+                </>
               ) : (
                 <div className={styles.emptyComment}>
                   <svg
@@ -312,6 +333,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
+                      className={styles.svgNotneeded}
                       width="18"
                       height="16"
                       viewBox="0 0 18 18"
@@ -342,6 +364,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
+                      className={styles.svgNomargin}
                       width="17"
                       height="16"
                       viewBox="0 0 17 16"
@@ -363,6 +386,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
                     </svg>
 
                     <svg
+                      className={styles.svgNotneeded}
                       width="16"
                       height="15"
                       viewBox="0 0 16 15"
@@ -481,14 +505,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
                 </div>
               </div>
             ) : null}
-
-            {type !== "spectator" && gameData.status === 0 && (
-              <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
-            )}
-
-            {type !== "spectator" && gameData.status === 1 && (
-              <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
-            )}
           </div>
         </div>
       </aside>
