@@ -1,6 +1,6 @@
 // Import api call adapter
-import { get, patch } from "../xhr";
-import { getLoggedInUserData } from "../auth";
+import { get, post, patch } from "../xhr";
+import { getLoggedInUserData, getChessBotData } from "../auth";
 import { SubscribeToChannel } from "@zuri/control";
 // import Centrifuge from "centrifuge";
 
@@ -63,4 +63,17 @@ export function endGame(game_id) {
   };
 
   return patch("/game/end", body);
+}
+
+// Start Game with Bot
+export function startGameWithBot(game_id) {
+  // Get the bot data
+  const bot = getChessBotData();
+
+  // Set the bot Data and Game Data to Body
+  let body = bot;
+  body["game_id"] = game_id;
+
+  // Call the join game api endpoint with the bot data
+  return post("/game/join", body);
 }
