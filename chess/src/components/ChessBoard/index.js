@@ -18,6 +18,7 @@ import Chessboard from "chessboardjsx";
 import PlayerName from "../PlayerName";
 import ChessBoardBorder from "../ChessBoardBorder";
 import GameWinnerModal from "../Modals/GameWinnerModal";
+import NextTurn from "../Modals/NextTurnModal/NextTurn";
 
 function ChessBoard({ type, gameData }) {
   const game_id = gameData._id;
@@ -117,6 +118,8 @@ function ChessBoard({ type, gameData }) {
 
     // illegal move
     if (move === null) return;
+
+    // if (GameEngine.current.turn() === "w")
 
     set_board_position(GameEngine.current.fen());
 
@@ -258,6 +261,24 @@ function ChessBoard({ type, gameData }) {
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
+        ) : GameEngine.current.turn() === "b" ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              zIndex: "1",
+              width: "80%",
+              margin: "3em 0 0 0",
+            }}
+          >
+            <NextTurn gameData={gameData} name={gameData.opponent?.user_name} />
+            <PlayerName
+              style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+              name={gameData.opponent?.user_name}
+              image_url={gameData.opponent?.image_url}
+            />
+          </div>
         ) : (
           <PlayerName
             style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
@@ -268,50 +289,58 @@ function ChessBoard({ type, gameData }) {
 
         <div
           style={{
-            position: "relative",
-            border: "3px solid #E1B168",
-            zIndex: "1",
+            display: "flex",
+            zIndex: "10",
           }}
         >
-          <ChessBoardBorder />
-          <Chessboard
-            // Set custom Chess Pieces
-            pieces={chessPieces()}
-            // Automatically adjust the board size to the screen
-            calcWidth={calcWidth}
-            // Set Board Id
-            id={`game_${game_id}`}
-            // disables chessboard pieces movement on spectator screen
-            draggable={type == "spectator" ? false : true}
-            // Set the board to face player with his color
-            orientation={
-              players_to_color_map[getLoggedInUserData().user_id] == "b"
-                ? "black"
-                : "white"
-            }
-            // Setting the board Postion
-            position={board_position}
-            // Determine if the board can be moved by the player now
-            allowDrag={allowDrag}
-            // On Drop/Click (for game on mobile devices) Of A Piece On the Chess Board
-            onDrop={onDrop}
-            // When Mouse is hovered on a square, draw possible moves for the piece
-            onMouseOverSquare={onMouseOverSquare}
-            onMouseOutSquare={onMouseOutSquare}
-            // Prop to manage the styling of the board squares
-            squareStyles={squareStyles}
-            // Custom Square styling for the board
-            darkSquareStyle={{ backgroundColor: "#3D2F19" }}
-            lightSquareStyle={{
-              background:
-                "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
+          <div
+            style={{
+              position: "relative",
+              border: "3px solid #E1B168",
+              zIndex: "1",
             }}
-            // Allow click and move
-            // onSquareClick={onSquareClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
-            // onSquareRightClick={onSquareRightClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
-            // Show Notations on the board
-            showNotation={false}
-          />
+          >
+            <ChessBoardBorder />
+
+            <Chessboard
+              // Set custom Chess Pieces
+              pieces={chessPieces()}
+              // Automatically adjust the board size to the screen
+              calcWidth={calcWidth}
+              // Set Board Id
+              id={`game_${game_id}`}
+              // disables chessboard pieces movement on spectator screen
+              draggable={type == "spectator" ? false : true}
+              // Set the board to face player with his color
+              orientation={
+                players_to_color_map[getLoggedInUserData().user_id] == "b"
+                  ? "black"
+                  : "white"
+              }
+              // Setting the board Postion
+              position={board_position}
+              // Determine if the board can be moved by the player now
+              allowDrag={allowDrag}
+              // On Drop/Click (for game on mobile devices) Of A Piece On the Chess Board
+              onDrop={onDrop}
+              // When Mouse is hovered on a square, draw possible moves for the piece
+              onMouseOverSquare={onMouseOverSquare}
+              onMouseOutSquare={onMouseOutSquare}
+              // Prop to manage the styling of the board squares
+              squareStyles={squareStyles}
+              // Custom Square styling for the board
+              darkSquareStyle={{ backgroundColor: "#3D2F19" }}
+              lightSquareStyle={{
+                background:
+                  "linear-gradient(262.27deg, #E1B168 -23.58%, rgba(189, 136, 48, 0.8) 112.36%)",
+              }}
+              // Allow click and move
+              // onSquareClick={onSquareClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
+              // onSquareRightClick={onSquareRightClick} // Commented out, cause it was allowing player one move player 2 pieces and vice versa
+              // Show Notations on the board
+              showNotation={false}
+            />
+          </div>
         </div>
 
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
@@ -320,6 +349,23 @@ function ChessBoard({ type, gameData }) {
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
+        ) : GameEngine.current.turn() === "w" ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              zIndex: "1",
+              width: "80%",
+            }}
+          >
+            <NextTurn gameData={gameData} name={gameData.owner.user_name} />
+            <PlayerName
+              style={{ paddingBottom: "28px" }}
+              name={gameData.owner.user_name}
+              image_url={gameData.owner.image_url}
+            />
+          </div>
         ) : (
           <PlayerName
             style={{ paddingBottom: "28px" }}
