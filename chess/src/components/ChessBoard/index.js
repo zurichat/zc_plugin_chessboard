@@ -82,19 +82,18 @@ function ChessBoard({ type, gameData }) {
   const [pieceSquare, setPieceSquare] = useState("");
   const [history, setHistory] = useState([]);
 
-// Beginning of random
-function makeRandomMove () {
-  var possibleMoves = game.moves()
+  // Beginning of random
+  function makeRandomMove() {
+    var possibleMoves = game.moves();
 
-  // game over
-  if (possibleMoves.length === 0) return
+    // game over
+    if (possibleMoves.length === 0) return;
 
-  var randomIdx = Math.floor(Math.random() * possibleMoves.length)
-  game.move(possibleMoves[randomIdx])
-  board.position(game.fen())
-}                  
-// End of random
-
+    var randomIdx = Math.floor(Math.random() * possibleMoves.length);
+    game.move(possibleMoves[randomIdx]);
+    board.position(game.fen());
+  }
+  // End of random
 
   const chessPieces = () => {
     return [
