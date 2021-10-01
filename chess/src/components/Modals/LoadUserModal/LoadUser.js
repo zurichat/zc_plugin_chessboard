@@ -25,26 +25,26 @@ const dummyData = [
   name: "Eni4sure",
   designation: "BackEnd developer",
   }
-]
+];
 
 const LoadUser = () => {
 
     const [usersDetails, setUsersDetails] = useState([...dummyData]);
     const [tempUsersDetails, setTempUsersDetails] = useState([...dummyData]);
-    const [noUser, setNoUser] = useState(false)
+    const [noUser, setNoUser] = useState(false);
   
   
       const handleInput = (e) => {
-        let obj = usersDetails
+        let obj = usersDetails;
   
-        obj = tempUsersDetails.filter(user => user.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        obj = tempUsersDetails.filter(user => user.name.toLowerCase().includes(e.target.value.toLowerCase()));
         if (obj.length === 0) {
           setNoUser(true);
         } else {
-          setNoUser(false)
+          setNoUser(false);
         }
-        setUsersDetails(obj)
-      }
+        setUsersDetails(obj);
+      };
 
       return (
         <div className={Styles["load-user__backdrop"]}>
@@ -65,7 +65,7 @@ const LoadUser = () => {
           </div>
          </div>
         </div>
-    )
-}
+    );
+};
 
 export default LoadUser;

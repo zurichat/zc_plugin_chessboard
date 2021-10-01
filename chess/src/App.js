@@ -23,8 +23,6 @@ function App() {
 
         {/* Rules Page */}
         <Route exact path="/rules" component={Rules} />
-
-        <Route exact path="/user" component={LoadUser} />
       </Switch>
     </Router>
   );

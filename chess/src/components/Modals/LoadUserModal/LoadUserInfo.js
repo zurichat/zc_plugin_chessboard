@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import icon from "../../../assets/modal/winner_image.png";
 
 import Styles from "./UserModal.module.css";
@@ -22,7 +22,7 @@ const LoadUserInfo = (props) => {
         )
       )
 
-    )
-}
+    );
+};
 
 export default LoadUserInfo; 
