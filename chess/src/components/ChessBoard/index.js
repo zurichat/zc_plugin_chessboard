@@ -90,6 +90,10 @@ function ChessBoard({ type, gameData }) {
       ? screenWidth * 0.80
       : screenWidth < 800
       ? screenWidth * 0.48
+      : screenWidth < 1000
+      ? screenWidth * 0.35
+      : screenWidth < 1300
+      ? screenWidth * 0.30
       : screenHeight < 650
       ? 350
       : 410;
@@ -272,7 +276,7 @@ function ChessBoard({ type, gameData }) {
               margin: "3em 0 0 0",
             }}
           >
-            <NextTurn gameData={gameData} name={gameData.opponent?.user_name} />
+            {/* <NextTurn gameData={gameData} name={gameData.opponent?.user_name} /> */}
             <PlayerName
               style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
               name={gameData.opponent?.user_name}
@@ -359,7 +363,7 @@ function ChessBoard({ type, gameData }) {
               width: "80%",
             }}
           >
-            <NextTurn gameData={gameData} name={gameData.owner.user_name} />
+            {/* <NextTurn gameData={gameData} name={gameData.owner.user_name} /> */}
             <PlayerName
               style={{ paddingBottom: "28px" }}
               name={gameData.owner.user_name}
