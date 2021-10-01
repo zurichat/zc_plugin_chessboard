@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
+
 // Import CSS for this page
 // import "./chessboard.css";
 
@@ -89,17 +90,17 @@ function ChessBoard({ type, gameData }) {
     return screenWidth < 560
       ? screenWidth * 0.85
       : screenWidth < 800
-      ? screenWidth * 0.48
-      : screenHeight < 650
-      ? 350
-      : 410;
+        ? screenWidth * 0.48
+        : screenHeight < 650
+          ? 350
+          : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
     if (
       GameEngine.current.game_over() ||
       GameEngine.current.turn() !==
-        players_to_color_map[getLoggedInUserData().user_id]
+      players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
