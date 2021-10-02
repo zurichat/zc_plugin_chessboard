@@ -24,7 +24,7 @@ import Forfeit from "../../components/Modals/ForfeitModal/Forfeit";
 import Exit from "../../components/Modals/ExitModal/Exit";
 
 // Styled Exit/Forfeit
-import { ExitBtn } from "../../components/SpectatorSidebar/SpectatorSidebarStyle";
+import { ExitBtn } from "../../components/SpectatorSideBar/SpectatorSidebarStyle";
 
 function Game({ type }) {
   const [gameData, setGameData] = useState(null);
