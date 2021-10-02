@@ -25,34 +25,30 @@
     z-index: 21;
   }
   
-  .room_header{
+  .room_header {
     font-weight: 900;
-    font-size: 2.25rem;
-    margin-top: 1rem;
-    margin: 1rem 1.5rem 0 1.5rem;
+    font-size: 2.8rem;
+    /* margin-top: 1rem; */
+    margin: 0.5rem 1.5rem 0 1.5rem;
+  }
+  .btn-user-modal-close {
+    display: inline;
+    float: right;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .modal-close-img {
+    margin-right: 2rem;
+    float: right;
   }
   
-  .room_para{
+  .room_para {
     font-size: 1.8rem;
     margin: 0.5rem 1.5rem;
   }
 
-  .room_notification{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 2rem;
-    width: 85%;
-    margin: 0.2rem 1.5rem;
-  }
-
-  .room_notify{
-    border: 1px solid black;
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 4px;
-  }
-  
   .load-user__form {
     margin: 1rem 1.5rem;
   }
