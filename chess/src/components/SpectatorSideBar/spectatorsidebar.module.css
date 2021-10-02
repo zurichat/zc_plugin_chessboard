@@ -111,9 +111,9 @@
   width: 100%;
 }
 
-.heartContainer {
+/* .heartContainer { */
   /* position: absolute; */
-}
+/* } */
 .heartContainer>img {
   position: fixed;
   visibility: hidden;
