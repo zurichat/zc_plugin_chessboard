@@ -14,7 +14,7 @@ import right from "../../assets/chess-pieces/right.svg";
 
 // Import Adapters
 import { UpdatePieceMove, UpdateGameWinner } from "../../adapters/chessboard";
-import { getLoggedInUserData } from "../../adapters/auth";
+import { getChessBotData, getLoggedInUserData } from "../../adapters/auth";
 
 // Import Components
 import Chess from "chess.js";
@@ -56,6 +56,7 @@ function ChessBoard({ type, gameData }) {
       set_board_position(moves.at(-1).position_fen);
     }
   };
+
   useEffect(() => {
     // if(replayIndex === -2 ){
     if (Math.abs(replayIndex) != moves.length + 1) {
@@ -77,6 +78,20 @@ function ChessBoard({ type, gameData }) {
     );
     set_board_position(GameEngine.current.fen());
   }, [moves]);
+
+  useEffect(() => {
+    // Check if the opponent of this game is our chessbot
+    if (gameData.opponent?.user_id === getChessBotData().user_id) {
+      // Check if it's bot turn to play
+      if (
+        players_to_color_map[getChessBotData().user_id] ===
+        GameEngine.current.turn()
+      ) {
+        // Delay for bot to think
+        makeRandomMove();
+      }
+    }
+  });
 
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
@@ -140,11 +155,36 @@ function ChessBoard({ type, gameData }) {
       GameEngine.current.turn() !==
         players_to_color_map[getLoggedInUserData().user_id]
     ) {
-      return true;
+      return false;
     } else {
       return true;
     }
   };
+
+  // Beginning of random
+  const makeRandomMove = () => {
+    let possibleMoves = GameEngine.current.moves();
+
+    // game over
+    if (possibleMoves.length === 0) return;
+
+    var randomIdx = Math.floor(Math.random() * possibleMoves.length);
+    const move = GameEngine.current.move(possibleMoves[randomIdx]);
+    set_board_position(GameEngine.current.fen());
+
+    // Piece Move API Call
+    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+      (response) => {
+        if (!response.data.success) {
+          // TODO: Handle error with Toasts
+          // Update the Board with last move
+        } else {
+          setHistory(GameEngine.current.history({ verbose: true }));
+        }
+      }
+    );
+  };
+  // End of random
 
   const onDrop = ({ sourceSquare, targetSquare, piece }) => {
     // see if the move is legal
@@ -157,8 +197,6 @@ function ChessBoard({ type, gameData }) {
 
     // illegal move
     if (move === null) return;
-
-    // if (GameEngine.current.turn() === "w")
 
     set_board_position(GameEngine.current.fen());
 
@@ -281,20 +319,9 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        {/* <h4
-          style={{
-            textAlign: "center",
-            fontSize: "1.5rem",
-            paddingTop: "1rem",
-
-            top: "0px",
-          }}
-        >
-          {" "}
-          Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
-        </h4> */}
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
@@ -307,18 +334,23 @@ function ChessBoard({ type, gameData }) {
               alignItems: "center",
               zIndex: "1",
               width: "80%",
-              margin: "3em 0 0 0",
+              margin: "1em 0 0 0",
             }}
           >
             {/* <NextTurn gameData={gameData} name={gameData.opponent?.user_name} /> */}
             <PlayerName
-              style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+              game_id={game_id}
+              style={{
+                paddingBottom: "28px",
+                paddingTop: "2px !important",
+              }}
               name={gameData.opponent?.user_name}
               image_url={gameData.opponent?.image_url}
             />
           </div>
         ) : (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "20px", paddingTop: "10px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
@@ -381,6 +413,7 @@ function ChessBoard({ type, gameData }) {
         </div>
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
@@ -397,6 +430,7 @@ function ChessBoard({ type, gameData }) {
           >
             {/* <NextTurn gameData={gameData} name={gameData.owner.user_name} /> */}
             <PlayerName
+              game_id={game_id}
               style={{ paddingBottom: "28px" }}
               name={gameData.owner.user_name}
               image_url={gameData.owner.image_url}
@@ -404,6 +438,7 @@ function ChessBoard({ type, gameData }) {
           </div>
         ) : (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}

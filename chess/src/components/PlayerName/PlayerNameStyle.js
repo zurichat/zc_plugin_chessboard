@@ -5,7 +5,7 @@ const PlayerDetails = styled.div`
   align-items: center;
   font-size: 1em;
   padding: 13px 0;
-  width: 50%;
+  width: 100%;
   /* padding-top: 28px; */
   justify-content: flex-end;
   justify-content: flex-end;
@@ -27,7 +27,7 @@ const WaitingPlayer2Container = styled.div`
   flex-direction: row;
   align-items: center;
   align-self: flex-start;
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
   padding-bottom: 3rem;
   padding-left: 1.2rem;
 

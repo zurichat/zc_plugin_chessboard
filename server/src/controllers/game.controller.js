@@ -330,14 +330,16 @@ class GameController {
 
       // Publish the event to Centrifugo server
       await centrifugoController.publish(game_id, payload);
-      await centrifugoController.publishToSideBar(
-        res.locals.organisation_id,
-        user_id,
-        {
-          event: "sidebar_update",
-          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
-        }
-      );
+
+      // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
+      // await centrifugoController.publishToSideBar(
+      //   res.locals.organisation_id,
+      //   user_id,
+      //   {
+      //     event: "sidebar_update",
+      //     sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+      //   }
+      // );
       // Return the game
       res.status(200).send(response("Joined as spectator successful", updated));
     } catch (error) {
@@ -386,14 +388,16 @@ class GameController {
 
       // Publish the event to Centrifugo server
       await centrifugoController.publish(game_id, payload);
-      await centrifugoController.publishToSideBar(
-        res.locals.organisation_id,
-        user_id,
-        {
-          event: "sidebar_update",
-          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
-        }
-      );
+
+      // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
+      // await centrifugoController.publishToSideBar(
+      //   res.locals.organisation_id,
+      //   user_id,
+      //   {
+      //     event: "sidebar_update",
+      //     sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+      //   }
+      // );
       // Return the game
       res.status(200).send(response("spectator removed successfully", updated));
     } catch (error) {
