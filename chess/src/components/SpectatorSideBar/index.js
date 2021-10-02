@@ -305,7 +305,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
               )}
             </div>
 
-            {type === "spectator" ? (
+            {type === "spectator" || type === "owner" || type === "opponent" ? (
               <div className={styles.chatInputForm}>
                 <input
                   type="text"
