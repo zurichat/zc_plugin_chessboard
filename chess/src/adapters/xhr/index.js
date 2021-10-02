@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { getCurrentOrganisation } from "../auth";
 
 function returnAxiosInstance() {
   return Axios.create({
@@ -6,6 +7,7 @@ function returnAxiosInstance() {
     // baseURL: "//localhost:5050/api/v1/",
     headers: {
       "Content-Type": "application/json",
+      Organisation: getCurrentOrganisation(),
       // 'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     },
     validateStatus: function (status) {
