@@ -2,11 +2,10 @@ import React from "react";
 
 import styles from "./nextturn.module.css";
 
-const NextTurn = (props, { gameData }) => {
+const NextTurn = ({ color_to_play }) => {
   return (
     <div className={styles.nextTurn}>
-      <h2 className={styles.nextTurnText}>Your Turn To Play</h2>
-      <h3 className={styles.nextTurnTexting}> {props.name}</h3>
+      <h2 className={styles.nextTurnText}> It's &nbsp; <span className={styles.nextTurnTexting}>{color_to_play}</span> &nbsp; Turn To Play</h2>
     </div>
   );
 };
