@@ -1,48 +1,30 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css';
 
+const GameHistory = () => { 
 
+const [data, setState] = useState([])
+const [hasError, setHasError] = useState(false)
+useEffect(() => {
+    fetch("https://chess.zuri.chat/api/v1/game/all/")
+    .then(response => response.json())
+    .then(res => setState(res.data))
+    .catch(err => setHasError(true))
+}, [])
+    // const { data, loading } = useFetch("https://chess.zuri.chat/api/v1/game/all/");
 
-export class GameHistory extends Component {
+    const [show, showHistory] = useState("hide");
 
-    constructor(props){
-        super(props);
-        this.state = {
-            items: [],
-            isLoaded: false,
-        }
-    }
+    return (
+        <div>
+            {hasError ? <div>Loading...</div> : 
 
-    componentDidMount(){
+            // <div>{data.opponent.user_name}</div>
 
-        fetch("https://chess.zuri.chat/api/v1/game/all")
-        .then(res => res.json())
-        .then(json => {
-            this.setState({
-                isLoaded: true,
-                items: json.data,
-            })
-        console.log(json.data);
-        }); 
-    }
-
-
-    showHistory() {
-        document.getElementById("gameHistory").style.display = "block";
-        document.getElementById("hide_button").style.display = "none";
-    }
-
-    render() {
-        var { isLoaded, items } = this.state;
-
-        if(!isLoaded) {
-            return <div>Loading ...</div>
-        } else {
-            return (
             <div className="outer_cover">
-                <div className="inner_cover" id="gameHistory">
+                <div className="inner_cover" id={show}>
                     <center><h1>Game History</h1></center>
-                       {items.map(item => (
+                       {data.map(item => (
                            <div>
                                <h3 className="game_id">GAME ID: </h3><span className="game_data">{item._id}</span>
                                <br/>
@@ -90,12 +72,18 @@ export class GameHistory extends Component {
                     </div>
 
                 <div className="game_button_cover">
-                    <button className="game_button" id="hide_button" onClick={this.showHistory}>Game History</button>
+                    <button className="game_button" id="button_display" onClick={ () => {
+                        showHistory()
+                    }}
+                    >
+                    Game History</button>
                 </div>   
             </div>
-            );
-        }
-    }
-}
+            
+            }
+        </div>
+    );
+};
+
 
 export default GameHistory;
