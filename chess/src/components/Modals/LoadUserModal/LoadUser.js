@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import LoadUserInfo from "./LoadUserInfo";
 import icon from "../../../assets/modal/close.svg";
-import bell from "../../../assets/modal/bell.svg";
-import phone from "../../../assets/modal/phone.svg";
-import chevron from "../../../assets/modal/chevron.svg";
-import search from "../../../assets/modal/search.svg";
 
 // Import the CSS
 import Styles from "./UserModal.module.css";
@@ -46,13 +42,12 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
         </button>
         <h3 className={Styles["room_header"]}># Chess</h3>
         <div className={Styles["room_notification"]}>
-           <h4 className={Styles["room_notify"]}> Get Notifcation for @ Mentions </h4>
-           <h4 className={Styles["room_notify"]}> Start a Call</h4>
+           <h4 className={Styles["room_notify"]}>Get Notifcation for @ Mentions</h4>
+           <h4 className={Styles["room_notify"]}>Start a Call</h4>
            </div>
         <p className={Styles["room_para"]}>Members</p>
 
         <form className={Styles["load-user__form"]}>
-            
           <input
             className={Styles["searchbar"]}
             type="text"
