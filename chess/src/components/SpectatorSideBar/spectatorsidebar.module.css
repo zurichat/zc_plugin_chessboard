@@ -29,12 +29,14 @@
 }
  
 .chatWrapperContainer::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7) ;
     -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7); 
     border-radius: 5px;
 }
  
 .chatWrapperContainer::-webkit-scrollbar-thumb {
     border-radius: 10px;
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.809);
     -webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.809); 
 }
 
@@ -104,6 +106,7 @@
   flex: 1;
   overflow-y: auto;
   padding-bottom: 8px;
+  user-select: text;
   -webkit-user-select: text;
   width: 100%;
 }
