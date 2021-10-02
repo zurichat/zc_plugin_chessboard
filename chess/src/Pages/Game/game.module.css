@@ -6,6 +6,7 @@
   height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .main-chess {
@@ -79,9 +80,10 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 919px) {
   .main-chess {
     width: 100%;
+    border-right: none;
   }
   .main-game {
     flex-direction: column;
