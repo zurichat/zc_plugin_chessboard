@@ -37,7 +37,7 @@ class CentrifugoController {
           method: "publish",
           params: {
             channel,
-            data,
+            data: { event: "sidebar_update", plugin_id: "chess.zuri.chat", data: data },
           },
         },
         {
@@ -47,6 +47,7 @@ class CentrifugoController {
           },
         }
       );
+
       return true;
     } catch (error) {
       throw new CustomError(`Unable to publish to ${channel}: ${error}`, "500");

@@ -41,74 +41,81 @@ class InformationController {
     }
   }
 
+  async sideBarInfo(organisation_id, user_id) {
+
+    const org = organisation_id;
+    const user = user_id;
+
+    // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
+    const GameRepo = new DatabaseConnection("003test_game", org);
+    const { data } = await GameRepo.fetchAll();
+
+    // pick running games
+    const filtered = data.filter((x) => {
+      return (
+        x.status !== 2 &&
+        (x.owner.user_id == user ||
+          (x.opponent && x.opponent.user_id == user) ||
+          x.spectators.filter((y) => y.user_id == user).length > 0)
+      );
+    });
+
+    const joined_rooms = [];
+    for (let game of filtered) {
+      // generate dynamic sidebar icons
+      const imageName = await generateImage(
+        game.owner.image_url ? game.owner.image_url : null,
+        game.opponent ? game.opponent.image_url : null,
+        game._id,
+        org
+      );
+
+      // add to room collection
+      joined_rooms.push({
+        room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"}`,
+        room_image: `https://chess.zuri.chat/${imageName}`,
+        room_url: `/chess/game/${game._id}`,
+        // unread: 1,
+      });
+    }
+
+    const { PLUGIN_ID } = DATABASE;
+    const payload = {
+      name: "Chess Plugin",
+      description: "The Chess plugin",
+      plugin_id: PLUGIN_ID,
+      organisation_id: org,
+      user_id: user,
+      group_name: "Chess Games",
+      show_group: true,
+      public_rooms: [
+        {
+          room_name: "Chess room",
+          room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+          room_url: "/chess",
+        },
+      ],
+      joined_rooms: [
+        // To be removed - why?
+        {
+          room_name: "Main Chess Room",
+          room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+          room_url: "/chess",
+          unread: 1,
+        },
+        // To be removed - why?
+        ...joined_rooms,
+      ],
+    };
+
+    return payload;
+  }
+
   async getSideBarInfo(req, res) {
     try {
       const { user, org } = req.query;
 
-      // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
-      const GameRepo = new DatabaseConnection("003test_game", org);
-      const { data } = await GameRepo.fetchAll();
-      if (!data)
-        return res.status(404).send(response("data not available", {}, false));
-
-      // pick running games
-      const filtered = data.filter((x) => {
-        return (
-          x.status !== 2 &&
-          (x.owner.user_id == user ||
-            (x.opponent && x.opponent.user_id == user) ||
-            x.spectators.filter((y) => y.user_id == user).length > 1)
-        );
-      });
-
-      const joined_rooms = [];
-      for (let game of filtered) {
-        // generate dynamic sidebar icons
-        const imageName = await generateImage(
-          game.owner.image_url ? game.owner.image_url : null,
-          game.opponent ? game.opponent.image_url : null,
-          game._id,
-          org
-        );
-
-        // add to room collection
-        joined_rooms.push({
-          room_name: `${game.owner.user_name} vs ${
-            game.opponent ? game.opponent.user_name : "-----"
-          }`,
-          room_image: `https://chess.zuri.chat/${imageName}`,
-          room_url: `/chess/game/${game._id}`,
-          count: 1,
-        });
-      }
-
-      const { PLUGIN_ID } = DATABASE;
-      const payload = {
-        name: "Chess Plugin",
-        description: "The Chess plugin",
-        plugin_id: PLUGIN_ID,
-        organisation_id: org,
-        user_id: user,
-        group_name: "Chess Games",
-        show_group: true,
-        public_rooms: [
-          {
-            room_name: "Chess room",
-            room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
-            room_url: "/chess",
-          },
-        ],
-        joined_rooms: [
-          // To be removed - why?
-          {
-            room_name: "Main Chess Room",
-            room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
-            room_url: "/chess",
-          },
-          // To be removed - why?
-          ...joined_rooms,
-        ],
-      };
+      const payload = await new InformationController().sideBarInfo(org, user);
 
       // Just return the payload
       return res.status(200).json(payload);
@@ -119,6 +126,7 @@ class InformationController {
       );
     }
   }
+
 }
 
 // Export Module
