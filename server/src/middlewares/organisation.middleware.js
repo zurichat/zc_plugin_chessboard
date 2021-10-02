@@ -9,7 +9,7 @@ module.exports = (app) => {
     // OMO laterrr
 
     // If org_id is not set in the header, then set it to the default organisation
-    if (!organisation && organisation == null) {
+    if (!organisation || organisation == null) {
       // Use hardcoded organisation
       res.locals.organisation_id = "6145c2d0285e4a18402073f6";
 
