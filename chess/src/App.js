@@ -8,7 +8,6 @@ import "./App.css";
 import Homepage from "./Pages/Home";
 import Game from "./Pages/Game";
 import Rules from "./Pages/Rules";
-import LoadUser from "./components/Modals/LoadUserModal/LoadUser";
 
 function App() {
   return (
