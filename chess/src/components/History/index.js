@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
+import "./style.module.css";
 const GameHistory = () => { 
 const [data, setState] = useState([]);
 const [hasError, setHasError] = useState(false);
