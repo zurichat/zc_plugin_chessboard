@@ -78,6 +78,7 @@ class InformationController {
           }`,
           room_image: `https://chess.zuri.chat/${imageName}`,
           room_url: `/chess/game/${game._id}`,
+          count: 1
         });
       }
 
