@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './style.css';
-
 const GameHistory = () => { 
-
 const [data, setState] = useState([]);
 const [hasError, setHasError] = useState(false);
 useEffect(() => {
@@ -12,7 +10,6 @@ useEffect(() => {
     .catch(err => setHasError(true))
 }, [])
     const [show, showHistory] = useState("hide");
-
     return (
         <div>
             {hasError ? <div>Loading...</div> : 
@@ -23,7 +20,6 @@ useEffect(() => {
                            <div>
                                <h3 className="game_id">GAME ID: </h3><span className="game_data">{item._id}</span>
                                <br/>
-
                                <h3 className="game_id">Spectators: </h3>
                                {item.spectators.map((sub)=>
                                 <div>
@@ -40,8 +36,6 @@ useEffect(() => {
                             <img className="game_img_opponent" src={item.opponent.image_url} />
                             <br/>
                             <span className="game_data">{item.owner.user_name} ------------- {item.opponent.user_name}</span>
-           
-
                             <span className="game_data"> <p className="chess_color">Chess Color </p>( {item.owner.color} )  ----- 
                             <p className="chess_color"> Chess Color </p> ( {item.opponent.color} )</span>
                             Start-time: {item.start_time}
@@ -49,23 +43,18 @@ useEffect(() => {
                             <br/>
                             <hr />
                             <br/>
-                                
-                              
-                               
                            </div>
                        ))};
                     </div>
-
                 <div className="game_button_cover">
                     <button className="game_button" id="button_display" onClick={ () => {
                         showHistory()
-                    }}
+                    }};
                     >
                     Game History</button>
                 </div>   
             </div>
-            
-            }
+            };
         </div>
     );
 };
