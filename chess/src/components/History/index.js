@@ -47,10 +47,7 @@ useEffect(() => {
                        ))};
                     </div>
                 <div className="game_button_cover">
-                    <button className="game_button" id="button_display" onClick={ () => {
-                        showHistory()
-                    }};
-                    >
+                    <button className="game_button" id="button_display" onClick={ () => {showHistory()}>
                     Game History</button>
                 </div>   
             </div>
