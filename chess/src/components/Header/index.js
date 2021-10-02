@@ -7,7 +7,6 @@ import { pluginHeader } from "@zuri/plugin-header";
 // Import CSS for this page
 import styles from "./header.module.css";
 
-
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
 import CommentIcon from "../../assets/header/CommentIcon.png";
