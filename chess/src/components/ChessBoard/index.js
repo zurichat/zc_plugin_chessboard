@@ -13,7 +13,7 @@ import left from "../../assets/chess-pieces/left.svg";
 import right from "../../assets/chess-pieces/right.svg";
 
 // Import Adapters
-import { UpdatePieceMove, UpdateGameWinner } from "../../adapters/chessboard";
+import { UpdatePieceMove, UpdateBotPieceMove, UpdateGameWinner } from "../../adapters/chessboard";
 import { getChessBotData, getLoggedInUserData } from "../../adapters/auth";
 
 // Import Components
@@ -173,7 +173,7 @@ function ChessBoard({ type, gameData }) {
     set_board_position(GameEngine.current.fen());
 
     // Piece Move API Call
-    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+    UpdateBotPieceMove(game_id, move, GameEngine.current.fen()).then(
       (response) => {
         if (!response.data.success) {
           // TODO: Handle error with Toasts
