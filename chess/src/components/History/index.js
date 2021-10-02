@@ -3,24 +3,19 @@ import './style.css';
 
 const GameHistory = () => { 
 
-const [data, setState] = useState([])
-const [hasError, setHasError] = useState(false)
+const [data, setState] = useState([]);
+const [hasError, setHasError] = useState(false);
 useEffect(() => {
     fetch("https://chess.zuri.chat/api/v1/game/all/")
     .then(response => response.json())
     .then(res => setState(res.data))
     .catch(err => setHasError(true))
 }, [])
-    // const { data, loading } = useFetch("https://chess.zuri.chat/api/v1/game/all/");
-
     const [show, showHistory] = useState("hide");
 
     return (
         <div>
             {hasError ? <div>Loading...</div> : 
-
-            // <div>{data.opponent.user_name}</div>
-
             <div className="outer_cover">
                 <div className="inner_cover" id={show}>
                     <center><h1>Game History</h1></center>
@@ -34,10 +29,8 @@ useEffect(() => {
                                 <div>
                                     <span className="game_data">{sub.user_name} | {sub.user_id}</span>
                                 </div>
-                                
-                                )}
+                                )};
                             <br/>
-
                             <h3 className="game_id">Player 1: ----------- </h3>
                             <h3 className="game_id">Player 2: </h3>
                             <br/>
@@ -46,21 +39,13 @@ useEffect(() => {
                             <img className="game_img_owner" src={item.owner.image_url} />
                             <img className="game_img_opponent" src={item.opponent.image_url} />
                             <br/>
-
                             <span className="game_data">{item.owner.user_name} ------------- {item.opponent.user_name}</span>
-                             
-                            {/* {item.owner.user_id}-------
-                            {item.opponent.user_id} <br/> */}
+           
 
                             <span className="game_data"> <p className="chess_color">Chess Color </p>( {item.owner.color} )  ----- 
                             <p className="chess_color"> Chess Color </p> ( {item.opponent.color} )</span>
                             Start-time: {item.start_time}
                             <br/>
-
-                            {/* {item.is_owner_winner} <br/>
-                             <br/>
-                            {item.moves} <br/> */}
-
                             <br/>
                             <hr />
                             <br/>
