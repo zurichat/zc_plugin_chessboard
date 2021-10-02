@@ -25,18 +25,6 @@ import { sendComment } from "../../adapters/comments";
 
 // (lekandev) Commented it out
 //import style-components
-<<<<<<< HEAD
-import {
-  Chat,
-  ChatInputForm,
-  ChatWrapper,
-  EmptyComment,
-  ExitBtn,
-  Sidebar,
-  SidebarNav
-} from "./SpectatorSidebarStyle";
-import styled from "styled-components";
-=======
 // import {
 //   Chat,
 //   ChatInputForm,
@@ -46,7 +34,6 @@ import styled from "styled-components";
 //   Sidebar,
 //   SidebarNav,
 // } from "./SpectatorSidebarStyle";
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
 
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
