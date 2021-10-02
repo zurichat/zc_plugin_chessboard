@@ -334,7 +334,7 @@ function ChessBoard({ type, gameData }) {
               alignItems: "center",
               zIndex: "1",
               width: "80%",
-              margin: "3em 0 0 0",
+              margin: "1em 0 0 0",
             }}
           >
             {/* <NextTurn gameData={gameData} name={gameData.opponent?.user_name} /> */}
