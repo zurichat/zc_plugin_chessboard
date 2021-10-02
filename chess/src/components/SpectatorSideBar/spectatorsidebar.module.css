@@ -11,6 +11,17 @@
   /* border-left: 5px solid #dbdbdb;
   border-bottom: 5px solid #dbdbdb; */
   overflow: hidden;
+  
+}
+
+.chatWrapperContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chatWrapperContainer {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .side-bar-nav {
