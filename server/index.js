@@ -6,6 +6,7 @@ const router = require("./src/routes/index");
 const { PORT } = require("./src/config");
 const errorMiddleware = require("./src/middlewares/error.middleware");
 const preRouteMiddlewares = require("./src/middlewares/pre_route.middleware");
+const { userAuth } = require("./src/middlewares/user_auth.middleware");
 
 const app = express();
 
@@ -31,6 +32,9 @@ app.use("/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Pre-Route middlewares
 preRouteMiddlewares(app);
+
+// All Endpoints require authentication to be accessed
+// app.use(userAuth);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", router);

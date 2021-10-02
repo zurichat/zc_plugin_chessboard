@@ -66,6 +66,7 @@ const ForfeitFooter = styled.div`
 const ForfeitGameBtn = styled.div`
   .btn-forfeit-modal {
     font-size: 1.2em;
+    padding: 1em 3em;
     line-height: 17px;
     font-weight: 300;
     border-radius: 4px;

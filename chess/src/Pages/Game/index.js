@@ -19,6 +19,13 @@ import Header from "../../components/Header";
 import ChessBoard from "../../components/ChessBoard";
 import SpectatorSideBar from "../../components/SpectatorSideBar";
 
+// Exit & Forfeit Modals (lekandev)
+import Forfeit from "../../components/Modals/ForfeitModal/Forfeit";
+import Exit from "../../components/Modals/ExitModal/Exit";
+
+// Styled Exit/Forfeit
+import { ExitBtn } from "../../components/SpectatorSideBar/SpectatorSidebarStyle";
+
 function Game() {
   const [gameData, setGameData] = useState(null);
   const gameDataRef = useRef(null);
@@ -26,6 +33,19 @@ function Game() {
   const [canCallWatchGame, setcanCallWatchGame] = useState(false);
   const { game_id } = useParams();
   const history = useHistory();
+
+  // State for Modals (lekandev)
+  const [isModalOpen, setmodalIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Handlers for Modals (lekandev)
+  const handleForfeitModal = () => {
+    setmodalIsOpen(true);
+  };
+
+  const handleExitModal = () => {
+    setIsOpen(true);
+  };
 
   // Why this? checkout - https://stackoverflow.com/questions/63224151/how-can-i-access-state-in-an-useeffect-without-re-firing-the-useeffect
   useEffect(() => {
@@ -99,7 +119,7 @@ function Game() {
           break;
         }
 
-        // NOT IN USE AGAIN !!!! _ GO annd Beat @odizee / @emeka if ou question it
+        // NOT IN USE AGAIN !!!! _ GO and Beat @odizee / @emeka if you question it
         // case "end_game":
         //   break;
 
@@ -136,6 +156,10 @@ function Game() {
   let BoardToRender = null;
   let SideBarToRender = null;
 
+  // (lekandev)
+  let ModalToRender = null;
+  let ButtonToRender = null;
+
   // If GameData State has been set
   if (gameData !== null) {
     // If LoggedIn User is the owner of the Game
@@ -143,6 +167,12 @@ function Game() {
       // Render the Chessboard with owner defaults
       BoardToRender = <ChessBoard type="owner" gameData={gameData} />;
       SideBarToRender = <SpectatorSideBar type="owner" gameData={gameData} />;
+
+      // (lekandev)
+      ButtonToRender = <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>;
+      ModalToRender = (
+        <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
+      );
       // If LoggedIn User is the opponent in the Game
     } else if (gameData.opponent?.user_id == getLoggedInUserData().user_id) {
       // Render the Chessboard with opponent defaults
@@ -150,12 +180,29 @@ function Game() {
       SideBarToRender = (
         <SpectatorSideBar type="opponent" gameData={gameData} />
       );
+
+      // (lekandev)
+      ButtonToRender = (
+        <ExitBtn onClick={handleForfeitModal}>ForFeit Game</ExitBtn>
+      );
+      ModalToRender = (
+        <Forfeit
+          isModalOpen={isModalOpen}
+          setmodalIsOpen={setmodalIsOpen}
+          gameData={gameData}
+        />
+      );
     } else {
       // Render the ChessBoard with spectator type
       BoardToRender = <ChessBoard type="spectator" gameData={gameData} />;
       SideBarToRender = (
         <SpectatorSideBar type="spectator" gameData={gameData} />
       );
+
+      // (lekandev)
+      // ButtonToRender = (
+      //   <ExitBtn onClick={handleExitModal}>Forfeit Game</ExitBtn>
+      // );
     }
   }
 
@@ -164,6 +211,25 @@ function Game() {
       <div className={styles["main-chess"]}>
         <Header gameData={gameData} />
         {BoardToRender}
+        {/* Exit/Forfeit container (lekandev) */}
+        <div className={styles["exit-button"]}>
+          {/* <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
+          <Forfeit
+            isModalOpen={isModalOpen}
+            setmodalIsOpen={setmodalIsOpen}
+            gameData={gameData}
+          /> */}
+
+          {/* {type !== "spectator" && gameData.status === 0 && (
+            <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
+          )}
+
+          {type !== "spectator" && gameData.status === 1 && (
+            <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
+          )} */}
+          {ModalToRender}
+          {ButtonToRender}
+        </div>
       </div>
       {SideBarToRender}
     </section>

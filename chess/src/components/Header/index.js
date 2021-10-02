@@ -6,7 +6,7 @@ import { pluginHeader } from "@zuri/plugin-header";
 
 // Import CSS for this page
 import styles from "./header.module.css";
-import LoadUser from "../Modals/LoadUserModal/LoadUser";
+// import LoadUser from "../Modals/LoadUserModal/LoadUser";
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -82,11 +82,11 @@ function Header({ gameData }) {
         headerConfig={pluginConfig}
       />
 
-      <LoadUser
+      {/* <LoadUser
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         gameData={gameData}
-      />
+      /> */}
 
       {/* <header className={styles["main-header"]}>
         <div className={`${styles.nav} ${styles["chesshome-nav"]}`}>
