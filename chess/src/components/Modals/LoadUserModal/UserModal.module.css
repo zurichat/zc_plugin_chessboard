@@ -15,9 +15,9 @@
   }
 
   .load-user__modal {
-    width: 453px;
+    width: 300px;
     max-width: 80%;
-    height: 75vh;
+    height: 70vh;
     background: #fff;
     color: #262626;
     padding: 1.5rem 0;
@@ -29,30 +29,67 @@
   
   .room_header {
     font-weight: 900;
-    font-size: 2.8rem;
+    font-size: 3rem;
     /* margin-top: 1rem; */
     margin: 0.5rem 1.5rem 0 1.5rem;
+    position: relative;
+
   }
+ 
   .btn-user-modal-close {
     display: inline;
     float: right;
     border: none;
     background-color: transparent;
     padding: 0;
+    /* font-size: 3rem; */
   }
 
   .modal-close-img {
     margin-right: 2rem;
     float: right;
+    border-radius: 5px;
+    /* color: black; */
   }
   
   .room_para {
     font-size: 1.8rem;
     margin: 0.5rem 1.5rem;
   }
+  .room_notification{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 2rem;
+    width: 85%;
+    margin: 0.2rem 1.5rem;
+  }
+
+  .room_notify{
+    border: 1px solid black;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    position: relative;
+  }
+  .h-img{
+      position: absolute;
+      left: 16px;
+      top: 15px;
+      right: 10px;
+  }
 
   .load-user__form {
     margin: 1rem 1.5rem;
+    /* position: relative; */
+   
+    /* font-family: Lato; */
+    
+  }
+  .form-img{
+      top: 13px;
+      left: 16px;
+      /* position: absolute; */
   }
   
   .searchbar {
@@ -61,10 +98,17 @@
     width: 95%;
     border: 1px solid rgba(0,0,0,.3);
     border-radius: 4px;
+    /* font-weight: normal;
+    font-size: 14px;
+    line-height: 130%;
+    height: 44px; */
+    /* box-shadow: 10px 11px 14px -8px #27AE60; */
+
   }
   
   .searchbar:focus {
-    outline: none;
+    outline: #27AE60;
+    /* box-shadow: 10px 11px 14px -8px #27AE60; */
   }
   
   .load-user__users {
@@ -78,7 +122,13 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+    position: relative;
   }
+  .form-img{
+    top: 13px;
+    left: 16px;
+    position: absolute;
+}
   
   .load-user__user:hover {
     background: #27AE60;
@@ -103,8 +153,8 @@
   }
   
   .user-img{
-    height: 5rem;
-    width: 5rem;
+    height: 7rem;
+    width: 7rem;
   }
 
   .load-user__user--details {
