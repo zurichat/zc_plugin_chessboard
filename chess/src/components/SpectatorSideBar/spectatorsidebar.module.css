@@ -71,17 +71,7 @@
   cursor: pointer;
 } */
 
-<<<<<<< HEAD
-.closeIcon:hover path {
-  stroke: #d1dada !important;
-}
-
-.closeIcon path {
-  stroke: #ffffff !important;
-}
-=======
 /* Í */
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
 
 #chat {
   height: 100%;
@@ -114,23 +104,8 @@
   flex: 1;
   overflow-y: auto;
   padding-bottom: 8px;
-<<<<<<< HEAD
-  user-select: text;
   -webkit-user-select: text;
   width: 100%;
-}
-
-.heartContainer {
-  position: absolute;
-  z-index: 1000;
-  right: 0;
-  bottom: 0;
-  width: 50%;
-  height: 80%;
-=======
-  -webkit-user-select: text;
-  width: 100%;
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
 }
 
 .heartContainer>img {
@@ -291,12 +266,7 @@
   width: 100%;
   padding: 2rem;
 }
-<<<<<<< HEAD
-
-.emptyComment>svg {
-=======
 .emptyComment > img {
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
   width: 100%;
   text-align: center;
   height: auto;
@@ -377,17 +347,11 @@ input::placeholder {
   margin: 0.3rem 0;
 }
 
-<<<<<<< HEAD
-.inputIconsleft>svg, .inputIconsright>svg {
-  margin-right: 0.8rem;
-  width: 2rem;
-=======
 .inputIconsleft,
 .inputIconsright {
   display: flex;
   align-items: center;
   gap: 1em;
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
   cursor: pointer;
 }
 
@@ -397,26 +361,13 @@ input::placeholder {
   color: #bebebe;
 }
 
-<<<<<<< HEAD
-.svgNotneeded {
-  display: none;
-}
-
-.svgNomargin {
-  margin-right: 0 !important;
-=======
 .submit {
   width: 1.8em;
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
 }
 
 .submit:hover {
   fill: white;
-<<<<<<< HEAD
-  background-color: #00b87b93;
-=======
   color: #00b87b93;
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
   border: 0.5px solid #19d395;
 }
 
@@ -460,14 +411,10 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 320px) {
-<<<<<<< HEAD
-  .inputIconsleft>svg, .inputIconsright>svg, .feather, .icon-down {
-=======
   .inputIconsleft > img,
   .inputIconsright > img,
   .feather,
   .icon-down {
->>>>>>> c0182dc753db7e8d9edb6a517b355c42fb2dd348
     width: 2rem !important;
   }
 }
