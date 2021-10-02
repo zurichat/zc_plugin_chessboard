@@ -23,7 +23,9 @@
     padding: 1.5rem 0;
     overflow-y: overlay;
     z-index: 21;
+    
   }
+
   
   .room_header {
     font-weight: 900;
@@ -126,3 +128,16 @@
     text-align: center;
     margin: 2rem 0;
   } 
+
+
+/* Scroll bar styling */
+  .load-user__modal::-webkit-scrollbar {
+    width: 10px;
+  }
+  .load-user__modal::-webkit-scrollbar-track {
+    background: none; 
+  }
+  .load-user__modal::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px; 
+  }
