@@ -447,7 +447,7 @@ function ChessBoard({ type, gameData }) {
         ) : (
           <PlayerName
             game_id={game_id}
-            style={{ paddingBottom: "2em", paddingTop: "2em" }}
+            style={{ paddingBottom: "1em", paddingTop: "2em" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
@@ -459,7 +459,7 @@ function ChessBoard({ type, gameData }) {
             gap: "0.8em",
             width: "inherit",
             justifyContent: "center",
-            marginBottom: "1em",
+            marginBottom: ".5em",
           }}
         >
           {/* Back buttons  */}

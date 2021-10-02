@@ -9,6 +9,11 @@
   overflow-y: scroll;
 }
 
+.exit-button {
+  display: grid;
+  place-content: center;
+}
+
 .main-chess {
   width: 100%;
   max-height: 100vh;
@@ -16,7 +21,7 @@
   flex-direction: column;
   justify-content: space-between;
   /* margin-right:.5rem; */
-  border-right: 5px solid #dbdbdb;
+  border-right: 3px solid #dbdbdb;
 }
 
 .main-chess > div > .main-header {
