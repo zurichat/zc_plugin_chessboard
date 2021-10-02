@@ -6,9 +6,6 @@ const PlayerDetails = styled.div`
   font-size: 1em;
   padding: 13px 0;
   width: 100%;
-  /* padding-top: 28px; */
-  justify-content: flex-end;
-  justify-content: flex-end;
 
   p {
     font-size: 1.8em;
@@ -36,6 +33,7 @@ const WaitingPlayer2Container = styled.div`
     padding: 0;
     margin: 0;
     color: #00b87c;
+    font-size: 1.8em;
     font-style: italic;
 
     :hover {

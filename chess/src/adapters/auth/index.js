@@ -81,7 +81,13 @@ export function getLoggedInUserData() {
 }
 
 export function getCurrentOrganisation() {
-  return localStorage.getItem("currentWorkspace");
+  let organisation_id = localStorage.getItem("currentWorkspace");
+
+  if (!organisation_id) {
+    return null;
+  }
+
+  return organisation_id;
 }
 
 export function getChessBotData() {

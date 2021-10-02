@@ -6,6 +6,12 @@
   height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.exit-button {
+  display: grid;
+  place-content: center;
 }
 
 .main-chess {
@@ -15,7 +21,7 @@
   flex-direction: column;
   justify-content: space-between;
   /* margin-right:.5rem; */
-  border-right: 5px solid #dbdbdb;
+  border-right: 3px solid #dbdbdb;
 }
 
 .main-chess > div > .main-header {
@@ -79,9 +85,10 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 919px) {
   .main-chess {
     width: 100%;
+    border-right: none;
   }
   .main-game {
     flex-direction: column;

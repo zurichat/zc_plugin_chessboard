@@ -8,9 +8,6 @@
 	cursor: pointer;
 }
 
-.mini-board {
-	font-size: 62.5%;
-}
 
 .mini-board {
 	height: 34.8rem;
@@ -93,8 +90,9 @@
 	height: 3.2rem;
 	width: 12.8rem;
 	background-color: #00b87c;
+	color: #fff;
 	font-family: Lato;
-	font-size: 1.2rem;
+	font-size: 1.2em;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 1.4rem;
