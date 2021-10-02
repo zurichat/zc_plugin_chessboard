@@ -231,11 +231,8 @@ const ChatInputForm = styled.div`
 `;
 
 const ExitBtn = styled.button`
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 30%;
-  width: inherit;
+  // position: sticky;
+  width: 370px;
   border-radius: 4px;
   font-size: 1.8em;
   padding: 1.5rem 4rem;
