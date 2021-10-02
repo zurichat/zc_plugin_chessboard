@@ -44,7 +44,6 @@ export const RulesContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    
 
     .carrier {
       width: 20rem;
