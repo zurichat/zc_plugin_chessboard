@@ -24,9 +24,9 @@ import Forfeit from "../../components/Modals/ForfeitModal/Forfeit";
 import Exit from "../../components/Modals/ExitModal/Exit";
 
 // Styled Exit/Forfeit
-import { ExitBtn } from "../../components/SpectatorSidebar/SpectatorSidebarStyle";
+import { ExitBtn } from "../../components/SpectatorSideBar/SpectatorSidebarStyle";
 
-function Game({ type }) {
+function Game() {
   const [gameData, setGameData] = useState(null);
   const gameDataRef = useRef(null);
   const [canCallCentrifuge, setcanCallCentrifuge] = useState(false);
