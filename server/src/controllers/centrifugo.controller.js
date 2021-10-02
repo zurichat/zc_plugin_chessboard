@@ -37,7 +37,11 @@ class CentrifugoController {
           method: "publish",
           params: {
             channel,
-            data: { event: "sidebar_update", plugin_id: "chess.zuri.chat", data: data },
+            data: {
+              event: "sidebar_update",
+              plugin_id: "chess.zuri.chat",
+              data: data,
+            },
           },
         },
         {

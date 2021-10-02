@@ -42,7 +42,6 @@ class InformationController {
   }
 
   async sideBarInfo(organisation_id, user_id) {
-
     const org = organisation_id;
     const user = user_id;
 
@@ -72,7 +71,9 @@ class InformationController {
 
       // add to room collection
       joined_rooms.push({
-        room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"}`,
+        room_name: `${game.owner.user_name} vs ${
+          game.opponent ? game.opponent.user_name : "-----"
+        }`,
         room_image: `https://chess.zuri.chat/${imageName}`,
         room_url: `/chess/game/${game._id}`,
         // unread: 1,
@@ -126,7 +127,6 @@ class InformationController {
       );
     }
   }
-
 }
 
 // Export Module

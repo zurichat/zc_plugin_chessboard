@@ -41,7 +41,10 @@ class GameController {
         // Save the game to the database
         const newGameDBData = await this.GameRepo.create(game);
 
-        const sidebar_update_payload = await InformationController.sideBarInfo(this.organisation_id, user_id);
+        const sidebar_update_payload = await InformationController.sideBarInfo(
+          this.organisation_id,
+          user_id
+        );
         await centrifugoController.publishToSideBar(
           this.organisation_id,
           user_id,
@@ -83,7 +86,10 @@ class GameController {
           status: 0,
         });
 
-        const sidebar_update_payload = await InformationController.sideBarInfo(this.organisation_id, user_id);
+        const sidebar_update_payload = await InformationController.sideBarInfo(
+          this.organisation_id,
+          user_id
+        );
         await centrifugoController.publishToSideBar(
           this.organisation_id,
           user_id,
@@ -159,7 +165,10 @@ class GameController {
 
         // Publish the event to Centrifugo server
         await centrifugoController.publish(game_id, payload);
-        const sidebar_update_payload = await InformationController.sideBarInfo(this.organisation_id, user_id);
+        const sidebar_update_payload = await InformationController.sideBarInfo(
+          this.organisation_id,
+          user_id
+        );
         await centrifugoController.publishToSideBar(
           this.organisation_id,
           user_id,
@@ -328,7 +337,10 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
 
       // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
-      const sidebar_update_payload = await InformationController.sideBarInfo(this.organisation_id, user_id);
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        user_id
+      );
       await centrifugoController.publishToSideBar(
         this.organisation_id,
         user_id,
@@ -385,7 +397,10 @@ class GameController {
       await centrifugoController.publish(game_id, payload);
 
       // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
-      const sidebar_update_payload = await InformationController.sideBarInfo(this.organisation_id, user_id);
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        user_id
+      );
       await centrifugoController.publishToSideBar(
         this.organisation_id,
         user_id,
