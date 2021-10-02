@@ -128,21 +128,21 @@ function ChessBoard({ type, gameData }) {
     return screenWidth < 560
       ? screenWidth * 0.8
       : screenWidth < 800
-        ? screenWidth * 0.48
-        : screenWidth < 1000
-          ? screenWidth * 0.35
-          : screenWidth < 1300
-            ? screenWidth * 0.3
-            : screenHeight < 650
-              ? 350
-              : 410;
+      ? screenWidth * 0.48
+      : screenWidth < 1000
+      ? screenWidth * 0.35
+      : screenWidth < 1300
+      ? screenWidth * 0.3
+      : screenHeight < 650
+      ? 350
+      : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
     if (
       GameEngine.current.game_over() ||
       GameEngine.current.turn() !==
-      players_to_color_map[getLoggedInUserData().user_id]
+        players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
@@ -333,7 +333,6 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-
         {GameEngine.current.turn() === "b" ? (
           <NextTurn color_to_play="black" />
         ) : (
