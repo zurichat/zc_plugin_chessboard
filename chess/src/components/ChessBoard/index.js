@@ -13,7 +13,11 @@ import left from "../../assets/chess-pieces/left.svg";
 import right from "../../assets/chess-pieces/right.svg";
 
 // Import Adapters
-import { UpdatePieceMove, UpdateBotPieceMove, UpdateGameWinner } from "../../adapters/chessboard";
+import {
+  UpdatePieceMove,
+  UpdateBotPieceMove,
+  UpdateGameWinner,
+} from "../../adapters/chessboard";
 import { getChessBotData, getLoggedInUserData } from "../../adapters/auth";
 
 // Import Components
