@@ -358,7 +358,7 @@ function ChessBoard({ type, gameData }) {
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
             game_id={game_id}
-            style={{ paddingBottom: "28px" }}
+            style={{}}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
@@ -447,14 +447,14 @@ function ChessBoard({ type, gameData }) {
             gap: "0.8em",
             width: "inherit",
             justifyContent: "center",
-            marginBottom: "1em",
+            marginBottom: ".5em",
           }}
         >
           {/* Back buttons  */}
           {moves.length + 1 > Math.abs(replayIndex) && (
             <button
               onClick={() => handleMoveReplay("-1")}
-              className={styles.btn_back}
+              className={`${styles.btn_back} ${styles.btn_replay}`}
             >
               <img src={left} alt="" style={{ width: "16px" }} />
               Back
@@ -476,7 +476,7 @@ function ChessBoard({ type, gameData }) {
           {-1 != replayIndex && (
             <button
               onClick={() => handleMoveReplay("+1")}
-              className={styles.btn_forward}
+              className={`${styles.btn_forward} ${styles.btn_replay}`}
             >
               Forward
               <img src={right} alt="" style={{ width: "16px" }} />

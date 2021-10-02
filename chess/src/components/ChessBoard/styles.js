@@ -6,9 +6,8 @@ export const ChessboardContainer = styled.div`
   justify-content: start;
   align-items: center;
   padding: 0 4rem;
-  height: 100%;
+  // height: 100%;
   max-width: 655px;
   width: 90%;
   margin: 0 auto;
-  position: relative;
 `;

@@ -1,7 +1,8 @@
 import React, { memo, useEffect, useState, useRef } from "react";
 import moment from "moment";
-import Forfeit from "../Modals/ForfeitModal/Forfeit";
-import Exit from "../Modals/ExitModal/Exit";
+// (lekandev) Commented it out
+// import Forfeit from "../Modals/ForfeitModal/Forfeit";
+// import Exit from "../Modals/ExitModal/Exit";
 
 // Import CSS for this component
 import styles from "./spectatorsidebar.module.css";
@@ -20,16 +21,17 @@ import close from "../../assets/comment/close.svg";
 // Import Adapters
 import { sendComment } from "../../adapters/comments";
 
+// (lekandev) Commented it out
 //import style-components
-import {
-  Chat,
-  ChatInputForm,
-  ChatWrapper,
-  EmptyComment,
-  ExitBtn,
-  Sidebar,
-  SidebarNav,
-} from "./SpectatorSidebarStyle";
+// import {
+//   Chat,
+//   ChatInputForm,
+//   ChatWrapper,
+//   EmptyComment,
+//   ExitBtn,
+//   Sidebar,
+//   SidebarNav,
+// } from "./SpectatorSidebarStyle";
 
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
@@ -37,8 +39,9 @@ const SpectatorSideBar = ({ type, gameData }) => {
   const [commentMsg, setCommentMsg] = useState("");
   const [commentsFromGameData] = useState(gameData.messages);
 
-  const [isModalOpen, setmodalIsOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  // (lekandev) Commented it out
+  // const [isModalOpen, setmodalIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
@@ -65,13 +68,14 @@ const SpectatorSideBar = ({ type, gameData }) => {
     }
   };
 
-  const handleForfeitModal = () => {
-    setmodalIsOpen(true);
-  };
+  // (lekandev) Commented it out
+  // const handleForfeitModal = () => {
+  //   setmodalIsOpen(true);
+  // };
 
-  const handleExitModal = () => {
-    setIsOpen(true);
-  };
+  // const handleExitModal = () => {
+  //   setIsOpen(true);
+  // };
 
   let comment_id = 0;
 
@@ -88,21 +92,23 @@ const SpectatorSideBar = ({ type, gameData }) => {
         </nav>
 
         <div id={styles.chat}>
-          <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
+          {/* (lekandev) Commented it out */}
+          {/* <Exit isOpen={isOpen} setIsOpen={setIsOpen} gameData={gameData} />
           <Forfeit
             isModalOpen={isModalOpen}
             setmodalIsOpen={setmodalIsOpen}
             gameData={gameData}
-          />
+          /> */}
 
           <div className={styles.chatContainer}>
-            {type !== "spectator" && gameData.status === 0 && (
+            {/* (lekandev) Commented it out */}
+            {/* {type !== "spectator" && gameData.status === 0 && (
               <ExitBtn onClick={handleExitModal}>Exit Game</ExitBtn>
             )}
 
             {type !== "spectator" && gameData.status === 1 && (
               <ExitBtn onClick={handleForfeitModal}>Forfeit Game</ExitBtn>
-            )}
+            )} */}
 
             <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (

@@ -18,7 +18,6 @@ const LoadUserInfo = ({ spectators }) => {
           >
             {spectator.user_name}
           </p>
-          {/* <p className={Styles["stack"]}>{user.designation}</p> */}
         </div>
       </div>
     </div>
