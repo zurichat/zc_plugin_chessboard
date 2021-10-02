@@ -21,7 +21,6 @@ function App() {
 
         {/* Rules Page */}
         <Route exact path="/rules" component={Rules} />
-
       </Switch>
     </Router>
   );

@@ -38,7 +38,7 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
     <div className={Styles["load-user__backdrop"]}>
       <div className={Styles["load-user__modal"]}>
         <button className={Styles["btn-user-modal-close"]} onClick={close}>
-        <img className={Styles["modal-close-img"]} src={icon} alt="Close" />
+          <img className={Styles["modal-close-img"]} src={icon} alt="Close" />
         </button>
         <h3 className={Styles["room_header"]}># Chess</h3>
         <p className={Styles["room_para"]}>Members</p>
