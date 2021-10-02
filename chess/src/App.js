@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Import the CSS
-import "./App.module.css";
+import "./App.css";
 
 // Import Pages
 import Homepage from "./Pages/Home";

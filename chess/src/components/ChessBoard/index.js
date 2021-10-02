@@ -326,7 +326,7 @@ function ChessBoard({ type, gameData }) {
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
             game_id={game_id}
-            style={{ paddingBottom: "28px" }}
+            style={{  }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
@@ -334,10 +334,10 @@ function ChessBoard({ type, gameData }) {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around",
+              // justifyContent: "space-around",
               alignItems: "center",
               zIndex: "1",
-              width: "80%",
+              width: "calc(80% - 20px)",
               margin: "1em 0 0 0",
             }}
           >
@@ -345,7 +345,7 @@ function ChessBoard({ type, gameData }) {
             <PlayerName
               game_id={game_id}
               style={{
-                paddingBottom: "28px",
+                paddingBottom: "2em",
                 paddingTop: "2px !important",
               }}
               name={gameData.opponent?.user_name}
@@ -355,7 +355,7 @@ function ChessBoard({ type, gameData }) {
         ) : (
           <PlayerName
             game_id={game_id}
-            style={{ paddingBottom: "20px", paddingTop: "10px" }}
+            style={{ paddingBottom: "2em", justifyContent: "flex-start" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
@@ -418,7 +418,7 @@ function ChessBoard({ type, gameData }) {
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
             game_id={game_id}
-            style={{ paddingBottom: "28px", paddingTop: "28px" }}
+            style={{ paddingBottom: "2em", paddingTop: "2em" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
@@ -429,13 +429,13 @@ function ChessBoard({ type, gameData }) {
               justifyContent: "space-around",
               alignItems: "center",
               zIndex: "1",
-              width: "80%",
+              width: "calc(80% - 20px)",
             }}
           >
             {/* <NextTurn gameData={gameData} name={gameData.owner.user_name} /> */}
             <PlayerName
               game_id={game_id}
-              style={{ paddingBottom: "28px" }}
+              style={{ paddingBottom: "28px", paddingTop: "2em", justifyContent: "flex-end" }}
               name={gameData.owner.user_name}
               image_url={gameData.owner.image_url}
             />
@@ -443,7 +443,7 @@ function ChessBoard({ type, gameData }) {
         ) : (
           <PlayerName
             game_id={game_id}
-            style={{ paddingBottom: "28px", paddingTop: "28px" }}
+            style={{ paddingBottom: "2em", paddingTop: "2em" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
@@ -462,7 +462,7 @@ function ChessBoard({ type, gameData }) {
           {moves.length + 1 > Math.abs(replayIndex) && (
             <button
               onClick={() => handleMoveReplay("-1")}
-              className={styles.btn_back}
+              className={`${styles.btn_back} ${styles.btn_replay}`}
             >
               <img src={left} alt="" style={{ width: "16px" }} />
               Back
@@ -473,7 +473,7 @@ function ChessBoard({ type, gameData }) {
           {replayIndex !== -1 && (
             <button
               onClick={() => handleCurrent()}
-              className={styles.btn_current}
+              className={`${styles.btn_current} ${styles.btn_replay}`}
             >
               <img src={back} alt="" style={{ width: "16px" }} />
               Reset to Live Game
@@ -484,7 +484,7 @@ function ChessBoard({ type, gameData }) {
           {-1 != replayIndex && (
             <button
               onClick={() => handleMoveReplay("+1")}
-              className={styles.btn_forward}
+              className={`${styles.btn_forward} ${styles.btn_replay}`}
             >
               Forward
               <img src={right} alt="" style={{ width: "16px" }} />

@@ -237,6 +237,8 @@ const ExitBtn = styled.button`
   right: 30%;
   width: inherit;
   border-radius: 4px;
+  font-size: 1.8em;
+  padding: 1.5rem 4rem;
   border: 0.5px solid #b8003c;
   background-color: #fff;
   color: #bb003c;
