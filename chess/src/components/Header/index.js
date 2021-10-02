@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //Zuri Header
 import Parcel from "single-spa-react/parcel";
@@ -6,6 +6,7 @@ import { pluginHeader } from "@zuri/plugin-header";
 
 // Import CSS for this page
 import styles from "./header.module.css";
+import LoadUser from "../Modals/LoadUserModal/LoadUser";
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -26,6 +27,12 @@ const Profile = ({ className, src }) => {
 };
 
 function Header({ gameData }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewAllSpectatorsModal = () => {
+    setIsModalOpen(true);
+  };
+
   function numUsers() {
     let number_of_users_in_room = 0;
     if (gameData) {
@@ -54,11 +61,11 @@ function Header({ gameData }) {
     },
     eventThumbnail: () => {
       //Block of code to be triggered on thumbnail click
+      handleViewAllSpectatorsModal();
     },
-    hasThumbnail: true, //set false if you don't want thumbnail on the header
+    hasThumbnail: !gameData ? false : true, //set false if you don't want thumbnail on the header
   };
 
-  // console.log(number_of_users_in_room);
   // pad leading zeros
   function padLeadingZeros(num, size) {
     var s = num + "";
@@ -74,6 +81,13 @@ function Header({ gameData }) {
         wrapStyle={{ width: "100%" }}
         headerConfig={pluginConfig}
       />
+
+      <LoadUser
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        gameData={gameData}
+      />
+
       {/* <header className={styles["main-header"]}>
         <div className={`${styles.nav} ${styles["chesshome-nav"]}`}>
           <div id={styles["chesshome-flex"]}>

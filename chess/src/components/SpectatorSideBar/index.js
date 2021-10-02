@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
 import Exit from "../Modals/ExitModal/Exit";
@@ -28,6 +28,15 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   const [isModalOpen, setmodalIsOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  });
 
   const handleAddComment = () => {
     if (commentMsg.trim().length) {
@@ -108,30 +117,35 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
             <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
-                commentsFromGameData.map(
-                  ({ user_name, image_url, text, timestamp }) => {
-                    return (
-                      <div className={styles.chatWrapper} key={comment_id++}>
-                        <div className={styles.specHead}>
-                          <img
-                            className={styles.specAvi}
-                            src={image_url}
-                            alt="avi"
-                          />
-                          <div className={styles.specInfo}>
-                            <h2 className={styles.spectatorName}>
-                              {user_name}
-                            </h2>
-                            <p className={styles["time-muted"]}>{timestamp}</p>
+                <>
+                  {commentsFromGameData.map(
+                    ({ user_name, image_url, text, timestamp }) => {
+                      return (
+                        <div className={styles.chatWrapper} key={comment_id++}>
+                          <div className={styles.specHead}>
+                            <img
+                              className={styles.specAvi}
+                              src={image_url}
+                              alt="avi"
+                            />
+                            <div className={styles.specInfo}>
+                              <h2 className={styles.spectatorName}>
+                                {user_name}
+                              </h2>
+                              <p className={styles["time-muted"]}>
+                                {timestamp}
+                              </p>
+                            </div>
+                          </div>
+                          <div className={styles.specNameTime}>
+                            <p className={styles.spectatorMessage}>{text}</p>
                           </div>
                         </div>
-                        <div className={styles.specNameTime}>
-                          <p className={styles.spectatorMessage}>{text}</p>
-                        </div>
-                      </div>
-                    );
-                  }
-                )
+                      );
+                    }
+                  )}
+                  <div ref={messagesEndRef} />
+                </>
               ) : (
                 <div className={styles.emptyComment}>
                   <svg
@@ -270,7 +284,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
               )}
             </div>
 
-            {type === "spectator" ? (
+            {type === "spectator" || type === "owner" || type === "opponent" ? (
               <div className={styles.chatInputForm}>
                 <input
                   type="text"
