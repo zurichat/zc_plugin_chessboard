@@ -8,9 +8,6 @@
 	cursor: pointer;
 }
 
-.mini-board {
-	font-size: 62.5%;
-}
 
 .mini-board {
 	height: 34.8rem;
@@ -32,10 +29,11 @@
 }
 
 .mini-profile-image {
-	background: url('../../assets/miniboard/miniProfileImage.png');
+	/* background: url('../../assets/miniboard/miniProfileImage.png'); */
 	height: 2.05rem;
 	width: 2.05rem;
 	border-radius: 4px;
+	background-size: contain;
 }
 
 .mini-profile-image-bg {
@@ -87,12 +85,14 @@
 }
 
 .mini-board .join-button {
+	cursor: pointer;
 	padding: 0.7rem 0rem !important;
 	height: 3.2rem;
 	width: 12.8rem;
 	background-color: #00b87c;
+	color: #fff;
 	font-family: Lato;
-	font-size: 1.2rem;
+	font-size: 1.2em;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 1.4rem;
@@ -109,8 +109,8 @@
 
 @media (max-width: 1024px) {
 	.mini-board {
-		height: calc(34.8rem * 1.2);
-		width: calc(26.4rem * 1.25);
+		/* height: calc(34.8rem * 1.2);
+		width: calc(26.4rem * 1.25); */
 	}
 
 	.mini-board .board-image img {
@@ -130,8 +130,8 @@
 
 @media (max-width: 360px) {
 	.mini-board {
-		height: calc(34.8rem * 1.1);
-		width: calc(26.4rem * 1.15);
+		/* height: calc(34.8rem * 1.1);
+		width: calc(26.4rem * 1.15); */
 	}
 
 	.mini-board .board-image img {
@@ -151,8 +151,8 @@
 
 @media (max-width: 330px) {
 	.mini-board {
-		height: calc(34.8rem * 0.9);
-		width: calc(26.4rem * 0.95);
+		/* height: calc(34.8rem * 0.9);
+		width: calc(26.4rem * 0.95); */
 	}
 
 	.mini-board .board-image img {
