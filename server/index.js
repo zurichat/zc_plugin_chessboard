@@ -34,7 +34,7 @@ app.use("/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 preRouteMiddlewares(app);
 
 // All Endpoints require authentication to be accessed
-app.use(userAuth);
+// app.use(userAuth);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", router);
