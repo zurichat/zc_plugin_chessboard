@@ -6,7 +6,6 @@ import { pluginHeader } from "@zuri/plugin-header";
 
 // Import CSS for this page
 import styles from "./header.module.css";
-// import LoadUser from "../Modals/LoadUserModal/LoadUser";
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -14,6 +13,7 @@ import CommentIcon from "../../assets/header/CommentIcon.png";
 import imageProfileOne from "../../assets/header/imageProfileOne.png";
 import imageProfileTwo from "../../assets/header/imageProfileTwo.png";
 import imageProfileThree from "../../assets/header/imageProfileThree.png";
+import LoadUser from "../Modals/LoadUserModal/LoadUser";
 
 const Profile = ({ className, src }) => {
   return (
@@ -82,11 +82,11 @@ function Header({ gameData }) {
         headerConfig={pluginConfig}
       />
 
-      {/* <LoadUser
+      <LoadUser
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         gameData={gameData}
-      /> */}
+      />
 
       {/* <header className={styles["main-header"]}>
         <div className={`${styles.nav} ${styles["chesshome-nav"]}`}>
