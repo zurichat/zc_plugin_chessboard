@@ -1,4 +1,6 @@
 import React, { memo, useEffect, useState, useRef } from "react";
+import HeartIcon from "../../assets/icons/hearticon.svg";
+import Heart from "../../assets/icons/heart.svg";
 import moment from "moment";
 import Forfeit from "../Modals/ForfeitModal/Forfeit";
 import Exit from "../Modals/ExitModal/Exit";
@@ -17,8 +19,9 @@ import {
   EmptyComment,
   ExitBtn,
   Sidebar,
-  SidebarNav,
+  SidebarNav
 } from "./SpectatorSidebarStyle";
+import styled from "styled-components";
 
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
@@ -63,6 +66,17 @@ const SpectatorSideBar = ({ type, gameData }) => {
   };
 
   let comment_id = 0;
+
+  // hearts animation
+  const heartsArr = Array.from(new Array(15));
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    if (animate === true) {
+      setTimeout(() => {
+        setAnimate(false);
+      }, 6500);
+    }
+  }, [animate]);
 
   return (
     <>
@@ -144,6 +158,13 @@ const SpectatorSideBar = ({ type, gameData }) => {
                       );
                     }
                   )}
+                  {animate ? (
+                    <div className={styles.heartContainer}>
+                      {heartsArr.map((item, id) => (
+                        <img src={Heart} alt="" key={`heart_${id+1}`} />
+                      ))}
+                    </div>
+                  ) : null}
                   <div ref={messagesEndRef} />
                 </>
               ) : (
@@ -293,6 +314,13 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
                   placeholder="Send a comment"
                 />
+                <div
+                  className={styles.heartIcon}
+                  onClick={() => setAnimate(true)}
+                >
+                  <img src={HeartIcon} alt="_heart_" />
+                  <span>16</span>
+                </div>
                 <div className={styles.inputIcons}>
                   <div className={styles.inputIconsleft}>
                     <svg
