@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import './style.css';
+import React, { useState, useEffect } from "react";
+import "./style.css";
 const GameHistory = () => { 
 const [data, setState] = useState([]);
 const [hasError, setHasError] = useState(false);
@@ -7,8 +7,8 @@ useEffect(() => {
     fetch("https://chess.zuri.chat/api/v1/game/all/")
     .then(response => response.json())
     .then(res => setState(res.data))
-    .catch(err => setHasError(true))
-}, [])
+    .catch(err => setHasError(true));
+}, []);
     const [show, showHistory] = useState("hide");
     return (
         <div>
@@ -54,5 +54,5 @@ useEffect(() => {
             };
         </div>
     );
-}
+};
 export default GameHistory;
