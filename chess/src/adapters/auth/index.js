@@ -2,6 +2,7 @@
 import { get } from "../xhr";
 import { GetUserInfo } from "@zuri/control";
 import { GetWorkspaceUser } from "@zuri/control";
+import botImage from "../../assets/bot/bot-image.svg";
 
 let profileImage;
 
@@ -9,6 +10,7 @@ async function getUserProfileImage(email) {
   const { image_url } = await GetWorkspaceUser(email);
   profileImage = image_url;
 }
+
 export function getLoggedInUserData() {
   // // Variable to get User Info Data - Mocking Global Variables
   // let logged_in_user_from_zc_main;
@@ -50,7 +52,8 @@ export function getLoggedInUserData() {
     let logged_in_user_from_zc_main = JSON.parse(
       sessionStorage.getItem("user")
     );
-    getUserProfileImage(logged_in_user_from_zc_main.email);
+
+    getUserProfileImage(logged_in_user_from_zc_main?.email);
 
     if (!logged_in_user_from_zc_main) {
       // Not Logged In, so return anonymous user info
@@ -79,4 +82,15 @@ export function getLoggedInUserData() {
 
 export function getCurrentOrganisation() {
   return localStorage.getItem("currentWorkspace");
+}
+
+export function getChessBotData() {
+  // Later may change to check Bot Info from API call to Backend
+
+  // Temp Fix for now
+  return {
+    user_id: "chessbot",
+    user_name: "Chess Bot",
+    image_url: botImage,
+  };
 }

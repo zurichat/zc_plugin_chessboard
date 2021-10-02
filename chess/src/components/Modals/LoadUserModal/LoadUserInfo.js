@@ -1,23 +1,24 @@
 import React from "react";
-import icon from "../../../assets/modal/winner_image.png";
-
 import Styles from "./UserModal.module.css";
 
-const LoadUserInfo = (props) => {
-  // console.log(props.players)
-  return props.users.map((user) => (
-    <div key={user.id} className={Styles["load-user__user"]}>
+const LoadUserInfo = ({ spectators }) => {
+  return spectators.map((spectator) => (
+    <div key={spectator.user_id} className={Styles["load-user__user"]}>
       <div className={Styles["load-user__user--info"]}>
         <div className={Styles["load-user__user--img"]}>
-          <img className={Styles["user-img"]} src={icon} alt="img.."></img>
+          <img
+            className={Styles["user-img"]}
+            src={spectator.image_url}
+            alt="img.."
+          ></img>
         </div>
         <div className={Styles["load-user__user--details"]}>
           <p
             className={`${Styles["load-user__user--name"]} {${Styles["stack"]}}`}
           >
-            {user.name}
+            {spectator.user_name}
           </p>
-          <p className={Styles["stack"]}>{user.designation}</p>
+          {/* <p className={Styles["stack"]}>{user.designation}</p> */}
         </div>
       </div>
     </div>

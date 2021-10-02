@@ -4,13 +4,17 @@ import React, { useState, useEffect, useRef } from "react";
 
 // Import CSS for this page
 // import "./chessboard.css";
+import styles from "./chessboard.module.css";
 
 // Import style for this page
 import { ChessboardContainer } from "./styles";
+import back from "../../assets/chess-pieces/back.svg";
+import left from "../../assets/chess-pieces/left.svg";
+import right from "../../assets/chess-pieces/right.svg";
 
 // Import Adapters
 import { UpdatePieceMove, UpdateGameWinner } from "../../adapters/chessboard";
-import { getLoggedInUserData } from "../../adapters/auth";
+import { getChessBotData, getLoggedInUserData } from "../../adapters/auth";
 
 // Import Components
 import Chess from "chess.js";
@@ -21,6 +25,9 @@ import GameWinnerModal from "../Modals/GameWinnerModal";
 import NextTurn from "../Modals/NextTurnModal/NextTurn";
 
 function ChessBoard({ type, gameData }) {
+  const initialIndex = -1;
+  const [replayIndex, setReplayIndex] = useState(initialIndex);
+
   const game_id = gameData._id;
   const GameEngine = useRef(new Chess());
 
@@ -30,6 +37,35 @@ function ChessBoard({ type, gameData }) {
     [gameData.owner.user_id]: gameData.owner.color,
     [gameData.opponent?.user_id]: gameData.opponent?.color,
   };
+
+  // Allow spectators to reset game to live
+  const handleCurrent = () => {
+    setReplayIndex(-1);
+    set_board_position(GameEngine.current.fen());
+  };
+
+  // Allow spectators to be able to replay the game
+  const handleMoveReplay = (move) => {
+    if (move == "-1") {
+      setReplayIndex(replayIndex - 1);
+    } else if ((move = "+1")) {
+      setReplayIndex(1 + replayIndex);
+      set_board_position(moves.at(replayIndex).position_fen);
+    } else if ((move = "0")) {
+      setReplayIndex(-1);
+      set_board_position(moves.at(-1).position_fen);
+    }
+  };
+
+  useEffect(() => {
+    // if(replayIndex === -2 ){
+    if (Math.abs(replayIndex) != moves.length + 1) {
+      set_board_position(moves.at(replayIndex).position_fen);
+    } else {
+      set_board_position("start");
+    }
+    // }
+  }, [replayIndex]);
 
   const [board_position, set_board_position] = useState(
     gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
@@ -42,6 +78,20 @@ function ChessBoard({ type, gameData }) {
     );
     set_board_position(GameEngine.current.fen());
   }, [moves]);
+
+  useEffect(() => {
+    // Check if the opponent of this game is our chessbot
+    if (gameData.opponent?.user_id === getChessBotData().user_id) {
+      // Check if it's bot turn to play
+      if (
+        players_to_color_map[getChessBotData().user_id] ===
+        GameEngine.current.turn()
+      ) {
+        // Delay for bot to think
+        makeRandomMove();
+      }
+    }
+  });
 
   const [squareStyles, setSquareStyles] = useState({});
   const [pieceSquare, setPieceSquare] = useState("");
@@ -87,13 +137,13 @@ function ChessBoard({ type, gameData }) {
 
   const calcWidth = ({ screenWidth, screenHeight }) => {
     return screenWidth < 560
-      ? screenWidth * 0.80
+      ? screenWidth * 0.8
       : screenWidth < 800
       ? screenWidth * 0.48
       : screenWidth < 1000
       ? screenWidth * 0.35
       : screenWidth < 1300
-      ? screenWidth * 0.30
+      ? screenWidth * 0.3
       : screenHeight < 650
       ? 350
       : 410;
@@ -111,6 +161,31 @@ function ChessBoard({ type, gameData }) {
     }
   };
 
+  // Beginning of random
+  const makeRandomMove = () => {
+    let possibleMoves = GameEngine.current.moves();
+
+    // game over
+    if (possibleMoves.length === 0) return;
+
+    var randomIdx = Math.floor(Math.random() * possibleMoves.length);
+    const move = GameEngine.current.move(possibleMoves[randomIdx]);
+    set_board_position(GameEngine.current.fen());
+
+    // Piece Move API Call
+    UpdatePieceMove(game_id, move, GameEngine.current.fen()).then(
+      (response) => {
+        if (!response.data.success) {
+          // TODO: Handle error with Toasts
+          // Update the Board with last move
+        } else {
+          setHistory(GameEngine.current.history({ verbose: true }));
+        }
+      }
+    );
+  };
+  // End of random
+
   const onDrop = ({ sourceSquare, targetSquare, piece }) => {
     // see if the move is legal
     const move = GameEngine.current.move({
@@ -122,8 +197,6 @@ function ChessBoard({ type, gameData }) {
 
     // illegal move
     if (move === null) return;
-
-    // if (GameEngine.current.turn() === "w")
 
     set_board_position(GameEngine.current.fen());
 
@@ -246,21 +319,9 @@ function ChessBoard({ type, gameData }) {
   return (
     <>
       <ChessboardContainer>
-        {/* <h4
-          style={{
-            textAlign: "center",
-            fontSize: "1.5rem",
-            paddingTop: "1rem",
-
-            top: "0px",
-          }}
-        >
-          {" "}
-          Game {type.charAt(0).toUpperCase() + type.slice(1)} Mode
-        </h4> */}
-
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
@@ -278,19 +339,23 @@ function ChessBoard({ type, gameData }) {
           >
             {/* <NextTurn gameData={gameData} name={gameData.opponent?.user_name} /> */}
             <PlayerName
-              style={{ paddingBottom: "28px", paddingTop: "2px !important" }}
+              game_id={game_id}
+              style={{
+                paddingBottom: "28px",
+                paddingTop: "2px !important",
+              }}
               name={gameData.opponent?.user_name}
               image_url={gameData.opponent?.image_url}
             />
           </div>
         ) : (
           <PlayerName
-            style={{ paddingBottom: "28px", paddingTop: "10px" }}
+            game_id={game_id}
+            style={{ paddingBottom: "20px", paddingTop: "10px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
           />
         )}
-
         <div
           style={{
             display: "flex",
@@ -346,9 +411,9 @@ function ChessBoard({ type, gameData }) {
             />
           </div>
         </div>
-
         {players_to_color_map[getLoggedInUserData().user_id] == "b" ? (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
@@ -365,6 +430,7 @@ function ChessBoard({ type, gameData }) {
           >
             {/* <NextTurn gameData={gameData} name={gameData.owner.user_name} /> */}
             <PlayerName
+              game_id={game_id}
               style={{ paddingBottom: "28px" }}
               name={gameData.owner.user_name}
               image_url={gameData.owner.image_url}
@@ -372,12 +438,57 @@ function ChessBoard({ type, gameData }) {
           </div>
         ) : (
           <PlayerName
+            game_id={game_id}
             style={{ paddingBottom: "28px", paddingTop: "28px" }}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
           />
         )}
+
+        <div
+          style={{
+            display: "flex",
+            gap: "0.8em",
+            width: "inherit",
+            justifyContent: "center",
+            marginBottom: "1em",
+          }}
+        >
+          {/* Back buttons  */}
+          {moves.length + 1 > Math.abs(replayIndex) && (
+            <button
+              onClick={() => handleMoveReplay("-1")}
+              className={styles.btn_back}
+            >
+              <img src={left} alt="" style={{ width: "16px" }} />
+              Back
+            </button>
+          )}
+
+          {/* Replay Buttons */}
+          {replayIndex !== -1 && (
+            <button
+              onClick={() => handleCurrent()}
+              className={styles.btn_current}
+            >
+              <img src={back} alt="" style={{ width: "16px" }} />
+              Reset to Live Game
+            </button>
+          )}
+
+          {/* Forward Button  */}
+          {-1 != replayIndex && (
+            <button
+              onClick={() => handleMoveReplay("+1")}
+              className={styles.btn_forward}
+            >
+              Forward
+              <img src={right} alt="" style={{ width: "16px" }} />
+            </button>
+          )}
+        </div>
       </ChessboardContainer>
+
       {gameWinner !== null ? <GameWinnerModal winner={gameWinner} /> : null}
     </>
   );
