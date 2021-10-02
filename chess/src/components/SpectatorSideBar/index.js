@@ -85,7 +85,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
   const heartsArr = Array.from(new Array(15));
   const [animate, setAnimate] = useState(false);
   useEffect(() => {
-    if (animate === true) {
+    if (animate) {
       setTimeout(() => {
         setAnimate(false);
       }, 6500);
@@ -152,13 +152,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
                       );
                     }
                   )}
-                  {animate ? (
-                    <div className={styles.heartContainer}>
-                      {heartsArr.map((item, id) => (
-                        <img src={Heart} alt="" key={`heart_${id+1}`} />
-                      ))}
-                    </div>
-                  ) : null}
                   <div ref={messagesEndRef} />
                 </>
               ) : (
@@ -172,6 +165,13 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
             {type === "spectator" || type === "owner" || type === "opponent" ? (
               <div className={styles.chatInputForm}>
+                {animate ? (
+                  <div className={styles.heartContainer}>
+                    {heartsArr.map((item, id) => (
+                      <img src={Heart} alt="" key={`heart_${id + 1}`} />
+                    ))}
+                  </div>
+                ) : null}
                 <input
                   type="text"
                   value={commentMsg}

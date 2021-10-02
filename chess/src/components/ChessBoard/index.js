@@ -63,7 +63,7 @@ function ChessBoard({ type, gameData }) {
   // Set Board Based On Replay Index
   useEffect(() => {
     if (Math.abs(replayIndex) !== moves.length + 1) {
-      set_board_position(moves.at(replayIndex).position_fen);
+      set_board_position(moves.at ? moves.at(replayIndex).position_fen : "start");
     } else {
       set_board_position("start");
     }
@@ -71,13 +71,13 @@ function ChessBoard({ type, gameData }) {
 
   // Set Board Based On Moves from GameData
   const [board_position, set_board_position] = useState(
-    gameData.moves.length > 0 ? gameData.moves.at(-1).position_fen : "start"
+    gameData.moves.length > 0 ? gameData.moves.at ? gameData.moves.at(-1).position_fen : "start" : "start"
   );
 
   useEffect(() => {
     // Update Board and Engine on New Move
     GameEngine.current = new Chess(
-      moves.length > 0 ? moves.at(-1).position_fen : undefined
+      moves.length > 0 ? moves.at ? moves.at(-1).position_fen : undefined : undefined
     );
     set_board_position(GameEngine.current.fen());
   }, [moves]);

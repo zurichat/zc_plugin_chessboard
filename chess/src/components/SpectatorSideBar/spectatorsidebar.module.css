@@ -111,12 +111,16 @@
   width: 100%;
 }
 
+.heartContainer {
+  /* position: absolute; */
+}
 .heartContainer>img {
-  position: absolute;
+  position: fixed;
   visibility: hidden;
   transform: scale(1);
   width: 60px;
   height: auto;
+  z-index: 1000;
 }
 
 @keyframes float {
@@ -124,9 +128,9 @@
     opacity: 1;
     visibility: visible;
     transform: scale(.5);
-    bottom: 22%;
+    bottom:40%;
+    right: 30px;
   }
-  ;
   20% {
     opacity: 1;
     transform: scale(1);
@@ -146,7 +150,7 @@
     right: 0%;
   }
   100% {
-    right: 80%
+    right: 30px;
   }
 }
 .heartContainer>img:nth-of-type(1) {
