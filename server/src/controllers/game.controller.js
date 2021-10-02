@@ -445,6 +445,7 @@ class GameController {
         winner: is_owner_winner
           ? gameDBData.data.owner.user_id
           : gameDBData.data.opponent.user_id,
+        game_end_status: "won",
         status,
       };
 
@@ -516,6 +517,7 @@ class GameController {
       const payload = {
         event: "end_game",
         winner: winner_id,
+        game_end_status: "resigned",
         status: isGameExist.data.status,
       };
 
