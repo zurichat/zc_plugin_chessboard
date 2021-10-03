@@ -41,6 +41,10 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
           <img className={Styles["modal-close-img"]} src={icon} alt="Close" />
         </button>
         <h3 className={Styles["room_header"]}># Chess</h3>
+        <div className={Styles["room_notification"]}>
+           <h4 className={Styles["room_notify"]}>Get Notifcation for @ Mentions</h4>
+           <h4 className={Styles["room_notify"]}>Start a Call</h4>
+           </div>
         <p className={Styles["room_para"]}>Members</p>
 
         <form className={Styles["load-user__form"]}>
