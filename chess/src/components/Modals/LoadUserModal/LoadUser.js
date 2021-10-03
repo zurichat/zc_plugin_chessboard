@@ -28,9 +28,12 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   const handleInput = (e) => {
     let spectators = usersDetails;
 
-    spectators = filterUserDetails.filter((spectator) =>
-      spectator?.username !== null &&
-      spectator?.user_name.toLowerCase().includes(e.target.value.toLowerCase())
+    spectators = filterUserDetails.filter(
+      (spectator) =>
+        spectator?.username !== null &&
+        spectator?.user_name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
     );
 
     if (spectators.length === 0) {
@@ -45,15 +48,8 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   return (
     <div className={Styles["load-user__backdrop"]}>
       <div className={Styles["load-user__modal"]}>
-        <button
-          className={Styles["btn-user-modal-close"]}
-          onClick={close}
-        >
-          <img
-            className={Styles["modal-close-img"]}
-            src={icon}
-            alt="Close"
-          />
+        <button className={Styles["btn-user-modal-close"]} onClick={close}>
+          <img className={Styles["modal-close-img"]} src={icon} alt="Close" />
         </button>
         <h3 className={Styles["room_header"]}># Chess</h3>
         <div className={Styles["room_notification"]}>
@@ -78,9 +74,7 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
         <div className={Styles["load-user__users"]}>
           {!noUser && <LoadUserInfo spectators={usersDetails} />}
           {noUser && (
-            <p className={Styles["load-user__no-user"]}>
-              No Member found..
-            </p>
+            <p className={Styles["load-user__no-user"]}>No Member found..</p>
           )}
         </div>
       </div>

@@ -53,13 +53,13 @@ function Header({ gameData }) {
 
   const pluginConfig = {
     // Name on header
-    name: "Chess Plugin", 
+    name: "Chess Plugin",
     // Image on header
-    icon: ChessImage, 
+    icon: ChessImage,
     // Replace with images of users
-    thumbnailUrl: [imageProfileOne, imageProfileTwo, imageProfileThree], 
+    thumbnailUrl: [imageProfileOne, imageProfileTwo, imageProfileThree],
     // User count on header
-    userCount: padLeadingZeros(numUsers(), 3), 
+    userCount: padLeadingZeros(numUsers(), 3),
     eventTitle: () => {
       //Block of code to be triggered on title click
     },
@@ -68,7 +68,7 @@ function Header({ gameData }) {
       handleViewAllSpectatorsModal();
     },
     // set false if you don't want thumbnail on the header
-    hasThumbnail: !gameData ? false : true, 
+    hasThumbnail: !gameData ? false : true,
   };
 
   // pad leading zeros
