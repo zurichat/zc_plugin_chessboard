@@ -7,7 +7,11 @@ import { startGameWithBot } from "../../adapters/game";
 //import style-components
 import { PlayerDetails, WaitingPlayer2Container } from "./PlayerNameStyle";
 
-const PlayerName = ({ game_id, name, image_url, style }) => {
+//Import invite modal
+import InviteUser from "./../Modals/InviteUserModal/InviteUser";
+import { useState } from "react";
+
+const PlayerName = ({ game_id, name, image_url, style, gameData }) => {
   const SetBotAsPlayer2 = () => {
     startGameWithBot(game_id).then((response) => {
       if (!response.data.success) {
@@ -17,13 +21,24 @@ const PlayerName = ({ game_id, name, image_url, style }) => {
     });
   };
 
+  console.log(gameData);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const handleViewAllSpectatorsModal = () => {
+    setIsModalOpen(true);
+  };
+
   if (!name) {
     return (
       <>
         <WaitingPlayer2Container className="waiting_player_2_container">
-          <button className="waiting_player_2"> Waiting for player</button>
+          <button className="waiting_player_2" onClick={() => handleViewAllSpectatorsModal()}> Waiting for player</button>
         </WaitingPlayer2Container>
-
+        <InviteUser
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        gameData={gameData}
+        />
         <button
           style={{
             padding: "1rem 5rem",

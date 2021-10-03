@@ -346,6 +346,7 @@ function ChessBoard({ type, gameData }) {
               }}
               name={gameData.opponent?.user_name}
               image_url={gameData.opponent?.image_url}
+              gameData={gameData}
             />
           </div>
         ) : (
@@ -354,6 +355,7 @@ function ChessBoard({ type, gameData }) {
             style={{ paddingBottom: "20px", paddingTop: "10px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
+            gameData={gameData}
           />
         )}
         <div
