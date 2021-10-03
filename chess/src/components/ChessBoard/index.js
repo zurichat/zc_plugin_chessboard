@@ -128,21 +128,21 @@ function ChessBoard({ type, gameData }) {
     return screenWidth < 560
       ? screenWidth * 0.8
       : screenWidth < 800
-      ? screenWidth * 0.48
-      : screenWidth < 1000
-      ? screenWidth * 0.35
-      : screenWidth < 1300
-      ? screenWidth * 0.3
-      : screenHeight < 650
-      ? 350
-      : 410;
+        ? screenWidth * 0.48
+        : screenWidth < 1000
+          ? screenWidth * 0.35
+          : screenWidth < 1300
+            ? screenWidth * 0.3
+            : screenHeight < 650
+              ? 350
+              : 410;
   };
 
   const allowDrag = ({ piece, position }) => {
     if (
       GameEngine.current.game_over() ||
       GameEngine.current.turn() !==
-        players_to_color_map[getLoggedInUserData().user_id]
+      players_to_color_map[getLoggedInUserData().user_id]
     ) {
       return false;
     } else {
@@ -348,7 +348,7 @@ function ChessBoard({ type, gameData }) {
               color: "white",
               background: "#25364b",
             }}
-            onClick={SetBotAsPlayer2()}
+            onClick={() => { SetBotAsPlayer2() }}
           >
             Play Bot
           </button>

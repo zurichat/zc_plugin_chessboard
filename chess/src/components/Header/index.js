@@ -52,18 +52,23 @@ function Header({ gameData }) {
   }
 
   const pluginConfig = {
-    name: "Chess Plugin", //Name on header
-    icon: ChessImage, //Image on header
-    thumbnailUrl: [imageProfileOne, imageProfileTwo, imageProfileThree], //Replace with images of users
-    userCount: padLeadingZeros(numUsers(), 3), //User count on header
+    // Name on header
+    name: "Chess Plugin", 
+    // Image on header
+    icon: ChessImage, 
+    // Replace with images of users
+    thumbnailUrl: [imageProfileOne, imageProfileTwo, imageProfileThree], 
+    // User count on header
+    userCount: padLeadingZeros(numUsers(), 3), 
     eventTitle: () => {
       //Block of code to be triggered on title click
     },
     eventThumbnail: () => {
-      //Block of code to be triggered on thumbnail click
+      // Block of code to be triggered on thumbnail click
       handleViewAllSpectatorsModal();
     },
-    hasThumbnail: !gameData ? false : true, //set false if you don't want thumbnail on the header
+    // set false if you don't want thumbnail on the header
+    hasThumbnail: !gameData ? false : true, 
   };
 
   // pad leading zeros
