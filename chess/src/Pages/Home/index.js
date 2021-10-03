@@ -10,6 +10,7 @@ import { getAllGames } from "../../adapters/home";
 // Import Components
 import Header from "../../components/Header";
 import MiniBoard from "../../components/MiniBoard";
+import GameHistory from "../../components/GameHistory";
 
 function Homepage() {
   // Set Games State
@@ -67,6 +68,7 @@ function Homepage() {
           </div>
         </div>
         <div className={styles.app__container}>{boards}</div>
+        <GameHistory />
       </div>
     </>
   );
