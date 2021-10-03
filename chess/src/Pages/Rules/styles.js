@@ -43,16 +43,13 @@ export const RulesContainer = styled.div`
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 
     .carrier {
       width: 20rem;
       text-align: center;
-      margin-right: 5rem;
-      margin-left: auto;
       height: 25rem;
-      margin-top: 5rem;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
@@ -60,8 +57,6 @@ export const RulesContainer = styled.div`
     .carrier {
       width: 20rem;
       text-align: center;
-      margin-right: 5rem;
-      margin-left: auto;
       height: 25rem;
       margin-top: 5rem;
       display: flex;
