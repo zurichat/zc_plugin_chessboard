@@ -52,6 +52,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   useEffect(() => {
     scrollToBottom();
+    // window.scrollTo(0, 0);
   });
 
   const handleAddComment = () => {
