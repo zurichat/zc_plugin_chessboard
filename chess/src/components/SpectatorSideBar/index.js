@@ -52,6 +52,10 @@ const SpectatorSideBar = ({ type, gameData }) => {
     scrollToBottom();
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   const handleAddComment = () => {
     if (commentMsg.trim().length) {
       sendComment(game_id, commentMsg).then((response) => {
