@@ -17,7 +17,7 @@ useEffect(() => {
         // Allow us to have empty DB
         if (response.data.data !== null) {
           setGames(response.data.data);
-          console.log(response.data.data)
+          console.log(response.data.data);
         }
       }
     }).catch(err => setHasError(true));
@@ -28,8 +28,8 @@ useEffect(() => {
     const [showHistory, setShowHistory] = useState(false);
 
     const onShow = ()=> {
-        setShowHistory(!showHistory)
-    }
+        setShowHistory(!showHistory);
+    };
 
     return (
         <div>
@@ -101,5 +101,5 @@ useEffect(() => {
 
         
     );
-}
+};
 export default GameHistory;
