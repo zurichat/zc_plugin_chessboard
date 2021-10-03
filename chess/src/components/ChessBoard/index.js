@@ -348,7 +348,7 @@ function ChessBoard({ type, gameData }) {
               color: "white",
               background: "#25364b",
             }}
-            onClick={SetBotAsPlayer2()}
+            onClick={SetBotAsPlayer2}
           >
             Play Bot
           </button>
