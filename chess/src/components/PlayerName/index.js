@@ -8,15 +8,15 @@ import InviteUser from "./../Modals/InviteUserModal/InviteUser";
 
 const PlayerName = ({ game_id, name, image_url, style, gameData }) => {
   console.log(gameData);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleViewAllSpectatorsModal = () => {
+  const handleInviteModal = () => {
     setIsModalOpen(true);
   };
   if (!name) {
     return (
       <>
-      <WaitingPlayer2Container className="waiting_player_2_container">
+      <WaitingPlayer2Container className="waiting_player_2_container" onClick={handleInviteModal}>
         <button className="waiting_player_2"> Waiting for player</button>
       </WaitingPlayer2Container>
       

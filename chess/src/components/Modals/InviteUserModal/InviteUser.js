@@ -4,6 +4,9 @@ import InviteUserInfo from "./InviteUserInfo";
 // Import the CSS
 import Styles from "./InviteModal.module.css";
 
+// Import image
+import Close from "../../../assets/modal/close.svg";
+
 const InviteUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   const close = () => setIsModalOpen(false);
 
@@ -37,6 +40,9 @@ const InviteUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   return (
     <div className={Styles["load-user__backdrop"]}>
       <div className={Styles["load-user__modal"]}>
+        <div className={Styles["btn-invite-modal-close"]} onClick={close}>
+          <img className="" src={Close} alt="Close" />
+        </div>
         <h3 className={Styles["room_header"]}>Invite colleagues to your game</h3>
         <div className={Styles["room_notification"]}>
           {/* <h4 className={Styles["room_notify"]}>

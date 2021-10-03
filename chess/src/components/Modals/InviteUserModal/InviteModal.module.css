@@ -15,6 +15,7 @@
   }
 
   .load-user__modal {
+    position: relative;
     width: 453px;
     max-width: 80%;
     height: 75vh;
@@ -25,6 +26,16 @@
     z-index: 21;
   }
   
+  .btn-invite-modal-close{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+ }
+
   .room_header{
     font-weight: 900;
     font-size: 2.25rem;
@@ -57,7 +68,13 @@
   
   .load-user__form {
     margin: 1rem 1.5rem;
+    display: flex;
+    justify-content: center;
   }
+
+    .load-user__form > input {
+      padding: 1rem;
+    }
   
   .searchbar {
     font-size: 1.8rem;
