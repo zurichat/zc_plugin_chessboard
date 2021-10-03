@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./style.module.css";
+import styles from "./style.module.css";
 const GameHistory = () => { 
 const [data, setState] = useState([]);
 const [hasError, setHasError] = useState(false);
@@ -13,30 +13,30 @@ useEffect(() => {
     return (
         <div>
             {hasError ? <div>Loading...</div> : 
-            <div className="outer_cover">
-                <div className="inner_cover" id={show}>
+            <div className={styles["outer_cover"]}>
+                <div className={styles["inner_cover"]} id={styles[{show}]}>
                     <center><h1>Game History</h1></center>
                        {data.map(item => (
                            <div>
-                               <h3 className="game_id">GAME ID: </h3><span className="game_data">{item._id}</span>
+                               <h3 className={styles["game_id"]}>GAME ID: </h3><span className={styles["game_data"]}>{item._id}</span>
                                <br/>
-                               <h3 className="game_id">Spectators: </h3>
+                               <h3 className={styles["game_id"]}>Spectators: </h3>
                                {item.spectators.map((sub)=>
                                 <div>
-                                    <span className="game_data">{sub.user_name} | {sub.user_id}</span>
+                                    <span className={styles["game_data"]}>{sub.user_name} | {sub.user_id}</span>
                                 </div>
                                 )};
                             <br/>
-                            <h3 className="game_id">Player 1: ----------- </h3>
-                            <h3 className="game_id">Player 2: </h3>
+                            <h3 className={styles["game_id"]}>Player 1: ----------- </h3>
+                            <h3 className={styles["game_id"]}>Player 2: </h3>
                             <br/>
                             <br/>
-                            <img className="game_img_owner" src={item.owner.image_url} />
-                            <img className="game_img_opponent" src={item.opponent.image_url} />
+                            <img className={styles["game_img_owner"]} src={item.owner.image_url} />
+                            <img className={styles["game_img_opponent"]} src={item.opponent.image_url} />
                             <br/>
-                            <span className="game_data">{item.owner.user_name} ------------- {item.opponent.user_name}</span>
-                            <span className="game_data"> <p className="chess_color">Chess Color </p>( {item.owner.color} )  ----- 
-                            <p className="chess_color"> Chess Color </p> ( {item.opponent.color} )</span>
+                            <span className={styles["game_data"]}>{item.owner.user_name} ------------- {item.opponent.user_name}</span>
+                            <span className={styles["game_data"]}> <p className={styles["chess_color"]}>Chess Color </p>( {item.owner.color} )  ----- 
+                            <p className={styles["chess_color"]}> Chess Color </p> ( {item.opponent.color} )</span>
                             Start-time: {item.start_time}
                             <br/>
                             <br/>
@@ -45,8 +45,8 @@ useEffect(() => {
                            </div>
                        ))};
                     </div>
-                <div className="game_button_cover">
-                    <button className="game_button" id="button_display" onClick={() => showHistory()}
+                <div className={styles["game_button_cover"]}>
+                    <button className={styles["game_button"]} id={styles["button_display"]} onClick={() => showHistory()}
                     >
                     Game History</button>
                 </div>   
