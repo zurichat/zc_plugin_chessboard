@@ -76,7 +76,7 @@ class InformationController {
         }`,
         room_image: `https://chess.zuri.chat/${imageName}`,
         room_url: `/chess/game/${game._id}`,
-        // unread: 1,
+        unread: 1,
       });
     }
 
@@ -102,7 +102,6 @@ class InformationController {
           room_name: "Main Chess Room",
           room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
           room_url: "/chess",
-          unread: 1,
         },
         // To be removed - why?
         ...joined_rooms,
