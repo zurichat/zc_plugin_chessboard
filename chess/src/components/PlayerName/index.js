@@ -16,15 +16,18 @@ const PlayerName = ({ game_id, name, image_url, style, gameData }) => {
   if (!name) {
     return (
       <>
-      <WaitingPlayer2Container className="waiting_player_2_container" onClick={handleInviteModal}>
-        <button className="waiting_player_2"> Waiting for player</button>
-      </WaitingPlayer2Container>
-      
-      <InviteUser
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-            gameData={gameData}
-            />
+        <WaitingPlayer2Container
+          className="waiting_player_2_container"
+          onClick={handleInviteModal}
+        >
+          <button className="waiting_player_2"> Waiting for player</button>
+        </WaitingPlayer2Container>
+
+        <InviteUser
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          gameData={gameData}
+        />
       </>
     );
   }
