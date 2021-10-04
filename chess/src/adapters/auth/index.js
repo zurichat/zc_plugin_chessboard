@@ -5,13 +5,11 @@ import { GetWorkspaceUser } from "@zuri/control";
 import botImage from "../../assets/bot/bot-image.svg";
 import defaultProfileImage from "../../assets/profile-image/default-profile-picture-avatar-png-green.png";
 
-
 let profileImage = defaultProfileImage;
 
 async function getUserProfileImage(email) {
   const { image_url } = await GetWorkspaceUser(email);
-  if (image_url !== "")
-    profileImage = image_url;
+  if (image_url !== "") profileImage = image_url;
 }
 
 export function getLoggedInUserData() {
@@ -75,7 +73,7 @@ export function getLoggedInUserData() {
         logged_in_user_from_zc_main.first_name +
         " " +
         logged_in_user_from_zc_main.last_name,
-      image_url: profileImage
+      image_url: profileImage,
     };
   }
 }
