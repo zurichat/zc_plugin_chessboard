@@ -1,6 +1,5 @@
 // Import api call adapter
-import { get } from "../xhr";
-import { GetUserInfo } from "@zuri/control";
+// import { GetUserInfo } from "@zuri/control";
 import { GetWorkspaceUser } from "@zuri/control";
 import botImage from "../../assets/bot/bot-image.svg";
 import defaultProfileImage from "../../assets/profile-image/default-profile-picture-avatar-png-green.png";

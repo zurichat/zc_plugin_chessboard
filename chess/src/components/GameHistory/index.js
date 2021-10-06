@@ -20,7 +20,7 @@ const GameHistory = () => {
           }
         }
       })
-      .catch((err) => setHasError(true));
+      .catch(() => setHasError(true));
   }, []);
 
   const [showHistory, setShowHistory] = useState(false);

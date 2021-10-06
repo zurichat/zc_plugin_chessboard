@@ -1,7 +1,7 @@
-import React, { memo, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import HeartIcon from "../../assets/icons/hearticon.svg";
 import Heart from "../../assets/icons/heart.svg";
-import moment from "moment";
+// import moment from "moment";
 // (lekandev) Commented it out
 // import Forfeit from "../Modals/ForfeitModal/Forfeit";
 // import Exit from "../Modals/ExitModal/Exit";
