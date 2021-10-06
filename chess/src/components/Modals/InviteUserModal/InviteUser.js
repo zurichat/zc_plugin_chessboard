@@ -16,9 +16,7 @@ const InviteUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
 
   console.log(gameData);
   const [usersDetails, setUsersDetails] = useState([...gameData.spectators]);
-  const [filterUserDetails] = useState([
-    ...gameData.spectators,
-  ]);
+  const [filterUserDetails] = useState([...gameData.spectators]);
   const [noUser, setNoUser] = useState(false);
 
   const handleInput = (e) => {
