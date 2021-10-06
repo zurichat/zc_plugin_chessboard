@@ -88,6 +88,16 @@ export function getCurrentOrganisation() {
   return organisation_id;
 }
 
+export function getAuthToken() {
+  let auth_token = sessionStorage.getItem("token");
+
+  if (!auth_token) {
+    return null;
+  }
+
+  return auth_token;
+}
+
 export function getChessBotData() {
   // Later may change to check Bot Info from API call to Backend
 
