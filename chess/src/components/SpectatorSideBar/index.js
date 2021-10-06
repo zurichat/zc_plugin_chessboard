@@ -158,7 +158,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
               ) : (
                 <div className={styles.emptyComment}>
                   <img src={emptyComment} />
-                  <h3>It's Quiet Here!</h3>
+                  <h3>{"It's"} Quiet Here!</h3>
                   <p>You can make a comment at any point.</p>
                 </div>
               )}

@@ -7,7 +7,7 @@ const NextTurn = ({ color_to_play }) => {
     <div className={styles.nextTurn}>
       <h2 className={styles.nextTurnText}>
         {" "}
-        It's &nbsp;{" "}
+        {"It's"} &nbsp;{" "}
         <span className={styles.nextTurnTexting}>{color_to_play}</span> &nbsp;
         Turn To Play
       </h2>
