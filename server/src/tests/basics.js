@@ -15,11 +15,11 @@ describe("checks", () => {
     // query to by-pass user auth
     const response = await api.get("/api/v1/ping/?user=''&org=''")
       .expect(200)
-      .expect("Content-Type", /application\/json/)
+      .expect("Content-Type", /application\/json/);
     
     expect(response.body).to.have.property("message");
     expect(response.body.message).to.be.a("string");
     expect(response.body.message).to.match(/hello from server/i);
     
   }, 500);
-})
+});
