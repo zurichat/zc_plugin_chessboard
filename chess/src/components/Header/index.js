@@ -5,7 +5,7 @@ import Parcel from "single-spa-react/parcel";
 import { pluginHeader } from "@zuri/plugin-header";
 
 // Import CSS for this page
-// import styles from "./header.module.css";
+import styles from "./header.module.css";
 
 // Header fix
 
@@ -72,7 +72,7 @@ function Header({ gameData }) {
 
   return (
     <div>
-      <div className={styles["header-fix"]}>
+      <div className={styles["header-fixed"]}>
         <Parcel
           config={pluginHeader}
           wrapWith="div"

@@ -6,7 +6,7 @@ header {
 	align-items: center;
 	justify-content: center;
 }
-.header-fix {
+.header-fixed {
 	position: fixed !important;
 	width: 100% !important;
 }
