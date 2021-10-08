@@ -7,8 +7,14 @@ header {
 	justify-content: center;
 }
 .header-fixed {
-	position: fixed !important;
+	position: relative !important;
+	top: 0;
 	width: 100% !important;
+	height: 50px !important;
+}
+.header-spaced {
+	width: 100%;
+	position: fixed !important;
 }
 
 p{

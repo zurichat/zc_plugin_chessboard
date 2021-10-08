@@ -73,12 +73,14 @@ function Header({ gameData }) {
   return (
     <div>
       <div className={styles["header-fixed"]}>
-        <Parcel
-          config={pluginHeader}
-          wrapWith="div"
-          wrapStyle={{ width: "100%" }}
-          headerConfig={pluginConfig}
-        />
+        <div className={styles["header-spaced"]}>
+          <Parcel
+            config={pluginHeader}
+            wrapWith="div"
+            wrapStyle={{ width: "100%" }}
+            headerConfig={pluginConfig}
+          />
+        </div>
       </div>
       
 
