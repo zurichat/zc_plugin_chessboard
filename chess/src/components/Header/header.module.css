@@ -6,6 +6,10 @@ header {
 	align-items: center;
 	justify-content: center;
 }
+.header-fix {
+	position: fixed !important;
+	width: 100% !important;
+}
 
 p{
 	font-size: 1.5em;
