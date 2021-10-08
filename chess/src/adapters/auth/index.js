@@ -1,14 +1,14 @@
 // Import api call adapter
-import { get } from "../xhr";
-import { GetUserInfo } from "@zuri/control";
+// import { GetUserInfo } from "@zuri/control";
 import { GetWorkspaceUser } from "@zuri/control";
 import botImage from "../../assets/bot/bot-image.svg";
+import defaultProfileImage from "../../assets/profile-image/default-profile-picture-avatar-png-green.png";
 
-let profileImage;
+let profileImage = defaultProfileImage;
 
 async function getUserProfileImage(email) {
   const { image_url } = await GetWorkspaceUser(email);
-  profileImage = image_url;
+  if (image_url !== "") profileImage = image_url;
 }
 
 export function getLoggedInUserData() {
@@ -72,10 +72,7 @@ export function getLoggedInUserData() {
         logged_in_user_from_zc_main.first_name +
         " " +
         logged_in_user_from_zc_main.last_name,
-      image_url:
-        profileImage !== ""
-          ? profileImage
-          : `https://ui-avatars.com/api/?name=${logged_in_user_from_zc_main.first_name}&background=random&uppercase=false`,
+      image_url: profileImage,
     };
   }
 }
@@ -88,6 +85,16 @@ export function getCurrentOrganisation() {
   }
 
   return organisation_id;
+}
+
+export function getAuthToken() {
+  let auth_token = sessionStorage.getItem("token");
+
+  if (!auth_token) {
+    return null;
+  }
+
+  return auth_token;
 }
 
 export function getChessBotData() {

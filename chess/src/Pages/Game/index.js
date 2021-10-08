@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
-import { BrowserRouter, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // Import CSS for this page
 import styles from "./game.module.css";

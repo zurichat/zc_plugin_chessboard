@@ -6,12 +6,20 @@ const { WELCOME_URL } = require("../config/index");
 exports.userAuth = async (req, res, next) => {
   try {
     const { user_id } = req.body;
-    if (user_id === "chessbot") return next();
+
+    if (
+      user_id === "chessbot" ||
+      user_id === "anonymous" ||
+      (req.query.user && req.query.org)
+    )
+      return next();
 
     const authorization = req.get("Authorization");
+
     if (!authorization) throw new CustomError("Authentication failed", 403);
 
     const token = authorization.split(" ")[1];
+
     if (!token || token === " ")
       throw new CustomError("Authentication failed", 403);
 

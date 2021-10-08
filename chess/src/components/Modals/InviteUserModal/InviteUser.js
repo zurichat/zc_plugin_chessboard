@@ -1,39 +1,29 @@
 import React, { useState } from "react";
-import LoadUserInfo from "./LoadUserInfo";
-import icon from "../../../assets/modal/close.svg";
+import InviteUserInfo from "./InviteUserInfo";
 
 // Import the CSS
-import Styles from "./UserModal.module.css";
+import Styles from "./InviteModal.module.css";
 
-const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
+// Import image
+import Close from "../../../assets/modal/close.svg";
+
+const InviteUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   const close = () => setIsModalOpen(false);
 
   if (!isModalOpen) {
     return null;
   }
 
-  const [usersDetails, setUsersDetails] = useState([
-    ...gameData.spectators,
-    gameData.owner,
-    // If Game Opponent is not null
-    gameData.opponent !== null && gameData.opponent,
-  ]);
-  const [filterUserDetails] = useState([
-    ...gameData.spectators,
-    gameData.owner,
-    gameData.opponent,
-  ]);
+  console.log(gameData);
+  const [usersDetails, setUsersDetails] = useState([...gameData.spectators]);
+  const [filterUserDetails] = useState([...gameData.spectators]);
   const [noUser, setNoUser] = useState(false);
 
   const handleInput = (e) => {
     let spectators = usersDetails;
 
-    spectators = filterUserDetails.filter(
-      (spectator) =>
-        spectator?.username !== null &&
-        spectator?.user_name
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase())
+    spectators = filterUserDetails.filter((spectator) =>
+      spectator.user_name.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
     if (spectators.length === 0) {
@@ -48,17 +38,21 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   return (
     <div className={Styles["load-user__backdrop"]}>
       <div className={Styles["load-user__modal"]}>
-        <button className={Styles["btn-user-modal-close"]} onClick={close}>
-          <img className={Styles["modal-close-img"]} src={icon} alt="Close" />
-        </button>
-        <h3 className={Styles["room_header"]}># Chess</h3>
+        <div className={Styles["btn-invite-modal-close"]} onClick={close}>
+          <img className="" src={Close} alt="Close" />
+        </div>
+        <h3 className={Styles["room_header"]}>
+          Invite colleagues to your game
+        </h3>
         <div className={Styles["room_notification"]}>
           {/* <h4 className={Styles["room_notify"]}>
             Get Notifcation for @ Mentions
-          </h4>
-          <h4 className={Styles["room_notify"]}>Start a Call</h4> */}
+          </h4> */}
+          {/* <h4 className={Styles["room_notify"]}>Start a Call</h4> */}
         </div>
-        <p className={Styles["room_para"]}>Members</p>
+        <p className={Styles["room_para"]}>
+          You can invite your colleagues to play chess with you
+        </p>
 
         <form className={Styles["load-user__form"]}>
           <input
@@ -72,7 +66,7 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
         </form>
 
         <div className={Styles["load-user__users"]}>
-          {!noUser && <LoadUserInfo spectators={usersDetails} />}
+          {!noUser && <InviteUserInfo spectators={usersDetails} />}
           {noUser && (
             <p className={Styles["load-user__no-user"]}>No Member found..</p>
           )}
@@ -82,4 +76,4 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
   );
 };
 
-export default LoadUser;
+export default InviteUser;
