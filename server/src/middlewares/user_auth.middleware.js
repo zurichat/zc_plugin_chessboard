@@ -5,7 +5,12 @@ const { WELCOME_URL } = require("../config/index");
 // GET req to zc_core to validate and fetch user details with the provided token
 exports.userAuth = async (req, res, next) => {
   try {
-    const { user_id } = req.body;
+    let { user_id } = req.body;
+
+    // Also get user_id from query for get requests
+    if (!user_id) {
+      user_id = req.query.user_id;
+    }
 
     if (
       user_id === "chessbot" ||
