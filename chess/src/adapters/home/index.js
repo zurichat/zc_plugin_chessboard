@@ -4,6 +4,6 @@ import { getLoggedInUserData } from "../auth";
 
 export function getAllGames() {
   return get("/game/all", {
-    user_id: getLoggedInUserData().user_id
+    user_id: getLoggedInUserData().user_id,
   });
 }
