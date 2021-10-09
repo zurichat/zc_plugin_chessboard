@@ -647,6 +647,104 @@ class GameController {
       throw new CustomError(`Unable to delete game: ${error}`, 500);
     }
   }
+
+  async rematch(req, res) {
+    try {
+      const {
+        game_id,
+        owner_id,
+        owner_name,
+        owner_img,
+        opp_id,
+        opp_name,
+        opp_img,
+      } = req.body;
+
+      if (!game_id || !owner_id || !owner_name || !opp_id || !opp_name)
+        return res
+          .status(400)
+          .send(
+            response(
+              "Please provide the neccesacry information needed to restart the game",
+              null,
+              false
+            )
+          );
+
+      const owner = {
+        user_id: owner_id,
+        user_name: owner_name,
+        image_url: owner_img,
+        color: "w",
+      };
+
+      const opponent = {
+        user_id: opp_id,
+        user_name: opp_name,
+        image_url: opp_img,
+        color: "b",
+      };
+
+      // Reset the game
+      await this.GameRepo.update(game_id, {
+        owner,
+        opponent,
+        moves: [],
+        messages: [],
+        spectators: [],
+        status: 1,
+      });
+
+      // for owner
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        owner_id
+      );
+      await centrifugoController.publishToSideBar(
+        this.organisation_id,
+        owner_id,
+        sidebar_update_payload
+      );
+
+      // for opponent
+      const sidebar_update_payload_opp =
+        await InformationController.sideBarInfo(this.organisation_id, opp_id);
+      await centrifugoController.publishToSideBar(
+        this.organisation_id,
+        opp_id,
+        sidebar_update_payload_opp
+      );
+
+      // set user permission in game
+      const permission = "READ/WRITE";
+
+      // Build Response
+      const payload = {
+        event: "join_game",
+        permission,
+      };
+
+      // Publish the event to Centrifugo server
+      await centrifugoController.publish(game_id, {
+        ...payload,
+        player: owner,
+      });
+
+      // Publish the event to Centrifugo server
+      await centrifugoController.publish(game_id, {
+        ...payload,
+        player: opponent,
+      });
+
+      res
+        .status(201)
+        .send(
+          response("Game restarted successfully", { object_id: game_id }, true)
+        );
+    } catch (error) {
+      throw new CustomError(`Unable to restart game: ${error}`, 500);
+    }
+  }
 }
 
 // Export Module

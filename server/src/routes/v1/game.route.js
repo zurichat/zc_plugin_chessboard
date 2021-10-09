@@ -204,6 +204,28 @@ router.post("/join", (req, res) => {
   new GameCtrl(res.locals.organisation_id).join(req, res);
 });
 
+// Replay A Game
+
+/**
+ * @swagger
+ * /api/v1/game/rematch:
+ *  post:
+ *   summary: restart current game
+ *   description: Restart the current game with the current players
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
+router.put("/rematch", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).rematch(req, res);
+});
+
 /**
  * @swagger
  * /api/v1/game/all:
