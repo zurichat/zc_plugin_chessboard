@@ -6,7 +6,7 @@ export class UserService {
 
   async fetchUserData() {
     this.userData = await GetUserInfo();
-    console.log(this.userData);
+    console.log("chess-zc-main-userService", this.userData);
     return this.userData;
   }
 

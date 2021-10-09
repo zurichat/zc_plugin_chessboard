@@ -12,6 +12,7 @@ import { UserService } from "./adapters/userService";
 
 function App() {
   useEffect(() => {
+    console.log("App loaded");
     UserService.getInstance()
       .fetchUserData()
       .then((res) => {
