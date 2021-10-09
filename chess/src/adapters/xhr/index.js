@@ -19,7 +19,7 @@ function returnAxiosInstance() {
 export function get(url, requestData) {
   const axios = returnAxiosInstance();
   if (requestData) {
-    return axios.get(url, { params: requestData});
+    return axios.get(url, { params: requestData });
   }
   return axios.get(url);
 }
