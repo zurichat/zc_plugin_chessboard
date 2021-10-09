@@ -24,13 +24,13 @@ exports.userAuth = async (req, res, next) => {
     if (!token || token === " ")
       throw new CustomError("Authentication failed", 403);
 
-    const { statusText, status } = await axios.get(WELCOME_URL, {
+    const { status } = await axios.get(WELCOME_URL, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    if (statusText === "OK" && status === 200) return next();
+    if (status === 200) return next();
 
     throw new CustomError("Authentication failed", 403);
   } catch (error) {
