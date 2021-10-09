@@ -3,7 +3,7 @@ const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
 const { DATABASE } = require("../config/index");
-const { generateImage, disposeImages } = require("../utils/imageHelper");
+const { generateImage } = require("../utils/imageHelper");
 
 class InformationController {
   async getPluginInfo(req, res) {

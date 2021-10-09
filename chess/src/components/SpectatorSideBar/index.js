@@ -1,7 +1,7 @@
-import React, { memo, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import HeartIcon from "../../assets/icons/hearticon.svg";
 import Heart from "../../assets/icons/heart.svg";
-import moment from "moment";
+// import moment from "moment";
 // (lekandev) Commented it out
 // import Forfeit from "../Modals/ForfeitModal/Forfeit";
 // import Exit from "../Modals/ExitModal/Exit";
@@ -158,7 +158,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
               ) : (
                 <div className={styles.emptyComment}>
                   <img src={emptyComment} />
-                  <h3>It's Quiet Here!</h3>
+                  <h3>{"It's"} Quiet Here!</h3>
                   <p>You can make a comment at any point.</p>
                 </div>
               )}

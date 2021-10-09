@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { getCurrentOrganisation } from "../auth";
+import { getCurrentOrganisation, getAuthToken } from "../auth";
 
 function returnAxiosInstance() {
   return Axios.create({
@@ -8,7 +8,7 @@ function returnAxiosInstance() {
     headers: {
       "Content-Type": "application/json",
       Organisation: getCurrentOrganisation(),
-      Authorization: "Bearer " + localStorage.getItem("access_token"),
+      Authorization: "Bearer " + getAuthToken(),
     },
     validateStatus: function (status) {
       return status < 500; // Resolve only if the status code is less than 500
@@ -16,8 +16,11 @@ function returnAxiosInstance() {
   });
 }
 
-export function get(url) {
+export function get(url, requestData) {
   const axios = returnAxiosInstance();
+  if (requestData) {
+    return axios.get(url, { params: requestData });
+  }
   return axios.get(url);
 }
 

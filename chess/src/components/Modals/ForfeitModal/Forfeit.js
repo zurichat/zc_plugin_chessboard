@@ -25,11 +25,6 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
   }, []);
 
   const handleForfeitGame = async () => {
-    const gameEndData = {
-      user_id: gameData.owner.user_id,
-      game_id: gameId,
-    };
-
     endGame(gameId).then((response) => {
       if (response.data.success) {
         history.push("/");

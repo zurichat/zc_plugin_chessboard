@@ -18,7 +18,7 @@ const LoadUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
     // If Game Opponent is not null
     gameData.opponent !== null && gameData.opponent,
   ]);
-  const [filterUserDetails, setFilterUserDetails] = useState([
+  const [filterUserDetails] = useState([
     ...gameData.spectators,
     gameData.owner,
     gameData.opponent,

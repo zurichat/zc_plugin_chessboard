@@ -1,5 +1,5 @@
 // Import api call adapter
-import { get, post } from "../xhr";
+import { post } from "../xhr";
 import { getLoggedInUserData } from "../auth";
 
 export function createGame() {

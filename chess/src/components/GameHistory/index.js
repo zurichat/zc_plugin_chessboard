@@ -20,7 +20,7 @@ const GameHistory = () => {
           }
         }
       })
-      .catch((err) => setHasError(true));
+      .catch(() => setHasError(true));
   }, []);
 
   const [showHistory, setShowHistory] = useState(false);
@@ -40,13 +40,13 @@ const GameHistory = () => {
               <h4>Game History</h4>
             </center>
             {games.map((item) => (
-              <div>
+              <div key={item._id}>
                 <h3 className={styles["game_id"]}>GAME ID: </h3>
                 <span className={styles["game_data"]}>{item._id}</span>
                 {/* <br/> */}
                 <h3 className={styles["game_id"]}>Spectators: </h3>
-                {item.spectators.map((sub) => (
-                  <div>
+                {item.spectators.map((sub, index) => (
+                  <div key={`spectator ${index}`}>
                     <span className={styles["game_data"]}>
                       {sub.user_name} | {sub.user_id}
                     </span>
