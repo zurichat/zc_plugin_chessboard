@@ -5,7 +5,10 @@ import Parcel from "single-spa-react/parcel";
 import { pluginHeader } from "@zuri/plugin-header";
 
 // Import CSS for this page
-// import styles from "./header.module.css";
+import styles from "./header.module.css";
+
+// Header fix
+
 
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
@@ -69,12 +72,17 @@ function Header({ gameData }) {
 
   return (
     <div>
-      <Parcel
-        config={pluginHeader}
-        wrapWith="div"
-        wrapStyle={{ width: "100%" }}
-        headerConfig={pluginConfig}
-      />
+      <div className={styles["header-fixed"]}>
+        <div className={styles["header-spaced"]}>
+          <Parcel
+            config={pluginHeader}
+            wrapWith="div"
+            wrapStyle={{ width: "100%" }}
+            headerConfig={pluginConfig}
+          />
+        </div>
+      </div>
+      
 
       <LoadUser
         isModalOpen={isModalOpen}
