@@ -32,7 +32,9 @@ export function getLoggedInUserData() {
     return {
       user_id: user_info_from_zcmain.id,
       user_name: user_info_from_zcmain.user_name,
-      image_url: user_info_from_zcmain.image_url ? user_info_from_zcmain.image_url : profileImage,
+      image_url: user_info_from_zcmain.image_url
+        ? user_info_from_zcmain.image_url
+        : profileImage,
     };
   }
 }
