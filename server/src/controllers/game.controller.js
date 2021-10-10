@@ -648,6 +648,42 @@ class GameController {
     }
   }
 
+  async requestRematch(req, res) {
+    try {
+      const { game_id, user_id, opp_id } = req.body;
+
+      // find game in db
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
+      if (!gameDBData.data)
+        return res.status(404).send(response("No games found.", null, true));
+
+      if (
+        (user_id === gameDBData.data.opponent.user_id ||
+          user_id === gameDBData.data.owner.user_id) &&
+        (opp_id === gameDBData.data.opponent.user_id ||
+          opp_id === gameDBData.data.owner.user_id)
+      ) {
+        // publish to centrifugo
+        const payload = {
+          event: "request_rematch",
+          opponent: { opp_id, user_id },
+        };
+
+        await centrifugoController.publish(game_id, payload);
+
+        return res
+          .status(201)
+          .send(response("Request for rematch made.", null, true));
+      } else {
+        return res
+          .status(400)
+          .send(response("You cannot request a rematch.", null, true));
+      }
+    } catch (error) {
+      throw new CustomError(`Unable to delete game: ${error}`, 500);
+    }
+  }
+
   async rematch(req, res) {
     try {
       const {
