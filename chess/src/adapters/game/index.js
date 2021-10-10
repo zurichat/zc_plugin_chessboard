@@ -5,7 +5,9 @@ import { SubscribeToChannel } from "@zuri/control";
 // import Centrifuge from "centrifuge";
 
 export function getGameData(game_id) {
-  return get(`/game/${game_id}`);
+  return get(`/game/${game_id}`, {
+    user_id: getLoggedInUserData().user_id,
+  });
 }
 
 export function CentrifugeSetup(game_id, ChannelEventsListener) {

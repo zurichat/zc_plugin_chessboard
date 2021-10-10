@@ -24,5 +24,5 @@ module.exports = {
   },
 
   // Verify user auth status with this URL
-  WELCOME_URL: "https://api.zuri.chat/v1/welcome",
+  WELCOME_URL: "https://api.zuri.chat/auth/verify-token",
 };
