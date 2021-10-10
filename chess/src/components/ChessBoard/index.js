@@ -348,7 +348,9 @@ function ChessBoard({ type, gameData }) {
               color: "white",
               background: "#25364b",
             }}
-            onClick={() => SetBotAsPlayer2()}
+            onClick={() => {
+              SetBotAsPlayer2();
+            }}
           >
             Play Bot
           </button>
@@ -360,6 +362,7 @@ function ChessBoard({ type, gameData }) {
             style={{}}
             name={gameData.owner.user_name}
             image_url={gameData.owner.image_url}
+            gameData={gameData}
           />
         ) : (
           <PlayerName
@@ -367,6 +370,7 @@ function ChessBoard({ type, gameData }) {
             style={{ paddingBottom: "28px" }}
             name={gameData.opponent?.user_name}
             image_url={gameData.opponent?.image_url}
+            gameData={gameData}
           />
         )}
 

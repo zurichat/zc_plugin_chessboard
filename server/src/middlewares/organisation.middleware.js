@@ -1,15 +1,20 @@
-const response = require("../utils/response");
+const CustomError = require("../utils/custom-error");
 
-// Export Module
-module.exports = (app) => {
-  app.use(function (req, res, next) {
-    let organisation = req.headers.organisation;
+// Verify the organisationID passed in the request is valid
+exports.orgAuth = async (req, res, next) => {
+  try {
+    let { organisation } = req.headers;
 
     // Verify if the organisation is valid
     // OMO laterrr
 
     // If org_id is not set in the header, then set it to the default organisation
-    if (!organisation || organisation == null) {
+    if (
+      !organisation ||
+      organisation === null ||
+      organisation === "null" ||
+      organisation === "undefined"
+    ) {
       // Use hardcoded organisation
       res.locals.organisation_id = "6145c2d0285e4a18402073f6";
 
@@ -22,7 +27,7 @@ module.exports = (app) => {
 
     // Continue to the next request
     next();
-  });
-
-  return app;
+  } catch (error) {
+    throw new CustomError(`Orgnisation Middleware: ${error}`, 502);
+  }
 };

@@ -1,5 +1,7 @@
-import React, { memo, useEffect, useState, useRef } from "react";
-import moment from "moment";
+import React, { useEffect, useState, useRef } from "react";
+import HeartIcon from "../../assets/icons/hearticon.svg";
+import Heart from "../../assets/icons/heart.svg";
+// import moment from "moment";
 // (lekandev) Commented it out
 // import Forfeit from "../Modals/ForfeitModal/Forfeit";
 // import Exit from "../Modals/ExitModal/Exit";
@@ -50,6 +52,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   useEffect(() => {
     scrollToBottom();
+    // window.scrollTo(0, 0);
   });
 
   const handleAddComment = () => {
@@ -78,6 +81,17 @@ const SpectatorSideBar = ({ type, gameData }) => {
   // };
 
   let comment_id = 0;
+
+  // hearts animation
+  const heartsArr = Array.from(new Array(15));
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    if (animate) {
+      setTimeout(() => {
+        setAnimate(false);
+      }, 6500);
+    }
+  }, [animate]);
 
   return (
     <>
@@ -144,7 +158,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
               ) : (
                 <div className={styles.emptyComment}>
                   <img src={emptyComment} />
-                  <h3>It's Quiet Here!</h3>
+                  <h3>{"It's"} Quiet Here!</h3>
                   <p>You can make a comment at any point.</p>
                 </div>
               )}
@@ -152,6 +166,13 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
             {type === "spectator" || type === "owner" || type === "opponent" ? (
               <div className={styles.chatInputForm}>
+                {animate ? (
+                  <div className={styles.heartContainer}>
+                    {heartsArr.map((item, id) => (
+                      <img src={Heart} alt="" key={`heart_${id + 1}`} />
+                    ))}
+                  </div>
+                ) : null}
                 <input
                   type="text"
                   value={commentMsg}
@@ -159,6 +180,13 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
                   placeholder="Send a comment"
                 />
+                <div
+                  className={styles.heartIcon}
+                  onClick={() => setAnimate(true)}
+                >
+                  <img src={HeartIcon} alt="_heart_" />
+                  <span>16</span>
+                </div>
                 <div className={styles.inputIcons}>
                   <div className={styles.inputIconsleft}>
                     <img src={zap} className={styles.feather} />

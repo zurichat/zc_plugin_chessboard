@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Import the CSS
@@ -8,8 +8,13 @@ import "./App.css";
 import Homepage from "./Pages/Home";
 import Game from "./Pages/Game";
 import Rules from "./Pages/Rules";
+import { UserService } from "./adapters/userService";
 
 function App() {
+  useEffect(() => {
+    UserService.getInstance().fetchUserData();
+  }, []);
+
   return (
     <Router basename="/chess">
       <Switch>

@@ -1,45 +1,11 @@
 // Import api call adapter
-import { get } from "../xhr";
-import { GetUserInfo } from "@zuri/control";
-import { GetWorkspaceUser } from "@zuri/control";
 import botImage from "../../assets/bot/bot-image.svg";
+import defaultProfileImage from "../../assets/profile-image/default-profile-picture-avatar-png-green.png";
+import { UserService } from "../userService";
 
-let profileImage;
-
-async function getUserProfileImage(email) {
-  const { image_url } = await GetWorkspaceUser(email);
-  profileImage = image_url;
-}
+let profileImage = defaultProfileImage;
 
 export function getLoggedInUserData() {
-  // // Variable to get User Info Data - Mocking Global Variables
-  // let logged_in_user_from_zc_main;
-
-  // // Try to set user info from ZC_Main
-  // (async function () {
-  //   logged_in_user_from_zc_main = await GetUserInfo();
-  // })();
-
-  // // Localhost can't use the auth function
-  // if (location.hostname === "localhost" && location.hostname === "127.0.0.1") {
-
-  //   // Just return hardcoded info
-  //   return {
-  //     user_id: "localhost_user_id",
-  //     user_name: "LocalhostUser",
-  //     image_url: "https://www.gravatar.com/avatar/",
-  //   };
-  // } else {
-  //   // Set timeout to let await resolve (the only hack i could find to make await work in synchronous function)
-  //   setTimeout(() => {
-  //     return {
-  //       user_id: logged_in_user_from_zc_main._id,
-  //       user_name: logged_in_user_from_zc_main.first_name + " " + logged_in_user_from_zc_main.last_name,
-  //       image_url: `https://ui-avatars.com/api/?name=${logged_in_user_from_zc_main.first_name}&background=random&uppercase=false`,
-  //     };
-  //   })
-  // }
-
   // Workaround for now (since we use a shared domain)
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     // On localhost return this
@@ -49,13 +15,10 @@ export function getLoggedInUserData() {
       image_url: "https://www.gravatar.com/avatar/",
     };
   } else {
-    let logged_in_user_from_zc_main = JSON.parse(
-      sessionStorage.getItem("user")
-    );
+    // get singleton instance
+    const user_info_from_zcmain = UserService.getInstance();
 
-    getUserProfileImage(logged_in_user_from_zc_main?.email);
-
-    if (!logged_in_user_from_zc_main) {
+    if (!user_info_from_zcmain.userData) {
       // Not Logged In, so return anonymous user info
       return {
         user_id: "anonymous",
@@ -67,15 +30,11 @@ export function getLoggedInUserData() {
 
     // Logged In, so return user info
     return {
-      user_id: logged_in_user_from_zc_main.id,
-      user_name:
-        logged_in_user_from_zc_main.first_name +
-        " " +
-        logged_in_user_from_zc_main.last_name,
-      image_url:
-        profileImage !== ""
-          ? profileImage
-          : `https://ui-avatars.com/api/?name=${logged_in_user_from_zc_main.first_name}&background=random&uppercase=false`,
+      user_id: user_info_from_zcmain.id,
+      user_name: user_info_from_zcmain.user_name,
+      image_url: user_info_from_zcmain.image_url
+        ? user_info_from_zcmain.image_url
+        : profileImage,
     };
   }
 }
@@ -88,6 +47,16 @@ export function getCurrentOrganisation() {
   }
 
   return organisation_id;
+}
+
+export function getAuthToken() {
+  let auth_token = sessionStorage.getItem("token");
+
+  if (!auth_token) {
+    return null;
+  }
+
+  return auth_token;
 }
 
 export function getChessBotData() {
