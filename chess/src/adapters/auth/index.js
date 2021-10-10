@@ -16,9 +16,9 @@ export function getLoggedInUserData() {
     };
   } else {
     // get singleton instance
-    const userData = UserService.getInstance();
+    const user_info_from_zcmain = UserService.getInstance();
 
-    if (!userData) {
+    if (!user_info_from_zcmain.userData) {
       // Not Logged In, so return anonymous user info
       return {
         user_id: "anonymous",
@@ -27,11 +27,12 @@ export function getLoggedInUserData() {
           "https://ui-avatars.com/api/?name=Anonymous&background=random",
       };
     }
+
     // Logged In, so return user info
     return {
-      user_id: userData.id,
-      user_name: userData.user_name,
-      image_url: userData.image_url ? userData.image_url : profileImage,
+      user_id: user_info_from_zcmain.id,
+      user_name: user_info_from_zcmain.user_name,
+      image_url: user_info_from_zcmain.image_url ? user_info_from_zcmain.image_url : profileImage,
     };
   }
 }
