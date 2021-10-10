@@ -29,6 +29,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "mocha": "^9.1.2",
     "nodemon": "^2.0.12",
+    "nyc": "^15.1.0",
     "supertest": "^6.1.6"
   },
   "scripts": {
@@ -38,6 +39,7 @@
     "build-step-1": "cd ../chess && yarn install && yarn build && cd ../server && yarn build-step-2",
     "build-step-2": "cd ../client && yarn install && yarn build",
     "lint": "eslint src/",
-    "test": "yarn mocha src/tests --exit"
+    "test": "mocha src/tests --exit",
+    "test-coverage": "nyc yarn test"
   }
 }
