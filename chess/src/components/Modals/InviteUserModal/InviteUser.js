@@ -14,7 +14,6 @@ const InviteUser = ({ isModalOpen, setIsModalOpen, gameData }) => {
     return null;
   }
 
-  console.log(gameData);
   const [usersDetails, setUsersDetails] = useState([...gameData.spectators]);
   const [filterUserDetails] = useState([...gameData.spectators]);
   const [noUser, setNoUser] = useState(false);

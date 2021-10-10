@@ -10,12 +10,10 @@ export class UserService {
 
   async fetchUserData() {
     this.userData = await GetUserInfo();
-
-    this.id = this.userData[0]._id;
-    this.image_url = this.userData[0].image_url;
-    this.email = this.userData[0].email;
-    this.user_name = this.userData[0].user_name;
-    console.log("from User Service", this.userData);
+    this.id = this.userData?.at(0)._id;
+    this.image_url = this.userData?.at(0).image_url;
+    this.email = this.userData?.at(0).email;
+    this.user_name = this.userData?.at(0).user_name;
   }
 
   static getInstance() {

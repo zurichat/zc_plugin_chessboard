@@ -633,7 +633,7 @@ class GameController {
 
   async like(req, res) {
     try {
-      const { like, game_id } = req.body;
+      const { game_id } = req.body;
 
       const gameDBData = await this.GameRepo.fetchOne(game_id);
 
@@ -646,10 +646,10 @@ class GameController {
       // const single_likes = {
       //   like: likes,
       // };
+      likes++;
 
-      while (likes) {
-        likes = like + 1;
-      }
+      console.log(likes);
+      // let count = likes++
 
       const payload = {
         event: "likes",

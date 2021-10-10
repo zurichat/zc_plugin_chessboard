@@ -1,9 +1,12 @@
 // Package Modules
 const router = require("express").Router();
 
-const OrganisationMiddleware = require("../../middlewares/organisation.middleware");
+const { orgAuth } = require("../../middlewares/organisation.middleware");
+const { userAuth } = require("../../middlewares/user_auth.middleware");
 
-OrganisationMiddleware(router);
+// All Endpoints require authentication and organisationID to be accessed
+router.use(orgAuth);
+router.use(userAuth);
 
 // Custom Modules
 const GameCtrl = require("../../controllers/game.controller");
