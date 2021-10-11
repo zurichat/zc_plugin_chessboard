@@ -23,7 +23,7 @@ function Rules() {
       <RulesContainer>
         <div className="top">
           <div className="content">
-          <h5 className="content_heading">Game Rule</h5>
+            <h5 className="content_heading">Game Rule</h5>
             <p className="content_heading_par">
               This is a two-player board game consisting of 64 (8x8) squares
               arranged in alternating light & dark colors and 32 Chess pieces.
