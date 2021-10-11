@@ -51,13 +51,13 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
 
         <footer className={styles.exit__footer}>
           <button
-            className={styles["exit__button exit__button--yes"]}
+            className={`${styles.exit__button} ${styles.exit__button__yes}`}
             onClick={exitGame}
           >
             Yes
           </button>
           <button
-            className={styles[" exit__button exit__button--no"]}
+            className={`${styles.exit__button} ${styles.exit__button__no}`}
             onClick={close}
           >
             No
