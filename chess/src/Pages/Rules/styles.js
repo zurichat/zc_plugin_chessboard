@@ -17,6 +17,16 @@ export const RulesContainer = styled.div`
       width: 80%;
       color: white;
     }
+    .content_heading {
+      font-size: 20px;
+      padding-bottom: 5px;
+    }
+    .content_heading_par {
+      font-size: 15px;
+      line-height: 23px;
+      text-align: justify;
+      padding-bottom: 5px;
+    }
 
     .pieces {
       position: relative;
@@ -101,11 +111,12 @@ export const RulesContainer = styled.div`
         text-align: center;
 
         p {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
+          line-height: 17px;
         }
 
         h4 {
-          font-size: 2rem;
+          font-size: 1.9rem;
         }
       }
     }
@@ -124,6 +135,7 @@ export const RulesContainer = styled.div`
       padding: 0.5rem 0;
       outline: none;
       border: none;
+      margin-bottom: 40px;
     }
   }
 
@@ -134,14 +146,20 @@ export const RulesContainer = styled.div`
 
     .top .content {
       width: 75%;
+      padding: 10px 15px;
     }
 
     .top .content p {
       font-size: 1rem;
+      line-height: 18px;
     }
 
-    .top .content h4 {
-      font-size: 1.2rem;
+    // .top .content h4 {
+    //   font-size: 20px;
+    // }
+    .content_heading {
+      font-size: 17px;
+      padding-bottom: 0;
     }
 
     .top .pieces {
@@ -200,6 +218,11 @@ export const RulesContainer = styled.div`
     .top .pieces .white img {
       left: 2rem;
       top: 5.5rem;
+    }
+
+    .content_heading {
+      font-size: 17px;
+      padding-bottom: 0;
     }
   }
 
