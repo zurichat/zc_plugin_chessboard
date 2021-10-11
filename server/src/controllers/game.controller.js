@@ -643,18 +643,18 @@ class GameController {
 
       let likes = gameDBData.data.like_count;
 
-      // const single_likes = {
-      //   like: likes,
-      // };
       likes++;
 
       console.log(likes);
-      // let count = likes++
 
       const payload = {
         event: "likes",
         likes: likes,
       };
+
+      const updated = await this.GameRepo.update(game_id, {
+        like_count: likes,
+      });
 
       await centrifugoController.publish(game_id, payload);
 
