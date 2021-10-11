@@ -60,25 +60,25 @@
 .exit__button:hover {
   opacity: 0.8;
 }
-.exit__button--yes {
+.exit__button__yes {
   background: rgba(184, 0, 60, 1);
   border-color: rgba(184, 0, 60, 1);
   color: #ffffff;
 }
 
-.exit__button--yes:hover,
-.exit__button--yes:focus {
+.exit__button__yes:hover,
+.exit__button__yes:focus {
   background: transparent;
   color: black;
 }
 
-.exit__button--no {
+.exit__button__no {
   color: black;
   border-color: rgba(39, 174, 96, 1);
 }
 
-.exit__button--no:hover,
-.exit__button--no:focus {
+.exit__button__no:hover,
+.exit__button__no:focus {
   background: rgba(39, 174, 96, 1);
   color: #fff;
 }
@@ -86,7 +86,6 @@
 .btn-exit-modal-close {
   display: inline;
   float: right;
-
   border: none;
   background-color: transparent;
   padding: 0;

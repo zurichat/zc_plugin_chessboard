@@ -377,7 +377,7 @@ function ChessBoard({ type, gameData }) {
         <div
           style={{
             display: "flex",
-            zIndex: "10",
+            zIndex: "1",
           }}
         >
           <div

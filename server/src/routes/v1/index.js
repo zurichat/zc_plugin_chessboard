@@ -5,7 +5,6 @@ const router = require("express").Router();
 const gameRoute = require("./game.route");
 const resultRoute = require("./result.route");
 const InfoCtrl = require("../../controllers/info.controller");
-const { userAuth } = require("../../middlewares/user_auth.middleware");
 
 /**
  * @swagger

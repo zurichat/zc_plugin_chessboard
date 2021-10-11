@@ -9,7 +9,6 @@ import styles from "./header.module.css";
 
 // Header fix
 
-
 // Import Assets
 import ChessImage from "../../assets/header/chess_piece.svg";
 // import CommentIcon from "../../assets/header/CommentIcon.png";
@@ -82,7 +81,6 @@ function Header({ gameData }) {
           />
         </div>
       </div>
-      
 
       <LoadUser
         isModalOpen={isModalOpen}
