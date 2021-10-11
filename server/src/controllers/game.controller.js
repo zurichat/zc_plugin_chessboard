@@ -645,8 +645,6 @@ class GameController {
 
       likes++;
 
-      console.log(likes);
-
       const payload = {
         event: "likes",
         likes: likes,
