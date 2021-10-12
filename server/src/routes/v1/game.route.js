@@ -92,6 +92,20 @@ const GameCtrl = require("../../controllers/game.controller");
  *      required: true
  *      description: The current board state as gotten from the chess library
  *
+ *   capturedPieceInput:
+ *    type: object
+ *    properties:
+ *     game_id:
+ *      type: string
+ *      description: Id of the game where the event occured
+ *      required: true
+ *     piece_name:
+ *      type: string
+ *      description: The name of the chess piece
+ *      required: true
+ *      example: wR
+ *    
+ * 
  *   endgameInput:
  *    type: object
  *    properties:
@@ -280,6 +294,29 @@ router.patch("/watch", (req, res) => {
  */
 router.patch("/piecemove", (req, res) => {
   new GameCtrl(res.locals.organisation_id).pieceMove(req, res);
+});
+
+/**
+ * @swagger
+ * /api/v1/game/capturedPiece:
+ *  patch:
+ *   summary: Save and sends out chess pieces that has been captured in a game.
+ *   description: This endpoint sends out a single chess piece so that it can be displayed on the chess board.
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/capturedPieceInput'
+ *
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    500:
+ *      description: An error occurred
+ */
+ router.patch("/capturedPiece", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).capturedPiece(req, res);
 });
 
 /**

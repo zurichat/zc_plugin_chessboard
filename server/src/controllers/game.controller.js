@@ -305,6 +305,43 @@ class GameController {
     }
   }
 
+  // Piece movement
+  async capturedPiece(req, res) {
+    try {
+      // get data from body
+      const { game_id, piece_name } = req.body;
+
+      // Find the game in the database
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
+
+      // Check if the game exists
+      if (!gameDBData.data)
+        return res.status(400).send(response("Game not found", null, false));
+
+      // push new move into moves array
+      const captured_pieces = gameDBData.data.captured_pieces;
+      captured_pieces.push(piece_name);
+
+      // build payload
+      const payload = {
+        event: "piece_captured",
+        piece_name,
+      };
+
+      // update the database
+      const updated = await this.GameRepo.update(game_id, {
+        captured_pieces,
+      });
+
+      await centrifugoController.publish(game_id, payload);
+      return res
+        .status(200)
+        .send(response("chess piece captured", updated, true));
+    } catch (error) {
+      throw new CustomError(`Failed to save captured piece${error}`, 500);
+    }
+  }
+
   // Add spectator to game
   async addSpectator(req, res) {
     try {

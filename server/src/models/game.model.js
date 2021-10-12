@@ -41,6 +41,9 @@ const game_schema = Joi.object({
     )
     .allow(null),
 
+  // captured pieces
+  captured_pieces: Joi.array().items(Joi.string()),
+
   // messages
   messages: Joi.array()
     .items(
