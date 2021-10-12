@@ -1,9 +1,9 @@
-const response = require("../utils/response");
+const CustomError = require("../utils/custom-error");
 
-// Export Module
-module.exports = (app) => {
-  app.use(function (req, res, next) {
-    let organisation = req.headers.organisation;
+// Verify the organisationID passed in the request is valid
+exports.orgAuth = async (req, res, next) => {
+  try {
+    let { organisation } = req.headers;
 
     // Verify if the organisation is valid
     // OMO laterrr
@@ -27,7 +27,7 @@ module.exports = (app) => {
 
     // Continue to the next request
     next();
-  });
-
-  return app;
+  } catch (error) {
+    throw new CustomError(`Orgnisation Middleware: ${error}`, 502);
+  }
 };

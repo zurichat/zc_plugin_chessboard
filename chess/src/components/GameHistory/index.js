@@ -16,7 +16,6 @@ const GameHistory = () => {
           // Allow us to have empty DB
           if (response.data.data !== null) {
             setGames(response.data.data);
-            console.log(response.data.data);
           }
         }
       })

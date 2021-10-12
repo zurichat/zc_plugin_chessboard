@@ -1,9 +1,12 @@
 // Package Modules
 const router = require("express").Router();
 
-const OrganisationMiddleware = require("../../middlewares/organisation.middleware");
+const { orgAuth } = require("../../middlewares/organisation.middleware");
+const { userAuth } = require("../../middlewares/user_auth.middleware");
 
-OrganisationMiddleware(router);
+// All Endpoints require authentication and organisationID to be accessed
+router.use(orgAuth);
+router.use(userAuth);
 
 // Custom Modules
 const GameCtrl = require("../../controllers/game.controller");
@@ -140,6 +143,19 @@ const GameCtrl = require("../../controllers/game.controller");
  *      description: The user id of the spectator
  *      required: true
  *      example: 613c960542a4c7d43b4cd2ad
+ *     game_id:
+ *      type: string
+ *      description: Game ID spectator is commenting on
+ *      example: 613b72eb3ce841615903e676
+ *      required: true
+ *
+ *   like:
+ *    type: object
+ *    properties:
+ *     like:
+ *      type: number
+ *      example: 1
+ *      required: true
  *     game_id:
  *      type: string
  *      description: Game ID spectator is commenting on
@@ -452,6 +468,32 @@ router.get("/all/:userId", (req, res) => {
  */
 router.patch("/comment", (req, res) => {
   new GameCtrl(res.locals.organisation_id).comment(req, res);
+});
+
+// Send like during game
+/**
+ * @swagger
+ * /api/v1/game/like:
+ *  patch:
+ *   summary: Update game likes
+ *   description: clikc on a like of a game
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *        schema:
+ *          $ref: '#/definitions/like'
+ *
+ *   responses:
+ *    202:
+ *      description: like sent
+ *    404:
+ *      description: Game not found
+ *    500:
+ *      description: Unable to Connect to Zuri Core DB
+ */
+router.patch("/like", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).like(req, res);
 });
 
 /**

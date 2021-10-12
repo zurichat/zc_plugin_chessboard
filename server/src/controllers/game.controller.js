@@ -631,6 +631,37 @@ class GameController {
     return res.status(202).send(response("comment sent", single_comment));
   }
 
+  async like(req, res) {
+    try {
+      const { game_id } = req.body;
+
+      const gameDBData = await this.GameRepo.fetchOne(game_id);
+
+      if (!gameDBData.data) {
+        return res.status(404).send(response("Game not found", null, false));
+      }
+
+      let likes = gameDBData.data.like_count;
+
+      likes++;
+
+      const payload = {
+        event: "likes",
+        likes: likes,
+      };
+
+      const updated = await this.GameRepo.update(game_id, {
+        like_count: likes,
+      });
+
+      await centrifugoController.publish(game_id, payload);
+
+      return res.status(202).send(response("a like is given", likes));
+    } catch (error) {
+      throw new CustomError(`Unable to fetch user games: ${error}`, 500);
+    }
+  }
+
   // Deletes a particular game from the database
   async delete(req, res) {
     try {

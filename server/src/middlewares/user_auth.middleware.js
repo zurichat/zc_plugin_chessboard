@@ -15,8 +15,7 @@ exports.userAuth = async (req, res, next) => {
     if (
       user_id === "chessbot" ||
       user_id === "anonymous" ||
-      user_id === "localhost_user_id" ||
-      (req.query.user && req.query.org)
+      user_id === "localhost_user_id"
     )
       return next();
 
