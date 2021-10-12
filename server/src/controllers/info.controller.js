@@ -89,7 +89,7 @@ class InformationController {
       organisation_id: org,
       user_id: user,
       group_name: "Chess Games",
-      show_group: true,
+      show_group: false,
       public_rooms: [
         {
           room_name: "Chess room",
