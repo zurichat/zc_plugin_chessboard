@@ -64,6 +64,7 @@ const game_schema = Joi.object({
     .allow(null),
 
   like_count: Joi.number().default(0).allow(null),
+  modifiedAt: Joi.number().default(0).allow(null),
 });
 
 module.exports = game_schema;

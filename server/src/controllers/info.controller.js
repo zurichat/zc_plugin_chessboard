@@ -84,6 +84,7 @@ class InformationController {
     const payload = {
       name: "Chess Plugin",
       description: "The Chess plugin",
+      category: "games",
       plugin_id: PLUGIN_ID,
       organisation_id: org,
       user_id: user,

@@ -1332,6 +1332,13 @@ global-dirs@^2.0.1:
   dependencies:
     ini "1.3.7"
 
+global-time@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/global-time/-/global-time-1.5.0.tgz#c822efee05dd0dcd9bf7144e1b76969e58cd646f"
+  integrity sha512-9voqFBzVYBgwI8zHl+spjrRBDnKgx4BZbbu+YLPXegwRAkj1e5R13Wf3m9Nww6r5uuYSEDjOXbfR6mid3gYtXQ==
+  dependencies:
+    node-fetch "^2.6.1"
+
 globals@^13.6.0, globals@^13.9.0:
   version "13.11.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-13.11.0.tgz#40ef678da117fe7bd2e28f1fab24951bd0255be7"

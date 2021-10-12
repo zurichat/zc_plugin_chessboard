@@ -6,6 +6,7 @@ const DatabaseConnection = require("../db/database.helper");
 const centrifugoController = require("../controllers/centrifugo.controller");
 const { disposeImage } = require("../utils/imageHelper");
 const InformationController = require("../controllers/info.controller");
+const globalTime = require("global-time");
 
 class GameController {
   constructor(organisation_id) {
@@ -22,6 +23,9 @@ class GameController {
       //Logic for more than 6 games not being active
       const gameDBData = await this.GameRepo.fetchAll();
 
+      // get current global time
+      const time = await globalTime();
+
       if (gameDBData.data.length < 6) {
         // create new game
 
@@ -36,6 +40,7 @@ class GameController {
           messages: [],
           spectators: [],
           status: 0,
+          modifiedAt: time,
         });
 
         // Save the game to the database
@@ -84,6 +89,7 @@ class GameController {
           messages: [],
           spectators: [],
           status: 0,
+          modifiedAt: time,
         });
 
         const sidebar_update_payload = await InformationController.sideBarInfo(
@@ -120,6 +126,9 @@ class GameController {
       // Find the game in the database
       const gameDBData = await this.GameRepo.fetchOne(game_id);
 
+      // get current global time
+      const time = await globalTime();
+
       // Check if the game exists
       if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
@@ -151,6 +160,7 @@ class GameController {
         const updated = await this.GameRepo.update(game_id, {
           opponent,
           status: 1,
+          modifiedAt: time,
         });
 
         // set user permission in game
@@ -247,6 +257,9 @@ class GameController {
       // Find the game in the database
       const gameDBData = await this.GameRepo.fetchOne(game_id);
 
+      // get current global time
+      const time = await globalTime();
+
       // Check if the game exists
       if (!gameDBData.data)
         return res.status(400).send(response("Game not found", null, false));
@@ -282,6 +295,7 @@ class GameController {
       // update the database
       const updated = await this.GameRepo.update(game_id, {
         moves,
+        modifiedAt: time,
       });
 
       await centrifugoController.publish(game_id, payload);
