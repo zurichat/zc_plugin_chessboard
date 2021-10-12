@@ -685,6 +685,7 @@ class GameController {
           .status(404)
           .send(response("No such game found in the database", {}, false));
 
+      console.log("remove this");
       await this.GameRepo.delete(game.data._id, game.data);
 
       res.status(204).send(response("game deleted successfully", {}, false));
