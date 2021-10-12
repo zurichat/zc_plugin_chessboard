@@ -678,6 +678,129 @@ class GameController {
       throw new CustomError(`Unable to delete game: ${error}`, 500);
     }
   }
+
+  async remove(req, res) {
+    try {
+      const { user_id, game_id, role } = req.body;
+      if (role === "s") {
+        // Find the game in the database
+        const gameDBData = await this.GameRepo.fetchOne(game_id);
+
+        // Check if the game exists
+        if (!gameDBData.data)
+          return res.status(400).send(response("Game not found", null, false));
+
+        // Get specatators in the game
+        const spectators = gameDBData.data.spectators;
+
+        // find index of user
+        const index = spectators.findIndex((o) => o.user_id == user_id);
+
+        // Check if the user is a spectator in the game
+        if (index === -1)
+          return res
+            .status(400)
+            .send(response("user not an active spectator", null, false));
+
+        const spectator = spectators.splice(index, 1);
+
+        // Save spectators back to db
+        const updated = await this.GameRepo.update(game_id, {
+          spectators,
+        });
+
+        // Build Response
+        const payload = {
+          event: "spectator_left_game",
+          spectator,
+          new_number_of_specators: spectators.length,
+        };
+
+        // Publish the event to Centrifugo server
+        await centrifugoController.publish(game_id, payload);
+
+        // THe sidebar endpoint doesn't update to show this action causing unnecessary refresh
+        const sidebar_update_payload = await InformationController.sideBarInfo(
+          this.organisation_id,
+          user_id
+        );
+        await centrifugoController.publishToSideBar(
+          this.organisation_id,
+          user_id,
+          sidebar_update_payload
+        );
+
+        // Return the game
+        return res
+          .status(200)
+          .send(response("spectator removed successfully", updated));
+      } else if (role === "p") {
+        let winner_id;
+        // retrieve game id and user id from the user
+        const { game_id, user_id } = req.body;
+
+        // fetch the game from the database
+        const isGameExist = await this.GameRepo.fetchOne(game_id);
+
+        // check if the game data exists
+        if (!isGameExist.data)
+          return res
+            .status(400)
+            .send(response("Game does not exist.", null, false));
+
+        // check if game is already ended
+        if (isGameExist.data.status === 2)
+          return res
+            .status(400)
+            .send(response("Game already ended.", null, false));
+
+        // checking if user resigning is owner or not
+        if (user_id === isGameExist.data.owner.user_id) {
+          isGameExist.data.is_owner_winner = false;
+          winner_id = isGameExist.data.opponent.user_id;
+        } else if (user_id === isGameExist.data.opponent.user_id) {
+          isGameExist.data.is_owner_winner = true;
+          winner_id = isGameExist.data.owner.user_id;
+        } else {
+          return res
+            .status(400)
+            .send(
+              response("You are not a participant of this game.", null, false)
+            );
+        }
+
+        isGameExist.data.status = 2;
+        // update the Game Info with current result
+        const updated = await this.GameRepo.update(game_id, {
+          status: isGameExist.data.status,
+          is_owner_winner: isGameExist.data.is_owner_winner,
+        });
+
+        const payload = {
+          event: "end_game",
+          winner: winner_id,
+          game_end_status: "resigned",
+          status: isGameExist.data.status,
+        };
+
+        await centrifugoController.publish(game_id, payload);
+        await centrifugoController.publishToSideBar(
+          this.organisation_id,
+          user_id,
+          {
+            event: "sidebar_update",
+            sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
+          }
+        );
+        await disposeImage(this.organisation_id, game_id);
+        return res.status(200).send(response("Game ended!!!", updated));
+      } else {
+        return res.status(400).send(response("You cannot leave this room", null));
+      }
+    } catch (error) {
+      throw new CustomError(error);
+    }
+  }
 }
 
 // Export Module

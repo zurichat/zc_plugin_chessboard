@@ -356,6 +356,30 @@ router.patch("/resign", (req, res) => {
 
 /**
  * @swagger
+ * /api/v1/game/remove:
+ *  patch:
+ *   summary: Exit the game room
+ *   description: This endpoint exits a user from a room irrespective of his role
+ *   requestBody:
+ *    required: true
+ *    content:
+ *      application/json:
+ *
+ *   responses:
+ *    200:
+ *      description: A successful response
+ *    404:
+ *      description: Game is not found
+ *    500:
+ *      description: An error occurred
+ */
+
+router.patch("/remove", (req, res) => {
+  new GameCtrl(res.locals.organisation_id).remove(req, res);
+});
+
+/**
+ * @swagger
  * /api/v1/game/{gameId}:
  *  get:
  *   summary: Queries DB to fetch a single game
