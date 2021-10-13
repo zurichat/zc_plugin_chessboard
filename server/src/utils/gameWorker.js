@@ -16,11 +16,11 @@ const timer = setInterval(async () => {
 
   const time = await globalTime();
 
-  if (time - game.data.modifiedAt > 1 * 60 * 1000) {
+  if (time - game.data.modifiedAt > 5 * 60 * 1000) {
     await gameRepo.delete(game.data._id, game.data);
     parentPort.postMessage(`${orgId}:${gameId}`);
   }
-}, 1 * 60 * 1000);
+}, 5 * 60 * 1000);
 
 parentPort.on("message", (data) => {
   if (data.toString() == "stop") clearInterval(timer);
