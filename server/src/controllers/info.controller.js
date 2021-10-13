@@ -3,7 +3,8 @@ const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
 const { DATABASE } = require("../config/index");
-const { generateImage } = require("../utils/imageHelper");
+const { Worker } = require("worker_threads");
+const path = require("path");
 
 class InformationController {
   async getPluginInfo(req, res) {
@@ -60,21 +61,26 @@ class InformationController {
     });
 
     const joined_rooms = [];
+    const workerPath = path.join(__dirname, "..", "utils", "imageWorker.js");
     for (let game of filtered) {
       // generate dynamic sidebar icons
-      const imageName = await generateImage(
-        game.owner.image_url ? game.owner.image_url : null,
-        game.opponent ? game.opponent.image_url : null,
-        game._id,
-        org
-      );
+      const file = `${game._id}_${org}_sidebar.png`;
+
+      // create images in the background
+      new Worker(workerPath, {
+        argv: [
+          game.owner.image_url ? game.owner.image_url : null,
+          game.opponent ? game.opponent.image_url : null,
+          file,
+        ],
+      });
 
       // add to room collection
       joined_rooms.push({
         room_name: `${game.owner.user_name} vs ${
           game.opponent ? game.opponent.user_name : "-----"
         }`,
-        room_image: `https://chess.zuri.chat/${imageName}`,
+        room_image: `https://chess.zuri.chat/${file}`,
         room_url: `/chess/game/${game._id}`,
         unread: 1,
       });
