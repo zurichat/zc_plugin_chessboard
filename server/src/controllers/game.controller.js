@@ -7,6 +7,7 @@ const centrifugoController = require("../controllers/centrifugo.controller");
 const { disposeImage } = require("../utils/imageHelper");
 const InformationController = require("../controllers/info.controller");
 const globalTime = require("global-time");
+const StateController = require("./state.controller");
 
 class GameController {
   constructor(organisation_id) {
@@ -56,6 +57,12 @@ class GameController {
           sidebar_update_payload
         );
 
+        //setup monitoring
+        StateController.getInstance().monitor(
+          this.organisation_id,
+          newGameDBData.data.object_id
+        );
+
         // Return the game
         res
           .status(201)
@@ -101,6 +108,8 @@ class GameController {
           user_id,
           sidebar_update_payload
         );
+
+        StateController.getInstance().monitor(this.organisation_id, game._id);
 
         res
           .status(201)
@@ -526,6 +535,11 @@ class GameController {
       );
       await disposeImage(this.organisation_id, game_id);
 
+      StateController.getInstance().stopMonitoring(
+        this.organisation_id,
+        game_id
+      );
+
       return res.status(200).send(
         response("Game ended!!!", {
           game_id,
@@ -597,6 +611,10 @@ class GameController {
         }
       );
       await disposeImage(this.organisation_id, game_id);
+      StateController.getInstance().stopMonitoring(
+        this.organisation_id,
+        game_id
+      );
       return res.status(200).send(response("Game ended!!!", updated));
     } catch (error) {
       throw new CustomError(`Unable to end game ${error}`, 500);
@@ -722,7 +740,6 @@ class GameController {
           .status(404)
           .send(response("No such game found in the database", {}, false));
 
-      console.log("remove this");
       await this.GameRepo.delete(game.data._id, game.data);
 
       res.status(204).send(response("game deleted successfully", {}, false));
