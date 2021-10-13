@@ -1,7 +1,7 @@
 // Import api call adapter
 import { get, post, patch } from "../xhr";
 import { getLoggedInUserData, getChessBotData } from "../auth";
-import { SubscribeToChannel } from "@zuri/control";
+import { SubscribeToChannel } from "@zuri/utilities";
 // import Centrifuge from "centrifuge";
 
 export function getGameData(game_id) {

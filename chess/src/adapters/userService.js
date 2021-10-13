@@ -1,4 +1,5 @@
-import { GetUserInfo } from "@zuri/control";
+import { GetUserInfo } from "@zuri/utilities";
+
 export class UserService {
   constructor() {
     this.userData = null;
