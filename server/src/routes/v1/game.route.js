@@ -104,8 +104,8 @@ const GameCtrl = require("../../controllers/game.controller");
  *      description: The name of the chess piece
  *      required: true
  *      example: wR
- *    
- * 
+ *
+ *
  *   endgameInput:
  *    type: object
  *    properties:
@@ -315,7 +315,7 @@ router.patch("/piecemove", (req, res) => {
  *    500:
  *      description: An error occurred
  */
- router.patch("/capturedPiece", (req, res) => {
+router.patch("/capturedPiece", (req, res) => {
   new GameCtrl(res.locals.organisation_id).capturedPiece(req, res);
 });
 
