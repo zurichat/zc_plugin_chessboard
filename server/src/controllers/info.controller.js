@@ -116,12 +116,10 @@ class InformationController {
 
   async installChess(req, res) {
     try {
-      const { organisation_id, user_id } = req.body;
-      // const org_id = "61675900fdb02e1855223968";
-      // const user_id = "61675901fdb02e1855223969";
+      const { organization_id, user_id } = req.body;
     
 
-      const url = `https://api.zuri.chat/organizations/${organisation_id}/plugins`;
+      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
 
       // Build request to zuri_core install url
       const payload = {
@@ -153,11 +151,9 @@ class InformationController {
 
   async uninstallChess(req, res) {
     try {
-      // const { org_id, user_id } = req.body;
-      const org_id = "61675900fdb02e1855223968";
-      const user_id = "6145c1a6285e4a18402073ee";
+      const { organization_id, user_id } = req.body;
 
-      const url = `https://api.zuri.chat/organizations/${org_id}/plugins`;
+      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
 
       // Build request to zuri_core install url
       const payload = {
