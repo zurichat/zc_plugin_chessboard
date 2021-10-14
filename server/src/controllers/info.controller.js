@@ -3,15 +3,14 @@ const axios = require("axios");
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
-const { DATABASE } = require("../config/index");
-const { COOKIES } = require("../config/index");
+const { DATABASE, COOKIES } = require("../config/index");
 const { generateImage } = require("../utils/imageHelper");
 
 class InformationController {
   async getPluginInfo(req, res) {
     try {
       let result = {
-        plugin_id: "6167df71f7dd1451ae6addc5",
+        plugin_id: DATABASE.PLUGIN_ID,
         name: "Chess Plugin",
         description:
           "Ease stress in Zuri's chess room while running business deals, socialize with friends and colleagues by engaging in a friendly chess match. You could also decide to spectate a chess game and make comments while you watch.",
@@ -34,7 +33,9 @@ class InformationController {
         homepage_url: "https://chess.zuri.chat/",
         install_url: "https://chess.zuri.chat/",
       };
-      res.status(200).send(response("Plugin Information Retrieved", result));
+      res.status(200).send(
+        response("Plugin Information Retrieved", result)
+      );
     } catch (error) {
       throw new CustomError(
         `Could not fetch plugin information: ${error}`,
@@ -73,9 +74,8 @@ class InformationController {
 
       // add to room collection
       joined_rooms.push({
-        room_name: `${game.owner.user_name} vs ${
-          game.opponent ? game.opponent.user_name : "-----"
-        }`,
+        room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"
+          }`,
         room_image: `https://chess.zuri.chat/${imageName}`,
         room_url: `/chess/game/${game._id}`,
         unread: 1,
@@ -95,7 +95,8 @@ class InformationController {
       public_rooms: [
         {
           room_name: "Chess room",
-          room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+          room_image:
+            "https://www.svgrepo.com/show/12072/chess-board.svg",
           room_url: "/chess",
         },
       ],
@@ -103,7 +104,8 @@ class InformationController {
         // To be removed - why?
         {
           room_name: "Main Chess Room",
-          room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
+          room_image:
+            "https://www.svgrepo.com/show/12072/chess-board.svg",
           room_url: "/chess",
         },
         // To be removed - why?
@@ -117,7 +119,6 @@ class InformationController {
   async installChess(req, res) {
     try {
       const { organization_id, user_id } = req.body;
-    
 
       const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
 
@@ -126,11 +127,11 @@ class InformationController {
         plugin_id: DATABASE.PLUGIN_ID,
         user_id: user_id,
       };
-      const headers = {
+
+      const { data } = await axios.post(url, payload, {
         "Content-Type": "application/json",
-        Cookie: COOKIES,
-      };
-      const { data } = await axios.post(url, payload, { headers });
+        Authorization: req.headers.authorization,
+      });
 
       if (data.status === 200) {
         return res
@@ -143,7 +144,8 @@ class InformationController {
             )
           );
       }
-      return res.status(400).send(response("could not redirect", null, false));
+
+      return res.status(400).send(response(data.message, null, false));
     } catch (error) {
       throw new CustomError(`Could not install plugin: ${error}`, "500");
     }
@@ -153,28 +155,34 @@ class InformationController {
     try {
       const { organization_id, user_id } = req.body;
 
-      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
+      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins/${DATABASE.PLUGIN_ID}`;
 
-      // Build request to zuri_core install url
+      // Build request to zuri_core uninstall url
       const payload = {
-        plugin_id: DATABASE.PLUGIN_ID,
         user_id: user_id,
       };
-      const headers = {
+
+      const { data } = await axios.delete(url, payload, {
         "Content-Type": "application/json",
-        Cookie: COOKIES,
-      };
-      const { data } = await axios.post(url, payload, { headers });
+        Authorization: req.headers.authorization,
+      });
+
       if (data.status === 200) {
         return res
           .status(200)
-          .send(response("plugin successfully uninstalled", null, true));
+          .send(
+            response("plugin successfully uninstalled", null, true)
+          );
       }
+
       return res
         .status(400)
-        .send(response("Organisation does not exist", null, false));
+        .send(response(data.message, null, false));
     } catch (error) {
-      throw new CustomError(`Plugin Could not be uninstalled: ${error}`, "500");
+      throw new CustomError(
+        `Plugin Could not be uninstalled: ${error}`,
+        "500"
+      );
     }
   }
 
@@ -182,7 +190,10 @@ class InformationController {
     try {
       const { user, org } = req.query;
 
-      const payload = await new InformationController().sideBarInfo(org, user);
+      const payload = await new InformationController().sideBarInfo(
+        org,
+        user
+      );
 
       // Just return the payload
       return res.status(200).json(payload);
