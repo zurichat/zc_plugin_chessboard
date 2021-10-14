@@ -247,22 +247,36 @@ class GameController {
         const limit = parseInt(req.query?.limit, 10) || 5;
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
-        // fetch all games
-        gameDBData = await this.GameRepo.fetchAll();
-        console.log(gameDBData);
-        matchedGames = allGames(searchQuery, gameDBData);
+
+        let regex = /^[a-h][1-8]$/;
+        let keywords = ["ongoing", "games"];
+        let modifiedQuery = searchQuery.trim().toLowerCase();
+        if (keywords.includes(modifiedQuery) || regex.test(searchQuery.trim())) {
+          // get active games
+          matchedGames = await this.GameRepo.fetchByParameter({
+            status: 1,
+          });
+        } else {
+          // fetch all games
+          gameDBData = await this.GameRepo.fetchAll();
+          matchedGames = allGames(searchQuery, gameDBData);
+        }
         // conform to zuri chat standard 
         const data = formatResult(matchedGames);
 
         let result = {};
         result.status = "ok";
+
+        const next = (endIndex < data?.slice(startIndex, endIndex).length) ? `https://chess.zuri.chat/api/v1/search/:org_id/:member_id?key=${searchQuery}&member_id=${req.query.user_id}&org_id=${this.organisation_id}&page=${page + 1}` : null;
+
         result.pagination = {
           total_count: matchedGames?.length,
           current_page: page,
           per_page: limit,
           page_count: result.data?.length,
           first_page: page,
-          last_page: Math.floor(result.data / limit)
+          last_page: Math.ceil(result.data?.length / limit),
+          next: next
         }
 
         result.query = searchQuery;
@@ -273,10 +287,6 @@ class GameController {
           in: [],
           from: []
         }
-        if (endIndex < result.data?.length) {
-          result.next = `https://chess.zuri.chat/api/v1/search/:org_id/:member_id?key=${searchQuery}&member_id=${req.query.user_id}&org_id=${this.organisation_id}&page=${page + 1}`
-        }
-
         // just return the result
         res
           .status(200)
@@ -312,6 +322,7 @@ class GameController {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
     }
   }
+
   // Piece movement
   async pieceMove(req, res) {
     try {
