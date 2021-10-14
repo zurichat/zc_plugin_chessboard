@@ -117,7 +117,6 @@ class InformationController {
   async installChess(req, res) {
     try {
       const { organization_id, user_id } = req.body;
-    
 
       const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
 
