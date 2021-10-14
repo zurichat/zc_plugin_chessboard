@@ -7,7 +7,11 @@ const centrifugoController = require("../controllers/centrifugo.controller");
 const { disposeImage } = require("../utils/imageHelper");
 const InformationController = require("../controllers/info.controller");
 const globalTime = require("global-time");
+<<<<<<< Updated upstream
 const StateController = require("./state.controller");
+=======
+const { allGames, matchedBoardMoves, formatResult } = require("../utils/search_helper");
+>>>>>>> Stashed changes
 
 class GameController {
   constructor(organisation_id) {
@@ -231,6 +235,53 @@ class GameController {
         .send(response("Games retrieved successfully", gameDBData.data));
     } catch (error) {
       throw new CustomError(`Unable to get all Games: ${error}`, 500);
+    }
+  }
+
+  // Search for Games
+  async search(req, res) {
+    try {
+      let gameDBData;
+      let matchedGames;
+      let { text: searchQuery, filter } = req.query;
+      if (searchQuery) {
+        // paginate
+        const page = parseInt(req.query?.page, 10) || 1;
+        const limit = parseInt(req.query?.limit, 10) || 5;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        // fetch all games
+        gameDBData = await this.GameRepo.fetchAll();
+        matchedGames = allGames(searchQuery, gameDBData);
+        // conform to zuri chat standard 
+        const data = formatResult(matchedGames);
+
+        let result = {};
+        result.status = "ok";
+        result.pagination = {
+          total_count: matchedGames.length,
+          current_page: page,
+          per_page: limit,
+          page_count: result.data?.length,
+          first_page: page,
+          last_page: Math.floor(result.data / limit)
+        }
+        result.query = searchQuery;
+        result.plugin = "Chess";
+        result.data = data?.slice(startIndex, endIndex);
+        result.filter_suggestions = {
+          in: [],
+          from: []
+        }
+        // just return the result
+        res
+          .status(200)
+          .json(result);
+      } else {
+        return res.status(400).send(response('Invalid query!', null, false));
+      }
+    } catch (error) {
+      throw new CustomError(`Unable to search for Games: ${error}`, 500);
     }
   }
 
