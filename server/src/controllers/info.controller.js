@@ -1,15 +1,17 @@
+const axios = require("axios");
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const DatabaseConnection = require("../db/database.helper");
 const { DATABASE } = require("../config/index");
+const { COOKIES } = require("../config/index");
 const { generateImage } = require("../utils/imageHelper");
 
 class InformationController {
   async getPluginInfo(req, res) {
     try {
       let result = {
-        plugin_id: "61448b7c92600a3c5318da53",
+        plugin_id: "6167df71f7dd1451ae6addc5",
         name: "Chess Plugin",
         description:
           "Ease stress in Zuri's chess room while running business deals, socialize with friends and colleagues by engaging in a friendly chess match. You could also decide to spectate a chess game and make comments while you watch.",
@@ -110,6 +112,70 @@ class InformationController {
     };
 
     return payload;
+  }
+
+  async installChess(req, res) {
+    try {
+      const { organization_id, user_id } = req.body;
+    
+
+      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
+
+      // Build request to zuri_core install url
+      const payload = {
+        plugin_id: DATABASE.PLUGIN_ID,
+        user_id: user_id,
+      };
+      const headers = {
+        "Content-Type": "application/json",
+        Cookie: COOKIES,
+      };
+      const { data } = await axios.post(url, payload, { headers });
+
+      if (data.status === 200) {
+        return res
+          .status(200)
+          .send(
+            response(
+              "Plugin has been installed",
+              { redirect_url: "/chess" },
+              true
+            )
+          );
+      }
+      return res.status(400).send(response("could not redirect", null, false));
+    } catch (error) {
+      throw new CustomError(`Could not install plugin: ${error}`, "500");
+    }
+  }
+
+  async uninstallChess(req, res) {
+    try {
+      const { organization_id, user_id } = req.body;
+
+      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
+
+      // Build request to zuri_core install url
+      const payload = {
+        plugin_id: DATABASE.PLUGIN_ID,
+        user_id: user_id,
+      };
+      const headers = {
+        "Content-Type": "application/json",
+        Cookie: COOKIES,
+      };
+      const { data } = await axios.post(url, payload, { headers });
+      if (data.status === 200) {
+        return res
+          .status(200)
+          .send(response("plugin successfully uninstalled", null, true));
+      }
+      return res
+        .status(400)
+        .send(response("Organisation does not exist", null, false));
+    } catch (error) {
+      throw new CustomError(`Plugin Could not be uninstalled: ${error}`, "500");
+    }
   }
 
   async getSideBarInfo(req, res) {

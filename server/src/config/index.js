@@ -25,4 +25,8 @@ module.exports = {
 
   // Verify user auth status with this URL
   WELCOME_URL: "https://api.zuri.chat/auth/verify-token",
+
+  // cookie from zc_core that expires in 2037
+  COOKIES:
+    "f6822af94e29ba112be310d3af45d5c7=MTYzNDE0OTkzNnxHd3dBR0RZeE5qY3hOVFE1T1dZM1lUYzVNR013T0dReU1qSm1NUT09fLxiYT50kNCayZQN_E_MlGlI3lbTETEX07XZYa-tcttk",
 };
