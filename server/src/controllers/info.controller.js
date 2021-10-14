@@ -116,11 +116,12 @@ class InformationController {
 
   async installChess(req, res) {
     try {
-      const { org_id, user_id } = req.body;
+      const { organisation_id, user_id } = req.body;
       // const org_id = "61675900fdb02e1855223968";
       // const user_id = "61675901fdb02e1855223969";
+    
 
-      const url = `https://api.zuri.chat/organizations/${org_id}/plugins`;
+      const url = `https://api.zuri.chat/organizations/${organisation_id}/plugins`;
 
       // Build request to zuri_core install url
       const payload = {
