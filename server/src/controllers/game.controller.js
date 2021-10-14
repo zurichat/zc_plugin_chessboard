@@ -7,11 +7,8 @@ const centrifugoController = require("../controllers/centrifugo.controller");
 const { disposeImage } = require("../utils/imageHelper");
 const InformationController = require("../controllers/info.controller");
 const globalTime = require("global-time");
-<<<<<<< Updated upstream
 const StateController = require("./state.controller");
-=======
 const { allGames, matchedBoardMoves, formatResult } = require("../utils/search_helper");
->>>>>>> Stashed changes
 
 class GameController {
   constructor(organisation_id) {
@@ -243,7 +240,7 @@ class GameController {
     try {
       let gameDBData;
       let matchedGames;
-      let { text: searchQuery, filter } = req.query;
+      let { key: searchQuery, filter } = req.query;
       if (searchQuery) {
         // paginate
         const page = parseInt(req.query?.page, 10) || 1;
