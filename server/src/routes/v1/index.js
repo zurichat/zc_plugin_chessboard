@@ -47,6 +47,12 @@ router.use("/game", gameRoute);
 // Result Endpoints
 router.use("/result", resultRoute);
 
+// install plugin endpoints
+router.post("/install", InfoCtrl.installChess);
+
+// uninstall chess endpioint
+router.delete("/uninstall", InfoCtrl.uninstallChess);
+
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
