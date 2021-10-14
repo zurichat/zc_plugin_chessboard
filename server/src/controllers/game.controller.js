@@ -247,6 +247,7 @@ class GameController {
         const limit = parseInt(req.query?.limit, 10) || 5;
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
+
         let regex = /^[a-h][1-8]$/;
         let keywords = ["ongoing", "games"];
         let modifiedQuery = searchQuery.trim().toLowerCase();
@@ -265,7 +266,9 @@ class GameController {
 
         let result = {};
         result.status = "ok";
-        const next = (endIndex < result.data?.length) ? `https://chess.zuri.chat/api/v1/search/:org_id/:member_id?key=${searchQuery}&member_id=${req.query.user_id}&org_id=${this.organisation_id}&page=${page + 1}` : null;
+
+        const next = (endIndex < data?.slice(startIndex, endIndex).length) ? `https://chess.zuri.chat/api/v1/search/:org_id/:member_id?key=${searchQuery}&member_id=${req.query.user_id}&org_id=${this.organisation_id}&page=${page + 1}` : null;
+
         result.pagination = {
           total_count: matchedGames?.length,
           current_page: page,
@@ -284,7 +287,6 @@ class GameController {
           in: [],
           from: []
         }
-
         // just return the result
         res
           .status(200)
