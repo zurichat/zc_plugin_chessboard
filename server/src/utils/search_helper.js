@@ -34,11 +34,11 @@ exports.matchedBoardMoves = (searchQuery, gameDBData = []) => {
 // }
 
 exports.allGames = (searchQuery, data) => {
-  console.log(data.data[0].owner);
+  console.log(data?.data[0]?.owner);
 
   let searchOwner = data?.data.filter((game) => {
 
-    return new RegExp(String(searchQuery), 'i').test(game.owner?.user_name);
+    return new RegExp(String(searchQuery), 'i').test(game?.owner?.user_name);
   });
 
   let searchOpponent = data?.data.filter((game) => {
