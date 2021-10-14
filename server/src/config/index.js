@@ -12,7 +12,7 @@ module.exports = {
   // Database Credentials
   DATABASE: {
     // Get Our PluginID from ENV or use the test_id
-    PLUGIN_ID: process.env.PLUGIN_ID || "61541d84a999ef8386e808c7",
+    PLUGIN_ID: process.env.PLUGIN_ID || "6167df71f7dd1451ae6addc5",
     // Get Our PluginID from ENV or use the test_id
     ORGANISATION_ID: process.env.ORGANISATION_ID || "6145c2d0285e4a18402073f6",
     // Endpoint for the database write operations
