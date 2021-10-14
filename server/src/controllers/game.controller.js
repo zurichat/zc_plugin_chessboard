@@ -249,6 +249,7 @@ class GameController {
         const endIndex = page * limit;
         // fetch all games
         gameDBData = await this.GameRepo.fetchAll();
+        console.log(gameDBData);
         matchedGames = allGames(searchQuery, gameDBData);
         // conform to zuri chat standard 
         const data = formatResult(matchedGames);
@@ -256,20 +257,26 @@ class GameController {
         let result = {};
         result.status = "ok";
         result.pagination = {
-          total_count: matchedGames.length,
+          total_count: matchedGames?.length,
           current_page: page,
           per_page: limit,
           page_count: result.data?.length,
           first_page: page,
           last_page: Math.floor(result.data / limit)
         }
+
         result.query = searchQuery;
+        result.filter = filter;
         result.plugin = "Chess";
         result.data = data?.slice(startIndex, endIndex);
         result.filter_suggestions = {
           in: [],
           from: []
         }
+        if (endIndex < result.data?.length) {
+          result.next = `https://chess.zuri.chat/api/v1/search/:org_id/:member_id?key=${searchQuery}&member_id=${req.query.user_id}&org_id=${this.organisation_id}&page=${page + 1}`
+        }
+
         // just return the result
         res
           .status(200)
