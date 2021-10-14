@@ -33,9 +33,7 @@ class InformationController {
         homepage_url: "https://chess.zuri.chat/",
         install_url: "https://chess.zuri.chat/",
       };
-      res.status(200).send(
-        response("Plugin Information Retrieved", result)
-      );
+      res.status(200).send(response("Plugin Information Retrieved", result));
     } catch (error) {
       throw new CustomError(
         `Could not fetch plugin information: ${error}`,
@@ -74,8 +72,9 @@ class InformationController {
 
       // add to room collection
       joined_rooms.push({
-        room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"
-          }`,
+        room_name: `${game.owner.user_name} vs ${
+          game.opponent ? game.opponent.user_name : "-----"
+        }`,
         room_image: `https://chess.zuri.chat/${imageName}`,
         room_url: `/chess/game/${game._id}`,
         unread: 1,
@@ -95,8 +94,7 @@ class InformationController {
       public_rooms: [
         {
           room_name: "Chess room",
-          room_image:
-            "https://www.svgrepo.com/show/12072/chess-board.svg",
+          room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
           room_url: "/chess",
         },
       ],
@@ -104,8 +102,7 @@ class InformationController {
         // To be removed - why?
         {
           room_name: "Main Chess Room",
-          room_image:
-            "https://www.svgrepo.com/show/12072/chess-board.svg",
+          room_image: "https://www.svgrepo.com/show/12072/chess-board.svg",
           room_url: "/chess",
         },
         // To be removed - why?
@@ -170,19 +167,12 @@ class InformationController {
       if (data.status === 200) {
         return res
           .status(200)
-          .send(
-            response("plugin successfully uninstalled", null, true)
-          );
+          .send(response("plugin successfully uninstalled", null, true));
       }
 
-      return res
-        .status(400)
-        .send(response(data.message, null, false));
+      return res.status(400).send(response(data.message, null, false));
     } catch (error) {
-      throw new CustomError(
-        `Plugin Could not be uninstalled: ${error}`,
-        "500"
-      );
+      throw new CustomError(`Plugin Could not be uninstalled: ${error}`, "500");
     }
   }
 
@@ -190,10 +180,7 @@ class InformationController {
     try {
       const { user, org } = req.query;
 
-      const payload = await new InformationController().sideBarInfo(
-        org,
-        user
-      );
+      const payload = await new InformationController().sideBarInfo(org, user);
 
       // Just return the payload
       return res.status(200).json(payload);
