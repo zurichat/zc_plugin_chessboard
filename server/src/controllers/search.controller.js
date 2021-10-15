@@ -1,7 +1,7 @@
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
-const { allGames, formatResult, formatData } = require("../utils/search_helper");
+const { allGames, formatResult, formatMatch } = require("../utils/search_helper");
 const DatabaseConnection = require("../db/database.helper");
 
 class SearchController {
@@ -14,30 +14,34 @@ class SearchController {
     try {
       let gameDBData;
       let matchedGames;
-      let { key: searchQuery, filter } = req.query;
+      let { q: searchQuery, filter } = req.query;
       if (searchQuery) {
         // paginate
-        const page = parseInt(req.query?.page, 10) || 1;
-        const limit = parseInt(req.query?.limit, 10) || 5;
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 3;
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
         //check for matching keywords. If match, return an array of ongoing games   
         let regex = /^[a-h][1-8]$/;
         let keywords = ["ongoing", "games"];
         let modifiedQuery = searchQuery.trim().toLowerCase();
+        console.log(keywords.includes(modifiedQuery));
         if (keywords.includes(modifiedQuery) || regex.test(searchQuery.trim())) {
           // get active games
-          matchedGames = await this.GameRepo.fetchByParameter({
-            status: 1,
-          });
+          const { data } = await this.GameRepo.fetchAll();
+          const chessMatch = data.filter(game => game.status == 1);
+          matchedGames = { chessMatch };
         } else {
           // fetch all games
           gameDBData = await this.GameRepo.fetchAll();
-          matchedGames = allGames(searchQuery, gameDBData);
+          // filter matches and group into entities
+          const { user, message } = allGames(searchQuery, gameDBData);
+          matchedGames = [user, message];
+          console.log("game entity all:" + matchedGames);
         }
         // conform to zuri chat standard 
-        let data = formatData(matchedGames);
-        const result = formatResult(req, res, data, startIndex, endIndex, limit, searchQuery, filter, page);
+        let entity = formatMatch(matchedGames, req.params.member_id);
+        const result = formatResult(req, res, entity, startIndex, endIndex, limit, searchQuery, filter, page);
         // just return the result
         res
           .status(200)
