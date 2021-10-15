@@ -78,9 +78,8 @@ class InformationController {
 
       // add to room collection
       joined_rooms.push({
-        room_name: `${game.owner.user_name} vs ${
-          game.opponent ? game.opponent.user_name : "-----"
-        }`,
+        room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"
+          }`,
         room_image: `https://chess.zuri.chat/${file}`,
         room_url: `/chess/game/${game._id}`,
         unread: 1,
@@ -121,53 +120,49 @@ class InformationController {
 
   async installChess(req, res) {
     try {
-      const { organization_id, user_id } = req.body;
+      const { organisation_id, user_id } = req.body;
 
-      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins`;
+      const url = `https://api.zuri.chat/organizations/${organisation_id}/plugins`;
 
-      // Build request to zuri_core install url
-      const payload = {
+      const { data } = await axios.post(url, {
         plugin_id: DATABASE.PLUGIN_ID,
         user_id: user_id,
-      };
-
-      const { data } = await axios.post(url, payload, {
-        "Content-Type": "application/json",
-        Authorization: req.headers.authorization,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: req.headers.authorization,
+        },
       });
 
-      if (data.status === 200) {
-        return res
-          .status(200)
-          .send(
-            response(
-              "Plugin has been installed",
-              { redirect_url: "/chess" },
-              true
-            )
-          );
-      }
+      return res
+        .status(200)
+        .send(
+          response(
+            "Plugin has been installed",
+            { redirect_url: "/chess" },
+            true
+          )
+        );
 
-      return res.status(400).send(response(data.message, null, false));
     } catch (error) {
-      throw new CustomError(`Could not install plugin: ${error}`, "500");
+      return res.status(200).send(response(error.response.data.message, null, false));
+      // throw new CustomError(`Could not install plugin: ${error}`, "500");
     }
   }
 
   async uninstallChess(req, res) {
     try {
-      const { organization_id, user_id } = req.body;
+      const { organisation_id, user_id } = req.body;
 
-      const url = `https://api.zuri.chat/organizations/${organization_id}/plugins/${DATABASE.PLUGIN_ID}`;
+      const url = `https://api.zuri.chat/organizations/${organisation_id}/plugins/${DATABASE.PLUGIN_ID}`;
 
-      // Build request to zuri_core uninstall url
-      const payload = {
+      const { data } = await axios.delete(url, {
         user_id: user_id,
-      };
-
-      const { data } = await axios.delete(url, payload, {
-        "Content-Type": "application/json",
-        Authorization: req.headers.authorization,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: req.headers.authorization,
+        }
       });
 
       if (data.status === 200) {
