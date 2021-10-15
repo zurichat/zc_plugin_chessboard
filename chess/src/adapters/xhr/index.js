@@ -1,5 +1,9 @@
 import Axios from "axios";
-import { getCurrentOrganisation, getAuthToken, getLoggedInUserData } from "../auth";
+import {
+  getCurrentOrganisation,
+  getAuthToken,
+  getLoggedInUserData,
+} from "../auth";
 
 function returnAxiosInstance() {
   return Axios.create({
@@ -9,7 +13,7 @@ function returnAxiosInstance() {
       "Content-Type": "application/json",
       Organisation: getCurrentOrganisation(),
       Authorization: "Bearer " + getAuthToken(),
-      user_id: getLoggedInUserData().user_id
+      user_id: getLoggedInUserData().user_id,
     },
     validateStatus: function (status) {
       return status < 500; // Resolve only if the status code is less than 500
