@@ -37,6 +37,7 @@ const game_schema = Joi.object({
         user_id: Joi.string().required(),
         position_fen: Joi.string().required(),
         board_state: Joi.string().required(),
+        read: Joi.array().default([]).items(Joi.string()),
       })
     )
     .allow(null),
@@ -51,6 +52,7 @@ const game_schema = Joi.object({
         user_name: Joi.string().required(),
         text: Joi.string().required(),
         image_url: Joi.string(),
+        read: Joi.array().items(Joi.string()),
       })
     )
     .allow(null),
@@ -65,6 +67,8 @@ const game_schema = Joi.object({
       })
     )
     .allow(null),
+
+  starredBy: Joi.array().default([]).items(Joi.string()),
 
   like_count: Joi.number().default(0).allow(null),
   modifiedAt: Joi.number().default(0).allow(null),

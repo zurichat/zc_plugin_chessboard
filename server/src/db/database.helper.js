@@ -110,10 +110,7 @@ class DatabaseConnection {
 
       let payload = this.DB_DEFAULTS_CONFIG;
       // Make the request
-      const response = await axios.post(
-        `${this.DB_READ_URL}`,
-        payload
-      );
+      const response = await axios.post(`${this.DB_READ_URL}`, payload);
 
       // Return the response
       return response.data;

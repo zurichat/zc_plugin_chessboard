@@ -63,7 +63,6 @@ exports.formatMatch = (matchedGames, member_id) => {
   const chessGame = chessMatch?.length > 0 ? chessMatch.map(otherEn => otherFormat(otherEn)) : [];
   const user = userMatch?.length > 0 ? userMatch.map(userEn => userFormat(userEn)) : [];
   const message = msgMatch?.length > 0 ? msgMatch.map(msgEn => msgFormat(msgEn)) : [];
-  console.log(user);
   return { chessGame, user, message };
 };
 

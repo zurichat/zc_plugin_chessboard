@@ -8,6 +8,7 @@ const { disposeImage } = require("../utils/imageHelper");
 const InformationController = require("../controllers/info.controller");
 const globalTime = require("global-time");
 const StateController = require("./state.controller");
+const updateRead = require("../utils/updateRead");
 
 class GameController {
   constructor(organisation_id) {
@@ -247,6 +248,9 @@ class GameController {
 
       // if game id returns data, send response
       if (fetchedGame.data !== null) {
+        const user_Id = res.locals.user_id;
+        await updateRead(fetchedGame.data, user_Id, this.GameRepo);
+
         res
           .status(200)
           .send(response("Game retrieved successfully", fetchedGame.data));
@@ -301,6 +305,8 @@ class GameController {
           board_state,
         },
       };
+
+      await updateRead(gameDBData.data, user_id, this.GameRepo);
 
       // update the database
       const updated = await this.GameRepo.update(game_id, {
@@ -382,6 +388,8 @@ class GameController {
       const updated = await this.GameRepo.update(game_id, {
         spectators,
       });
+
+      await updateRead(gameDBData.data, user_id, this.GameRepo);
 
       // set user permission in the game
       const permission = "READ";
@@ -526,13 +534,14 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        user_id
+      );
       await centrifugoController.publishToSideBar(
         this.organisation_id,
         user_id,
-        {
-          event: "sidebar_update",
-          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
-        }
+        sidebar_update_payload
       );
       await disposeImage(this.organisation_id, game_id);
 
@@ -603,13 +612,14 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        user_id
+      );
       await centrifugoController.publishToSideBar(
         this.organisation_id,
         user_id,
-        {
-          event: "sidebar_update",
-          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
-        }
+        sidebar_update_payload
       );
       await disposeImage(this.organisation_id, game_id);
       StateController.getInstance().stopMonitoring(
@@ -638,6 +648,8 @@ class GameController {
             game.spectators.find((spec) => spec.user_id == userId))
         );
       });
+
+      await updateRead(data, userId, this.GameRepo);
 
       return res
         .status(200)

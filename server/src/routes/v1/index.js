@@ -40,7 +40,9 @@ router.get("/info", InfoCtrl.getPluginInfo);
  *    500:
  *      description: An error occurred
  */
-router.get("/sidebar", /*userAuth*/ InfoCtrl.getSideBarInfo);
+router.get("/sidebar", InfoCtrl.getSideBarInfo);
+
+router.get("/sidebar/star", InfoCtrl.createStar);
 
 // Game Endpoints
 router.use("/game", gameRoute);
@@ -52,7 +54,7 @@ router.use("/result", resultRoute);
 router.post("/install", InfoCtrl.installChess);
 
 // uninstall chess endpioint
-router.delete("/uninstall", InfoCtrl.uninstallChess);
+// router.delete("/uninstall", InfoCtrl.uninstallChess);
 
 // Search Endpoints
 router.use("/", searchRoute);
