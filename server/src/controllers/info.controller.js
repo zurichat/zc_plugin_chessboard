@@ -78,8 +78,9 @@ class InformationController {
 
       // add to room collection
       joined_rooms.push({
-        room_name: `${game.owner.user_name} vs ${game.opponent ? game.opponent.user_name : "-----"
-          }`,
+        room_name: `${game.owner.user_name} vs ${
+          game.opponent ? game.opponent.user_name : "-----"
+        }`,
         room_image: `https://chess.zuri.chat/${file}`,
         room_url: `/chess/game/${game._id}`,
         unread: 1,
@@ -124,15 +125,19 @@ class InformationController {
 
       const url = `https://api.zuri.chat/organizations/${organisation_id}/plugins`;
 
-      const { data } = await axios.post(url, {
-        plugin_id: DATABASE.PLUGIN_ID,
-        user_id: user_id,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: req.headers.authorization,
+      const { data } = await axios.post(
+        url,
+        {
+          plugin_id: DATABASE.PLUGIN_ID,
+          user_id: user_id,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: req.headers.authorization,
+          },
+        }
+      );
 
       return res
         .status(200)
@@ -143,9 +148,10 @@ class InformationController {
             true
           )
         );
-
     } catch (error) {
-      return res.status(200).send(response(error.response.data.message, null, false));
+      return res
+        .status(200)
+        .send(response(error.response.data.message, null, false));
       // throw new CustomError(`Could not install plugin: ${error}`, "500");
     }
   }
@@ -156,14 +162,18 @@ class InformationController {
 
       const url = `https://api.zuri.chat/organizations/${organisation_id}/plugins/${DATABASE.PLUGIN_ID}`;
 
-      const { data } = await axios.delete(url, {
-        user_id: user_id,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: req.headers.authorization,
+      const { data } = await axios.delete(
+        url,
+        {
+          user_id: user_id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: req.headers.authorization,
+          },
         }
-      });
+      );
 
       if (data.status === 200) {
         return res
