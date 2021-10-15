@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 const { orgAuth } = require("../../middlewares/organisation.middleware");
-const { userAuth, memberAuth } = require("../../middlewares/user_auth.middleware");
+const { userAuth } = require("../../middlewares/user_auth.middleware");
 
 // All Endpoints require authentication and organisationID to be accessed
 router.use(orgAuth);
@@ -248,22 +248,6 @@ router.post("/join", (req, res) => {
  */
 router.get("/all", (req, res) => {
   new GameCtrl(res.locals.organisation_id).getAll(req, res);
-});
-
-/**
- * @swagger
- * /api/v1/game/search:
- *  get:
- *   summary: Search for games in the database
- *   description: returns a paginated responseof all the matched game objects in the database
- *   responses:
- *    200:
- *      description: A successful response
- *    500:
- *      description: An error occurred
- */
-router.get("/search/:org_id/:member_id", (req, res) => {
-  new GameCtrl(res.locals.organisation_id).search(req, res);
 });
 
 /**

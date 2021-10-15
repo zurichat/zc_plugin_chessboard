@@ -1,50 +1,11 @@
-exports.matchedBoardMoves = (searchQuery, gameDBData = []) => {
-  let array = gameDBData.data;
-  let games;
-  let matchedGames = [];
-  for (i = 0; i < array.length; i++) {
-    if (array[i].moves.length > 0) {
-      if (array[i]?.moves[i]?.to == searchQuery) {
-        matchedGames.push(array[i])
-        i++;
-      } else (i++)
-    }
-  }
-
-  if (matchedGames.length > 0) {
-    gameDBData.data = [];
-    games = gameDBData.data.push(matchedGames);
-  }
-  console.log(games);
-  const result = games ? games : [];
-  return result;
-}
-
-// for (i = 0; i < array.length; i++) {
-//   if (array[i].moves.length > 0) {
-//     let boardMoves = array[i]?.moves[i]?.board_state;
-//     for (const prop in boardMoves) {
-//       if (boardMoves[prop] == searchQuery) {
-
-//       } 
-//       matchedGames.push(array[i])
-//       i++;
-//   }
-//   } else (i++)
-// }
-
 exports.allGames = (searchQuery, data) => {
-  console.log(data?.data[0]?.owner);
-
   let searchOwner = data?.data.filter((game) => {
-
     return new RegExp(String(searchQuery), 'i').test(game?.owner?.user_name);
   });
 
   let searchOpponent = data?.data.filter((game) => {
     return new RegExp(String(searchQuery), 'i').test(game.opponent?.user_name);
   });
-
 
   let searchMessages = data?.data.filter((game) => {
     game.messages?.includes(searchQuery);
@@ -53,7 +14,7 @@ exports.allGames = (searchQuery, data) => {
   return games;
 }
 
-exports.formatResult = (matchedGames) => {
+exports.formatData = (matchedGames) => {
   const data = matchedGames && matchedGames.length > 0 ? matchedGames.map(game => {
     return {
       title: `${game.owner?.user_name} vs ${game.opponent?.user_name}`,
@@ -66,4 +27,47 @@ exports.formatResult = (matchedGames) => {
     }
   }) : [];
   return data;
+}
+
+exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, searchQuery = " ", filter = " ", page) => {
+  let result = {};
+  let page_count = Math.ceil(data?.length / limit);
+  let total_count = data?.length;
+  let first_page = 1;
+  let last_page = page_count;
+  if (!total_count) {
+    first_page = 0;
+    last_page = 0;
+    // per_page = 0;
+  }
+  data = data?.slice(startIndex, endIndex);
+  let per_page = data?.length;
+  let current_page = Math.ceil(data?.length / limit);
+  // ensure current page isn't out of range
+  if (current_page < 1 && current_page !== 0) {
+    current_page = 1;
+  } else if (current_page > page_count) {
+    current_page = page_count;
+  }
+
+  const next = (endIndex < data.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?key=${searchQuery}&member_id=${req.query.member_id}&org_id=${this.organisation_id}&page=${page + 1}` : " ";
+
+  let filter_suggestions = {
+    in: [],
+    from: []
+  }
+
+  result = {
+    status: "ok",
+    pagination: {
+      page_count, per_page, total_count,
+      current_page, first_page, last_page, next
+    },
+    query: searchQuery,
+    plugin: "Chess",
+    filter: filter,
+    data,
+    filter_suggestions
+  }
+  return result
 }
