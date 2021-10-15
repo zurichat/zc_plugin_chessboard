@@ -1,33 +1,34 @@
-exports.allGames = (searchQuery, data) => {
-  let user = data?.data.filter((game) => {
+exports.filterFromAllGames = (searchQuery, data) => {
+  let userMatch = data?.data.filter((game) => {
     return new RegExp(String(searchQuery), "i").test(game?.owner?.user_name);
   });
 
-  let opponent = data?.data.filter((game) => {
+  let opponentMatch = data?.data.filter((game) => {
     return new RegExp(String(searchQuery), "i").test(game.opponent?.user_name);
   });
-  if (opponent) {
-    user.push(opponent);
+  if (opponentMatch) {
+    userMatch = [...userMatch, ...opponentMatch];
   }
 
-  let message = data?.data.filter((game) => {
+  let msgMatch = data?.data.filter((game) => {
     game.messages?.includes(searchQuery);
   });
 
-  let games = { user, message };
+  let games = { userMatch, msgMatch };
   return games;
 };
 
+// map matched games according to their respective standard formats
 exports.formatMatch = (matchedGames, member_id) => {
   const { chessMatch, userMatch, msgMatch } = matchedGames;
   const userFormat = (userEn) => {
     return {
       _id: `${member_id}`,
-      username: userEn.owner?.user_name == searchQuery ? userEn.owner?.user_name : userEn.opponent?.user_name,
+      username: userEn.owner?.user_name,
       email: null,
       images_url: `${userEn.owner?.image_url}`,
       created_at: userEn.start_time,
-      destination_url: `https://chess.zuri.chat/game/:${user._id}`
+      destination_url: `https://chess.zuri.chat/game/:${userEn._id}`
     };
   };
   const msgFormat = (msgEn) => {
@@ -51,7 +52,7 @@ exports.formatMatch = (matchedGames, member_id) => {
     return {
       _id: `${otherEn._id}`,
       title: `${otherEn.owner?.user_name} vs ${otherEn.opponent?.user_name}`,
-      content: `${state} game with ${otherEn.spectators.length} spectator(s)`,
+      content: `${state} game with ${otherEn.spectators?.length} spectator(s)`,
       created_by: otherEn.owner?.user_name,
       images_url: otherEn.owner?.image_url,
       created_at: otherEn.start_time,
@@ -59,23 +60,24 @@ exports.formatMatch = (matchedGames, member_id) => {
     };
   };
 
-  const chessGame = chessMatch && chessMatch.length > 0 ? chessMatch.map(otherEn => otherFormat(otherEn)) : [];
-  const user = userMatch && userMatch.length > 0 ? userMatch.map(userEn => userFormat(userEn)) : [];
-  const message = msgMatch && msgMatch.length > 0 ? msgMatch.map(msgEn => msgFormat(msgEn)) : [];
-
+  const chessGame = chessMatch?.length > 0 ? chessMatch.map(otherEn => otherFormat(otherEn)) : [];
+  const user = userMatch?.length > 0 ? userMatch.map(userEn => userFormat(userEn)) : [];
+  const message = msgMatch?.length > 0 ? msgMatch.map(msgEn => msgFormat(msgEn)) : [];
+  console.log(user);
   return { chessGame, user, message };
 };
 
 exports.formatResult = (req, res, entity = {}, startIndex, endIndex, limit, searchQuery = " ", filter = " ", page) => {
-  if (entity.user.length > 0) {
+  let data;
+  if (entity.user?.length > 0) {
     data = entity.user;
     entity = "user";
-  } else if (entity.message.length > 0) {
+  } else if (entity.message?.length > 0) {
     data = entity.message;
     entity = "message";
-  } else if (entity.chessGame.length > 0) {
+  } else if (entity.chessGame?.length > 0) {
     data = entity.chessGame;
-    entity = "chess"
+    entity = "chess";
   }
   let result = {};
   let page_size = Math.ceil(data?.length / limit);
@@ -83,9 +85,9 @@ exports.formatResult = (req, res, entity = {}, startIndex, endIndex, limit, sear
   let first_page = 1;
   let last_page = page_size;
 
-  const previous = (startIndex < data.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page - 1}` : " ";
+  const previous = (startIndex < data?.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page - 1}` : " ";
 
-  const next = (endIndex < data.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page + 1}` : " ";
+  const next = (endIndex < data?.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page + 1}` : " ";
 
   data = data?.slice(startIndex, endIndex);
 
@@ -104,7 +106,7 @@ exports.formatResult = (req, res, entity = {}, startIndex, endIndex, limit, sear
   result = {
     status: "ok",
     title: `${searchQuery} in Chess`,
-    description: `search for ${searchQuery} Chess games`,
+    description: `search for ${searchQuery} in Chess`,
     pagination: {
       total_results, page_size, current_page, first_page, last_page,
       previous, next

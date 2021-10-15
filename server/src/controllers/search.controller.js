@@ -1,7 +1,7 @@
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
-const { allGames, formatResult, formatMatch } = require("../utils/search_helper");
+const { filterFromAllGames, formatResult, formatMatch } = require("../utils/search_helper");
 const DatabaseConnection = require("../db/database.helper");
 
 class SearchController {
@@ -35,9 +35,8 @@ class SearchController {
           // fetch all games
           gameDBData = await this.GameRepo.fetchAll();
           // filter matches and group into entities
-          const { user, message } = allGames(searchQuery, gameDBData);
-          matchedGames = [user, message];
-          console.log("game entity all:" + matchedGames);
+          const { userMatch, msgMatch } = filterFromAllGames(searchQuery, gameDBData);
+          matchedGames = { userMatch, msgMatch };
         }
         // conform to zuri chat standard 
         let entity = formatMatch(matchedGames, req.params.member_id);
