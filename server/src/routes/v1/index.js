@@ -43,7 +43,6 @@ router.get("/sidebar", InfoCtrl.getSideBarInfo);
 
 router.get("/sidebar/star", InfoCtrl.createStar);
 
-
 // Game Endpoints
 router.use("/game", gameRoute);
 
