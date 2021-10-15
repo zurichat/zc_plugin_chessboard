@@ -3,9 +3,9 @@ const path = require("path");
 const { Canvas, Image } = require("canvas");
 const { writeFile } = require("fs").promises;
 
-const imag1 = process.argv[2];
-const imag2 = process.argv[3];
-const file = process.argv[3];
+// const imag1 = process.argv[2];
+// const imag2 = process.argv[3];
+// const file = process.argv[3];
 
 const generateImage = async (imag1, imag2, file) => {
   const image = await mergeImages(
@@ -43,4 +43,5 @@ const generateImage = async (imag1, imag2, file) => {
   return file;
 };
 
-generateImage(imag1, imag2, file);
+//generateImage(imag1, imag2, file);
+module.exports = generateImage;

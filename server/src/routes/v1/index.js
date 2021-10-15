@@ -39,7 +39,10 @@ router.get("/info", InfoCtrl.getPluginInfo);
  *    500:
  *      description: An error occurred
  */
-router.get("/sidebar", /*userAuth*/ InfoCtrl.getSideBarInfo);
+router.get("/sidebar", InfoCtrl.getSideBarInfo);
+
+router.get("/sidebar/star", InfoCtrl.createStar);
+
 
 // Game Endpoints
 router.use("/game", gameRoute);

@@ -68,6 +68,8 @@ const game_schema = Joi.object({
     )
     .allow(null),
 
+  starredBy: Joi.array().default([]).items(Joi.string()),
+
   like_count: Joi.number().default(0).allow(null),
   modifiedAt: Joi.number().default(0).allow(null),
 });

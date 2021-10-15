@@ -534,13 +534,14 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        user_id
+      );
       await centrifugoController.publishToSideBar(
         this.organisation_id,
         user_id,
-        {
-          event: "sidebar_update",
-          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
-        }
+        sidebar_update_payload
       );
       await disposeImage(this.organisation_id, game_id);
 
@@ -611,13 +612,14 @@ class GameController {
       };
 
       await centrifugoController.publish(game_id, payload);
+      const sidebar_update_payload = await InformationController.sideBarInfo(
+        this.organisation_id,
+        user_id
+      );
       await centrifugoController.publishToSideBar(
         this.organisation_id,
         user_id,
-        {
-          event: "sidebar_update",
-          sidebar_url: "https://chess.zuri.chat/api/v1/sidebar",
-        }
+        sidebar_update_payload
       );
       await disposeImage(this.organisation_id, game_id);
       StateController.getInstance().stopMonitoring(

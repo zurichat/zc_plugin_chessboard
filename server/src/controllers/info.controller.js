@@ -6,6 +6,8 @@ const DatabaseConnection = require("../db/database.helper");
 const { Worker } = require("worker_threads");
 const path = require("path");
 const { DATABASE } = require("../config/index");
+const CentrifugoController = require("./centrifugo.controller");
+const generateImage = require("../utils/imageWorker");
 
 class InformationController {
   async getPluginInfo(req, res) {
@@ -50,7 +52,7 @@ class InformationController {
     // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
     const GameRepo = new DatabaseConnection("003test_game", org);
     const { data } = await GameRepo.fetchAll();
-
+    console.log(data);
     // pick running games
     const filtered = data.filter((x) => {
       return (
@@ -62,19 +64,17 @@ class InformationController {
     });
 
     const joined_rooms = [];
-    const workerPath = path.join(__dirname, "..", "utils", "imageWorker.js");
+    const starred = [];
+    //const workerPath = path.join(__dirname, "..", "utils", "imageWorker.js");
     for (let game of filtered) {
       // generate dynamic sidebar icons
       const file = `${game._id}_${org}_sidebar.png`;
 
-      // create images in the background
-      new Worker(workerPath, {
-        argv: [
-          game.owner.image_url ? game.owner.image_url : null,
-          game.opponent ? game.opponent.image_url : null,
-          file,
-        ],
-      });
+      generateImage(
+        game.owner.image_url ? game.owner.image_url : null,
+        game.opponent ? game.opponent.image_url : null,
+        file
+      );
 
       let unread = 0;
       for (let move of game.moves) {
@@ -96,7 +96,12 @@ class InformationController {
 
       if (unread == 0) delete joinedRoom.unread;
       // add to room collection
-      joined_rooms.push(joinedRoom);
+
+      if (game.starredBy && game.starredBy.includes(user_id)) {
+        starred.push(joinedRoom);
+      } else {
+        joined_rooms.push(joinedRoom);
+      }
     }
 
     const { PLUGIN_ID } = DATABASE;
@@ -126,7 +131,12 @@ class InformationController {
         // To be removed - why?
         ...joined_rooms,
       ],
+      starred,
     };
+
+    if (starred.length < 1) {
+      delete payload.starred;
+    }
 
     return payload;
   }
@@ -213,6 +223,42 @@ class InformationController {
         "500"
       );
     }
+  }
+
+  async createStar(req, res) {
+    //room_id=“”&member_id=“”&org=“”
+    const { room_id, user, org, isStar } = req.query;
+    // Get all games from the database
+    const GameRepo = new DatabaseConnection("003test_game", org);
+    const fetchedGame = await GameRepo.fetchByParameter({
+      _id: room_id,
+    });
+
+    if (!fetchedGame.data)
+      return res
+        .status(404)
+        .send(response("Games does not exist", null, false));
+
+    if (isStar == true || isStar == "true") {
+      fetchedGame.data.starredBy.push(user);
+    } else {
+      const index = fetchedGame.data.starredBy.indexOf(user);
+      fetchedGame.data.starredBy.splice(index, 1);
+    }
+
+    await GameRepo.update(fetchedGame.data._id, {
+      starredBy: fetchedGame.data.starredBy,
+    });
+
+    const sidebar_update_payload =
+      await new InformationController().sideBarInfo(org, user);
+
+    await CentrifugoController.publishToSideBar(
+      org,
+      user,
+      sidebar_update_payload
+    );
+    return res.status(200).send(response("Game starred", null, false));
   }
 }
 
