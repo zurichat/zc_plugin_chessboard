@@ -1,7 +1,11 @@
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
-const { allGames, formatResult, formatData } = require("../utils/search_helper");
+const {
+  allGames,
+  formatResult,
+  formatData,
+} = require("../utils/search_helper");
 const DatabaseConnection = require("../db/database.helper");
 
 class SearchController {
@@ -21,11 +25,14 @@ class SearchController {
         const limit = parseInt(req.query?.limit, 10) || 5;
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
-        //check for matching keywords. If match, return an array of ongoing games   
+        //check for matching keywords. If match, return an array of ongoing games
         let regex = /^[a-h][1-8]$/;
         let keywords = ["ongoing", "games"];
         let modifiedQuery = searchQuery.trim().toLowerCase();
-        if (keywords.includes(modifiedQuery) || regex.test(searchQuery.trim())) {
+        if (
+          keywords.includes(modifiedQuery) ||
+          regex.test(searchQuery.trim())
+        ) {
           // get active games
           matchedGames = await this.GameRepo.fetchByParameter({
             status: 1,
@@ -35,13 +42,21 @@ class SearchController {
           gameDBData = await this.GameRepo.fetchAll();
           matchedGames = allGames(searchQuery, gameDBData);
         }
-        // conform to zuri chat standard 
+        // conform to zuri chat standard
         let data = formatData(matchedGames);
-        const result = formatResult(req, res, data, startIndex, endIndex, limit, searchQuery, filter, page);
+        const result = formatResult(
+          req,
+          res,
+          data,
+          startIndex,
+          endIndex,
+          limit,
+          searchQuery,
+          filter,
+          page
+        );
         // just return the result
-        res
-          .status(200)
-          .json(result);
+        res.status(200).json(result);
       } else {
         return res.status(400).send(response("Invalid query!", null, false));
       }
@@ -66,9 +81,7 @@ class SearchController {
       let response = {
         status: "ok",
         type: "suggestions",
-        data: [
-          "ongoing", "chess", ...names, ...moves
-        ]
+        data: ["ongoing", "chess", ...names, ...moves],
       };
       res.status(200).json(response);
     } catch (error) {

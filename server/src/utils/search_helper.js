@@ -15,21 +15,34 @@ exports.allGames = (searchQuery, data) => {
 };
 
 exports.formatData = (matchedGames) => {
-  const data = matchedGames && matchedGames.length > 0 ? matchedGames.map(game => {
-    return {
-      title: `${game.owner?.user_name} vs ${game.opponent?.user_name}`,
-      description: `${game.spectators.length} spectators`,
-      content: `${game.messages}`,
-      email: null,
-      image_url: null,
-      created_at: game.start_time,
-      url: `https://chess.zuri.chat/game/:${game._id}`,
-    };
-  }) : [];
+  const data =
+    matchedGames && matchedGames.length > 0
+      ? matchedGames.map((game) => {
+          return {
+            title: `${game.owner?.user_name} vs ${game.opponent?.user_name}`,
+            description: `${game.spectators.length} spectators`,
+            content: `${game.messages}`,
+            email: null,
+            image_url: null,
+            created_at: game.start_time,
+            url: `https://chess.zuri.chat/game/:${game._id}`,
+          };
+        })
+      : [];
   return data;
 };
 
-exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, searchQuery = " ", filter = " ", page) => {
+exports.formatResult = (
+  req,
+  res,
+  data = [],
+  startIndex,
+  endIndex,
+  limit,
+  searchQuery = " ",
+  filter = " ",
+  page
+) => {
   let result = {};
   let page_count = Math.ceil(data?.length / limit);
   let total_count = data?.length;
@@ -50,24 +63,36 @@ exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, search
     current_page = page_count;
   }
 
-  const next = (endIndex < data.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?key=${searchQuery}&member_id=${req.query.member_id}&org_id=${this.organisation_id}&page=${page + 1}` : " ";
+  const next =
+    endIndex < data.length
+      ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${
+          req.params.member_id
+        }?key=${searchQuery}&member_id=${req.query.member_id}&org_id=${
+          this.organisation_id
+        }&page=${page + 1}`
+      : " ";
 
   let filter_suggestions = {
     in: [],
-    from: []
+    from: [],
   };
 
   result = {
     status: "ok",
     pagination: {
-      page_count, per_page, total_count,
-      current_page, first_page, last_page, next
+      page_count,
+      per_page,
+      total_count,
+      current_page,
+      first_page,
+      last_page,
+      next,
     },
     query: searchQuery,
     plugin: "Chess",
     filter: filter,
     data,
-    filter_suggestions
+    filter_suggestions,
   };
   return result;
 };
