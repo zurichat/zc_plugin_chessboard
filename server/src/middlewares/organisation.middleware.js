@@ -16,7 +16,7 @@ exports.orgAuth = async (req, res, next) => {
       organisation === "undefined"
     ) {
       // Use hardcoded organisation
-      res.locals.organisation_id = "6145c2d0285e4a18402073f6";
+      res.locals.organisation_id = "616947fd9ea5d3be97df290d";
 
       // For now, we will use the default organisation
       // res.status(400).send(response("Organisation header is required", null, false));
