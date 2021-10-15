@@ -24,7 +24,7 @@ const searchCtrl = require("../../controllers/search.controller");
  *      description: An error occurred
  */
 router.get("/search/:org_id/:member_id", (req, res) => {
-  new searchCtrl(res.locals.organisation_id).search(req, res);
+  new searchCtrl(req.params.org_id).search(req, res);
 });
 
 /**
@@ -40,7 +40,7 @@ router.get("/search/:org_id/:member_id", (req, res) => {
  *      description: An error occurred
  */
 router.get("/search-suggestions/:org_id/:member_id", (req, res) => {
-  new searchCtrl(res.locals.organisation_id).searchSuggestions(req, res);
+  new searchCtrl(req.params.org_id).searchSuggestions(req, res);
 });
 
 // Export Module

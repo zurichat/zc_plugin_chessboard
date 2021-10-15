@@ -3,9 +3,12 @@ const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const { allGames, formatResult, formatData } = require("../utils/search_helper");
 const DatabaseConnection = require("../db/database.helper");
-const GameRepo = new DatabaseConnection("001test_game");
 
 class SearchController {
+  constructor(organisation_id) {
+    this.organisation_id = organisation_id;
+    this.GameRepo = new DatabaseConnection("003test_game", organisation_id);
+  }
   // Search for Games
   async search(req, res) {
     try {
@@ -24,12 +27,12 @@ class SearchController {
         let modifiedQuery = searchQuery.trim().toLowerCase();
         if (keywords.includes(modifiedQuery) || regex.test(searchQuery.trim())) {
           // get active games
-          matchedGames = await GameRepo.fetchByParameter({
+          matchedGames = await this.GameRepo.fetchByParameter({
             status: 1,
           });
         } else {
           // fetch all games
-          gameDBData = await GameRepo.fetchAll();
+          gameDBData = await this.GameRepo.fetchAll();
           matchedGames = allGames(searchQuery, gameDBData);
         }
         // conform to zuri chat standard 
@@ -54,8 +57,7 @@ class SearchController {
       let names = [];
       let moves = [];
 
-      gameDBData = await GameRepo.fetchAll();
-      console.log(gameDBData);
+      gameDBData = await this.GameRepo.fetchAll();
       for (let data in gameDBData.data) {
         names.push(data?.owner?.user_name);
         names.push(data?.opponent?.user_name);
