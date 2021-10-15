@@ -25,6 +25,7 @@ class DatabaseConnection {
       bulk_write: false,
       object_id: "",
       filter: {},
+      options: {},
       payload: {},
     };
   }
@@ -78,6 +79,40 @@ class DatabaseConnection {
       // Make the request
       const response = await axios.get(
         `${this.DB_READ_URL}/${this.DB_DEFAULTS_CONFIG.plugin_id}/${this.DB_DEFAULTS_CONFIG.collection_name}/${this.DB_DEFAULTS_CONFIG.organization_id}?${query_string}`
+      );
+
+      // Return the response
+      return response.data;
+    } catch (error) {
+      if (
+        error.response.data.status == 404 &&
+        error.response.data.message == "collection not found"
+      ) {
+        return { data: [] };
+      }
+
+      throw new CustomError(
+        `Unable to Connect to Zuri Core DB [READ ONE BY PARAMETER]: ${error}`,
+        "500"
+      );
+    }
+  }
+
+  // Fetch by params
+  async advancedFetch(filter = {}, options = {}, org_id) {
+    try {
+      // Convert the object to a query string
+      this.DB_DEFAULTS_CONFIG.filter = filter;
+      this.DB_DEFAULTS_CONFIG.object_id = null;
+      this.DB_DEFAULTS_CONFIG.bulk_write = false;
+      this.DB_DEFAULTS_CONFIG.options = options;
+      this.DB_DEFAULTS_CONFIG.organization_id = org_id;
+
+      let payload = this.DB_DEFAULTS_CONFIG;
+      // Make the request
+      const response = await axios.post(
+        `${this.DB_READ_URL}`,
+        payload
       );
 
       // Return the response
