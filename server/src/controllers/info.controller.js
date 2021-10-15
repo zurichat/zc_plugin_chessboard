@@ -52,7 +52,6 @@ class InformationController {
     // fetch all data from db - Change this proceedure later - Why change it? There are just 6 of them
     const GameRepo = new DatabaseConnection("003test_game", org);
     const { data } = await GameRepo.fetchAll();
-    console.log(data);
     // pick running games
     const filtered = data.filter((x) => {
       return (
@@ -64,7 +63,7 @@ class InformationController {
     });
 
     const joined_rooms = [];
-    const starred = [];
+    const starred_rooms = [];
     //const workerPath = path.join(__dirname, "..", "utils", "imageWorker.js");
     for (let game of filtered) {
       // generate dynamic sidebar icons
@@ -98,7 +97,7 @@ class InformationController {
       // add to room collection
 
       if (game.starredBy && game.starredBy.includes(user_id)) {
-        starred.push(joinedRoom);
+        starred_rooms.push(joinedRoom);
       } else {
         joined_rooms.push(joinedRoom);
       }
@@ -131,10 +130,10 @@ class InformationController {
         // To be removed - why?
         ...joined_rooms,
       ],
-      starred,
+      starred_rooms,
     };
 
-    if (starred.length < 1) {
+    if (starred_rooms.length < 1) {
       delete payload.starred;
     }
 
