@@ -76,15 +76,27 @@ class InformationController {
         ],
       });
 
-      // add to room collection
-      joined_rooms.push({
+      let unread = 0;
+      for (let move of game.moves) {
+        if (!move.read.includes(user_id)) unread += 1;
+      }
+
+      for (let message of game.messages) {
+        if (!message.read.includes(user_id)) unread += 1;
+      }
+
+      const joinedRoom = {
         room_name: `${game.owner.user_name} vs ${
           game.opponent ? game.opponent.user_name : "-----"
         }`,
         room_image: `https://chess.zuri.chat/${file}`,
         room_url: `/chess/game/${game._id}`,
-        unread: 1,
-      });
+        unread,
+      };
+
+      if (unread == 0) delete joinedRoom.unread;
+      // add to room collection
+      joined_rooms.push(joinedRoom);
     }
 
     const { PLUGIN_ID } = DATABASE;
