@@ -40,7 +40,7 @@ class SearchController {
           .status(200)
           .json(result);
       } else {
-        return res.status(400).send(response('Invalid query!', null, false));
+        return res.status(400).send(response("Invalid query!", null, false));
       }
     } catch (error) {
       throw new CustomError(`Unable to search for Games: ${error}`, 500);
@@ -56,7 +56,7 @@ class SearchController {
 
       gameDBData = await GameRepo.fetchAll();
       console.log(gameDBData);
-      for (data in gameDBData.data) {
+      for (let data in gameDBData.data) {
         names.push(data?.owner?.user_name);
         names.push(data?.opponent?.user_name);
         moves.push(data?.moves?.to);
@@ -67,7 +67,7 @@ class SearchController {
         data: [
           "ongoing", "chess", ...names, ...moves
         ]
-      }
+      };
       res.status(200).json(response);
     } catch (error) {
       throw new CustomError(`Unable to search for Suggestions: ${error}`, 500);

@@ -1,18 +1,18 @@
 exports.allGames = (searchQuery, data) => {
   let searchOwner = data?.data.filter((game) => {
-    return new RegExp(String(searchQuery), 'i').test(game?.owner?.user_name);
+    return new RegExp(String(searchQuery), "i").test(game?.owner?.user_name);
   });
 
   let searchOpponent = data?.data.filter((game) => {
-    return new RegExp(String(searchQuery), 'i').test(game.opponent?.user_name);
+    return new RegExp(String(searchQuery), "i").test(game.opponent?.user_name);
   });
 
   let searchMessages = data?.data.filter((game) => {
     game.messages?.includes(searchQuery);
   });
-  let games = [...searchOwner, ...searchOpponent, ...searchMessages]
+  let games = [...searchOwner, ...searchOpponent, ...searchMessages];
   return games;
-}
+};
 
 exports.formatData = (matchedGames) => {
   const data = matchedGames && matchedGames.length > 0 ? matchedGames.map(game => {
@@ -24,10 +24,10 @@ exports.formatData = (matchedGames) => {
       image_url: null,
       created_at: game.start_time,
       url: `https://chess.zuri.chat/game/:${game._id}`,
-    }
+    };
   }) : [];
   return data;
-}
+};
 
 exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, searchQuery = " ", filter = " ", page) => {
   let result = {};
@@ -35,13 +35,13 @@ exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, search
   let total_count = data?.length;
   let first_page = 1;
   let last_page = page_count;
+  data = data?.slice(startIndex, endIndex);
+  let per_page = data?.length;
   if (!total_count) {
     first_page = 0;
     last_page = 0;
-    // per_page = 0;
+    per_page = 0;
   }
-  data = data?.slice(startIndex, endIndex);
-  let per_page = data?.length;
   let current_page = Math.ceil(data?.length / limit);
   // ensure current page isn't out of range
   if (current_page < 1 && current_page !== 0) {
@@ -55,7 +55,7 @@ exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, search
   let filter_suggestions = {
     in: [],
     from: []
-  }
+  };
 
   result = {
     status: "ok",
@@ -68,6 +68,6 @@ exports.formatResult = (req, res, data = [], startIndex, endIndex, limit, search
     filter: filter,
     data,
     filter_suggestions
-  }
-  return result
-}
+  };
+  return result;
+};

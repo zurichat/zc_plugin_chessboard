@@ -1,17 +1,15 @@
 const axios = require("axios");
 const CustomError = require("../utils/custom-error");
 const { WELCOME_URL } = require("../config/index");
-const response = require("../utils/response");
 
 // GET req to zc_core to validate and fetch user details with the provided token
 exports.userAuth = async (req, res, next) => {
   try {
     let { user_id } = req.body;
-
+    let member_id = req.query.member_id || req.params.member_id;
     // Also get user_id from query for get requests
     if (!user_id) {
       user_id = req.query.user_id;
-      member_id = req.query.member_id || req.params.member_id;
     }
 
     if (

@@ -108,8 +108,7 @@ class DatabaseConnection {
       this.DB_DEFAULTS_CONFIG.options = options;
       this.DB_DEFAULTS_CONFIG.organization_id = org_id;
 
-
-      payload = this.DB_DEFAULTS_CONFIG;
+      let payload = this.DB_DEFAULTS_CONFIG;
       // Make the request
       const response = await axios.post(
         `${this.DB_READ_URL}`,
