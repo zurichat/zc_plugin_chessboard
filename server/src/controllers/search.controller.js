@@ -1,7 +1,11 @@
 // Custom Modules
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
-const { filterFromAllGames, formatResult, formatMatch } = require("../utils/search_helper");
+const {
+  filterFromAllGames,
+  formatResult,
+  formatMatch,
+} = require("../utils/search_helper");
 const DatabaseConnection = require("../db/database.helper");
 
 class SearchController {
@@ -25,21 +29,37 @@ class SearchController {
         let regex = /^[a-h][1-8]$/;
         let keywords = ["ongoing", "games"];
         let modifiedQuery = searchQuery.trim().toLowerCase();
-        if (keywords.includes(modifiedQuery) || regex.test(searchQuery.trim())) {
+        if (
+          keywords.includes(modifiedQuery) ||
+          regex.test(searchQuery.trim())
+        ) {
           // get active games
           const { data } = await this.GameRepo.fetchAll();
-          const chessMatch = data.filter(game => game.status == 1);
+          const chessMatch = data.filter((game) => game.status == 1);
           matchedGames = { chessMatch };
         } else {
           // fetch all games
           gameDBData = await this.GameRepo.fetchAll();
           // filter matches and group into entities
-          const { userMatch, msgMatch } = filterFromAllGames(searchQuery, gameDBData);
+          const { userMatch, msgMatch } = filterFromAllGames(
+            searchQuery,
+            gameDBData
+          );
           matchedGames = { userMatch, msgMatch };
         }
-        // conform to zuri chat standard 
+        // conform to zuri chat standard
         let entity = formatMatch(matchedGames, req.params.member_id);
-        const result = formatResult(req, res, entity, startIndex, endIndex, limit, searchQuery, filter, page);
+        const result = formatResult(
+          req,
+          res,
+          entity,
+          startIndex,
+          endIndex,
+          limit,
+          searchQuery,
+          filter,
+          page
+        );
         // just return the result
         res.status(200).json(result);
       } else {
@@ -57,11 +77,14 @@ class SearchController {
         status: "ok",
         type: "suggestions",
         data: {
-          "616957589ea5d3be97df29bc": "ongoing chess game", "chess bot": "chess bot", "hi, hi": "message in chess game", "anonymous": "Anonymous",
-          "LocalhostUser": "spectators in-game",
-          "Anonymous": "chess player 1",
-          "616963d0b2cc8a9af4833d82": "chess"
-        }
+          "616957589ea5d3be97df29bc": "ongoing chess game",
+          "chess bot": "chess bot",
+          "hi, hi": "message in chess game",
+          anonymous: "Anonymous",
+          LocalhostUser: "spectators in-game",
+          Anonymous: "chess player 1",
+          "616963d0b2cc8a9af4833d82": "chess",
+        },
       };
       res.status(200).send(response);
     } catch (error) {
