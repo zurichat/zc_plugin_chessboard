@@ -41,7 +41,8 @@ router.get("/info", InfoCtrl.getPluginInfo);
  */
 router.get("/sidebar", InfoCtrl.getSideBarInfo);
 
-router.get("/sidebar/star", InfoCtrl.createStar);
+// Sidebar star item
+router.put("/org/:org/rooms/:room_id/members/:user/star", InfoCtrl.createStar);
 
 // Game Endpoints
 router.use("/game", gameRoute);

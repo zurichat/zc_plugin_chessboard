@@ -98,9 +98,8 @@ class InformationController {
 
       if (game.starredBy && game.starredBy.includes(user_id)) {
         starred_rooms.push(joinedRoom);
-      } else {
-        joined_rooms.push(joinedRoom);
       }
+      joined_rooms.push(joinedRoom);
     }
 
     const { PLUGIN_ID } = DATABASE;
@@ -134,7 +133,7 @@ class InformationController {
     };
 
     if (starred_rooms.length < 1) {
-      delete payload.starred;
+      delete payload.starred_rooms;
     }
 
     return payload;
@@ -226,7 +225,7 @@ class InformationController {
 
   async createStar(req, res) {
     //room_id=“”&member_id=“”&org=“”
-    const { room_id, user, org, isStar } = req.query;
+    const { room_id, user, org } = req.params;
     // Get all games from the database
     const GameRepo = new DatabaseConnection("003test_game", org);
     const fetchedGame = await GameRepo.fetchByParameter({
@@ -238,11 +237,15 @@ class InformationController {
         .status(404)
         .send(response("Games does not exist", null, false));
 
-    if (isStar == true || isStar == "true") {
+    if (!fetchedGame.data.starredBy) {
+      fetchedGame.data.starredBy = [];
+    }
+
+    if (!fetchedGame.data.starredBy.includes(user)) {
       fetchedGame.data.starredBy.push(user);
     } else {
       const index = fetchedGame.data.starredBy.indexOf(user);
-      fetchedGame.data.starredBy.splice(index, 1);
+      if (index > -1) fetchedGame.data.starredBy.splice(index, 1);
     }
 
     await GameRepo.update(fetchedGame.data._id, {
