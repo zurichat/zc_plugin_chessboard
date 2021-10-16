@@ -6,7 +6,7 @@ const { WELCOME_URL } = require("../config/index");
 exports.userAuth = async (req, res, next) => {
   try {
     let { user_id } = req.body;
-
+    let member_id = req.query.member_id || req.params.member_id;
     // Also get user_id from query for get requests
     if (!user_id) {
       user_id = req.query.user_id;
@@ -15,7 +15,8 @@ exports.userAuth = async (req, res, next) => {
     if (
       user_id === "chessbot" ||
       user_id === "anonymous" ||
-      user_id === "localhost_user_id"
+      user_id === "localhost_user_id" ||
+      member_id
     )
       return next();
 

@@ -5,6 +5,7 @@ const router = require("express").Router();
 const gameRoute = require("./game.route");
 const resultRoute = require("./result.route");
 const InfoCtrl = require("../../controllers/info.controller");
+const searchRoute = require("./search.route");
 
 /**
  * @swagger
@@ -55,6 +56,9 @@ router.post("/install", InfoCtrl.installChess);
 
 // uninstall chess endpioint
 // router.delete("/uninstall", InfoCtrl.uninstallChess);
+
+// Search Endpoints
+router.use("/", searchRoute);
 
 router.get("/ping", (req, res) => {
   res.json({ message: "Hello from server!" });
