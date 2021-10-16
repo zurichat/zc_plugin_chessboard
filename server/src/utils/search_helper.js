@@ -84,7 +84,7 @@ exports.formatResult = (req, res, entity = {}, startIndex, endIndex, limit, sear
   let first_page = 1;
   let last_page = page_size;
 
-  const previous = (startIndex < data?.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page - 1}` : " ";
+  const previous = (page - 1 > 0) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page - 1}` : " ";
 
   const next = (endIndex < data?.length) ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${req.params.member_id}?q=${searchQuery}&page=${page + 1}` : " ";
 
