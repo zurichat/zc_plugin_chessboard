@@ -2,9 +2,9 @@
 const response = require("../utils/response");
 const CustomError = require("../utils/custom-error");
 const {
-  allGames,
+  filterFromAllGames,
   formatResult,
-  formatData,
+  formatMatch,
 } = require("../utils/search_helper");
 const DatabaseConnection = require("../db/database.helper");
 
@@ -18,11 +18,11 @@ class SearchController {
     try {
       let gameDBData;
       let matchedGames;
-      let { key: searchQuery, filter } = req.query;
+      let { q: searchQuery, filter } = req.query;
       if (searchQuery) {
         // paginate
-        const page = parseInt(req.query?.page, 10) || 1;
-        const limit = parseInt(req.query?.limit, 10) || 5;
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 3;
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
         //check for matching keywords. If match, return an array of ongoing games
@@ -34,20 +34,25 @@ class SearchController {
           regex.test(searchQuery.trim())
         ) {
           // get active games
-          matchedGames = await this.GameRepo.fetchByParameter({
-            status: 1,
-          });
+          const { data } = await this.GameRepo.fetchAll();
+          const chessMatch = data.filter((game) => game.status == 1);
+          matchedGames = { chessMatch };
         } else {
           // fetch all games
           gameDBData = await this.GameRepo.fetchAll();
-          matchedGames = allGames(searchQuery, gameDBData);
+          // filter matches and group into entities
+          const { userMatch, msgMatch } = filterFromAllGames(
+            searchQuery,
+            gameDBData
+          );
+          matchedGames = { userMatch, msgMatch };
         }
         // conform to zuri chat standard
-        let data = formatData(matchedGames);
+        let entity = formatMatch(matchedGames, req.params.member_id);
         const result = formatResult(
           req,
           res,
-          data,
+          entity,
           startIndex,
           endIndex,
           limit,
@@ -68,22 +73,20 @@ class SearchController {
   // get search suggestions
   async searchSuggestions(req, res) {
     try {
-      let gameDBData;
-      let names = [];
-      let moves = [];
-
-      gameDBData = await this.GameRepo.fetchAll();
-      for (let data in gameDBData.data) {
-        names.push(data?.owner?.user_name);
-        names.push(data?.opponent?.user_name);
-        moves.push(data?.moves?.to);
-      }
       let response = {
         status: "ok",
         type: "suggestions",
-        data: ["ongoing", "chess", ...names, ...moves],
+        data: {
+          "616957589ea5d3be97df29bc": "ongoing chess game",
+          "chess bot": "chess bot",
+          "hi, hi": "message in chess game",
+          anonymous: "Anonymous",
+          LocalhostUser: "spectators in-game",
+          Anonymous: "chess player 1",
+          "616963d0b2cc8a9af4833d82": "chess",
+        },
       };
-      res.status(200).json(response);
+      res.status(200).send(response);
     } catch (error) {
       throw new CustomError(`Unable to search for Suggestions: ${error}`, 500);
     }
