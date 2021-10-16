@@ -28,7 +28,7 @@ exports.formatMatch = (matchedGames, member_id) => {
       email: null,
       images_url: `${userEn.owner?.image_url}`,
       created_at: userEn.start_time,
-      destination_url: `/game/:${userEn._id}`
+      destination_url: `/game/${userEn._id}`
     };
   };
   const msgFormat = (msgEn) => {
@@ -39,7 +39,7 @@ exports.formatMatch = (matchedGames, member_id) => {
       created_by: msgEn.user_name,
       images_url: msgEn.image_url,
       created_at: msgEn.timestamp,
-      destination_url: `/game/:${msgEn._id}`,
+      destination_url: `/game/${msgEn._id}`,
     };
   };
   const otherFormat = (otherEn) => {
@@ -66,7 +66,7 @@ exports.formatMatch = (matchedGames, member_id) => {
   return { chessGame, user, message };
 };
 
-exports.formatResult = (req, res, entity = {}, startIndex, endIndex, limit, searchQuery = " ", filter = " ", page) => {
+exports.formatResult = (req, res, entity = {}, startIndex, endIndex, limit, searchQuery = " ", filter = [], page) => {
   let data;
   if (entity.user?.length > 0) {
     data = entity.user;
