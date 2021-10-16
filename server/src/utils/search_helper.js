@@ -28,7 +28,7 @@ exports.formatMatch = (matchedGames, member_id) => {
       email: null,
       images_url: `${userEn.owner?.image_url}`,
       created_at: userEn.start_time,
-      destination_url: `https://chess.zuri.chat/game/:${userEn._id}`
+      destination_url: `/game/:${userEn._id}`
     };
   };
   const msgFormat = (msgEn) => {
@@ -39,7 +39,7 @@ exports.formatMatch = (matchedGames, member_id) => {
       created_by: msgEn.user_name,
       images_url: msgEn.image_url,
       created_at: msgEn.timestamp,
-      destination_url: `https://chess.zuri.chat/game/:${msgEn._id}`,
+      destination_url: `/game/:${msgEn._id}`,
     };
   };
   const otherFormat = (otherEn) => {
@@ -56,7 +56,7 @@ exports.formatMatch = (matchedGames, member_id) => {
       created_by: otherEn.owner?.user_name,
       images_url: otherEn.owner?.image_url,
       created_at: otherEn.start_time,
-      destination_url: `https://chess.zuri.chat/game/:${otherEn._id}`,
+      destination_url: `/game/${otherEn._id}`,
     };
   };
 
