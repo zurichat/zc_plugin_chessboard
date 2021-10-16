@@ -53,22 +53,17 @@ class SearchController {
   // get search suggestions
   async searchSuggestions(req, res) {
     try {
-      let gameDBData;
-      let names = [];
-      let moves = [];
-
-      gameDBData = await this.GameRepo.fetchAll();
-      for (let data in gameDBData.data) {
-        names.push(data?.owner?.user_name);
-        names.push(data?.opponent?.user_name);
-        moves.push(data?.moves?.to);
-      }
       let response = {
         status: "ok",
         type: "suggestions",
-        data: ["ongoing", "chess", ...names, ...moves],
-      };
-      res.status(200).json(response);
+        data: {
+          "616957589ea5d3be97df29bc": "ongoing chess game", "chess bot": "chess bot", "hi, hi": "message in chess game", "anonymous": "Anonymous",
+          "LocalhostUser": "spectators in-game",
+          "Anonymous": "chess player 1",
+          "616963d0b2cc8a9af4833d82": "chess"
+        }
+      }
+      res.status(200).send(response);
     } catch (error) {
       throw new CustomError(`Unable to search for Suggestions: ${error}`, 500);
     }
