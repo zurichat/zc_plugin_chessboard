@@ -185,14 +185,28 @@ class GameController {
 
         // Publish the event to Centrifugo server
         await centrifugoController.publish(game_id, payload);
-        const sidebar_update_payload = await InformationController.sideBarInfo(
-          this.organisation_id,
-          user_id
-        );
+        const sidebar_update_payload_opponent =
+          await InformationController.sideBarInfo(
+            this.organisation_id,
+            user_id
+          );
+
+        const sidebar_update_payload_owner =
+          await InformationController.sideBarInfo(
+            this.organisation_id,
+            gameDBData.data.owner.user_id
+          );
+
         await centrifugoController.publishToSideBar(
           this.organisation_id,
           user_id,
-          sidebar_update_payload
+          sidebar_update_payload_opponent
+        );
+
+        await centrifugoController.publishToSideBar(
+          this.organisation_id,
+          user_id,
+          sidebar_update_payload_owner
         );
       }
 
