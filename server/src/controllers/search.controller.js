@@ -62,7 +62,7 @@ class SearchController {
           "Anonymous": "chess player 1",
           "616963d0b2cc8a9af4833d82": "chess"
         }
-      }
+      };
       res.status(200).send(response);
     } catch (error) {
       throw new CustomError(`Unable to search for Suggestions: ${error}`, 500);
