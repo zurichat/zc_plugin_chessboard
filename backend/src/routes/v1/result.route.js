@@ -1,8 +1,8 @@
 // Package Modules
-const router = require("express").Router();
+const router = require('express').Router();
 
 // Custom Modules
-const ResultCtrl = require("../../controllers/result.controller");
+const ResultCtrl = require('../../controllers/result.controller');
 
 /**
  * @swagger
@@ -16,7 +16,7 @@ const ResultCtrl = require("../../controllers/result.controller");
  *    500:
  *      description: An error occurred
  */
-router.get("/all", ResultCtrl.getAll);
+router.get('/all', ResultCtrl.getAll);
 
 // Get Result for a particular game -- Erhabor Destiny
 
@@ -37,7 +37,7 @@ router.get("/all", ResultCtrl.getAll);
  *      description: An error occurred
  */
 
-router.get("/:gameId", ResultCtrl.getById);
+router.get('/:gameId', ResultCtrl.getById);
 
 // Export Module
 module.exports = router;

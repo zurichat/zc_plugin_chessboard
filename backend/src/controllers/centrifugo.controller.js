@@ -1,6 +1,6 @@
-const axios = require("axios");
-const { SOCKER_KEY, SOCKET_URL } = require("../config/index");
-const CustomError = require("../utils/custom-error");
+const axios = require('axios');
+const { SOCKER_KEY, SOCKET_URL } = require('../config/index');
+const CustomError = require('../utils/custom-error');
 
 class CentrifugoController {
   static async publish(channel, data) {
@@ -8,7 +8,7 @@ class CentrifugoController {
       await axios.post(
         SOCKET_URL,
         {
-          method: "publish",
+          method: 'publish',
           params: {
             channel,
             data,
@@ -17,44 +17,44 @@ class CentrifugoController {
         {
           headers: {
             Authorization: `apikey ${SOCKER_KEY}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-        }
+        },
       );
       return true;
     } catch (error) {
-      throw new CustomError(`Unable to publish to ${channel}: ${error}`, "500");
+      throw new CustomError(`Unable to publish to ${channel}: ${error}`, '500');
     }
   }
 
-  static async publishToSideBar(organisation_id, user_id, data) {
-    let channel = `${organisation_id}_${user_id}_sidebar`;
+  static async publishToSideBar(organisationId, userId, data) {
+    const channel = `${organisationId}_${userId}_sidebar`;
 
     try {
       await axios.post(
         SOCKET_URL,
         {
-          method: "publish",
+          method: 'publish',
           params: {
             channel,
             data: {
-              event: "sidebar_update",
-              plugin_id: "chess.zuri.chat",
-              data: data,
+              event: 'sidebar_update',
+              plugin_id: 'chess.zuri.chat',
+              data,
             },
           },
         },
         {
           headers: {
             Authorization: `apikey ${SOCKER_KEY}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-        }
+        },
       );
 
       return true;
     } catch (error) {
-      throw new CustomError(`Unable to publish to ${channel}: ${error}`, "500");
+      throw new CustomError(`Unable to publish to ${channel}: ${error}`, '500');
     }
   }
 }

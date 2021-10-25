@@ -1,11 +1,11 @@
 // Package Modules
-const router = require("express").Router();
+const router = require('express').Router();
 
 // Custom
-const gameRoute = require("./game.route");
-const resultRoute = require("./result.route");
-const InfoCtrl = require("../../controllers/info.controller");
-const searchRoute = require("./search.route");
+const gameRoute = require('./game.route');
+const resultRoute = require('./result.route');
+const InfoCtrl = require('../../controllers/info.controller');
+const searchRoute = require('./search.route');
 
 /**
  * @swagger
@@ -19,7 +19,7 @@ const searchRoute = require("./search.route");
  *    500:
  *      description: An error occurred
  */
-router.get("/info", InfoCtrl.getPluginInfo);
+router.get('/info', InfoCtrl.getPluginInfo);
 
 /**
  * @swagger
@@ -40,28 +40,28 @@ router.get("/info", InfoCtrl.getPluginInfo);
  *    500:
  *      description: An error occurred
  */
-router.get("/sidebar", InfoCtrl.getSideBarInfo);
+router.get('/sidebar', InfoCtrl.getSideBarInfo);
 
 // Sidebar star item
-router.put("/org/:org/rooms/:room_id/members/:user/star", InfoCtrl.createStar);
+router.put('/org/:org/rooms/:room_id/members/:user/star', InfoCtrl.createStar);
 
 // Game Endpoints
-router.use("/game", gameRoute);
+router.use('/game', gameRoute);
 
 // Result Endpoints
-router.use("/result", resultRoute);
+router.use('/result', resultRoute);
 
 // install plugin endpoints
-router.post("/install", InfoCtrl.installChess);
+router.post('/install', InfoCtrl.installChess);
 
 // uninstall chess endpioint
 // router.delete("/uninstall", InfoCtrl.uninstallChess);
 
 // Search Endpoints
-router.use("/", searchRoute);
+router.use('/', searchRoute);
 
-router.get("/ping", (req, res) => {
-  res.json({ message: "Hello from server!" });
+router.get('/ping', (req, res) => {
+  res.json({ message: 'Hello from server!' });
 });
 
 // Export Module

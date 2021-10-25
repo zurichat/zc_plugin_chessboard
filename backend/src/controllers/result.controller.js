@@ -1,8 +1,16 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable object-curly-newline */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
+/* eslint-disable operator-linebreak */
+
 // Custom Modules
-const response = require("../utils/response");
-const CustomError = require("../utils/custom-error");
-const DatabaseConnection = require("../db/database.helper");
-const GameRepo = new DatabaseConnection("001test_game");
+const response = require('../utils/response');
+const CustomError = require('../utils/custom-error');
+const DatabaseConnection = require('../db/database.helper');
+
+const GameRepo = new DatabaseConnection('001test_game');
 
 class ResultController {
   // Get All Results
@@ -10,25 +18,18 @@ class ResultController {
     const { data } = await GameRepo.fetchAll();
 
     try {
-      let resultsDBData = data.map((game) => {
-        return {
-          result:
-            game.is_owner_winner == null || game.is_owner_winner == undefined
-              ? "Draw"
-              : "Win",
-          winner:
-            game.is_owner_winner == null || game.is_owner_winner == undefined
-              ? {}
-              : game.is_owner_winner == true
+      this.resultsDBData = data.map((game) => ({
+        result: game.is_owner_winner == null || game.is_owner_winner === undefined ? 'Draw' : 'Win',
+        winner:
+          game.is_owner_winner == null || game.is_owner_winner === undefined
+            ? {}
+            : game.is_owner_winner === true
               ? game.winner
               : game.opponent,
-          game_id: game._id,
-        };
-      });
+        game_id: game._id,
+      }));
 
-      res
-        .status(200)
-        .send(response("Results retrieved successfully", resultsDBData));
+      res.status(200).send(response('Results retrieved successfully', this.resultsDBData));
     } catch (error) {
       throw new CustomError(`Unable to get all Results: ${error}`, 500);
     }
@@ -39,28 +40,28 @@ class ResultController {
     try {
       const { gameId } = req.params;
       const { data } = await GameRepo.fetchAll();
-      const game = data.find((game) => game._id == gameId);
-      if (!game) {
+      this.game = data.find((game) => game._id === gameId);
+      if (!this.game) {
         throw new CustomError(`Result with id: ${gameId} not found`, 404);
       }
-      res.status(200).send(
+      return res.status(200).send(
         response(
-          "Result retrieved successfully",
+          'Result retrieved successfully',
           {
             result:
-              game.is_owner_winner == null || game.is_owner_winner == undefined
-                ? "Draw"
-                : "Win",
+              this.game.is_owner_winner == null || this.game.is_owner_winner === undefined
+                ? 'Draw'
+                : 'Win',
             winner:
-              game.is_owner_winner == null || game.is_owner_winner == undefined
+              this.game.is_owner_winner == null || this.game.is_owner_winner === undefined
                 ? {}
-                : game.is_owner_winner == true
-                ? game.winner
-                : game.opponent,
-            game_id: game._id,
+                : this.game.is_owner_winner === true
+                  ? this.game.winner
+                  : this.game.opponent,
+            game_id: this.game._id,
           },
-          true
-        )
+          true,
+        ),
       );
     } catch (error) {
       throw new CustomError(`Unable to get Results by: ${error}`, 500);

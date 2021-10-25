@@ -1,10 +1,10 @@
-const path = require("path");
-const { Worker } = require("worker_threads");
+const path = require('path');
+const { Worker } = require('worker_threads');
 
 class StateController {
   constructor() {
     this.games = {};
-    this.workerPath = path.join(__dirname, "..", "utils", "gameWorker.js");
+    this.workerPath = path.join(__dirname, '..', 'utils', 'gameWorker.js');
   }
 
   monitor(orgId, gameId) {
@@ -17,8 +17,8 @@ class StateController {
 
     this.games[orgId][gameId] = worker;
 
-    worker.on("message", (data) => {
-      const params = data.split(":");
+    worker.on('message', (data) => {
+      const params = data.split(':');
       delete this.games[params[0]][params[1]];
     });
   }
@@ -30,7 +30,7 @@ class StateController {
     const gameWorker = organisation[gameId];
     if (!gameWorker) return;
 
-    gameWorker.postMessage("stop");
+    gameWorker.postMessage('stop');
     delete organisation[gameId];
   }
 

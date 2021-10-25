@@ -1,15 +1,16 @@
+/* eslint-disable max-len */
 // Package Modules
-const router = require("express").Router();
+const router = require('express').Router();
 
-const { orgAuth } = require("../../middlewares/organisation.middleware");
-const { userAuth } = require("../../middlewares/user_auth.middleware");
+const { orgAuth } = require('../../middlewares/organisation.middleware');
+const { userAuth } = require('../../middlewares/user_auth.middleware');
 
 // All Endpoints require authentication and organisationID to be accessed
 router.use(orgAuth);
 router.use(userAuth);
 
 // Custom Modules
-const GameCtrl = require("../../controllers/game.controller");
+const GameCtrl = require('../../controllers/game.controller');
 
 // Swagger Documentation
 
@@ -206,7 +207,7 @@ const GameCtrl = require("../../controllers/game.controller");
  *    500:
  *      description: An error occurred
  */
-router.post("/create", (req, res) => {
+router.post('/create', (req, res) => {
   new GameCtrl(res.locals.organisation_id).create(req, res);
 });
 
@@ -230,7 +231,7 @@ router.post("/create", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.post("/join", (req, res) => {
+router.post('/join', (req, res) => {
   new GameCtrl(res.locals.organisation_id).join(req, res);
 });
 
@@ -246,7 +247,7 @@ router.post("/join", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.get("/all", (req, res) => {
+router.get('/all', (req, res) => {
   new GameCtrl(res.locals.organisation_id).getAll(req, res);
 });
 
@@ -269,7 +270,7 @@ router.get("/all", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.patch("/watch", (req, res) => {
+router.patch('/watch', (req, res) => {
   new GameCtrl(res.locals.organisation_id).addSpectator(req, res);
 });
 
@@ -292,7 +293,7 @@ router.patch("/watch", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.patch("/piecemove", (req, res) => {
+router.patch('/piecemove', (req, res) => {
   new GameCtrl(res.locals.organisation_id).pieceMove(req, res);
 });
 
@@ -315,7 +316,7 @@ router.patch("/piecemove", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.patch("/capturedPiece", (req, res) => {
+router.patch('/capturedPiece', (req, res) => {
   new GameCtrl(res.locals.organisation_id).capturedPiece(req, res);
 });
 
@@ -338,7 +339,7 @@ router.patch("/capturedPiece", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.patch("/end", (req, res) => {
+router.patch('/end', (req, res) => {
   new GameCtrl(res.locals.organisation_id).endGame(req, res);
 });
 
@@ -361,7 +362,7 @@ router.patch("/end", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.patch("/unwatch", (req, res) => {
+router.patch('/unwatch', (req, res) => {
   new GameCtrl(res.locals.organisation_id).removeSpectator(req, res);
 });
 
@@ -387,7 +388,7 @@ router.patch("/unwatch", (req, res) => {
  *      description: An error occurred
  */
 
-router.patch("/resign", (req, res) => {
+router.patch('/resign', (req, res) => {
   new GameCtrl(res.locals.organisation_id).resign(req, res);
 });
 
@@ -410,7 +411,7 @@ router.patch("/resign", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   new GameCtrl(res.locals.organisation_id).getById(req, res);
 });
 
@@ -433,7 +434,7 @@ router.get("/:id", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.get("/all/:userId", (req, res) => {
+router.get('/all/:userId', (req, res) => {
   new GameCtrl(res.locals.organisation_id).getAllByUser(req, res);
 });
 
@@ -461,7 +462,7 @@ router.get("/all/:userId", (req, res) => {
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/comment", (req, res) => {
+router.patch('/comment', (req, res) => {
   new GameCtrl(res.locals.organisation_id).comment(req, res);
 });
 
@@ -487,7 +488,7 @@ router.patch("/comment", (req, res) => {
  *    500:
  *      description: Unable to Connect to Zuri Core DB
  */
-router.patch("/like", (req, res) => {
+router.patch('/like', (req, res) => {
   new GameCtrl(res.locals.organisation_id).like(req, res);
 });
 
@@ -512,7 +513,7 @@ router.patch("/like", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.delete("/delete", (req, res) => {
+router.delete('/delete', (req, res) => {
   new GameCtrl(res.locals.organisation_id).delete(req, res);
 });
 

@@ -22,9 +22,10 @@
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.12"
@@ -35,6 +36,6 @@
     "build": "yarn build-step-1",
     "build-step-1": "cd ../frontend && yarn install && yarn build && cd ../backend && yarn build-step-2",
     "build-step-2": "cd ../client && yarn install && yarn build",
-    "lint": "eslint src/"
+    "lint": "eslint ./ --fix"
   }
 }

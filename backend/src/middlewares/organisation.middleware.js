@@ -1,23 +1,22 @@
-const CustomError = require("../utils/custom-error");
+/* eslint-disable camelcase */
+const CustomError = require('../utils/custom-error');
 
 // Verify the organisationID passed in the request is valid
 exports.orgAuth = async (req, res, next) => {
   try {
-    let { organisation, user_id } = req.headers;
+    const { organisation, user_id } = req.headers;
 
     // Verify if the organisation is valid
     // OMO laterrr
 
     // If org_id is not set in the header, then set it to the default organisation
     if (
-      !organisation ||
-      organisation === null ||
-      organisation === "null" ||
-      organisation === "undefined"
+      !organisation || organisation === null
+      || organisation === 'null' || organisation === 'undefined'
     ) {
       // Use hardcoded organisation
-      res.locals.organisation_id = "616947fd9ea5d3be97df290d";
-      res.locals.user_id = "local_host_user";
+      res.locals.organisation_id = '616947fd9ea5d3be97df290d';
+      res.locals.user_id = 'local_host_user';
       // For now, we will use the default organisation
       // res.status(400).send(response("Organisation header is required", null, false));
     } else {

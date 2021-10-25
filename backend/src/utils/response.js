@@ -1,3 +1,10 @@
+function formatMesaage(str) {
+  if (!str) return '';
+
+  // Make first letter capitial
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 /**
  * Returns response object
  * @param {string} message Response message
@@ -11,13 +18,6 @@ function response(message, data, success) {
     data: data || null,
     success: success == null ? true : success,
   };
-}
-
-function formatMesaage(str) {
-  if (!str) return "";
-
-  // Make first letter capitial
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Export Module

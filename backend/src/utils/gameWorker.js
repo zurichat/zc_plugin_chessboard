@@ -1,11 +1,12 @@
-const { parentPort } = require("worker_threads");
-const globalTime = require("global-time");
-const DatabaseConnection = require("../db/database.helper");
+/* eslint-disable no-underscore-dangle */
+const { parentPort } = require('worker_threads');
+const globalTime = require('global-time');
+const DatabaseConnection = require('../db/database.helper');
 
 const orgId = process.argv[2];
 const gameId = process.argv[3];
 
-const gameRepo = new DatabaseConnection("003test_game", orgId);
+const gameRepo = new DatabaseConnection('003test_game', orgId);
 
 const timer = setInterval(async () => {
   const game = await gameRepo.fetchOne(gameId);
@@ -22,6 +23,6 @@ const timer = setInterval(async () => {
   }
 }, 5 * 60 * 1000);
 
-parentPort.on("message", (data) => {
-  if (data.toString() == "stop") clearInterval(timer);
+parentPort.on('message', (data) => {
+  if (data.toString() === 'stop') clearInterval(timer);
 });

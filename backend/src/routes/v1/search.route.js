@@ -1,15 +1,16 @@
+/* eslint-disable max-len */
 // Package Modules
-const router = require("express").Router();
+const router = require('express').Router();
 
-const { orgAuth } = require("../../middlewares/organisation.middleware");
-const { userAuth } = require("../../middlewares/user_auth.middleware");
+const { orgAuth } = require('../../middlewares/organisation.middleware');
+const { userAuth } = require('../../middlewares/user_auth.middleware');
 
 // All Endpoints require authentication and organisationID to be accessed
 router.use(orgAuth);
 router.use(userAuth);
 
 // Custom Modules
-const searchCtrl = require("../../controllers/search.controller");
+const SearchCtrl = require('../../controllers/search.controller');
 
 /**
  * @swagger
@@ -23,8 +24,8 @@ const searchCtrl = require("../../controllers/search.controller");
  *    500:
  *      description: An error occurred
  */
-router.get("/search/:org_id/:member_id", (req, res) => {
-  new searchCtrl(req.params.org_id).search(req, res);
+router.get('/search/:org_id/:member_id', (req, res) => {
+  new SearchCtrl(req.params.org_id).search(req, res);
 });
 
 /**
@@ -39,8 +40,8 @@ router.get("/search/:org_id/:member_id", (req, res) => {
  *    500:
  *      description: An error occurred
  */
-router.get("/search-suggestions/:org_id/:member_id", (req, res) => {
-  new searchCtrl(req.params.org_id).searchSuggestions(req, res);
+router.get('/search-suggestions/:org_id/:member_id', (req, res) => {
+  new SearchCtrl(req.params.org_id).searchSuggestions(req, res);
 });
 
 // Export Module
