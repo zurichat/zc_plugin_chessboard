@@ -15,10 +15,10 @@ jobs:
     - name: Use cached node_modules
       uses: c-hive/gha-yarn-cache@v2
       with:
-        directory: server
+        directory: backend
 
     - name: Install yarn dependencies and Run ESLint
       run: |
-        cd server
+        cd backend
         yarn install
         yarn run lint

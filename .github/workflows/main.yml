@@ -55,11 +55,11 @@ jobs:
     - name: Use cached node_modules
       uses: c-hive/gha-yarn-cache@v2
       with:
-        directory: chess
+        directory: frontend
     
     - name: Install yarn dependencies and Run ESLint for main app
       run: |
-        cd chess
+        cd frontend
         yarn install
         yarn run lint --fix
 
@@ -84,11 +84,11 @@ jobs:
     - name: Use cached node_modules
       uses: c-hive/gha-yarn-cache@v2
       with:
-        directory: server
+        directory: backend
 
     - name: Install yarn dependencies and Run ESLint
       run: |
-        cd server
+        cd backend
         yarn install
         yarn run lint --fix
 
@@ -108,7 +108,7 @@ jobs:
 
       - name: Install yarn dependencies and build project
         run: |
-          cd server
+          cd backend
           yarn install
           yarn build
 
@@ -123,7 +123,7 @@ jobs:
             git stash
             git fetch --all
             git reset --hard origin/dev
-            cd server
+            cd backend
             # yarn install
 
       - name: Copy Main Chess App dist folder to server
@@ -132,7 +132,7 @@ jobs:
           privateKey: ${{ secrets.PRIVATE_KEY }}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
-          localPath: './chess/dist/'
+          localPath: './frontend/dist/'
           remotePath: '/var/www/zc_plugin_chessboard/chess/dist'
 
       - name: Copy Client dist folder to server
