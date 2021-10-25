@@ -37,7 +37,7 @@ git clone https://github.com/<username>/zc_plugin_chessboard.git
 - switch to the backend directory and install all dependencies
 
 ```
-cd server
+cd backend
 npm install   or   yarn install
 ```
 
@@ -46,7 +46,7 @@ npm install   or   yarn install
 - switch to the frontend directory and install all dependencies
 
 ```
-cd client
+cd frontend
 npm install   or   yarn install
 ```
 
