@@ -1,5 +1,4 @@
 // Imports
-const path = require("path");
 require("express-async-errors");
 const express = require("express");
 const router = require("./src/routes/index");
@@ -12,7 +11,6 @@ const app = express();
 // swagger setup
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDocument = require("swagger-jsdoc");
-const { generateImage } = require("./src/utils/imageHelper");
 
 const swaggerOptions = {
   definition: {
@@ -34,16 +32,6 @@ preRouteMiddlewares(app);
 
 // All Endpoints routes for backend are defined here
 app.use("/api", router);
-
-app.get("/image", async (req, res) => {
-  try {
-    const src = await generateImage(null, null);
-    res.send(`<img src=http://localhost:5050/${src}>`);
-  } catch (error) {
-    console.log(error);
-    res.send("nothing");
-  }
-});
 
 // Error middlewares
 errorMiddleware(app);

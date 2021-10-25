@@ -16,12 +16,6 @@ module.exports = (app) => {
     })
   );
 
-  // enable Cors for all routes
-  // app.use(cors());
-
-  // Secure the app by setting various HTTP headers off.
-  // app.use(helmet());
-
   // Tell express to recognize the incoming Request Object as a JSON Object
   app.use(express.json());
 
@@ -40,7 +34,7 @@ module.exports = (app) => {
         "..",
         "..",
         "..",
-        "chess",
+        "frontend",
         "dist",
         "zuri-zuri-plugin-chessboard.js"
       )
