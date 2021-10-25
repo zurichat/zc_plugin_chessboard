@@ -1,21 +1,21 @@
-import Axios from "axios";
+import Axios from 'axios';
 import {
   getCurrentOrganisation,
   getAuthToken,
   getLoggedInUserData,
-} from "../auth";
+} from '../auth';
 
 function returnAxiosInstance() {
   return Axios.create({
-    baseURL: "https://chess.zuri.chat/api/v1/",
+    baseURL: 'https://chess.zuri.chat/api/v1/',
     // baseURL: "//localhost:5050/api/v1/",
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Organisation: getCurrentOrganisation(),
-      Authorization: "Bearer " + getAuthToken(),
+      Authorization: `Bearer ${getAuthToken()}`,
       user_id: getLoggedInUserData().user_id,
     },
-    validateStatus: function (status) {
+    validateStatus(status) {
       return status < 500; // Resolve only if the status code is less than 500
     },
   });

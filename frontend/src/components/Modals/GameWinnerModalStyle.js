@@ -1,4 +1,6 @@
-import styled, { keyframes } from "styled-components";
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-tabs */
+import styled, { keyframes } from 'styled-components';
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -219,4 +221,6 @@ const myAnim = keyframes`
 	}
 `;
 
-export { ModalWrapper, ModalBackdrop, ModalBox, ModalContent, Button };
+export {
+  ModalWrapper, ModalBackdrop, ModalBox, ModalContent, Button,
+};

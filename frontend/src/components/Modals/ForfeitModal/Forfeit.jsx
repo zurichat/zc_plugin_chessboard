@@ -1,9 +1,12 @@
-import Logo from "../../../assets/modal/profile_img.svg";
-import Close from "../../../assets/modal/close.svg";
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import Logo from '../../../assets/modal/profile_img.svg';
+import Close from '../../../assets/modal/close.svg';
 // import "./Forfeit.css";
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { endGame } from "../../../adapters/game";
+import { endGame } from '../../../adapters/game';
 
 import {
   ForfeitContainer,
@@ -13,7 +16,7 @@ import {
   ForfeitContent,
   ForfeitFooter,
   ForfeitGameBtn,
-} from "./ForfeitStyle";
+} from './ForfeitStyle';
 
 const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
   const history = useHistory();
@@ -22,15 +25,14 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
 
   useEffect(() => {
     setGameId(gameData._id);
-  }, []);
+  }, [gameData._id]);
 
   const handleForfeitGame = async () => {
     endGame(gameId).then((response) => {
       if (response.data.success) {
-        history.push("/");
+        history.push('/');
       } else {
         // TODO: Handle error with Toasts
-        console.log("Unable to forfeit Game: ", response.data.message);
       }
     });
   };
@@ -50,13 +52,12 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
         </ForfeitHeader>
 
         <ForfeitContent className="forfeit-content">
-          <h2 className="forfeit-content-text">
-            Are you sure you want to forfeit the game?
-          </h2>
+          <h2 className="forfeit-content-text">Are you sure you want to forfeit the game?</h2>
         </ForfeitContent>
         <ForfeitFooter className="forfeit-footer">
           <ForfeitGameBtn className="btn-forfeit-game">
             <button
+              type="button"
               className="btn-forfeit-modal btn-accept-forfeit"
               // onClick={() => {
               //   history.push("/");
@@ -68,10 +69,7 @@ const Forfeit = ({ isModalOpen, setmodalIsOpen, gameData }) => {
           </ForfeitGameBtn>
 
           <ForfeitGameBtn className="btn-forfeit-game">
-            <button
-              className="btn-forfeit-modal btn-decline-forfeit"
-              onClick={close}
-            >
+            <button type="button" className="btn-forfeit-modal btn-decline-forfeit" onClick={close}>
               Decline
             </button>
           </ForfeitGameBtn>

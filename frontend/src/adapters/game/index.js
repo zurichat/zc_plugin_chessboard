@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
+/* eslint-disable import/no-unresolved */
 // Import api call adapter
-import { get, post, patch } from "../xhr";
-import { getLoggedInUserData, getChessBotData } from "../auth";
-import { SubscribeToChannel } from "@zuri/utilities";
+import { SubscribeToChannel } from '@zuri/utilities';
+import { get, post, patch } from '../xhr';
+import { getLoggedInUserData, getChessBotData } from '../auth';
 // import Centrifuge from "centrifuge";
 
 export function getGameData(game_id) {
@@ -44,7 +46,7 @@ export function watchGame(game_id) {
     image_url: getLoggedInUserData().image_url,
   };
 
-  return patch("/game/watch", body);
+  return patch('/game/watch', body);
 }
 
 // unwatch Game
@@ -54,7 +56,7 @@ export function unwatchGame(game_id) {
     user_id: getLoggedInUserData().user_id,
   };
 
-  return patch("/game/unwatch", body);
+  return patch('/game/unwatch', body);
 }
 
 // End Game
@@ -64,7 +66,7 @@ export function endGame(game_id) {
     game_id,
   };
 
-  return patch("/game/end", body);
+  return patch('/game/end', body);
 }
 
 // Start Game with Bot
@@ -73,9 +75,9 @@ export function startGameWithBot(game_id) {
   const bot = getChessBotData();
 
   // Set the bot Data and Game Data to Body
-  let body = bot;
-  body["game_id"] = game_id;
+  const body = bot;
+  body.game_id = game_id;
 
   // Call the join game api endpoint with the bot data
-  return post("/game/join", body);
+  return post('/game/join', body);
 }

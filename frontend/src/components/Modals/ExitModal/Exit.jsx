@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Logo from "../../../assets/modal/profile_img.svg";
-import Close from "../../../assets/modal/close.svg";
-import styles from "./exit.module.css";
-import { useHistory } from "react-router-dom";
-import { UpdateGameWinner } from "../../../adapters/chessboard";
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import Logo from '../../../assets/modal/profile_img.svg';
+import Close from '../../../assets/modal/close.svg';
+import styles from './exit.module.css';
+import { UpdateGameWinner } from '../../../adapters/chessboard';
 
 const Exit = ({ isOpen, setIsOpen, gameData }) => {
   const history = useHistory();
@@ -12,15 +15,15 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
 
   useEffect(() => {
     setGameId(gameData._id);
-  }, []);
+  }, [gameData._id]);
 
   const exitGame = async () => {
     UpdateGameWinner(gameId, gameData.owner.user_id).then((response) => {
       if (response.data.success) {
-        history.push("/");
+        history.push('/');
       } else {
         // TODO: Handle error with Toasts
-        console.log("Unable to exit Game: ", response.data.message);
+        console.log('Unable to exit Game: ', response.data.message);
       }
     });
   };
@@ -32,7 +35,7 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
   return (
     <div className={styles.exit__container}>
       <div className={styles.exit__modal}>
-        <button className={styles["btn-exit-modal-close"]} onClick={close}>
+        <button type="button" className={styles['btn-exit-modal-close']} onClick={close}>
           <img className="" src={Close} alt="Close" />
         </button>
 
@@ -44,19 +47,20 @@ const Exit = ({ isOpen, setIsOpen, gameData }) => {
 
         <section className={styles.exit__content}>
           <p className={styles.exit__text}>
-            You are probably tired of waiting for player 2, are you sure you
-            want to leave the game?
+            You are probably tired of waiting for player 2, are you sure you want to leave the game?
           </p>
         </section>
 
         <footer className={styles.exit__footer}>
           <button
+            type="button"
             className={`${styles.exit__button} ${styles.exit__button__yes}`}
             onClick={exitGame}
           >
             Yes
           </button>
           <button
+            type="button"
             className={`${styles.exit__button} ${styles.exit__button__no}`}
             onClick={close}
           >

@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-plusplus */
+/* eslint-disable camelcase */
+/* eslint-disable react/prop-types */
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-unresolved */
+import React, { useState } from 'react';
 
-//Zuri Header
-import Parcel from "single-spa-react/parcel";
-import { pluginHeader } from "@zuri/plugin-header";
+// Zuri Header
+import Parcel from 'single-spa-react/parcel';
+import { pluginHeader } from '@zuri/plugin-header';
 
 // Import CSS for this page
-import styles from "./header.module.css";
+import styles from './header.module.css';
 
 // Header fix
 
 // Import Assets
-import ChessImage from "../../assets/header/chess_piece.svg";
+import ChessImage from '../../assets/header/chess_piece.svg';
 // import CommentIcon from "../../assets/header/CommentIcon.png";
-import imageProfileOne from "../../assets/header/imageProfileOne.png";
-import imageProfileTwo from "../../assets/header/imageProfileTwo.png";
-import imageProfileThree from "../../assets/header/imageProfileThree.png";
-import LoadUser from "../Modals/LoadUserModal/LoadUser";
+import imageProfileOne from '../../assets/header/imageProfileOne.png';
+import imageProfileTwo from '../../assets/header/imageProfileTwo.png';
+import imageProfileThree from '../../assets/header/imageProfileThree.png';
+import LoadUser from '../Modals/LoadUserModal/LoadUser';
 
 function Header({ gameData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +51,7 @@ function Header({ gameData }) {
 
   const pluginConfig = {
     // Name on header
-    name: "Chess Plugin",
+    name: 'Chess Plugin',
     // Image on header
     icon: ChessImage,
     // Replace with images of users
@@ -52,41 +59,37 @@ function Header({ gameData }) {
     // User count on header
     userCount: padLeadingZeros(numUsers(), 3),
     eventTitle: () => {
-      //Block of code to be triggered on title click
+      // Block of code to be triggered on title click
     },
     eventThumbnail: () => {
       // Block of code to be triggered on thumbnail click
       handleViewAllSpectatorsModal();
     },
     // set false if you don't want thumbnail on the header
-    hasThumbnail: !gameData ? false : true,
+    hasThumbnail: !!gameData,
   };
 
   // pad leading zeros
   function padLeadingZeros(num, size) {
-    var s = num + "";
-    while (s.length < size) s = "0" + s;
+    let s = `${num}`;
+    while (s.length < size) s = `0${s}`;
     return s;
   }
 
   return (
     <div>
-      <div className={styles["header-fixed"]}>
-        <div className={styles["header-spaced"]}>
+      <div className={styles['header-fixed']}>
+        <div className={styles['header-spaced']}>
           <Parcel
             config={pluginHeader}
             wrapWith="div"
-            wrapStyle={{ width: "100%" }}
+            wrapStyle={{ width: '100%' }}
             headerConfig={pluginConfig}
           />
         </div>
       </div>
 
-      <LoadUser
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        gameData={gameData}
-      />
+      <LoadUser isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} gameData={gameData} />
     </div>
   );
 }

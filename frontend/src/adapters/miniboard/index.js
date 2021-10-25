@@ -1,13 +1,14 @@
+/* eslint-disable camelcase */
 // Import api call adapter
-import { post } from "../xhr";
-import { getLoggedInUserData } from "../auth";
+import { post } from '../xhr';
+import { getLoggedInUserData } from '../auth';
 
 export function createGame() {
   // Get the authenticated user data
   const user = getLoggedInUserData();
 
   // Call the Create the game Endpoint
-  return post("/game/create", user);
+  return post('/game/create', user);
 }
 
 export function joinGame(game_id) {
@@ -15,9 +16,9 @@ export function joinGame(game_id) {
   const user = getLoggedInUserData();
 
   // Set User Data and Game Data to Body
-  let body = user;
-  body["game_id"] = game_id;
+  const body = user;
+  body.game_id = game_id;
 
   // Call the Join game Endpoint
-  return post("/game/join", body);
+  return post('/game/join', body);
 }

@@ -1,7 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 // Import The Base React Application
-import App from "./App";
+import App from './App';
 
 export default function Root() {
   return (

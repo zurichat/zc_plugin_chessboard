@@ -1,4 +1,7 @@
-import { GetUserInfo } from "@zuri/utilities";
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-unresolved */
+import { GetUserInfo } from '@zuri/utilities';
 
 export class UserService {
   constructor() {

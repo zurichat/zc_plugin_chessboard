@@ -1,30 +1,40 @@
-import React, { useEffect, useState, useRef } from "react";
-import HeartIcon from "../../assets/icons/hearticon.svg";
-import Heart from "../../assets/icons/heart.svg";
-// import moment from "moment";
-// (lekandev) Commented it out
-// import Forfeit from "../Modals/ForfeitModal/Forfeit";
-// import Exit from "../Modals/ExitModal/Exit";
+/* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable dot-notation */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/jsx-curly-brace-presence */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable no-plusplus */
+/* eslint-disable camelcase */
+/* eslint-disable arrow-body-style */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect, useState, useRef } from 'react';
+import HeartIcon from '../../assets/icons/hearticon.svg';
+import Heart from '../../assets/icons/heart.svg';
 
 // Import CSS for this component
-import styles from "./spectatorsidebar.module.css";
-import link from "../../assets/comment/link.svg";
-import div1 from "../../assets/comment/divider1.svg";
-import div2 from "../../assets/comment/divider2.svg";
-import zap from "../../assets/comment/zap.svg";
-import bold from "../../assets/comment/bold.svg";
-import at from "../../assets/comment/at.svg";
-import clip from "../../assets/comment/clip.svg";
-import send from "../../assets/comment/send.svg";
-import dropdown from "../../assets/comment/dropdown.svg";
-import emptyComment from "../../assets/comment/emptyComment.svg";
-import close from "../../assets/comment/close.svg";
+import styles from './spectatorsidebar.module.css';
+import link from '../../assets/comment/link.svg';
+import div1 from '../../assets/comment/divider1.svg';
+import div2 from '../../assets/comment/divider2.svg';
+import zap from '../../assets/comment/zap.svg';
+import bold from '../../assets/comment/bold.svg';
+import at from '../../assets/comment/at.svg';
+import clip from '../../assets/comment/clip.svg';
+import send from '../../assets/comment/send.svg';
+import dropdown from '../../assets/comment/dropdown.svg';
+import emptyComment from '../../assets/comment/emptyComment.svg';
+import close from '../../assets/comment/close.svg';
 
 // Import Adapters
-import { sendComment } from "../../adapters/comments";
+import { sendComment } from '../../adapters/comments';
 
 // (lekandev) Commented it out
-//import style-components
+//  import style-components
 // import {
 //   Chat,
 //   ChatInputForm,
@@ -38,7 +48,7 @@ import { sendComment } from "../../adapters/comments";
 const SpectatorSideBar = ({ type, gameData }) => {
   const game_id = gameData._id;
 
-  const [commentMsg, setCommentMsg] = useState("");
+  const [commentMsg, setCommentMsg] = useState('');
   const [commentsFromGameData] = useState(gameData.messages);
 
   // (lekandev) Commented it out
@@ -46,12 +56,9 @@ const SpectatorSideBar = ({ type, gameData }) => {
   // const [isOpen, setIsOpen] = useState(false);
 
   const messagesEndRef = useRef(null);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   useEffect(() => {
-    scrollToBottom();
+    if (messagesEndRef.current) messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     // window.scrollTo(0, 0);
   });
 
@@ -60,14 +67,13 @@ const SpectatorSideBar = ({ type, gameData }) => {
       sendComment(game_id, commentMsg).then((response) => {
         if (!response.data.success) {
           // TODO: Handle error with Toasts
-          console.log("Unable to send comment: ", response.data.message);
         } else {
           // Clear the comment message input
         }
-      }, setCommentMsg(""));
+      }, setCommentMsg(''));
     } else {
       // TODO: Handle error with Toasts
-      console.log("CommentMsg is empty");
+      console.log('CommentMsg is empty');
     }
   };
 
@@ -95,8 +101,8 @@ const SpectatorSideBar = ({ type, gameData }) => {
 
   return (
     <>
-      <aside className={styles["side-bar"]}>
-        <nav className={styles["side-bar-nav"]}>
+      <aside className={styles['side-bar']}>
+        <nav className={styles['side-bar-nav']}>
           <div className={styles.navLink}>
             <h2>Comments</h2>
           </div>
@@ -127,32 +133,24 @@ const SpectatorSideBar = ({ type, gameData }) => {
             <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 <>
-                  {commentsFromGameData.map(
-                    ({ user_name, image_url, text, timestamp }) => {
-                      return (
-                        <div className={styles.chatWrapper} key={comment_id++}>
-                          <div className={styles.specHead}>
-                            <img
-                              className={styles.specAvi}
-                              src={image_url}
-                              alt="avi"
-                            />
-                            <div className={styles.specInfo}>
-                              <h2 className={styles.spectatorName}>
-                                {user_name}
-                              </h2>
-                              <p className={styles["time-muted"]}>
-                                {timestamp}
-                              </p>
-                            </div>
-                          </div>
-                          <div className={styles.specNameTime}>
-                            <p className={styles.spectatorMessage}>{text}</p>
+                  {commentsFromGameData.map(({
+                    user_name, image_url, text, timestamp,
+                  }) => {
+                    return (
+                      <div className={styles.chatWrapper} key={comment_id++}>
+                        <div className={styles.specHead}>
+                          <img className={styles.specAvi} src={image_url} alt="avi" />
+                          <div className={styles.specInfo}>
+                            <h2 className={styles.spectatorName}>{user_name}</h2>
+                            <p className={styles['time-muted']}>{timestamp}</p>
                           </div>
                         </div>
-                      );
-                    }
-                  )}
+                        <div className={styles.specNameTime}>
+                          <p className={styles.spectatorMessage}>{text}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
                   <div ref={messagesEndRef} />
                 </>
               ) : (
@@ -164,7 +162,7 @@ const SpectatorSideBar = ({ type, gameData }) => {
               )}
             </div>
 
-            {type === "spectator" || type === "owner" || type === "opponent" ? (
+            {type === 'spectator' || type === 'owner' || type === 'opponent' ? (
               <div className={styles.chatInputForm}>
                 {animate ? (
                   <div className={styles.heartContainer}>
@@ -177,13 +175,10 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   type="text"
                   value={commentMsg}
                   onChange={(e) => setCommentMsg(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAddComment()}
                   placeholder="Send a comment"
                 />
-                <div
-                  className={styles.heartIcon}
-                  onClick={() => setAnimate(true)}
-                >
+                <div className={styles.heartIcon} onClick={() => setAnimate(true)}>
                   <img src={HeartIcon} alt="_heart_" />
                   <span>16</span>
                 </div>
@@ -198,13 +193,9 @@ const SpectatorSideBar = ({ type, gameData }) => {
                   <div className={styles.inputIconsright}>
                     <img src={at} className={styles.feather} />
                     <img src={clip} className={styles.feather} />
-                    <img
-                      src={send}
-                      className={styles["submit"]}
-                      onClick={handleAddComment}
-                    />
+                    <img src={send} className={styles['submit']} onClick={handleAddComment} />
                     <img src={div2} className="" />
-                    <img src={dropdown} className={styles["icon-down"]} />
+                    <img src={dropdown} className={styles['icon-down']} />
                   </div>
                 </div>
               </div>
