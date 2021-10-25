@@ -38,18 +38,12 @@ class DatabaseConnection {
 
     try {
       // Make the request
-      const response = await axios.post(
-        this.DB_WRITE_URL,
-        JSON.stringify(this.DB_DEFAULTS_CONFIG),
-      );
+      const response = await axios.post(this.DB_WRITE_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
 
       // Return the response
       return response.data;
     } catch (error) {
-      throw new CustomError(
-        `Unable to Connect to Zuri Core DB [CREATE]: ${error}`,
-        '500',
-      );
+      throw new CustomError(`Unable to Connect to Zuri Core DB [CREATE]: ${error}`, '500');
     }
   }
 
@@ -64,10 +58,7 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
-      throw new CustomError(
-        `Unable to Connect to Zuri Core DB [READ ONE]: ${error}`,
-        '500',
-      );
+      throw new CustomError(`Unable to Connect to Zuri Core DB [READ ONE]: ${error}`, '500');
     }
   }
 
@@ -86,8 +77,8 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       if (
-        error.response.data.status === 404
-        && error.response.data.message === 'collection not found'
+        error.response.data.status === 404 &&
+        error.response.data.message === 'collection not found'
       ) {
         return { data: [] };
       }
@@ -117,8 +108,8 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       if (
-        error.response.data.status === 404
-        && error.response.data.message === 'collection not found'
+        error.response.data.status === 404 &&
+        error.response.data.message === 'collection not found'
       ) {
         return { data: [] };
       }
@@ -146,16 +137,13 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       if (
-        error.response.data.status === 404
-        && error.response.data.message === 'collection not found'
+        error.response.data.status === 404 &&
+        error.response.data.message === 'collection not found'
       ) {
         return { data: [] };
       }
 
-      throw new CustomError(
-        `Unable to Connect to Zuri Core DB [READ ALL]: ${error}`,
-        '500',
-      );
+      throw new CustomError(`Unable to Connect to Zuri Core DB [READ ALL]: ${error}`, '500');
     }
   }
 
@@ -167,18 +155,12 @@ class DatabaseConnection {
     this.DB_DEFAULTS_CONFIG.object_id = object_id;
     try {
       // Make the request
-      const response = await axios.put(
-        this.DB_WRITE_URL,
-        JSON.stringify(this.DB_DEFAULTS_CONFIG),
-      );
+      const response = await axios.put(this.DB_WRITE_URL, JSON.stringify(this.DB_DEFAULTS_CONFIG));
 
       // Return the response
       return response.data;
     } catch (error) {
-      throw new CustomError(
-        `Unable to Connect to Zuri Core DB [UPDATE]: ${error}`,
-        '500',
-      );
+      throw new CustomError(`Unable to Connect to Zuri Core DB [UPDATE]: ${error}`, '500');
     }
   }
 
@@ -199,10 +181,7 @@ class DatabaseConnection {
       // Return the response
       return response.data;
     } catch (error) {
-      throw new CustomError(
-        `Unable to Connect to Zuri Core DB [DELETE]: ${error}`,
-        '500',
-      );
+      throw new CustomError(`Unable to Connect to Zuri Core DB [DELETE]: ${error}`, '500');
     }
   }
 }

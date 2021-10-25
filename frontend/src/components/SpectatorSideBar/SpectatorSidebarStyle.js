@@ -56,7 +56,7 @@ const Chat = styled.div`
   .chatContainer {
     width: 100%;
     overflow-y: auto;
-    font-family: "Lato", sans-serif;
+    font-family: 'Lato', sans-serif;
     padding: 1.5rem 2rem 0.5rem 1rem;
     display: flex;
     flex-direction: column;
@@ -73,7 +73,7 @@ const ChatWrapper = styled.div`
   @media only screen and (max-width: 420px) {
     width: 100%;
     /* overflow-y: auto; */
-    font-family: "Lato", sans-serif;
+    font-family: 'Lato', sans-serif;
     padding: 1.5rem 1rem 1rem 0.5rem;
   }
 
@@ -241,12 +241,4 @@ const ExitBtn = styled.button`
   color: #bb003c;
 `;
 
-export {
-  Sidebar,
-  SidebarNav,
-  Chat,
-  ChatWrapper,
-  EmptyComment,
-  ChatInputForm,
-  ExitBtn,
-};
+export { Sidebar, SidebarNav, Chat, ChatWrapper, EmptyComment, ChatInputForm, ExitBtn };

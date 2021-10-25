@@ -1,9 +1,5 @@
 import Axios from 'axios';
-import {
-  getCurrentOrganisation,
-  getAuthToken,
-  getLoggedInUserData,
-} from '../auth';
+import { getCurrentOrganisation, getAuthToken, getLoggedInUserData } from '../auth';
 
 function returnAxiosInstance() {
   return Axios.create({

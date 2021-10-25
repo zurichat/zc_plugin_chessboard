@@ -19,10 +19,8 @@ const RequestRematchModal = styled.div`
   width: 456px;
   z-index: 2;
   background: #ffffff;
-  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07),
-    0px 49px 35px rgba(0, 0, 0, 0.0460133),
-    0px 24.8165px 16.4998px rgba(0, 0, 0, 0.034856),
-    0px 13.729px 8.167px rgba(0, 0, 0, 0.0269394),
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 49px 35px rgba(0, 0, 0, 0.0460133),
+    0px 24.8165px 16.4998px rgba(0, 0, 0, 0.034856), 0px 13.729px 8.167px rgba(0, 0, 0, 0.0269394),
     0px 7.56423px 3.94388px rgba(0, 0, 0, 0.0201337),
     0px 3.35772px 1.53069px rgba(0, 0, 0, 0.0128302);
   display: flex;

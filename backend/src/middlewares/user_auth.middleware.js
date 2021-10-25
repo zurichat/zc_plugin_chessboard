@@ -14,11 +14,13 @@ exports.userAuth = async (req, res, next) => {
     }
 
     if (
-      user_id === 'chessbot'
-      || user_id === 'anonymous'
-      || user_id === 'localhost_user_id'
-      || member_id
-    ) { return next(); }
+      user_id === 'chessbot' ||
+      user_id === 'anonymous' ||
+      user_id === 'localhost_user_id' ||
+      member_id
+    ) {
+      return next();
+    }
 
     const authorization = req.get('Authorization');
 
@@ -26,7 +28,9 @@ exports.userAuth = async (req, res, next) => {
 
     const token = authorization.split(' ')[1];
 
-    if (!token || token === ' ') { throw new CustomError('Authentication failed', 403); }
+    if (!token || token === ' ') {
+      throw new CustomError('Authentication failed', 403);
+    }
 
     const { status } = await axios.get(WELCOME_URL, {
       headers: {

@@ -23,28 +23,16 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: true }));
 
   // Set Express Engine for Actual react code build
-  app.use(
-    express.static(path.join(__dirname, '..', '..', '..', 'chess', 'dist')),
-  );
+  app.use(express.static(path.join(__dirname, '..', '..', '..', 'chess', 'dist')));
 
   app.get('/zuri-zuri-plugin-chessboard.js', (req, res) => {
     res.sendFile(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        '..',
-        'frontend',
-        'dist',
-        'zuri-zuri-plugin-chessboard.js',
-      ),
+      path.join(__dirname, '..', '..', '..', 'frontend', 'dist', 'zuri-zuri-plugin-chessboard.js'),
     );
   });
 
   // Create express static engine for our zuri_main mini app
-  app.use(
-    express.static(path.join(__dirname, '..', '..', '..', 'client', 'dist')),
-  );
+  app.use(express.static(path.join(__dirname, '..', '..', '..', 'client', 'dist')));
 
   return app;
 };

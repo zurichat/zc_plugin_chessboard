@@ -13,7 +13,7 @@ export const AlphabetSection = styled.section`
 
   .letters {
     font-weight: bold;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 13px;
 
     @media (max-width: 414px) {
@@ -39,7 +39,7 @@ export const NumberSection = styled.section`
 
   .digit {
     font-weight: bold;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 13px;
 
     @media (max-width: 414px) {
