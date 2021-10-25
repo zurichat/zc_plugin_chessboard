@@ -73,7 +73,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
       }, setCommentMsg(''));
     } else {
       // TODO: Handle error with Toasts
-      console.log('CommentMsg is empty');
     }
   };
 
