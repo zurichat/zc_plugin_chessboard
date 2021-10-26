@@ -68,6 +68,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4.1.2
       with:
         commit_message: Frontend EsLint Fixes
+        push_options: '--force'
 
   be_eslint:
     needs: fe_eslint
@@ -92,12 +93,12 @@ jobs:
         yarn install
         yarn run lint --fix
 
-    - name: Commit changes
-      if: always()
-      uses: stefanzweifel/git-auto-commit-action@v4.1.2
-      with:
-        commit_message: Backend EsLint Fixes
-        push_options: '--force'
+#     - name: Commit changes
+#       if: always()
+#       uses: stefanzweifel/git-auto-commit-action@v4.1.2
+#       with:
+#         commit_message: Backend EsLint Fixes
+#         push_options: '--force'
 
   deploy:
     needs: be_eslint
