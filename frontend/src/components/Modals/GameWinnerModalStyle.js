@@ -221,6 +221,4 @@ const myAnim = keyframes`
 	}
 `;
 
-export {
-  ModalWrapper, ModalBackdrop, ModalBox, ModalContent, Button,
-};
+export { ModalWrapper, ModalBackdrop, ModalBox, ModalContent, Button };
