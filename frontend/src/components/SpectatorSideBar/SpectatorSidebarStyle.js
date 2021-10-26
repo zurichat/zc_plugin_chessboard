@@ -241,4 +241,6 @@ const ExitBtn = styled.button`
   color: #bb003c;
 `;
 
-export { Sidebar, SidebarNav, Chat, ChatWrapper, EmptyComment, ChatInputForm, ExitBtn };
+export {
+  Sidebar, SidebarNav, Chat, ChatWrapper, EmptyComment, ChatInputForm, ExitBtn,
+};
