@@ -26,10 +26,10 @@ jobs:
     - name: Use cached node_modules
       uses: c-hive/gha-yarn-cache@v2
       with:
-        directory: chess
+        directory: frontend
 
     - name: Install yarn dependencies and Run ESLint for chess spa
       run: |
-        cd chess
+        cd frontend
         yarn install
         yarn run lint
