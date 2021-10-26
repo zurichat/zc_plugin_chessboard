@@ -77,8 +77,8 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       if (
-        error.response.data.status === 404
-        && error.response.data.message === 'collection not found'
+        error.response.data.status === 404 &&
+        error.response.data.message === 'collection not found'
       ) {
         return { data: [] };
       }
@@ -108,8 +108,8 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       if (
-        error.response.data.status === 404
-        && error.response.data.message === 'collection not found'
+        error.response.data.status === 404 &&
+        error.response.data.message === 'collection not found'
       ) {
         return { data: [] };
       }
@@ -137,8 +137,8 @@ class DatabaseConnection {
       return response.data;
     } catch (error) {
       if (
-        error.response.data.status === 404
-        && error.response.data.message === 'collection not found'
+        error.response.data.status === 404 &&
+        error.response.data.message === 'collection not found'
       ) {
         return { data: [] };
       }
