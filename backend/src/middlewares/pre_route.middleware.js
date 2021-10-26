@@ -23,7 +23,7 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: true }));
 
   // Set Express Engine for Actual react code build
-  app.use(express.static(path.join(__dirname, '..', '..', '..', 'chess', 'dist')));
+  app.use(express.static(path.join(__dirname, '..', '..', '..', 'frontend', 'dist')));
 
   app.get('/zuri-zuri-plugin-chessboard.js', (req, res) => {
     res.sendFile(

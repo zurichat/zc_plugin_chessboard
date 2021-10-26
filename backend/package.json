@@ -33,9 +33,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "yarn build-step-1",
-    "build-step-1": "cd ../frontend && yarn install && yarn build && cd ../backend && yarn build-step-2",
-    "build-step-2": "cd ../client && yarn install && yarn build",
+    "build": "yarn build:step-1 && yarn build:step-2",
+    "build:step-1": "cd ../frontend && yarn install && yarn build",
+    "build:step-2": "cd ../client && yarn install && yarn build",
     "lint": "eslint ./ --fix"
   }
 }
