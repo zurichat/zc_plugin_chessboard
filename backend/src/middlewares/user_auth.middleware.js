@@ -14,10 +14,10 @@ exports.userAuth = async (req, res, next) => {
     }
 
     if (
-      user_id === 'chessbot'
-      || user_id === 'anonymous'
-      || user_id === 'localhost_user_id'
-      || member_id
+      user_id === 'chessbot' ||
+      user_id === 'anonymous' ||
+      user_id === 'localhost_user_id' ||
+      member_id
     ) {
       return next();
     }
