@@ -152,5 +152,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           script: |
             cd /var/www/zc_plugin_chessboard/backend
-            PM2_HOME=/opt/pm2/.pm2 pm2 restart index
+            PM2_HOME=/opt/pm2/.pm2 pm2 delete index
+            PM2_HOME=/opt/pm2/.pm2 pm2 start index
 
