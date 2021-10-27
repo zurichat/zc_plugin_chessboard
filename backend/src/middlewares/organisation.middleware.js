@@ -11,10 +11,10 @@ exports.orgAuth = async (req, res, next) => {
 
     // If org_id is not set in the header, then set it to the default organisation
     if (
-      !organisation ||
-      organisation === null ||
-      organisation === 'null' ||
-      organisation === 'undefined'
+      !organisation
+      || organisation === null
+      || organisation === 'null'
+      || organisation === 'undefined'
     ) {
       // Use hardcoded organisation
       res.locals.organisation_id = '616947fd9ea5d3be97df290d';

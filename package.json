@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "concurrently": "^6.3.0",
+    "husky": "^7.0.4"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "concurrently \"cd ./backend && yarn run lint --fix\" \"cd ./frontend && yarn run lint\""
+  }
+}

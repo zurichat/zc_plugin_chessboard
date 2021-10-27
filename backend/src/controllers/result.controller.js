@@ -24,8 +24,8 @@ class ResultController {
           game.is_owner_winner == null || game.is_owner_winner === undefined
             ? {}
             : game.is_owner_winner === true
-            ? game.winner
-            : game.opponent,
+              ? game.winner
+              : game.opponent,
         game_id: game._id,
       }));
 
@@ -56,8 +56,8 @@ class ResultController {
               this.game.is_owner_winner == null || this.game.is_owner_winner === undefined
                 ? {}
                 : this.game.is_owner_winner === true
-                ? this.game.winner
-                : this.game.opponent,
+                  ? this.game.winner
+                  : this.game.opponent,
             game_id: this.game._id,
           },
           true,

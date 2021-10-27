@@ -1,3 +1,8 @@
 {
-  "extends": "airbnb-base"
+  "extends": ["eslint:recommended", "airbnb-base"],
+  "rules": {
+    "no-console": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-nested-ternary": "off"
+  }
 }

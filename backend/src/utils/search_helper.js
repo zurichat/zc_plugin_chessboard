@@ -4,13 +4,9 @@
 exports.filterFromAllGames = (searchQuery, data) => {
   if (!data) return [];
 
-  let userMatch = data.data.filter((game) =>
-    new RegExp(String(searchQuery), 'i').test(game.owner.user_name),
-  );
+  let userMatch = data.data.filter((game) => new RegExp(String(searchQuery), 'i').test(game.owner.user_name));
 
-  const opponentMatch = data.data.filter((game) =>
-    new RegExp(String(searchQuery), 'i').test(game.opponent.user_name),
-  );
+  const opponentMatch = data.data.filter((game) => new RegExp(String(searchQuery), 'i').test(game.opponent.user_name));
   if (opponentMatch) {
     userMatch = [...userMatch, ...opponentMatch];
   }
@@ -93,19 +89,17 @@ exports.formatResult = (
   let first_page = 1;
   let last_page = page_size;
 
-  const previous =
-    page - 1 > 0
-      ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${
-          req.params.member_id
-        }q=${searchQuery}&page=${page - 1}`
-      : ' ';
+  const previous = page - 1 > 0
+    ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${
+      req.params.member_id
+    }q=${searchQuery}&page=${page - 1}`
+    : ' ';
 
-  const next =
-    endIndex < data.length
-      ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${
-          req.params.member_id
-        }q=${searchQuery}&page=${page + 1}`
-      : ' ';
+  const next = endIndex < data.length
+    ? `https://chess.zuri.chat/api/v1/search/${req.params.org_id}/${
+      req.params.member_id
+    }q=${searchQuery}&page=${page + 1}`
+    : ' ';
 
   data = data.slice(startIndex, endIndex);
 
