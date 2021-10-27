@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable camelcase */
+
 /* eslint-disable operator-linebreak */
 // Custom Modules
 const globalTime = require('global-time');
@@ -619,7 +619,8 @@ class GameController {
     try {
       const { data } = await this.GameRepo.fetchAll();
       const userGames = data.filter(
-        (game) => game.owner.user_id === userId ||
+        (game) =>
+          game.owner.user_id === userId ||
           (game.opponent && game.opponent.user_id === userId) ||
           (game.spectators.length > 0 && game.spectators.find((spec) => spec.user_id === userId)),
       );

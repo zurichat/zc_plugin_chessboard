@@ -38,10 +38,5 @@
     "build:step-1": "cd ../frontend && yarn install && yarn build",
     "build:step-2": "cd ../client && yarn install && yarn build",
     "lint": "eslint src/"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn run lint --fix"
-    }
   }
 }
