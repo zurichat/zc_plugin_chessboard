@@ -6,7 +6,9 @@ import { useParams } from 'react-router-dom';
 import styles from './game.module.css';
 
 // Import Adaptors
-import { CentrifugeSetup, getGameData, unwatchGame, watchGame } from '../../adapters/game';
+import {
+  CentrifugeSetup, getGameData, unwatchGame, watchGame,
+} from '../../adapters/game';
 import { getLoggedInUserData } from '../../adapters/auth';
 
 // Import Components
@@ -65,8 +67,8 @@ function Game() {
     // If user is about to leave this game, unwatch - ComponentWillUnmount (Not the best right now, cause this is called for every user, instead of spectators only)
     return () => {
       if (
-        gameDataRef.current.owner.user_id !== getLoggedInUserData().user_id &&
-        gameDataRef.current.opponent?.user_id !== getLoggedInUserData().user_id
+        gameDataRef.current.owner.user_id !== getLoggedInUserData().user_id
+        && gameDataRef.current.opponent?.user_id !== getLoggedInUserData().user_id
       ) {
         unwatchGame(game_id).then((response) => {
           if (!response.data.success) {
@@ -76,7 +78,7 @@ function Game() {
         });
       }
     };
-  }, []);
+  }, [game_id, history]);
 
   if (canCallCentrifuge && gameData) {
     CentrifugeSetup(game_id, (ctx) => {
@@ -131,8 +133,8 @@ function Game() {
 
   if (canCallWatchGame && gameData) {
     if (
-      gameData.owner.user_id !== getLoggedInUserData().user_id &&
-      gameData.opponent?.user_id !== getLoggedInUserData().user_id
+      gameData.owner.user_id !== getLoggedInUserData().user_id
+      && gameData.opponent?.user_id !== getLoggedInUserData().user_id
     ) {
       // Call the Watch Game Adapter
       watchGame(game_id).then((response) => {

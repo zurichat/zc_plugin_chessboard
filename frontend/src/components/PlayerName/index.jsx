@@ -9,7 +9,9 @@ import { useState } from 'react';
 import { PlayerDetails, WaitingPlayer2Container } from './PlayerNameStyle';
 import InviteUser from '../Modals/InviteUserModal/InviteUser';
 
-const PlayerName = ({ name, image_url, style, gameData }) => {
+const PlayerName = ({
+  name, image_url, style, gameData,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleInviteModal = () => {

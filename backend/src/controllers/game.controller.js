@@ -1,7 +1,8 @@
+/* eslint-disable camelcase */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
-
 /* eslint-disable operator-linebreak */
+
 // Custom Modules
 const globalTime = require('global-time');
 const response = require('../utils/response');
