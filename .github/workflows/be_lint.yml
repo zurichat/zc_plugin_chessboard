@@ -21,4 +21,4 @@ jobs:
       run: |
         cd backend
         yarn install
-        yarn run lint
+        yarn run lint --fix
