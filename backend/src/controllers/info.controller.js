@@ -55,8 +55,7 @@ class InformationController {
     const { data } = await GameRepo.fetchAll();
     // pick running games
     const filtered = data.filter(
-      (x) =>
-        x.status !== 2 &&
+      (x) => x.status !== 2 &&
         (x.owner.user_id === this.user ||
           (x.opponent && x.opponent.user_id === this.user) ||
           x.spectators.filter((y) => y.user_id === this.user).length > 0),
