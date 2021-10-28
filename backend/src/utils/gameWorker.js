@@ -2,6 +2,8 @@
 const { parentPort } = require('worker_threads');
 const globalTime = require('global-time');
 const DatabaseConnection = require('../db/database.helper');
+const centrifugoController = require('../controllers/centrifugo.controller');
+const InformationController = require('../controllers/info.controller');
 
 const orgId = process.argv[2];
 const gameId = process.argv[3];
@@ -20,6 +22,30 @@ const timer = setInterval(async () => {
   if (time - game.data.modifiedAt > 5 * 60 * 1000) {
     await gameRepo.delete(game.data._id, game.data);
     parentPort.postMessage(`${orgId}:${gameId}`);
+
+    // collect sidebar info for game user
+    const sidebarUpdatePayloadOwner = await InformationController.sideBarInfo(
+      orgId,
+      game.data.owner.user_id,
+    );
+    // publishing collected sidebar info of both owner and opponent
+    await centrifugoController.publishToSideBar(
+      orgId,
+      game.data.owner.user_id,
+      sidebarUpdatePayloadOwner,
+    );
+
+    if (game.data.opponent.user_id != null) {
+      const sidebarUpdatePayloadOpponent = await InformationController.sideBarInfo(
+        orgId,
+        game.data.opponent.user_id,
+      );
+      await centrifugoController.publishToSideBar(
+        orgId,
+        game.data.opponent.user_id,
+        sidebarUpdatePayloadOpponent,
+      );
+    }
   }
 }, 5 * 60 * 1000);
 
