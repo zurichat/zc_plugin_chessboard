@@ -6,12 +6,14 @@ import React from 'react';
 // Import style for this page
 import { AlphabetSection, NumberSection } from './styles';
 
+let count = 0;
+const getID = () => count++;
+
 const Alphabets = () => (
   <AlphabetSection>
     <div className="wrapper">
-      {[...'abcdefgh'].map((item, index) => (
-        // eslint-disable-next-line
-        <div className="letters" key={index}>
+      {[...'abcdefgh'].map((item) => (
+        <div className="letters" key={getID()}>
           {item.toUpperCase()}
         </div>
       ))}
@@ -22,9 +24,8 @@ const Alphabets = () => (
 const Numbers = () => (
   <NumberSection>
     <div className="wrapper">
-      {[...'87654321'].map((item, index) => (
-        // eslint-disable-next-line
-        <div className="digit" key={index}>
+      {[...'87654321'].map((item) => (
+        <div className="digit" key={getID()}>
           {item}
         </div>
       ))}
