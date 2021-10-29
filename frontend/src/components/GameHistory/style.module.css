@@ -1,0 +1,88 @@
+.outer_cover {
+    padding: 0 120px;
+}
+.inner_cover {
+    text-align: justify;
+    padding: 10px 0;
+}
+#hide {
+    display: none;
+}
+#show {
+    display: block;
+}
+
+
+#hide_button {
+    display: none;
+}
+#button_display {
+    display: inline-block;
+}
+
+/* .g_heading {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.player_one {
+    display: inline;
+    font-size: 20px;
+}
+
+.player_score {
+    display: inline;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+} */
+
+@media screen and (max-width: 768px){
+    .outer_cover {
+        padding: 0 20px;
+    }
+    .player_one, .player_one, .player_score {
+        font-size: 15px;
+    }
+}
+
+
+
+
+.game_button_cover {
+    text-align: center;
+    margin: 10px;
+    margin-bottom: 50px;
+}
+.game_button {
+    cursor: pointer;
+    height: 40px;
+    width: 208px;
+    border-radius: 4px;
+    padding: 5px 34px;
+    color: #00b87c;
+    background-color: #fff;
+    border: 1px solid #00b87c;
+    display: block;
+}
+
+.game_id {
+    font-size: 16px;
+    display: inline;
+}
+.game_data {
+    font-size: 16px;
+    display: block;
+}
+.game_img_owner, .game_img_opponent {
+    border-radius: 50%;
+    width: 90px;
+}
+.game_img_owner {
+    margin-right: 40px;
+}
+.chess_color {
+    font-size: 14px;
+    display: inline;
+    font-weight: 600;
+}
