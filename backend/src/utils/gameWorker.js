@@ -35,7 +35,7 @@ const timer = setInterval(async () => {
       sidebarUpdatePayloadOwner,
     );
 
-    if (game.data.opponent.user_id != null) {
+    if (game.data.opponent != null) {
       const sidebarUpdatePayloadOpponent = await InformationController.sideBarInfo(
         orgId,
         game.data.opponent.user_id,
