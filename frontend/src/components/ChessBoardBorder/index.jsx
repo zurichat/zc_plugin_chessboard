@@ -1,4 +1,5 @@
 import React from 'react';
+// import { keyframes } from 'styled-components';
 // Import CSS for this page
 // import "./chessboardborder.css";
 
@@ -8,8 +9,9 @@ import { AlphabetSection, NumberSection } from './styles';
 const Alphabets = () => (
   <AlphabetSection>
     <div className="wrapper">
-      {[...'abcdefgh'].map((item) => (
-        <div className="letters" key={new Date().toISOString()}>
+      {[...'abcdefgh'].map((item, index) => (
+        // eslint-disable-next-line
+        <div className="letters" key={index}>
           {item.toUpperCase()}
         </div>
       ))}
@@ -20,8 +22,9 @@ const Alphabets = () => (
 const Numbers = () => (
   <NumberSection>
     <div className="wrapper">
-      {[...'87654321'].map((item) => (
-        <div className="digit" key={new Date().toISOString()}>
+      {[...'87654321'].map((item, index) => (
+        // eslint-disable-next-line
+        <div className="digit" key={index}>
           {item}
         </div>
       ))}
