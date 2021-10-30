@@ -144,7 +144,7 @@ class InformationController {
       this.organisation_id = req.body.organisation_id;
       this.user_id = req.body.user_id;
 
-      const url = `https://api.zuri.chat/organizations/${this.Authorizationorganisation_id}/plugins`;
+      const url = `https://api.zuri.chat/organizations/${this.organisation_id}/plugins`;
 
       await axios.post(
         url,
