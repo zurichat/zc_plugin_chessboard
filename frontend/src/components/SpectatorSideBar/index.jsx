@@ -34,7 +34,7 @@ import close from '../../assets/comment/close.svg';
 import { sendComment } from '../../adapters/comments';
 
 // Import Utilities
-import mapTimeStamp from './utilities';
+import mapTimeStamp from './mapTimeStamp';
 
 // (lekandev) Commented it out
 //  import style-components
