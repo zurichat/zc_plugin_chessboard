@@ -33,6 +33,9 @@ import close from '../../assets/comment/close.svg';
 // Import Adapters
 import { sendComment } from '../../adapters/comments';
 
+// Import Utilities
+import mapTimeStamp from './utilities';
+
 // (lekandev) Commented it out
 //  import style-components
 // import {
@@ -51,40 +54,6 @@ const SpectatorSideBar = ({ type, gameData }) => {
   const [commentMsg, setCommentMsg] = useState('');
   const [commentsFromGameData] = useState(gameData.messages);
 
-  const mapTimeStamp = (timeStamp) => {
-    const [date, time, suffix] = timeStamp.split(' ');
-    const [month, day, year] = date.split('/');
-    const [hr, min, sec] = time.split(':');
-    const currentDate = new Date(new Date().getTime());
-    const commentDate = suffix === 'PM'
-      ? new Date(year.replace(',', ''), Number(month) - 1, day, Number(hr) + 13, min, sec)
-      : new Date(year.replace(',', ''), Number(month) - 1, day, Number(hr) + 1, min, sec);
-    const diff = currentDate - commentDate;
-    const timeStampInSeconds = diff / 1000;
-    const timeStampInMinutes = timeStampInSeconds / 60;
-    const timeStampInHours = timeStampInMinutes / 60;
-    const timeInDays = timeStampInHours / 24;
-
-    if (timeStampInSeconds < 60) {
-      return `${Math.floor(timeStampInSeconds)} seconds ago`;
-    }
-    if (timeStampInSeconds === 60) {
-      return `${Math.floor(timeStampInMinutes)} minute ago`;
-    }
-    if (timeStampInSeconds < 3600) {
-      return `${Math.floor(timeStampInMinutes)} minutes ago`;
-    }
-    if (timeStampInSeconds === 3600) {
-      return `${Math.floor(timeStampInHours)} hour ago`;
-    }
-    if (timeStampInSeconds < 86400) {
-      return `${Math.floor(timeStampInHours)} hours ago`;
-    }
-    if (timeStampInSeconds === 86400) {
-      return `${Math.floor(timeStampInHours)} day ago`;
-    }
-    return `over ${timeInDays} days ago`;
-  };
   // (lekandev) Commented it out
   // const [isModalOpen, setmodalIsOpen] = useState(false);
   // const [isOpen, setIsOpen] = useState(false);
