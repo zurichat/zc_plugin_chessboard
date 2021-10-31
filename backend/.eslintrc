@@ -3,6 +3,7 @@
   "rules": {
     "no-console": "off",
     "implicit-arrow-linebreak": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "linebreak-style": "off"
   }
 }
