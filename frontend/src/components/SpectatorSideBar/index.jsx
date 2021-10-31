@@ -33,6 +33,9 @@ import close from '../../assets/comment/close.svg';
 // Import Adapters
 import { sendComment } from '../../adapters/comments';
 
+// Import Utilities
+import mapTimeStamp from './mapTimeStamp';
+
 // (lekandev) Commented it out
 //  import style-components
 // import {
@@ -132,16 +135,14 @@ const SpectatorSideBar = ({ type, gameData }) => {
             <div className={styles.chatWrapperContainer}>
               {commentsFromGameData.length ? (
                 <>
-                  {commentsFromGameData.map(({
-                    user_name, image_url, text, timestamp,
-                  }) => {
+                  {commentsFromGameData.map(({ user_name, image_url, text, timestamp }) => {
                     return (
                       <div className={styles.chatWrapper} key={comment_id++}>
                         <div className={styles.specHead}>
                           <img className={styles.specAvi} src={image_url} alt="avi" />
                           <div className={styles.specInfo}>
                             <h2 className={styles.spectatorName}>{user_name}</h2>
-                            <p className={styles['time-muted']}>{timestamp}</p>
+                            <p className={styles['time-muted']}>{mapTimeStamp(timestamp)}</p>
                           </div>
                         </div>
                         <div className={styles.specNameTime}>
