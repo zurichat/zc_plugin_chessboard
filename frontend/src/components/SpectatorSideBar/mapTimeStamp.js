@@ -23,7 +23,6 @@ export default (timeStamp) => {
   };
   Object.keys(timeStampObj).forEach((key) => {
     const value = Math.floor(timeStampObj[key]);
-    console.log(value);
     if (value === 1) {
       mappedTimeStamp = `${value} ${key} ago`;
     } else if (value > 1) {
