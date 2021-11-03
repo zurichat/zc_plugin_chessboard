@@ -5,7 +5,7 @@ react-dom
 https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js
 
 @zuri/utilities
-https://zuri.chat/zuri-utilities.js
+https://staging.zuri.chat/zuri-utilities.js
 
 @zuri/plugin-header
-https://zuri.chat/zuri-plugin-header.js
+https://staging.zuri.chat/zuri-plugin-header.js

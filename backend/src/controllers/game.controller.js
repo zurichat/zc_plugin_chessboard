@@ -190,7 +190,7 @@ class GameController {
 
         await centrifugoController.publishToSideBar(
           this.organisation_id,
-          user_id,
+          gameDBData.data.owner.user_id,
           sidebar_update_payload_owner,
         );
       }

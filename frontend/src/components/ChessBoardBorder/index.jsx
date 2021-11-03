@@ -1,15 +1,19 @@
 import React from 'react';
+// import { keyframes } from 'styled-components';
 // Import CSS for this page
 // import "./chessboardborder.css";
 
 // Import style for this page
 import { AlphabetSection, NumberSection } from './styles';
 
+let count = 0;
+const getID = () => count++;
+
 const Alphabets = () => (
   <AlphabetSection>
     <div className="wrapper">
       {[...'abcdefgh'].map((item) => (
-        <div className="letters" key={new Date().toISOString()}>
+        <div className="letters" key={getID()}>
           {item.toUpperCase()}
         </div>
       ))}
@@ -21,7 +25,7 @@ const Numbers = () => (
   <NumberSection>
     <div className="wrapper">
       {[...'87654321'].map((item) => (
-        <div className="digit" key={new Date().toISOString()}>
+        <div className="digit" key={getID()}>
           {item}
         </div>
       ))}
