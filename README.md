@@ -93,7 +93,7 @@ cd server
 npm run dev   or   yarn run dev
 ```
 
-- Open http://127.0.0.1:5050/ping
+- Open http://127.0.0.1:22664/ping
 - Open another terminal in vscode and run
 
 ```
