@@ -34,7 +34,7 @@
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
     "coverage": "cross-env BABEL_ENV=test jest --coverage"
   },
-  "proxy": "http://127.0.0.1:5050/",
+  "proxy": "http://127.0.0.1:22664/",
   "eslintConfig": {
     "extends": [
       "react-app",
