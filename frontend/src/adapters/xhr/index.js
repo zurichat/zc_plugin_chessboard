@@ -4,7 +4,7 @@ import { getCurrentOrganisation, getAuthToken, getLoggedInUserData } from '../au
 function returnAxiosInstance() {
   return Axios.create({
     baseURL: 'https://chess.zuri.chat/api/v1/',
-    // baseURL: "//localhost:5050/api/v1/",
+    // baseURL: "//localhost:22664/api/v1/",
     headers: {
       'Content-Type': 'application/json',
       Organisation: getCurrentOrganisation(),
