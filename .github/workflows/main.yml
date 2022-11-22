@@ -115,9 +115,9 @@ jobs:
       - name: Deployment
         uses: appleboy/ssh-action@master
         with:
-          key: ${{ secrets.PRIVATE_KEY }}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/zc_plugin_chessboard/
             git stash
@@ -129,7 +129,7 @@ jobs:
       - name: Copy Main Chess App dist folder to server
         uses: Creepios/sftp-action@v1.0.1
         with:
-          privateKey: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           localPath: './frontend/dist/'
@@ -138,7 +138,7 @@ jobs:
       - name: Copy Client dist folder to server
         uses: Creepios/sftp-action@v1.0.1
         with:
-          privateKey: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           localPath: './client/dist/'
@@ -147,7 +147,7 @@ jobs:
       - name: Restart PM2 Server
         uses: appleboy/ssh-action@master
         with:
-          key: ${{ secrets.PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USERNAME }}
           script: |
