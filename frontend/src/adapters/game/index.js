@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable import/no-unresolved */
 // Import api call adapter
-import { SubscribeToChannel } from '@zuri/utilities';
+// import { SubscribeToChannel } from '@zuri/utilities';
 import { get, post, patch } from '../xhr';
 import { getLoggedInUserData, getChessBotData } from '../auth';
 // import Centrifuge from "centrifuge";
@@ -34,7 +34,7 @@ export function CentrifugeSetup(game_id, ChannelEventsListener) {
   // // return centrifuge;
 
   // Switched to ZC_MAIN SINGLE RTC METHOD
-  SubscribeToChannel(game_id, ChannelEventsListener);
+  // SubscribeToChannel(game_id, ChannelEventsListener);
 }
 
 // Watch Game

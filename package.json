@@ -5,7 +5,7 @@
   },
   "scripts": {
     "start": "yarn start:backend & yarn start:client & yarn start:frontend",
-    "start:backend": "cd backend && yarn start",
+    "start:backend": "cd backend && yarn dev",
     "start:client": "cd client && yarn start",
     "start:frontend": "cd frontend && yarn start",
     "prepare": "husky install",

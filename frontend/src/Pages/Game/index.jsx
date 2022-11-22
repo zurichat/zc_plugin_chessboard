@@ -12,7 +12,7 @@ import {
 import { getLoggedInUserData } from '../../adapters/auth';
 
 // Import Components
-import Header from '../../components/Header';
+// import Header from '../../components/Header';
 import ChessBoard from '../../components/ChessBoard';
 import SpectatorSideBar from '../../components/SpectatorSideBar';
 
@@ -191,7 +191,7 @@ function Game() {
   return (
     <section className={styles['main-game']}>
       <div className={styles['main-chess']}>
-        <Header gameData={gameData} />
+        {/* <Header gameData={gameData} /> */}
         {BoardToRender}
         {/* Exit/Forfeit container (lekandev) */}
         <div className={styles['exit-button']}>

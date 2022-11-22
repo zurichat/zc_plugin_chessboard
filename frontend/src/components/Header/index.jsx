@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 // Zuri Header
 import Parcel from 'single-spa-react/parcel';
-import { pluginHeader } from '@zuri/plugin-header';
+// import { pluginHeader } from '@zuri/plugin-header';
 
 // Import CSS for this page
 import styles from './header.module.css';
@@ -80,12 +80,12 @@ function Header({ gameData }) {
     <div>
       <div className={styles['header-fixed']}>
         <div className={styles['header-spaced']}>
-          <Parcel
+          {/* <Parcel
             config={pluginHeader}
             wrapWith="div"
             wrapStyle={{ width: '100%' }}
             headerConfig={pluginConfig}
-          />
+          /> */}
         </div>
       </div>
 

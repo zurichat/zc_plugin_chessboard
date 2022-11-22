@@ -10,7 +10,7 @@ import styles from './home.module.css';
 import { getAllGames } from '../../adapters/home';
 
 // Import Components
-import Header from '../../components/Header';
+// import Header from '../../components/Header';
 import MiniBoard from '../../components/MiniBoard';
 import GameHistory from '../../components/GameHistory';
 
@@ -57,7 +57,7 @@ function Homepage() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className={styles['chesshome-container']}>
         <div className={styles['chesshome-rules-holder']}>
           <div className={styles['chesshome-rules']}>

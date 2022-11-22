@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-import { GetUserInfo } from '@zuri/utilities';
+// import { GetUserInfo } from '@zuri/utilities';
 
 export class UserService {
   constructor() {
@@ -13,7 +13,8 @@ export class UserService {
   }
 
   async fetchUserData() {
-    this.userData = await GetUserInfo();
+    // this.userData = await GetUserInfo();
+    this.userData = {};
     if (!this.userData) return;
 
     // The .at(0) funtion is not a function. Doesn't work in all browsers
