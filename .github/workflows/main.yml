@@ -152,5 +152,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           script: |
             cd /var/www/zuri.chat/zuriplugins/chess_plugin/main/zc_plugin_chessboard/backend
-            PM2_HOME=/opt/pm2/.pm2 pm2 restart index
+            pm2 restart 3
 
