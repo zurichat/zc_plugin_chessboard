@@ -120,6 +120,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/zc_plugin_chessboard/
+            ls
             git stash
             git fetch --all
             git reset --hard origin/dev
@@ -152,5 +153,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           script: |
             cd /var/www/zuri.chat/zuriplugins/chess_plugin/main/zc_plugin_chessboard/backend
+            pm2 list
             pm2 restart 3
 
