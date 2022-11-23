@@ -16,7 +16,11 @@ module.exports = (app) => {
   //   }),
   // );
 
-  app.use(cors());
+  app.use(
+    cors({
+      credentials: true,
+    }),
+  );
 
   // Tell express to recognize the incoming Request Object as a JSON Object
   app.use(express.json());

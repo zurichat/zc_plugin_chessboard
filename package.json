@@ -4,8 +4,9 @@
     "husky": "^7.0.4"
   },
   "scripts": {
-    "start": "yarn start:backend & yarn start:frontend",
+    "start": "yarn start:backend & yarn start:client & yarn start:frontend",
     "start:backend": "cd backend && yarn dev",
+    "start:client": "cd client && yarn start",
     "start:frontend": "cd frontend && yarn start",
     "prepare": "husky install",
     "lint": "concurrently \"cd ./backend && yarn run lint --fix\" \"cd ./frontend && yarn run lint\""

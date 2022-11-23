@@ -4,12 +4,13 @@ import { getCurrentOrganisation, getAuthToken, getLoggedInUserData } from '../au
 function returnAxiosInstance() {
   return Axios.create({
     baseURL: 'https://chess.zuri.chat/api/v1/',
-    // baseURL: "//localhost:22664/api/v1/",
+    // baseURL: 'http://localhost:22664/api/v1/',
     headers: {
       'Content-Type': 'application/json',
       Organisation: getCurrentOrganisation(),
       Authorization: `Bearer ${getAuthToken()}`,
       user_id: getLoggedInUserData().user_id,
+      'Access-Control-Allow-Origin': true,
     },
     validateStatus(status) {
       return status < 500; // Resolve only if the status code is less than 500
