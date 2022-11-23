@@ -18,10 +18,10 @@ export class UserService {
     if (!this.userData) return;
 
     // The .at(0) funtion is not a function. Doesn't work in all browsers
-    this.id = this.userData[0]._id;
-    this.image_url = this.userData[0].image_url;
-    this.email = this.userData[0].email;
-    this.user_name = this.userData[0].user_name;
+    this.id = this.userData[0]?._id;
+    this.image_url = this.userData[0]?.image_url;
+    this.email = this.userData[0]?.email;
+    this.user_name = this.userData[0]?.user_name;
   }
 
   static getInstance() {

@@ -13,6 +13,9 @@ module.exports = (app) => {
     cors({
       // Allow all Origins so we can use the live api for local testing
       origin: ['*'],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
     }),
   );
 
