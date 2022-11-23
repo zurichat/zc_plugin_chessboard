@@ -106,11 +106,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Install yarn dependencies and build project
-      #   run: |
-      #     cd backend
-      #     yarn install
-      #     yarn build
+      - name: Install yarn dependencies and build project
+        run: |
+          cd backend
+          yarn install
+          yarn build
 
       - name: Deployment
         uses: appleboy/ssh-action@master
@@ -126,23 +126,23 @@ jobs:
             cd backend
             yarn install
 
-      # - name: Copy Main Chess App dist folder to server
-      #   uses: Creepios/sftp-action@v1.0.1
-      #   with:
-      #     password: ${{ secrets.PASSWORD }}
-      #     host: ${{ secrets.HOSTNAME }}
-      #     username: ${{ secrets.USERNAME }}
-      #     localPath: './frontend/dist/'
-      #     remotePath: '/var/www/zuri.chat/zuriplugins/chess_plugin/main/zc_plugin_chessboard/frontend/dist'
+      - name: Copy Main Chess App dist folder to server
+        uses: Creepios/sftp-action@v1.0.1
+        with:
+          password: ${{ secrets.PASSWORD }}
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          localPath: './frontend/dist/'
+          remotePath: '/var/www/zuri.chat/zuriplugins/chess_plugin/main/zc_plugin_chessboard/frontend/dist'
 
-      # - name: Copy Client dist folder to server
-      #   uses: Creepios/sftp-action@v1.0.1
-      #   with:
-      #     password: ${{ secrets.PASSWORD }}
-      #     host: ${{ secrets.HOSTNAME }}
-      #     username: ${{ secrets.USERNAME }}
-      #     localPath: './client/dist/'
-      #     remotePath: '/var/www/zuri.chat/zuriplugins/chess_plugin/main/zc_plugin_chessboard/client/dist'
+      - name: Copy Client dist folder to server
+        uses: Creepios/sftp-action@v1.0.1
+        with:
+          password: ${{ secrets.PASSWORD }}
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          localPath: './client/dist/'
+          remotePath: '/var/www/zuri.chat/zuriplugins/chess_plugin/main/zc_plugin_chessboard/client/dist'
 
       - name: Restart PM2 Server
         uses: appleboy/ssh-action@master
