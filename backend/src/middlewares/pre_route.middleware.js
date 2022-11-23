@@ -9,14 +9,14 @@ const cors = require('cors');
 // Export Module
 module.exports = (app) => {
   // enable CORS
-  // app.use(
-  //   cors({
-  //     // Allow all Origins so we can use the live api for local testing
-  //     origin: ['*'],
-  //   }),
-  // );
+  app.use(
+    cors({
+      // Allow all Origins so we can use the live api for local testing
+      origin: ['*'],
+    }),
+  );
 
-  app.use(cors());
+  // app.use(cors());
 
   // Tell express to recognize the incoming Request Object as a JSON Object
   app.use(express.json());
