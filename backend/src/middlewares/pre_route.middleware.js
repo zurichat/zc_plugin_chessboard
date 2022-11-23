@@ -12,9 +12,7 @@ module.exports = (app) => {
   // app.use(
   //   cors({
   //     // Allow all Origins so we can use the live api for local testing
-  //     // origin: ['*'],
-  //     credentials: false,
-  //     optionsSuccessStatus: 200,
+  //     origin: ['*'],
   //   }),
   // );
 
