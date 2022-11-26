@@ -494,6 +494,7 @@ class GameController {
 
       // check if that particular user exist in the database
       if (!user_id) {
+        console.log(user_id);
         return res.status(400).send(response('User does not exist', null, false));
       }
 
@@ -542,6 +543,7 @@ class GameController {
         }),
       );
     } catch (error) {
+      console.log(error);
       throw new CustomError(`Unable to end game: ${error}`, 500);
     }
   }
