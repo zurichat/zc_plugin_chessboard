@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+/* eslint-disable */
 /* eslint-disable import/no-unresolved */
 // Import api call adapter
 // import { SubscribeToChannel } from '@zuri/utilities';
