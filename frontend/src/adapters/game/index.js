@@ -13,6 +13,8 @@ export function getGameData(game_id) {
 }
 
 export function CentrifugeSetup(game_id, ChannelEventsListener) {
+  console.log(game_id, ChannelEventsListener);
+
   // // Setup Centrifugo Route
   // const centrifuge = new Centrifuge(
   //   "wss://realtime.zuri.chat/connection/websocket"
