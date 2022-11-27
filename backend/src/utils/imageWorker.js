@@ -1,16 +1,16 @@
 const path = require('path');
 const mergeImg = require('merge-img');
 
-const generateImage = async (imag1, imag2, file) => {
+const generateImage = async (file) => {
   mergeImg([
     {
-      src: imag1 || 'https://ui-avatars.com/api/?name=--&background=random&uppercase=false',
+      src: 'https://ui-avatars.com/api/?name=--&background=random&uppercase=false',
 
       // x: 0,
       // y: 0,
     },
     {
-      src: imag2 || 'https://ui-avatars.com/api/?name=--&background=random&uppercase=false',
+      src: 'https://ui-avatars.com/api/?name=--&background=random&uppercase=false',
 
       // x: 32,
       // y: 0,

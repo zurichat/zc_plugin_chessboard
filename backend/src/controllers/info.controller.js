@@ -69,11 +69,10 @@ class InformationController {
       // generate dynamic sidebar icons
       const file = `${game._id}_${this.org}_sidebar.png`;
 
-      generateImage(
-        game.owner.image_url ? game.owner.image_url : null,
-        game.opponent ? game.opponent.image_url : null,
-        file,
-      );
+      // game.owner.image_url ? game.owner.image_url : null,
+      //   game.opponent ? game.opponent.image_url : null,
+
+      generateImage(file);
 
       let unread = 0;
       for (const move of game.moves) {
