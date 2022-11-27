@@ -10,7 +10,7 @@ exports.userAuth = async (req, res, next) => {
     const member_id = req.query.member_id || req.params.member_id;
     // Also get user_id from query for get requests
     if (!user_id) {
-      user_id = 'anonymous';
+      user_id = req.query.user_id;
     }
 
     if (
