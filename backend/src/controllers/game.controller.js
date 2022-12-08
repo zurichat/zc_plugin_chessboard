@@ -18,7 +18,7 @@ const updateRead = require('../utils/updateRead');
 class GameController {
   constructor(organisation_id) {
     this.organisation_id = organisation_id;
-    this.GameRepo = new DatabaseConnection('003test_game', organisation_id);
+    this.GameRepo = new DatabaseConnection('data', organisation_id);
   }
 
   // Create A Game
