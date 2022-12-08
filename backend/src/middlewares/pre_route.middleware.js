@@ -9,12 +9,12 @@ const cors = require('cors');
 // Export Module
 module.exports = (app) => {
   // enable CORS
-  // app.use(
-  //   cors({
-  //     // Allow all Origins so we can use the live api for local testing
-  //     origin: ['*'],
-  //   }),
-  // );
+  app.use(
+    cors({
+      // Allow all Origins so we can use the live api for local testing
+      origin: ['https://zuri.chat', 'http://localhost:9000', 'http://localhost:5000'],
+    }),
+  );
 
   app.use(cors());
 

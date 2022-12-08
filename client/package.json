@@ -1,13 +1,13 @@
 {
   "name": "@zuri/root-config",
   "scripts": {
-    "start": "webpack serve --port 9000 --env isLocal",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && webpack serve --port 9000 --env isLocal",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "build": "concurrently yarn:build:*",
-    "build:webpack": "webpack --mode=production"
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && concurrently yarn:build:*",
+    "build:webpack": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

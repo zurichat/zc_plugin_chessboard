@@ -18,7 +18,7 @@ const updateRead = require('../utils/updateRead');
 class GameController {
   constructor(organisation_id) {
     this.organisation_id = organisation_id;
-    this.GameRepo = new DatabaseConnection('003test_game', organisation_id);
+    this.GameRepo = new DatabaseConnection('data', organisation_id);
   }
 
   // Create A Game
@@ -111,7 +111,13 @@ class GameController {
         .status(201)
         .send(response('New Game Board Created successfully', { object_id: game._id }, true));
     } catch (error) {
-      throw new CustomError(`Unable to create a Game: ${error}`, 500);
+      console.log(error);
+      return res.status(500).json({
+        status: error.statusCode,
+        error,
+        msg: `Unable to create a Game: ${error}`,
+      });
+      // throw new CustomError(`Unable to create a Game: ${error}`, 500);
     }
   }
 

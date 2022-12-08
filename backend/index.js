@@ -17,7 +17,7 @@ const swaggerOptions = {
       title: 'Chess Plugin API',
       version: '1.0.0',
       description: 'Chess plugin api for zuri chat application documentation',
-      servers: ['https://chess.zuri.chat/api'],
+      servers: ['http://127.0.0.1:22664/api'],
     },
   },
   apis: ['./src/routes/v1/*.js'],
