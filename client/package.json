@@ -1,7 +1,7 @@
 {
   "name": "@zuri/root-config",
   "scripts": {
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && webpack serve --port 9000 --env isLocal",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && webpack serve --port 5000 --env isLocal",
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write .",

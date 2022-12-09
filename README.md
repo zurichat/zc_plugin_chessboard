@@ -12,7 +12,7 @@ coming soon!
 
 ## Hosted URL:
 
-https://chess.zuri.chat/
+http://127.0.0.1:22664/
 
 ## Tech Stack:
 
