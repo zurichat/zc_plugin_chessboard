@@ -12,7 +12,14 @@ module.exports = (app) => {
   app.use(
     cors({
       // Allow all Origins so we can use the live api for local testing
-      origin: ['https://zuri.chat', 'http://localhost:9000', 'http://localhost:5000'],
+      origin: [
+        'https://zuri.chat',
+        'http://zuri.chat',
+        'https://www.zuri.chat',
+        'zuri.chat',
+        'http://localhost:9000',
+        'http://localhost:5000',
+      ],
     }),
   );
 
