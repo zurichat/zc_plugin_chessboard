@@ -35,10 +35,10 @@ class InformationController {
         version: 'v1.0',
         developer_name: 'HNG 8.0/Team Tesla',
         developer_email: 'hello@zuri.com',
-        sidebar_url: 'http://127.0.0.1:22664/api/v1/sideBar',
-        ping_url: 'http://127.0.0.1:22664/api/v1/ping',
-        homepage_url: 'http://127.0.0.1:22664/',
-        install_url: 'http://127.0.0.1:22664/',
+        sidebar_url: 'https://chess.zuri.chat/api/v1/sideBar',
+        ping_url: 'https://chess.zuri.chat/api/v1/ping',
+        homepage_url: 'https://chess.zuri.chat/',
+        install_url: 'https://chess.zuri.chat/',
       };
       return res.status(200).send(response('Plugin Information Retrieved', this.result));
     } catch (error) {
@@ -87,7 +87,7 @@ class InformationController {
         room_name: `${game.owner.user_name} vs ${
           game.opponent ? game.opponent.user_name : '-----'
         }`,
-        room_image: `http://127.0.0.1:22664/${file}`,
+        room_image: `https://chess.zuri.chat/${file}`,
         room_url: `/chess/game/${game._id}`,
         unread,
       };

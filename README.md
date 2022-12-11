@@ -12,7 +12,7 @@ coming soon!
 
 ## Hosted URL:
 
-http://127.0.0.1:22664/
+https://chess.zuri.chat/
 
 ## Tech Stack:
 
@@ -93,7 +93,7 @@ cd server
 npm run dev   or   yarn run dev
 ```
 
-- Open http://127.0.0.1:22664/ping
+- Open https://chess.zuri.cht/ping
 - Open another terminal in vscode and run
 
 ```

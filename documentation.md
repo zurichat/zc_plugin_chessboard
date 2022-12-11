@@ -2,7 +2,7 @@
 
 Zuri chess plugin is a web based recreational and competitive board game played between two players with an option for AI, that can easily be installed and used as part of the Zuri chat main application.
 
-- live link : [http://127.0.0.1:22664](https//chess.zuri.chat)
+- live link : [https://chess.zuri.chat](https//chess.zuri.chat)
 
 ## TABLE OF CONTENT: Quick reference
 
@@ -172,10 +172,10 @@ This return a json formatted response payload to the client browser display in a
     version: "v1.0",
     developer_name: "HNG 8.0/Team Tesla",
     developer_email: "hello@zuri.com",
-    sidebar_url: "http://127.0.0.1:22664/api/v1/sideBar",
-    ping_url: "http://127.0.0.1:22664/api/v1/ping",
-    homepage_url: "http://127.0.0.1:22664/",
-    install_url: "http://127.0.0.1:22664/",
+    sidebar_url: "https://chess.zuri.chat/api/v1/sideBar",
+    ping_url: "https://chess.zuri.chat/api/v1/ping",
+    homepage_url: "https://chess.zuri.chat/",
+    install_url: "https://chess.zuri.chat/",
   }
 ]
 
