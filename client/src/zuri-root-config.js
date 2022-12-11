@@ -52,7 +52,7 @@ function customRegister(env) {
     registerApplication({
       name: "@zuri/zuri-plugin-chessboard",
       app: () =>
-        System.import("https://chess.zuri.chat/zuri-zuri-plugin-chess.js"),
+        System.import("https://chess.zuri.chat/zuri-zuri-plugin-chessboard.js"),
       activeWhen: ["/"],
     });
   }
