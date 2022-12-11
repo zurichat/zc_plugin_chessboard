@@ -23,10 +23,10 @@
   },
   "scripts": {
     "lint": "eslint src --ext jsx,js --fix",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && webpack serve",
+    "start": "webpack serve",
     "start:standalone": "webpack serve --env standalone",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && concurrently yarn:build:*",
-    "build:webpack": "set NODE_OPTIONS=--openssl-legacy-provider && webpack --mode=production",
+    "build": "concurrently yarn:build:*",
+    "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
     "format": "prettier --write .",
     "CRA-Build": "react-scripts --openssl-legacy-provider build",
