@@ -30,12 +30,12 @@ module.exports = (app) => {
   app.use(express.static(path.join(__dirname, '..', '..', '..', 'client', 'dist')));
 
   // enable CORS
-  app.use(
-    cors({
-      // Allow all Origins so we can use the live api for local testing
-      origin: ['*'],
-    }),
-  );
+  // app.use(
+  //   cors({
+  //     // Allow all Origins so we can use the live api for local testing
+  //     origin: ['*'],
+  //   }),
+  // );
 
   return app;
 };
