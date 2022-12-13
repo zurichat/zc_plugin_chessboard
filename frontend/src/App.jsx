@@ -16,7 +16,7 @@ function App({ baseName }) {
   }, []);
 
   return (
-    <Router basename={baseName}>
+    <Router basename={baseName || '/'}>
       <Switch>
         {/* Home Page/ View Board Games in Organisation */}
         <Route exact path="/" component={Homepage} />
