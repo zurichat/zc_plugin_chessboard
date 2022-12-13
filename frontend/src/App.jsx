@@ -10,13 +10,13 @@ import Game from './Pages/Game';
 import Rules from './Pages/Rules';
 import { UserService } from './adapters/userService';
 
-function App() {
+function App({ baseName }) {
   useEffect(() => {
     UserService.getInstance().fetchUserData();
   }, []);
 
   return (
-    <Router basename="/chess">
+    <Router basename={baseName}>
       <Switch>
         {/* Home Page/ View Board Games in Organisation */}
         <Route exact path="/" component={Homepage} />
